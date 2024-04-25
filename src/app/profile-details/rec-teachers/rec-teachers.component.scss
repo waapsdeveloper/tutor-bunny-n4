@@ -1,0 +1,108 @@
+.student-box-outer-689567{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .sb-heading-7895{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .sb-heading-title-7895{
+      font-size: 20px;
+    }
+    .sb-heading-sl-7895{
+      font-size: 12px;
+    }
+  }
+}
+
+.student-box-cards-outer-689567{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .card-68976 {
+
+    background: #ffffff;
+    // height: 60px;
+    box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    flex-basis: calc(33.3333% - 10px); /* Adjust as needed for margin/padding */
+    margin-right: 10px; /* Adjust spacing between items */
+    margin-bottom: 10px; /* Adjust spacing between rows */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 8px;;
+
+    .image-box-outer{
+      position: relative;
+      .image-circle-789675{
+        width: 56px;
+        padding-bottom: 56px;
+        border-radius: 50px;
+        background: blue;
+        background-size: cover;
+        background-position: center center;
+      }
+      .country-flag-i-7685{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        height: 14px;
+        border-radius: 16px;
+      }
+    }
+
+    .nbl-title-box{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      .nbl-title-76895{
+        font-size: 16px;
+        color: #393939;
+      }
+
+      .nbl-subtitle-76895{
+        font-size: 14px;
+      }
+    }
+
+    .nbl-action-76895{
+
+      background: #484848;
+      // height: 16px;
+      color: #ffffff;
+      font-size: 14px;
+      border-radius: 16px;
+      padding:  4px 16px;
+
+    }
+
+
+
+
+  }
+
+
+.card-68976:nth-child(3n) {
+  margin-right: 0; /* Remove margin on every 3rd item to prevent wrapping */
+}
+}
+
+.info-misc-68448 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #000000;
+}

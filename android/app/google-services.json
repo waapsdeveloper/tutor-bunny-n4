@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "968620174522",
+    "project_id": "tutor-bunny-ff340",
+    "storage_bucket": "tutor-bunny-ff340.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968620174522:android:ae6f82896da039b6f7a683",
+        "android_client_info": {
+          "package_name": "com.waaps.tutorbunny"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968620174522-lubupgi2tml96acrehi7c8rkejjdhbvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.waaps.tutorbunny",
+            "certificate_hash": "6949d9075f5f61580fa3c6e3f5928ea1a02400a9"
+          }
+        },
+        {
+          "client_id": "968620174522-immkl6qanvvjlu0mjrbp958hm2a31fh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQx-CsruqWooRD0KmOBkIzTbr1WuTRY0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968620174522-immkl6qanvvjlu0mjrbp958hm2a31fh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

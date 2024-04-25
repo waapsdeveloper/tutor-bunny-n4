@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">tutor-bunny</string>
+    <string name="title_activity_main">tutor-bunny</string>
+    <string name="package_name">com.waaps.tutorbunny</string>
+    <string name="custom_url_scheme">com.waaps.tutorbunny</string>
+</resources>

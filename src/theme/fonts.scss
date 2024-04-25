@@ -1,0 +1,127 @@
+/*  use these @fontface in html below  */
+
+@font-face {
+  font-family: Outfit-Thin;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Thin.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-ExtraLight;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-ExtraLight.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-Light;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Light.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-Regular;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-Medium;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Medium.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-SemiBold;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-SemiBold.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-Bold;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Bold.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-ExtraBold;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-ExtraBold.ttf');
+}
+
+
+@font-face {
+  font-family: Outfit-Black;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  src: url('./../assets/fonts/Outfit/static/Outfit-Black.ttf');
+}
+
+/*  use these classes in html below  */
+
+.outfit-thin {
+  font-family: "Outfit-Thin", sans-serif;
+}
+
+
+.outfit-extralight {
+  font-family: "Outfit-ExtraLight", sans-serif;
+}
+
+
+.outfit-light {
+  font-family: "Outfit-Light", sans-serif;
+}
+
+
+.outfit {
+  font-family: "Outfit-Regular", sans-serif;
+}
+
+
+.outfit-medium {
+  font-family: "Outfit-Medium", sans-serif;
+}
+
+
+.outfit-semibold {
+  font-family: "Outfit-SemiBold", sans-serif;
+}
+
+
+.outfit-bold {
+  font-family: "Outfit-Bold", sans-serif;
+}
+
+
+.outfit-extrabold {
+  font-family: "Outfit-ExtraBold", sans-serif;
+}
+
+
+.outfit-black {
+  font-family: "Outfit-Black", sans-serif;
+}
