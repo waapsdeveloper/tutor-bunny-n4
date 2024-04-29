@@ -1,0 +1,67 @@
+.content-outer-877584 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+
+  .joinus-outer-877584 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .image-outer-877584 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 50%;
+    }
+  }
+
+  .heading-outer-877584 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .subheading {
+      color: #666666;
+    }
+  }
+}
+
+.circle-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-container {
+  margin: 10px; /* Adjust spacing between images */
+  width: 120px; /* Set a fixed width for each image container */
+  height: 120px; /* Set a fixed height for each image container */
+  overflow: hidden; /* Ensure circular clipping */
+  border-radius: 50%; /* Make the container circular */
+}
+
+.circle-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the circular container */
+  border-radius: 50%; /* Make the image circular */
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+  .image-container {
+    width: 80px; /* Adjust container width for smaller screens */
+    height: 80px; /* Adjust container height for smaller screens */
+  }
+}

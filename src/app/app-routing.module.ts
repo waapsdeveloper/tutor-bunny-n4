@@ -4,8 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'splash',
     pathMatch: 'full',
+  },
+  {
+    path: 'splash',
+    loadChildren: () =>
+      import('./splash/splash.module').then((m) => m.SplashPageModule),
   },
   {
     path: 'home',
@@ -27,6 +32,10 @@ const routes: Routes = [
       import('./profile-details/profile-details.module').then(
         (m) => m.ProfileDetailsPageModule
       ),
+  },
+  {
+    path: 'role-base',
+    loadChildren: () => import('./role-base/role-base.module').then( m => m.RoleBasePageModule)
   },
 ];
 
