@@ -9,7 +9,10 @@
 </ion-header>
 <ion-content>
   <div class="container-img">
-    <div class="solial-links">
+    <div class="solial-links" *ngIf="loading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div class="solial-links" *ngIf="!loading">
       <div class="social-login-button-outer" (click)="continueWithGoogle()">
         <div class="social-login-button">
           <img src="assets/google.png" />

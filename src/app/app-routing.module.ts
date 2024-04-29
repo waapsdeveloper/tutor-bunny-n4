@@ -9,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
   // {
   //   path: 'dashboard',
@@ -17,20 +18,22 @@ const routes: Routes = [
   // },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
+    loadChildren: () =>
+      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
     path: 'profile-details',
-    loadChildren: () => import('./profile-details/profile-details.module').then( m => m.ProfileDetailsPageModule)
+    loadChildren: () =>
+      import('./profile-details/profile-details.module').then(
+        (m) => m.ProfileDetailsPageModule
+      ),
   },
-
-
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

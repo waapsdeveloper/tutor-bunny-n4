@@ -7,6 +7,11 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
+firebase.initializeApp(environment.firebaseConfig);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
