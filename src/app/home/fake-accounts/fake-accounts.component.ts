@@ -10,6 +10,7 @@ const accounts = require('./../../data/users.json');
 })
 export class FakeAccountsComponent implements OnInit {
   list = accounts;
+  user: any;
   constructor(private modals: ModalService,
     private network: NetworkService
   ) {}
@@ -19,11 +20,16 @@ export class FakeAccountsComponent implements OnInit {
   async openAccount(item) {
     console.log(item);
 
-    let res = await this.network.login(item)
-    console.log(res);
+    this.user = await this.network.login(item) as any[];
+    console.log(this.user.user);
+
+
+    let user = this.user.user;
+
+    localStorage. setItem("user", JSON.stringify(user) );
 
     // return
 
-    this.modals.dismiss(res);
+    this.modals.dismiss(user);
   }
 }
