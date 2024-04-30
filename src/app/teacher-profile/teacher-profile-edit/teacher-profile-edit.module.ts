@@ -8,6 +8,8 @@ import { TeacherProfileEditPageRoutingModule } from './teacher-profile-edit-rout
 
 import { TeacherProfileEditPage } from './teacher-profile-edit.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
+import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.module';
+import { SdCountryBoxModule } from 'src/app/components/sd-country-box/sd-country-box.module';
 
 @NgModule({
   imports: [
@@ -16,6 +18,8 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
     IonicModule,
     TeacherProfileEditPageRoutingModule,
     SdHeaderTopModule,
+    SdInputBoxModule,
+    SdCountryBoxModule,
   ],
   declarations: [TeacherProfileEditPage],
 })
