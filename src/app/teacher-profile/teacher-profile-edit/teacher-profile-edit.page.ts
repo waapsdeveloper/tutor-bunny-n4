@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher-profile-edit.page.scss'],
 })
 export class TeacherProfileEditPage implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  selectedCountry($event) {
+    console.log($event);
   }
-
 }

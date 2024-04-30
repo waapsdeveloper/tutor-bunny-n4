@@ -1,0 +1,16 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title class="fs-16 outfit-semibold">Select Country</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <ion-searchbar class="outfit fs-16" clear-icon="close-outline"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of list" (click)="selection(item)">
+      <ion-label>
+        <h2 class="fs-16 outfit-medium">{{item.name}} | {{item.code}}</h2>
+        <p class="fs-16 outfit">{{item.flag}} | {{item.dial_code}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

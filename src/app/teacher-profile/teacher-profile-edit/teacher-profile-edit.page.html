@@ -3,10 +3,14 @@
     [showBack]="true"></app-sd-header-top>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">teacher-profile-edit</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448">
+    <div class="input-box-lines">
+      <app-sd-input-box placeholder="Teacher or institute name"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines">
+      <app-sd-country-box (outc)="selectedCountry($event)"></app-sd-country-box>
+    </div>
+
+  </div>
 </ion-content>
