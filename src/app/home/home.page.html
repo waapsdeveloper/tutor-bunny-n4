@@ -1,10 +1,13 @@
 <!-- <ion-header>
 </ion-header> -->
-<ion-header class="splash-header-outer-6785">
+<ion-header class="splash-header-outer-6785 ion-padding">
   <div class="splash-header-6785">
     <ion-img src="assets/logo.png"></ion-img>
-    <div class="heading-splash-6785 outfit-semibold">Bring your success juorney</div>
+    <div class="heading-splash-6785 fs-16 outfit "><span>Bring your success journey</span></div>
+    <app-sd-bback-btn (click)="back()" class="back-home-96765"></app-sd-bback-btn>
+
   </div>
+
 
 </ion-header>
 <ion-content>
@@ -13,22 +16,31 @@
       <ion-spinner></ion-spinner>
     </div>
     <div class="solial-links" *ngIf="!loading">
+
+      <div class="social-login-button-outer" (click)="continueWithFake()">
+        <div class="social-login-button">
+          <div class="text-div-4326432 outfit-medium">
+            Continue with Fake Account
+          </div>
+        </div>
+      </div>
+
       <div class="social-login-button-outer" (click)="continueWithGoogle()">
         <div class="social-login-button">
           <img src="assets/google.png" />
           <div class="text-div-4326432 outfit-medium">
-            Continue with google
+            Continue with Google
           </div>
         </div>
       </div>
-      <div class="social-login-button-outer" (click)="gotoDashboard()">
+      <!-- <div class="social-login-button-outer" (click)="gotoDashboard()">
         <div class="social-login-button">
           <img src="assets/fb.png" />
           <div class="text-div-4326432 outfit-medium">
             Continue with Facebook
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="social-login-button-outer" (click)="gotoDashboard()">
         <div class="social-login-button">
           <img src="assets/apple.png" />

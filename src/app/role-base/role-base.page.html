@@ -21,8 +21,10 @@
     <div class="joinus-outer-877584">
       <div class="fs-16 outfit-semibold">Do you want to join us as a</div>
 
-      <app-sd-button-gray [image]="'assets/svg/tcl-white.svg'" [text]="'Teacher or Institute'"></app-sd-button-gray>
-      <app-sd-button-clear [image]="'assets/svg/stc.svg'" [text]="'Student'"></app-sd-button-clear>
+      <app-sd-button-gray (click)="setCurrentRole('teacher')" [image]="'assets/svg/tcl-white.svg'"
+        [text]="'Teacher or Institute'"></app-sd-button-gray>
+      <app-sd-button-clear (click)="setCurrentRole('student')" [image]="'assets/svg/stc.svg'"
+        [text]="'Student'"></app-sd-button-clear>
 
     </div>
 

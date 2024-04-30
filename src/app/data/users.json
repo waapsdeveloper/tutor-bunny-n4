@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Mary Kate",
+    "email": "mary.kate@gmail.com",
+    "password": "1987933790",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "assets/role-base-8-images/image1.jpeg"
+  },
+  {
+    "name": "john paul",
+    "email": "john.paul@gmail.com",
+    "password": "2906343973",
+    "login_type": "google.com",
+    "role_id": "2",
+    "image": "assets/role-base-8-images/image2.jpeg"
+  },
+  {
+    "name": "anna grace",
+    "email": "anna.grace@gmail.com",
+    "password": "1510006623",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "assets/role-base-8-images/image3.jpeg"
+  },
+  {
+    "name": "emma rose",
+    "email": "emma.rose@gmail.com",
+    "password": "6143093460",
+    "login_type": "google.com",
+    "role_id": "2",
+    "image": "assets/role-base-8-images/image4.jpeg"
+  },
+  {
+    "name": "sarah jane",
+    "email": "sarah jane@gmail.com",
+    "password": "8365678346",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "assets/role-base-8-images/image5.jpeg"
+  },
+  {
+    "name": "jack henry",
+    "email": "jack.henry@gmail.com",
+    "password": "5136395697",
+    "login_type": "google.com",
+    "role_id": "2",
+    "image": "assets/role-base-8-images/image6.jpeg"
+  },
+  {
+    "name": "lily mae",
+    "email": "lily.mae@gmail.com",
+    "password": "6527206648",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "assets/role-base-8-images/image7.jpeg"
+  },
+  {
+    "name": "luke james",
+    "email": "luke.james@gmail.com",
+    "password": "1817205308",
+    "login_type": "google.com",
+    "role_id": "2",
+    "image": "assets/role-base-8-images/image8.jpeg"
+  }
+]

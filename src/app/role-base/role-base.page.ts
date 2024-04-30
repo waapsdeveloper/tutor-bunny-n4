@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from '../services/nav.service';
 
 @Component({
   selector: 'app-role-base',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoleBasePage implements OnInit {
   images = [];
-  constructor() {}
+  constructor(private nav: NavService) {}
 
   ngOnInit() {}
+
+  setCurrentRole(key) {
+    localStorage.setItem('role', key);
+    this.nav.push('/home');
+  }
 }

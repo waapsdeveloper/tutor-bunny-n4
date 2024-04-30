@@ -1,0 +1,35 @@
+<div class="profile-box-98875">
+  <div class="item-box-98875">
+    <div class="image-box-98875" (click)="openEditProfile()">
+      <img class="image-box-image-7-98875" src="assets/role-base-8-images/image4.jpeg" />
+      <div class="edit-icon-box-98875">
+        <img class="image-box-image-8-98875" src="assets/svg/edit-lr.svg" />
+      </div>
+    </div>
+    <div class="title-box-98875">
+      <div class="heading-box-98875">
+        <div class="heading-box-line-98875">
+          <span class="fs-21 outfit-medium">Ana Monte</span>
+          <img src="assets/svg/verified-profile-sheild.svg" />
+        </div>
+        <div class="create-course-btn-98875 fs-16 outfit-medium">Create Course</div>
+      </div>
+      <div class="flag-box-98875">
+        <img src="assets/flag.png" />
+        <div class="fs-16 outfit">India</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="skills-box-98875">
+    <div class="ab-items-tr-98875">
+      <div class="fs-16 outfit">Teaches: </div>
+      <div class="fs-16 outfit ab-items-td-98875" *ngFor="let skill of skills">{{skill}}</div>
+    </div>
+    <div class="ab-items-tr-98875">
+      <div class="fs-16 outfit">Speaks:</div>
+      <div class="fs-16 outfit ab-items-td-98875" *ngFor="let language of languages">{{language}}</div>
+    </div>
+
+  </div>
+</div>
