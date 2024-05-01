@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SdInputBoxComponent } from './sd-input-box.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { SdTextareaBoxComponent } from './sd-textarea-box.component';
 
 @NgModule({
-  declarations: [SdTextareaBoxComponent],
+  declarations: [SdInputBoxComponent],
   imports: [CommonModule, IonicModule, FormsModule],
-  exports: [SdTextareaBoxComponent],
+  exports: [SdInputBoxComponent],
 })
-export class SdTextareaBoxModule {}
+export class SdInputBoxModule {}
