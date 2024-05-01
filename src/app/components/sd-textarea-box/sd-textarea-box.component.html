@@ -1,0 +1,5 @@
+<div class="sd-input-box-outer-675315">
+  <textarea class="fs-16 outfit sd-input-box-input-675315" rows="3" [placeholder]="placeholder"
+    [(ngModel)]="inputText" (keyup)="result($event)"></textarea>
+  <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
+</div>

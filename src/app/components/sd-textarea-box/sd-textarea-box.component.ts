@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-sd-textarea-about',
-  templateUrl: './sd-textarea-about.component.html',
-  styleUrls: ['./sd-textarea-about.component.scss'],
+  selector: 'app-sd-textarea-box',
+  templateUrl: './sd-textarea-box.component.html',
+  styleUrls: ['./sd-textarea-box.component.scss'],
 })
-export class SdTextareaAboutComponent  implements OnInit {
+export class SdTextareaBoxComponent  implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';

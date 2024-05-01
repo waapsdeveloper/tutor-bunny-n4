@@ -13,10 +13,10 @@ export class SdCountryBoxComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
 
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   list = countries;
   selectedCountry = { name: 'India', flag: '🇮🇳', code: 'IN', dial_code: '+91' };
 
-  @Output('outc') outc: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private modals: ModalService) {}
 
@@ -34,7 +34,12 @@ export class SdCountryBoxComponent implements OnInit {
 
     if (res.data) {
       this.selectedCountry = res.data;
-      this.outc.emit(res.data);
+      this.onChange.emit(res.data);
     }
+  }
+  result($event){
+    let v = $event.target.value;
+    console.log(v);
+    this.onChange.emit(v)
   }
 }

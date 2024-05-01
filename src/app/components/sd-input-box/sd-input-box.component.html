@@ -1,5 +1,5 @@
 <div class="sd-input-box-outer-675315">
   <input class="fs-16 outfit sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
-    [(ngModel)]="inputText" />
+    [(ngModel)]="inputText" (keyup)="result($event)" [readOnly]="isReadOnly" />
   <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
 </div>

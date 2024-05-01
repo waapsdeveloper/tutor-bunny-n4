@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonicSlides } from '@ionic/angular';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-teacher-profile-edit',
@@ -9,13 +10,80 @@ import { IonicSlides } from '@ionic/angular';
 export class TeacherProfileEditPage implements OnInit {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
+  user;
+  lang;
 
-  constructor() { }
+  formData: any = {
+    name: null,
+    country: null,
+    state: null,
+    phone_number: null,
+    address: null,
+    language: null,
+    subject: null,
+    experience: null,
+    tital: null,
+    about: null,
+
+  };
+  contryCode: any;
+
+
+  constructor(private network: NetworkService) {
+
+    this.initialize()
+  }
 
   ngOnInit() { }
 
+
+  async initialize() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    console.log(this.user);
+    let obj = {
+      email: this.user.email
+    }
+    console.log(obj);
+
+    let res = await this.network.getUserByEmail(obj);
+
+    if (res) {
+      this.setFormDta(res)
+    }
+
+
+  }
+
+  result(value, key) {
+
+
+    if(key == 'country'){
+
+      this.formData['country'] = value.name;
+      this.formData['dial_code'] = value.dial_code;
+    } else
+    if(key == 'languages'){
+      this.lang = value;
+      this.formData['languages'] = value.map(obj => obj.id)
+    }
+    else {
+      this.formData[key] = value;
+    }
+    console.log(this.formData)
+  }
+
+
+  setFormDta(data) {
+    this.formData['name'] = data['name']
+  }
+
   selectedCountry(event) {
-    console.log(event);
+    this.contryCode = event.list
+    console.log(this.contryCode);
+  }
+  async selectedLanguage(event) {
+    this.lang = event.list;
+    console.log("dsfsfsfsdff", this.lang);
   }
 
   async onSlideChange() {

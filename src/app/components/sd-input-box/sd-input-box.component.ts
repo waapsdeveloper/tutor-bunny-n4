@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sd-input-box',
@@ -9,7 +9,17 @@ export class SdInputBoxComponent implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
+  @Input() isReadOnly = false;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   constructor() {}
 
   ngOnInit() {}
+
+  result($event){
+    let v = $event.target.value;
+    if(!this.isReadOnly){
+      this.onChange.emit(v)
+    }
+
+  }
 }

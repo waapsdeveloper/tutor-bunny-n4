@@ -13,11 +13,25 @@ export class NetworkService {
     public router: Router,
     public utility: UtilityService,
     public modals: ModalService
-  ) {}
+  ) { }
 
   // Authentication Related APIs
   login(data: any) {
     return this.httpPostResponse('login-via-social', data);
+  }
+
+  getLanguage() {
+    return this.httpGetResponse('languages/list', null,);
+  }
+
+  getUserByEmail(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'user-by-email' + '?' + str,
+      null,
+      false
+    );
+
   }
 
   serialize = (obj: any) => {

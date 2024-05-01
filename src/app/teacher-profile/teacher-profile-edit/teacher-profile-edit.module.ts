@@ -11,8 +11,9 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
 import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.module';
 import { SdCountryBoxModule } from 'src/app/components/sd-country-box/sd-country-box.module';
 import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
-import { SdTextareaBoxModule } from 'src/app/components/sd-input-box copy/sd-textarea-box.module';
 import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-textarea-about.module';
+import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-textarea-box.module';
+import { SdLanguageBoxModule } from 'src/app/components/sd-language-box/sd-language-box.module';
 
 @NgModule({
   imports: [
@@ -24,8 +25,9 @@ import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-t
     SdInputBoxModule,
     SdCountryBoxModule,
     SdButtonGrayModule,
+    SdTextareaAboutModule,
     SdTextareaBoxModule,
-    SdTextareaAboutModule
+    SdLanguageBoxModule
   ],
   declarations: [TeacherProfileEditPage],
 
