@@ -4,60 +4,78 @@
 </ion-header>
 
 <ion-content class="ion-padding ion-content-medium-background">
-  <div class="body-content-68448">
-    <div class="input-box-lines">
-      <app-sd-input-box placeholder="Teacher or institute name"></app-sd-input-box>
-    </div>
-    <div class="input-box-lines">
-      <app-sd-country-box (outc)="selectedCountry($event)"></app-sd-country-box>
-    </div>
-    <div class="input-box-lines">
-      <app-sd-input-box placeholder="State"></app-sd-input-box>
-    </div>
-    <div class="phone-input">
-      <div class="dail-code">
-        <app-sd-input-box placeholder="+92"></app-sd-input-box>
-      </div>
-      <div class="number">
-        <app-sd-input-box placeholder="Phone Number"></app-sd-input-box>
-      </div>
-    </div>
-    <div class="input-box-lines">
-      <app-sd-textarea-box placeholder="Address"></app-sd-textarea-box>
-    </div>
-    <div class="language-sec">
-      <div class="input-box-lines languages">
-        <div class="language">
-          <app-sd-input-box placeholder="languages"></app-sd-input-box>
+
+  <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
+    <swiper-slide>
+      <div class="body-content-68448">
+        <div class="input-box-lines">
+          <app-sd-input-box placeholder="Teacher or institute name"></app-sd-input-box>
         </div>
-        <div class="add-lang">
-          <img src="../../../assets/icon/add-circle.svg" alt="">
+        <div class="input-box-lines">
+          <app-sd-country-box (outc)="selectedCountry($event)"></app-sd-country-box>
+        </div>
+        <div class="input-box-lines">
+          <app-sd-input-box placeholder="State"></app-sd-input-box>
+        </div>
+        <div class="phone-input">
+          <div class="dail-code">
+            <app-sd-input-box placeholder="+92"></app-sd-input-box>
+          </div>
+          <div class="number">
+            <app-sd-input-box placeholder="Phone Number"></app-sd-input-box>
+          </div>
+        </div>
+        <div class="input-box-lines">
+          <app-sd-textarea-box placeholder="Address"></app-sd-textarea-box>
+        </div>
+        <div class="language-sec">
+          <div class="input-box-lines languages">
+            <div class="language">
+              <app-sd-input-box placeholder="languages"></app-sd-input-box>
+            </div>
+            <div class="add-lang">
+              <img src="../../../assets/icon/add-circle.svg" alt="">
+            </div>
+          </div>
+          <div class="lang-chips">
+            <ion-chip>Franch <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+            <ion-chip>Hindi <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+            <ion-chip>English <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+          </div>
+        </div>
+        <div class="subject-sec">
+          <div class="input-box-lines subjects">
+            <div class="subject">
+              <app-sd-input-box placeholder="Subject Teches"></app-sd-input-box>
+            </div>
+            <div class="add-sub">
+              <img src="../../../assets/icon/add-circle.svg" alt="">
+            </div>
+          </div>
+          <div class="sub-chips">
+            <ion-chip>Drawing <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+            <ion-chip>Piano <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+            <ion-chip>Guitar <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+          </div>
+        </div>
+        <div class="input-box-lines">
+          <app-sd-input-box placeholder="Teaching experience in Yrs"></app-sd-input-box>
+        </div>
+        <div class="input-box-lines">
+          <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
         </div>
       </div>
-      <div class="lang-chips">
-        <ion-chip >Franch <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-        <ion-chip >Hindi <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-        <ion-chip >English <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-      </div>
-    </div>
-    <div class="subject-sec">
-      <div class="input-box-lines subjects">
-        <div class="subject">
-          <app-sd-input-box placeholder="Subject Teches"></app-sd-input-box>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="body-content-68448">
+        <div class="input-box-lines">
+          <app-sd-input-box placeholder="Profile Title (100 characters)"></app-sd-input-box>
         </div>
-        <div class="add-sub">
-          <img src="../../../assets/icon/add-circle.svg" alt="">
+        <div class="input-box-lines">
+          <app-sd-textarea-about placeholder="About the Teacher/Institute"></app-sd-textarea-about>
         </div>
       </div>
-      <div class="sub-chips">
-        <ion-chip >Drawing <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-        <ion-chip >Piano <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-        <ion-chip >Guitar <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-      </div>
-    </div>
-    <div class="input-box-lines">
-      <app-sd-input-box placeholder="Teaching experience in Yrs"></app-sd-input-box>
-    </div>
-    <app-sd-button-gray></app-sd-button-gray>
-  </div>
+    </swiper-slide>
+  </swiper-container>
+
 </ion-content>

@@ -1,7 +1,5 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <div class="content-outer-877584">
-
     <div class="image-outer-877584">
       <img src="assets/logo.png">
     </div>
@@ -9,7 +7,6 @@
       <div class="heading fs-16 outfit-semibold">Meeting Place for teacher and students</div>
       <div class="subheading fs-16 outfit-semibold">Access to the qualified teachers around the
         world and request free trial classes</div>
-
     </div>
     <div class="circle-images">
       <div class="image-container" *ngFor="let item of [1,2,3,4,5,6,7,8]">
@@ -17,18 +14,12 @@
       </div>
     </div>
     <div style="height: 5vh;"></div>
-
     <div class="joinus-outer-877584">
       <div class="fs-16 outfit-semibold">Do you want to join us as a</div>
-
       <app-sd-button-gray (click)="setCurrentRole('teacher')" [image]="'assets/svg/tcl-white.svg'"
         [text]="'Teacher or Institute'"></app-sd-button-gray>
       <app-sd-button-clear (click)="setCurrentRole('student')" [image]="'assets/svg/stc.svg'"
         [text]="'Student'"></app-sd-button-clear>
-
     </div>
-
-
-
   </div>
 </ion-content>
