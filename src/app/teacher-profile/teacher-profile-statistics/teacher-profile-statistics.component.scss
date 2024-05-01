@@ -5,9 +5,10 @@
   // height: 60px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  gap:13px;
   // padding: 8px;
 
   .statistics-box-item-78906 {
@@ -20,6 +21,7 @@
     margin-bottom: 8px;
     width: 20%;
     height: 60px;
+    padding-right: 13px;
     border-right: 0.25px solid rgba(103, 113, 105, 0.15);
     //  padding: 10px;
     .nbl-687 {

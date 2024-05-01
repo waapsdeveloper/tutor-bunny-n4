@@ -39,13 +39,13 @@
 .circle-images {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
 }
 
 .image-container {
   margin: 10px; /* Adjust spacing between images */
-  width: 120px; /* Set a fixed width for each image container */
-  height: 120px; /* Set a fixed height for each image container */
+  width: 100px; /* Set a fixed width for each image container */
+  height: 100px; /* Set a fixed height for each image container */
   overflow: hidden; /* Ensure circular clipping */
   border-radius: 50%; /* Make the container circular */
 }
@@ -61,7 +61,7 @@
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .image-container {
-    width: 80px; /* Adjust container width for smaller screens */
-    height: 80px; /* Adjust container height for smaller screens */
+    width: 75px; /* Adjust container width for smaller screens */
+    height: 75px; /* Adjust container height for smaller screens */
   }
 }
