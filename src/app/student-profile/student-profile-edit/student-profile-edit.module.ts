@@ -1,12 +1,12 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TeacherProfileEditPageRoutingModule } from './teacher-profile-edit-routing.module';
+import { StudentProfileEditPageRoutingModule } from './student-profile-edit-routing.module';
 
-import { TeacherProfileEditPage } from './teacher-profile-edit.page';
+import { StudentProfileEditPage } from './student-profile-edit.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.module';
 import { SdCountryBoxModule } from 'src/app/components/sd-country-box/sd-country-box.module';
@@ -21,7 +21,7 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
     CommonModule,
     FormsModule,
     IonicModule,
-    TeacherProfileEditPageRoutingModule,
+    StudentProfileEditPageRoutingModule,
     SdHeaderTopModule,
     SdInputBoxModule,
     SdCountryBoxModule,
@@ -31,8 +31,6 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
     SdLanguageBoxModule,
     AcceptTermsProfileModule,
   ],
-  declarations: [TeacherProfileEditPage],
-
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [StudentProfileEditPage],
 })
-export class TeacherProfileEditPageModule {}
+export class StudentProfileEditPageModule {}

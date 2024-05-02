@@ -1,0 +1,13 @@
+.customised-uyt-78956 {
+  --size: 32px;
+
+  a {
+    color: #6c60fd;
+  }
+}
+
+.customised-uyt-78956::part(container) {
+  box-shadow: 0 0 3.3px 1 rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  border: none;
+}

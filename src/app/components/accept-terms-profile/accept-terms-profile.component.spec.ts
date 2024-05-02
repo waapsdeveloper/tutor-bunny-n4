@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SdInputBoxComponent } from './sd-input-box.component';
+import { AcceptTermsProfileComponent } from './accept-terms-profile.component';
 
-describe('SdInputBoxComponent', () => {
-  let component: SdInputBoxComponent;
-  let fixture: ComponentFixture<SdInputBoxComponent>;
+describe('AcceptTermsProfileComponent', () => {
+  let component: AcceptTermsProfileComponent;
+  let fixture: ComponentFixture<AcceptTermsProfileComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SdInputBoxComponent ],
+      declarations: [ AcceptTermsProfileComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SdInputBoxComponent);
+    fixture = TestBed.createComponent(AcceptTermsProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

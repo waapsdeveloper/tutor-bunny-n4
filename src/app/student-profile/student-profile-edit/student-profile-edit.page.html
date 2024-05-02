@@ -1,0 +1,46 @@
+<ion-header>
+  <app-sd-header-top [title]="'Student Details'" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
+</ion-header>
+
+
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448">
+    <div class="input-box-lines two-names">
+      <app-sd-input-box placeholder="First name" (onChange)="result($event, 'first_name')"
+        [inputText]="formData.name"></app-sd-input-box>
+      <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
+        [inputText]="formData.name"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines">
+      <app-sd-country-box (onChange)="result($event, 'country')" [inputText]="formData.country"></app-sd-country-box>
+    </div>
+    <div class="input-box-lines">
+      <app-sd-input-box placeholder="State" (onChange)="result($event, 'state')"
+        [inputText]="formData.state"></app-sd-input-box>
+    </div>
+    <div class="phone-input">
+      <div class="dail-code">
+        <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
+          [isReadOnly]="true"> </app-sd-input-box>
+      </div>
+      <div class="number">
+        <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
+          [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
+      </div>
+    </div>
+    <div class="image-upload-box-st-78955674">
+      <div class="icno-text-88666">
+        <img class="img-67855" src="assets/icon/user-avatar-stp.png" />
+        <div class="outfit fs-16">Upload Profile Photo (optional)</div>
+      </div>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+    <div class="terms-agree">
+      <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+    </div>
+
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>
+</ion-content>

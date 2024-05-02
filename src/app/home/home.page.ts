@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { ModalService } from '../services/basic/modal.service';
 import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomePage implements ViewWillEnter {
   constructor(
     private nav: NavService,
     public authService: AuthenticationService,
-    private modals: ModalService
+    private modals: ModalService,
+    private profiles: ProfileService
   ) {}
 
   ionViewWillEnter(): void {
@@ -51,7 +53,23 @@ export class HomePage implements ViewWillEnter {
     const res = await this.modals.present(FakeAccountsComponent, {}, '', 0.5);
     console.log(res);
     if (res.data) {
-      this.nav.push('/tabs');
+      let user = res.data;
+      const isf = await this.profiles.isProfileCompleted(user);
+
+      if (!isf) {
+        if (parseInt(user.role_id) == 2) {
+          this.nav.push('/student-profile/student-profile-edit', {
+            backUrl: '/home',
+          });
+        }
+        if (parseInt(user.role_id) == 3) {
+          this.nav.push('/teacher-profile/teacher-profile-edit', {
+            backUrl: '/home',
+          });
+        }
+      } else {
+        this.nav.push('/tabs');
+      }
     }
     // face objects
   }
