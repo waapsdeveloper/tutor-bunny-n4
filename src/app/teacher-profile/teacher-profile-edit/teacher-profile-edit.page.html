@@ -1,6 +1,5 @@
-<ion-header>
-  <app-sd-header-top [title]="'Teacher/Institute Profile'" [backUrl]="'/teacher-profile'"
-    [showBack]="true"></app-sd-header-top>
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [title]="'Teacher/Institute Profile'" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-padding ion-content-medium-background">
@@ -13,7 +12,7 @@
             [inputText]="formData.name"></app-sd-input-box>
         </div>
         <div class="input-box-lines">
-          <app-sd-country-box  (onChange)="result($event, 'country')"
+          <app-sd-country-box (onChange)="result($event, 'country')"
             [inputText]="formData.country"></app-sd-country-box>
         </div>
         <div class="input-box-lines">
@@ -23,7 +22,7 @@
         <div class="phone-input">
           <div class="dail-code">
             <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')"
-            [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
+              [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
           </div>
           <div class="number">
             <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
@@ -54,7 +53,7 @@
           <div class="input-box-lines subjects">
             <div class="subject">
               <app-sd-input-box placeholder="Subject teaches" (onChange)="result($event, 'subject')"
-              [inputText]="formData.subject"></app-sd-input-box>
+                [inputText]="formData.subject"></app-sd-input-box>
             </div>
             <div class="add-sub">
               <img src="../../../assets/icon/add-circle.svg" alt="">
@@ -68,7 +67,7 @@
         </div>
         <div class="input-box-lines">
           <app-sd-input-box placeholder="Teaching experience in Yrs" (onChange)="result($event, 'experience')"
-          [inputText]="formData.experience" [type]="'number'"></app-sd-input-box>
+            [inputText]="formData.experience" [type]="'number'"></app-sd-input-box>
         </div>
         <div class="input-box-lines">
           <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
@@ -79,11 +78,20 @@
       <div class="body-content-68448">
         <div class="input-box-lines">
           <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'tital')"
-          [inputText]="formData.tital"></app-sd-input-box>
+            [inputText]="formData.tital"></app-sd-input-box>
         </div>
         <div class="input-box-lines">
           <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'about')"
-          [inputText]="formData.about"></app-sd-textarea-about>
+            [inputText]="formData.about"></app-sd-textarea-about>
+        </div>
+        <div class="">
+
+        </div>
+        <div class="terms-agree">
+          <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+        </div>
+        <div class="input-box-lines">
+          <app-sd-button-gray [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
         </div>
       </div>
     </swiper-slide>

@@ -1,0 +1,140 @@
+.phone-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  .dail-code {
+    width: 50px;
+  }
+  .number {
+    width: 100%;
+  }
+}
+
+.languages {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  .add-lang {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon {
+      font-size: 45px;
+    }
+  }
+  .language {
+    width: 100%;
+  }
+}
+.language-sec {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+.lang-chips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  ion-chip {
+    background-color: rgba(69, 69, 69, 1);
+    color: white;
+    ion-icon {
+      color: white;
+    }
+  }
+}
+
+.subjects {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  .add-sub {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon {
+      font-size: 45px;
+    }
+  }
+  .subject {
+    width: 100%;
+  }
+}
+.subject-sec {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+.sub-chips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  ion-chip {
+    background-color: rgba(69, 69, 69, 1);
+    color: white;
+    ion-icon {
+      color: white;
+    }
+  }
+}
+.language-chips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.two-names {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.image-upload-box-st-78955674 {
+  height: 78px;
+  border-radius: 8px;
+  border: 1px solid #303030;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  .icno-text-88666 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+
+    .img-67855 {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  .icno-text-88666 {
+    display: flex;
+  }
+}

@@ -83,3 +83,8 @@ swiper-container {
     0.5
   );
 }
+
+ion-header {
+  box-shadow: none !important;
+  --box-shadow: none !important;
+}

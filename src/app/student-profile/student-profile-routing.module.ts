@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { StudentProfilePage } from './student-profile.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: StudentProfilePage
+  },
+  {
+    path: 'student-profile-edit',
+    loadChildren: () => import('./student-profile-edit/student-profile-edit.module').then( m => m.StudentProfileEditPageModule)
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class StudentProfilePageRoutingModule {}

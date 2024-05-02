@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor() {}
 
-  constructor() { }
-
-
-  
+  isProfileCompleted(user) {
+    return new Promise((resolve) => {
+      resolve(false);
+    });
+  }
 }
