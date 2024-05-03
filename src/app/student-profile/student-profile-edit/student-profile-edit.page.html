@@ -12,6 +12,10 @@
         [inputText]="formData.name"></app-sd-input-box>
     </div>
     <div class="input-box-lines">
+      <app-sd-year-box placeholder="Year of birth" (onChange)="result($event, 'year')"
+        [inputText]="formData.year"></app-sd-year-box>
+    </div>
+    <div class="input-box-lines">
       <app-sd-country-box (onChange)="result($event, 'country')" [inputText]="formData.country"></app-sd-country-box>
     </div>
     <div class="input-box-lines">
@@ -43,7 +47,7 @@
       <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
     </div>
     <div class="input-box-lines d-flex flex-column justify-content-center align-center ">
-      <div class="outfit-light fs-16" >Skip</div>
+      <div class="outfit-light fs-16">Skip</div>
     </div>
   </div>
 </ion-content>
