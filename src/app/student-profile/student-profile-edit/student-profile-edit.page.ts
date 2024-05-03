@@ -46,4 +46,8 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   }
 
   submit() {}
+
+  skipToStudentDashboard() {
+    this.nav.push('/tabs/student-dashboard');
+  }
 }
