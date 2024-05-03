@@ -13,6 +13,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   @ViewChild('slides', { static: false }) slides: any;
   user;
   lang;
+  sub;
 
   params: any;
   backUrl = '/teacher-profile';
@@ -20,9 +21,10 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     name: null,
     country: null,
     state: null,
+    dail_code: null,
     phone_number: null,
     address: null,
-    language: null,
+    languages: null,
     subject: null,
     experience: null,
     tital: null,
@@ -34,7 +36,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -65,6 +67,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     } else if (key == 'languages') {
       this.lang = value;
       this.formData['languages'] = value.map((obj) => obj.id);
+    } else if (key == 'subject') {
+      this.sub = value;
+      this.formData['subject'] = value.map((obj) => obj.id);
     } else {
       this.formData[key] = value;
     }
@@ -84,11 +89,20 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     console.log('dsfsfsfsdff', this.lang);
   }
 
+  async selevtedSubject(event) {
+    this.sub = event.list;
+    console.log('dsfsfsfsdff', this.sub);
+  }
+
   async onSlideChange() {
-    // const activeIndex = await this.slides.getActiveIndex();
-    // console.log("Active index:", activeIndex);
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
 
-  submit() {}
+  submit() { }
+
+  openGallery($event){
+    console.log("open gallery")
+    this.nav.push('/teacher-profile/teacher-gallery')
+  }
+
 }

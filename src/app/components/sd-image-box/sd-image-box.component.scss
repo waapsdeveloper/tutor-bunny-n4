@@ -1,0 +1,32 @@
+.top-header-78956 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  .image-78558{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+  }
+
+  .image-box-78559 {
+    height: 93px;
+    width: 95px;
+    padding: 15px;
+    border: 1px solid rgba(69, 69, 69, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+  }
+  .image-heading{
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+  }
+}

@@ -23,6 +23,9 @@ export class NetworkService {
   getLanguage() {
     return this.httpGetResponse('languages/list', null,);
   }
+  getSubject() {
+    return this.httpGetResponse('subjects/list', null,);
+  }
 
   getUserByEmail(data) {
     const str = this.serialize(data);

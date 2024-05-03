@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'teacher-profile-edit',
     loadChildren: () => import('./teacher-profile-edit/teacher-profile-edit.module').then( m => m.TeacherProfileEditPageModule)
+  },  {
+    path: 'teacher-gallery',
+    loadChildren: () => import('./teacher-gallery/teacher-gallery.module').then( m => m.TeacherGalleryPageModule)
   }
+
 ];
 
 @NgModule({

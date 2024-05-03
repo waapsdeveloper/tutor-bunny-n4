@@ -1,0 +1,14 @@
+<ion-content>
+  <div class="add-icon" (click)="selectedsubject()">
+    Add <ion-icon name="add-outline" size="large"></ion-icon>
+  </div>
+  <ion-searchbar class="outfit fs-16" clear-icon="close-outline"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of list" >
+      <ion-label>
+        <h2>{{item.name}}</h2>
+      </ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>

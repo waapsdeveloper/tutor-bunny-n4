@@ -15,6 +15,8 @@ import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-t
 import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-textarea-box.module';
 import { SdLanguageBoxModule } from 'src/app/components/sd-language-box/sd-language-box.module';
 import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profile/accept-terms-profile.module';
+import { SdSubjectBoxModule } from 'src/app/components/sd-subject-box/sd-subject-box.module';
+import { SdImageBoxModule } from 'src/app/components/sd-image-box/sd-image-box.module';
 
 @NgModule({
   imports: [
@@ -30,6 +32,8 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
     SdTextareaBoxModule,
     SdLanguageBoxModule,
     AcceptTermsProfileModule,
+    SdSubjectBoxModule,
+    SdImageBoxModule
   ],
   declarations: [TeacherProfileEditPage],
 

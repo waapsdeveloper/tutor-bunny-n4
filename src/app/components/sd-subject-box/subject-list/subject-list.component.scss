@@ -2,7 +2,7 @@
   height: 40px;
   border-radius: 8px;
   background: #ffffff;
-  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -10,6 +10,7 @@
   padding-left: 8px;
   padding-right: 8px;
   gap: 8px;
+  width: 100% !important;
 }
 
 .sd-input-box-input-675315 {
@@ -23,4 +24,12 @@
   /* Additional styles when input is focused */
   /* You can customize this block based on your requirements */
   box-shadow: none; /* Remove any focus box-shadow */
+}
+
+.add-icon{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 20px;
 }

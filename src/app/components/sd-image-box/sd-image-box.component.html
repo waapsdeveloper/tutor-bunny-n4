@@ -1,0 +1,25 @@
+<div class="top-header-78956">
+  <div class="image-78558">
+    <div class="image-box-78559" (click)="fileInput.click()">
+      <img src="../../../assets/profile-photos.png" alt="Selected Image" >
+    </div>
+    <input type="file" formControlName="profile_photo" (change)="onProfileSelected($event)" accept="image/*" style="display: none" #fileInput/>
+    <p class="image-heading">Profile Photo*</p>
+  </div>
+  <div  class="image-78558">
+    <div class="image-box-78559" (click)="photoInput.click()">
+      <img src="../../../assets/photo-id.png" alt="">
+    </div>
+    <input type="file" formControlName="phto_id" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput/>
+
+    <p class="image-heading">Photo ID*</p>
+  </div>
+  <div  class="image-78558">
+
+    <div class="image-box-78559 ion-activatable ripple-parent rectangle" (click)="openGallery.emit()" >
+      <ion-ripple-effect></ion-ripple-effect>
+      <img src="../../../assets/gallary.png" alt="">
+    </div>
+    <p class="image-heading">Gallary</p>
+  </div>
+</div>

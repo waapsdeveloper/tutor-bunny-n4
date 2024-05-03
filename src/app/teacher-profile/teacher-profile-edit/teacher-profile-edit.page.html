@@ -52,17 +52,17 @@
         <div class="subject-sec">
           <div class="input-box-lines subjects">
             <div class="subject">
-              <app-sd-input-box placeholder="Subject teaches" (onChange)="result($event, 'subject')"
-                [inputText]="formData.subject"></app-sd-input-box>
+              <app-sd-subject-box (onChange)="result($event, 'subject')"
+                placeholder="Subject teaches"></app-sd-subject-box>
             </div>
             <div class="add-sub">
               <img src="../../../assets/icon/add-circle.svg" alt="">
             </div>
           </div>
-          <div class="sub-chips">
-            <ion-chip>Drawing <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-            <ion-chip>Piano <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-            <ion-chip>Guitar <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+          <div class="language-chips">
+            <div class="sub-chips" *ngFor="let item of sub">
+              <ion-chip>{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+            </div>
           </div>
         </div>
         <div class="input-box-lines">
@@ -84,8 +84,8 @@
           <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'about')"
             [inputText]="formData.about"></app-sd-textarea-about>
         </div>
-        <div class="">
-
+        <div class="input-box-lines">
+          <app-sd-image-box (openGallery)="openGallery($event)"></app-sd-image-box>
         </div>
         <div class="terms-agree">
           <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>

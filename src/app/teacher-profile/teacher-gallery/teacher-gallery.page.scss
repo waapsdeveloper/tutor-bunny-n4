@@ -1,0 +1,20 @@
+.gallery-outer-8965 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+  grid-gap: 8px; /* Gap between grid items */
+}
+
+.image-card-78975 {
+  /* Optional: Add styling for image cards */
+  background-color: rgba(217, 217, 217, 1);
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  aspect-ratio: 4 / 3;
+}
+
+.image-card-78975 img {
+
+}
