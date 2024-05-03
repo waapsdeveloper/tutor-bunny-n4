@@ -45,5 +45,19 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     console.log(this.formData);
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      let image = reader.result as string;
+      console.log(image);
+    };
+    reader.readAsDataURL(file);
+  }
+
   submit() {}
+
+  skipToStudentDashboard() {
+    this.nav.push('/tabs/student-dashboard');
+  }
 }

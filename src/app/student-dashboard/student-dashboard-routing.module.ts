@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: StudentDashboardPage
+  },
+  {
+    path: 'student-menu',
+    loadChildren: () => import('./student-menu/student-menu.module').then( m => m.StudentMenuPageModule)
   }
 ];
 

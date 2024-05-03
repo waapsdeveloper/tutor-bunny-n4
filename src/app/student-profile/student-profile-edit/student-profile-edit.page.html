@@ -32,13 +32,14 @@
           [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
       </div>
     </div>
-    <div class="image-upload-box-st-78955674">
+    <div class="image-upload-box-st-78955674" (click)="photoInput.click()">
       <div class="icno-text-88666">
         <img class="img-67855" src="assets/icon/user-avatar-stp.png" />
         <div class="outfit fs-16">Upload Profile Photo (optional)</div>
       </div>
       <ion-icon name="chevron-forward-outline"></ion-icon>
     </div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
     <div class="terms-agree">
       <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
     </div>
@@ -46,7 +47,8 @@
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
     </div>
-    <div class="input-box-lines d-flex flex-column justify-content-center align-center ">
+    <div class="input-box-lines d-flex flex-column justify-content-center align-center "
+      (click)="skipToStudentDashboard()">
       <div class="outfit-light fs-16">Skip</div>
     </div>
   </div>
