@@ -1,13 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>student-dashboard</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border ion-no-shadow">
+  <div class="profile-bc-header-678956">
+    <div class="pl-box-785">
+      <img class="pl-img" src="assets/profileimg.png" />
+      <div class="pl-heading outfit-semibold">Hi, Kretyal</div>
+    </div>
+    <div class="noti-795">
+      <div class="icon-box-77">
+        <img src="assets/icon/header-search.svg" />
+      </div>
+      <div class="icon-box-77">
+        <img src="assets/icon/notification-bell.svg" />
+      </div>
+
+    </div>
+  </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">student-dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-content-bg ion-padding" >
+
+  <div class="body-content-68448">
+    <div class="header-chips">
+      <ion-chip>All</ion-chip>
+      <ion-chip>Academics</ion-chip>
+      <ion-chip>Hobby</ion-chip>
+      <ion-chip>Language</ion-chip>
+      <ion-chip>K-2 Tution</ion-chip>
+    </div>
+    <app-profile-search-box></app-profile-search-box>
+    <app-rec-teachers></app-rec-teachers>
+    <app-rec-courses></app-rec-courses>
+
+  </div>
+
 </ion-content>
