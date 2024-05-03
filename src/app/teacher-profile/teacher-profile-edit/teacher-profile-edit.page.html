@@ -4,97 +4,98 @@
 
 <ion-content class="ion-padding ion-content-medium-background">
 
-  <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
-    <swiper-slide>
-      <div class="body-content-68448">
-        <div class="input-box-lines">
-          <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
-            [inputText]="formData.name"></app-sd-input-box>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-country-box (onChange)="result($event, 'country')"
-            [inputText]="formData.country"></app-sd-country-box>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-input-box placeholder="State" (onChange)="result($event, 'state')"
-            [inputText]="formData.state"></app-sd-input-box>
-        </div>
-        <div class="phone-input">
-          <div class="dail-code">
-            <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')"
-              [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
+  <form >
+    <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
+      <swiper-slide>
+        <div class="body-content-68448">
+          <div class="input-box-lines">
+            <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
+              [inputText]="formData.name"></app-sd-input-box>
           </div>
-          <div class="number">
-            <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
-              [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
+          <div class="input-box-lines">
+            <app-sd-country-box (onChange)="result($event, 'country')"
+              [inputText]="formData.country"></app-sd-country-box>
           </div>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-textarea-box placeholder="Address" (onChange)="result($event, 'address')"
-            [inputText]="formData.address"></app-sd-textarea-box>
-        </div>
-        <div class="language-sec">
-          <div class="input-box-lines languages">
-            <div class="language">
-              <app-sd-language-box (onChange)="result($event, 'languages')"
-                placeholder="Select Languages"></app-sd-language-box>
+          <div class="input-box-lines">
+            <app-sd-input-box placeholder="State" (onChange)="result($event, 'state')"
+              [inputText]="formData.state"></app-sd-input-box>
+          </div>
+          <div class="phone-input">
+            <div class="dail-code">
+              <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')"
+                [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
             </div>
-            <div class="add-lang">
-              <img src="../../../assets/icon/add-circle.svg" alt="">
+            <div class="number">
+              <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
+                [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
             </div>
           </div>
-          <div class="language-chips">
-            <div class="lang-chips" *ngFor="let item of lang">
-              <ion-chip>{{item.name}} <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+          <div class="input-box-lines">
+            <app-sd-textarea-box placeholder="Address" (onChange)="result($event, 'address')"
+              [inputText]="formData.address"></app-sd-textarea-box>
+          </div>
+          <div class="language-sec">
+            <div class="input-box-lines languages">
+              <div class="language">
+                <app-sd-language-box (onChange)="result($event, 'languages')"
+                  placeholder="Select Languages"></app-sd-language-box>
+              </div>
+              <div class="add-lang">
+                <img src="../../../assets/icon/add-circle.svg" alt="">
+              </div>
+            </div>
+            <div class="language-chips">
+              <div class="lang-chips" *ngFor="let item of lang">
+                <ion-chip>{{item.name}} <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="subject-sec">
-          <div class="input-box-lines subjects">
-            <div class="subject">
-              <app-sd-subject-box (onChange)="result($event, 'subject')"
-                placeholder="Subject teaches"></app-sd-subject-box>
+          <div class="subject-sec">
+            <div class="input-box-lines subjects">
+              <div class="subject">
+                <app-sd-subject-box (onChange)="result($event, 'subject')"
+                  placeholder="Subject teaches"></app-sd-subject-box>
+              </div>
+              <div class="add-sub">
+                <img src="../../../assets/icon/add-circle.svg" alt="">
+              </div>
             </div>
-            <div class="add-sub">
-              <img src="../../../assets/icon/add-circle.svg" alt="">
+            <div class="language-chips">
+              <div class="sub-chips" *ngFor="let item of sub">
+                <ion-chip>{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+              </div>
             </div>
           </div>
-          <div class="language-chips">
-            <div class="sub-chips" *ngFor="let item of sub">
-              <ion-chip>{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-            </div>
+          <div class="input-box-lines">
+            <app-sd-input-box placeholder="Teaching experience in Yrs" (onChange)="result($event, 'experience')"
+              [inputText]="formData.experience" [type]="'number'"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines">
+            <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
           </div>
         </div>
-        <div class="input-box-lines">
-          <app-sd-input-box placeholder="Teaching experience in Yrs" (onChange)="result($event, 'experience')"
-            [inputText]="formData.experience" [type]="'number'"></app-sd-input-box>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="body-content-68448">
+          <div class="input-box-lines">
+            <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
+              [inputText]="formData.title"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines">
+            <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
+              [inputText]="formData.description"></app-sd-textarea-about>
+          </div>
+          <div class="input-box-lines">
+            <app-sd-image-box (openGallery)="openGallery($event)"></app-sd-image-box>
+          </div>
+          <div class="terms-agree">
+            <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+          </div>
+          <div class="input-box-lines">
+            <app-sd-button-gray [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
+          </div>
         </div>
-        <div class="input-box-lines">
-          <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
-        </div>
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="body-content-68448">
-        <div class="input-box-lines">
-          <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'tital')"
-            [inputText]="formData.tital"></app-sd-input-box>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'about')"
-            [inputText]="formData.about"></app-sd-textarea-about>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-image-box (openGallery)="openGallery($event)"></app-sd-image-box>
-        </div>
-        <div class="terms-agree">
-          <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
-        </div>
-        <div class="input-box-lines">
-          <app-sd-button-gray [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
-        </div>
-      </div>
-    </swiper-slide>
-  </swiper-container>
-
+      </swiper-slide>
+    </swiper-container>
+  </form>
 </ion-content>

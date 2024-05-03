@@ -1,24 +1,16 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [title]="'My Gallery'" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
 </ion-header>
-
 <ion-content class="ion-padding ion-content-medium-background">
-
   <div class="gallery-outer-8965">
-
     <div class="image-card-78975" *ngFor="let image of images" [style.backgroundImage]="setBackgroundImage(image)">
-      <!-- <img src="assets/role-base-8-images/image1.jpeg" /> -->
+      <img class="image" src="{{image.image}}" />
     </div>
-
   </div>
-
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="photoInput.click()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
-  <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput/>
-
+  <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
 </ion-content>

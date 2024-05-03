@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -12,30 +13,29 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   user;
+  userId;
   lang;
   sub;
-
   params: any;
   backUrl = '/teacher-profile';
   formData: any = {
     name: null,
     country: null,
     state: null,
-    dail_code: null,
+    dial_code: null,
     phone_number: null,
     address: null,
     languages: null,
     subject: null,
     experience: null,
-    tital: null,
-    about: null,
+    title: null,
+    description: null,
   };
   contryCode: any;
 
-  constructor(private network: NetworkService, private nav: NavService) {
+  constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder) {
     this.initialize();
   }
-
   ngOnInit() { }
 
   ionViewWillEnter(): void {
@@ -44,7 +44,6 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       this.backUrl = this.params.backUrl;
     }
   }
-
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
     console.log(this.user);
@@ -56,10 +55,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     let res = await this.network.getUserByEmail(obj);
 
     if (res) {
-      this.setFormDta(res);
+      this.setFormDta(res.user);
     }
   }
-
   result(value, key) {
     if (key == 'country') {
       this.formData['country'] = value.name;
@@ -75,9 +73,19 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
     console.log(this.formData);
   }
-
   setFormDta(data) {
     this.formData['name'] = data['name'];
+    this.formData['country'] = data['country'];
+    this.formData['state'] = data['state'];
+    this.formData['dial_code'] = data['dial_code'];
+    this.formData['phone_number'] = data['phone_number'];
+    this.formData['address'] = data['address'];
+    this.formData['languages'] = data['languages'];
+    this.formData['subject'] = data['subject'];
+    this.formData['experience'] = data['experience'];
+    this.formData['title'] = data['title'];
+    this.formData['description'] = data['description'];
+    console.log("tsahgdvshgf",data);
   }
 
   selectedCountry(event) {
@@ -98,11 +106,17 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
 
-  submit() { }
+  async submit() {
+      const data = this.formData;
+      this.userId = this.user.id;
+      const res = await this.network.createProfile(data, this.userId)
+
+  }
 
   openGallery($event){
     console.log("open gallery")
     this.nav.push('/teacher-profile/teacher-gallery')
   }
+
 
 }

@@ -20,11 +20,25 @@ export class NetworkService {
     return this.httpPostResponse('login-via-social', data);
   }
 
-  getLanguage() {
-    return this.httpGetResponse('languages/list', null,);
+  postImages(data) {
+    return this.httpPostResponse('gallery/add', data);
   }
-  getSubject() {
-    return this.httpGetResponse('subjects/list', null,);
+  getImage(data) {
+
+    return this.httpGetResponse(
+      'gallery/list' + '?user_id=' + data,
+      null,
+      false
+    );
+  }
+
+  getLanguage(data) {
+    return this.httpGetResponse('languages/list' , data,);
+  }
+
+  getSubject(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('subjects/list'+'?'+ str);
   }
 
   getUserByEmail(data) {
@@ -35,6 +49,10 @@ export class NetworkService {
       false
     );
 
+  }
+
+  createProfile(data, id){
+    return this.httpPostResponse('user/teacher/'+ id, data);
   }
 
   serialize = (obj: any) => {
