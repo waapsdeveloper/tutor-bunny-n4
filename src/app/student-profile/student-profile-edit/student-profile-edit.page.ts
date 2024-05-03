@@ -13,6 +13,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   formData: any = {
     first_name: null,
     last_name: null,
+    year: null,
     country: null,
     state: null,
     phone_number: null,
