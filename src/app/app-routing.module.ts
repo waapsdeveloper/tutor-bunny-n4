@@ -45,6 +45,8 @@ const routes: Routes = [
     path: 'student-profile',
     loadChildren: () => import('./student-profile/student-profile.module').then( m => m.StudentProfilePageModule)
   },
+  
+
 ];
 
 @NgModule({

@@ -8,14 +8,22 @@ const routes: Routes = [
     path: '',
     component: TabsPage,
     children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'dashboard',
+      //   pathMatch: 'full',
+      // },
       {
         path: 'dashboard',
         loadChildren: () => import('./../dashboard/dashboard.module').then( m => m.DashboardPageModule)
+      },
+      {
+        path: 'student-dashboard',
+        loadChildren: () => import('./../student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule)
+      },
+      {
+        path: 'teacher-dashboard',
+        loadChildren: () => import('./../teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
       },
       {
         path: 'profile',

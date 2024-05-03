@@ -10,11 +10,7 @@ export class TabsPage implements OnInit {
   constructor(private nav: NavService) {}
 
   ngOnInit() {
-    this.checkProfileCompleted();
-  }
 
-  checkProfileCompleted() {
-    // for teacher
-    this.nav.push('/teacher-profile');
   }
+  
 }

@@ -68,7 +68,18 @@ export class HomePage implements ViewWillEnter {
           });
         }
       } else {
-        this.nav.push('/tabs');
+
+        if (parseInt(user.role_id) == 2) {
+          this.nav.push('/tabs/student-dashboard', {
+            backUrl: '/home',
+          });
+        }
+        if (parseInt(user.role_id) == 3) {
+          this.nav.push('/tabs/teacher-dashboard', {
+            backUrl: '/home',
+          });
+        }
+
       }
     }
     // face objects
