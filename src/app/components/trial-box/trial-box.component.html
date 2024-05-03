@@ -1,0 +1,57 @@
+<div class="trial-box-outer-689567">
+  <div class="sb-heading-7895">
+    <div class="sb-heading-title-7895 outfit-semibold">Trial Requests (2)</div>
+    <!-- <div class="sb-heading-sl-7895 outfit">see all</div> -->
+  </div>
+  <div class="sb-content-7895"></div>
+</div>
+
+<div class="trial-box-item-outer-689567" >
+
+  <div class="trial-box-item-689567" *ngFor="let item of [1,2]">
+
+    <div class="profile-line-content">
+      <div class="image-box-outer">
+        <div class="image-circle-789675" [style.backgroundImage]="'url(assets/profileimg.png)'"></div>
+      </div>
+      <div class="content-box-outer">
+
+        <div class="content-box-outer-heading-top">
+          <div class="title-heading-789 outfit-semibold">
+            D**********ip
+          </div>
+          <div class="pnd-678956">
+            <img src="assets/icon/hour-glass.svg" />
+            <div class="pnd-inner-7895">Pending</div>
+          </div>
+        </div>
+
+        <div class="country-heading-789">
+          <img class="country-flag-i-7685" src="assets/flag.png">
+          <span class="country-name-789 outfit">India</span>
+        </div>
+        <div class="age-title-789 outfit">Age: 7 years</div>
+        <div class="er-title-789 outfit">
+          <span>Piano class for teens and students</span>
+          <img src="assets/icon/info.svg" />
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+    <div class="options-box-outer-78906">
+
+      <div *ngFor="let item of list" class="statistics-box-item-78906" >
+        <img [src]="item.img" />
+        <div class="nbl-687 outfit-semibold {{item.colorClass}}">{{ item.nbl}}</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

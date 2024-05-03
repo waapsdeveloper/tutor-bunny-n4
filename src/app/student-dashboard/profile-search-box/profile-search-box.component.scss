@@ -1,0 +1,54 @@
+.search-box-outer-89655 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  .search-box-filter-outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+
+    .label-986675555 {
+      font-size: 10px;
+      color: #677169
+    }
+
+  }
+
+  .search-box-input-outer {
+    background: #FFFFFF;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 8px;
+
+    input:focus,
+    input:focus-visible {
+      border: none;
+      outline: none; /* Add this line to remove the outline */
+    }
+
+    input:active {
+      border: none;
+    }
+    input{
+      background: transparent;
+      border: none;
+      color: rgba(102, 102, 104, 0.5) ;
+      flex-grow: 1;
+    }
+
+  }
+
+}
