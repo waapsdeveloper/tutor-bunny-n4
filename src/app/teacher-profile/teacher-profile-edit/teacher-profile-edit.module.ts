@@ -17,6 +17,7 @@ import { SdLanguageBoxModule } from 'src/app/components/sd-language-box/sd-langu
 import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profile/accept-terms-profile.module';
 import { SdSubjectBoxModule } from 'src/app/components/sd-subject-box/sd-subject-box.module';
 import { SdImageBoxModule } from 'src/app/components/sd-image-box/sd-image-box.module';
+import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { SdImageBoxModule } from 'src/app/components/sd-image-box/sd-image-box.m
     SdLanguageBoxModule,
     AcceptTermsProfileModule,
     SdSubjectBoxModule,
-    SdImageBoxModule
+    SdImageBoxModule,
+    SdStateBoxModule
   ],
   declarations: [TeacherProfileEditPage],
 

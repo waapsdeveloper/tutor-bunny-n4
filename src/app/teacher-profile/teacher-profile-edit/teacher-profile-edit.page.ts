@@ -32,7 +32,6 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     description: null,
   };
   contryCode: any;
-
   constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder) {
     this.initialize();
   }
@@ -87,7 +86,6 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.formData['description'] = data['description'];
     console.log("tsahgdvshgf",data);
   }
-
   selectedCountry(event) {
     this.contryCode = event.list;
     console.log(this.contryCode);
@@ -96,27 +94,21 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.lang = event.list;
     console.log('dsfsfsfsdff', this.lang);
   }
-
   async selevtedSubject(event) {
     this.sub = event.list;
     console.log('dsfsfsfsdff', this.sub);
   }
-
   async onSlideChange() {
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
-
   async submit() {
       const data = this.formData;
       this.userId = this.user.id;
       const res = await this.network.createProfile(data, this.userId)
 
   }
-
   openGallery($event){
     console.log("open gallery")
     this.nav.push('/teacher-profile/teacher-gallery')
   }
-
-
 }

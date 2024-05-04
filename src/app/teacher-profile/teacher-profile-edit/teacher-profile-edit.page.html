@@ -17,8 +17,8 @@
               [inputText]="formData.country"></app-sd-country-box>
           </div>
           <div class="input-box-lines">
-            <app-sd-input-box placeholder="State" (onChange)="result($event, 'state')"
-              [inputText]="formData.state"></app-sd-input-box>
+            <app-sd-state-box placeholder="State" (onChange)="result($event, 'state')"
+              [inputText]="formData.state"></app-sd-state-box>
           </div>
           <div class="phone-input">
             <div class="dail-code">
@@ -39,9 +39,6 @@
               <div class="language">
                 <app-sd-language-box (onChange)="result($event, 'languages')"
                   placeholder="Select Languages"></app-sd-language-box>
-              </div>
-              <div class="add-lang">
-                <img src="../../../assets/icon/add-circle.svg" alt="">
               </div>
             </div>
             <div class="language-chips">
