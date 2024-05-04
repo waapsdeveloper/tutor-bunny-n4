@@ -36,6 +36,10 @@ export class NetworkService {
 
   }
 
+  getStates(id){
+    return this.httpGetResponse('states/by-country/'+id );
+  }
+
   getLanguage(data) {
     return this.httpGetResponse('languages/list' , data,);
   }

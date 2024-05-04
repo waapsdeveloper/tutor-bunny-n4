@@ -14,44 +14,44 @@ export class ListCountryComponent implements OnInit {
   page = 1;
   searchTerm: string = '';
   selectedContactId: any = null;
-  constructor(private modals: ModalService,private network: NetworkService) {
+  constructor(private modals: ModalService, private network: NetworkService) {
 
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   selection(item) {
+    console.log(item);
     this.modals.dismiss(item);
   }
-  async initialize() {
 
+  async initialize() {
     this.search = "";
     this.page = 1;
     this.callApi();
-    }
+  }
+  callApi() {
+    return new Promise(async resolve => {
+      this.country = await this.network.getCountries() as any[];
+      console.log(this.country);
+      this.page = this.country["current_page"];
+      console.log(this.page);
+      if (this.page == 1) {
+        this.list = this.country["data"];
 
-    callApi() {
-      return new Promise( async resolve => {
-
-        this.country = await this.network.getCountries() as any[];
-        console.log(this.country);
-        this.page = this.country.current_page;
-
-        if (this.page == 1) {
-          this.list = this.country["data"];
-        } else {
-          this.list = [...this.list, ...this.country["data"]]
-        }
-
-        resolve(true);
-
-      })
+      } else {
+        this.list = [...this.list, ...this.country["data"]]
+        console.log(this.list);
 
 
-    }
+      }
+      resolve(true);
+    })
+  }
   async loadMore($event) {
     this.page = this.country.current_page + 1;
+    console.log(this.page);
     await this.callApi();
     $event.target.complete();
   }

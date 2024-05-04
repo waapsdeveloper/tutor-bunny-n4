@@ -19,7 +19,6 @@ export class LanguageListComponent implements OnInit {
   }
   ngOnInit() { }
   async initialize() {
-
   }
   selection(item: any) {
     this.modals.dismiss(item);
@@ -27,7 +26,6 @@ export class LanguageListComponent implements OnInit {
   isListItemSelected() {
     return this.list.filter(x => x.checked == true).length > 0;
   }
-
   selectedLanguage() {
     let list = this.list.filter(x => x.checked == true);
     console.log(list);
@@ -40,27 +38,19 @@ export class LanguageListComponent implements OnInit {
   }
   callApi() {
     return new Promise( async resolve => {
-
       let obj = {
         search: this.search,
         page: this.page
       }
-
-      this.lang = await this.network.getLanguage(this.searchTerm) as any[];
+      this.lang = await this.network.getLanguage(obj) as any[];
       console.log(this.lang);
       this.page = this.lang.current_page;
-
       if (this.page == 1) {
         this.list = this.lang["data"];
       } else {
         this.list = [...this.list, ...this.lang["data"]]
       }
-
       resolve(true);
-
     })
-
-
   }
-
 }

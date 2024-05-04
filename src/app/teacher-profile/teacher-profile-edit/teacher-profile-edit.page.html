@@ -17,12 +17,12 @@
               [inputText]="formData.country"></app-sd-country-box>
           </div>
           <div class="input-box-lines">
-            <app-sd-state-box placeholder="State" (onChange)="result($event, 'state')"
+            <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
               [inputText]="formData.state"></app-sd-state-box>
           </div>
           <div class="phone-input">
             <div class="dail-code">
-              <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')"
+              <app-sd-input-box (onChange)="result($event, 'dial_code')"
                 [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
             </div>
             <div class="number">

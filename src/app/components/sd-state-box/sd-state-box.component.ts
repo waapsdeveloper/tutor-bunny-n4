@@ -13,13 +13,18 @@ export class SdStateBoxComponent  implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
+  @Input() countryId: string;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  constructor(private modals: ModalService) {}
-  ngOnInit() {}
+  constructor(private modals: ModalService) {
+    console.log(this.countryId);
+  }
+  ngOnInit() {
+
+  }
   async openCountrySelection() {
     const res = (await this.modals.present(
       StateListComponent,
-      { list: this.list },
+      { id: this.countryId },
       '',
       0.75
     )) as any;

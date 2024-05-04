@@ -16,10 +16,10 @@ export class SubjectListComponent implements OnInit {
   page = 1;
   selectedContactId: any = null;
   constructor(private modals: ModalService, private network: NetworkService) {
+    this.initialize()
 
   }
   ngOnInit() {
-    this.initialize()
   }
   async initialize() {
     this.search = "";
@@ -29,27 +29,20 @@ export class SubjectListComponent implements OnInit {
 
   callApi() {
     return new Promise( async resolve => {
-
       let obj = {
         search: this.search,
         page: this.page
       }
-
       this.sub = await this.network.getSubject(obj) as any[];
       console.log(this.sub);
       this.page = this.sub.current_page;
-
       if (this.page == 1) {
         this.list = this.sub["data"];
       } else {
         this.list = [...this.list, ...this.sub["data"]]
       }
-
       resolve(true);
-
     })
-
-
   }
 
   async loadMore($event) {

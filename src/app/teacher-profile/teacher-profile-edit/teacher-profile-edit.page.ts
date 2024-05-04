@@ -32,6 +32,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     description: null,
   };
   contryCode: any;
+  countryId;
   constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder) {
     this.initialize();
   }
@@ -58,7 +59,11 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
   }
   result(value, key) {
+    console.log(value);
+
     if (key == 'country') {
+      this.countryId= value.id;
+      console.log(this.countryId);
       this.formData['country'] = value.name;
       this.formData['dial_code'] = value.dial_code;
     } else if (key == 'languages') {
