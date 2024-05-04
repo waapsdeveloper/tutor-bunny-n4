@@ -31,6 +31,10 @@ export class NetworkService {
       false
     );
   }
+  getCountries(){
+    return this.httpGetResponse('countries/list' , null);
+
+  }
 
   getLanguage(data) {
     return this.httpGetResponse('languages/list' , data,);

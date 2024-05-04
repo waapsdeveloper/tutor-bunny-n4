@@ -29,9 +29,6 @@ export class SdLanguageBoxComponent implements OnInit {
 
     if (res.data) {
       console.log(res.data);
-
-
-      // this.selectedLanguage = res.data;
       this.onChange.emit(res.data);
     }
   }

@@ -1,10 +1,10 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title class="fs-16 outfit-semibold">Select Country</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+
+<ion-header>
+  <app-sd-header-top [showBack]="false" [title]="'Subjects'"></app-sd-header-top>
+  <ion-searchbar class="fs-16 outfit"></ion-searchbar>
+</ion-header>
+
 <ion-content>
-  <ion-searchbar class="outfit fs-16" clear-icon="close-outline"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of list" (click)="selection(item)">
       <ion-label>
@@ -13,4 +13,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

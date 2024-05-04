@@ -19,9 +19,7 @@ export class LanguageListComponent implements OnInit {
   }
   ngOnInit() { }
   async initialize() {
-    this.search = "";
-    this.page = 1;
-    this.callApi();
+
   }
   selection(item: any) {
     this.modals.dismiss(item);

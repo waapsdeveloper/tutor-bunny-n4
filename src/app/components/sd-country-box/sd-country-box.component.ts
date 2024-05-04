@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { ListCountryComponent } from './list-country/list-country.component';
 const countries = require('src/app/data/country_dial_info.json');
-
 @Component({
   selector: 'app-sd-country-box',
   templateUrl: './sd-country-box.component.html',
@@ -14,21 +13,19 @@ export class SdCountryBoxComponent implements OnInit {
   @Input() inputText = '';
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  list = countries;
   selectedCountry = { name: 'India', flag: '🇮🇳', code: 'IN', dial_code: '+91' };
 
 
-  constructor(private modals: ModalService) {}
+  constructor(private modals: ModalService,) {
 
-  ngOnInit() {}
+  }
+
+  ngOnInit() { }
+
 
   async openCountrySelection() {
     const res = (await this.modals.present(
-      ListCountryComponent,
-      { list: this.list },
-      '',
-      0.75
-    )) as any;
+      ListCountryComponent)) as any;
 
     console.log(res);
 
@@ -37,9 +34,5 @@ export class SdCountryBoxComponent implements OnInit {
       this.onChange.emit(res.data);
     }
   }
-  result($event){
-    let v = $event.target.value;
-    console.log(v);
-    this.onChange.emit(v)
-  }
+
 }

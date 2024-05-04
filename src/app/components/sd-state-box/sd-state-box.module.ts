@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SdStateBoxComponent } from './sd-state-box.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { StateListModule } from './state-list/state-list.module';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    StateListModule
   ],
   exports: [SdStateBoxComponent]
 })
