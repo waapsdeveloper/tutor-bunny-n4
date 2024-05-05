@@ -30,6 +30,7 @@
     "@capacitor/status-bar": "6.0.0",
     "@ionic/angular": "^7.0.0",
     "firebase": "^10.11.0",
+    "flag-icons": "^7.2.1",
     "ionicons": "^7.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",

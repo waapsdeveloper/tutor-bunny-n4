@@ -1,16 +1,14 @@
 
 <ion-header>
-  <app-sd-header-top [showBack]="false" [title]="'Subjects'"></app-sd-header-top>
-  <ion-searchbar class="fs-16 outfit"></ion-searchbar>
+  <app-sd-header-top [showBack]="false" [title]="'Countries'"></app-sd-header-top>
+  <ion-searchbar class="fs-16 outfit" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of list" (click)="selection(item)">
-      <ion-label>
-        <h2 class="fs-16 outfit-medium">{{item.name}} </h2>
-        <!-- <p class="fs-16 outfit">{{item.phonecode}}</p> -->
-      </ion-label>
+      <span slot="start" class="fi fi-{{item['iso'].toLowerCase()}}"></span>
+      <div class="fs-16 outfit">{{ capitalizeFirst(item.name)}}</div>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-list-country',
@@ -14,7 +15,7 @@ export class ListCountryComponent implements OnInit {
   page = 1;
   searchTerm: string = '';
   selectedContactId: any = null;
-  constructor(private modals: ModalService, private network: NetworkService) {
+  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
 
     this.initialize();
   }
@@ -33,7 +34,14 @@ export class ListCountryComponent implements OnInit {
   }
   callApi() {
     return new Promise(async resolve => {
-      this.country = await this.network.getCountries() as any[];
+
+      let obj = {
+        search: this.search,
+        page: this.page
+      }
+
+
+      this.country = await this.network.getCountries(obj) as any[];
       console.log(this.country);
       this.page = this.country["current_page"];
       console.log(this.page);
@@ -54,5 +62,19 @@ export class ListCountryComponent implements OnInit {
     console.log(this.page);
     await this.callApi();
     $event.target.complete();
+  }
+
+  handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    console.log(query);
+    this.search = query;
+    this.page = 1;
+    this.callApi();
+
+    // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
+  }
+
+  capitalizeFirst(string){
+    return this.utility.capitalizeEachFirst(string)
   }
 }

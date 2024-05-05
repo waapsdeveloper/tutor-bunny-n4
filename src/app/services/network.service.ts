@@ -31,13 +31,15 @@ export class NetworkService {
       false
     );
   }
-  getCountries(){
-    return this.httpGetResponse('countries/list' , null);
+  getCountries(data){
+    const str = this.serialize(data);
+    return this.httpGetResponse('countries/list'+'?'+ str , null, false, false);
 
   }
 
-  getStates(id){
-    return this.httpGetResponse('states/by-country/'+id );
+  getStates(data){
+    const str = this.serialize(data);
+    return this.httpGetResponse('states/by-country' + '?'+ str, null, false, false );
   }
 
   getLanguage(data) {
