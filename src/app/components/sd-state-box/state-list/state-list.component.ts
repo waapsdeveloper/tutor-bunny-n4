@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-state-list',
@@ -12,15 +13,31 @@ export class StateListComponent  implements OnInit {
   search: "";
   page = 1;
   state;
-  searchTerm: string = '';
-  @Input() countryId: string;
-  constructor(private modals: ModalService, private network: NetworkService) {
+
+  private _countryId;
+  // @Input('countryId') countryId: string;
+  @Input()
+  public get countryId(): number {
+    return this._countryId;
+  }
+
+  public set countryId(value: number){
+    this._countryId = value;
     this.initialize();
-    console.log(this.countryId);
 
   }
 
-  ngOnInit() {}
+
+
+
+
+  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
+
+  }
+
+  ngOnInit() {
+    // this.initialize();
+  }
 
   async initialize() {
     this.search = "";
@@ -29,7 +46,16 @@ export class StateListComponent  implements OnInit {
   }
   callApi() {
     return new Promise(async resolve => {
-      this.state = await this.network.getStates(this.countryId) as any[];
+
+
+      let obj = {
+        search: this.search,
+        page: this.page,
+        countryId: this.countryId
+      }
+
+
+      this.state = await this.network.getStates(obj) as any[];
       console.log(this.state);
       this.page = this.state["current_page"];
       console.log(this.page);
@@ -53,5 +79,20 @@ export class StateListComponent  implements OnInit {
   }
   selection(item) {
     this.modals.dismiss(item);
+  }
+
+
+  handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    console.log(query);
+    this.search = query;
+    this.page = 1;
+    this.callApi();
+
+    // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
+  }
+
+  capitalizeFirst(string){
+    return this.utility.capitalizeEachFirst(string)
   }
 }

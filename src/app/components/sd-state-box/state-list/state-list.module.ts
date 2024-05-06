@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StateListComponent } from './state-list.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { SdHeaderTopModule } from '../../sd-header-top/sd-header-top.module';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    SdHeaderTopModule
   ],
   exports:[StateListComponent]
 })

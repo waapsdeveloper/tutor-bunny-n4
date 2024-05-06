@@ -36,7 +36,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder) {
     this.initialize();
   }
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();

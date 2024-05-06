@@ -1,17 +1,15 @@
 
 
 <ion-header>
-  <app-sd-header-top [showBack]="false" [title]="'Subjects'"></app-sd-header-top>
-  <ion-searchbar class="fs-16 outfit"></ion-searchbar>
+  <app-sd-header-top [showBack]="false" [title]="'Languages'"></app-sd-header-top>
+  <ion-searchbar class="fs-16 outfit" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar>
 </ion-header>
 
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of list" >
-      <ion-label>
-        <h2 class="fs-16 outfit">{{item.name}}</h2>
-      </ion-label>
+      <div class="fs-16 outfit">{{ item.name}}</div>
       <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
   </ion-list>

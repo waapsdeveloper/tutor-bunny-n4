@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-language-list',
@@ -14,11 +15,18 @@ export class LanguageListComponent implements OnInit {
   page = 1;
   searchTerm: string = '';
   selectedContactId: any = null;
-  constructor(private modals: ModalService, private network: NetworkService) {
+  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
+
+  }
+  ngOnInit() {
     this.initialize()
   }
-  ngOnInit() { }
+
   async initialize() {
+    this.search = "";
+    this.page = 1;
+    //console.log(this.search, this.page);
+    this.callApi();
   }
   selection(item: any) {
     this.modals.dismiss(item);
@@ -53,4 +61,20 @@ export class LanguageListComponent implements OnInit {
       resolve(true);
     })
   }
+
+
+  handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    console.log(query);
+    this.search = query;
+    this.page = 1;
+    this.callApi();
+
+    // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
+  }
+
+  capitalizeFirst(string){
+    return this.utility.capitalizeEachFirst(string)
+  }
+
 }

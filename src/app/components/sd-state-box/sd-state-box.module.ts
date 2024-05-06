@@ -13,7 +13,7 @@ import { StateListModule } from './state-list/state-list.module';
     CommonModule,
     IonicModule,
     FormsModule,
-    StateListModule
+    StateListModule,
   ],
   exports: [SdStateBoxComponent]
 })

@@ -13,10 +13,7 @@ export class ListCountryComponent implements OnInit {
   country
   search: "";
   page = 1;
-  searchTerm: string = '';
-  selectedContactId: any = null;
   constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
-
     this.initialize();
   }
 

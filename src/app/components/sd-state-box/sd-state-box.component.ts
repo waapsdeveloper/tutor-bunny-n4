@@ -9,24 +9,43 @@ import { StateListComponent } from './state-list/state-list.component';
 })
 export class SdStateBoxComponent  implements OnInit {
   list ;
-  selectedState= { name: 'India', flag: '🇮🇳', code: 'IN', dial_code: '+91' };
+  selectedState = {
+    id: 0,
+    state: null
+  };
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
-  @Input() countryId: string;
+
+  private _countryId;
+  // @Input('countryId') countryId: string;
+  @Input()
+  public get countryId(): number {
+    return this._countryId;
+  }
+
+  public set countryId(value: number){
+    this._countryId = value;
+    this.selectedState = {
+      id: 0,
+      state: null
+    };
+
+  }
+
+
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   constructor(private modals: ModalService) {
-    console.log(this.countryId);
+
   }
   ngOnInit() {
 
   }
-  async openCountrySelection() {
+  async openStateSelection() {
+
     const res = (await this.modals.present(
       StateListComponent,
-      { id: this.countryId },
-      '',
-      0.75
+      { countryId: this.countryId },
     )) as any;
     console.log(res);
     if (res.data) {
@@ -36,7 +55,7 @@ export class SdStateBoxComponent  implements OnInit {
   }
   result($event){
     let v = $event.target.value;
-    console.log(v);
     this.onChange.emit(v)
   }
+
 }

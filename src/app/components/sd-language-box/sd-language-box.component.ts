@@ -20,7 +20,9 @@ export class SdLanguageBoxComponent implements OnInit {
   constructor(private modals: ModalService) { }
 
   ngOnInit() { }
+
   async openLanguageSelection() {
+
     const res = (await this.modals.present(
       LanguageListComponent,
     )) as any;

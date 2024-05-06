@@ -16,7 +16,7 @@
             <app-sd-country-box (onChange)="result($event, 'country')"
               [inputText]="formData.country"></app-sd-country-box>
           </div>
-          <div class="input-box-lines">
+          <div class="input-box-lines" *ngIf="countryId">
             <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
               [inputText]="formData.state"></app-sd-state-box>
           </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="language-chips">
               <div class="lang-chips" *ngFor="let item of lang">
-                <ion-chip>{{item.name}} <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+                <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}} <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="language-chips">
               <div class="sub-chips" *ngFor="let item of sub">
-                <ion-chip>{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+                <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
               </div>
             </div>
           </div>

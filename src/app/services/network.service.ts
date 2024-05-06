@@ -43,7 +43,8 @@ export class NetworkService {
   }
 
   getLanguage(data) {
-    return this.httpGetResponse('languages/list' , data,);
+    const str = this.serialize(data);
+    return this.httpGetResponse('languages/list' + '?'+ str, null, false, false);
   }
 
   getSubject(data) {
