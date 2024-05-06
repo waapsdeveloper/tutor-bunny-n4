@@ -11,7 +11,7 @@ export class SdStateBoxComponent  implements OnInit {
   list ;
   selectedState = {
     id: 0,
-    state: null
+    name: null
   };
   @Input() type = 'text';
   @Input() placeholder = '';
@@ -28,7 +28,7 @@ export class SdStateBoxComponent  implements OnInit {
     this._countryId = value;
     this.selectedState = {
       id: 0,
-      state: null
+      name: null
     };
 
   }

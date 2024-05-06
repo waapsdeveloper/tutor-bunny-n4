@@ -37,16 +37,20 @@ export class SdCountryBoxComponent implements OnInit {
   async openCountrySelection() {
     const res = (await this.modals.present(
       ListCountryComponent)) as any;
-
-    console.log(res);
-
     if (res.data) {
 
       const d = res.data;
-      d['name'] = this.utility.capitalizeEachFirst(d['name']);
       this.selectedCountry = d;
       this.onChange.emit(res.data);
+
     }
+  }
+
+  returnFlagCode(item){
+    if(item && item.iso2){
+      return item.iso2.toLowerCase();
+    }
+    return 'in';
   }
 
 }

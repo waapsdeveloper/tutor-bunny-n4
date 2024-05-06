@@ -64,10 +64,10 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     console.log(value);
 
     if (key == 'country') {
-      this.countryId= value.id;
-      console.log(this.countryId);
+      this.countryId = value.id;
+      // console.log(this.countryId);
       this.formData['country'] = value.name;
-      this.formData['dial_code'] = value.dial_code;
+      this.formData['dial_code'] = '+' + value.phonecode;
     } else if (key == 'languages') {
       this.lang = value;
       this.formData['languages'] = value.map((obj) => obj.id);
