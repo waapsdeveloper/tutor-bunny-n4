@@ -55,25 +55,7 @@
 
 
 
-.subjects{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: flex-start;
-  gap: 8px;
-  .add-sub{
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ion-icon{
-      font-size: 45px;
-    }
-  }
-  .subject{
-    width: 100%;
-  }
-}
+
 .subject-sec{
   display: flex;
   align-items: start;

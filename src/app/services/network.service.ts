@@ -47,6 +47,15 @@ export class NetworkService {
     return this.httpGetResponse('languages/list' + '?'+ str, null, false, false);
   }
 
+  addSubject(data) {
+    return this.httpPostResponse('subjects/add-teacher-subject', data);
+  }
+
+  getMySubjects(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('subjects/my-list' + '?'+ str, null, false, false);
+  }
+
   getSubject(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('subjects/list'+'?'+ str);

@@ -25,3 +25,24 @@
   /* You can customize this block based on your requirements */
   box-shadow: none; /* Remove any focus box-shadow */
 }
+
+.subjects{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+  .add-sub{
+    width: 50px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon{
+      font-size: 45px;
+    }
+  }
+  .subject{
+    width: 100%;
+  }
+}

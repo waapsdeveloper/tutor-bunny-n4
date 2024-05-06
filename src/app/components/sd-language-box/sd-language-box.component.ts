@@ -13,9 +13,6 @@ export class SdLanguageBoxComponent implements OnInit {
   @Input() inputText = '';
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  // list = language;
-  selectedLanguage = {code: 'en', name: 'English', nativeName:'English'  } ;
-
 
   constructor(private modals: ModalService) { }
 

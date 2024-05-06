@@ -48,14 +48,8 @@
             </div>
           </div>
           <div class="subject-sec">
-            <div class="input-box-lines subjects">
-              <div class="subject">
-                <app-sd-subject-box (onChange)="result($event, 'subject')"
-                  placeholder="Subject teaches"></app-sd-subject-box>
-              </div>
-              <div class="add-sub">
-                <img src="../../../assets/icon/add-circle.svg" alt="">
-              </div>
+            <div class="input-box-lines" style="width: 100%;">
+              <app-sd-subject-box (onChange)="result($event, 'subject')" placeholder="Subject teaches"></app-sd-subject-box>
             </div>
             <div class="language-chips">
               <div class="sub-chips" *ngFor="let item of sub">

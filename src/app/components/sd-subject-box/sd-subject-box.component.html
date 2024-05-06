@@ -1,5 +1,12 @@
-<div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openSubjectSelection()">
-  <ion-ripple-effect></ion-ripple-effect>
-  <input class="fs-16 outfit sd-input-box-input-675315" [type]="type" [placeholder]="placeholder" readonly />
-  <ion-icon name="chevron-down-outline"></ion-icon>
+<div class="subjects">
+  <div class="sd-input-box-outer-675315">
+    <input class="fs-16 outfit sd-input-box-input-675315" [(ngModel)]="inputText" [type]="type" [placeholder]="placeholder" />
+    <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
+  </div>
+  <div class="add-sub ion-activatable ripple-parent rectangle" (click)="addSubject()">
+    <ion-ripple-effect></ion-ripple-effect>
+    <img src="assets/icon/add-circle.svg" alt="" >
+  </div>
 </div>
+
+
