@@ -31,11 +31,13 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     title: null,
     description: null,
     terms: false,
+    image: null,
+    photo_id: null
 
   };
   contryCode: any;
   countryId;
-  constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder, private events: EventsService) {
+  constructor(private network: NetworkService, private nav: NavService, public formBuilder: FormBuilder, private events: EventsService) {
     this.initialize();
   }
   ngOnInit() {
@@ -59,6 +61,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     let res = await this.network.getUserByEmail(obj);
 
     if (res) {
+      localStorage.setItem('user', JSON.stringify(res.user));
       this.setFormDta(res.user);
     }
   }
@@ -68,8 +71,12 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     if (key == 'country') {
       this.countryId = value.id;
       // console.log(this.countryId);
-      this.formData['country'] = value.name;
+      this.formData['country_id'] = value.id;
+      this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
+    } else if (key == 'state') {
+      this.formData['state_id'] = value.id;
+      this.formData['state'] = value;
     } else if (key == 'languages') {
       this.lang = value;
       this.formData['languages'] = value.map((obj) => obj.id);
@@ -83,16 +90,30 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   }
   setFormDta(data) {
     this.formData['name'] = data['name'];
-    this.formData['country'] = data['country'];
-    this.formData['state'] = data['state'];
-    this.formData['dial_code'] = data['dial_code'];
-    this.formData['phone_number'] = data['phone_number'];
-    this.formData['address'] = data['address'];
-    this.formData['languages'] = data['languages'];
-    this.formData['subject'] = data['subject'];
-    this.formData['experience'] = data['experience'];
-    this.formData['title'] = data['title'];
-    this.formData['description'] = data['description'];
+    const cnty = data['teacher']['country'];
+    this.countryId = cnty.id;
+    // console.log(this.countryId);
+    this.formData['country_id'] = cnty.id;
+    this.formData['country'] = cnty;
+    this.formData['dial_code'] = '+' + cnty.phonecode;
+
+    const stt = data['teacher']['state']
+    this.formData['state'] = stt;
+    this.formData['state_id'] = stt.id;
+    // this.formData['dial_code'] = data['dial_code'];
+    this.formData['phone_number'] = data['teacher']['phone_number'];
+    this.formData['address'] = data['teacher']['address'];
+    // this.formData['languages'] = data['languages'];
+    // this.formData['subject'] = data['subject'];
+    // this.formData['experience'] = data['experience'];
+    this.formData['title'] = data['teacher']['title'];
+    this.formData['description'] = data['teacher']['description'];
+
+    this.formData['image'] = data['image'];
+    this.formData['photo_id'] = data['teacher']['photo_id'];
+
+
+
   }
   selectedCountry(event) {
     this.contryCode = event.list;
@@ -111,36 +132,46 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
 
     const f = this.formData;
     console.log("form", f);
-    if(!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects){
+    if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
       return
     }
+    const user = JSON.parse(localStorage.getItem('user'));
+    const res = await this.network.updateProfile(f, user.id)
 
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
 
   }
   async submit() {
-      const data = this.formData;
-      this.userId = this.user.id;
+    const data = this.formData;
+    this.userId = this.user.id;
 
-      if(this.formData.terms){
-        const f = this.formData;
-        if(!f.title || !f.description){
-          return
-        }
+    if (this.formData.terms) {
+      const f = this.formData;
 
+      this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
 
-
-
-
-
-        const res = await this.network.createProfile(data, this.userId)
+      if (!f.title || !f.description) {
+        return
       }
 
 
 
 
+
+
+      // const res = await this.network.createProfile(data, this.userId)
+    }
+
+
+
+
   }
-  openGallery($event){
+
+  disableIfIncomplete(){
+    return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
+  }
+
+  openGallery($event) {
     console.log("open gallery")
     this.nav.push('/teacher-profile/teacher-gallery')
   }

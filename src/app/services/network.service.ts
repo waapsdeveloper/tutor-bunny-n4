@@ -23,6 +23,15 @@ export class NetworkService {
   postImages(data) {
     return this.httpPostResponse('gallery/add', data);
   }
+
+  postProfileImage(data) {
+    return this.httpPostResponse('user/update-profile-image', data);
+  }
+
+  postPhotoIdImage(data) {
+    return this.httpPostResponse('user/update-photoid-image', data);
+  }
+
   getImage(data) {
 
     return this.httpGetResponse(
@@ -88,7 +97,7 @@ export class NetworkService {
 
   }
 
-  createProfile(data, id){
+  updateProfile(data, id){
     return this.httpPostResponse('user/teacher/'+ id, data);
   }
 

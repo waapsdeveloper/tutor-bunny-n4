@@ -17,6 +17,28 @@ export class SdCountryBoxComponent implements OnInit {
   @Input('errorText') errorText = '';
   isRequired = false;
 
+  private _country;
+
+  @Input()
+  public set country(value: any){
+    this._country = value;
+    console.log(value);
+    if(value && value.name){
+      this.selectedCountry = value;
+    }
+
+  }
+
+  public get country(): any{
+    return this._country
+  }
+
+
+
+
+
+
+
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   selectedCountry = {
     "id": 0,

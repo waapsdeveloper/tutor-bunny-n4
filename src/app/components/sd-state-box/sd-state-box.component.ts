@@ -22,6 +22,22 @@ export class SdStateBoxComponent  implements OnInit {
   @Input('errorText') errorText = '';
   isRequired = false;
 
+  private _state;
+
+  @Input()
+  public set state(value: any){
+    this._state = value;
+    console.log(value);
+    if(value && value.name){
+      this.selectedState = value;
+    }
+
+  }
+
+  public get state(): any{
+    return this._state
+  }
+
   private _countryId;
   // @Input('countryId') countryId: string;
   @Input()

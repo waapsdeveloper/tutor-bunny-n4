@@ -14,11 +14,11 @@
           </div>
           <div class="input-box-lines">
             <app-sd-country-box (onChange)="result($event, 'country')"
-              [inputText]="formData.country" [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
+              [country]="formData.country" [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
           </div>
           <div class="input-box-lines" *ngIf="countryId">
             <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
-              [inputText]="formData.state"  [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
+              [state]="formData.state"  [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
           </div>
           <div class="phone-input">
             <div class="dail-code">
@@ -60,16 +60,16 @@
           </div>
           <div class="input-box-lines">
             <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
-              [inputText]="formData.description" [key]="'title'" [errorText]="'Profile title is required'"></app-sd-textarea-about>
+              [inputText]="formData.description" [key]="'description'" [errorText]="'Description is required'"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines">
-            <app-sd-image-box (openGallery)="openGallery($event)"></app-sd-image-box>
+            <app-sd-image-box (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
           <div class="terms-agree">
             <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
           </div>
           <div class="input-box-lines">
-            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="!formData.terms" (click)="submit()"></app-sd-button-gray>
+            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="disableIfIncomplete()" (click)="submit()"></app-sd-button-gray>
           </div>
         </div>
       </swiper-slide>

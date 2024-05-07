@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-sd-image-box',
@@ -12,19 +13,43 @@ export class SdImageBoxComponent  implements OnInit {
   photoId: SafeUrl | undefined;
 
   @Output('openGallery') openGallery: EventEmitter<any> = new EventEmitter<any>();
+  @Output('updateImage') updateImage: EventEmitter<any> = new EventEmitter<any>();
+  @Output('updatePhotoId') updatePhotoId: EventEmitter<any> = new EventEmitter<any>();
 
 
 
-  constructor(private sanitizer: DomSanitizer) { }
 
-  ngOnInit() {}
+  constructor(private network: NetworkService) { }
+
+  ngOnInit() {
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    this.profilePhoto = user.image;
+    this.photoId = user.teacher.photo_id;
+
+
+  }
 
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = () => {
-      this.profilePhoto = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
-      console.log(this.profilePhoto);
+    reader.onload = async () => {
+      const pmi = reader.result as string;
+      console.log(pmi);
+
+      // send it to API for upload
+      let user = JSON.parse(localStorage.getItem('user'));
+
+      let obj = {
+        user_id: user.id,
+        image: pmi
+      }
+
+      const res = await this.network.postProfileImage(obj)
+      console.log(res);
+      this.profilePhoto = res.result.image;
+      this.updateImage.emit(res.image)
 
     };
     reader.readAsDataURL(file);
@@ -32,9 +57,22 @@ export class SdImageBoxComponent  implements OnInit {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = () => {
-      this.photoId = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
+    reader.onload = async () => {
+      const pmi = reader.result as string;
       console.log(this.photoId);
+
+      // send it to API for upload
+      let user = JSON.parse(localStorage.getItem('user'));
+
+      let obj = {
+        user_id: user.id,
+        image: pmi
+      }
+
+      const res = await this.network.postPhotoIdImage(obj)
+      console.log(res);
+      this.photoId = res.result.image;
+      this.updatePhotoId.emit(res.image)
 
     };
     reader.readAsDataURL(file);
