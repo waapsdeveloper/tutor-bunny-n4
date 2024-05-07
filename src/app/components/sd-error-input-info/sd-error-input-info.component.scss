@@ -1,0 +1,23 @@
+.error-info-676464 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: red;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-top: 8px;
+  align-items: center;
+  padding: 3px 6px;
+  background: rgba(255, 0, 0, 0.05);
+
+  .error-icon {
+    color: red;
+  }
+
+  .text-info-67856 {
+    flex-grow: 1;
+  }
+
+}

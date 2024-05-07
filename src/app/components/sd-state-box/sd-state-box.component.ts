@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { StateListComponent } from './state-list/state-list.component';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-sd-state-box',
@@ -16,6 +17,10 @@ export class SdStateBoxComponent  implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
+
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  isRequired = false;
 
   private _countryId;
   // @Input('countryId') countryId: string;
@@ -35,10 +40,19 @@ export class SdStateBoxComponent  implements OnInit {
 
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  constructor(private modals: ModalService) {
+  constructor(private modals: ModalService,  private events: EventsService) {
 
   }
   ngOnInit() {
+    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData) => {
+      console.log(formData.state)
+      if(!formData.state){
+        this.isRequired = true;
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
 
   }
   async openStateSelection() {

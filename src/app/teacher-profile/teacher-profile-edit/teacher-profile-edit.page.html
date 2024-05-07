@@ -10,57 +10,43 @@
         <div class="body-content-68448">
           <div class="input-box-lines">
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
-              [inputText]="formData.name"></app-sd-input-box>
+              [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines">
             <app-sd-country-box (onChange)="result($event, 'country')"
-              [inputText]="formData.country"></app-sd-country-box>
+              [inputText]="formData.country" [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
           </div>
           <div class="input-box-lines" *ngIf="countryId">
             <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
-              [inputText]="formData.state"></app-sd-state-box>
+              [inputText]="formData.state"  [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
           </div>
           <div class="phone-input">
             <div class="dail-code">
               <app-sd-input-box (onChange)="result($event, 'dial_code')"
-                [inputText]="formData.dial_code" [isReadOnly]="true"> </app-sd-input-box>
+                [inputText]="formData.dial_code" [isReadOnly]="true"  [key]="'dial_code'" [errorText]="'!'"> </app-sd-input-box>
             </div>
             <div class="number">
               <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
-                [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
+                [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'" [errorText]="'Phone number is required'"></app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines">
             <app-sd-textarea-box placeholder="Address" (onChange)="result($event, 'address')"
-              [inputText]="formData.address"></app-sd-textarea-box>
+              [inputText]="formData.address" [key]="'address'" [errorText]="'Address is required'"></app-sd-textarea-box>
           </div>
           <div class="language-sec">
             <div class="input-box-lines languages">
               <div class="language">
                 <app-sd-language-box (onChange)="result($event, 'languages')"
-                  placeholder="Select Languages"></app-sd-language-box>
-              </div>
-            </div>
-            <div class="language-chips">
-              <div class="lang-chips" *ngFor="let item of lang">
-                <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}} <ion-icon name="close-circle-outline"></ion-icon></ion-chip>
+                  placeholder="Select Languages" [key]="'address'" [errorText]="'Languages is required'"></app-sd-language-box>
               </div>
             </div>
           </div>
           <div class="subject-sec">
             <div class="input-box-lines" style="width: 100%;">
-              <app-sd-subject-box (onChange)="result($event, 'subject')" placeholder="Subject teaches"></app-sd-subject-box>
-            </div>
-            <div class="language-chips">
-              <div class="sub-chips" *ngFor="let item of sub">
-                <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}}<ion-icon name="close-circle-outline"></ion-icon></ion-chip>
-              </div>
+              <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Subject teaches"  [key]="'subjects'" [errorText]="'Subjects is required'"></app-sd-subject-box>
             </div>
           </div>
-          <!-- <div class="input-box-lines">
-            <app-sd-input-box placeholder="Teaching experience in Yrs" (onChange)="result($event, 'experience')"
-              [inputText]="formData.experience" [type]="'number'"></app-sd-input-box>
-          </div> -->
           <div class="input-box-lines">
             <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
           </div>
@@ -70,11 +56,11 @@
         <div class="body-content-68448">
           <div class="input-box-lines">
             <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title"></app-sd-input-box>
+              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines">
             <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
-              [inputText]="formData.description"></app-sd-textarea-about>
+              [inputText]="formData.description" [key]="'title'" [errorText]="'Profile title is required'"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines">
             <app-sd-image-box (openGallery)="openGallery($event)"></app-sd-image-box>
@@ -83,7 +69,7 @@
             <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
           </div>
           <div class="input-box-lines">
-            <app-sd-button-gray [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
+            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="!formData.terms" (click)="submit()"></app-sd-button-gray>
           </div>
         </div>
       </swiper-slide>

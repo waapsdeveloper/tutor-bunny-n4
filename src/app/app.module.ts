@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -20,6 +21,7 @@ firebase.initializeApp(environment.firebaseConfig);
     mode: 'ios'
   }), AppRoutingModule,
     HttpClientModule,
+    NgxPubSubModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

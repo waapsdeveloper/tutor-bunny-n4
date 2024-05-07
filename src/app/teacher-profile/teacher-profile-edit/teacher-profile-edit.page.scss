@@ -1,10 +1,10 @@
 .phone-input{
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap :8px;
   .dail-code{
-    width: 50px;
+    width: 75px;
   }
   .number{
     width: 100%;

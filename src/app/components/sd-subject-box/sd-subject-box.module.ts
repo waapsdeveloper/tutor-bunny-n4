@@ -4,10 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { SdSubjectBoxComponent } from './sd-subject-box.component';
 import { SubjectListeModule } from './subject-list/subject-list.module';
+import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-info.module';
 
 @NgModule({
   declarations: [SdSubjectBoxComponent],
-  imports: [CommonModule, FormsModule, IonicModule,SubjectListeModule],
+  imports: [CommonModule, FormsModule, IonicModule,SubjectListeModule, SdErrorInputInfoModule],
   exports: [SdSubjectBoxComponent],
 })
 export class SdSubjectBoxModule {}

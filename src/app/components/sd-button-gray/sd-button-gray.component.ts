@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SdButtonGrayComponent implements OnInit {
   @Input() image: any = null;
   @Input() text: any = null;
+  @Input() disabled: boolean = false;
 
   constructor() {}
 

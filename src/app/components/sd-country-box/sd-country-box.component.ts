@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { ListCountryComponent } from './list-country/list-country.component';
 import { UtilityService } from 'src/app/services/utility.service';
+import { EventsService } from 'src/app/services/events.service';
 const countries = require('src/app/data/country_dial_info.json');
 @Component({
   selector: 'app-sd-country-box',
@@ -12,26 +13,34 @@ export class SdCountryBoxComponent implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  isRequired = false;
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   selectedCountry = {
-    "id": 99,
-    "iso": "in",
-    "name": "India",
-    "nicename": "India",
-    "iso3": "IND",
-    "numcode": 356,
-    "dial_code": 91,
-    "created_at": null,
-    "updated_at": null
+    "id": 0,
+    "iso": "",
+    "name": "",
   };
 
 
-  constructor(private modals: ModalService, private utility: UtilityService) {
+  constructor(private modals: ModalService, private utility: UtilityService, private events: EventsService) {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData) => {
+      console.log(formData.country)
+      if(!formData.country){
+        this.isRequired = true;
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
+
+  }
 
 
   async openCountrySelection() {
@@ -50,7 +59,7 @@ export class SdCountryBoxComponent implements OnInit {
     if(item && item.iso2){
       return item.iso2.toLowerCase();
     }
-    return 'in';
+    return '';
   }
 
 }

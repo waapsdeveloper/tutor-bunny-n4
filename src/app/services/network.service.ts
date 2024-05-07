@@ -47,6 +47,19 @@ export class NetworkService {
     return this.httpGetResponse('languages/list' + '?'+ str, null, false, false);
   }
 
+  addLanguage(data) {
+    return this.httpPostResponse('languages/add-teacher-language', data);
+  }
+
+  getMyLanguages(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('languages/my-list' + '?'+ str, null, false, false);
+  }
+
+  removeMyLanguages(data) {
+    return this.httpPostResponse('languages/remove-from-my-list', data, false, false);
+  }
+
   addSubject(data) {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
@@ -56,9 +69,13 @@ export class NetworkService {
     return this.httpGetResponse('subjects/my-list' + '?'+ str, null, false, false);
   }
 
+  removeMySubjects(data) {
+    return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
+  }
+
   getSubject(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('subjects/list'+'?'+ str);
+    return this.httpGetResponse('subjects/list'+'?'+ str, null, false, false);
   }
 
   getUserByEmail(data) {

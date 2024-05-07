@@ -4,6 +4,7 @@ import { SdStateBoxComponent } from './sd-state-box.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { StateListModule } from './state-list/state-list.module';
+import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-info.module';
 
 
 
@@ -14,6 +15,7 @@ import { StateListModule } from './state-list/state-list.module';
     IonicModule,
     FormsModule,
     StateListModule,
+    SdErrorInputInfoModule
   ],
   exports: [SdStateBoxComponent]
 })

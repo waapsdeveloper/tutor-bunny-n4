@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
 
@@ -26,14 +27,15 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     phone_number: null,
     address: null,
     languages: null,
-    subject: null,
-    experience: null,
+    subjects: null,
     title: null,
     description: null,
+    terms: false,
+
   };
   contryCode: any;
   countryId;
-  constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder) {
+  constructor(private network: NetworkService, private nav: NavService,public formBuilder: FormBuilder, private events: EventsService) {
     this.initialize();
   }
   ngOnInit() {
@@ -71,9 +73,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     } else if (key == 'languages') {
       this.lang = value;
       this.formData['languages'] = value.map((obj) => obj.id);
-    } else if (key == 'subject') {
+    } else if (key == 'subjects') {
       this.sub = value;
-      this.formData['subject'] = value.map((obj) => obj.id);
+      this.formData['subjects'] = value.map((obj) => obj.id);
     } else {
       this.formData[key] = value;
     }
@@ -91,11 +93,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.formData['experience'] = data['experience'];
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
-    console.log("tsahgdvshgf",data);
   }
   selectedCountry(event) {
     this.contryCode = event.list;
-    console.log(this.contryCode);
   }
   async selectedLanguage(event) {
     this.lang = event.list;
@@ -106,12 +106,38 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     console.log('dsfsfsfsdff', this.sub);
   }
   async onSlideChange() {
+
+    this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+
+    const f = this.formData;
+    console.log("form", f);
+    if(!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects){
+      return
+    }
+
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
+
   }
   async submit() {
       const data = this.formData;
       this.userId = this.user.id;
-      const res = await this.network.createProfile(data, this.userId)
+
+      if(this.formData.terms){
+        const f = this.formData;
+        if(!f.title || !f.description){
+          return
+        }
+
+
+
+
+
+
+        const res = await this.network.createProfile(data, this.userId)
+      }
+
+
+
 
   }
   openGallery($event){

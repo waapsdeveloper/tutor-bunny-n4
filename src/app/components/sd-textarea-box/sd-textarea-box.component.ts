@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-sd-textarea-box',
@@ -9,10 +10,27 @@ export class SdTextareaBoxComponent  implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  constructor() {}
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  isRequired = false;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  ngOnInit() {}
+  constructor(private events: EventsService) {}
+
+  ngOnInit() {
+    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+      console.log(v)
+
+      if(!v || v == ''){
+        this.isRequired = true;
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
+  }
 
   result($event){
     let v = $event.target.value;
