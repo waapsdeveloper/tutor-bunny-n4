@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-accept-terms-profile',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./accept-terms-profile.component.scss'],
 })
 export class AcceptTermsProfileComponent implements OnInit {
+  @Input('terms') terms = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
 

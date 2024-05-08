@@ -37,6 +37,8 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   };
   contryCode: any;
   countryId;
+  hideTerms = false;
+
   constructor(private network: NetworkService, private nav: NavService, public formBuilder: FormBuilder, private events: EventsService) {
     this.initialize();
   }
@@ -112,6 +114,12 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     this.formData['image'] = data['image'];
     this.formData['photo_id'] = data['teacher']['photo_id'];
 
+    this.formData['terms'] = data['teacher']['terms'] == 1 || data['teacher']['terms'] == true;
+
+    if(this.formData['terms'] == true){
+      this.hideTerms = true;
+    }
+
 
 
   }
@@ -154,12 +162,12 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
         return
       }
 
-
-
-
-
+      const user = JSON.parse(localStorage.getItem('user'));
+      const res = await this.network.updateProfile(f, user.id)
 
       // const res = await this.network.createProfile(data, this.userId)
+
+      this.nav.push('/tabs/teacher-dashboard')
     }
 
 

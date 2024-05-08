@@ -65,8 +65,8 @@
           <div class="input-box-lines">
             <app-sd-image-box (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
-          <div class="terms-agree">
-            <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+          <div class="terms-agree" *ngIf="!hideTerms">
+            <app-accept-terms-profile [terms]="formData.terms" (onChange)="result($event, 'terms')"></app-accept-terms-profile>
           </div>
           <div class="input-box-lines">
             <app-sd-button-gray [text]="'Submit for Review'" [disabled]="disableIfIncomplete()" (click)="submit()"></app-sd-button-gray>
