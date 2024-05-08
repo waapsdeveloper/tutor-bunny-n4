@@ -20,7 +20,7 @@ export class OptionBbBoxComponent  implements OnInit {
       img: 'assets/icon/cradd.svg'
     },
     {
-      nbl: 'Buy Credit',
+      nbl: 'Subscription',
       colorClass: '',
       img: 'assets/icon/buyc.svg'
     },

@@ -9,27 +9,27 @@ export class StatisticBoxComponent  implements OnInit {
 
   list = [
     {
-      nbl: '$4643',
+      nbl: '$0',
       label: 'Earnings',
       colorClass: ''
     },
     {
-      nbl: '5',
+      nbl: '0',
       label: 'Trials',
       colorClass: ''
     },
     {
-      nbl: '4',
+      nbl: '0',
       label: 'Courses',
       colorClass: ''
     },
     {
-      nbl: '20',
+      nbl: '0',
       label: 'Credits',
       colorClass: ''
     },
     {
-      nbl: '6',
+      nbl: '0',
       label: 'Inactive',
       colorClass: 'nbl-danger'
     }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { NetworkService } from '../services/network.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['dashboard.page.scss'],
 })
 export class DashboardPage {
+  user;
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -37,8 +39,24 @@ export class DashboardPage {
   ];
   constructor(
     private nav: NavService,
-    public authService: AuthenticationService
-  ) {}
+    public authService: AuthenticationService,
+    private network: NetworkService
+  ) {
+    this.initialize()
+  }
+
+  async initialize() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    let obj = {
+      email: this.user.email,
+    };
+    console.log(obj);
+
+    let res = await this.network.getUserByEmail(obj);
+    console.log(res);
+
+  }
 
   openProfile() {
     this.nav.push('/tabs/profile');

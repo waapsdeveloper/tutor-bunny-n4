@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { NetworkService } from '../services/network.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -8,6 +9,9 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
 export class TeacherDashboardPage implements OnInit {
+  user;
+  item;
+  image;
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -37,11 +41,20 @@ export class TeacherDashboardPage implements OnInit {
   ];
   constructor(
     private nav: NavService,
-    public authService: AuthenticationService
-  ) {}
-
-
+    public authService: AuthenticationService,
+    private network: NetworkService
+  ) {
+    this.initialize()
+  }
   ngOnInit() {
+
+  }
+
+  async initialize() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    this.image = this.user.teacher.photo_id;
+
   }
 
   openProfile() {
@@ -52,4 +65,3 @@ export class TeacherDashboardPage implements OnInit {
     this.nav.push('home');
   }
 }
-

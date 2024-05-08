@@ -8,7 +8,7 @@ export class ProfileService {
 
   isProfileCompleted(user) {
     return new Promise((resolve) => {
-      resolve(false);
+      resolve(true);
     });
   }
 }

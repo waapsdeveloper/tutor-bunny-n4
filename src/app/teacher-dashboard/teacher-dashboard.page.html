@@ -1,6 +1,6 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
   <div class="top-dashboard-header-outer ion-padding">
-    <ion-img src="assets/profileimg.png" class="profile-img" (click)="openProfile()"></ion-img>
+    <ion-img [src]="image" class="profile-img" (click)="openProfile()"></ion-img>
     <div class="header-oblique-double-675">
       <div class="header-line-678576">
         <div class="header-line-box-678576">
@@ -11,7 +11,7 @@
       </div>
       <div class="header-info-box-68447">
         <div class="header-info-user-68448">
-          <div class="header-info-user-name outfit-semibold ">Kretya L</div>
+          <div class="header-info-user-name outfit-semibold ">{{user.name}}</div>
           <div class="header-info-user-flag"><img src="assets/flag.png" /></div>
         </div>
         <div class="header-info-misc-68448 outfit"><img src="assets/icon/star.svg" /> <span>4.9 (8K reviews)</span>
@@ -24,8 +24,9 @@
   <div class="ion-padding body-content-68448">
     <app-statistic-box></app-statistic-box>
     <app-option-bb-box></app-option-bb-box>
-    <app-students-box></app-students-box>
-    <app-trial-box></app-trial-box>
+    <app-youtube-box></app-youtube-box>
+    <!-- <app-students-box></app-students-box>
+    <app-trial-box></app-trial-box> -->
   </div>
 
 </ion-content>

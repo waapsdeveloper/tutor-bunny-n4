@@ -11,6 +11,7 @@ import { OptionBbBoxModule } from '../components/option-bb-box/option-bb-box.mod
 import { StatisticBoxModule } from '../components/statistic-box/statistic-box.module';
 import { StudentsBoxModule } from '../components/students-box/students-box.module';
 import { TrialBoxModule } from '../components/trial-box/trial-box.module';
+import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { TrialBoxModule } from '../components/trial-box/trial-box.module';
     OptionBbBoxModule,
     StudentsBoxModule,
     TrialBoxModule,
-    TeacherDashboardPageRoutingModule
+    TeacherDashboardPageRoutingModule,
+    YoutubeBoxModule
   ],
   declarations: [TeacherDashboardPage]
 })
