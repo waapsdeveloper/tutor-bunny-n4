@@ -3,4 +3,4 @@
     [(ngModel)]="inputText" (keyup)="result($event)" [readOnly]="isReadOnly" />
   <ion-icon *ngIf="inputText" name="close-outline" (click)="clearInput()"></ion-icon>
 </div>
-<app-sd-error-input-info *ngIf="isRequired" [errorText]="errorText" ></app-sd-error-input-info>
+<app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>

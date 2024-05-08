@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
+import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-student-profile-edit',
@@ -10,21 +12,24 @@ import { NavService } from 'src/app/services/nav.service';
 export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   params: any;
   backUrl = '/student-profile';
+  user;
   formData: any = {
     first_name: null,
     last_name: null,
-    year: null,
+    dob: null,
     country: null,
     state: null,
+    dial_code: null,
     phone_number: null,
-    address: null,
-    language: null,
-    subject: null,
-    experience: null,
-    tital: null,
-    about: null,
+    image: null,
+    terms: false
   };
-  constructor(private nav: NavService) {}
+  countryId;
+  hideTerms = false;
+
+  constructor(private network: NetworkService, private nav: NavService,  private events: EventsService) {
+    this.initialize();
+  }
 
   ngOnInit() {}
 
@@ -35,10 +40,66 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     }
   }
 
+  async initialize() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    let obj = {
+      email: this.user.email,
+    };
+    console.log(obj);
+
+    let res = await this.network.getUserByEmail(obj);
+
+    console.log(res)
+    if (res) {
+      localStorage.setItem('user', JSON.stringify(res.user));
+      this.setFormDta(res.user);
+    }
+  }
+
+  setFormDta(data) {
+
+    this.formData['first_name'] = data['student']['first_name'];
+    this.formData['last_name'] = data['student']['last_name'];
+
+    const cnty = data['student']['country'];
+    if(cnty){
+      this.countryId = cnty.id;
+      this.formData['country_id'] = cnty.id;
+      this.formData['country'] = cnty;
+      this.formData['dial_code'] = '+' + cnty.phonecode;
+    }
+
+
+    const stt = data['student']['state']
+    if(stt){
+      this.formData['state'] = stt;
+      this.formData['state_id'] = stt.id;
+    }
+
+    this.formData['phone_number'] = data['student']['phone_number'];
+    this.formData['image'] = data['image'];
+
+    this.formData['terms'] = data['student']['terms'] == 1 || data['student']['terms'] == true;
+
+    if(this.formData['terms'] == true){
+      this.hideTerms = true;
+    }
+
+
+
+  }
+
   result(value, key) {
     if (key == 'country') {
-      this.formData['country'] = value.name;
-      this.formData['dial_code'] = value.dial_code;
+      this.countryId = value.id;
+      // console.log(this.countryId);
+      this.formData['country_id'] = value.id;
+      this.formData['country'] = value;
+      this.formData['dial_code'] = '+' + value.phonecode;
+    } else if (key == 'state') {
+      this.formData['state_id'] = value.id;
+      this.formData['state'] = value;
     } else {
       this.formData[key] = value;
     }
@@ -51,13 +112,33 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     reader.onload = () => {
       let image = reader.result as string;
       console.log(image);
+      this.formData['image'] = image;
     };
     reader.readAsDataURL(file);
   }
 
-  submit() {}
+  async submit() {
+
+    this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+
+    const f = this.formData;
+    console.log("form", f);
+    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
+      return
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    const res = await this.network.updateStudentProfile(f, user.id)
+
+    this.nav.push('/tabs/student-dashboard')
+
+  }
 
   skipToStudentDashboard() {
     this.nav.push('/tabs/student-dashboard');
   }
+
+  disableIfIncomplete(){
+    return !this.formData.terms
+  }
+
 }

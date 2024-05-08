@@ -7,29 +7,29 @@
   <div class="body-content-68448">
     <div class="input-box-lines two-names">
       <app-sd-input-box placeholder="First name" (onChange)="result($event, 'first_name')"
-        [inputText]="formData.name"></app-sd-input-box>
+        [inputText]="formData.first_name" [key]="'first_name'" [errorText]="'First Name is required'"></app-sd-input-box>
       <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
-        [inputText]="formData.name"></app-sd-input-box>
+        [inputText]="formData.last_name" [key]="'last_name'" [errorText]="'Last Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines">
-      <app-sd-year-box placeholder="Year of birth" (onChange)="result($event, 'year')"
-        [inputText]="formData.year"></app-sd-year-box>
+      <app-sd-year-box placeholder="Year of birth" (onChange)="result($event, 'dob')"
+        [inputText]="formData.dob"></app-sd-year-box>
     </div>
     <div class="input-box-lines">
-      <app-sd-country-box (onChange)="result($event, 'country')" [inputText]="formData.country"></app-sd-country-box>
+      <app-sd-country-box (onChange)="result($event, 'country')" [inputText]="formData.country" [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
     </div>
-    <div class="input-box-lines">
-      <app-sd-input-box placeholder="State" (onChange)="result($event, 'state')"
-        [inputText]="formData.state"></app-sd-input-box>
+    <div class="input-box-lines" *ngIf="countryId">
+      <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
+        [state]="formData.state"  [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
     </div>
     <div class="phone-input">
       <div class="dail-code">
-        <app-sd-input-box placeholder="+92" (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
-          [isReadOnly]="true"> </app-sd-input-box>
+        <app-sd-input-box (onChange)="result($event, 'dial_code')"
+          [inputText]="formData.dial_code" [isReadOnly]="true" [needed]="false"  [key]="'dial_code'" [errorText]="'!'"> </app-sd-input-box>
       </div>
       <div class="number">
         <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
-          [inputText]="formData.phone_number" [type]="'number'"></app-sd-input-box>
+          [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'" [errorText]="'Phone number is required'"></app-sd-input-box>
       </div>
     </div>
     <div class="image-upload-box-st-78955674" (click)="photoInput.click()">
@@ -37,15 +37,17 @@
         <img class="img-67855" src="assets/icon/user-avatar-stp.png" />
         <div class="outfit fs-16">Upload Profile Photo (optional)</div>
       </div>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-icon *ngIf="!formData.image" name="chevron-forward-outline"></ion-icon>
+      <ion-icon *ngIf="formData.image" class="upload-done-circle" name="checkmark-circle"></ion-icon>
+      <!-- *ngIf="formData.image" -->
     </div>
     <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
-    <div class="terms-agree">
-      <app-accept-terms-profile (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+    <div class="terms-agree" *ngIf="!hideTerms">
+      <app-accept-terms-profile [terms]="formData.terms" (onChange)="result($event, 'terms')"></app-accept-terms-profile>
     </div>
 
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Next'" [disabled]="disableIfIncomplete()" (click)="submit()"></app-sd-button-gray>
     </div>
     <div class="input-box-lines d-flex flex-column justify-content-center align-center "
       (click)="skipToStudentDashboard()">

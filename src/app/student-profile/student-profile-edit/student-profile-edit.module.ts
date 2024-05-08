@@ -16,6 +16,7 @@ import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-texta
 import { SdLanguageBoxModule } from 'src/app/components/sd-language-box/sd-language-box.module';
 import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profile/accept-terms-profile.module';
 import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.module';
+import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.modu
     SdHeaderTopModule,
     SdInputBoxModule,
     SdCountryBoxModule,
+    SdStateBoxModule,
     SdButtonGrayModule,
     SdTextareaAboutModule,
     SdTextareaBoxModule,

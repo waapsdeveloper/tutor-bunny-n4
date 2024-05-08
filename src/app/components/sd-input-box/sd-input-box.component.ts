@@ -13,8 +13,11 @@ export class SdInputBoxComponent implements OnInit {
   @Input() isReadOnly = false;
   @Input('key') key = '';
   @Input('errorText') errorText = '';
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input('needed') needed = true;
   isRequired = false;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+
+
 
   constructor(private events: EventsService) {
 

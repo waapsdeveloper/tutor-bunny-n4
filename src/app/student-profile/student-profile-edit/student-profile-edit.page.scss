@@ -1,11 +1,13 @@
 .phone-input {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+
   .dail-code {
-    width: 50px;
+    width: 75px;
   }
+
   .number {
     width: 100%;
   }
@@ -17,19 +19,23 @@
   width: 100%;
   justify-content: flex-start;
   gap: 8px;
+
   .add-lang {
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+
     ion-icon {
       font-size: 45px;
     }
   }
+
   .language {
     width: 100%;
   }
 }
+
 .language-sec {
   display: flex;
   align-items: start;
@@ -37,15 +43,18 @@
   width: 100%;
   gap: 8px;
 }
+
 .lang-chips {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 8px;
+
   ion-chip {
     background-color: rgba(69, 69, 69, 1);
     color: white;
+
     ion-icon {
       color: white;
     }
@@ -58,19 +67,23 @@
   width: 100%;
   justify-content: flex-start;
   gap: 8px;
+
   .add-sub {
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+
     ion-icon {
       font-size: 45px;
     }
   }
+
   .subject {
     width: 100%;
   }
 }
+
 .subject-sec {
   display: flex;
   align-items: start;
@@ -78,20 +91,24 @@
   width: 100%;
   gap: 8px;
 }
+
 .sub-chips {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 8px;
+
   ion-chip {
     background-color: rgba(69, 69, 69, 1);
     color: white;
+
     ion-icon {
       color: white;
     }
   }
 }
+
 .language-chips {
   display: flex;
   align-items: center;
@@ -106,10 +123,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+
+  app-sd-input-box {
+    width: calc(50% - 4px);
+  }
 }
-.input-box-lines{
+
+.input-box-lines {
   width: 100%;
 }
+
 .image-upload-box-st-78955674 {
   height: 78px;
   border-radius: 8px;
@@ -121,6 +144,16 @@
   align-items: center;
   padding-left: 8px;
   padding-right: 8px;
+
+  position: relative;
+
+  .upload-done-circle {
+    // position: absolute;
+    // top: 4px;
+    // right: 8px;
+    font-size: 30px;
+    color: green;
+  }
 
   .icno-text-88666 {
     display: flex;

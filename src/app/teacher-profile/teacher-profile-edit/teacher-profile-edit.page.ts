@@ -93,15 +93,20 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   setFormDta(data) {
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
-    this.countryId = cnty.id;
-    // console.log(this.countryId);
-    this.formData['country_id'] = cnty.id;
-    this.formData['country'] = cnty;
-    this.formData['dial_code'] = '+' + cnty.phonecode;
+
+    if(cnty){
+      this.countryId = cnty.id;
+      this.formData['country_id'] = cnty.id;
+      this.formData['country'] = cnty;
+      this.formData['dial_code'] = '+' + cnty.phonecode;
+    }
+
 
     const stt = data['teacher']['state']
-    this.formData['state'] = stt;
-    this.formData['state_id'] = stt.id;
+    if(stt){
+      this.formData['state'] = stt;
+      this.formData['state_id'] = stt.id;
+    }
     // this.formData['dial_code'] = data['dial_code'];
     this.formData['phone_number'] = data['teacher']['phone_number'];
     this.formData['address'] = data['teacher']['address'];
@@ -144,7 +149,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
-    const res = await this.network.updateProfile(f, user.id)
+    const res = await this.network.updateTeacherProfile(f, user.id)
 
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
 
@@ -163,7 +168,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       }
 
       const user = JSON.parse(localStorage.getItem('user'));
-      const res = await this.network.updateProfile(f, user.id)
+      const res = await this.network.updateTeacherProfile(f, user.id)
 
       // const res = await this.network.createProfile(data, this.userId)
 
