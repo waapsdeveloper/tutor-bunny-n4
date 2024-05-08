@@ -17,10 +17,6 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Access the value of ion-datetime
-    if(this.dob){
-      const dateTimeValue = this.dob.nativeElement.value;
-      console.log(dateTimeValue); // Log the current value
-    }
 
   }
 
