@@ -1,8 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <img class="pl-img" src="assets/profileimg.png" />
-      <div class="pl-heading outfit-semibold">Hi, Kretyal</div>
+      <div class="image-box-89657" [style.background-image]="'url(' + image + ')'"  (click)="goToProfile()">
+      </div>
+      <!-- <img class="pl-img" src="assets/profileimg.png" /> -->
+      <div class="pl-heading outfit-semibold">Hi, {{item?.name}}</div>
     </div>
     <div class="noti-795">
       <div class="icon-box-77">

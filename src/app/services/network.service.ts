@@ -27,9 +27,10 @@ export class NetworkService {
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
+ 
 
   postPhotoIdImage(data) {
-    return this.httpPostResponse('user/update-photoid-image', data);
+    return this.httpPostResponse('user/students/update-profile-image', data);
   }
 
   getImage(data) {
@@ -58,6 +59,10 @@ export class NetworkService {
 
   addLanguage(data) {
     return this.httpPostResponse('languages/add-teacher-language', data);
+  }
+
+  getvideos(){
+    return this.httpGetResponse('videos/list' , null, false, false);
   }
 
   getMyLanguages(data) {

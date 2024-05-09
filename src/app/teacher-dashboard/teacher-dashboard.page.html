@@ -1,6 +1,8 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
   <div class="top-dashboard-header-outer ion-padding">
-    <ion-img [src]="image" class="profile-img" (click)="openProfile()"></ion-img>
+    <div class="image-box-89657" [style.background-image]="'url(' + image + ')'"  (click)="openProfile()">
+    </div>
+    <!-- <ion-img [src]="image" ></ion-img> -->
     <div class="header-oblique-double-675">
       <div class="header-line-678576">
         <div class="header-line-box-678576">
@@ -11,7 +13,7 @@
       </div>
       <div class="header-info-box-68447">
         <div class="header-info-user-68448">
-          <div class="header-info-user-name outfit-semibold ">{{user.name}}</div>
+          <div class="header-info-user-name outfit-semibold ">{{item?.name}}</div>
           <div class="header-info-user-flag"><img src="assets/flag.png" /></div>
         </div>
         <div class="header-info-misc-68448 outfit"><img src="assets/icon/star.svg" /> <span>4.9 (8K reviews)</span>

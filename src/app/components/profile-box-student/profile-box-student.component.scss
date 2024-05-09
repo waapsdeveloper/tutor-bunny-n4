@@ -39,8 +39,8 @@
         position: absolute;
         right: 0;
         top: 40px;
-        .image-box-image-8-98875 {
-        }
+
+        .image-box-image-8-98875 {}
       }
     }
 
@@ -67,6 +67,7 @@
           align-items: flex-start;
           gap: 8px;
         }
+
         .create-course-btn-98875 {
           color: #ffffff;
           background: var(--tb-btn-color-dark);
@@ -111,4 +112,19 @@
       }
     }
   }
+}
+
+.image-box-89657 {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
 }

@@ -13,6 +13,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   params: any;
   backUrl = '/student-profile';
   user;
+  photoId;
   formData: any = {
     first_name: null,
     last_name: null,
@@ -27,11 +28,11 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   countryId;
   hideTerms = false;
 
-  constructor(private network: NetworkService, private nav: NavService,  private events: EventsService) {
+  constructor(private network: NetworkService, private nav: NavService, private events: EventsService) {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -58,36 +59,28 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
+    console.log(data);
 
     this.formData['first_name'] = data['student']['first_name'];
     this.formData['last_name'] = data['student']['last_name'];
-
     const cnty = data['student']['country'];
-    if(cnty){
+    if (cnty) {
       this.countryId = cnty.id;
       this.formData['country_id'] = cnty.id;
       this.formData['country'] = cnty;
       this.formData['dial_code'] = '+' + cnty.phonecode;
     }
-
-
     const stt = data['student']['state']
-    if(stt){
+    if (stt) {
       this.formData['state'] = stt;
       this.formData['state_id'] = stt.id;
     }
-
     this.formData['phone_number'] = data['student']['phone_number'];
     this.formData['image'] = data['image'];
-
     this.formData['terms'] = data['student']['terms'] == 1 || data['student']['terms'] == true;
-
-    if(this.formData['terms'] == true){
+    if (this.formData['terms'] == true) {
       this.hideTerms = true;
     }
-
-
-
   }
 
   result(value, key) {
@@ -105,25 +98,33 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     }
     console.log(this.formData);
   }
-
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = () => {
-      let image = reader.result as string;
-      console.log(image);
-      this.formData['image'] = image;
+    reader.onload = async () => {
+      const pmi = reader.result as string;
+      console.log(this.photoId);
+
+      // send it to API for upload
+      let user = JSON.parse(localStorage.getItem('user'));
+
+      let obj = {
+        user_id: user.id,
+        image: pmi
+      }
+
+      const res = await this.network.postPhotoIdImage(obj)
+      console.log(res);
+      this.photoId = res.result.image;
+
     };
     reader.readAsDataURL(file);
   }
-
   async submit() {
-
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
-
     const f = this.formData;
     console.log("form", f);
-    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
+    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.dial_code || !f.phone_number) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
@@ -137,7 +138,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     this.nav.push('/tabs/student-dashboard');
   }
 
-  disableIfIncomplete(){
+  disableIfIncomplete() {
     return !this.formData.terms
   }
 

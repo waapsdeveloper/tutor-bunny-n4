@@ -55,13 +55,11 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
     console.log(this.user);
-    let obj = {
-      email: this.user.email,
-    };
-    console.log(obj);
-
-    let res = await this.network.getUserByEmail(obj);
-
+      let obj = {
+        email: this.user.email,
+      };
+      console.log(obj);
+      let res = await this.network.getUserByEmail(obj);
     if (res) {
       localStorage.setItem('user', JSON.stringify(res.user));
       this.setFormDta(res.user);
@@ -69,10 +67,8 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   }
   result(value, key) {
     console.log(value);
-
     if (key == 'country') {
       this.countryId = value.id;
-      // console.log(this.countryId);
       this.formData['country_id'] = value.id;
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
@@ -93,40 +89,27 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   setFormDta(data) {
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
-
     if(cnty){
       this.countryId = cnty.id;
       this.formData['country_id'] = cnty.id;
       this.formData['country'] = cnty;
       this.formData['dial_code'] = '+' + cnty.phonecode;
     }
-
-
     const stt = data['teacher']['state']
     if(stt){
       this.formData['state'] = stt;
       this.formData['state_id'] = stt.id;
     }
-    // this.formData['dial_code'] = data['dial_code'];
     this.formData['phone_number'] = data['teacher']['phone_number'];
     this.formData['address'] = data['teacher']['address'];
-    // this.formData['languages'] = data['languages'];
-    // this.formData['subject'] = data['subject'];
-    // this.formData['experience'] = data['experience'];
     this.formData['title'] = data['teacher']['title'];
     this.formData['description'] = data['teacher']['description'];
-
     this.formData['image'] = data['image'];
     this.formData['photo_id'] = data['teacher']['photo_id'];
-
     this.formData['terms'] = data['teacher']['terms'] == 1 || data['teacher']['terms'] == true;
-
     if(this.formData['terms'] == true){
       this.hideTerms = true;
     }
-
-
-
   }
   selectedCountry(event) {
     this.contryCode = event.list;
@@ -140,9 +123,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     console.log('dsfsfsfsdff', this.sub);
   }
   async onSlideChange() {
-
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
-
     const f = this.formData;
     console.log("form", f);
     if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
@@ -150,40 +131,26 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
-
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
-
   }
   async submit() {
     const data = this.formData;
     this.userId = this.user.id;
-
     if (this.formData.terms) {
       const f = this.formData;
-
       this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
-
       if (!f.title || !f.description) {
         return
       }
-
       const user = JSON.parse(localStorage.getItem('user'));
       const res = await this.network.updateTeacherProfile(f, user.id)
 
-      // const res = await this.network.createProfile(data, this.userId)
-
       this.nav.push('/tabs/teacher-dashboard')
     }
-
-
-
-
   }
-
   disableIfIncomplete(){
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
   }
-
   openGallery($event) {
     console.log("open gallery")
     this.nav.push('/teacher-profile/teacher-gallery')

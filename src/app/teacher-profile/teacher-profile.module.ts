@@ -8,7 +8,7 @@ import { TeacherProfilePageRoutingModule } from './teacher-profile-routing.modul
 
 import { TeacherProfilePage } from './teacher-profile.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
-import { ProfileBoxModule } from './profile-box/profile-box.module';
+import { ProfileBoxModule } from '../components/profile-box/profile-box.module';
 import { TeacherProfileStatisticsModule } from './teacher-profile-statistics/teacher-profile-statistics.module';
 
 @NgModule({
@@ -23,4 +23,4 @@ import { TeacherProfileStatisticsModule } from './teacher-profile-statistics/tea
   ],
   declarations: [TeacherProfilePage],
 })
-export class TeacherProfilePageModule {}
+export class TeacherProfilePageModule { }

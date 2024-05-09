@@ -8,5 +8,8 @@
 
 
 <div class="vedio-box-outer">
-  
+    <div class="vedio-box-inner" *ngFor="let item of list">
+        <iframe width="100%" height="100%" [src]="getLink(item)" frameborder="0" allowfullscreen></iframe>
+        <!-- <p>{{item.name}}</p> -->
+    </div>
 </div>

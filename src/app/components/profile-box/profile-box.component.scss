@@ -1,0 +1,130 @@
+.profile-box-98875 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+
+  .item-box-98875 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+
+    .image-box-98875 {
+      position: relative;
+      width: 65px;
+      height: 65px;
+
+      .image-box-image-7-98875 {
+        width: 65px;
+        height: 65px;
+        border-radius: 50px;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .edit-icon-box-98875 {
+        height: 27px;
+        width: 27px;
+        background: #677169;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 24px;
+
+        position: absolute;
+        right: 0;
+        top: 40px;
+
+        .image-box-image-8-98875 {}
+      }
+    }
+
+    .title-box-98875 {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-grow: 1;
+
+      .heading-box-98875 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+
+        .heading-box-line-98875 {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .create-course-btn-98875 {
+          color: #ffffff;
+          background: var(--tb-btn-color-dark);
+          padding: 4px 10px;
+          border-radius: 20px;
+        }
+      }
+
+      .flag-box-98875 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+
+        img {
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  .skills-box-98875 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+
+    .ab-items-tr-98875 {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .ab-items-td-98875 {
+        padding: 0 3px 0 3px;
+        border-radius: 2px;
+        background: #cfd9ce;
+      }
+    }
+  }
+}
+
+.image-box-89657 {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
+}

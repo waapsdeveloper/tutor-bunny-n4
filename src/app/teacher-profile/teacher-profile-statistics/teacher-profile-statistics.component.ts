@@ -8,22 +8,22 @@ import { Component, OnInit } from '@angular/core';
 export class TeacherProfileStatisticsComponent implements OnInit {
   list = [
     {
-      nbl: '4.9',
+      nbl: '0',
       label: 'Ratings',
       colorClass: '',
     },
     {
-      nbl: '5',
+      nbl: '0',
       label: 'Courses',
       colorClass: '',
     },
     {
-      nbl: '5y',
+      nbl: '0y',
       label: 'Experience',
       colorClass: '',
     },
     {
-      nbl: '17',
+      nbl: '0',
       label: 'Students',
       colorClass: '',
     },

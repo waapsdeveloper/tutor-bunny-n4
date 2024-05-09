@@ -22,24 +22,8 @@ export class HomePage implements ViewWillEnter {
   ) {}
 
   ionViewWillEnter(): void {
-    // this.initialize();
   }
 
-  // async initialize() {
-  //   var self = this;
-  //   self.loading = true;
-
-  //   const isLogin = await this.authService.checkGoogleAuthentication();
-  //   self.loading = false;
-  //   if (isLogin) {
-  //     this.nav.push('tabs');
-  //   }
-
-  // setTimeout(async () => {
-  //   self.loading = false;
-  //   console.log('WWE');
-  // }, 5000);
-  // }
 
   gotoDashboard() {
     this.nav.push('tabs');

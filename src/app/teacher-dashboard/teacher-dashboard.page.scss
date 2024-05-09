@@ -10,6 +10,8 @@
 
   .profile-img {
     width: 100px;
+    // border-radius: 0 0 20px 20px;
+    // height: 156px;
   }
 
   .header-oblique-double-675 {
@@ -84,8 +86,7 @@
       justify-content: center;
       align-items: center;
 
-      .footer-tab-img {
-      }
+      .footer-tab-img {}
 
       .footer-tab-label {
         font-size: 12px;
@@ -93,4 +94,19 @@
       }
     }
   }
+}
+
+.image-box-89657 {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
 }

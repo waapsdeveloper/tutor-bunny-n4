@@ -13,6 +13,20 @@
   }
 }
 
+.image-box-89657 {
+  height: 95px;
+  width: 95px;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
+}
+
 .languages {
   display: flex;
   align-items: center;
@@ -134,7 +148,7 @@
 }
 
 .image-upload-box-st-78955674 {
-  height: 78px;
+  height: 110px;
   border-radius: 8px;
   border: 1px solid #303030;
   width: 100%;
@@ -142,8 +156,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 8px;
 
   position: relative;
 

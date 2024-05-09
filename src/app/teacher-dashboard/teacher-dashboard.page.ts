@@ -47,18 +47,27 @@ export class TeacherDashboardPage implements OnInit {
     this.initialize()
   }
   ngOnInit() {
-
   }
+
 
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-    this.image = this.user.teacher.photo_id;
+    let obj = {
+      email: this.user.email,
+    };
+    let item = await this.network.getUserByEmail(obj);
+    this.item = item.user;
+    localStorage. setItem("user", JSON.stringify(this.item) );
+
+    this.image = this.item.image;
 
   }
 
   openProfile() {
-    this.nav.push('/tabs/profile');
+    const params = { user_id: this.item.id };
+    this.nav.push('teacher-profile', params );
+    this.initialize()
+
   }
   async logout() {
     const res = await this.authService.logout();
