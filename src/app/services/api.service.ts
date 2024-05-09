@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor(public http: HttpClient) {
     // this.url = 'http://127.0.0.1:8000/api';
-    this.url = 'http://tutorbunny.maktech.space/api'
+    this.url = 'https://maktech.space/api'
   }
 
   /* Main functions for making API calls
