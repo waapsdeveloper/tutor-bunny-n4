@@ -12,6 +12,7 @@ export class TeacherDashboardPage implements OnInit {
   user;
   item;
   image;
+  flag
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -57,10 +58,24 @@ export class TeacherDashboardPage implements OnInit {
     };
     let item = await this.network.getUserByEmail(obj);
     this.item = item.user;
-    localStorage. setItem("user", JSON.stringify(this.item) );
+    console.log(item);
 
+    localStorage. setItem("user", JSON.stringify(this.item) );
     this.image = this.item.image;
 
+  }
+  getFlag(){
+    if(this.item && this.item.teacher && this.item.teacher.country){
+      console.log(this.item.teacher);
+
+      const flag = this.item.teacher.country.iso2;
+      console.log(flag);
+
+      return flag.toLowerCase();
+    }
+    else{
+      return ""
+    }
   }
 
   openProfile() {
