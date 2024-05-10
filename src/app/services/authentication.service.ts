@@ -14,7 +14,7 @@ export class AuthenticationService {
     return new Promise(async (resolve) => {
       const result = await FirebaseAuthentication.signInWithGoogle();
       console.log(result);
-      resolve(true);
+      resolve(result);
     });
   }
 

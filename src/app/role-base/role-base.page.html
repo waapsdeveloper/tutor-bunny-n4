@@ -8,17 +8,21 @@
       <div class="subheading fs-16 outfit-semibold">Access to the qualified teachers around the <br>
         world and request free trial classes</div>
     </div>
-    <div class="circle-images">
-      <div class="image-container" *ngFor="let item of [1,2,3,4,5,6,7,8]">
-        <img src="assets/role-base-8-images/image{{item}}.jpeg" alt="Image {{ item }}" class="circle-image">
-      </div>
-    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+          <div class="image-container" >
+            <img src="assets/role-base-8-images/image{{item}}.jpeg" alt="Image {{ item }}" class="circle-image">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <div style="height: 5vh;"></div>
     <div class="joinus-outer-877584">
       <div class="fs-16 outfit-semibold">Do you want to join us as a</div>
-      <app-sd-button-gray (click)="setCurrentRole('teacher')" [image]="'assets/svg/tcl-white.svg'"
+      <app-sd-button-gray (click)="setCurrentRole('3')" [image]="'assets/svg/tcl-white.svg'"
         [text]="'Teacher or Institute'"></app-sd-button-gray>
-      <app-sd-button-clear (click)="setCurrentRole('student')" [image]="'assets/svg/stc.svg'"
+      <app-sd-button-clear (click)="setCurrentRole('2')" [image]="'assets/svg/stc.svg'"
         [text]="'Student'"></app-sd-button-clear>
     </div>
   </div>

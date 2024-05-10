@@ -113,7 +113,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
         image: pmi
       }
 
-      const res = await this.network.postPhotoIdImage(obj)
+      const res = await this.network.postStudentPhotoIdImage(obj)
       console.log(res);
       this.photoId = res.result.image;
 

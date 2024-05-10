@@ -27,10 +27,12 @@ export class NetworkService {
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
- 
 
   postPhotoIdImage(data) {
-    return this.httpPostResponse('user/students/update-profile-image', data);
+    return this.httpPostResponse('user/update-photoid-image', data);
+  }
+  postStudentPhotoIdImage(data) {
+    return this.httpPostResponse('students/update-profile', data);
   }
 
   getImage(data) {
