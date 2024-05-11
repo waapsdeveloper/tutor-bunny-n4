@@ -32,7 +32,7 @@ export class FirebaseService{
     let user = JSON.parse(localStorage.getItem('user'));
     const obj = {
       email: user.email,
-      fcm_token : await this.getFCMToken()
+      token : await this.getFCMToken()
     };
     if (obj) {
       this.network.saveFcmToken(obj).then(

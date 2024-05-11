@@ -16,6 +16,7 @@ export class ProfileBoxComponent implements OnInit {
   data;
   languges;
   subject;
+  shield = false;
   constructor(private nav: NavService,
     private network: NetworkService
   ) {
@@ -35,22 +36,26 @@ export class ProfileBoxComponent implements OnInit {
     let item = await this.network.getUserByEmail(obj);
     this.item = item.user;
     this.image = this.item.image;
-    this.data =this.item.teacher;
+    this.data = this.item.teacher;
+
+    if (this.data.status == 'approved') {
+      this.shield = true;
+    }
   }
 
   openEditProfile() {
     this.nav.push('/teacher-profile/teacher-profile-edit');
   }
-  getFlag(){
-    if(this.item && this.item.teacher && this.item.teacher.country){
+  getFlag() {
+    if (this.item && this.item.teacher && this.item.teacher.country) {
       console.log(this.item.teacher);
 
       const flag = this.item.teacher.country.iso2;
-      console.log(flag);
+      // console.log(flag);
 
       return flag.toLowerCase();
     }
-    else{
+    else {
       return ""
     }
   }

@@ -12,7 +12,7 @@
       <div class="heading-box-98875">
         <div class="heading-box-line-98875">
           <span class="fs-21 outfit-medium">{{item?.name}}</span>
-          <img src="assets/svg/verified-profile-sheild.svg" />
+          <img *ngIf="shield == true" src="assets/svg/verified-profile-sheild.svg" />
         </div>
         <!-- <div class="create-course-btn-98875 fs-16 outfit-medium">Create Course</div> -->
       </div>
