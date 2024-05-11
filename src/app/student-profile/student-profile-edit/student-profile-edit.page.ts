@@ -43,15 +43,15 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
 
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
+    // console.log(this.user);
     let obj = {
       email: this.user.email,
     };
-    console.log(obj);
+    // console.log(obj);
 
     let res = await this.network.getUserByEmail(obj);
 
-    console.log(res)
+    // console.log(res)
     if (res) {
       localStorage.setItem('user', JSON.stringify(res.user));
       this.setFormDta(res.user);
@@ -59,7 +59,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
-    console.log(data);
+    // console.log(data);
 
     this.formData['first_name'] = data['student']['first_name'];
     this.formData['last_name'] = data['student']['last_name'];
@@ -96,14 +96,14 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     } else {
       this.formData[key] = value;
     }
-    console.log(this.formData);
+    // console.log(this.formData);
   }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
     reader.onload = async () => {
       const pmi = reader.result as string;
-      console.log(this.photoId);
+      // console.log(this.photoId);
 
       // send it to API for upload
       let user = JSON.parse(localStorage.getItem('user'));
@@ -114,7 +114,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
       }
 
       const res = await this.network.postStudentPhotoIdImage(obj)
-      console.log(res);
+      // console.log(res);
       this.photoId = res.result.image;
 
     };
@@ -123,7 +123,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   async submit() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log("form", f);
+    // console.log("form", f);
     if (!f.first_name || !f.last_name || !f.country || !f.state || !f.dial_code || !f.phone_number) {
       return
     }

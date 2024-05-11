@@ -18,10 +18,10 @@ export class FakeAccountsComponent implements OnInit {
   ngOnInit() {}
 
   async openAccount(item) {
-    console.log(item);
+    // console.log(item);
 
     this.user = await this.network.login(item) as any[];
-    console.log(this.user.user);
+    // console.log(this.user.user);
 
 
     let user = this.user.user;

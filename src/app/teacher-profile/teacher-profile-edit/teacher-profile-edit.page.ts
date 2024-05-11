@@ -54,11 +54,11 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   }
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
+    // console.log(this.user);
       let obj = {
         email: this.user.email,
       };
-      console.log(obj);
+      // console.log(obj);
       let res = await this.network.getUserByEmail(obj);
     if (res) {
       localStorage.setItem('user', JSON.stringify(res.user));
@@ -66,7 +66,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
   }
   result(value, key) {
-    console.log(value);
+    // console.log(value);
     if (key == 'country') {
       this.countryId = value.id;
       this.formData['country_id'] = value.id;
@@ -84,7 +84,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     } else {
       this.formData[key] = value;
     }
-    console.log(this.formData);
+    // console.log(this.formData);
   }
   setFormDta(data) {
     this.formData['name'] = data['name'];
@@ -116,16 +116,16 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   }
   async selectedLanguage(event) {
     this.lang = event.list;
-    console.log('dsfsfsfsdff', this.lang);
+    // console.log('dsfsfsfsdff', this.lang);
   }
   async selevtedSubject(event) {
     this.sub = event.list;
-    console.log('dsfsfsfsdff', this.sub);
+    // console.log('dsfsfsfsdff', this.sub);
   }
   async onSlideChange() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log("form", f);
+    // console.log("form", f);
     if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
       return
     }
@@ -152,7 +152,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
   }
   openGallery($event) {
-    console.log("open gallery")
+    // console.log("open gallery")
     this.nav.push('/teacher-profile/teacher-gallery')
   }
 }

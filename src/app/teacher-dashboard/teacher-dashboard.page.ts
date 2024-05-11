@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { NetworkService } from '../services/network.service';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -43,7 +44,8 @@ export class TeacherDashboardPage implements OnInit {
   constructor(
     private nav: NavService,
     public authService: AuthenticationService,
-    private network: NetworkService
+    private network: NetworkService,
+    private fcm : FirebaseService
   ) {
     this.initialize()
   }
@@ -58,18 +60,22 @@ export class TeacherDashboardPage implements OnInit {
     };
     let item = await this.network.getUserByEmail(obj);
     this.item = item.user;
-    console.log(item);
+    // console.log(item);
 
     localStorage. setItem("user", JSON.stringify(this.item) );
     this.image = this.item.image;
 
+    let res =this.fcm.setTokenToServer();
+    console.log(res);
+    
+
   }
   getFlag(){
     if(this.item && this.item.teacher && this.item.teacher.country){
-      console.log(this.item.teacher);
+      // console.log(this.item.teacher);
 
       const flag = this.item.teacher.country.iso2;
-      console.log(flag);
+      // console.log(flag);
 
       return flag.toLowerCase();
     }

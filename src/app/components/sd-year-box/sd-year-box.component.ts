@@ -26,9 +26,9 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
 
   result($event) {
     let v = $event.target.value;
-    console.log("date-set", v)
+    // console.log("date-set", v)
     let m = moment(v).format('Y-MM-DD');
-    console.log(m);
+    // console.log(m);
     // if (!this.isReadOnly) {
     this.onChange.emit(m);
     // }

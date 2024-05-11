@@ -27,8 +27,8 @@ export class TeacherProfilePage implements OnInit {
     };
     let res = await this.network.getUserByEmail(obj);
     this.data = res.user.teacher;
-    console.log(this.data);
-    
+    // console.log(this.data);
+
 
   }
 }

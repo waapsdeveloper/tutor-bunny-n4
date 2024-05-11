@@ -107,7 +107,7 @@ export class TeacherGalleryPage implements OnInit {
   }
   async addImageInArray(string) {
     let firstIndex = this.images.findIndex(x => x.image == null);
-    console.log(firstIndex);
+    // console.log(firstIndex);
     this.images[firstIndex]['id'] = firstIndex;
     this.images[firstIndex]['image'] = string;
     let obj = {
@@ -115,7 +115,7 @@ export class TeacherGalleryPage implements OnInit {
       image: string
     }
     let res = await this.network.postImages(obj)
-    console.log(res);
+    // console.log(res);
     this.initialize();
   }
 
