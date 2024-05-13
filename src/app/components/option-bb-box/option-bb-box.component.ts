@@ -15,12 +15,12 @@ export class OptionBbBoxComponent  implements OnInit {
 
     },
     {
-      nbl: 'Course',
+      nbl: 'Create Course',
       colorClass: '',
       img: 'assets/icon/cradd.svg'
     },
     {
-      nbl: 'Subscription',
+      nbl: 'Buy Credit',
       colorClass: '',
       img: 'assets/icon/buyc.svg'
     },

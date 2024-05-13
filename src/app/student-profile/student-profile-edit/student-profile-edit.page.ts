@@ -28,7 +28,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   countryId;
   hideTerms = false;
 
-  constructor(private network: NetworkService, private nav: NavService, private events: EventsService) {
+  constructor(private network: NetworkService, private nav: NavService, private events: EventsService,) {
     this.initialize();
   }
 
@@ -129,6 +129,8 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateStudentProfile(f, user.id)
+
+    this.events.publish('get-user-after-submit-form', user)
 
     this.nav.push('/tabs/student-dashboard')
 

@@ -15,6 +15,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
   .heading-splash-6785 {
     color: #393939;
     height: 45px;
@@ -30,6 +31,7 @@
     bottom: 0;
   }
 }
+
 .container-img {
   background-image: url(./../../assets/image.png);
   background-size: cover;
@@ -49,6 +51,7 @@
   gap: 15px;
   margin: 16px;
 }
+
 .para {
   font-size: 14px;
   margin-top: 6px;
@@ -68,11 +71,14 @@
     width: 250px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 8px;
+
     img {
       height: 20px;
     }
+
     .text-div-4326432 {
       display: flex;
       align-items: center;

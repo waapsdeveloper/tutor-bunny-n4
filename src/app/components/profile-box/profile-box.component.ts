@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
+import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
 
@@ -7,7 +9,7 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './profile-box.component.html',
   styleUrls: ['./profile-box.component.scss'],
 })
-export class ProfileBoxComponent implements OnInit {
+export class ProfileBoxComponent implements OnInit, ViewWillEnter {
   skills: any[] = ['Guitar', 'Violen', 'Piano', 'Drums'];
   languages: any[] = ['English', 'Hindi'];
   user;
@@ -17,16 +19,24 @@ export class ProfileBoxComponent implements OnInit {
   languges;
   subject;
   shield = false;
-  constructor(private nav: NavService,
-    private network: NetworkService
+  constructor(
+    private nav: NavService,
+    private network: NetworkService,
+    private events : EventsService
   ) {
 
     this.initialize()
   }
 
   ngOnInit() {
-  }
+    this.events.subscribe('get-user-after-submit-form', (user) => {
+      console.log(user);
 
+    })
+  }
+  ionViewWillEnter(): void {
+    this.initialize()
+  }
 
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));

@@ -1,5 +1,21 @@
 [
   {
+    "name": "Tony Stark",
+    "email": "starl.tony@gmail.com",
+    "password": "1234567890",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "assets/role-base-8-images/image1.jpeg"
+  },
+  {
+    "name": "Hamza Shahid",
+    "email": "hamzashahid.waaps@gmail.com",
+    "password": "ya29.a0AXooCgu2BwIL_IwRPnUDr2zGH7l7e-aPWlf-nJ2ju-T34fDLYVtqpAaRfZwrIkn2eQKS8b1U7JzKkxtsc35tUW7JbSJuk2vTTQ_DLs-looxAorSqC7bBNNKlVMQJkBF6Gv3_A_r8Q6WudBTqVxqf0X8xDlSkGWnUY4IaCgYKAXASARESFQHGX2Mi7IXCv5HZbhUQWNBZAvJ-oQ0170",
+    "login_type": "google.com",
+    "role_id": "3",
+    "image": "https://lh3.googleusercontent.com/a/ACg8ocLO_5EdJzHOQgvskBg2uBJgJWOreTiAHlRRfGPr0TOTZnEQ8A=s96-c"
+  },
+  {
     "name": "Mary Kate",
     "email": "mary.kate@gmail.com",
     "password": "1987933790",

@@ -8,20 +8,18 @@ export class ProfileService {
 
   isProfileCompleted(user) {
     return new Promise((resolve) => {
-
-      if(!user){
+      if (!user) {
         resolve(false);
         return;
       }
 
       let flag = true;
       let roleId = parseInt(user.role_id);
-
+      console.log(roleId);
 
       // Check if the user is a teacher
       if (roleId == 2) {
-
-        if (user.name && user.email && user.student.dial_code && user.student.phone_number && user.student.dob  && user.student.status) {
+        if (user.name && user.email && user.student.dial_code && user.student.phone_number && user.student.dob ) {
           flag = false;
         }
         if (user.student.country) {
@@ -36,7 +34,7 @@ export class ProfileService {
       }
       
       if (roleId == 3) {
-        if (user.name && user.teacher.address && user.teacher.description && user.teacher.dial_code && user.teacher.phone_number && user.teacher.title) {
+        if (user.name && user.teacher.address && user.teacher.description && user.teacher.dial_code && user.teacher.phone_number && user.teacher.title ) {
           flag = false;
         }
         if (user.teacher.country) {

@@ -12,6 +12,8 @@ export class SdInputBoxComponent implements OnInit {
   @Input() inputText = '';
   @Input() isReadOnly = false;
   @Input('key') key = '';
+  @Input() minlength;
+  @Input() maxlength;
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
   isRequired = false;
@@ -29,24 +31,33 @@ export class SdInputBoxComponent implements OnInit {
       let v = formData[this.key];
       console.log(v)
 
-      if(!v || v == ''){
+      if (!v || v == '') {
         this.isRequired = true;
-        setTimeout( () => {
+        setTimeout(() => {
           this.isRequired = false;
         }, 5000);
+      }
+      if (this.key == 'title') {
+        if (formData.title.length < 50 || formData.title.length > 100) {
+          this.isRequired = true;
+          this.errorText = 'The field shlould be 50 to 100 correctors'
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
       }
     }, false)
   }
 
-  result($event){
+  result($event) {
     let v = $event.target.value;
-    if(!this.isReadOnly){
+    if (!this.isReadOnly) {
       this.onChange.emit(v)
     }
 
   }
 
-  clearInput(){
+  clearInput() {
     this.inputText = '';
     this.onChange.emit('')
   }

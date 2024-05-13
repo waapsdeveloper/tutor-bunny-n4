@@ -10,6 +10,8 @@ export class SdTextareaAboutComponent  implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
+  @Input() minlength;
+  @Input() maxlength;
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
@@ -27,6 +29,15 @@ export class SdTextareaAboutComponent  implements OnInit {
         setTimeout( () => {
           this.isRequired = false;
         }, 5000);
+      }
+      if (this.key == 'title') {
+        if (formData.description.length < 400) {
+          this.isRequired = true;
+          this.errorText = 'The field shlould be 400 correctors'
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }   
       }
     }, false)
   }
