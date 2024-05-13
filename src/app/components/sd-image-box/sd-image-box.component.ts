@@ -7,7 +7,7 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './sd-image-box.component.html',
   styleUrls: ['./sd-image-box.component.scss'],
 })
-export class SdImageBoxComponent  implements OnInit {
+export class SdImageBoxComponent implements OnInit {
 
   profilePhoto: SafeUrl | undefined;
   photoId: SafeUrl | undefined;
@@ -19,17 +19,20 @@ export class SdImageBoxComponent  implements OnInit {
 
 
 
-  constructor(private network: NetworkService) { }
+  constructor(private network: NetworkService) {
+
+    this.initialize()
+  }
 
   ngOnInit() {
-
+  }
+  initialize() {
     const user = JSON.parse(localStorage.getItem('user'));
     console.log(user);
     this.profilePhoto = user.image;
     this.photoId = user.teacher.photo_id;
-
-
   }
+
 
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -58,16 +61,19 @@ export class SdImageBoxComponent  implements OnInit {
     const file: File = event.target.files[0];
     const reader = new FileReader();
     reader.onload = async () => {
-      const pmi = reader.result as string;
-      console.log(this.photoId);
+      const pmil = reader.result as string;
+      console.log(this.photoId, "dfsfsf");
 
       // send it to API for upload
       let user = JSON.parse(localStorage.getItem('user'));
 
       let obj = {
         user_id: user.id,
-        image: pmi
+        image: pmil
       }
+      console.log("test", obj);
+
+      // return
 
       const res = await this.network.postPhotoIdImage(obj)
       console.log(res);

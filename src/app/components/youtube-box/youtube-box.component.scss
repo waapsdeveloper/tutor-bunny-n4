@@ -12,6 +12,13 @@
 
     .sb-heading-title-7895 {
       font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap:8px;
+      img{
+        height: 24px;
+      }
     }
 
     .sb-heading-sl-7895 {
@@ -19,16 +26,20 @@
     }
   }
 }
+
 .vedio-box-outer {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-  gap: 16px; /* Gap between columns */
+  grid-template-columns: repeat(2, 1fr);
+  /* Two equal-width columns */
+  gap: 16px;
+  /* Gap between columns */
   width: 100%;
 }
 
 .vedio-box-inner {
   border-radius: 6px;
-  iframe{
-  border-radius: 6px;
+
+  iframe {
+    border-radius: 6px;
   }
 }

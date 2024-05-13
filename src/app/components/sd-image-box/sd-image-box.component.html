@@ -10,7 +10,7 @@
     <ion-icon *ngIf="profilePhoto" class="upload-done-circle" name="checkmark-circle"></ion-icon>
   </div>
   <div class="image-78558">
-    <div class="image-box-78559" (click)="fileInput.click()"
+    <div class="image-box-78559" (click)="photoInput.click()"
       [ngStyle]="{ 'background-image': photoId ? 'url(' + photoId + ')' : 'none' }">
       <img *ngIf="!photoId" src="assets/photo-id.png" alt="">
     </div>

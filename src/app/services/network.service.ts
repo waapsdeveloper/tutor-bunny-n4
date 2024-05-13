@@ -35,6 +35,8 @@ export class NetworkService {
   postPhotoIdImage(data) {
     return this.httpPostResponse('user/update-photoid-image', data);
   }
+
+  
   postStudentPhotoIdImage(data) {
     return this.httpPostResponse('students/update-profile', data);
   }

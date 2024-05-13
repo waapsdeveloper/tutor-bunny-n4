@@ -18,19 +18,12 @@ export class SdInputBoxComponent implements OnInit {
   @Input('needed') needed = true;
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-
-
-
   constructor(private events: EventsService) {
-
   }
-
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
-
       let v = formData[this.key];
       console.log(v)
-
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -48,7 +41,6 @@ export class SdInputBoxComponent implements OnInit {
       }
     }, false)
   }
-
   result($event) {
     let v = $event.target.value;
     if (!this.isReadOnly) {
