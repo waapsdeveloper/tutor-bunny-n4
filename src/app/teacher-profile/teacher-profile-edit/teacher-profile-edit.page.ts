@@ -52,6 +52,10 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       this.backUrl = this.params.backUrl;
     }
   }
+
+  back() {
+    this.nav.pop(this.backUrl);
+  }
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
     let obj = {

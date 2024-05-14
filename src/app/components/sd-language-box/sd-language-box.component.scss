@@ -1,13 +1,14 @@
 .sd-input-box-outer-675315 {
-  height: 40px;
+  height: 50px;
   border-radius: 8px;
   background: #ffffff;
-
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 8px;
+  padding-left: 20px;
+  border: 1px solid #404040;
   padding-right: 8px;
   gap: 8px;
   width: 100% !important;
@@ -16,43 +17,50 @@
 .sd-input-box-input-675315 {
   background: none;
   border: none;
-  outline: none; /* Remove default focus outline */
+  outline: none;
+  /* Remove default focus outline */
   flex-grow: 1;
 }
 
 .sd-input-box-input-675315:focus {
   /* Additional styles when input is focused */
   /* You can customize this block based on your requirements */
-  box-shadow: none; /* Remove any focus box-shadow */
+  box-shadow: none;
+  /* Remove any focus box-shadow */
 }
 
-.languages{
+.languages {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: flex-start;
   gap: 8px;
-  .add-lang{
+
+  .add-lang {
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    ion-icon{
+
+    ion-icon {
       font-size: 45px;
     }
   }
-  .language{
+
+  .language {
     width: 100%;
   }
 }
-.language-sec{
+
+.language-sec {
   display: flex;
   align-items: start;
   flex-direction: column;
   width: 100%;
   gap: 8px;
 }
-.lang-chips{
+
+.lang-chips {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -60,26 +68,30 @@
   flex-wrap: wrap;
 
   gap: 8px;
-  ion-chip{
+
+  ion-chip {
     background-color: rgba(69, 69, 69, 1);
     color: white;
-    ion-icon{
+
+    ion-icon {
       color: white;
     }
   }
 }
 
-.language-chips{
+.language-chips {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 8px;
 }
-.lang-chips-7895545{
+
+.lang-chips-7895545 {
   margin-top: 8px;
 }
-.lang-chips-7895545 ion-chip{
+
+.lang-chips-7895545 ion-chip {
   margin: 0;
 
 }

@@ -18,6 +18,8 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
 import { SdSubjectBoxModule } from 'src/app/components/sd-subject-box/sd-subject-box.module';
 import { SdImageBoxModule } from 'src/app/components/sd-image-box/sd-image-box.module';
 import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
+import { SdDailcodeBoxModule } from 'src/app/components/sd-dailcode-box/sd-dailcode-box.module';
+import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.m
     AcceptTermsProfileModule,
     SdSubjectBoxModule,
     SdImageBoxModule,
-    SdStateBoxModule
+    SdStateBoxModule,
+    SdDailcodeBoxModule,
+    SdBbackBtnModule
   ],
   declarations: [TeacherProfileEditPage],
 

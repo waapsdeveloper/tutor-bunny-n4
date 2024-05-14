@@ -2,8 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 10px;
 
@@ -12,7 +11,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
+    width: 33%;
     position: relative;
 
     .upload-done-circle {
@@ -27,14 +26,14 @@
 }
 
 .image-box-78559 {
-  height: 93px;
-  width: 95px;
+  height: 60px;
+  width: 60px;
   padding: 15px;
   border: 1px solid rgba(69, 69, 69, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 50%;
   object-fit: cover;
   background: rgb(255, 255, 255);
   background-repeat: repeat;
@@ -44,7 +43,7 @@
 }
 
 .image-heading {
-  font-size: 16px;
+  font-size: 14px;
   color: black;
-  font-weight: 600;
+  font-weight: 400;
 }

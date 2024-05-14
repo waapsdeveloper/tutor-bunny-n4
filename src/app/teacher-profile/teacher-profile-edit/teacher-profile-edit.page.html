@@ -1,52 +1,70 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [title]="'Teacher/Institute Profile'" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <app-sd-bback-btn (click)="back()"></app-sd-bback-btn>
+      <div class="header-title  outfit-medium">Create Profile</div>
+    </div>
+  </div>
 </ion-header>
 
 <ion-content class="ion-padding ion-content-medium-background">
 
-  <form >
+  <form>
     <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines">
+            <p class="input-title">Name</p>
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
               [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines">
-            <app-sd-country-box (onChange)="result($event, 'country')"
-              [country]="formData.country" [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
+            <p class="input-title">Country</p>
+            <app-sd-country-box (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
+              [errorText]="'Country is required'"></app-sd-country-box>
           </div>
           <div class="input-box-lines" *ngIf="countryId">
-            <app-sd-state-box  [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
-              [state]="formData.state"  [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
+            <p class="input-title">State</p>
+            <app-sd-state-box [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
+              [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
           </div>
-          <div class="phone-input">
-            <div class="dail-code">
-              <app-sd-input-box (onChange)="result($event, 'dial_code')"
-                [inputText]="formData.dial_code" [isReadOnly]="true"  [key]="'dial_code'" [errorText]="'!'"> </app-sd-input-box>
+
+          <div class="input-box-lines city-zip">
+            <div class="city">
+              <p class="input-title">City</p>
+              <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')"
+                [city]="formData.city" [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
             </div>
-            <div class="number">
-              <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
-                [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'" [errorText]="'Phone number is required'"></app-sd-input-box>
+            <div class="zip-code-2">
+              <p class="input-title">Zip</p>
+              <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
+                 [key]="'zip_code'" [errorText]="'Zip is required'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines">
-            <app-sd-textarea-box placeholder="Address" (onChange)="result($event, 'address')"
-              [inputText]="formData.address" [key]="'address'" [errorText]="'Address is required'"></app-sd-textarea-box>
-          </div>
-          <div class="language-sec">
-            <div class="input-box-lines languages">
-              <div class="language">
-                <app-sd-language-box (onChange)="result($event, 'languages')"
-                  placeholder="Select Languages" [key]="'address'" [errorText]="'Languages is required'"></app-sd-language-box>
+            <p class="input-title">Phone Number</p>
+            <div class="phone-input">
+              <div class="dail-code">
+                <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
+                  [isReadOnly]="true" [key]="'dial_code'" [errorText]="'!'"> </app-sd-dailcode-box>
+              </div>
+              <div class="number">
+                <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
+                  [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'"
+                  [errorText]="'Phone number is required'"></app-sd-input-box>
               </div>
             </div>
           </div>
-          <div class="subject-sec">
-            <div class="input-box-lines" style="width: 100%;">
-              <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Subject teaches"  [key]="'subjects'" [errorText]="'Subjects is required'"></app-sd-subject-box>
+          <div class="language-sec">
+            <p class="input-title">Language of communication</p>
+            <div class="input-box-lines languages">
+              <div class="language">
+                <app-sd-language-box (onChange)="result($event, 'languages')" placeholder="Select Languages"
+                  [key]="'address'" [errorText]="'Languages is required'"></app-sd-language-box>
+              </div>
             </div>
           </div>
+
           <div class="input-box-lines">
             <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
           </div>
@@ -55,21 +73,35 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines">
+            <p class="input-title">Title</p>
             <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
+              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+              [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines">
+            <p class="input-title">About</p>
             <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
-              [inputText]="formData.description" [key]="'description'" [errorText]="'Description is required'"></app-sd-textarea-about>
+              [inputText]="formData.description" [key]="'description'"
+              [errorText]="'Description is required'"></app-sd-textarea-about>
+          </div>
+          <div class="subject-sec">
+            <p class="input-title">What do you teach?</p>
+            <div class="input-box-lines" style="width: 100%;">
+              <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Subject teaches"
+                [key]="'subjects'" [errorText]="'Subjects is required'"></app-sd-subject-box>
+            </div>
           </div>
           <div class="input-box-lines">
-            <app-sd-image-box (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
+            <app-sd-image-box (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')"
+              (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
           <div class="terms-agree" *ngIf="!hideTerms">
-            <app-accept-terms-profile [terms]="formData.terms" (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+            <app-accept-terms-profile [terms]="formData.terms"
+              (onChange)="result($event, 'terms')"></app-accept-terms-profile>
           </div>
           <div class="input-box-lines">
-            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="disableIfIncomplete()" (click)="submit()"></app-sd-button-gray>
+            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="disableIfIncomplete()"
+              (click)="submit()"></app-sd-button-gray>
           </div>
         </div>
       </swiper-slide>
