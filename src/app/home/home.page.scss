@@ -54,13 +54,14 @@
 
 .para {
   font-size: 14px;
+  font-weight: 400;
   margin-top: 6px;
 }
 
 .social-login-button-outer {
   width: 100%;
-  border-radius: 70px;
-  height: 40px;
+  border-radius: 10px;
+  height: 57px;
   display: flex;
   background-color: white;
   align-items: center;
@@ -86,6 +87,7 @@
       text-align: center;
       color: #3a3a3a;
       font-size: 16px;
+      font-weight: 500;
     }
   }
 }

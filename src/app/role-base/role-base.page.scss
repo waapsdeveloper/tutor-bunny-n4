@@ -4,6 +4,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
+  margin-top: 65px;
 
   .joinus-outer-877584 {
     width: 100%;
@@ -28,10 +29,13 @@
   .heading-outer-877584 {
     text-align: center;
     display: flex;
+    margin-top: 40px;
     flex-direction: column;
     gap: 8px;
     .subheading {
       color: #666666;
+      margin-top: 18px;
+      font-weight: 600;
     }
   }
 }
@@ -64,4 +68,11 @@
     width: 75px; /* Adjust container width for smaller screens */
     height: 75px; /* Adjust container height for smaller screens */
   }
+}
+
+.signin-option{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }

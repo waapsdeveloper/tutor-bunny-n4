@@ -16,15 +16,6 @@
       <ion-spinner></ion-spinner>
     </div>
     <div class="solial-links" *ngIf="!loading">
-
-      <div class="social-login-button-outer" (click)="continueWithFake()">
-        <div class="social-login-button">
-          <div class="text-div-4326432 outfit-medium">
-            Continue with Fake Account
-          </div>
-        </div>
-      </div>
-
       <div class="social-login-button-outer" (click)="continueWithGoogle()">
         <div class="social-login-button">
           <img src="assets/google.png" />
@@ -33,14 +24,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="social-login-button-outer" (click)="gotoDashboard()">
-        <div class="social-login-button">
-          <img src="assets/fb.png" />
-          <div class="text-div-4326432 outfit-medium">
-            Continue with Facebook
-          </div>
-        </div>
-      </div> -->
       <div class="social-login-button-outer" (click)="gotoDashboard()">
         <div class="social-login-button">
           <img src="assets/apple.png" />
@@ -49,7 +32,13 @@
           </div>
         </div>
       </div>
-
+      <div class="social-login-button-outer" (click)="continueWithFake()">
+        <div class="social-login-button">
+          <div class="text-div-4326432 outfit-medium">
+            Continue with Fake Account
+          </div>
+        </div>
+      </div>
       <p class="para outfit-light">© 2024 Tutorbunny. All Rights Reserved.</p>
     </div>
   </div>
