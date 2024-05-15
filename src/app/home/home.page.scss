@@ -13,7 +13,7 @@
   ion-img {
     width: 36%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .heading-splash-6785 {
@@ -23,12 +23,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    span{
+      font-size: 20px;
+    }
   }
 
   .back-home-96765 {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 45px;
   }
 }
 

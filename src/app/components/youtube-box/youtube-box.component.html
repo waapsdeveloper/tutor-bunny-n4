@@ -1,15 +1,10 @@
 <div class="student-box-outer-689567">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">How it works <img src="../../../assets/icon/buld.svg" alt=""></div>
+    <div class="sb-heading-title-7895 outfit-semibold">How it works <img src="../../../assets/icon/buld.svg" alt="">
+    </div>
     <div class="sb-heading-sl-7895 outfit">See all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-
-<div class="vedio-box-outer">
-    <div class="vedio-box-inner" *ngFor="let item of list">
-        <iframe width="100%" height="100%" [src]="getLink(item)" frameborder="0" allowfullscreen></iframe>
-        <!-- <p>{{item.name}}</p> -->
-    </div>
-</div>
+<app-youtube-list class="component-style"></app-youtube-list>

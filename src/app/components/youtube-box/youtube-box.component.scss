@@ -28,12 +28,10 @@
 }
 
 .vedio-box-outer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* Two equal-width columns */
+  display: flex;
   gap: 16px;
-  /* Gap between columns */
-  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .vedio-box-inner {
@@ -42,4 +40,8 @@
   iframe {
     border-radius: 6px;
   }
+}
+
+.component-style{
+  width: 100%;
 }
