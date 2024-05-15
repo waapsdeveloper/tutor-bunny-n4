@@ -2,10 +2,10 @@
   background: #FFFFFF;
   border-radius: 20px;
   box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
-  // height: 60px;
   display: flex;
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
+  height: 96px;
   align-items: center;
   width: 100%;
   // padding: 8px;
@@ -19,7 +19,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
     width: 20%;
-    height: 60px;
+    height: 80px;
     border-right: 0.25px solid rgba(103, 113, 105, 0.15);
     //  padding: 10px;
     .nbl-687{
