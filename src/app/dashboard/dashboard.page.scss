@@ -27,7 +27,10 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        gap: 16px;
+        gap: 24px;
+        img {
+          height: 24px;
+        }
       }
     }
 
