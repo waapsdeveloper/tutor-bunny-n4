@@ -1,10 +1,11 @@
 .content-outer-877584 {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 16px;
-  margin-top: 65px;
+  height: 100%;
+  // gap: 16px;
+  // margin-top: 65px;
 
   .joinus-outer-877584 {
     width: 100%;
@@ -29,7 +30,7 @@
   .heading-outer-877584 {
     text-align: center;
     display: flex;
-    margin-top: 40px;
+    // margin-top: 40px;
     flex-direction: column;
     gap: 8px;
     .subheading {
@@ -47,11 +48,18 @@
 }
 
 .image-container {
-  margin: 10px; /* Adjust spacing between images */
-  width: 100px; /* Set a fixed width for each image container */
-  height: 100px; /* Set a fixed height for each image container */
-  overflow: hidden; /* Ensure circular clipping */
-  border-radius: 50%; /* Make the container circular */
+  width: 100%; /* This makes the box take the full width of its container */
+  padding-bottom: 100%; /* This sets the height of the box to be equal to its width, making it a square */
+  background-color: #3498db; /* Example background color */
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  // margin: 10px; /* Adjust spacing between images */
+  // width: 100px; /* Set a fixed width for each image container */
+  // height: 100px; /* Set a fixed height for each image container */
+  // overflow: hidden; /* Ensure circular clipping */
+  // border-radius: 50%; /* Make the container circular */
 }
 
 .circle-image {
@@ -65,14 +73,18 @@
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .image-container {
-    width: 75px; /* Adjust container width for smaller screens */
-    height: 75px; /* Adjust container height for smaller screens */
+    // width: 75px; /* Adjust container width for smaller screens */
+    // height: 75px; /* Adjust container height for smaller screens */
   }
 }
 
-.signin-option{
+.signin-option {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.image-over-grid-785674 {
+  width: 100%;
 }

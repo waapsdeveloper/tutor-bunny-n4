@@ -1,26 +1,29 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="content-outer-877584">
-    <div class="image-outer-877584">
-      <img src="assets/logo.png">
+    <div class="first-top-section">
+
+      <div class="image-outer-877584">
+        <img src="assets/logo.png">
+      </div>
+      <ion-grid class="image-over-grid-785674">
+        <ion-row>
+          <ion-col size="3" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+            <div class="image-container" [style.background-image]="'url(' + 'assets/role-base-8-images/image' + item + '.jpeg' + ')'" >
+              <!-- <img src="assets/role-base-8-images/image{{item}}.jpeg" alt="Image {{ item }}" class="circle-image"> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="3" *ngFor="let item of [1,2,3,4,5,6,7,8]">
-          <div class="image-container" >
-            <img src="assets/role-base-8-images/image{{item}}.jpeg" alt="Image {{ item }}" class="circle-image">
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
     <div class="heading-outer-877584">
-      <div class="heading fs-21 outfit-semibold">Meeting Place for teacher and students</div>
-      <div class="subheading fs-18 outfit-semibold">Access to the qualified teachers around the <br>
-        world and request free trial classes, join events, 
-        subscribe monthly courses and explore more.</div>
+      <div class="heading fs-21 roboto-bold">Meeting Place for teacher and students</div>
+      <div class="subheading fs-18 roboto-medium">Access to the qualified teachers around the world and request free trial classes, join events, subscribe monthly courses and explore more.</div>
     </div>
-    <div style="height: 8vh;"></div>
+
     <div class="joinus-outer-877584">
-      <div class="fs-18 outfit-semibold signin-option"> <img src="../../assets/svg/signin.svg" alt=""> Sign up as</div>
+      <div class="fs-18 roboto-bold signin-option"> <img src="../../assets/svg/signin.svg" alt=""> Sign up as</div>
       <app-sd-button-clear (click)="setCurrentRole('2')" [image]="'assets/svg/teacher.svg'"
         [text]="'Teacher or Institute'"></app-sd-button-clear>
       <app-sd-button-gray (click)="setCurrentRole('3')" [image]="'assets/svg/student.svg'"
