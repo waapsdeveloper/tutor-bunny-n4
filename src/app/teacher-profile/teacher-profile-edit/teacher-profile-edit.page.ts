@@ -98,11 +98,13 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
     const stt = data['teacher']['state']
     if (stt) {
+      this.stateId = stt.id;
       this.formData['state'] = stt;
       this.formData['state_id'] = stt.id;
     }
     this.formData['phone_number'] = data['teacher']['phone_number'];
-    this.formData['address'] = data['teacher']['address'];
+    this.formData['city'] = data['teacher']['city'];
+    this.formData['zip_code'] = data['teacher']['zip_code'];
     this.formData['title'] = data['teacher']['title'];
     this.formData['description'] = data['teacher']['description'];
     this.formData['image'] = data['image'];
@@ -129,9 +131,13 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     }
     const user = JSON.parse(localStorage.getItem('user'));
 
-    const res = await this.network.updateTeacherProfile(f, user.id)
+    const res = await this.network.updateTeacherProfile(f, user.id);
+    if(res){
+      this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.step = 2;
+    }
 
-    this.slides?.nativeElement.swiper.slideTo(1, false, false);
+
   }
 
   async changeToPrev(){
@@ -140,18 +146,22 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   async submit() {
     const data = this.formData;
     this.userId = this.user.id;
-    if (this.formData.terms) {
+
       const f = this.formData;
-      this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+      this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
       if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.title.description < 400) {
         console.log("return");
         return
+      }
+
+      if (!this.formData.terms) {
+        return;
       }
       const user = JSON.parse(localStorage.getItem('user'));
       console.log("efferfS");
       const res = await this.network.updateTeacherProfile(f, user.id)
       this.nav.push('/teacher-profile')
-    }
+
   }
   disableIfIncomplete() {
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id

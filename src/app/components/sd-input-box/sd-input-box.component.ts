@@ -22,24 +22,49 @@ export class SdInputBoxComponent implements OnInit {
   }
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+
+      if (this.key == 'title' || this.key == 'description') {
+        return;
+      }
+
       let v = formData[this.key];
       console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
-        }, 3000);
+        }, 5000);
       }
+
+    }, false)
+
+    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+
+      console.log(v, this.key);
+
       if (this.key == 'title') {
-        if (formData.title.length < 50 || formData.title.length > 100) {
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+
+          return;
+        }
+
+        if (v.length < 50 || v.length > 100) {
           this.isRequired = true;
           this.errorText = 'The field shlould be 50 to 100 correctors'
           setTimeout(() => {
             this.isRequired = false;
-          }, 3000);
+          }, 5000);
         }
       }
+
     }, false)
+
   }
   result($event) {
 
@@ -48,10 +73,6 @@ export class SdInputBoxComponent implements OnInit {
       let numericValue: string = v.replace(/\D/g, '');
       ($event.target as HTMLInputElement).value = numericValue;
     }
-
-
-
-
 
     if (!this.isReadOnly) {
       this.onChange.emit(v)

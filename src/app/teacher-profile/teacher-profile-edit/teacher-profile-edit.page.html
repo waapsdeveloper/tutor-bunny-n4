@@ -28,7 +28,7 @@
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">City</div>
               <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')"
-                [city]="formData.city" [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
+              [inputText]="formData.city" [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Zip</div>
@@ -68,13 +68,13 @@
             <p class="input-title">Title</p>
             <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
-              [maxlength]="100"></app-sd-input-box>
+              [maxlength]="100" [needed]="step == 2"></app-sd-input-box>
           </div>
           <div class="input-box-lines">
             <p class="input-title">About</p>
             <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
               [inputText]="formData.description" [key]="'description'"
-              [errorText]="'Description is required'"></app-sd-textarea-about>
+              [errorText]="'Description is required'" [needed]="step == 2"></app-sd-textarea-about>
           </div>
           <div class="subject-sec">
             <p class="input-title">What do you teach?</p>
@@ -110,8 +110,7 @@
 
     <div class="input-box-lines">
       <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" [disabled]="disableIfIncomplete()"
-        (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 

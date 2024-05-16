@@ -14,12 +14,13 @@ export class SdTextareaAboutComponent  implements OnInit {
   @Input() maxlength;
   @Input('key') key = '';
   @Input('errorText') errorText = '';
+  @Input('needed') needed = true;
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   constructor(private events: EventsService) {
   }
   ngOnInit() {
-    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
       console.log(v)
       if(!v || v == ''){
@@ -29,13 +30,13 @@ export class SdTextareaAboutComponent  implements OnInit {
         }, 5000);
       }
       if (this.key == 'description') {
-        if (formData.description.length < 400) {
+        if (v.length < 400) {
           this.isRequired = true;
           this.errorText = 'The field shlould be 400 correctors'
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
-        }   
+        }
       }
     }, false)
   }
