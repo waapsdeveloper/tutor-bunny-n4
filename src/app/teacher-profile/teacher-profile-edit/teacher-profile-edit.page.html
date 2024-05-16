@@ -8,40 +8,40 @@
     <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
       <swiper-slide>
         <div class="body-content-68448">
-          <div class="input-box-lines">
-            <p class="input-title">Name</p>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Name</div>
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
               [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
-          <div class="input-box-lines">
-            <p class="input-title">Country</p>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Country</div>
             <app-sd-country-box (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
               [errorText]="'Country is required'"></app-sd-country-box>
           </div>
-          <div class="input-box-lines" *ngIf="countryId">
-            <p class="input-title">State</p>
+          <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
+            <div class="input-title fs-12 roboto-medium">State</div>
             <app-sd-state-box [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
               [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
           </div>
 
           <div class="input-box-lines city-zip">
-            <div class="city">
-              <p class="input-title">City</p>
+            <div class="city d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">City</div>
               <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')"
                 [city]="formData.city" [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
             </div>
-            <div class="zip-code-2">
-              <p class="input-title">Zip</p>
+            <div class="zip-code-2 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Zip</div>
               <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
-                 [key]="'zip_code'" [errorText]="'Zip is required'"> </app-sd-input-box>
+                 [key]="'zip_code'" [errorText]="'!'"> </app-sd-input-box>
             </div>
           </div>
-          <div class="input-box-lines">
-            <p class="input-title">Phone Number</p>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Phone</div>
             <div class="phone-input">
               <div class="dail-code">
                 <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
-                  [isReadOnly]="true" [key]="'dial_code'" [errorText]="'!'"> </app-sd-dailcode-box>
+                  [isReadOnly]="true" [key]="'dial_code'" [errorText]="'!'" [needed]="false"> </app-sd-dailcode-box>
               </div>
               <div class="number">
                 <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
@@ -50,12 +50,12 @@
               </div>
             </div>
           </div>
-          <div class="language-sec">
-            <p class="input-title">Language of communication</p>
+          <div class="language-sec d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Language of communication</div>
             <div class="input-box-lines languages">
               <div class="language">
                 <app-sd-language-box (onChange)="result($event, 'languages')" placeholder="Select Languages"
-                  [key]="'address'" [errorText]="'Languages is required'"></app-sd-language-box>
+                  [key]="'languages'" [errorText]="'Languages is required'"></app-sd-language-box>
               </div>
             </div>
           </div>

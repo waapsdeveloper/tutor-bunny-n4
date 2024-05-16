@@ -1,7 +1,7 @@
 <div class="sd-input-box-outer-675315">
   <input class="fs-16 outfit sd-input-box-input-675315" [minlength]="minlength" [maxlength]="maxlength" [type]="type" [placeholder]="placeholder"
     [(ngModel)]="inputText" (keyup)="result($event)" [readOnly]="isReadOnly" />
-    <img src="../../../assets/svg/clear.svg"   alt="" (click)="clearInput()">
+    <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText"  alt="" (click)="clearInput()">
   <!-- <ion-icon name="close-outline" (click)="clearInput()"></ion-icon> -->
 </div>
 <app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>

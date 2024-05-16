@@ -14,7 +14,20 @@ export class UsersService {
   }
 
   setUser(user){
+    localStorage.setItem("user", JSON.stringify(user));
     this._user = user;
+  }
+
+  getUserRole(){
+    if(this._user){
+      return -1;
+    }
+
+    if(!this._user.role_id){
+      return -1;
+    }
+
+    return this._user.role_id;
   }
 
   setTeacher(user){
@@ -25,7 +38,7 @@ export class UsersService {
 
   }
 
-  
+
 
 
 }

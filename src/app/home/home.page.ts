@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
@@ -6,23 +6,22 @@ import { ModalService } from '../services/basic/modal.service';
 import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
 import { ProfileService } from '../services/profile.service';
 import { NetworkService } from '../services/network.service';
+import { BasePage } from '../base-page/base-page';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements ViewWillEnter {
+export class HomePage extends BasePage implements ViewWillEnter {
   loading = false;
   googleauth;
-  user;
   constructor(
-    private nav: NavService,
+    injector: Injector,
     public authService: AuthenticationService,
-    private modals: ModalService,
-    private profiles: ProfileService,
-    private network: NetworkService
-  ) { }
+  ) {
+    super(injector)
+  }
 
   ionViewWillEnter(): void {
   }
@@ -46,15 +45,13 @@ export class HomePage implements ViewWillEnter {
       console.log(data);
       // return
 
-      this.user = await this.network.login(data) as any[];
-      let user = this.user.user;
-      localStorage.setItem("user", JSON.stringify(user));
-      const profile = await this.profiles.isProfileCompleted(user);
-      console.log(profile);
+      const res = await this.network.login(data) as any;
+      this.users.setUser(res.user)
 
-      let roleId = parseInt(user.role_id);
-      if (!profile) {
-        console.log(roleId);
+      const flag = await this.profiles.isProfileCompleted(res.user);
+
+      let roleId = this.users.getUserRole();
+      if (!flag) {
 
         if (roleId == 2) {
           this.nav.push('/student-profile/student-profile-edit', {
@@ -68,7 +65,6 @@ export class HomePage implements ViewWillEnter {
         }
 
       } else {
-        console.log(roleId);
 
         if (roleId == 2) {
           this.nav.push('/tabs/student-dashboard', {

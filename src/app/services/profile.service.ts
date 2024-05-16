@@ -9,7 +9,7 @@ export class ProfileService {
   isProfileCompleted(user) {
     return new Promise((resolve) => {
       if (!user) {
-        resolve(false);
+        resolve(null);
         return;
       }
 
