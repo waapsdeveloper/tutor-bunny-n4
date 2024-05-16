@@ -64,20 +64,20 @@
       </swiper-slide>
       <swiper-slide>
         <div class="body-content-68448">
-          <div class="input-box-lines">
-            <p class="input-title">Title</p>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Title</div>
             <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
               [maxlength]="100" [needed]="step == 2"></app-sd-input-box>
           </div>
-          <div class="input-box-lines">
-            <p class="input-title">About</p>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">About</div>
             <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
               [inputText]="formData.description" [key]="'description'"
               [errorText]="'Description is required'" [needed]="step == 2"></app-sd-textarea-about>
           </div>
-          <div class="subject-sec">
-            <p class="input-title">What do you teach?</p>
+          <div class="subject-sec d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">What do you teach?</div>
             <div class="input-box-lines" style="width: 100%;">
               <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Subject teaches"
                 [key]="'subjects'" [errorText]="'Subjects is required'"></app-sd-subject-box>

@@ -157,6 +157,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       if (!this.formData.terms) {
         return;
       }
+
       const user = JSON.parse(localStorage.getItem('user'));
       console.log("efferfS");
       const res = await this.network.updateTeacherProfile(f, user.id)

@@ -158,6 +158,19 @@ export class SdSubjectBoxComponent implements OnInit {
 
   }
 
+  showAddSuggestionsButton(){
+
+    if(!this.inputText){
+      return false;
+    }
+
+    if(this.inputText && this.suggestionsList.length == 0){
+      return true;
+    }
+
+    return false;
+  }
+
 
 }
 
