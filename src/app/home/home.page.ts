@@ -92,12 +92,16 @@ export class HomePage implements ViewWillEnter {
     console.log(res);
     if (res.data) {
       const user = res.data;
+
+      console.log(user);
+
       const isProfileCompleted = await this.profiles.isProfileCompleted(user);
+      console.log(isProfileCompleted);
       const roleId = parseInt(user.role_id);
       if (roleId === 3) {
         if (!isProfileCompleted) {
           this.nav.push('/teacher-profile/teacher-profile-edit', {
-            queryParams: { backUrl: '/home' }
+            queryParams: { backUrl: '/home',  }
           });
         }
         else{

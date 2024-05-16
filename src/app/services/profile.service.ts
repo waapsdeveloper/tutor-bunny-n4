@@ -32,15 +32,15 @@ export class ProfileService {
 
 
       }
-      
+
       if (roleId == 3) {
-        if (user.name && user.teacher.address && user.teacher.description && user.teacher.dial_code && user.teacher.phone_number && user.teacher.title ) {
+        if (!user.name || !user.teacher.address || !user.teacher.description || !user.teacher.dial_code || !user.teacher.phone_number || !user.teacher.title ) {
           flag = false;
         }
-        if (user.teacher.country) {
+        if (!user.teacher.country) {
           flag = false;
         }
-        if (user.teacher.state) {
+        if (!user.teacher.state) {
           flag = false;
         }
         if (user.teacher.languages.length == 0) {
@@ -49,12 +49,12 @@ export class ProfileService {
         if (user.teacher.subjects.length == 0) {
           flag = false;
         }
-        flag = true;
+
 
       }
-      
+
       resolve(flag);
-      
+
     });
   }
 

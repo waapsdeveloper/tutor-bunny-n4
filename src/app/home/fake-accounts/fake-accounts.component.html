@@ -1,7 +1,7 @@
 <ion-list class="ion-margin-top">
   <ion-item *ngFor="let item of list" (click)="openAccount(item)">
     <ion-avatar slot="start">
-      <ion-img [src]="item.image"></ion-img>
+      <ion-img [src]="item.liveurl + '/' + item.image"></ion-img>
     </ion-avatar>
     <ion-label>
       <h2>{{item.name}}</h2>

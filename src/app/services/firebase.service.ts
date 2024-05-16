@@ -13,7 +13,7 @@ import { Capacitor } from '@capacitor/core';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService{
+export class FirebaseService {
   constructor(
     public events: EventsService,
     public network: NetworkService,
@@ -29,24 +29,35 @@ export class FirebaseService{
   }
 
   async setTokenToServer() {
-    let user = JSON.parse(localStorage.getItem('user'));
-    const obj = {
-      email: user.email,
-      token : await this.getFCMToken()
-    };
-    if (obj) {
-      this.network.saveFcmToken(obj).then(
-        (dats) => {},
-        (err) => {
-          console.error(err);
-        }
-      );
+
+    if (Capacitor.getPlatform() != 'web') {
+
+      const token = await this.getFCMToken();
+      if(!token){
+        return;
+      }
+
+      let user = JSON.parse(localStorage.getItem('user'));
+      const obj = {
+        email: user.email,
+        token: token
+      };
+      if (obj) {
+        this.network.saveFcmToken(obj).then(
+          (dats) => { },
+          (err) => {
+            console.error(err);
+          }
+        );
+      }
+
     }
+
   }
 
   async setupFMC() {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
       if (Capacitor.getPlatform() !== 'web') {
         await this.setupNativePush();

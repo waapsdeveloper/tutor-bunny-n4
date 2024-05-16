@@ -54,6 +54,9 @@ export class TeacherDashboardPage implements OnInit {
 
 
   async initialize() {
+
+    this.fcm.setTokenToServer();
+
     this.user = JSON.parse(localStorage.getItem('user'));
     let obj = {
       email: this.user.email,
@@ -62,12 +65,9 @@ export class TeacherDashboardPage implements OnInit {
     this.item = item.user;
     // console.log(item);
 
-    localStorage. setItem("user", JSON.stringify(this.item) );
+    localStorage.setItem("user", JSON.stringify(this.item) );
     this.image = this.item.image;
 
-    let res =this.fcm.setTokenToServer();
-    console.log(res);
-    
 
   }
   getFlag(){

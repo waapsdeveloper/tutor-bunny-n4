@@ -5,7 +5,8 @@
     "password": "1234567890",
     "login_type": "google.com",
     "role_id": "3",
-    "image": "assets/role-base-8-images/image1.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image1.jpeg"
   },
   {
     "name": "Hamza Shahid",
@@ -13,6 +14,7 @@
     "password": "ya29.a0AXooCgu2BwIL_IwRPnUDr2zGH7l7e-aPWlf-nJ2ju-T34fDLYVtqpAaRfZwrIkn2eQKS8b1U7JzKkxtsc35tUW7JbSJuk2vTTQ_DLs-looxAorSqC7bBNNKlVMQJkBF6Gv3_A_r8Q6WudBTqVxqf0X8xDlSkGWnUY4IaCgYKAXASARESFQHGX2Mi7IXCv5HZbhUQWNBZAvJ-oQ0170",
     "login_type": "google.com",
     "role_id": "3",
+    "liveurl": "https://maktech.space",
     "image": "https://lh3.googleusercontent.com/a/ACg8ocLO_5EdJzHOQgvskBg2uBJgJWOreTiAHlRRfGPr0TOTZnEQ8A=s96-c"
   },
   {
@@ -21,7 +23,8 @@
     "password": "1987933790",
     "login_type": "google.com",
     "role_id": "3",
-    "image": "assets/role-base-8-images/image1.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image1.jpeg"
   },
   {
     "name": "john paul",
@@ -29,7 +32,8 @@
     "password": "2906343973",
     "login_type": "google.com",
     "role_id": "2",
-    "image": "assets/role-base-8-images/image2.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image2.jpeg"
   },
   {
     "name": "anna grace",
@@ -37,7 +41,8 @@
     "password": "1510006623",
     "login_type": "google.com",
     "role_id": "3",
-    "image": "assets/role-base-8-images/image3.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image3.jpeg"
   },
   {
     "name": "emma rose",
@@ -45,15 +50,17 @@
     "password": "6143093460",
     "login_type": "google.com",
     "role_id": "2",
-    "image": "assets/role-base-8-images/image4.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image4.jpeg"
   },
   {
     "name": "sarah jane",
-    "email": "sarah jane@gmail.com",
+    "email": "sarah.jane@gmail.com",
     "password": "8365678346",
     "login_type": "google.com",
     "role_id": "3",
-    "image": "assets/role-base-8-images/image5.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image5.jpeg"
   },
   {
     "name": "jack henry",
@@ -61,7 +68,8 @@
     "password": "5136395697",
     "login_type": "google.com",
     "role_id": "2",
-    "image": "assets/role-base-8-images/image6.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image6.jpeg"
   },
   {
     "name": "lily mae",
@@ -69,7 +77,8 @@
     "password": "6527206648",
     "login_type": "google.com",
     "role_id": "3",
-    "image": "assets/role-base-8-images/image7.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image7.jpeg"
   },
   {
     "name": "luke james",
@@ -77,6 +86,7 @@
     "password": "1817205308",
     "login_type": "google.com",
     "role_id": "2",
-    "image": "assets/role-base-8-images/image8.jpeg"
+    "liveurl": "https://maktech.space",
+    "image": "images/role-base-8-images/image8.jpeg"
   }
 ]
