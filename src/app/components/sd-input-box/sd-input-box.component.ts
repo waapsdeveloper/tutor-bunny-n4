@@ -28,7 +28,7 @@ export class SdInputBoxComponent implements OnInit {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
-        }, 5000);
+        }, 3000);
       }
       if (this.key == 'title') {
         if (formData.title.length < 50 || formData.title.length > 100) {
@@ -36,13 +36,23 @@ export class SdInputBoxComponent implements OnInit {
           this.errorText = 'The field shlould be 50 to 100 correctors'
           setTimeout(() => {
             this.isRequired = false;
-          }, 5000);
+          }, 3000);
         }
       }
     }, false)
   }
   result($event) {
+
     let v = $event.target.value;
+    if(this.key == 'zip_code'){
+      let numericValue: string = v.replace(/\D/g, '');
+      ($event.target as HTMLInputElement).value = numericValue;
+    }
+
+
+
+
+
     if (!this.isReadOnly) {
       this.onChange.emit(v)
     }

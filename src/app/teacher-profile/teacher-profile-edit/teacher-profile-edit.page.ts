@@ -25,7 +25,8 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
     state: null,
     dial_code: null,
     phone_number: null,
-    address: null,
+    city: null,
+    zip_code: null,
     languages: null,
     subjects: null,
     title: null,
@@ -37,7 +38,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   };
   contryCode: any;
   countryId;
+  stateId;
   hideTerms = false;
+  step = 1;
 
   constructor(private network: NetworkService, private nav: NavService, public formBuilder: FormBuilder, private events: EventsService) {
     this.initialize();
@@ -71,6 +74,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
     } else if (key == 'state') {
+      this.stateId = value.id
       this.formData['state_id'] = value.id;
       this.formData['state'] = value;
     } else if (key == 'languages') {
@@ -120,12 +124,18 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.address || !f.languages || !f.subjects) {
+    if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.city || !f.zip_code || !f.languages || !f.subjects) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
+
     const res = await this.network.updateTeacherProfile(f, user.id)
+
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
+  }
+
+  async changeToPrev(){
+    this.slides?.nativeElement.swiper.slideTo(0, false, false);
   }
   async submit() {
     const data = this.formData;
@@ -149,4 +159,6 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   openGallery($event) {
     this.nav.push('/teacher-profile/teacher-gallery')
   }
+
+
 }

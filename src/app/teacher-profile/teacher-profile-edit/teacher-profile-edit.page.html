@@ -24,7 +24,7 @@
               [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
           </div>
 
-          <div class="input-box-lines city-zip">
+          <div class="input-box-lines city-zip" *ngIf="stateId">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">City</div>
               <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')"
@@ -60,9 +60,6 @@
             </div>
           </div>
 
-          <div class="input-box-lines">
-            <app-sd-button-gray [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
-          </div>
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -94,12 +91,28 @@
             <app-accept-terms-profile [terms]="formData.terms"
               (onChange)="result($event, 'terms')"></app-accept-terms-profile>
           </div>
-          <div class="input-box-lines">
-            <app-sd-button-gray [text]="'Submit for Review'" [disabled]="disableIfIncomplete()"
-              (click)="submit()"></app-sd-button-gray>
-          </div>
+
         </div>
       </swiper-slide>
     </swiper-container>
   </form>
 </ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+  <div class="d-flex flex-column gap-16">
+    <div class="number-selection-outer-678956">
+      <div class="number-box-7896">
+        <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
+        <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>
+      </div>
+      <div class="center-line-hr-96895"></div>
+
+    </div>
+
+    <div class="input-box-lines">
+      <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" [disabled]="disableIfIncomplete()"
+        (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>
+
+</ion-footer>
