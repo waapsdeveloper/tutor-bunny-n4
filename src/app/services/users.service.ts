@@ -10,6 +10,12 @@ export class UsersService {
   constructor() { }
 
   getUser(){
+    if(!this._user){
+      const res = localStorage.getItem("user");
+      if(res){
+        this._user = JSON.parse(res);
+      }
+    }
     return this._user;
   }
 

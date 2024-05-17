@@ -5,7 +5,7 @@
 <ion-content class="ion-padding ion-content-medium-background">
 
   <form>
-    <swiper-container slides-per-view="1" allow-touch-move="true" space-between="40" [modules]="swiperModules" #slides>
+    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -99,7 +99,7 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
-    <div class="number-selection-outer-678956">
+    <div class="number-selection-outer-678956" (click)="changeToPrev()">
       <div class="number-box-7896">
         <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
         <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>

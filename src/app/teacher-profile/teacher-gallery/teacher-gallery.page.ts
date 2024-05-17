@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'console';
 import { NetworkService } from 'src/app/services/network.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-teacher-gallery',
@@ -89,34 +90,58 @@ export class TeacherGalleryPage implements OnInit {
   list;
 
 
-  constructor(private sanitizer: DomSanitizer, private network: NetworkService,) {
+  constructor(private sanitizer: DomSanitizer, private network: NetworkService, public users: UsersService) {
 
     this.initialize();
   }
   ngOnInit() {
   }
   async initialize() {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    let user_id = this.user.id;
-    this.list  = await this.network.getImage(user_id) as any [];
-    this.images = this.list.result;
+    const user = this.users.getUser();
+    const res = await this.network.getImage(user.id) as any;
+    console.log(res);
+
+    let list = res.result;
+
+    for(var i = 0; i < list.length; i++){
+
+      let item = list[i];
+      let firstIndex = this.images.findIndex(x => x.image == null);
+      console.log(firstIndex);
+
+      if(firstIndex != -1){
+        this.images[firstIndex]['id'] = item.id;
+        this.images[firstIndex]['image'] = item.image;
+      }
+    }
+    // this.images = this.list.result;
 
   }
-  setBackgroundImage(image) {
-    return
+  setBackgroundImage(item) {
+
+    return `url('${item.image}')`
+
   }
   async addImageInArray(string) {
+    console.log(this.images)
     let firstIndex = this.images.findIndex(x => x.image == null);
-    // console.log(firstIndex);
-    this.images[firstIndex]['id'] = firstIndex;
-    this.images[firstIndex]['image'] = string;
+    console.log(firstIndex);
+
+    if(firstIndex != -1){
+      this.images[firstIndex]['id'] = firstIndex;
+      this.images[firstIndex]['image'] = string;
+    }
+
+    // return;
+
+    const user = this.users.getUser();
     let obj = {
-      user_id: this.user.id,
+      user_id: user.id,
       image: string
     }
     let res = await this.network.postImages(obj)
-    // console.log(res);
-    this.initialize();
+    console.log(res);
+    // this.initialize();
   }
 
   async onFileSelected(event: any) {

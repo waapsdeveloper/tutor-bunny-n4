@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { EventsService } from 'src/app/services/events.service';
@@ -10,7 +10,7 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './teacher-profile-edit.page.html',
   styleUrls: ['./teacher-profile-edit.page.scss'],
 })
-export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
+export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewInit {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   user;
@@ -45,7 +45,12 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   constructor(private network: NetworkService, private nav: NavService, public formBuilder: FormBuilder, private events: EventsService) {
     this.initialize();
   }
+
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit(): void {
 
   }
 
@@ -141,7 +146,12 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter {
   }
 
   async changeToPrev(){
-    this.slides?.nativeElement.swiper.slideTo(0, false, false);
+
+    if(this.step == 2){
+      this.step = 1;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+
   }
   async submit() {
     const data = this.formData;

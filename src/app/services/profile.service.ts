@@ -19,16 +19,15 @@ export class ProfileService {
 
       // Check if the user is a teacher
       if (roleId == 2) {
-        if (user.name && user.email && user.student.dial_code && user.student.phone_number && user.student.dob ) {
+        if (!user.name || !user.email || !user.student.dial_code || !user.student.phone_number || !user.student.dob ) {
           flag = false;
         }
-        if (user.student.country) {
+        if (!user.student.country) {
           flag = false;
         }
-        if (user.student.state) {
+        if (!user.student.state) {
           flag = false;
         }
-        flag = true;
 
 
       }
