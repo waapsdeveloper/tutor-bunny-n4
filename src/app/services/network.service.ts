@@ -27,7 +27,7 @@ export class NetworkService {
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
-  saveFcmToken(data) {
+  saveFcmToken(data){
     return this.httpPostResponse('update-firebase-token', data);
   }
 
@@ -49,33 +49,33 @@ export class NetworkService {
       false
     );
   }
-  getCountries(data) {
+  getCountries(data){
     const str = this.serialize(data);
-    return this.httpGetResponse('countries/list' + '?' + str, null, false, false);
+    return this.httpGetResponse('countries/list'+'?'+ str , null, false, false);
 
   }
 
-  getStates(data) {
+  getStates(data){
     const str = this.serialize(data);
-    return this.httpGetResponse('states/by-country' + '?' + str, null, false, false);
+    return this.httpGetResponse('states/by-country' + '?'+ str, null, false, false );
   }
 
   getLanguage(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('languages/list' + '?' + str, null, false, false);
+    return this.httpGetResponse('languages/list' + '?'+ str, null, false, false);
   }
 
   addLanguage(data) {
     return this.httpPostResponse('languages/add-teacher-language', data);
   }
 
-  getvideos() {
-    return this.httpGetResponse('videos/list', null, false, false);
+  getvideos(){
+    return this.httpGetResponse('videos/list' , null, false, false);
   }
 
   getMyLanguages(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('languages/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse('languages/my-list' + '?'+ str, null, false, false);
   }
 
   removeMyLanguages(data) {
@@ -88,7 +88,7 @@ export class NetworkService {
 
   getMySubjects(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('subjects/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse('subjects/my-list' + '?'+ str, null, false, false);
   }
 
   removeMySubjects(data) {
@@ -97,7 +97,7 @@ export class NetworkService {
 
   getSubject(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('subjects/list' + '?' + str, null, false, false);
+    return this.httpGetResponse('subjects/list'+'?'+ str, null, false, false);
   }
 
   getUserByEmail(data) {
@@ -110,13 +110,12 @@ export class NetworkService {
 
   }
 
-  updateTeacherProfile(data, id) {
-    return this.httpPostResponse('user/teacher/' + id, data);
+  updateTeacherProfile(data, id){
+    return this.httpPostResponse('user/teacher/'+ id, data);
   }
 
-  updateStudentProfile(data, id) {
-
-    return this.httpPostResponse('user/student/update-info/' + id, data);
+  updateStudentProfile(data, id){
+    return this.httpPostResponse('user/student/'+ id, data);
   }
 
   serialize = (obj: any) => {
