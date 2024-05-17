@@ -22,10 +22,23 @@ export class ProfileService {
         if (!user.name || !user.email || !user.student.dial_code || !user.student.phone_number || !user.student.dob ) {
           flag = false;
         }
+
+        if (!user.student.first_name) {
+          flag = false;
+        }
+        if (!user.student.last_name) {
+          flag = false;
+        }
         if (!user.student.country) {
           flag = false;
         }
         if (!user.student.state) {
+          flag = false;
+        }
+        if (!user.student.city) {
+          flag = false;
+        }
+        if (!user.student.zip_code) {
           flag = false;
         }
 
@@ -33,13 +46,19 @@ export class ProfileService {
       }
 
       if (roleId == 3) {
-        if (!user.name || !user.teacher.address || !user.teacher.description || !user.teacher.dial_code || !user.teacher.phone_number || !user.teacher.title ) {
+        if (!user.name || !user.teacher.description || !user.teacher.dial_code || !user.teacher.phone_number || !user.teacher.title ) {
           flag = false;
         }
         if (!user.teacher.country) {
           flag = false;
         }
         if (!user.teacher.state) {
+          flag = false;
+        }
+        if (!user.teacher.city) {
+          flag = false;
+        }
+        if (!user.teacher.zip_code) {
           flag = false;
         }
         if (user.teacher.languages.length == 0) {
