@@ -1,14 +1,16 @@
 <div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openDateSelection()">
   <ion-ripple-effect></ion-ripple-effect>
-  <ion-datetime-button fill="clear" datetime="date2" #dob ></ion-datetime-button>
+  <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
+  [(ngModel)]="inputText" readonly />
+  <!-- <ion-datetime-button fill="clear" datetime="date2" #dob ></ion-datetime-button> -->
 
   <ion-modal [keepContentsMounted]="true">
     <ng-template>
-      <ion-datetime id="date2" presentation="date" (ionChange)="result($event)"></ion-datetime>
+      <ion-datetime [mode]="'ios'" id="date2" presentation="date" display-format="YYYY" picker-format="YYYY" (ionChange)="result($event)"></ion-datetime>
     </ng-template>
   </ion-modal>
   <!-- <input class="fs-16 outfit sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
     [(ngModel)]="inputText" (keyup)="result($event)" [readOnly]="isReadOnly" /> -->
   <!-- <ion-icon name="calendar-outline" (click)="inputText = ''"></ion-icon> -->
-  <img src="assets/svg/chv-calnedar-gray.svg" />
+  <ion-icon name="chevron-down-outline"></ion-icon>
 </div>
