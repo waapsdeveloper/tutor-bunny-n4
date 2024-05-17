@@ -15,37 +15,54 @@
       <div class="input-box-lines d-flex flex-column gap-8">
         <div class="input-title fs-12 roboto-medium">Last Name</div>
         <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
-        [inputText]="formData.last_name" [key]="'last_name'" [errorText]="'Last Name is required'"></app-sd-input-box>
+          [inputText]="formData.last_name" [key]="'last_name'" [errorText]="'Last Name is required'"></app-sd-input-box>
       </div>
-
-
     </div>
-    <div class="input-box-lines">
-      <app-sd-year-box placeholder="Year of birth" (onChange)="result($event, 'dob')"
-        [inputText]="formData.dob"></app-sd-year-box>
-    </div>
-    <div class="input-box-lines">
-      <app-sd-country-box (onChange)="result($event, 'country')" [inputText]="formData.country" [key]="'country'"
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Country</div>
+      <app-sd-country-box (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
         [errorText]="'Country is required'"></app-sd-country-box>
     </div>
-    <div class="input-box-lines" *ngIf="countryId">
+    <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
+      <div class="input-title fs-12 roboto-medium">State</div>
       <app-sd-state-box [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
         [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
     </div>
-    <div class="phone-input">
-      <div class="dail-code">
-        <app-sd-input-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code" [isReadOnly]="true"
-          [needed]="false" [key]="'dial_code'" [errorText]="'!'"> </app-sd-input-box>
+
+    <div class="input-box-lines city-zip" *ngIf="stateId">
+      <div class="city d-flex flex-column gap-8">
+        <div class="input-title fs-12 roboto-medium">City</div>
+        <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')" [inputText]="formData.city"
+          [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
       </div>
-      <div class="number">
-        <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
-          [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'"
-          [errorText]="'Phone number is required'"></app-sd-input-box>
+      <div class="zip-code-2 d-flex flex-column gap-8">
+        <div class="input-title fs-12 roboto-medium">Zip</div>
+        <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
+          [key]="'zip_code'" [errorText]="'!'"> </app-sd-input-box>
       </div>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Phone</div>
+      <div class="phone-input">
+        <div class="dail-code">
+          <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
+            [isReadOnly]="true" [key]="'dial_code'" [errorText]="'!'" [needed]="false"> </app-sd-dailcode-box>
+        </div>
+        <div class="number">
+          <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
+            [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'"
+            [errorText]="'Phone number is required'"></app-sd-input-box>
+        </div>
+      </div>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Year of birth</div>
+      <app-sd-year-box placeholder="Select" (onChange)="result($event, 'dob')"
+        [inputText]="formData.dob"></app-sd-year-box>
     </div>
     <div class="image-upload-box-st-78955674" (click)="photoInput.click()">
       <div class="icno-text-88666">
-        <div *ngIf="photoId" class="image-box-89657" [style.background-image]="'url(' + photoId + ')'"  >
+        <div *ngIf="photoId" class="image-box-89657" [style.background-image]="'url(' + photoId + ')'">
         </div>
         <img *ngIf="!photoId" class="img-67855" src="assets/icon/user-avatar-stp.png" />
         <div class="outfit fs-16">Upload Profile Photo (optional)</div>
@@ -60,12 +77,16 @@
         (onChange)="result($event, 'terms')"></app-accept-terms-profile>
     </div>
 
-    <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'" [disabled]="disableIfIncomplete()" (click)="submit()"></app-sd-button-gray>
-    </div>
-    <div class="input-box-lines d-flex flex-column justify-content-center align-center "
-      (click)="skipToStudentDashboard()">
-      <div class="outfit-light fs-16">Skip</div>
-    </div>
   </div>
 </ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+  <div class="d-flex flex-column gap-8">
+    <app-sd-button-gray [text]="'Save and Continue'" (click)="submit()"></app-sd-button-gray>
+    <div class="sd-clear-btn-96789611 ion-activatable ripple-parent rectangle" (click)="skipToStudentDashboard()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <span class="roboto-regular fs-16 ">Skip now</span>
+    </div>
+
+  </div>
+
+</ion-footer>
