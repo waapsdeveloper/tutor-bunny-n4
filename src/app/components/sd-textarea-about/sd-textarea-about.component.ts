@@ -30,7 +30,7 @@ export class SdTextareaAboutComponent  implements OnInit {
         }, 5000);
       }
       if (this.key == 'description') {
-        if (v.length < 400) {
+        if (v && v.length < 400) {
           this.isRequired = true;
           this.errorText = 'The field shlould be 400 correctors'
           setTimeout(() => {

@@ -6,11 +6,19 @@
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="body-content-68448">
     <div class="input-box-lines two-names">
-      <app-sd-input-box placeholder="First name" (onChange)="result($event, 'first_name')"
-        [inputText]="formData.first_name" [key]="'first_name'"
-        [errorText]="'First Name is required'"></app-sd-input-box>
-      <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
+      <div class="input-box-lines d-flex flex-column gap-8">
+        <div class="input-title fs-12 roboto-medium">First Name</div>
+        <app-sd-input-box placeholder="First name" (onChange)="result($event, 'first_name')"
+          [inputText]="formData.first_name" [key]="'first_name'"
+          [errorText]="'First Name is required'"></app-sd-input-box>
+      </div>
+      <div class="input-box-lines d-flex flex-column gap-8">
+        <div class="input-title fs-12 roboto-medium">Last Name</div>
+        <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
         [inputText]="formData.last_name" [key]="'last_name'" [errorText]="'Last Name is required'"></app-sd-input-box>
+      </div>
+
+
     </div>
     <div class="input-box-lines">
       <app-sd-year-box placeholder="Year of birth" (onChange)="result($event, 'dob')"
