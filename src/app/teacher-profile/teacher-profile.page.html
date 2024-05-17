@@ -1,39 +1,47 @@
-<ion-header>
-  <app-sd-header-top [title]="'Teacher Profile'" [backUrl]="'tabs/teacher-dashboard'" [showBack]="true"></app-sd-header-top>
-</ion-header>
-
-<ion-content class="ion-padding ion-content-medium-background">
-
-  <div class="body-content-68448">
-    <!-- <app-profile-box></app-profile-box> -->
-    <div class="profile-box-98875">
-      <div class="item-box-98875">
-        <div class="image-box-98875" (click)="openEditProfile()">
-          <!-- <img class="image-box-image-7-98875" src="assets/role-base-8-images/image4.jpeg" /> -->
-          <div class="image-box-89657" [style.background-image]="'url(' + image + ')'"  >
-          </div>
-          <div class="edit-icon-box-98875">
-            <img class="image-box-image-8-98875" src="assets/svg/edit-lr.svg" />
-          </div>
-        </div>
-        <div class="title-box-98875">
-          <div class="heading-box-98875">
-            <div class="heading-box-line-98875">
-              <span class="fs-21 outfit-medium">{{item?.name}}</span>
-              <img *ngIf="shield == true" src="assets/svg/verified-profile-sheild.svg" />
-            </div>
-            <!-- <div class="create-course-btn-98875 fs-16 outfit-medium">Create Course</div> -->
-          </div>
-          <div class="flag-box-98875">
-            <span slot="start" class="fi fi-{{getFlag()}}"></span>
-            <div class="fs-16 outfit">{{data?.country?.name}}</div>
-          </div>
-        </div>
-
-      </div>
-
+<ion-header class="ion-no-shadow ion-no-border ion-header-bg">
+  <div class="top-dashboard-header-outer ion-padding">
+    <div class="image-box-89657" [style.background-image]="'url(' + image + ')'">
     </div>
+    <div class="header-oblique-double-675">
+      <div class="header-line-678576">
+        <div class="header-line-box-678576">
+          <img src="../../assets/svg/edit.svg" (click)="openEditProfile()" />
+        </div>
+      </div>
+      <div class="header-info-box-68447">
+        <div class="header-info-user-68448">
+          <div class="header-info-user-name outfit-semibold ">{{item?.name}}</div>
 
+        </div>
+        <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/location.svg" /> <span>{{city}},
+            {{country}}</span><span slot="start" class="fi fi-{{getFlag()}}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448">
+    <div>
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="../../assets/svg/techer-card.svg" alt="">
+          <p class="techer-text">Teachers:</p>
+        </div>
+        <div class="chip-outer-78961" *ngFor="let item of subject">
+          <ion-chip>{{item?.name}}</ion-chip>
+        </div>
+      </div>
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="../../assets/svg/speaks.svg" alt="">
+          <p class="techer-text">Speaks:</p>
+        </div>
+        <div class="chip-outer-78961" *ngFor="let item of language">
+          <ion-chip>{{item?.name}}</ion-chip>
+        </div>
+      </div>
+    </div>
     <app-teacher-profile-statistics></app-teacher-profile-statistics>
     <div class="fs-16 outfit">
       {{data?.title}}
@@ -43,7 +51,4 @@
       {{data?.description}}
     </div>
   </div>
-
-
-
 </ion-content>

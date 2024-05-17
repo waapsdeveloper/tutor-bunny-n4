@@ -115,8 +115,8 @@
 }
 
 .image-box-89657 {
-  width: 65px;
-  height: 65px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   background: rgb(255, 255, 255);
@@ -127,4 +127,123 @@
   justify-content: center;
   background-size: cover;
   background-position: center center;
+}
+
+.top-dashboard-header-outer {
+  background-color: #484848;
+  border-radius: 0 0 20px 20px;
+  height: 156px;
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+
+  .profile-img {
+    width: 100px;
+    // border-radius: 0 0 20px 20px;
+    // height: 156px;
+  }
+
+  .header-oblique-double-675 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .header-line-678576 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: absolute;
+      justify-content: flex-end;
+      right: 18px;
+      top: 40px;
+
+
+      .header-line-box-678576 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 24px;
+
+        img {
+          height: 24px;
+        }
+      }
+    }
+
+    .header-info-box-68447 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: end;
+      padding-left: 16px;
+      height: 100%;
+      gap: 6px;
+      position: absolute;
+      bottom: 22px;
+
+
+      .header-info-user-68448 {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+
+        .header-info-user-name {
+          font-size: 20px;
+          color: #ffffff;
+        }
+
+        .header-info-user-flag img {
+          height: 14px;
+        }
+      }
+
+      .header-info-misc-68448 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #ffffff;
+      }
+    }
+
+    // width: 100%;
+  }
+}
+
+.teacher-card-head {
+  display: flex;
+  width: 99px;
+  align-items: center;
+  justify-content: start;
+  gap: 7px;
+  .techer-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+  }
+
+}
+.chip-outer-78961{
+   display: flex;
+   align-items: baseline;
+  //  justify-content: flex-start;
+   flex-wrap: wrap;
+  ion-chip{
+    border-radius: 3px;
+    height: 22px;
+    font-size: 16px;
+  }
+}
+
+.techer-card-outer-78965{
+  display: flex;
+  align-items: baseline;
+  justify-content: start;
+  width: 100%;
+  gap: 0px;
+
 }

@@ -15,6 +15,10 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
   data;
   shield;
   image;
+  city;
+  country;
+  language;
+  subject;
 
   constructor(
     private network: NetworkService,
@@ -22,13 +26,12 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
     private nav: NavService
   ) {
 
-    
+
   }
 
   ngOnInit() {
     this.events.subscribe('get-user-after-submit-form', (data) => {
-      console.log(data);
-      
+
     } )
   }
   openEditProfile() {
@@ -36,7 +39,6 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
   }
   getFlag() {
     if (this.item && this.item.teacher && this.item.teacher.country) {
-      console.log(this.item.teacher);
 
       const flag = this.item.teacher.country.iso2;
       // console.log(flag);
@@ -58,9 +60,15 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
       email: this.user.email,
     };
     let item = await this.network.getUserByEmail(obj);
+    
     this.item = item.user;
     this.image = this.item.image;
     this.data = this.item.teacher;
+    this.city = this.item.teacher.city;
+    this.country = this.item.teacher.country.name;
+    this.language = this.item.teacher.languages;
+    this.subject = this.item.teacher.subjects;
+    
 
     if (this.data.status == 'approved') {
       this.shield = true;
