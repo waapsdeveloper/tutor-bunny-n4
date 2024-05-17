@@ -22,38 +22,40 @@
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="body-content-68448">
-    <div>
+    <div class="techer-subject-content">
       <div class="techer-card-outer-78965">
         <div class="teacher-card-head">
           <img src="../../assets/svg/techer-card.svg" alt="">
-         Teachers:
+          Teachers:
         </div>
-        <div class="chip-outer-78961" *ngFor="let item of subject">
-          <ion-chip>{{item?.name}}</ion-chip>
+        <div class="chips-outer">
+          <div class="chip-outer-78961" *ngFor="let item of subject">
+            <div class="chips">{{item?.name}}</div>
+          </div>
         </div>
       </div>
       <div class="techer-card-outer-78965">
         <div class="teacher-card-head">
           <img src="../../assets/svg/speaks.svg" alt="">
-         Speaks:
+          Speaks:
         </div>
         <div class="chip-outer-78961" *ngFor="let item of language">
-          <ion-chip>{{item?.name}}</ion-chip>
+          <div class="chips">{{item?.name}}</div>
         </div>
       </div>
     </div>
     <app-teacher-profile-statistics></app-teacher-profile-statistics>
     <div class="fs-16 outfit">
-      <h2 class="about-heading">About</h2>
-      <p class="about-para">
+      <div class="about-heading">About</div>
+      <div class="about-para">
         {{data?.title}}
-      </p>
+      </div>
 
     </div>
     <div class="fs-16 outfit discription-text">
-      <p class="discription-para" [class.collapsed]="isExpanded">
+      <div class="discription-para" [class.collapsed]="isExpanded">
         {{ data?.description }}
-      </p>
+      </div>
       <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</ion-button>
       <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</ion-button>
     </div>

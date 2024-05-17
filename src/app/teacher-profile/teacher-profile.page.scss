@@ -40,7 +40,7 @@
         right: 0;
         top: 40px;
 
-        .image-box-image-8-98875 {}
+       
       }
     }
 
@@ -132,7 +132,7 @@
 .top-dashboard-header-outer {
   background-color: #484848;
   border-radius: 0 0 20px 20px;
-  height: 156px;
+  height: 140px;
   display: flex;
   display: flex;
   align-items: center;
@@ -226,20 +226,35 @@
 
 
 }
+.techer-subject-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .chip-outer-78961 {
   display: flex;
   align-items: baseline;
   //  justify-content: flex-start;
   flex-wrap: wrap;
+  gap: 10px;
 
-  ion-chip {
-    border-radius: 3px;
+  .chips {
+    border-radius: 5px;
     height: 22px;
+    padding: 2px 3px;
     font-size: 16px;
+    background-color: rgba(69, 69, 69, 0.25);
   }
 }
-
+.chips-outer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px
+}
 .techer-card-outer-78965 {
   display: flex;
   align-items: center;
