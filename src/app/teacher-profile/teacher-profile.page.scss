@@ -220,30 +220,72 @@
   align-items: center;
   justify-content: start;
   gap: 7px;
-  .techer-text{
+
+  .techer-text {
     font-size: 16px;
     font-weight: 400;
     color: #000;
   }
 
 }
-.chip-outer-78961{
-   display: flex;
-   align-items: baseline;
+
+.chip-outer-78961 {
+  display: flex;
+  align-items: baseline;
   //  justify-content: flex-start;
-   flex-wrap: wrap;
-  ion-chip{
+  flex-wrap: wrap;
+
+  ion-chip {
     border-radius: 3px;
     height: 22px;
     font-size: 16px;
   }
 }
 
-.techer-card-outer-78965{
+.techer-card-outer-78965 {
   display: flex;
   align-items: baseline;
   justify-content: start;
   width: 100%;
   gap: 0px;
+
+}
+
+.about-heading {
+  font-size: 20px;
+  font-weight: 600;
+
+}
+
+.about-para {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.discription-text {
+  // height: 150px;
+  width: 100%;
+
+  .discription-para {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6; 
+    -webkit-box-orient: vertical;
+  }
+  
+  .discription-para.collapsed {
+    -webkit-line-clamp: unset;
+  }
+
+}
+.read-more{
+  width: 100%;
+  border-radius: 50px;
+  background-color: white;
+  box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+  border: 1px solid #BFBFBF;
+  font-size: 16x;
+  font-weight: 600;
 
 }

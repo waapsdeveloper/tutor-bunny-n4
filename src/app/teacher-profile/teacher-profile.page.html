@@ -44,11 +44,21 @@
     </div>
     <app-teacher-profile-statistics></app-teacher-profile-statistics>
     <div class="fs-16 outfit">
-      {{data?.title}}
+      <h2 class="about-heading">About</h2>
+      <p class="about-para">
+        {{data?.title}}
+      </p>
+
     </div>
-    <div class="fs-16 outfit">
-      <div class="fs-16 outfit-semibold">Description</div>
-      {{data?.description}}
+    <div class="fs-16 outfit discription-text">
+      <p class="discription-para" [class.collapsed]="isExpanded">
+        {{ data?.description }}
+      </p>
+      <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</ion-button>
+      <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</ion-button>
     </div>
+    <app-my-courses></app-my-courses>
+    <app-my-gallery></app-my-gallery>
   </div>
+
 </ion-content>
