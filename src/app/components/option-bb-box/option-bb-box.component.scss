@@ -40,6 +40,7 @@
 
 .line {
   height: 28px;
-  width: 0.5px;
-  background-color: #677169;
+  border-right: 0.5px solid #677169;
+  // background-color: #677169;
+  opacity: 25%;
 }
