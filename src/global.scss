@@ -89,6 +89,10 @@ ion-header {
   --box-shadow: none !important;
 }
 
+.button-read{
+  background-color: --tb-page-bg-color;
+}
+
 .failureToast {
   .toast-container {
     background-color: yellow;

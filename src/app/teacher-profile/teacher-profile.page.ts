@@ -15,6 +15,7 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
   data;
   shield;
   image;
+  isExpanded = false;
   city;
   country;
   language;
@@ -73,6 +74,9 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
     if (this.data.status == 'approved') {
       this.shield = true;
     }
+  }
+  toggleReadMore() {
+    this.isExpanded = !this.isExpanded;
   }
 
 }
