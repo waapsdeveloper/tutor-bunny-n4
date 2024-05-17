@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import * as moment from 'moment';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { SelectYearComponent } from './select-year/select-year.component';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-sd-year-box',
@@ -13,9 +14,13 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   @Input() isReadOnly = false;
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  @Input('needed') needed = true;
+  isRequired = false;
   @ViewChild('dob') dob: ElementRef;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private modals: ModalService) {}
+  constructor(private modals: ModalService, private events: EventsService) {}
 
   ngAfterViewInit(): void {
     // Access the value of ion-datetime
@@ -23,6 +28,19 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+    this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+      console.log(v)
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+
+    }, false)
 
   }
 

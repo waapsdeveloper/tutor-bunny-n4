@@ -14,3 +14,4 @@
   <!-- <ion-icon name="calendar-outline" (click)="inputText = ''"></ion-icon> -->
   <ion-icon name="chevron-down-outline"></ion-icon>
 </div>
+<app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>

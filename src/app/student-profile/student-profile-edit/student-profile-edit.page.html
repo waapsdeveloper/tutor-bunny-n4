@@ -58,22 +58,25 @@
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Year of birth</div>
       <app-sd-year-box placeholder="Select" (onChange)="result($event, 'dob')"
+        [key]="'dob'" [errorText]="'Year is required'"
         [inputText]="formData.dob"></app-sd-year-box>
     </div>
     <div class="image-upload-box-st-78955674" (click)="photoInput.click()">
       <div class="icno-text-88666">
-        <div *ngIf="photoId" class="image-box-89657" [style.background-image]="'url(' + photoId + ')'">
+        <div *ngIf="formData.image" class="image-box-89657" [style.background-image]="'url(' + formData.image + ')'">
         </div>
-        <img *ngIf="!photoId" class="img-67855" src="assets/icon/user-avatar-stp.png" />
-        <div class="outfit fs-16">Upload Profile Photo (optional)</div>
+        <img *ngIf="!formData.image" class="img-67855" src="assets/icon/user-avatar-stp.png" />
+        <div class="roboto-regular fs-14">Upload Profile Photo (optional)</div>
       </div>
-      <ion-icon *ngIf="!formData.image" name="chevron-forward-outline"></ion-icon>
-      <ion-icon *ngIf="formData.image" class="upload-done-circle" name="checkmark-circle"></ion-icon>
+      <!-- *ngIf="!formData.image" -->
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <!-- <ion-icon *ngIf="formData.image" class="upload-done-circle" name="checkmark-circle"></ion-icon> -->
       <!-- *ngIf="formData.image" -->
     </div>
     <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
     <div class="terms-agree" *ngIf="!hideTerms">
       <app-accept-terms-profile [terms]="formData.terms"
+        [key]="'terms'" [errorText]="'Please accept terms'"
         (onChange)="result($event, 'terms')"></app-accept-terms-profile>
     </div>
 

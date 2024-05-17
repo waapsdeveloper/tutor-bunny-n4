@@ -130,9 +130,10 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   }
   async submit() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+    this.events.publish('student-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    // console.log("form", f);
-    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.dial_code || !f.phone_number) {
+    console.log("form", f);
+    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));

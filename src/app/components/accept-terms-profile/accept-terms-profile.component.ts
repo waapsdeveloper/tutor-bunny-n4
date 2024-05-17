@@ -37,5 +37,25 @@ export class AcceptTermsProfileComponent implements OnInit {
 
     }, false)
 
+    this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+
+      console.log(v, this.key);
+
+
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+
+        return;
+      }
+
+
+
+    }, false)
+
   }
 }
