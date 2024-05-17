@@ -20,12 +20,15 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     dob: null,
     country: null,
     state: null,
+    city: null,
+    zip_code: null,
     dial_code: null,
     phone_number: null,
     image: null,
     terms: false
   };
   countryId;
+  stateId;
   hideTerms = false;
 
   constructor(private network: NetworkService, private nav: NavService, private events: EventsService,) {
@@ -72,10 +75,13 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     }
     const stt = data['student']['state']
     if (stt) {
+      this.stateId = stt.id
       this.formData['state'] = stt;
       this.formData['state_id'] = stt.id;
     }
     this.formData['phone_number'] = data['student']['phone_number'];
+    this.formData['city'] = data['student']['city'];
+    this.formData['zip_code'] = data['student']['zip_code'];
     this.formData['image'] = data['image'];
     this.formData['terms'] = data['student']['terms'] == 1 || data['student']['terms'] == true;
     if (this.formData['terms'] == true) {
@@ -91,6 +97,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
     } else if (key == 'state') {
+      this.stateId = value.id
       this.formData['state_id'] = value.id;
       this.formData['state'] = value;
     } else {
@@ -98,6 +105,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     }
     // console.log(this.formData);
   }
+
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
