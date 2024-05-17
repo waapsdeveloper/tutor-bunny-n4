@@ -75,7 +75,9 @@
 /*  use these classes in html below  */
 
 .outfit-thin {
-  font-family: "Outfit-Thin", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
 
 .outfit-extralight {
@@ -83,7 +85,9 @@
 }
 
 .outfit-light {
-  font-family: "Outfit-Light", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .outfit {
@@ -93,23 +97,62 @@
 }
 
 .outfit-medium {
-  font-family: "Outfit-Medium", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .outfit-semibold {
-  font-family: "Outfit-SemiBold", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .outfit-bold {
-  font-family: "Outfit-Bold", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .outfit-extrabold {
-  font-family: "Outfit-ExtraBold", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+  font-style: normal;
 }
 
 .outfit-black {
-  font-family: "Outfit-Black", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+.outfit-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.outfit-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.outfit-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.outfit-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.outfit-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }
 
 
