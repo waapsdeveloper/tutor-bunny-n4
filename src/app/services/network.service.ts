@@ -115,7 +115,7 @@ export class NetworkService {
   }
 
   updateStudentProfile(data, id){
-    return this.httpPostResponse('user/student/'+ id, data);
+    return this.httpPostResponse('student-profile-update/'+ id, data);
   }
 
   serialize = (obj: any) => {
