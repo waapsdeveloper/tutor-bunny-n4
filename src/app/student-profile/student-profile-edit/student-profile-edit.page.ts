@@ -46,15 +46,10 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
 
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    // console.log(this.user);
     let obj = {
       email: this.user.email,
     };
-    // console.log(obj);
-
     let res = await this.network.getUserByEmail(obj);
-
-    // console.log(res)
     if (res) {
       localStorage.setItem('user', JSON.stringify(res.user));
       this.setFormDta(res.user);
@@ -62,7 +57,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
-    // console.log(data);
+    console.log(data);
 
     this.formData['first_name'] = data['student']['first_name'];
     this.formData['last_name'] = data['student']['last_name'];
@@ -133,14 +128,12 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     this.events.publish('student-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
     console.log("form", f);
-    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob) {
+    if (!f.first_name || !f.last_name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.terms) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateStudentProfile(f, user.id)
-
     this.events.publish('get-user-after-submit-form', user)
-
     this.nav.push('/tabs/student-dashboard')
 
   }
