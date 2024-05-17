@@ -14,6 +14,7 @@ import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-cle
 import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
 import { MyCoursesModule } from '../components/my-courses/my-courses.module';
 import { MyGalleryModule } from '../components/my-gallery/my-gallery.module';
+import { RatingReviewModule } from '../components/rating-review/rating-review.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { MyGalleryModule } from '../components/my-gallery/my-gallery.module';
     TeacherProfileStatisticsModule,
     YoutubeBoxModule,
     MyCoursesModule,
-    MyGalleryModule
+    MyGalleryModule,
+    RatingReviewModule
   ],
   declarations: [TeacherProfilePage],
 })
