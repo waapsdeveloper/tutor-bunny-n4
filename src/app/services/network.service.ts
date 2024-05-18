@@ -118,6 +118,10 @@ export class NetworkService {
     return this.httpPostResponse('student-profile-update/'+ id, data);
   }
 
+  signupViaEmail(data){
+    return this.httpPostResponse('signup-via-email', data);
+  }
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {
