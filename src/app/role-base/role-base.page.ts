@@ -15,6 +15,8 @@ export class RoleBasePage implements OnInit {
   setCurrentRole(key) {
     localStorage.setItem('role', key);
     console.log(key);
-    this.nav.push('/home');
+    this.nav.push('/home', {
+      role: key
+    });
   }
 }

@@ -16,7 +16,8 @@ import { BasePage } from '../base-page/base-page';
 export class HomePage extends BasePage implements ViewWillEnter {
   loading = false;
   googleauth;
-  backbtn= false;
+  params: any;
+
   constructor(
     injector: Injector,
     public authService: AuthenticationService,
@@ -25,6 +26,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   ionViewWillEnter(): void {
+    this.params = this.nav.getQueryParams();
+    console.log(this.params)
   }
 
 
@@ -84,7 +87,9 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   async continueWithFake() {
-    const res = await this.modals.present(FakeAccountsComponent, {}, '', 0.5);
+    const res = await this.modals.present(FakeAccountsComponent, {
+      role: this.params.role
+    }, '', 0.5);
     console.log(res.data);
     // return
 
@@ -100,23 +105,23 @@ export class HomePage extends BasePage implements ViewWillEnter {
       if (roleId === 3) {
         if (!isProfileCompleted) {
           this.nav.push('/teacher-profile/teacher-profile-edit', {
-            queryParams: { backUrl: '/home',  }
+            backUrl: '/home',
           });
         }
         else{
           this.nav.push('/tabs/teacher-dashboard', {
-            queryParams: { backUrl: '/home' }
+            backUrl: '/home'
           });
         }
       }
       else {
         if (!isProfileCompleted) {
           this.nav.push('/student-profile/student-profile-edit', {
-            queryParams: { backUrl: '/home' }
+            backUrl: '/home'
           });
         } else if (roleId === 2) {
           this.nav.push('/tabs/student-dashboard', {
-            queryParams: { backUrl: '/home' }
+            backUrl: '/home'
           });
         }
       }

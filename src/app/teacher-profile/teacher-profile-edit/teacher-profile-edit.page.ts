@@ -21,7 +21,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   params: any;
   backUrl = '/teacher-profile';
   btn: any;
-  titles = "";
+  title = "Create Profile";
   backBtn = false;
   formData: any = {
     name: null,
@@ -65,11 +65,12 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
-      this.backBtn = this.params.showBack;
-
     }
-    this.titles = this.params.title;
-    console.log(this.titles);
+
+    if (this.params.title) {
+      this.title = this.params.title;
+    }
+
 
   }
 
@@ -85,6 +86,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
   }
   result(value, key) {
+    console.log(value, key);
     if (key == 'country') {
       this.countryId = value.id;
       this.formData['country_id'] = value.id;
@@ -167,13 +169,17 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   }
   async submit() {
     const data = this.formData;
+    console.log(data);
     this.userId = this.user.id;
 
     const f = this.formData;
     this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
     if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.title.description < 400) {
-      console.log("return");
       return
+    }
+
+    if (!f.image || !f.photo_id) {
+      return;
     }
 
     if (!this.formData.terms) {
