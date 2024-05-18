@@ -5,27 +5,20 @@
 
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="body-content-68448">
-    <div class="input-box-lines two-names">
-      <div class="input-box-lines d-flex flex-column gap-8">
-        <div class="input-title fs-12 roboto-medium">First Name</div>
-        <app-sd-input-box placeholder="First name" (onChange)="result($event, 'first_name')"
-          [inputText]="formData.first_name" [key]="'first_name'"
-          [errorText]="'First Name is required'"></app-sd-input-box>
-      </div>
-      <div class="input-box-lines d-flex flex-column gap-8">
-        <div class="input-title fs-12 roboto-medium">Last Name</div>
-        <app-sd-input-box placeholder="Last name" (onChange)="result($event, 'last_name')"
-          [inputText]="formData.last_name" [key]="'last_name'" [errorText]="'Last Name is required'"></app-sd-input-box>
-      </div>
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Name</div>
+      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
+        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Country</div>
-      <app-sd-country-box (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
+      <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
         [errorText]="'Country is required'"></app-sd-country-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
       <div class="input-title fs-12 roboto-medium">State</div>
-      <app-sd-state-box [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
+      <app-sd-state-box [countryId]="countryId" placeholder="Select" (onChange)="result($event, 'state')"
         [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
     </div>
 
