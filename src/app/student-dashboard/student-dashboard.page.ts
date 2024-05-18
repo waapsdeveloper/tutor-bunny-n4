@@ -1,43 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { NavService } from '../services/nav.service';
 import { NetworkService } from '../services/network.service';
+import { BasePage } from '../base-page/base-page';
 
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.page.html',
   styleUrls: ['./student-dashboard.page.scss'],
 })
-export class StudentDashboardPage implements OnInit {
+export class StudentDashboardPage extends BasePage implements OnInit {
+
   user;
-  item;
-  image;
-  constructor(
-    private nav: NavService,
-    public authService: AuthenticationService,
-    private network: NetworkService
-  ) {
-    this.initialize()
+
+  constructor(injector: Injector, public authService: AuthenticationService,) {
+    super(injector)
   }
+
   ngOnInit() {
+    this.initialize()
   }
 
 
   async initialize() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
-    let item = await this.network.getUserByEmail(obj);
-    this.item = item.user;
-    localStorage. setItem("user", JSON.stringify(this.item) );
-
-    this.image = this.item.image;
+    let res = await this.network.getUserByEmail(obj);
+    if (res) {
+      this.users.setUser(res.user);
+      this.user = this.users.getUser();
+    }
 
   }
 
-  goToProfile(){
-    this.nav.push('student-profile')
+  updateProfile(){
+    this.nav.push('/student-profile/student-profile-edit', {
+      backUrl: '/home', showBack: true
+    });
   }
 
 }
