@@ -15,8 +15,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   user;
   photoId;
   formData: any = {
-    first_name: null,
-    last_name: null,
+    name: null,
     dob: null,
     country: null,
     state: null,
@@ -59,8 +58,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   setFormDta(data) {
     console.log(data);
 
-    this.formData['first_name'] = data['student']['first_name'];
-    this.formData['last_name'] = data['student']['last_name'];
+    this.formData['name'] = data['name'];
     const cnty = data['student']['country'];
     if (cnty) {
       this.countryId = cnty.id;

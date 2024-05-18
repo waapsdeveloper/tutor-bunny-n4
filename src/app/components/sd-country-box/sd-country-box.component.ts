@@ -33,12 +33,6 @@ export class SdCountryBoxComponent implements OnInit {
     return this._country
   }
 
-
-
-
-
-
-
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
   selectedCountry = {
     "id": 0,

@@ -1,7 +1,7 @@
 <div class="animation-outer">
   <div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openCountrySelection()">
     <ion-ripple-effect></ion-ripple-effect>
-    <span class="fi fi-{{returnFlagCode(selectedCountry) }}"></span>
+    <span *ngIf="selectedCountry.name" class="fi fi-{{ returnFlagCode(selectedCountry) }}"></span>
     <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
       [(ngModel)]="selectedCountry.name" readonly />
     <ion-icon name="chevron-down-outline"></ion-icon>
