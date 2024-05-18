@@ -1,27 +1,33 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89657" [style.background-image]="'url(' + image + ')'"  (click)="goToProfile()">
+      <div class="image-box-89657" [style.background-image]="'url(' + image + ')'" (click)="goToProfile()">
       </div>
-      <!-- <img class="pl-img" src="assets/profileimg.png" /> -->
-      <div class="pl-heading outfit-semibold">Hi, {{item?.name}}</div>
     </div>
     <div class="noti-795">
-      <div class="icon-box-77">
-        <img src="assets/icon/header-search.svg" />
+      <div class="icon-box">
+        <div class="icon-box-outer">
+          <div class="icon-box-77">
+            <img src="assets/icon/header-search.svg" />
+          </div>
+          <div class="icon-box-77">
+            <img src="assets/icon/heart.svg" />
+          </div>
+          <div class="icon-box-77">
+            <img src="assets/icon/notification-bell.svg" />
+          </div>
+        </div>
       </div>
-      <div class="icon-box-77">
-        <img src="assets/icon/heart.svg" />
-      </div>
-      <div class="icon-box-77">
-        <img src="assets/icon/notification-bell.svg" />
+      <div class="name-box">
+        <div class="pl-heading outfit-semibold">Hi, {{item?.name}}</div>
+        <img src="../../assets/svg/student-edit.svg" alt="">
       </div>
 
     </div>
   </div>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" >
+<ion-content class="ion-content-bg ion-padding">
 
   <div class="body-content-68448">
     <div class="header-chips">
