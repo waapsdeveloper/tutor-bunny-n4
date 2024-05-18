@@ -9,6 +9,8 @@ import { StorageService } from './basic/storage.service';
   providedIn: 'root',
 })
 export class UtilityService {
+  firstName: string = '';
+  lastName: string = '';
   constructor(
     public loading: LoadingService,
     public plt: Platform,
@@ -19,6 +21,11 @@ export class UtilityService {
 
   showLoader(msg = '') {
     return this.loading.showLoader(msg);
+  }
+  splitName(name) {
+    const nameParts = name.trim().split(' ');
+    this.firstName = nameParts[0] || '';
+    this.lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
   }
 
   hideLoader() {
