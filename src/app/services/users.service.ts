@@ -9,38 +9,48 @@ export class UsersService {
 
   constructor() { }
 
-  getUser(){
-    if(!this._user){
+  getUser() {
+    if (!this._user) {
       const res = localStorage.getItem("user");
-      if(res){
+      if (res) {
         this._user = JSON.parse(res);
       }
     }
     return this._user;
   }
 
-  setUser(user){
+  setUser(user) {
     localStorage.setItem("user", JSON.stringify(user));
     this._user = user;
   }
 
-  getUserRole(){
-    if(this._user){
+  getUserRole() {
+
+    const res = localStorage.getItem("user");
+    if (res) {
+      this._user = JSON.parse(res);
+      
+    }
+    
+    
+    console.log(this._user);
+
+    if (!this._user) {
       return -1;
     }
 
-    if(!this._user.role_id){
+    if (!this._user.role_id) {
       return -1;
     }
 
     return this._user.role_id;
   }
 
-  setTeacher(user){
+  setTeacher(user) {
 
   }
 
-  setStudent(user){
+  setStudent(user) {
 
   }
 

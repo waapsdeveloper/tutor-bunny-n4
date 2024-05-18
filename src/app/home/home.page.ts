@@ -53,8 +53,11 @@ export class HomePage extends BasePage implements ViewWillEnter {
       this.users.setUser(res.user)
 
       const flag = await this.profiles.isProfileCompleted(res.user);
+      console.log(flag);
+      
 
       let roleId = this.users.getUserRole();
+      console.log(roleId,"sadad");
 
 
       if (!flag) {
@@ -65,6 +68,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
           });
         }
         if (roleId == 3) {
+          console.log("fdgcbv nbvcb fv");
+          
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home', showBack: false, title: 'Create Profile'
           });
@@ -78,6 +83,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
           });
         }
         if (roleId == 3) {
+          console.log("sdsdfdsfs");
+          
           this.nav.push('/tabs/teacher-dashboard', {
             backUrl: '/home',
           });
