@@ -35,6 +35,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   }
 
+
   updateProfile(){
     this.nav.push('/student-profile/student-profile-edit', {
       backUrl: '/home', showBack: true
