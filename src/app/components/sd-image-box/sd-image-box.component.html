@@ -21,9 +21,10 @@
   </div>
   <div class="image-78558">
 
-    <div class="image-box-78559 ion-activatable ripple-parent rectangle" (click)="openGallery.emit()">
+    <div class="image-box-78559 ion-activatable ripple-parent rectangle" (click)="openGallery.emit()"
+      [ngStyle]="{ 'background-image': sampleGalleryImage != '/assets/gallary.png'  ? 'url(' + sampleGalleryImage + ')' : 'none' }">
       <ion-ripple-effect></ion-ripple-effect>
-      <img src="../../../assets/gallary.png" alt="">
+      <img *ngIf="sampleGalleryImage == '/assets/gallary.png'" [src]="sampleGalleryImage" alt="">
     </div>
     <p class="image-heading">Gallary</p>
   </div>
