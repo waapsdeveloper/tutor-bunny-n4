@@ -5,6 +5,7 @@ import { SdBbackBtnModule } from '../sd-bback-btn/sd-bback-btn.module';
 import { SdBsearchBtnModule } from '../sd-bsearch-btn/sd-bsearch-btn.module';
 import { SdBontiBtnModule } from '../sd-bonti-btn/sd-bonti-btn.module';
 import { SdImageBoxComponent } from './sd-image-box.component';
+import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-info.module';
 
 @NgModule({
   declarations: [SdImageBoxComponent],
@@ -14,6 +15,7 @@ import { SdImageBoxComponent } from './sd-image-box.component';
     SdBbackBtnModule,
     SdBsearchBtnModule,
     SdBontiBtnModule,
+    SdErrorInputInfoModule
   ],
   exports: [SdImageBoxComponent],
 })
