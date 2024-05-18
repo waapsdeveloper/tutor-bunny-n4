@@ -39,17 +39,19 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      padding-top: 8px;
+      padding-bottom: 8px;
       border-bottom: 0.25px solid rgba(103, 113, 105, 0.5);
       width: 100%;
 
       .block-item-header-title {
-        // white-space: nowrap; /* Prevent text from wrapping */
-        overflow: hidden;
-        /* Hide overflow text */
-        text-overflow: ellipsis;
-        /* Show ellipsis for overflow text */
         font-size: 16px;
         height: 23px;
+        white-space: nowrap;
+        width: 358px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
       }
     }
 
@@ -57,12 +59,12 @@
       display: flex;
       flex-direction: row;
       gap: 8px;
-      justify-content: space-between;
+      justify-content: flex-start;
       width: 100%;
 
 
       .profile-item-image-block {
-        width: 20%;
+        width: 148px;
         height: 90px;
         background-size: cover;
         background-position: center center;
@@ -164,32 +166,12 @@
         gap: 6px;
 
         .us-status-btn-label {
-          font-size: 16px;
+          font-size: 20px;
         }
 
       }
 
-      .right-980676 {
 
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 8px;
-        position: relative;
-
-
-
-        .buy-now-btn-89675 {
-          // height: 26px;
-          font-size: 16px;
-          background: #E29F1B;
-          padding: 6px 20px;
-          color: #FFFFFF;
-          border-radius: 16px;
-
-        }
-      }
     }
 
     .number-counter-outer-89676 {
@@ -264,19 +246,47 @@
 
       }
 
-      .free-trial-btn-89675 {
-        // height: 26px;
-        font-size: 16px;
-        background: #454545;
-        padding: 6px 20px;
-        color: #FFFFFF;
-        border-radius: 16px;
-
-      }
+      
     }
 
 
   }
 
 
+}
+
+.right-980676 {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+
+
+
+  .buy-now-btn-89675 {
+    // height: 26px;
+    font-size: 16px;
+    background: #E29F1B;
+    padding: 2px 20px 0 20px;
+    height: 24px;
+    color: #FFFFFF;
+    border-radius: 16px;
+
+  }
+  .free-trial-btn-89675 {
+    // height: 26px;
+    font-size: 16px;
+    background: #454545;
+    padding: 2px 20px 0 20px;
+    height: 24px;
+    color: #FFFFFF;
+    border-radius: 16px;
+
+  }
+}
+.block-item-body{
+  padding-top: 8px;
 }
