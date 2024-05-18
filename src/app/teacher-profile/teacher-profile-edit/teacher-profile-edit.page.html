@@ -1,0 +1,118 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [backUrl]="backUrl" [title]="'Create Profile'"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+
+  <form>
+    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
+      <swiper-slide>
+        <div class="body-content-68448">
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Name</div>
+            <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
+              [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Country</div>
+            <app-sd-country-box (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
+              [errorText]="'Country is required'"></app-sd-country-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
+            <div class="input-title fs-12 roboto-medium">State</div>
+            <app-sd-state-box [countryId]="countryId" placeholder="State" (onChange)="result($event, 'state')"
+              [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
+          </div>
+
+          <div class="input-box-lines city-zip" *ngIf="stateId">
+            <div class="city d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">City</div>
+              <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')"
+              [inputText]="formData.city" [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
+            </div>
+            <div class="zip-code-2 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Zip</div>
+              <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
+                 [key]="'zip_code'" [errorText]="'!'"> </app-sd-input-box>
+            </div>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Phone</div>
+            <div class="phone-input">
+              <div class="dail-code">
+                <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
+                  [isReadOnly]="true" [key]="'dial_code'" [errorText]="'!'" [needed]="false"> </app-sd-dailcode-box>
+              </div>
+              <div class="number">
+                <app-sd-input-box placeholder="Phone Number" (onChange)="result($event, 'phone_number')"
+                  [inputText]="formData.phone_number" [type]="'number'" [key]="'phone_number'"
+                  [errorText]="'Phone number is required'"></app-sd-input-box>
+              </div>
+            </div>
+          </div>
+          <div class="language-sec d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Language of communication</div>
+            <div class="input-box-lines languages">
+              <div class="language">
+                <app-sd-language-box (onChange)="result($event, 'languages')" placeholder="Select Languages"
+                  [key]="'languages'" [errorText]="'Languages is required'"></app-sd-language-box>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="body-content-68448">
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Title</div>
+            <app-sd-input-box placeholder="Profile Title (100 characters)" (onChange)="result($event, 'title')"
+              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+              [maxlength]="100" [needed]="step == 2"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">About</div>
+            <app-sd-textarea-about placeholder="About the Teacher/Institute" (onChange)="result($event, 'description')"
+              [inputText]="formData.description" [key]="'description'"
+              [errorText]="'Description is required'" [needed]="step == 2"></app-sd-textarea-about>
+          </div>
+          <div class="subject-sec d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">What do you teach?</div>
+            <div class="input-box-lines" style="width: 100%;">
+              <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Subject teaches"
+                [key]="'subjects'" [errorText]="'Subjects is required'"></app-sd-subject-box>
+            </div>
+          </div>
+          <div class="input-box-lines">
+            <app-sd-image-box (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')"
+              (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
+          </div>
+          <div class="terms-agree" *ngIf="!hideTerms">
+            <app-accept-terms-profile [terms]="formData.terms"
+              [key]="'terms'" [errorText]="'Please accept terms'"
+              (onChange)="result($event, 'terms')"></app-accept-terms-profile>
+          </div>
+
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </form>
+</ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+  <div class="d-flex flex-column gap-16">
+    <div class="number-selection-outer-678956" (click)="changeToPrev()">
+      <div class="number-box-7896">
+        <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
+        <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>
+      </div>
+      <div class="center-line-hr-96895"></div>
+
+    </div>
+
+    <div class="input-box-lines">
+      <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>
+
+</ion-footer>

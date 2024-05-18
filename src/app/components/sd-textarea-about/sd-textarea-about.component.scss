@@ -6,23 +6,29 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-right: 8px;
+  padding-right: 30px;
   padding-left: 20px;
   border: 0.15px solid rgba(0, 0, 0, 0.75);
   gap: 8px;
+  position: relative;
 }
 
 .sd-input-box-input-675315 {
   background: none;
   border: none;
   outline: none;
-  /* Remove default focus outline */
   flex-grow: 1;
 }
 
 .sd-input-box-input-675315:focus {
-  /* Additional styles when input is focused */
-  /* You can customize this block based on your requirements */
   box-shadow: none;
-  /* Remove any focus box-shadow */
+}
+
+.clear-input-678956744{
+  height: 16px;
+  opacity: 0.6;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+
 }
