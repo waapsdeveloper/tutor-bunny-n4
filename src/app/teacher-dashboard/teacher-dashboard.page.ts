@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { NetworkService } from '../services/network.service';
 import { FirebaseService } from '../services/firebase.service';
+import { BasePage } from '../base-page/base-page';
 
 @Component({
   selector: 'app-teacher-dashboard',
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage implements OnInit {
+export class TeacherDashboardPage extends BasePage implements OnInit {
   user;
-  item;
-  image;
+  displayName = 'LL'
   flag
   footerlist = [
     {
@@ -41,57 +41,46 @@ export class TeacherDashboardPage implements OnInit {
       active: 0,
     },
   ];
-  constructor(
-    private nav: NavService,
-    public authService: AuthenticationService,
-    private network: NetworkService,
-    private fcm : FirebaseService
-  ) {
-    this.initialize()
+  constructor(injector: Injector, private fcm : FirebaseService) {
+    super(injector);
   }
+
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.initialize()
   }
 
 
   async initialize() {
-
-    this.fcm.setTokenToServer();
-
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
-    let item = await this.network.getUserByEmail(obj);
-    this.item = item.user;
-    // console.log(item);
-
-    localStorage.setItem("user", JSON.stringify(this.item) );
-    this.image = this.item.image;
-
-
+    let res = await this.network.getUserByEmail(obj);
+    if (res) {
+      this.users.setUser(res.user);
+      this.user = this.users.getUser();
+      this.flag = this.getFlag()
+      this.displayName = this.utility.getAmericanName(this.user.name)
+    }
   }
   getFlag(){
-    if(this.item && this.item.teacher && this.item.teacher.country){
-      // console.log(this.item.teacher);
-
-      const flag = this.item.teacher.country.iso2;
-      // console.log(flag);
-
-      return flag.toLowerCase();
-    }
-    else{
+    if(this.user && this.user.teacher && this.user.teacher.country){
+      const flag = this.user.teacher.country.iso2;
+      if(flag){
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
       return ""
     }
   }
 
   openProfile() {
-    const params = { user_id: this.item.id };
-    this.nav.push('teacher-profile', params );
-    this.initialize()
-
-  }
-  async logout() {
-    const res = await this.authService.logout();
-    this.nav.push('home');
+    const params = { user_id: this.user.id, showBack: true };
+    this.nav.push('/teacher-profile', params );
   }
 }

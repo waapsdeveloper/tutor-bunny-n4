@@ -34,6 +34,18 @@ export class UtilityService {
 
   }
 
+  getAmericanName(name) {
+    const nameParts = name.trim().split(' ');
+
+    let obj = {
+      first_name: nameParts[0] || '',
+      last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+    }
+
+    return obj.first_name + ' ' + obj.last_name.charAt(0) + '.';
+
+  }
+
   hideLoader() {
     return this.loading.hideLoader();
   }

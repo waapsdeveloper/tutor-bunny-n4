@@ -1,6 +1,6 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
   <div class="top-dashboard-header-outer ion-padding">
-    <div class="image-box-89657" [style.background-image]="'url(' + image + ')'" (click)="openProfile()">
+    <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" (click)="openProfile()">
     </div>
     <!-- <ion-img [src]="image" ></ion-img> -->
     <div class="header-oblique-double-675">
@@ -13,8 +13,8 @@
       </div>
       <div class="header-info-box-68447">
         <div class="header-info-user-68448">
-          <div class="header-info-user-name outfit-semibold ">{{item?.name}}</div>
-          <span slot="start" class="fi fi-{{getFlag()}}"></span>
+          <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
+          <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
         <div class="header-info-misc-68448 outfit"><img src="assets/icon/star.svg" /> <span>4.9 (8K reviews)</span>
         </div>
