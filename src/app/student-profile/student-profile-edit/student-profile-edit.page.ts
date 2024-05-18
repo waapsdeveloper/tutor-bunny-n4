@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
+import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -9,9 +10,10 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './student-profile-edit.page.html',
   styleUrls: ['./student-profile-edit.page.scss'],
 })
-export class StudentProfileEditPage implements OnInit, ViewWillEnter {
+export class StudentProfileEditPage extends BasePage implements OnInit, ViewWillEnter {
   params: any;
   backUrl = '/student-profile';
+  showBack = false;
   user;
   photoId;
   formData: any = {
@@ -30,7 +32,8 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
   stateId;
   hideTerms = false;
 
-  constructor(private network: NetworkService, private nav: NavService, private events: EventsService,) {
+  constructor(injector: Injector) {
+    super(injector)
     this.initialize();
   }
 
@@ -41,16 +44,22 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
+
+    if (this.params.showBack) {
+      this.showBack = this.params.showBack;
+    }
+
+
   }
 
   async initialize() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
     if (res) {
-      localStorage.setItem('user', JSON.stringify(res.user));
+      this.users.setUser(res.user);
       this.setFormDta(res.user);
     }
   }
@@ -73,6 +82,7 @@ export class StudentProfileEditPage implements OnInit, ViewWillEnter {
       this.formData['state_id'] = stt.id;
     }
     this.formData['phone_number'] = data['student']['phone_number'];
+    this.formData['dob'] = data['student']['dob'];
     this.formData['city'] = data['student']['city'];
     this.formData['zip_code'] = data['student']['zip_code'];
     this.formData['image'] = data['image'];

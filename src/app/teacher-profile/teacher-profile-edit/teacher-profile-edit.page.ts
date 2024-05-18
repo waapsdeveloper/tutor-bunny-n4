@@ -21,7 +21,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   params: any;
   backUrl = '/teacher-profile';
   btn: any;
-  title = "Create Profile";
+  title = "Create profile";
   backBtn = false;
   formData: any = {
     name: null,
@@ -75,13 +75,13 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   }
 
   async initialize() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
     if (res) {
-      localStorage.setItem('user', JSON.stringify(res.user));
+      this.users.setUser(res.user);
       this.setFormDta(res.user);
     }
   }
