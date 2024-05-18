@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -10,7 +11,7 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './teacher-profile-edit.page.html',
   styleUrls: ['./teacher-profile-edit.page.scss'],
 })
-export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewInit {
+export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWillEnter, AfterViewInit {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   user;
@@ -20,6 +21,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
   params: any;
   backUrl = '/teacher-profile';
   btn: any;
+  titles = "";
   backBtn = false;
   formData: any = {
     name: null,
@@ -44,7 +46,8 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
   hideTerms = false;
   step = 1;
 
-  constructor(private network: NetworkService, private nav: NavService, public formBuilder: FormBuilder, private events: EventsService) {
+  constructor ( injector:Injector) {
+    super(injector)
     this.initialize();
   }
 
@@ -63,20 +66,11 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
       this.backBtn = this.params.showBack;
+
     }
-    // this.btn = this.nav.getQueryParams();
-    // console.log(this.btn);
+    this.titles = this.params.title;
+    console.log(this.titles);
 
-    // if (this.btn.back) {
-    //   this.backBtn = false;
-    //   console.log(this.backBtn);
-    // }
-    // else{
-    //   this.backBtn = true;
-    //   console.log(this.backBtn);
-
-
-    // }
   }
 
   async initialize() {

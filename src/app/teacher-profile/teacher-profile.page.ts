@@ -34,11 +34,11 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
     this.events.subscribe('get-user-after-submit-form', (data) => {
 
-    } )
+    })
   }
   openEditProfile() {
     this.nav.push('/teacher-profile/teacher-profile-edit', {
-      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: true,
+      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: false, title: 'Edit Profile'
     })
   }
   getFlag() {
