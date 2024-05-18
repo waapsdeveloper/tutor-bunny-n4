@@ -23,12 +23,10 @@ export class ProfileService {
           flag = false;
         }
 
-        if (!user.student.first_name) {
+        if (!user.image) {
           flag = false;
         }
-        if (!user.student.last_name) {
-          flag = false;
-        }
+
         if (!user.student.country) {
           flag = false;
         }
@@ -49,6 +47,11 @@ export class ProfileService {
         if (!user.name || !user.teacher.description || !user.teacher.dial_code || !user.teacher.phone_number || !user.teacher.title ) {
           flag = false;
         }
+
+        if (!user.image) {
+          flag = false;
+        }
+
         if (!user.teacher.country) {
           flag = false;
         }
