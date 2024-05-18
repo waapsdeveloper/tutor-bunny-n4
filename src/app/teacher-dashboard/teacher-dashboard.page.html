@@ -1,6 +1,6 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
   <div class="top-dashboard-header-outer ion-padding">
-    <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" (click)="openProfile()">
+    <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user?.image + ')'" (click)="openProfile()">
     </div>
     <!-- <ion-img [src]="image" ></ion-img> -->
     <div class="header-oblique-double-675">

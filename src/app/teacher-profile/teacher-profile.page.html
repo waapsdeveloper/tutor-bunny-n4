@@ -1,6 +1,6 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
   <div class="top-dashboard-header-outer ion-padding">
-    <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
+    <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
     </div>
     <div class="header-oblique-double-675">
       <div class="header-line-678576">
