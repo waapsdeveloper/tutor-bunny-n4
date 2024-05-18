@@ -16,6 +16,7 @@ import { BasePage } from '../base-page/base-page';
 export class HomePage extends BasePage implements ViewWillEnter {
   loading = false;
   googleauth;
+  backbtn= false;
   constructor(
     injector: Injector,
     public authService: AuthenticationService,
@@ -51,6 +52,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
       const flag = await this.profiles.isProfileCompleted(res.user);
 
       let roleId = this.users.getUserRole();
+
+
       if (!flag) {
 
         if (roleId == 2) {
@@ -60,7 +63,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
         }
         if (roleId == 3) {
           this.nav.push('/teacher-profile/teacher-profile-edit', {
-            backUrl: '/home',
+            backUrl: '/home', back :  true,
           });
         }
 

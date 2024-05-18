@@ -21,6 +21,7 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
   language;
   subject;
 
+
   constructor(
     private network: NetworkService,
     private events: EventsService,
@@ -61,7 +62,7 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
       email: this.user.email,
     };
     let item = await this.network.getUserByEmail(obj);
-    
+
     this.item = item.user;
     this.image = this.item.image;
     this.data = this.item.teacher;
@@ -69,7 +70,7 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
     this.country = this.item.teacher.country.name;
     this.language = this.item.teacher.languages;
     this.subject = this.item.teacher.subjects;
-    
+
 
     if (this.data.status == 'approved') {
       this.shield = true;
