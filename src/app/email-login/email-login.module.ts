@@ -9,6 +9,7 @@ import { EmailLoginPageRoutingModule } from './email-login-routing.module';
 import { EmailLoginPage } from './email-login.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
 import { SdInputBoxModule } from '../components/sd-input-box/sd-input-box.module';
+import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SdInputBoxModule } from '../components/sd-input-box/sd-input-box.module
     IonicModule,
     EmailLoginPageRoutingModule,
     SdHeaderTopModule,
-    SdInputBoxModule
+    SdInputBoxModule,
+    SdButtonGrayModule
   ],
   declarations: [EmailLoginPage]
 })

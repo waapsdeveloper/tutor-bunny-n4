@@ -1,5 +1,5 @@
 <ion-header>
-  <app-sd-header-top [title]="'Login with email'" [backUrl]="'/home'" [showBack]="true"></app-sd-header-top>
+  <app-sd-header-top [title]="'Login with email'" [backUrl]="'/email-signup'" [showBack]="true"></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-padding ion-content-medium-background">
@@ -8,12 +8,12 @@
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
-      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
-        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')"
+        [inputText]="formData.name" [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'name')"
         [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
     </div>
 
@@ -22,3 +22,11 @@
 
 
 </ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+  <div class="d-flex flex-column gap-16">
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>
+
+</ion-footer>
