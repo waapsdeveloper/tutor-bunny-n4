@@ -239,6 +239,7 @@
 .chips-outer {
   display: flex;
   align-items: center;
+  width: calc(100% - 100px);
   justify-content: flex-start;
   gap: 8px;
   flex-direction: row;
