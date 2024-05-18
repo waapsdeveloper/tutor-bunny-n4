@@ -12,6 +12,7 @@ import { BasePage } from '../base-page/base-page';
 export class StudentDashboardPage extends BasePage implements OnInit {
 
   user;
+  displayName: string = '';
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
@@ -33,7 +34,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.user = this.users.getUser();
     }
 
+    this.displayName = this.utility.splitName(this.user.name).first_name;
+
   }
+
 
 
   updateProfile(){
