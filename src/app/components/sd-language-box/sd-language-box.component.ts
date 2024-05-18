@@ -3,6 +3,7 @@ import { ModalService } from 'src/app/services/basic/modal.service';
 import { LanguageListComponent } from './language-list/language-list.component';
 import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-sd-language-box',
@@ -19,7 +20,7 @@ export class SdLanguageBoxComponent implements OnInit {
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor(private modals: ModalService, private network: NetworkService, private events: EventsService) { }
+  constructor(private modals: ModalService, private network: NetworkService, private events: EventsService, private users: UsersService) { }
 
   async ngOnInit() {
 
@@ -37,7 +38,7 @@ export class SdLanguageBoxComponent implements OnInit {
     }, false);
 
     this.inputText = '';
-    let user = JSON.parse(localStorage.getItem('user'));
+    const user = this.users.getUser();
 
     let obj = {
       user_id: user.id
