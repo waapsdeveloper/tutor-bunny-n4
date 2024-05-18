@@ -12,12 +12,13 @@ import { BasePage } from '../base-page/base-page';
 })
 export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnter {
   user;
+  displayName = 'LL'
+  flag
+
   item;
   data;
   shield;
-  image;
   isExpanded = false;
-  city;
   country;
   language;
   subject;
@@ -29,55 +30,55 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   }
 
   ngOnInit() {
-
-    this.user = this.users.getUser()
-
     this.events.subscribe('get-user-after-submit-form', (data) => {
-
     })
   }
-  openEditProfile() {
-    this.nav.push('/teacher-profile/teacher-profile-edit', {
-      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: false, title: 'Edit Profile'
-    })
-  }
-  getFlag() {
-    if (this.item && this.item.teacher && this.item.teacher.country) {
 
-      const flag = this.item.teacher.country.iso2;
-      // console.log(flag);
-
-      return flag.toLowerCase();
-    }
-    else {
-      return ""
-    }
-  }
-
-  ionViewWillEnter(): void {
+  ionViewWillEnter(){
     this.initialize()
   }
 
   async initialize() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
-    let item = await this.network.getUserByEmail(obj);
-
-    this.item = item.user;
-    this.image = this.item.image;
-    this.data = this.item.teacher;
-    this.city = this.item.teacher.city;
-    this.country = this.item.teacher.country.name;
-    this.language = this.item.teacher.languages;
-    this.subject = this.item.teacher.subjects;
-
+    let res = await this.network.getUserByEmail(obj);
+    if (res) {
+      this.users.setUser(res.user);
+      this.user = this.users.getUser();
+      this.flag = this.getFlag()
+      this.displayName = this.utility.getAmericanName(this.user.name);
+      this.country = this.user.teacher.country.name;
+      this.language = this.user.teacher.languages;
+      this.subject = this.user.teacher.subjects;
+    }
 
     if (this.data.status == 'approved') {
       this.shield = true;
     }
   }
+
+
+  openEditProfile() {
+    this.nav.push('/teacher-profile/teacher-profile-edit', {
+      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
+    })
+  }
+  getFlag(){
+    if(this.user && this.user.teacher && this.user.teacher.country){
+      const flag = this.user.teacher.country.iso2;
+      if(flag){
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
+      return ""
+    }
+  }
+
+
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
   }
