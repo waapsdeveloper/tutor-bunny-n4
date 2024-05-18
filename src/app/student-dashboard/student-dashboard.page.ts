@@ -40,9 +40,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
 
 
-  updateProfile(){
+  updateProfile() {
     this.nav.push('/student-profile/student-profile-edit', {
-      backUrl: 'student-dashboard', showBack: true
+      backUrl: '/tabs/student-dashboard', showBack: true
     });
   }
 

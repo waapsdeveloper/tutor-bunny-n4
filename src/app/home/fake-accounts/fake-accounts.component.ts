@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { UsersService } from 'src/app/services/users.service';
 
 const accounts = require('./../../data/users.json');
 @Component({
@@ -13,7 +14,8 @@ export class FakeAccountsComponent implements OnInit {
   user: any;
   @Input('role') role = '1';
   constructor(private modals: ModalService,
-    private network: NetworkService
+    private network: NetworkService,
+    private users: UsersService
   ) {}
 
   ngOnInit() {
@@ -23,16 +25,11 @@ export class FakeAccountsComponent implements OnInit {
   async openAccount(item) {
     // console.log(item);
 
-    this.user = await this.network.login(item) as any[];
-    // console.log(this.user.user);
-
-
-    let user = this.user.user;
-
-    localStorage. setItem("user", JSON.stringify(user) );
-
-    // return
-
-    this.modals.dismiss(user);
+    const res = await this.network.login(item) as any;
+    if(res){
+      const user = res.user;
+      this.users.setUser(user);
+      this.modals.dismiss(user);
+    }
   }
 }
