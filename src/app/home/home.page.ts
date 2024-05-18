@@ -60,7 +60,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
       if (!flag) {
 
         if (roleId == 2) {
-          this.nav.push('/student-profile/student-profile-edit', {
+          this.nav.push('/student-dashboard/student-profile-edit', {
             backUrl: '/home',
           });
         }

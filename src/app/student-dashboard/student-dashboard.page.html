@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" (click)="updateProfile()">
+      <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" >
       </div>
     </div>
     <div class="noti-795">
@@ -20,7 +20,7 @@
       </div>
       <div class="name-box">
         <div class="pl-heading outfit-semibold">Hi, {{displayName}}</div>
-        <img src="../../assets/svg/student-edit.svg" alt="">
+        <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
       </div>
 
     </div>
