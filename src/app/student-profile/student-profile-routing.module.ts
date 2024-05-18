@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'student-profile-edit',
-    loadChildren: () => import('./student-profile-edit/student-profile-edit.module').then( m => m.StudentProfileEditPageModule)
+    loadChildren: () => import('../student-dashboard/student-profile-edit/student-profile-edit.module').then( m => m.StudentProfileEditPageModule)
   }
 ];
 
