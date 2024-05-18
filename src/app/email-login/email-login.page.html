@@ -1,0 +1,24 @@
+<ion-header>
+  <app-sd-header-top [title]="'Login with email'" [backUrl]="'/home'" [showBack]="true"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+
+  <div class="body-content-68448">
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Email</div>
+      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
+        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Password</div>
+      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
+        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+
+  </div>
+
+
+
+</ion-content>
