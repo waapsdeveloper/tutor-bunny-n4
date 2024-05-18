@@ -19,6 +19,8 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
   sub;
   params: any;
   backUrl = '/teacher-profile';
+  btn: any;
+  backBtn = false;
   formData: any = {
     name: null,
     country: null,
@@ -56,8 +58,23 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
+
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
+    }
+    this.btn = this.nav.getQueryParams();
+    console.log(this.btn);
+
+    if (this.btn.back) {
+      this.backBtn = false;
+      console.log(this.backBtn);
+    }
+    else{
+      this.backBtn = true;
+      console.log(this.backBtn);
+
+
     }
   }
 
@@ -137,7 +154,7 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
     const user = JSON.parse(localStorage.getItem('user'));
 
     const res = await this.network.updateTeacherProfile(f, user.id);
-    if(res){
+    if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
     }
@@ -145,9 +162,9 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
 
   }
 
-  async changeToPrev(){
+  async changeToPrev() {
 
-    if(this.step == 2){
+    if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
@@ -157,21 +174,21 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
     const data = this.formData;
     this.userId = this.user.id;
 
-      const f = this.formData;
-      this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
-      if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.title.description < 400) {
-        console.log("return");
-        return
-      }
+    const f = this.formData;
+    this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
+    if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.title.description < 400) {
+      console.log("return");
+      return
+    }
 
-      if (!this.formData.terms) {
-        return;
-      }
+    if (!this.formData.terms) {
+      return;
+    }
 
-      const user = JSON.parse(localStorage.getItem('user'));
-      console.log("efferfS");
-      const res = await this.network.updateTeacherProfile(f, user.id)
-      this.nav.push('/teacher-profile')
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log("efferfS");
+    const res = await this.network.updateTeacherProfile(f, user.id)
+    this.nav.push('/teacher-profile')
 
   }
   disableIfIncomplete() {
