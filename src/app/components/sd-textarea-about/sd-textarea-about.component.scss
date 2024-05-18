@@ -11,24 +11,24 @@
   border: 0.15px solid rgba(0, 0, 0, 0.75);
   gap: 8px;
   position: relative;
+  .sd-input-box-input-675315 {
+    background: none;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+  }
+  
+  .sd-input-box-input-675315:focus {
+    box-shadow: none;
+  }
+  
+  .clear-input-678956744{
+    height: 16px;
+    opacity: 0.6;
+    position: absolute;
+    right: 8px;
+    top: 10px;
+  
+  }
 }
 
-.sd-input-box-input-675315 {
-  background: none;
-  border: none;
-  outline: none;
-  flex-grow: 1;
-}
-
-.sd-input-box-input-675315:focus {
-  box-shadow: none;
-}
-
-.clear-input-678956744{
-  height: 16px;
-  opacity: 0.6;
-  position: absolute;
-  right: 8px;
-  top: 10px;
-
-}
