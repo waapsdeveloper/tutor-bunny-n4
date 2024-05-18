@@ -32,7 +32,7 @@ export class SdTextareaAboutComponent  implements OnInit {
       if (this.key == 'description') {
         if (v && v.length < 400) {
           this.isRequired = true;
-          this.errorText = 'The field shlould be 400 correctors'
+          this.errorText = 'The About field should have minimum 400 characters'
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);

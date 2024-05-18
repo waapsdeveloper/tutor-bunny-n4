@@ -56,7 +56,7 @@ export class SdInputBoxComponent implements OnInit {
 
         if (v.length < 50 || v.length > 100) {
           this.isRequired = true;
-          this.errorText = 'The field shlould be 50 to 100 correctors'
+          this.errorText = 'The Title should be between 50-100 characters'
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
