@@ -54,9 +54,9 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.subject = this.user.teacher.subjects;
     }
 
-    if (this.data.status == 'approved') {
-      this.shield = true;
-    }
+    // if (this.data.status == 'approved') {
+    //   this.shield = true;
+    // }
   }
 
 

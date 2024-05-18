@@ -239,6 +239,7 @@
 .chips-outer {
   display: flex;
   align-items: center;
+  width: calc(100% - 100px);
   justify-content: flex-start;
   gap: 8px;
   flex-direction: row;
@@ -246,10 +247,10 @@
 }
 .techer-card-outer-78965 {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  gap: 8px;
+  gap: 16px;
 }
 
 .about-heading {
