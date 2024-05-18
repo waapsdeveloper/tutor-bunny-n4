@@ -25,23 +25,22 @@
     <div class="techer-subject-content">
       <div class="techer-card-outer-78965">
         <div class="teacher-card-head">
-          <img src="../../assets/svg/techer-card.svg" alt="">
-          Teachers:
+          <img src="assets/svg/techer-card.svg" alt="">
+          <div class="fs-16 roboto-regular">Teachers:</div>
         </div>
         <div class="chips-outer">
-          <div class="chip-outer-78961" *ngFor="let item of subject">
-            <div class="chips">{{item?.name}}</div>
-          </div>
+          <div class="chip-outer-78961 fs-16 roboto-regular" *ngFor="let item of subject">{{item?.name}}</div>
         </div>
       </div>
       <div class="techer-card-outer-78965">
         <div class="teacher-card-head">
-          <img src="../../assets/svg/speaks.svg" alt="">
-          Speaks:
+          <img src="assets/svg/speaks.svg" alt="">
+          <div class="fs-16 roboto-regular">Speaks:</div>
         </div>
-        <div class="chip-outer-78961" *ngFor="let item of language">
-          <div class="chips">{{item?.name}}</div>
+        <div class="chips-outer">
+          <div class="chip-outer-78961 fs-16 roboto-regular" *ngFor="let item of language">{{item?.name}}</div>
         </div>
+
       </div>
     </div>
     <app-teacher-profile-statistics></app-teacher-profile-statistics>

@@ -39,8 +39,6 @@
         position: absolute;
         right: 0;
         top: 40px;
-
-       
       }
     }
 
@@ -159,7 +157,6 @@
       right: 18px;
       top: 40px;
 
-
       .header-line-box-678576 {
         display: flex;
         flex-direction: row;
@@ -182,7 +179,6 @@
       gap: 6px;
       position: absolute;
       bottom: 22px;
-
 
       .header-info-user-68448 {
         display: flex;
@@ -216,22 +212,17 @@
 
 .teacher-card-head {
   display: flex;
-  width: 99px;
   align-items: center;
-  justify-content: start;
-  gap: 7px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #000;
-
-
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100px;
 }
-.techer-subject-content{
+.techer-subject-content {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
 .chip-outer-78961 {
@@ -241,33 +232,29 @@
   flex-wrap: wrap;
   gap: 10px;
 
-  .chips {
-    border-radius: 5px;
-    height: 22px;
-    padding: 2px 3px;
-    font-size: 16px;
-    background-color: rgba(69, 69, 69, 0.25);
-  }
+  border-radius: 5px;
+  padding: 0px 3px 0 3px;
+  background-color: rgba(69, 69, 69, 0.25);
 }
-.chips-outer{
+.chips-outer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .techer-card-outer-78965 {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
-  gap: 0px;
-
+  gap: 8px;
 }
 
 .about-heading {
   font-size: 20px;
   font-weight: 600;
-
 }
 
 .about-para {
@@ -283,22 +270,20 @@
   .discription-para {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 6; 
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
   }
-  
+
   .discription-para.collapsed {
     -webkit-line-clamp: unset;
   }
-
 }
-.read-more{
+.read-more {
   width: 100%;
   border-radius: 50px;
   background-color: white;
   box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
-  border: 1px solid #BFBFBF;
+  border: 1px solid #bfbfbf;
   font-size: 16x;
   font-weight: 600;
-
 }
