@@ -62,20 +62,21 @@ export class TeacherProfileEditPage implements OnInit, ViewWillEnter, AfterViewI
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
+      this.backBtn = this.params.showBack;
     }
-    this.btn = this.nav.getQueryParams();
-    console.log(this.btn);
+    // this.btn = this.nav.getQueryParams();
+    // console.log(this.btn);
 
-    if (this.btn.back) {
-      this.backBtn = false;
-      console.log(this.backBtn);
-    }
-    else{
-      this.backBtn = true;
-      console.log(this.backBtn);
+    // if (this.btn.back) {
+    //   this.backBtn = false;
+    //   console.log(this.backBtn);
+    // }
+    // else{
+    //   this.backBtn = true;
+    //   console.log(this.backBtn);
 
 
-    }
+    // }
   }
 
   async initialize() {

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { NetworkService } from '../services/network.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { EventsService } from '../services/events.service';
 import { NavService } from '../services/nav.service';
+import { BasePage } from '../base-page/base-page';
 
 @Component({
   selector: 'app-teacher-profile',
   templateUrl: './teacher-profile.page.html',
   styleUrls: ['./teacher-profile.page.scss'],
 })
-export class TeacherProfilePage implements OnInit, ViewWillEnter {
+export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnter {
   user;
   item;
   data;
@@ -22,22 +23,23 @@ export class TeacherProfilePage implements OnInit, ViewWillEnter {
   subject;
 
 
-  constructor(
-    private network: NetworkService,
-    private events: EventsService,
-    private nav: NavService
-  ) {
-
+  constructor(injector: Injector) {
+    super(injector)
 
   }
 
   ngOnInit() {
+
+    this.user = this.users.getUser()
+
     this.events.subscribe('get-user-after-submit-form', (data) => {
 
     } )
   }
   openEditProfile() {
-    this.nav.push('/teacher-profile/teacher-profile-edit');
+    this.nav.push('/teacher-profile/teacher-profile-edit', {
+      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: true,
+    })
   }
   getFlag() {
     if (this.item && this.item.teacher && this.item.teacher.country) {

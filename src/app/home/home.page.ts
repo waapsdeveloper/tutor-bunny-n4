@@ -63,7 +63,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
         }
         if (roleId == 3) {
           this.nav.push('/teacher-profile/teacher-profile-edit', {
-            backUrl: '/home', back :  true,
+            backUrl: '/home', showBack: false,
           });
         }
 
