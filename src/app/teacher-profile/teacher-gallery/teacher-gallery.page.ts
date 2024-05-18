@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'console';
+import { BasePage } from 'src/app/base-page/base-page';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './teacher-gallery.page.html',
   styleUrls: ['./teacher-gallery.page.scss'],
 })
-export class TeacherGalleryPage implements OnInit {
+export class TeacherGalleryPage extends BasePage implements OnInit {
 
   backUrl = '/teacher-profile/teacher-profile-edit';
   user;
@@ -90,7 +91,8 @@ export class TeacherGalleryPage implements OnInit {
   list;
 
 
-  constructor(private sanitizer: DomSanitizer, private network: NetworkService, public users: UsersService) {
+  constructor(injector: Injector) {
+    super(injector)
 
     this.initialize();
   }
@@ -141,6 +143,9 @@ export class TeacherGalleryPage implements OnInit {
     }
     let res = await this.network.postImages(obj)
     console.log(res);
+    let image = res.result.image;
+
+    this.events.publish('change-sample-image-to-this', image)
     // this.initialize();
   }
 

@@ -21,6 +21,8 @@ export class SdImageBoxComponent implements OnInit {
 
   @Input('image') image = '';
 
+  sampleGalleryImage = '/assets/gallary.png'
+
   constructor(private network: NetworkService, private events: EventsService, public users: UsersService) {
     this.initialize()
   }
@@ -44,13 +46,40 @@ export class SdImageBoxComponent implements OnInit {
 
     }, false)
 
+    this.events.subscribe('change-sample-image-to-this', (image: any) => {
+
+      if (image) {
+        this.sampleGalleryImage = image;
+      }
+
+    }, false)
+
   }
+
   initialize() {
     const user = this.users.getUser();
     console.log(user);
     this.profilePhoto = user.image;
     this.photoId = user.teacher.photo_id;
+
+    this.getGalleryImages();
   }
+
+  async getGalleryImages(){
+
+    const user = this.users.getUser();
+    const res = await this.network.getImage(user.id) as any;
+    console.log(res);
+
+    let list = res.result;
+    if(list.length > 0){
+      let item = list[0];
+      this.sampleGalleryImage = item.image
+
+    }
+
+  }
+
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader = new FileReader();
