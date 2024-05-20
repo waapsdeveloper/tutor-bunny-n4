@@ -1,12 +1,9 @@
 import { Component, Injector } from '@angular/core';
-import { NavService } from '../services/nav.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
-import { ModalService } from '../services/basic/modal.service';
 import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
-import { ProfileService } from '../services/profile.service';
-import { NetworkService } from '../services/network.service';
 import { BasePage } from '../base-page/base-page';
+import { LoginPage } from '../login/login.page';
 
 @Component({
   selector: 'app-home',
@@ -136,9 +133,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   gotoEmailDashboard(){
-    this.nav.push('/email-signup', {
-
-    });
+   this.modals.present(LoginPage, {}, "", 0.7);
   }
 
 

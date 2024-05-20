@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavService } from '../services/nav.service';
+import { EventsService } from '../services/events.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,16 +7,33 @@ import { NavService } from '../services/nav.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-  constructor(private nav: NavService) {
+
+  showTabs = true;
+  constructor(private events: EventsService) {
     this.initialize()
     
   }
 
   ngOnInit() {
-
+    this.events.subscribe('page-scroll-event', this.pageScrollCondition.bind(this), false)
   }
+
+  pageScrollCondition(data){
+
+    let direction = data.direction;    
+    if(direction == 'up'){
+      this.showTabs = true;
+    }
+
+    if(direction == 'down'){
+      this.showTabs = false;
+    }
+  }
+
   initialize(){
     // let user = this.users.getUser();
   }
+
+
   
 }

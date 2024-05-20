@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'email-signup',
     loadChildren: () => import('./email-signup/email-signup.module').then( m => m.EmailSignupPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 
   
 

@@ -27,7 +27,7 @@
   </div>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding">
+<ion-content class="ion-content-bg ion-padding" [scrollEvents]="true"  (ionScroll)="onScroll($event)">
 
   <div class="body-content-68448">
     <div class="header-chips">

@@ -1,0 +1,74 @@
+<ion-header>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <div class="header-title  roboto-regular " *ngIf="step == 'login'">Login to your account</div>
+      <div class="header-title  roboto-regular " *ngIf="step == 'SignUp'">Register your account</div>
+    </div>
+    <div class="header-right-items-78956">
+      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    </div>
+  </div>
+
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+
+  <div class="body-content-68448" *ngIf="step == 'login'">
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Email</div>
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.name"
+        [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Password</div>
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'Password')" [inputText]="formData.name"
+        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex gap-8 sign-up-box" >
+        <img class="image" src="../../assets/svg/signup.svg" alt="">
+        <div class="fs-18 roboto-bold" (click)="signUp()">
+          New user sign-up
+        </div>
+    </div>
+
+
+
+    <div class="d-flex flex-column gap-16">
+      <div class="input-box-lines">
+        <app-sd-button-gray [text]="'Login'" (click)="submit()"></app-sd-button-gray>
+      </div>
+      <div class="input-box-lines">
+        <app-sd-button-clear [text]="'Cancel'" (click)="submit()"></app-sd-button-clear>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-content-68448" *ngIf="step == 'SignUp'">
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Email</div>
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.name"
+        [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Password</div>
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'Password')" [inputText]="formData.name"
+        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Confirm password</div>
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'name')" [inputText]="formData.name"
+        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+
+    <div class="d-flex flex-column gap-16">
+      <div class="input-box-lines">
+        <app-sd-button-gray [text]="'Register'" (click)="submit()"></app-sd-button-gray>
+      </div>
+      <div class="input-box-lines">
+        <app-sd-button-clear [text]="'Cancel'" (click)="submit()"></app-sd-button-clear>
+      </div>
+    </div>
+  </div>
+</ion-content>

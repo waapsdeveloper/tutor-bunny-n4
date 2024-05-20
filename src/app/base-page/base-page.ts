@@ -28,6 +28,33 @@ export abstract class BasePage {
     this.modals = injector.get(ModalService);
 }
 
+  private lastScrollTop: number = 0;
+  onScroll(event: CustomEvent) {
+    const currentScrollTop = event.detail.scrollTop;
+
+    if (currentScrollTop > this.lastScrollTop) {
+      console.log('Scrolled downwards');
+      // Handle downward scroll event
+      let obj = {
+        direction: 'down'
+      }
+      this.events.publish('page-scroll-event', obj)
+
+    } else {
+      console.log('Scrolled upwards or no scroll change');
+      // Handle upward scroll event or no change
+      let obj = {
+        direction: 'up'
+      }
+      this.events.publish('page-scroll-event', obj)
+
+      
+
+    }
+
+    this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
+  }
+
 
 
 }
