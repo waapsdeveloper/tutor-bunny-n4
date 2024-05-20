@@ -1,0 +1,49 @@
+<ion-header>
+  <app-sd-header-top [title]="'Signup with email'" [backUrl]="'/home'" [showBack]="true"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+
+  <div class="body-content-68448">
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Name</div>
+      <app-sd-input-box placeholder="Full Name" (onChange)="result($event, 'name')"
+        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Email</div>
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')"
+        [inputText]="formData.email" [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Password</div>
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'password')"
+        [inputText]="formData.password" [type]="'password'" [key]="'password'" [errorText]="'Password is required'"></app-sd-input-box>
+    </div>
+
+    <div class="input-box-lines d-flex flex-column gap-8" (click)="gotoLogin()">
+      <div class="input-title fs-16 roboto-medium">Have Account? <div style="text-decoration: underline;">Login here</div></div>
+    </div>
+
+  </div>
+
+
+
+</ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+
+  <div class="d-flex flex-column gap-8">
+    <app-sd-button-clear (click)="setCurrentRole('3')" [image]="'assets/svg/teacher.svg'"
+      [text]="'Teacher or Institute'"></app-sd-button-clear>
+    <app-sd-button-gray (click)="setCurrentRole('2')" [image]="'assets/svg/student.svg'"
+      [text]="'Student'"></app-sd-button-gray>
+  </div>
+
+  <!-- <div class="d-flex flex-column gap-16">
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Next'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div> -->
+
+</ion-footer>

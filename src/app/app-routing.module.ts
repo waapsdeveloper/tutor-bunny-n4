@@ -48,6 +48,14 @@ const routes: Routes = [
     path: 'blocked',
     loadChildren: () => import('./blocked/blocked.module').then( m => m.BlockedPageModule)
   },
+  {
+    path: 'email-login',
+    loadChildren: () => import('./email-login/email-login.module').then( m => m.EmailLoginPageModule)
+  },
+  {
+    path: 'email-signup',
+    loadChildren: () => import('./email-signup/email-signup.module').then( m => m.EmailSignupPageModule)
+  },
 
   
 
