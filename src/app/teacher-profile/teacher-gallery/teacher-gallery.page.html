@@ -13,9 +13,16 @@
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
 </ion-content>
 
-<ion-footer  class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" *ngIf="gallery == 'true'">
-  <ion-button (click)="photoInput.click()" class="read-more"> <img src="../../../assets/svg/upload.svg" alt="">Upload
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" *ngIf="gallery == 'true'">
+  <!-- <ion-button  class="read-more"> <img src="../../../assets/svg/upload.svg" alt="">Upload
     gallery images</ion-button>
-  <ion-button (click)="Back()" class="read-more"> <img src="../../../assets/svg/done.svg" alt="">
-   Done</ion-button>
+  <ion-button class="read-more"> <img src="../../../assets/svg/done.svg" alt="">
+    Done</ion-button> -->
+    <div class="d-flex flex-column gap-16" style="width: 100%;" >
+
+      <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
+      [text]="'Upload gallery images'"></app-sd-button-gray>
+      <app-sd-button-gray style="width: 100%;" (click)="Back()" [image]="'assets/svg/done.svg'" [text]="'Done'"></app-sd-button-gray>
+    </div>
+
 </ion-footer>

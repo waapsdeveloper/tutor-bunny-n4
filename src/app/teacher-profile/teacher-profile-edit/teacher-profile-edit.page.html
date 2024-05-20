@@ -34,7 +34,7 @@
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Zip</div>
               <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code"
-                placeholder="Zip" [key]="'zip_code'" [errorText]="'!'"> </app-sd-input-box>
+                placeholder="Zip" [key]="'zip_code'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -73,9 +73,9 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">About</div>
-            <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)" (onChange)="result($event, 'description')" [inputText]="formData.description"
-              [key]="'description'" [errorText]="'Description is required'"
-              [needed]="step == 2"></app-sd-textarea-about>
+            <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
+              (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
+              [errorText]="'Description is required'" [needed]="step == 2"></app-sd-textarea-about>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">What do you teach?</div>

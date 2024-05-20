@@ -197,7 +197,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   }
   openGallery($event) {
     this.nav.push('/teacher-profile/teacher-gallery' , {
-      gallary: "true", title: 'Upload Galary'
+      gallary: "true", title: 'Upload Gallery'
     })
   }
 }

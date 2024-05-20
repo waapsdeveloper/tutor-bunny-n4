@@ -267,6 +267,10 @@
 .discription-text {
   // height: 150px;
   width: 100%;
+  display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
 
   .discription-para {
     overflow: hidden;

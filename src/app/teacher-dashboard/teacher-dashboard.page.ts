@@ -14,6 +14,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   user;
   displayName = 'LL'
   flag
+  status;
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -59,11 +60,17 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
+    // console.log(res);
+   
+    console.log(this.status);
+    
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name)
+      this.status = res.user.teacher.status;
+    
     }
   }
   getFlag(){
@@ -81,6 +88,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
 
   openProfile() {
     const params = { user_id: this.user.id, showBack: true };
-    this.nav.push('/teacher-profile', params );
+    this.nav.push('/tabs/teacher-profile', params );
   }
 }

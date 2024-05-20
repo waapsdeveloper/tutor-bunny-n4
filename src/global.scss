@@ -30,7 +30,9 @@
 @import url('./theme/animations.scss');
 
 .ion-content-bg {
-  --background: #ebeaea;
+  --background: #f5f5f5;
+  --padding-top: 20px;
+  padding-top: 20px;
 }
 
 .ion-header-bg {

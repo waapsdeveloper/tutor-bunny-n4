@@ -28,8 +28,9 @@
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" [scrollEvents]="true"  (ionScroll)="onScroll($event)">
+  <app-profile-search-box></app-profile-search-box>
 
-  <div class="body-content-68448">
+  <div class="body-content-68448" style="margin-top: 16px;">
     <div class="header-chips">
       <div class="header-chip">
         <ion-chip>All</ion-chip>
@@ -39,8 +40,7 @@
         <ion-chip>K2Tution</ion-chip>
       </div>
     </div>
-    <app-profile-search-box></app-profile-search-box>
-    <app-rec-teachers></app-rec-teachers>
+    <!-- <app-rec-teachers></app-rec-teachers> -->
     <app-rec-courses></app-rec-courses>
 
   </div>

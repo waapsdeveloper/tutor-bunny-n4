@@ -8,6 +8,8 @@ import { TeacherGalleryPageRoutingModule } from './teacher-gallery-routing.modul
 
 import { TeacherGalleryPage } from './teacher-gallery.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
+import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
+import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [
@@ -16,6 +18,8 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
     IonicModule,
     TeacherGalleryPageRoutingModule,
     SdHeaderTopModule,
+    SdButtonClearModule,
+    SdButtonGrayModule
   ],
   declarations: [TeacherGalleryPage]
 })

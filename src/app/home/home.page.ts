@@ -54,7 +54,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
 
       let roleId = this.users.getUserRole();
-      console.log(roleId,"sadad");
+      console.log(roleId, "sadad");
 
 
       if (!flag) {
@@ -103,37 +103,48 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       console.log(user);
 
-      const isProfileCompleted = await this.profiles.isProfileCompleted(user);
-      console.log(isProfileCompleted);
-      const roleId = parseInt(user.role_id);
-      if (roleId === 3) {
-        if (!isProfileCompleted) {
-          this.nav.push('/teacher-profile/teacher-profile-edit', {
-            backUrl: '/home',
-          });
-        }
-        else{
-          this.nav.push('/tabs/teacher-dashboard', {
-            backUrl: '/home'
-          });
+      // if (user.teacher.status == '"blocked"') {
+      //   this.nav.push('/blocked')
+      // }
+      // else {
+      //   {
+          const isProfileCompleted = await this.profiles.isProfileCompleted(user);
+          console.log(isProfileCompleted);
+          const roleId = parseInt(user.role_id);
+          if (roleId === 3) {
+            if (!isProfileCompleted) {
+              this.nav.push('/teacher-profile/teacher-profile-edit', {
+                backUrl: '/home',
+              });
+            }
+            else {
+              this.nav.push('/tabs/teacher-dashboard', {
+                backUrl: '/home'
+              });
+            }
+          }
+          else {
+            if (!isProfileCompleted) {
+              this.nav.push('/student-profile/student-profile-edit', {
+                backUrl: '/home'
+              });
+            } else if (roleId === 2) {
+              this.nav.push('/tabs/student-dashboard', {
+                backUrl: '/home'
+              });
+            // }
+          // }
         }
       }
-      else {
-        if (!isProfileCompleted) {
-          this.nav.push('/student-profile/student-profile-edit', {
-            backUrl: '/home'
-          });
-        } else if (roleId === 2) {
-          this.nav.push('/tabs/student-dashboard', {
-            backUrl: '/home'
-          });
-        }
-      }
+
+
+
+
     }
   }
 
-  gotoEmailDashboard(){
-   this.modals.present(LoginPage, {}, "", 0.7);
+  gotoEmailDashboard() {
+    this.modals.present(LoginPage, {}, "", 0.7);
   }
 
 

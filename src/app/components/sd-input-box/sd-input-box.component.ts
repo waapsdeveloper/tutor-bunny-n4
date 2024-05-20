@@ -18,11 +18,11 @@ export class SdInputBoxComponent implements OnInit {
   @Input('needed') needed = true;
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private events: EventsService) {
-  }
+
+  constructor(private events: EventsService) {}
+
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
-
       if (this.key == 'title' || this.key == 'description') {
         return;
       }
@@ -35,13 +35,10 @@ export class SdInputBoxComponent implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
-
-    }, false)
+    }, false);
 
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
-
       let v = formData[this.key];
-
       console.log(v, this.key);
 
       if (this.key == 'title') {
@@ -50,38 +47,55 @@ export class SdInputBoxComponent implements OnInit {
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
-
           return;
         }
 
         if (v.length < 50 || v.length > 100) {
           this.isRequired = true;
-          this.errorText = 'The Title should be between 50-100 characters'
+          this.errorText = 'The Title should be between 50-100 characters';
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
         }
       }
 
-    }, false)
+      if (this.key == 'phone_number') {
+        console.log(this.key);
+        // return
+        // if (!v || v == '') {
+        //   this.isRequired = true;
+        //   setTimeout(() => {
+        //     this.isRequired = false;
+        //   }, 5000);
+        //   return;
+        // }
 
+        if ( v.length > 14) {
+          this.isRequired = true;
+          this.errorText = 'The Phone Number should be 15 characters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      }
+    }, false);
   }
-  result($event) {
 
+  result($event) {
     let v = $event.target.value;
-    if(this.key == 'zip_code'){
+
+    if (this.key == 'zip_code') {
       let numericValue: string = v.replace(/\D/g, '');
       ($event.target as HTMLInputElement).value = numericValue;
     }
 
     if (!this.isReadOnly) {
-      this.onChange.emit(v)
+      this.onChange.emit(v);
     }
-
   }
 
   clearInput() {
     this.inputText = '';
-    this.onChange.emit('')
+    this.onChange.emit('');
   }
 }
