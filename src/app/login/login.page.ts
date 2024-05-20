@@ -39,6 +39,10 @@ export class LoginPage extends BasePage implements OnInit {
       password: this.formData.password
     }
     const res = await this.network.loginViaEmail(obj) as any;
+    console.log(res);
+    this.users.setUser(res.user);
+    this.modals.dismiss(res.user)
+
 
   }
 
@@ -66,39 +70,8 @@ export class LoginPage extends BasePage implements OnInit {
     let res = await this.network.signUpviaEmail(obj) as any;
     console.log(res);
     this.users.setUser(res.user);
-    this.modals.dismiss()
+    this.modals.dismiss(res.user)
 
-    const flag = await this.profiles.isProfileCompleted(res.user);
-    console.log(flag);
-    let roleId = this.users.getUserRole();
-    console.log(roleId, "sadad");
-    if (!flag) {
-      if (roleId == 2) {
-        this.nav.push('/student-dashboard/student-profile-edit', {
-          backUrl: '/home',
-        });
-      }
-      if (roleId == 3) {
-        console.log("fdgcbv nbvcb fv");
-
-        this.nav.push('/teacher-profile/teacher-profile-edit', {
-          backUrl: '/home', showBack: false, title: 'Create Profile'
-        });
-      }
-    } else {
-      if (roleId == 2) {
-        this.nav.push('/tabs/student-dashboard', {
-          backUrl: '/home',
-        });
-      }
-      if (roleId == 3) {
-        console.log("sdsdfdsfs");
-
-        this.nav.push('/tabs/teacher-dashboard', {
-          backUrl: '/home',
-        });
-      }
-    }
 
   }
 
