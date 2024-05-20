@@ -20,6 +20,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   shield;
   isExpanded = false;
   country;
+  city;
   language;
   subject;
 
@@ -50,6 +51,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
+      this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.subject = this.user.teacher.subjects;
     }

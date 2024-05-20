@@ -7,10 +7,16 @@ import { NavService } from '../services/nav.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-  constructor(private nav: NavService) {}
+  constructor(private nav: NavService) {
+    this.initialize()
+    
+  }
 
   ngOnInit() {
 
+  }
+  initialize(){
+    // let user = this.users.getUser();
   }
   
 }
