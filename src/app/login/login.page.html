@@ -4,7 +4,7 @@
       <div class="header-title  roboto-regular " *ngIf="step == 'login'">Login to your account</div>
       <div class="header-title  roboto-regular " *ngIf="step == 'SignUp'">Register your account</div>
     </div>
-    <div class="header-right-items-78956">
+    <div class="header-right-items-78956" (click)="back()">
       <img class="image" src="../../assets/svg/cancel.svg" alt="">
     </div>
   </div>
@@ -17,13 +17,13 @@
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
-      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.name"
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.email"
         [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box placeholder="************" (onChange)="result($event, 'Password')" [inputText]="formData.name"
-        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'password')" [inputText]="formData.password"
+        [key]="'password'" [errorText]="'password is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex gap-8 sign-up-box" >
         <img class="image" src="../../assets/svg/signup.svg" alt="">
@@ -39,7 +39,7 @@
         <app-sd-button-gray [text]="'Login'" (click)="submit()"></app-sd-button-gray>
       </div>
       <div class="input-box-lines">
-        <app-sd-button-clear [text]="'Cancel'" (click)="submit()"></app-sd-button-clear>
+        <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>
       </div>
     </div>
   </div>
@@ -48,12 +48,12 @@
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
-      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.name"
+      <app-sd-input-box placeholder="xxx@mail.com" (onChange)="result($event, 'email')" [inputText]="formData.email"
         [key]="'email'" [errorText]="'Email is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box placeholder="************" (onChange)="result($event, 'Password')" [inputText]="formData.name"
+      <app-sd-input-box placeholder="************" (onChange)="result($event, 'password')" [inputText]="formData.password"
         [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
@@ -64,7 +64,7 @@
 
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
-        <app-sd-button-gray [text]="'Register'" (click)="submit()"></app-sd-button-gray>
+        <app-sd-button-gray [text]="'Register'" (click)="SignUpWithEmail()"></app-sd-button-gray>
       </div>
       <div class="input-box-lines">
         <app-sd-button-clear [text]="'Cancel'" (click)="submit()"></app-sd-button-clear>

@@ -19,6 +19,13 @@ export class NetworkService {
   login(data: any) {
     return this.httpPostResponse('login-via-social', data);
   }
+  loginViaEmail(data){
+    return this.httpPostResponse('login-via-email', data);
+  }
+
+  signUpviaEmail(data){
+    return this.httpPostResponse('signup-via-email', data);
+  }
 
   postImages(data) {
     return this.httpPostResponse('gallery/add', data);
