@@ -13,6 +13,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   user;
   displayName: string = '';
+  showWarning = false;
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
@@ -33,6 +34,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
     }
+    this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
+    console.log(this.showWarning);
+
 
     this.displayName = this.utility.splitName(this.user.name).first_name;
 

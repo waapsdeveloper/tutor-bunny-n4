@@ -1,20 +1,23 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" >
+      <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" *ngIf="showWarning == true">
+      </div>
+      <div class="image-box-89656" *ngIf="showWarning == false" (click)="updateProfile()">
+        <img src="../../assets/svg/warning.svg" alt="" class="image-98563">
       </div>
     </div>
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
           <div class="icon-box-77">
-            <img src="assets/icon/header-search.svg" />
+            <img class="icon-box-77" src="assets/icon/header-search.svg" />
           </div>
           <div class="icon-box-77">
-            <img src="assets/icon/heart.svg" />
+            <img class="icon-box-77" src="assets/icon/heart.svg" />
           </div>
           <div class="icon-box-77">
-            <img src="assets/icon/notification-bell.svg" />
+            <img  class="icon-box-77"src="assets/icon/notification-bell.svg" />
           </div>
         </div>
       </div>
@@ -22,7 +25,6 @@
         <div class="pl-heading outfit-semibold">Hi, {{displayName}}</div>
         <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
       </div>
-
     </div>
   </div>
 </ion-header>

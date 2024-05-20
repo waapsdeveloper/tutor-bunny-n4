@@ -12,6 +12,7 @@
   border-radius: 5px;
   width: 125px;
   height: 100px;
+  position: relative;
   /* height: auto; */
   display: block;
   border-radius: 5px;
@@ -57,4 +58,10 @@ ion-footer {
   flex-direction: column;
   gap: 16px;
   padding-bottom: 24px;
+}
+
+.clear-input-678956744{
+  position: absolute;
+  right: 8px;
+  top: 8px;
 }

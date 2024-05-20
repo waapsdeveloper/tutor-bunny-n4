@@ -90,4 +90,11 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   Back() {
     this.nav.pop('/teacher-profile')
   }
+
+  async clearImage(id) {
+
+    await this.network.deleteImage(id)
+    this.initialize();
+
+  }
 }

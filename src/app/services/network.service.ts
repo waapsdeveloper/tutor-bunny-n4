@@ -23,6 +23,9 @@ export class NetworkService {
   postImages(data) {
     return this.httpPostResponse('gallery/add', data);
   }
+  deleteImage(id){
+    return this.httpDeleteResponse('gallery/delete/ ' + id)
+  }
 
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);

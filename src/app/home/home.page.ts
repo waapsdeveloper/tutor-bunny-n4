@@ -103,11 +103,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       console.log(user);
 
-      // if (user.teacher.status == '"blocked"') {
-      //   this.nav.push('/blocked')
-      // }
-      // else {
-      //   {
           const isProfileCompleted = await this.profiles.isProfileCompleted(user);
           console.log(isProfileCompleted);
           const roleId = parseInt(user.role_id);
@@ -125,15 +120,13 @@ export class HomePage extends BasePage implements ViewWillEnter {
           }
           else {
             if (!isProfileCompleted) {
-              this.nav.push('/student-profile/student-profile-edit', {
+              this.nav.push('/tabs/student-dashboard', {
                 backUrl: '/home'
               });
             } else if (roleId === 2) {
               this.nav.push('/tabs/student-dashboard', {
                 backUrl: '/home'
               });
-            // }
-          // }
         }
       }
 
