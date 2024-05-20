@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-my-gallery',
   templateUrl: './my-gallery.component.html',
   styleUrls: ['./my-gallery.component.scss'],
 })
-export class MyGalleryComponent  implements OnInit {
+export class MyGalleryComponent extends BasePage  implements OnInit {
 
-  constructor() { }
+  constructor(injector: Injector) {
+
+    super(injector)
+   }
 
   ngOnInit() {}
+
+  goToGallery() {
+    this.nav.push('/teacher-profile/teacher-gallery' , {
+      gallary: "false", title: 'My Galary'
+    })
+  }
 
 }

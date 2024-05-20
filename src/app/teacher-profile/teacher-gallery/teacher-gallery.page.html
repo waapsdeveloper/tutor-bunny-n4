@@ -1,16 +1,21 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [title]="'My Gallery'" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
+  <app-sd-header-top [title]="title" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="gallery-outer-8965">
     <div class="image-card-78975" *ngFor="let image of images" [style.backgroundImage]="setBackgroundImage(image)">
-      <!-- <img class="image" src="{{image.image}}" /> -->
+
     </div>
   </div>
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="photoInput.click()">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
+
+
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
 </ion-content>
+
+<ion-footer  class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" *ngIf="gallery == 'true'">
+  <ion-button (click)="photoInput.click()" class="read-more"> <img src="../../../assets/svg/upload.svg" alt="">Upload
+    gallery images</ion-button>
+  <ion-button (click)="Back()" class="read-more"> <img src="../../../assets/svg/done.svg" alt="">
+   Done</ion-button>
+</ion-footer>

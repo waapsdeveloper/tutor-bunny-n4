@@ -196,8 +196,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
   }
   openGallery($event) {
-    this.nav.push('/teacher-profile/teacher-gallery')
+    this.nav.push('/teacher-profile/teacher-gallery' , {
+      gallary: "true", title: 'Upload Galary'
+    })
   }
-
-
 }

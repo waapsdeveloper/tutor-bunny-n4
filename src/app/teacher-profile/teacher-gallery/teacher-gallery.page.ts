@@ -14,82 +14,11 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   backUrl = '/teacher-profile/teacher-profile-edit';
   user;
-  images = [
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-    {
-      id: 1,
-      image: null
-    },
-  ]
+  images = []
   list;
-
+  params;
+  title;
+  gallery = "false";
 
   constructor(injector: Injector) {
     super(injector)
@@ -98,26 +27,28 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   }
   ngOnInit() {
   }
+  ionViewWillEnter(): void {
+    this.params = this.nav.getQueryParams();
+    console.log(this.params);
+
+    if (this.params.gallary) {
+      this.gallery = this.params.gallary;
+      console.log(this.gallery);
+
+    }
+
+    if (this.params.title) {
+      this.title = this.params.title;
+    }
+
+
+  }
   async initialize() {
     const user = this.users.getUser();
     const res = await this.network.getImage(user.id) as any;
     console.log(res);
 
-    let list = res.result;
-
-    for(var i = 0; i < list.length; i++){
-
-      let item = list[i];
-      let firstIndex = this.images.findIndex(x => x.image == null);
-      console.log(firstIndex);
-
-      if(firstIndex != -1){
-        this.images[firstIndex]['id'] = item.id;
-        this.images[firstIndex]['image'] = item.image;
-      }
-    }
-    // this.images = this.list.result;
-
+    this.images = res.result;
   }
   setBackgroundImage(item) {
 
@@ -128,14 +59,10 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     console.log(this.images)
     let firstIndex = this.images.findIndex(x => x.image == null);
     console.log(firstIndex);
-
-    if(firstIndex != -1){
+    if (firstIndex != -1) {
       this.images[firstIndex]['id'] = firstIndex;
       this.images[firstIndex]['image'] = string;
     }
-
-    // return;
-
     const user = this.users.getUser();
     let obj = {
       user_id: user.id,
@@ -146,7 +73,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     let image = res.result.image;
 
     this.events.publish('change-sample-image-to-this', image)
-    // this.initialize();
+    this.initialize();
   }
 
   async onFileSelected(event: any) {
@@ -156,5 +83,11 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
       this.addImageInArray(reader.result as string)
     };
     reader.readAsDataURL(file);
+
+
+  }
+
+  Back() {
+    this.nav.pop('/teacher-profile')
   }
 }

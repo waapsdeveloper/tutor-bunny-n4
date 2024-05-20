@@ -28,3 +28,33 @@
   width: 125px;
   object-fit: contain;
 }
+
+.read-more {
+  width: 100%;
+  margin-top: 16;
+  height: 40px;
+  border-radius: 00px;
+  background-color: white;
+  box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+  border: 1px solid #bfbfbf;
+  font-size: 16x;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 10px;
+}
+
+ion-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 24px;
+}

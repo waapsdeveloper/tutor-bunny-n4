@@ -9,9 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class GalleryListComponent implements OnInit {
   user;
-  images = [
-
-  ]
+  images = []
   list;
   constructor(private network: NetworkService, public users: UsersService) {
     this.initialize();
