@@ -125,7 +125,7 @@ export class NetworkService {
   }
 
   updateStudentProfile(data, id){
-    return this.httpPostResponse('student-profile-update/'+ id, data);
+    return this.httpPostResponse('students/update-info/'+ id, data);
   }
 
   signupViaEmail(data){
