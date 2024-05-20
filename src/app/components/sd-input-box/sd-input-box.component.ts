@@ -59,40 +59,28 @@ export class SdInputBoxComponent implements OnInit {
         }
       }
 
-      if (this.key == 'phone_number') {
-        console.log(this.key);
-        // return
-        // if (!v || v == '') {
-        //   this.isRequired = true;
-        //   setTimeout(() => {
-        //     this.isRequired = false;
-        //   }, 5000);
-        //   return;
-        // }
-
-        if ( v.length > 14) {
-          this.isRequired = true;
-          this.errorText = 'The Phone Number should be 15 characters';
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-        }
-      }
     }, false);
   }
 
   result($event) {
     let v = $event.target.value;
-
+  
     if (this.key == 'zip_code') {
       let numericValue: string = v.replace(/\D/g, '');
       ($event.target as HTMLInputElement).value = numericValue;
     }
-
+  
+    // Check if the key is 'phone_number' and limit the input to 15 characters
+    if (this.key == 'phone_number' && v.length > 15) {
+      ($event.target as HTMLInputElement).value = v.slice(0, 15);
+      v = ($event.target as HTMLInputElement).value;
+    }
+  
     if (!this.isReadOnly) {
       this.onChange.emit(v);
     }
   }
+  
 
   clearInput() {
     this.inputText = '';
