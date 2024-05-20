@@ -39,8 +39,35 @@ export class LoginPage extends BasePage implements OnInit {
       password: this.formData.password
     }
     const res = await this.network.loginViaEmail(obj) as any;
+
+  }
+
+
+  signUp() {
+    this.step = "SignUp"
+  }
+
+  async SignUpWithEmail() {
+    console.log(this.formData);
+
+    if (!this.formData.email || !this.formData.password || !this.formData.name) {
+      console.log("fdsdfs");
+
+      return
+    }
+    let key = localStorage.getItem('role');
+    let obj = {
+      email: this.formData.email,
+      password: this.formData.password,
+      name: this.formData.name,
+      login_type: "email",
+      role_id: key
+    }
+    let res = await this.network.signUpviaEmail(obj) as any;
     console.log(res);
-    this.users.setUser(res.user)
+    this.users.setUser(res.user);
+    this.modals.dismiss()
+
     const flag = await this.profiles.isProfileCompleted(res.user);
     console.log(flag);
     let roleId = this.users.getUserRole();
@@ -72,33 +99,7 @@ export class LoginPage extends BasePage implements OnInit {
         });
       }
     }
-    this.modals.dismiss()
 
-  }
-
-
-  signUp() {
-    this.step = "SignUp"
-  }
-
-  SignUpWithEmail() {
-    console.log(this.formData);
-
-    if (!this.formData.email || !this.formData.password || !this.formData.name) {
-      console.log("fdsdfs");
-
-      return
-    }
-    let key = localStorage.getItem('role');
-    let obj = {
-      email: this.formData.email,
-      password: this.formData.password,
-      name: this.formData.name,
-      login_type: "email",
-      role_id: key
-    }
-    let res = this.network.signUpviaEmail(obj);
-    console.log(res);
   }
 
   back() {

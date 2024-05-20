@@ -23,7 +23,7 @@
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
       <app-sd-input-box placeholder="************" (onChange)="result($event, 'password')" [inputText]="formData.password"
-        [key]="'password'" [errorText]="'password is required'"></app-sd-input-box>
+        [key]="'password'" [errorText]="'password is required'" [type]="'password'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex gap-8 sign-up-box" >
         <img class="image" src="../../assets/svg/signup.svg" alt="">
@@ -45,6 +45,11 @@
   </div>
 
   <div class="body-content-68448" *ngIf="step == 'SignUp'">
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-12 roboto-medium">Name </div>
+      <app-sd-input-box placeholder="Name" (onChange)="result($event, 'name')" [inputText]="formData.name"
+        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
@@ -54,13 +59,9 @@
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
       <app-sd-input-box placeholder="************" (onChange)="result($event, 'password')" [inputText]="formData.password"
-        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+        [key]="'name'" [errorText]="'Name is required'" [type]="'password'"></app-sd-input-box>
     </div>
-    <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Confirm password</div>
-      <app-sd-input-box placeholder="************" (onChange)="result($event, 'name')" [inputText]="formData.name"
-        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
-    </div>
+
 
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
