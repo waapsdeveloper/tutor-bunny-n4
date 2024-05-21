@@ -6,7 +6,7 @@ import { EventsService } from 'src/app/services/events.service';
   templateUrl: './sd-textarea-about.component.html',
   styleUrls: ['./sd-textarea-about.component.scss'],
 })
-export class SdTextareaAboutComponent  implements OnInit {
+export class SdTextareaAboutComponent implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
@@ -20,16 +20,33 @@ export class SdTextareaAboutComponent  implements OnInit {
   constructor(private events: EventsService) {
   }
   ngOnInit() {
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+      if (this.key == 'title' || this.key == 'description') {
+        return;
+      }
+
       let v = formData[this.key];
       console.log(v)
-      if(!v || v == ''){
+      if (!v || v == '') {
         this.isRequired = true;
-        setTimeout( () => {
+        setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
+    }, false);
+
+    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+      let v = formData[this.key];
+      console.log(v, this.key)
       if (this.key == 'description') {
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+          return
+        }
+        
         if (v && v.length < 400) {
           this.isRequired = true;
           this.errorText = 'The About field should have minimum 400 characters'
@@ -38,13 +55,16 @@ export class SdTextareaAboutComponent  implements OnInit {
           }, 5000);
         }
       }
+
     }, false)
   }
-  result($event){
+
+
+  result($event) {
     let v = $event.target.value;
     this.onChange.emit(v)
   }
-  clearInput(){
+  clearInput() {
     this.inputText = '';
     this.onChange.emit('')
   }

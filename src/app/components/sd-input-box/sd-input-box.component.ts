@@ -40,7 +40,6 @@ export class SdInputBoxComponent implements OnInit {
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
       console.log(v, this.key);
-
       if (this.key == 'title') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -58,7 +57,7 @@ export class SdInputBoxComponent implements OnInit {
           }, 5000);
         }
       }
-
+        
     }, false);
   }
 

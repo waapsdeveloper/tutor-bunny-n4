@@ -174,7 +174,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
     const f = this.formData;
     this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
-    if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.title.description < 400) {
+    if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
       return
     }
 
@@ -185,9 +185,10 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (!this.formData.terms) {
       return;
     }
-
+    // return
     const user = JSON.parse(localStorage.getItem('user'));
     console.log("efferfS");
+
     const res = await this.network.updateTeacherProfile(f, user.id)
     this.nav.push('/tabs/teacher-dashboard')
 
