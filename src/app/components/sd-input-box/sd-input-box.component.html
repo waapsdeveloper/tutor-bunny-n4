@@ -1,6 +1,6 @@
 <div class="sd-input-box-outer-675315">
   <input class="fs-16 roboto-regular sd-input-box-input-675315" [minlength]="minlength" [maxlength]="maxlength" [type]="type" [placeholder]="placeholder"
-    [(ngModel)]="inputText"  (paste)="result($event)" (keyup)="result($event)" [readOnly]="isReadOnly" />
+    [(ngModel)]="inputText"  (paste)="onPasteHandler($event)" (keyup)="result($event)" [readOnly]="isReadOnly" />
     <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText"  alt="" (click)="clearInput()">
 </div>
 <app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>

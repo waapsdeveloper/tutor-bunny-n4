@@ -57,7 +57,7 @@ export class SdInputBoxComponent implements OnInit {
           }, 5000);
         }
       }
-        
+
     }, false);
   }
 
@@ -78,6 +78,19 @@ export class SdInputBoxComponent implements OnInit {
     if (!this.isReadOnly) {
       this.onChange.emit(v);
     }
+  }
+
+  onPasteHandler($event){
+    const v = $event.clipboardData.getData('text/plain');
+    console.log(v);
+    let obj = {
+      target: {
+        value: v
+      }
+    }
+
+    this.result(obj);
+
   }
   
 
