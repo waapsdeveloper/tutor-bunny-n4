@@ -1,0 +1,25 @@
+.image-box{
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  object-fit: contain;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.bback-btn-7895 {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none !important;
+  padding: 10px 5px;
+  border-radius: 45px;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+}

@@ -1,10 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { log } from 'console';
 import { BasePage } from 'src/app/base-page/base-page';
-import { NetworkService } from 'src/app/services/network.service';
-import { UsersService } from 'src/app/services/users.service';
-import { GalleryIamgePage } from './gallery-iamge/gallery-iamge.page';
+import { GalleryImagePage } from './gallery-image/gallery-image.page';
 
 @Component({
   selector: 'app-teacher-gallery',
@@ -96,13 +92,17 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     this.nav.pop('/teacher-profile/teacher-profile-edit')
   }
 
-  async clearImage(id) {
-
-    await this.network.deleteImage(id)
+  async clearImage(id: string, event: Event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up
+    await this.network.deleteImage(id);
     this.initialize();
+}
+  openImage(image){
+    
+    this.nav.push('/teacher-profile/teacher-gallery/gallery-image', {
 
-  }
-  openImage(){
-    this.modals.present(GalleryIamgePage)
+      backUrl: '/teacher-profile/teacher-gallery',
+      image: image
+    })
   }
 }

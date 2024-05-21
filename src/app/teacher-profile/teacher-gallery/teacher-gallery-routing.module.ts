@@ -7,9 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: TeacherGalleryPage
-  },  {
-    path: 'gallery-iamge',
-    loadChildren: () => import('./gallery-iamge/gallery-iamge.module').then( m => m.GalleryIamgePageModule)
+  },
+  
+  {
+    path: 'gallery-image',
+    loadChildren: () => import('./gallery-image/gallery-image.module').then( m => m.GalleryImagePageModule)
   }
 
 ];

@@ -4,9 +4,10 @@
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="gallery-outer-8965">
     <div class="image-card-78975" *ngFor="let image of images" [style.backgroundImage]="setBackgroundImage(image)"
-      (click)="openImage()">
-      <img src="assets/svg/clear.svg" class="clear-input-678956744" (click)="clearImage(image.id)">
+      (click)="openImage(image.image)">
+      <img src="assets/svg/clear.svg" class="clear-input-678956744" (click)="clearImage(image.id, $event)">
     </div>
+
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
 </ion-content>

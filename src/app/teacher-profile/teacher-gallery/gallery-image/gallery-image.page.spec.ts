@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GalleryIamgePage } from './gallery-iamge.page';
+import { GalleryImagePage } from './gallery-image.page';
 
-describe('GalleryIamgePage', () => {
-  let component: GalleryIamgePage;
-  let fixture: ComponentFixture<GalleryIamgePage>;
+describe('GalleryImagePage', () => {
+  let component: GalleryImagePage;
+  let fixture: ComponentFixture<GalleryImagePage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryIamgePage);
+    fixture = TestBed.createComponent(GalleryImagePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
