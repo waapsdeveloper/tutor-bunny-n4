@@ -1,22 +1,39 @@
-
 <ion-header>
-  <app-sd-header-top [showBack]="false" [title]="'Subjects'"></app-sd-header-top>
-  <ion-searchbar class="fs-16 outfit"></ion-searchbar>
+  <app-sd-header-top [showBack]="false" [title]="'Select Subject'"></app-sd-header-top>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of list" >
-      <ion-label>
-        <h2 class="fs-16 outfit">{{item.name}}</h2>
-      </ion-label>
-      <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+
+<ion-content >
+  <div style="padding: 16px;">
+    <div class="subjects" [class.low-opac-6644]="subs.length > 4">
+      <div class="sd-input-box-outer-675315">
+        <input class="fs-16 outfit sd-input-box-input-675315" [(ngModel)]="inputText" [type]="type" placeholder="Search subjects"
+          [placeholder]="placeholder" (keyup)="checkSuggestions($event)" [readOnly]="subs.length > 4" />
+        <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
+      </div>
+      <div class="add-sub ion-activatable ripple-parent rectangle" *ngIf="showAddSuggestionsButton()"
+        (click)="addSubject()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/icon/add-circle.svg" alt="">
+      </div>
+    </div>
+    <div class="suggestions-list-outer">
+      <div class="fs-14 outfit-light" *ngIf="suggestionsList.length > 0">Tap on suggestions to add (max 5)</div>
+      <div class="suggestions-list-678564">
+
+        <div class="sub-chips" *ngFor="let item of subs">
+          <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}}<ion-icon name="close-circle-outline"
+              (click)="removeMySubject(item)"></ion-icon></ion-chip>
+        </div>
+
+        <ion-chip class="fs-14 outfit-light sub-chips-76544" fill="clear" *ngFor="let item of suggestionsList"
+          (click)="addToSubjects(item)">{{item.name}}</ion-chip>
+      </div>
+
+    </div>
+  </div>
+
 </ion-content>
 <ion-footer class="ion-padding">
-  <app-sd-button-gray [text]="'Save'" (click)="selectedsubject()"></app-sd-button-gray>
+  <app-sd-button-gray [text]="'Save'" (click)="selectedSubjects()"></app-sd-button-gray>
 </ion-footer>

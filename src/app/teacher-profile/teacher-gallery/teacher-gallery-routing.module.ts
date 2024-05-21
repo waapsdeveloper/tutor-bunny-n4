@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: TeacherGalleryPage
+  },  {
+    path: 'gallery-iamge',
+    loadChildren: () => import('./gallery-iamge/gallery-iamge.module').then( m => m.GalleryIamgePageModule)
   }
+
 ];
 
 @NgModule({

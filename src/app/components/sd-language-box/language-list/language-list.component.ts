@@ -77,4 +77,5 @@ export class LanguageListComponent implements OnInit {
     return this.utility.capitalizeEachFirst(string)
   }
 
+
 }

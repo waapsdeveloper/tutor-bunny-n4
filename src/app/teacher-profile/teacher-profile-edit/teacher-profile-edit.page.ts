@@ -46,7 +46,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   hideTerms = false;
   step = 1;
 
-  constructor ( injector:Injector) {
+  constructor(injector: Injector) {
     super(injector)
     this.initialize();
   }
@@ -189,14 +189,15 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     const user = JSON.parse(localStorage.getItem('user'));
     console.log("efferfS");
     const res = await this.network.updateTeacherProfile(f, user.id)
-    this.nav.push('/teacher-profile')
+    this.nav.push('/tabs/teacher-dashboard')
 
   }
   disableIfIncomplete() {
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
   }
   openGallery($event) {
-    this.nav.push('/teacher-profile/teacher-gallery' , {
+    this.nav.push('/teacher-profile/teacher-gallery', {
+      backUrl: '/teacher-profile/teacher-profile-edit',
       gallary: "true", title: 'Upload Gallery'
     })
   }

@@ -17,7 +17,9 @@ export class MyGalleryComponent extends BasePage  implements OnInit {
 
   goToGallery() {
     this.nav.push('/teacher-profile/teacher-gallery' , {
-      gallary: "false", title: 'My Galary'
+
+      backUrl: '/teacher-profile',
+      gallary: "false", title: 'My Gallery'
     })
   }
 

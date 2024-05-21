@@ -1,19 +1,20 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [title]="title" [backUrl]="backUrl" [showBack]="true"></app-sd-header-top>
+  <app-sd-header-top [title]="title" [backUrl]="backBtn" [showBack]="true"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="gallery-outer-8965">
-    <div class="image-card-78975" *ngFor="let image of images" [style.backgroundImage]="setBackgroundImage(image)">
+    <div class="image-card-78975" *ngFor="let image of images" [style.backgroundImage]="setBackgroundImage(image)"
+      (click)="openImage()">
       <img src="assets/svg/clear.svg" class="clear-input-678956744" (click)="clearImage(image.id)">
     </div>
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" *ngIf="gallery == 'true'">
-    <div class="d-flex flex-column gap-16" style="width: 100%;" >
-      <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
+  <div class="d-flex flex-column gap-16" style="width: 100%;">
+    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
       [text]="'Upload gallery images'"></app-sd-button-gray>
-      <app-sd-button-gray style="width: 100%;" (click)="Back()" [image]="'assets/svg/done.svg'" [text]="'Done'"></app-sd-button-gray>
-    </div>
-
+    <app-sd-button-gray style="width: 100%;" (click)="Back()" [image]="'assets/svg/done.svg'"
+      [text]="'Done'"></app-sd-button-gray>
+  </div>
 </ion-footer>

@@ -31,7 +31,7 @@
       <div class="zip-code-2 d-flex flex-column gap-8">
         <div class="input-title fs-12 roboto-medium">Zip</div>
         <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
-          [key]="'zip_code'" [errorText]="'!'"> </app-sd-input-box>
+          [key]="'zip_code'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
       </div>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">

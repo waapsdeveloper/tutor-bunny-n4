@@ -4,6 +4,7 @@ import { log } from 'console';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
+import { GalleryIamgePage } from './gallery-iamge/gallery-iamge.page';
 
 @Component({
   selector: 'app-teacher-gallery',
@@ -16,6 +17,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   user;
   images = []
   list;
+  backBtn ='';
   params;
   title;
   gallery = "false";
@@ -39,6 +41,9 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
     if (this.params.title) {
       this.title = this.params.title;
+    }
+    if (this.params.backUrl) {
+      this.backBtn = this.params.backUrl;
     }
 
 
@@ -88,7 +93,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   }
 
   Back() {
-    this.nav.pop('/teacher-profile')
+    this.nav.pop('/teacher-profile/teacher-profile-edit')
   }
 
   async clearImage(id) {
@@ -96,5 +101,8 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     await this.network.deleteImage(id)
     this.initialize();
 
+  }
+  openImage(){
+    this.modals.present(GalleryIamgePage)
   }
 }

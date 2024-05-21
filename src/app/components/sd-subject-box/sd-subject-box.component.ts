@@ -1,16 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { LanguageListComponent } from '../sd-language-box/language-list/language-list.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { NetworkService } from 'src/app/services/network.service';
 import { EventsService } from 'src/app/services/events.service';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-sd-subject-box',
   templateUrl: './sd-subject-box.component.html',
   styleUrls: ['./sd-subject-box.component.scss'],
 })
-export class SdSubjectBoxComponent implements OnInit {
+export class SdSubjectBoxComponent extends BasePage implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
@@ -23,7 +24,9 @@ export class SdSubjectBoxComponent implements OnInit {
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private network: NetworkService, private events: EventsService) { }
+  constructor(injector:Injector) {
+    super(injector)
+   }
 
   async ngOnInit() {
 
@@ -53,16 +56,16 @@ export class SdSubjectBoxComponent implements OnInit {
     this.onChange.emit(this.subs);
   }
 
-  // async openSubjectSelection() {
-  //   const res = (await this.modals.present(
-  //     SubjectListComponent,
-  //   )) as any;
-  //   console.log(res);
-  //   if (res.data) {
-  //     console.log(res.data);
-  //     this.onChange.emit(res.data);
-  //   }
-  // }
+  async openSubjectSelection() {
+    const res = (await this.modals.present(
+      SubjectListComponent,
+    )) as any;
+    console.log(res);
+    if (res.data) {
+      console.log(res.data);
+      this.onChange.emit(res.data);
+    }
+  }
 
   async addSubject() {
     console.log(this.inputText)
