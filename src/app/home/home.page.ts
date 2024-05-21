@@ -135,41 +135,37 @@ export class HomePage extends BasePage implements ViewWillEnter {
   async gotoEmailDashboard() {
     let res = await this.modals.present(LoginPage, {}, "", 0.7);
 
-    if(res.data){
+    if (res.data) {
       let user = res.data
-    const flag = await this.profiles.isProfileCompleted(user);
-    console.log(flag);
-    let roleId = this.users.getUserRole();
-    console.log(roleId, "sadad");
-    if (!flag) {
-      if (roleId == 2) {
-        this.nav.push('/student-dashboard/student-profile-edit', {
-          backUrl: '/home',
-        });
-      }
-      if (roleId == 3) {
-        console.log("fdgcbv nbvcb fv");
 
-        this.nav.push('/teacher-profile/teacher-profile-edit', {
-          backUrl: '/home', showBack: false, title: 'Create Profile'
-        });
+      const isProfileCompleted = await this.profiles.isProfileCompleted(user);
+      console.log(isProfileCompleted);
+      const roleId = parseInt(user.role_id);
+      if (roleId === 3) {
+        if (!isProfileCompleted) {
+          this.nav.push('/teacher-profile/teacher-profile-edit', {
+            backUrl: '/home',
+          });
+        }
+        else {
+          this.nav.push('/tabs/teacher-dashboard', {
+            backUrl: '/home'
+          });
+        }
       }
-    } else {
-      if (roleId == 2) {
-        this.nav.push('/tabs/student-dashboard', {
-          backUrl: '/home',
-        });
-      }
-      if (roleId == 3) {
-        console.log("sdsdfdsfs");
-
-        this.nav.push('/tabs/teacher-dashboard', {
-          backUrl: '/home',
-        });
+      else {
+        if (!isProfileCompleted) {
+          this.nav.push('/tabs/student-dashboard', {
+            backUrl: '/home'
+          });
+        } else if (roleId === 2) {
+          this.nav.push('/tabs/student-dashboard', {
+            backUrl: '/home'
+          });
+        }
       }
     }
   }
-}
 
 
   back() {

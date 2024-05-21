@@ -40,10 +40,10 @@ export class LoginPage extends BasePage implements OnInit {
     }
     const res = await this.network.loginViaEmail(obj) as any;
     console.log(res);
-    this.users.setUser(res.user);
-    this.modals.dismiss(res.user)
-
-
+    if(res){
+      this.users.setUser(res.user);
+      this.modals.dismiss(res.user)
+    }
   }
 
 
@@ -69,9 +69,10 @@ export class LoginPage extends BasePage implements OnInit {
     }
     let res = await this.network.signUpviaEmail(obj) as any;
     console.log(res);
-    this.users.setUser(res.user);
-    this.modals.dismiss(res.user)
-
+    if(res){
+      this.users.setUser(res.user);
+      this.modals.dismiss(res.user)
+    }
 
   }
 
