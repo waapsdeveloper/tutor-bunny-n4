@@ -20,6 +20,9 @@ export class UsersService {
   }
 
   setUser(user) {
+    // if(!user.image){
+    //   user.image = '/assets//svg/signup.svg'
+    // }
     localStorage.setItem("user", JSON.stringify(user));
     this._user = user;
   }
@@ -29,10 +32,10 @@ export class UsersService {
     const res = localStorage.getItem("user");
     if (res) {
       this._user = JSON.parse(res);
-      
+
     }
-    
-    
+
+
     console.log(this._user);
 
     if (!this._user) {

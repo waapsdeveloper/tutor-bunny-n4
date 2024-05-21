@@ -136,7 +136,7 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     this.events.publish('student-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
     console.log("form", f);
-    if (!f.name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.image || !f.terms) {
+    if (!f.name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.terms) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));

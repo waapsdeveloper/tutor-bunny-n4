@@ -57,13 +57,16 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
   }
 
   async openSubjectSelection() {
-    const res = (await this.modals.present(
-      SubjectListComponent,
-    )) as any;
+    const res = (await this.modals.present(SubjectListComponent, {
+      subs: this.subs
+    })) as any;
     console.log(res);
+
     if (res.data) {
-      console.log(res.data);
-      this.onChange.emit(res.data);
+      if(res.data.subs){
+        this.subs = res.data.subs;
+      }
+      this.onChange.emit(this.subs);
     }
   }
 

@@ -19,7 +19,7 @@ export class SubjectListComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   noSugg = false;
-  subs = [];
+  @Input() subs = [];
   suggestionsList = [];
 
   @Input('key') key = '';
@@ -105,7 +105,9 @@ export class SubjectListComponent implements OnInit {
       this.suggestionsList = [];
 
 
-      this.onChange.emit(res2.result);
+      this.onChange.emit({
+        subs: this.subs
+      });
     }
   }
 
@@ -122,6 +124,8 @@ export class SubjectListComponent implements OnInit {
       search: v,
       perpage: 5
     }
+
+    this.suggestionsList = [];
     const res = await this.network.getSubject(obj);
     console.log(res);
     if (res.data) {
@@ -154,7 +158,9 @@ export class SubjectListComponent implements OnInit {
     this.subs = res2.result;
     this.suggestionsList = [];
 
-    this.onChange.emit(res2.result);
+    this.onChange.emit({
+      subs: this.subs
+    });
 
   }
 
@@ -172,7 +178,9 @@ export class SubjectListComponent implements OnInit {
 
     const res2 = await this.network.removeMySubjects(obj)
     console.log(res2);
-    this.onChange.emit(this.subs);
+    this.onChange.emit({
+      subs: this.subs
+    });
 
 
   }
@@ -201,10 +209,14 @@ export class SubjectListComponent implements OnInit {
   }
 
   selectedSubjects() {
-    let list = this.list.filter(x => x.checked == true);
-    console.log(list);
-    this.modals.dismiss(list);
+    // let list = this.list.filter(x => x.checked == true);
+    // console.log(list);
+    this.modals.dismiss({
+      subs: this.subs
+    });
   }
+
+
 
 
 }

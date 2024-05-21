@@ -36,4 +36,17 @@ export class SdTextareaBoxComponent  implements OnInit {
     let v = $event.target.value;
     this.onChange.emit(v)
   }
+
+  onPasteHandler($event){
+    const v = $event.clipboardData.getData('text/plain');
+    console.log(v);
+    let obj = {
+      target: {
+        value: v
+      }
+    }
+
+    this.result(obj);
+
+  }
 }

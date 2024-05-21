@@ -1,21 +1,25 @@
 <ion-header>
-  <app-sd-header-top [showBack]="false" [title]="'Select Subject'"></app-sd-header-top>
+  <app-sd-header-top [showBack]="false" [title]="'Subjects'"></app-sd-header-top>
 </ion-header>
 
 
-<ion-content >
-  <div style="padding: 16px;">
-    <div class="subjects" [class.low-opac-6644]="subs.length > 4">
-      <div class="sd-input-box-outer-675315">
-        <input class="fs-16 outfit sd-input-box-input-675315" [(ngModel)]="inputText" [type]="type" placeholder="Search subjects"
-          [placeholder]="placeholder" (keyup)="checkSuggestions($event)" [readOnly]="subs.length > 4" />
-        <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
+<ion-content class="ion-padding ion-content-medium-background" >
+  <div class="d-flex flex-column gap-16">
+    <div class="subjects d-flex flex-column gap-16" [class.low-opac-6644]="subs.length > 4">
+      <div class="fs-12 roboto-medium">Type and search your subjects</div>
+      <div class="d-flex flex-row gap-16">
+        <div class="sd-input-box-outer-675315">
+          <input class="fs-16 outfit sd-input-box-input-675315" [(ngModel)]="inputText" [type]="type" placeholder="Search subjects"
+            [placeholder]="'Search'" (keyup)="checkSuggestions($event)" [readOnly]="subs.length > 4" />
+          <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
+        </div>
+        <div class="add-sub ion-activatable ripple-parent rectangle" *ngIf="showAddSuggestionsButton()"
+          (click)="addSubject()">
+          <ion-ripple-effect></ion-ripple-effect>
+          <img src="assets/icon/add-circle.svg" alt="">
+        </div>
       </div>
-      <div class="add-sub ion-activatable ripple-parent rectangle" *ngIf="showAddSuggestionsButton()"
-        (click)="addSubject()">
-        <ion-ripple-effect></ion-ripple-effect>
-        <img src="assets/icon/add-circle.svg" alt="">
-      </div>
+
     </div>
     <div class="suggestions-list-outer">
       <div class="fs-14 outfit-light" *ngIf="suggestionsList.length > 0">Tap on suggestions to add (max 5)</div>
@@ -35,5 +39,5 @@
 
 </ion-content>
 <ion-footer class="ion-padding">
-  <app-sd-button-gray [text]="'Save'" (click)="selectedSubjects()"></app-sd-button-gray>
+  <app-sd-button-gray [text]="'Back'" (click)="selectedSubjects()"></app-sd-button-gray>
 </ion-footer>

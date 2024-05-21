@@ -23,10 +23,6 @@ export class ProfileService {
           flag = false;
         }
 
-        if (!user.image) {
-          flag = false;
-        }
-
         if (!user.student.country) {
           flag = false;
         }

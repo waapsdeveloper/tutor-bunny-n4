@@ -63,18 +63,23 @@ export class SdInputBoxComponent implements OnInit {
 
   result($event) {
     let v = $event.target.value;
-  
+
     if (this.key == 'zip_code') {
       let numericValue: string = v.replace(/\D/g, '');
       ($event.target as HTMLInputElement).value = numericValue;
     }
-  
+
+    if (this.key == 'title') {
+      let maxValue: string = v.substring(0, 100);
+      ($event.target as HTMLInputElement).value = maxValue;
+    }
+
     // Check if the key is 'phone_number' and limit the input to 15 characters
     if (this.key == 'phone_number' && v.length > 15) {
       ($event.target as HTMLInputElement).value = v.slice(0, 15);
       v = ($event.target as HTMLInputElement).value;
     }
-  
+
     if (!this.isReadOnly) {
       this.onChange.emit(v);
     }
@@ -92,7 +97,7 @@ export class SdInputBoxComponent implements OnInit {
     this.result(obj);
 
   }
-  
+
 
   clearInput() {
     this.inputText = '';
