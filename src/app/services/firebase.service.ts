@@ -102,6 +102,8 @@ export class FirebaseService {
 
       // On success, we should be able to receive notifications
       PushNotifications.addListener('registration', (token: Token) => {
+        console.log(token);
+        
         localStorage.setItem('fcm_token', token.value);
       });
 

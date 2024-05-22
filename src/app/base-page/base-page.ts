@@ -50,7 +50,7 @@ export abstract class BasePage {
 
     }
 
-    this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
+    this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
   }
 
 
