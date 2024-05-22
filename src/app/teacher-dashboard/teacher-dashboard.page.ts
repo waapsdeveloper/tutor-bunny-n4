@@ -47,7 +47,16 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.fcm.setTokenToServer();
+
+    this.events.subscribe('dashboard:refreshpage', () => {
+      console.log("test token");
+      
+      this.initialize();
+  });
   }
+  
 
   ionViewWillEnter(){
     this.initialize()
@@ -67,6 +76,8 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name)
       this.status = res.user.teacher.status;
+      console.log(this.status);
+      
 
     }
   }

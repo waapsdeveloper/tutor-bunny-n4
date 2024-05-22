@@ -50,8 +50,6 @@
       gap: 6px;
       position: absolute;
       bottom: 13px;
-
-
       .header-info-user-68448 {
         display: flex;
         flex-direction: row;
@@ -66,7 +64,6 @@
           height: 14px;
         }
       }
-
       .header-info-misc-68448 {
         display: flex;
         flex-direction: row;
@@ -74,9 +71,6 @@
         align-items: center;
         width: 100%;
         gap: 16px;
-
-
-
         .ed-circ-67895464 {
           width: 12px;
           height: 12px;
@@ -87,13 +81,17 @@
         .ed-rv-67895464{
           color: rgba(248, 180, 4, 1);
         }
-
-
-
+        .ed-circ-67895465 {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgb(255, 0, 0);
+        }
+        .ed-rv-67895465{
+          color: rgb(248, 4, 4);
+        }
       }
     }
-
-    // width: 100%;
   }
 }
 
@@ -111,8 +109,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
-      .footer-tab-img {}
 
       .footer-tab-label {
         font-size: 12px;
