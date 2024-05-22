@@ -22,7 +22,6 @@ export class SdCountryBoxComponent implements OnInit {
   @Input()
   public set country(value: any){
     this._country = value;
-    console.log(value);
     if(value && value.name){
       this.selectedCountry = value;
     }
@@ -47,7 +46,6 @@ export class SdCountryBoxComponent implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData) => {
-      console.log(formData.country)
       if(!formData.country){
         this.isRequired = true;
         setTimeout( () => {

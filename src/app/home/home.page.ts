@@ -24,7 +24,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    console.log(this.params)
   }
 
 
@@ -43,11 +42,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
         role_id: key,
         image: this.googleauth.user.photoUrl
       }
-      console.log(data);
-      // return
 
       const res = await this.network.login(data) as any;
-      console.log(res)
       if (res.user) {
         let user = res.user;
         this.users.setUser(user);
@@ -61,10 +57,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
     const res = await this.modals.present(FakeAccountsComponent, {
       role: this.params.role
     }, '', 0.5);
-    console.log(res.data);
-    // return
-
-    console.log(res);
     if (res.data) {
       const user = res.data;
       this.users.setUser(user);
@@ -86,9 +78,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   async redirectDependsOnRole(user) {
     const isProfileCompleted = await this.profiles.isProfileCompleted(user);
-    console.log(isProfileCompleted);
     const roleId = parseInt(user.role_id);
-    console.log(roleId)
 
     if (roleId === 3) {
 

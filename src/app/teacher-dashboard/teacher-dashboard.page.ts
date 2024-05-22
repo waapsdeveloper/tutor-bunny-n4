@@ -60,17 +60,14 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
-    // console.log(res);
-   
-    console.log(this.status);
-    
+
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name)
       this.status = res.user.teacher.status;
-    
+
     }
   }
   getFlag(){

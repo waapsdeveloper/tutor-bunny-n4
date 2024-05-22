@@ -65,8 +65,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
   }
 
   setFormDta(data) {
-    console.log(data);
-
     this.formData['name'] = data['name'];
     const cnty = data['student']['country'];
     if (cnty) {
@@ -95,7 +93,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
   result(value, key) {
     if (key == 'country') {
       this.countryId = value.id;
-      // console.log(this.countryId);
       this.formData['country_id'] = value.id;
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
@@ -106,7 +103,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     } else {
       this.formData[key] = value;
     }
-    // console.log(this.formData);
   }
 
   onFileSelected(event: any) {
@@ -114,8 +110,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     const reader = new FileReader();
     reader.onload = async () => {
       const pmi = reader.result as string;
-      // console.log(this.photoId);
-
       // send it to API for upload
       let user = JSON.parse(localStorage.getItem('user'));
 
@@ -125,7 +119,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
       }
 
       const res = await this.network.postStudentPhotoIdImage(obj)
-      // console.log(res);
       this.formData.image = res.result.image;
 
     };
@@ -135,14 +128,14 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     this.events.publish('student-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log("form", f);
     if (!f.name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.terms) {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateStudentProfile(f, user.id)
-
     if(res){
+      let user = res.user;
+      this.users.setUser(user)
       this.events.publish('get-user-after-submit-form', user)
       this.nav.push('/tabs/student-dashboard')
     }

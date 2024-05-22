@@ -61,7 +61,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -86,7 +85,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
   }
   result(value, key) {
-    console.log(value, key);
     if (key == 'country') {
       this.countryId = value.id;
       this.formData['country_id'] = value.id;
@@ -169,7 +167,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   }
   async submit() {
     const data = this.formData;
-    console.log(data);
     this.userId = this.user.id;
 
     const f = this.formData;
@@ -187,8 +184,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
     // return
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log("efferfS");
-
     const res = await this.network.updateTeacherProfile(f, user.id)
     this.nav.push('/tabs/teacher-dashboard')
 

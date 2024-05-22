@@ -20,7 +20,6 @@ export class ListCountryComponent implements OnInit {
   ngOnInit() { }
 
   selection(item) {
-    console.log(item);
     this.modals.dismiss(item);
   }
 
@@ -39,31 +38,24 @@ export class ListCountryComponent implements OnInit {
 
 
       this.country = await this.network.getCountries(obj) as any[];
-      console.log(this.country);
       this.page = this.country["current_page"];
-      console.log(this.page);
       if (this.page == 1) {
         this.list = this.country["data"];
 
       } else {
         this.list = [...this.list, ...this.country["data"]]
-        console.log(this.list);
-
-
       }
       resolve(true);
     })
   }
   async loadMore($event) {
     this.page = this.country.current_page + 1;
-    console.log(this.page);
     await this.callApi();
     $event.target.complete();
   }
 
   handleInput(event) {
     const query = event.target.value.toLowerCase();
-    console.log(query);
     this.search = query;
     this.page = 1;
     this.callApi();

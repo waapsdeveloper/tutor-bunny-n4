@@ -33,7 +33,6 @@ export abstract class BasePage {
     const currentScrollTop = event.detail.scrollTop;
 
     if (currentScrollTop > this.lastScrollTop) {
-      console.log('Scrolled downwards');
       // Handle downward scroll event
       let obj = {
         direction: 'down'
@@ -41,14 +40,13 @@ export abstract class BasePage {
       this.events.publish('page-scroll-event', obj)
 
     } else {
-      console.log('Scrolled upwards or no scroll change');
       // Handle upward scroll event or no change
       let obj = {
         direction: 'up'
       }
       this.events.publish('page-scroll-event', obj)
 
-      
+
 
     }
 

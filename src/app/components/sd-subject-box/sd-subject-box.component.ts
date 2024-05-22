@@ -33,7 +33,6 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      console.log(v)
 
       if(!v || v == ''){
         this.isRequired = true;
@@ -42,6 +41,10 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
         }, 5000);
       }
     }, false)
+
+    this.events.subscribe('update-subs-list', (obj) => {
+      this.subs = obj.subs
+    })
 
     this.inputText = '';
     let user = JSON.parse(localStorage.getItem('user'));
@@ -60,7 +63,6 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
     const res = (await this.modals.present(SubjectListComponent, {
       subs: this.subs
     })) as any;
-    console.log(res);
 
     if (res.data) {
       if(res.data.subs){
@@ -71,20 +73,14 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
   }
 
   async addSubject() {
-    console.log(this.inputText)
-
     let user = JSON.parse(localStorage.getItem('user'));
-
     if (this.inputText) {
       let obj = {
         user_id: user.id,
         name: this.inputText
       }
       const res = await this.network.addSubject(obj)
-      console.log(res);
-
       const res2 = await this.network.getMySubjects(obj)
-      console.log(res2);
 
 
       this.inputText = '';
@@ -110,7 +106,6 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
       perpage: 5
     }
     const res = await this.network.getSubject(obj);
-    console.log(res);
     if (res.data) {
       this.suggestionsList = res.data;
     }
@@ -131,10 +126,7 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
       name: item.name
     }
     const res = await this.network.addSubject(obj)
-    console.log(res);
-
     const res2 = await this.network.getMySubjects(obj)
-    console.log(res2);
 
 
     this.inputText = '';
@@ -146,7 +138,6 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
   }
 
   async removeMySubject(item) {
-    console.log(item);
     let index = this.subs.findIndex(x => x.id == item.id);
     this.subs.splice(index, 1);
 
@@ -158,7 +149,6 @@ export class SdSubjectBoxComponent extends BasePage implements OnInit {
     }
 
     const res2 = await this.network.removeMySubjects(obj)
-    console.log(res2);
     this.onChange.emit(this.subs);
 
 

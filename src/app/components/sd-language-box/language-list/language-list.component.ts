@@ -25,7 +25,6 @@ export class LanguageListComponent implements OnInit {
   async initialize() {
     this.search = "";
     this.page = 1;
-    //console.log(this.search, this.page);
     this.callApi();
   }
   selection(item: any) {
@@ -36,7 +35,6 @@ export class LanguageListComponent implements OnInit {
   }
   selectedLanguage() {
     let list = this.list.filter(x => x.checked == true);
-    console.log(list);
     this.modals.dismiss(list);
   }
   async loadMore($event) {
@@ -51,7 +49,6 @@ export class LanguageListComponent implements OnInit {
         page: this.page
       }
       this.lang = await this.network.getLanguage(obj) as any[];
-      console.log(this.lang);
       this.page = this.lang.current_page;
       if (this.page == 1) {
         this.list = this.lang["data"];
@@ -65,7 +62,6 @@ export class LanguageListComponent implements OnInit {
 
   handleInput(event) {
     const query = event.target.value.toLowerCase();
-    console.log(query);
     this.search = query;
     this.page = 1;
     this.callApi();

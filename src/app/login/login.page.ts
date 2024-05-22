@@ -23,15 +23,9 @@ export class LoginPage extends BasePage implements OnInit {
 
   result(value, key) {
     this.formData[key] = value;
-    console.log(this.formData[key]);
-
   }
   async submit() {
-    console.log(this.formData);
-
     if (!this.formData.email || !this.formData.password) {
-      console.log("fdsdfs");
-
       return
     }
     let obj = {
@@ -39,7 +33,6 @@ export class LoginPage extends BasePage implements OnInit {
       password: this.formData.password
     }
     const res = await this.network.loginViaEmail(obj) as any;
-    console.log(res);
     if(res){
       this.users.setUser(res.user);
       this.modals.dismiss(res.user)
@@ -52,11 +45,7 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   async SignUpWithEmail() {
-    console.log(this.formData);
-
     if (!this.formData.email || !this.formData.password || !this.formData.name) {
-      console.log("fdsdfs");
-
       return
     }
     let key = localStorage.getItem('role');
@@ -68,7 +57,6 @@ export class LoginPage extends BasePage implements OnInit {
       role_id: key
     }
     let res = await this.network.signUpviaEmail(obj) as any;
-    console.log(res);
     if(res){
       this.users.setUser(res.user);
       this.modals.dismiss(res.user)

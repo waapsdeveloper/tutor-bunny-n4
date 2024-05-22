@@ -30,7 +30,6 @@ export class ProfileBoxComponent implements OnInit, ViewWillEnter {
 
   ngOnInit() {
     this.events.subscribe('get-user-after-submit-form', (user) => {
-      console.log(user);
 
     })
   }
@@ -58,11 +57,7 @@ export class ProfileBoxComponent implements OnInit, ViewWillEnter {
   }
   getFlag() {
     if (this.item && this.item.teacher && this.item.teacher.country) {
-      console.log(this.item.teacher);
-
       const flag = this.item.teacher.country.iso2;
-      // console.log(flag);
-
       return flag.toLowerCase();
     }
     else {

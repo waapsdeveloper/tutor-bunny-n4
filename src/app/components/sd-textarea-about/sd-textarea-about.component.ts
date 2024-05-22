@@ -26,7 +26,6 @@ export class SdTextareaAboutComponent implements OnInit {
       }
 
       let v = formData[this.key];
-      console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -37,7 +36,6 @@ export class SdTextareaAboutComponent implements OnInit {
 
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
-      console.log(v, this.key)
       if (this.key == 'description') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -77,7 +75,6 @@ export class SdTextareaAboutComponent implements OnInit {
 
   onPasteHandler($event){
     const v = $event.clipboardData.getData('text/plain');
-    console.log(v);
     let obj = {
       target: {
         value: v

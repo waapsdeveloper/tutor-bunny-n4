@@ -102,7 +102,6 @@ export class FirebaseService {
 
       // On success, we should be able to receive notifications
       PushNotifications.addListener('registration', (token: Token) => {
-        console.log(token.value);
         localStorage.setItem('fcm_token', token.value);
       });
 
@@ -113,9 +112,6 @@ export class FirebaseService {
       PushNotifications.addListener(
         'pushNotificationReceived',
         (notification: PushNotificationSchema) => {
-
-          console.log("here it falls through")
-
           this.events.publish('dashboard:notificationReceived');
           this.events.publish('dashboard:refreshpage');
         }
@@ -139,18 +135,12 @@ export class FirebaseService {
   async getFCMToken() {
     return new Promise((resolve) => {
       const token = localStorage.getItem('fcm_token');
-      console.log(token);
       if (token) {
         resolve(token);
-        // this.sqlite.setFcmToken(token);
-        // this.events.publish('user:settokentoserver');
       }
 
       resolve(null);
 
-      // resolve(true);
-      // this.fcm.getToken().then(v => resolve(v), (err) =>
-      // { console.log(err); resolve(null) }).catch(v => { console.log(v); resolve(null) })
     });
   }
 }

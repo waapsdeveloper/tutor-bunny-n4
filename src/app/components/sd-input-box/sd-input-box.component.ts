@@ -28,7 +28,6 @@ export class SdInputBoxComponent implements OnInit {
       }
 
       let v = formData[this.key];
-      console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -39,7 +38,6 @@ export class SdInputBoxComponent implements OnInit {
 
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
-      console.log(v, this.key);
       if (this.key == 'title') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -87,7 +85,6 @@ export class SdInputBoxComponent implements OnInit {
 
   onPasteHandler($event){
     const v = $event.clipboardData.getData('text/plain');
-    console.log(v);
     let obj = {
       target: {
         value: v

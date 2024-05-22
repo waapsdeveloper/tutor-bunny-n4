@@ -32,7 +32,6 @@ export class SelectYearComponent  implements OnInit {
   }
 
   selection(item) {
-    console.log(item);
     this.modals.dismiss(item);
   }
 

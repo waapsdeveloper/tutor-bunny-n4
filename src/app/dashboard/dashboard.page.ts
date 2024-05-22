@@ -47,14 +47,11 @@ export class DashboardPage {
 
   async initialize() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    // console.log(this.user);
     let obj = {
       email: this.user.email,
     };
-    // console.log(obj);
 
     let res = await this.network.getUserByEmail(obj);
-    // console.log(res);
 
   }
 

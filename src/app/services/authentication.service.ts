@@ -13,7 +13,6 @@ export class AuthenticationService {
   googleAuth() {
     return new Promise(async (resolve) => {
       const result = await FirebaseAuthentication.signInWithGoogle();
-      console.log(result);
       resolve(result);
     });
   }
@@ -22,13 +21,10 @@ export class AuthenticationService {
     return new Promise(async (resolve) => {
       try {
         const result = await FirebaseAuthentication.signInWithGoogle();
-        console.log(result);
         const user = result.user;
         if (user) {
-          console.log('User is already authenticated:', user);
           resolve(true);
         } else {
-          console.log('User is not authenticated.');
           resolve(false);
         }
       } catch (error) {
@@ -41,7 +37,6 @@ export class AuthenticationService {
   logout() {
     return new Promise(async (resolve) => {
       const result = await FirebaseAuthentication.signOut();
-      console.log(result);
       resolve(false);
     });
   }

@@ -20,11 +20,7 @@ export class GalleryListComponent implements OnInit {
   async initialize() {
     const user = this.users.getUser();
     const res = await this.network.getImage(user.id) as any;
-    console.log(res);
     this.images = res.result;
-
-
-
   }
 
   setBackgroundImage(item) {

@@ -35,9 +35,6 @@ export class UsersService {
 
     }
 
-
-    console.log(this._user);
-
     if (!this._user) {
       return -1;
     }
