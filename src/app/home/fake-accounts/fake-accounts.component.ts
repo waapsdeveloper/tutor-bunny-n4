@@ -23,8 +23,6 @@ export class FakeAccountsComponent implements OnInit {
   }
 
   async openAccount(item) {
-    // console.log(item);
-
     const res = await this.network.login(item) as any;
     if(res){
       const user = res.user;

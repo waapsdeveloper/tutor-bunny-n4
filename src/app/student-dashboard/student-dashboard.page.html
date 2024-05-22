@@ -1,10 +1,11 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" *ngIf="showWarning == true">
-      </div>
-      <div class="image-box-89656" *ngIf="showWarning == false" (click)="updateProfile()">
-        <img src="../../assets/svg/warning.svg" alt="" class="image-98563">
+      <!-- <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" *ngIf="showWarning == true"> </div> -->
+
+      <!-- *ngIf="showWarning == false" -->
+      <div class="image-box-89656" (click)="updateProfile()"  [style.background-image]="user.image ? 'url(' + user.image + ')' : '/assets/svg/signup.svg'">
+        <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
       </div>
     </div>
     <div class="noti-795">

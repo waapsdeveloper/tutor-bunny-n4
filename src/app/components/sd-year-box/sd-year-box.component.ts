@@ -32,7 +32,6 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
     this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -46,20 +45,14 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
 
   result($event) {
     let v = $event.target.value;
-    // console.log("date-set", v)
     let m = moment(v).format('Y-MM-DD');
-    // console.log(m);
-    // if (!this.isReadOnly) {
     this.onChange.emit(m);
-    // }
   }
 
   async openDateSelection() {
     const res = (await this.modals.present(
       SelectYearComponent)) as any;
     if (res.data) {
-
-      console.log(res.data)
       const d = res.data;
       this.onChange.emit(res.data.name);
 

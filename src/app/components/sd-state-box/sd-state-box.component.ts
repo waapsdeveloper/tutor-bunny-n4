@@ -27,7 +27,6 @@ export class SdStateBoxComponent  implements OnInit {
   @Input()
   public set state(value: any){
     this._state = value;
-    console.log(value);
     if(value && value.name){
       this.selectedState = value;
     }
@@ -61,7 +60,6 @@ export class SdStateBoxComponent  implements OnInit {
   }
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData) => {
-      console.log(formData.state)
       if(!formData.state){
         this.isRequired = true;
         setTimeout( () => {
@@ -77,7 +75,6 @@ export class SdStateBoxComponent  implements OnInit {
       StateListComponent,
       { countryId: this.countryId },
     )) as any;
-    console.log(res);
     if (res.data) {
       this.selectedState = res.data;
       this.onChange.emit(res.data);

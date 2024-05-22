@@ -15,15 +15,9 @@ export class ProfileService {
 
       let flag = true;
       let roleId = parseInt(user.role_id);
-      console.log(roleId);
-
       // Check if the user is a teacher
       if (roleId == 2) {
         if (!user.name || !user.email || !user.student.dial_code || !user.student.phone_number || !user.student.dob ) {
-          flag = false;
-        }
-
-        if (!user.image) {
           flag = false;
         }
 

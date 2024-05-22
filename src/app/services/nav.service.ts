@@ -49,7 +49,6 @@ export class NavService {
   }
 
   navigateTo(link: any, data?: NavigationExtras) {
-    // console.log(link);
     this.router.navigate([link], data);
   }
 
@@ -58,11 +57,6 @@ export class NavService {
   }
 
   getParams() {
-    console.log(
-      'this.activatedRoute.snapshot.params',
-      this.activatedRoute.snapshot.params
-    );
-
     return this.activatedRoute.snapshot.params;
   }
 

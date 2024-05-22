@@ -28,7 +28,6 @@ export class SdInputBoxComponent implements OnInit {
       }
 
       let v = formData[this.key];
-      console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -39,7 +38,6 @@ export class SdInputBoxComponent implements OnInit {
 
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
-      console.log(v, this.key);
       if (this.key == 'title') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -63,18 +61,23 @@ export class SdInputBoxComponent implements OnInit {
 
   result($event) {
     let v = $event.target.value;
-  
+
     if (this.key == 'zip_code') {
       let numericValue: string = v.replace(/\D/g, '');
       ($event.target as HTMLInputElement).value = numericValue;
     }
-  
+
+    if (this.key == 'title') {
+      let maxValue: string = v.substring(0, 100);
+      ($event.target as HTMLInputElement).value = maxValue;
+    }
+
     // Check if the key is 'phone_number' and limit the input to 15 characters
     if (this.key == 'phone_number' && v.length > 15) {
       ($event.target as HTMLInputElement).value = v.slice(0, 15);
       v = ($event.target as HTMLInputElement).value;
     }
-  
+
     if (!this.isReadOnly) {
       this.onChange.emit(v);
     }
@@ -82,7 +85,6 @@ export class SdInputBoxComponent implements OnInit {
 
   onPasteHandler($event){
     const v = $event.clipboardData.getData('text/plain');
-    console.log(v);
     let obj = {
       target: {
         value: v
@@ -92,7 +94,7 @@ export class SdInputBoxComponent implements OnInit {
     this.result(obj);
 
   }
-  
+
 
   clearInput() {
     this.inputText = '';

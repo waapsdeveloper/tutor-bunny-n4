@@ -27,7 +27,6 @@ export class SdLanguageBoxComponent implements OnInit {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      console.log(v)
 
       if(!v || v == ''){
         this.isRequired = true;
@@ -55,10 +54,7 @@ export class SdLanguageBoxComponent implements OnInit {
       LanguageListComponent,
     )) as any;
 
-    console.log(res);
-
     if (res.data) {
-      console.log(res.data);
       this.lang = res.data;
 
       let user = JSON.parse(localStorage.getItem('user'));
@@ -68,17 +64,12 @@ export class SdLanguageBoxComponent implements OnInit {
       }
 
       const res2 = await this.network.addLanguage(obj)
-      console.log(res2);
-
-
-
       this.onChange.emit(res.data);
     }
   }
 
   async removeLanguage(item){
 
-    console.log(item);
     let index = this.lang.findIndex(x => x.id == item.id);
     this.lang.splice(index, 1);
 
@@ -90,8 +81,6 @@ export class SdLanguageBoxComponent implements OnInit {
     }
 
     const res2 = await this.network.removeMyLanguages(obj)
-    console.log(res2);
-
     this.onChange.emit(this.lang);
 
   }

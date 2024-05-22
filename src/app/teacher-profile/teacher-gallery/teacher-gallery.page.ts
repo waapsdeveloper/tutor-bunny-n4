@@ -27,12 +27,9 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   }
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
 
     if (this.params.gallary) {
       this.gallery = this.params.gallary;
-      console.log(this.gallery);
-
     }
 
     if (this.params.title) {
@@ -47,8 +44,6 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   async initialize() {
     const user = this.users.getUser();
     const res = await this.network.getImage(user.id) as any;
-    console.log(res);
-
     this.images = res.result;
   }
   setBackgroundImage(item) {
@@ -57,9 +52,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   }
   async addImageInArray(string) {
-    console.log(this.images)
     let firstIndex = this.images.findIndex(x => x.image == null);
-    console.log(firstIndex);
     if (firstIndex != -1) {
       this.images[firstIndex]['id'] = firstIndex;
       this.images[firstIndex]['image'] = string;
@@ -70,7 +63,6 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
       image: string
     }
     let res = await this.network.postImages(obj)
-    console.log(res);
     let image = res.result.image;
 
     this.events.publish('change-sample-image-to-this', image)
@@ -98,7 +90,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     this.initialize();
 }
   openImage(image){
-    
+
     this.nav.push('/teacher-profile/teacher-gallery/gallery-image', {
 
       backUrl: '/teacher-profile/teacher-gallery',

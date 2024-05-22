@@ -1,6 +1,6 @@
 <ion-tabs  >
   <ion-tab-bar class="ion-tab-bar-67895675" slot="bottom" [class.tab-bar-hight-1]="showTabs" [class.tab-bar-hight-0]="!showTabs" >
-    <ion-tab-button class="ion-tab-button-67895675" tab="dashboard">
+    <ion-tab-button class="ion-tab-button-67895675" [tab]="returnDashboardLink()">
       <img src="assets/icon/home/home-icon.svg" />
       <div class="footer-tab-label">Home</div>
     </ion-tab-button>
@@ -15,7 +15,7 @@
     <ion-tab-button class="ion-tab-button-67895675" tab="search">
       <img src="assets/icon/home/box-icon.svg" />
       <div class="footer-tab-label">Courses</div>
-    </ion-tab-button> 
+    </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="search">
       <img src="../../assets/svg/more.svg" style="height: 24px; width: 24px;"/>
       <div class="footer-tab-label">More</div>

@@ -23,6 +23,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.initialize()
   }
 
+  ionViewWillEnter(){
+    this.initialize()
+  }
+
 
   async initialize() {
     this.user = this.users.getUser();
@@ -35,9 +39,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.user = this.users.getUser();
     }
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
-    console.log(this.showWarning);
-
-
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
   }
@@ -50,6 +51,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     });
   }
 
-  
+
 
 }

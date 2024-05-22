@@ -56,24 +56,18 @@ export class StateListComponent  implements OnInit {
 
 
       this.state = await this.network.getStates(obj) as any[];
-      console.log(this.state);
       this.page = this.state["current_page"];
-      console.log(this.page);
       if (this.page == 1) {
         this.list = this.state["data"];
 
       } else {
         this.list = [...this.list, ...this.state["data"]]
-        console.log(this.list);
-
-
       }
       resolve(true);
     })
   }
   async loadMore($event) {
     this.page = this.state.current_page + 1;
-    console.log(this.page);
     await this.callApi();
     $event.target.complete();
   }
@@ -84,7 +78,6 @@ export class StateListComponent  implements OnInit {
 
   handleInput(event) {
     const query = event.target.value.toLowerCase();
-    console.log(query);
     this.search = query;
     this.page = 1;
     this.callApi();

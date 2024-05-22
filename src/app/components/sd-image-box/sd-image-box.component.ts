@@ -58,7 +58,6 @@ export class SdImageBoxComponent implements OnInit {
 
   initialize() {
     const user = this.users.getUser();
-    console.log(user);
     this.profilePhoto = user.image;
     this.photoId = user.teacher.photo_id;
 
@@ -69,7 +68,6 @@ export class SdImageBoxComponent implements OnInit {
 
     const user = this.users.getUser();
     const res = await this.network.getImage(user.id) as any;
-    console.log(res);
 
     let list = res.result;
     if(list.length > 0){
@@ -85,14 +83,12 @@ export class SdImageBoxComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = async () => {
       const pmi = reader.result as string;
-      console.log(pmi);
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
         image: pmi
       }
       const res = await this.network.postProfileImage(obj)
-      console.log(res);
       this.profilePhoto = res.result.image;
       this.updateImage.emit(this.profilePhoto)
 
@@ -104,15 +100,12 @@ export class SdImageBoxComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = async () => {
       const pmil = reader.result as string;
-      console.log(this.photoId, "dfsfsf");
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
         image: pmil
       }
-      console.log("test", obj);
       const res = await this.network.postPhotoIdImage(obj)
-      console.log(res);
       this.photoId = res.result.image;
       this.updatePhotoId.emit(this.photoId)
     };

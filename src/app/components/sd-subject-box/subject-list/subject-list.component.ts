@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { resolve } from 'path';
 import { ModalService } from 'src/app/services/basic/modal.service';
+import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './subject-list.component.html',
   styleUrls: ['./subject-list.component.scss'],
 })
-export class SubjectListComponent implements OnInit {
+export class SubjectListComponent implements OnInit, OnDestroy {
   list = [];
   sub
   search: "";
@@ -19,16 +20,21 @@ export class SubjectListComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   noSugg = false;
-  subs = [];
+  @Input() subs = [];
   suggestionsList = [];
 
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private modals: ModalService, private network: NetworkService) {
+  constructor(private modals: ModalService, private network: NetworkService, private events: EventsService) {
     this.initialize()
 
+  }
+  ngOnDestroy(): void {
+    this.events.publish('update-subs-list', {
+      subs: this.subs
+    })
   }
   ngOnInit() {
   }
@@ -45,7 +51,6 @@ export class SubjectListComponent implements OnInit {
         page: this.page
       }
       this.sub = await this.network.getSubject(obj) as any[];
-      console.log(this.sub);
       this.page = this.sub.current_page;
       if (this.page == 1) {
         this.list = this.sub["data"];
@@ -69,43 +74,37 @@ export class SubjectListComponent implements OnInit {
   }
   selectedsubject() {
     let list = this.list.filter(x => x.checked == true);
-    console.log(list);
     this.modals.dismiss(list);
   }
   async openSubjectSelection() {
     const res = (await this.modals.present(
       SubjectListComponent,
     )) as any;
-    console.log(res);
+
     if (res.data) {
-      console.log(res.data);
       this.onChange.emit(res.data);
     }
   }
 
   async addSubject() {
-    console.log(this.inputText)
 
     let user = JSON.parse(localStorage.getItem('user'));
-
     if (this.inputText) {
       let obj = {
         user_id: user.id,
         name: this.inputText
       }
       const res = await this.network.addSubject(obj)
-      console.log(res);
-
       const res2 = await this.network.getMySubjects(obj)
-      console.log(res2);
-
 
       this.inputText = '';
       this.subs = res2.result;
       this.suggestionsList = [];
 
 
-      this.onChange.emit(res2.result);
+      this.onChange.emit({
+        subs: this.subs
+      });
     }
   }
 
@@ -122,8 +121,9 @@ export class SubjectListComponent implements OnInit {
       search: v,
       perpage: 5
     }
+
+    this.suggestionsList = [];
     const res = await this.network.getSubject(obj);
-    console.log(res);
     if (res.data) {
       this.suggestionsList = res.data;
     }
@@ -144,22 +144,20 @@ export class SubjectListComponent implements OnInit {
       name: item.name
     }
     const res = await this.network.addSubject(obj)
-    console.log(res);
-
     const res2 = await this.network.getMySubjects(obj)
-    console.log(res2);
 
 
     this.inputText = '';
     this.subs = res2.result;
     this.suggestionsList = [];
 
-    this.onChange.emit(res2.result);
+    this.onChange.emit({
+      subs: this.subs
+    });
 
   }
 
   async removeMySubject(item) {
-    console.log(item);
     let index = this.subs.findIndex(x => x.id == item.id);
     this.subs.splice(index, 1);
 
@@ -171,8 +169,9 @@ export class SubjectListComponent implements OnInit {
     }
 
     const res2 = await this.network.removeMySubjects(obj)
-    console.log(res2);
-    this.onChange.emit(this.subs);
+    this.onChange.emit({
+      subs: this.subs
+    });
 
 
   }
@@ -192,7 +191,6 @@ export class SubjectListComponent implements OnInit {
 
   handleInput(event) {
     const query = event.target.value.toLowerCase();
-    console.log(query);
     this.search = query;
     this.page = 1;
     this.callApi();
@@ -201,10 +199,12 @@ export class SubjectListComponent implements OnInit {
   }
 
   selectedSubjects() {
-    let list = this.list.filter(x => x.checked == true);
-    console.log(list);
-    this.modals.dismiss(list);
+    this.modals.dismiss({
+      subs: this.subs
+    });
   }
+
+
 
 
 }

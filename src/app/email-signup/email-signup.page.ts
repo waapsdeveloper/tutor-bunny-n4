@@ -28,7 +28,6 @@ export class EmailSignupPage extends BasePage implements OnInit {
   async setCurrentRole(role_id) {
 
     const f = this.formData;
-    console.log("form", f);
     this.events.publish('teacher-profile-first-screen-submit-call', f)
     if (!f.name || !f.email || !f.password) {
       return

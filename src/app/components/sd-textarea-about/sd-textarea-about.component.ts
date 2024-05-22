@@ -26,7 +26,6 @@ export class SdTextareaAboutComponent implements OnInit {
       }
 
       let v = formData[this.key];
-      console.log(v)
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -37,7 +36,6 @@ export class SdTextareaAboutComponent implements OnInit {
 
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
-      console.log(v, this.key)
       if (this.key == 'description') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -46,7 +44,7 @@ export class SdTextareaAboutComponent implements OnInit {
           }, 5000);
           return
         }
-        
+
         if (v && v.length < 400) {
           this.isRequired = true;
           this.errorText = 'The About field should have minimum 400 characters'
@@ -62,10 +60,28 @@ export class SdTextareaAboutComponent implements OnInit {
 
   result($event) {
     let v = $event.target.value;
+
+    if (this.key == 'description') {
+      let maxValue: string = v.substring(0, 400);
+      ($event.target as HTMLInputElement).value = maxValue;
+    }
+
     this.onChange.emit(v)
   }
   clearInput() {
     this.inputText = '';
     this.onChange.emit('')
+  }
+
+  onPasteHandler($event){
+    const v = $event.clipboardData.getData('text/plain');
+    let obj = {
+      target: {
+        value: v
+      }
+    }
+
+    this.result(obj);
+
   }
 }
