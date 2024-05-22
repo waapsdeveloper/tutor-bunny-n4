@@ -30,8 +30,8 @@ export class StatisticBoxComponent  implements OnInit {
     },
     {
       nbl: '0',
-      label: 'Inactive',
-      colorClass: 'nbl-danger'
+      label: 'Students',
+      colorClass: ''
     }
   ]
   constructor() { }

@@ -84,6 +84,7 @@ export class SdInputBoxComponent implements OnInit {
   }
 
   onPasteHandler($event) {
+    
     const v = $event.clipboardData.getData('text/plain');
     let obj = {
       target: {
