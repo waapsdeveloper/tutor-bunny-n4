@@ -10,6 +10,8 @@ import { ProfileService } from "../services/profile.service";
 
 export abstract class BasePage {
 
+  directionObj = {};
+
   public network: NetworkService;
   public utility: UtilityService;
   public nav: NavService;
@@ -30,27 +32,33 @@ export abstract class BasePage {
 
   private lastScrollTop: number = 0;
   onScroll(event: CustomEvent) {
+    console.log(event);
+    
     const currentScrollTop = event.detail.scrollTop;
 
     if (currentScrollTop > this.lastScrollTop) {
-      // Handle downward scroll event
       let obj = {
         direction: 'down'
       }
-      this.events.publish('page-scroll-event', obj)
+
+      this.directionObj = obj;
 
     } else {
-      // Handle upward scroll event or no change
       let obj = {
         direction: 'up'
       }
-      this.events.publish('page-scroll-event', obj)
-
-
-
+      this.directionObj = obj;
     }
 
     this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
+    // console.log(this.lastScrollTop);
+    
+  }
+
+  onScrollEnd(event: CustomEvent){
+    // console.log(event);
+    
+    this.events.publish('page-scroll-event', this.directionObj)
   }
 
 

@@ -30,7 +30,7 @@
   </div>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" [scrollEvents]="true"  (ionScroll)="onScroll($event)">
+<ion-content class="ion-content-bg ion-padding" [scrollEvents]="true"  (ionScroll)="onScroll($event)"  (ionScrollEnd)="onScrollEnd($event)" >
   <app-profile-search-box></app-profile-search-box>
 
   <div class="body-content-68448" style="margin-top: 16px;">
@@ -44,6 +44,9 @@
       </div>
     </div>
     <!-- <app-rec-teachers></app-rec-teachers> -->
+    <app-rec-courses></app-rec-courses>
+    <app-rec-courses></app-rec-courses>
+    <app-rec-courses></app-rec-courses>
     <app-rec-courses></app-rec-courses>
 
   </div>
