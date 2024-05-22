@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -7,11 +8,12 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './gallery-list.component.html',
   styleUrls: ['./gallery-list.component.scss'],
 })
-export class GalleryListComponent implements OnInit {
+export class GalleryListComponent extends BasePage implements OnInit {
   user;
   images = []
   list;
-  constructor(private network: NetworkService, public users: UsersService) {
+  constructor( injector:Injector) {
+    super(injector)
     this.initialize();
   }
 
@@ -27,6 +29,14 @@ export class GalleryListComponent implements OnInit {
 
     return `url('${item.image}')`
 
+  }
+  openImage(image){
+
+    this.nav.push('/teacher-profile/teacher-gallery/gallery-image', {
+
+      backUrl: '/tabs/teacher-profile',
+      image: image,
+    })
   }
 
 }

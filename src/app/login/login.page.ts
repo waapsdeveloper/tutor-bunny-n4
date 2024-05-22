@@ -62,7 +62,8 @@ export class LoginPage extends BasePage implements OnInit {
     let res = await this.network.signUpviaEmail(obj) as any;
     if(res){
       this.users.setUser(res.user);
-      this.modals.dismiss(res.user)
+      this.formData.password = null;
+     this.step = 'login'
     }
 
   }
