@@ -17,10 +17,14 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
+    this.initialize()
   }
 
   ngOnInit() {
-    this.initialize()
+    this.events.subscribe('get-user-after-submit-form', (data) => {
+      this.initialize()
+
+    })
   }
 
   ionViewWillEnter(){

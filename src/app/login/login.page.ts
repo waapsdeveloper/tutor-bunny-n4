@@ -25,6 +25,7 @@ export class LoginPage extends BasePage implements OnInit {
     this.formData[key] = value;
   }
   async submit() {
+    this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     if (!this.formData.email || !this.formData.password) {
       return
     }
@@ -45,7 +46,8 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   async SignUpWithEmail() {
-    if (!this.formData.email || !this.formData.password || !this.formData.name) {
+    this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+    if (!this.formData.email || !this.formData.password || !this.formData.name || !this.formData.confirm_password) {
       return
     }
     let key = localStorage.getItem('role');
@@ -53,6 +55,7 @@ export class LoginPage extends BasePage implements OnInit {
       email: this.formData.email,
       password: this.formData.password,
       name: this.formData.name,
+      confirm_password:this.formData.confirm_password,
       login_type: "email",
       role_id: key
     }
