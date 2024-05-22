@@ -25,14 +25,15 @@ export class TabsPage implements OnInit {
 
   pageScrollCondition(data){
 
-    let direction = data.direction;
-    if(direction == 'up'){
-      this.showTabs = true;
-    }
+    this.showTabs = data.hide;
+    // let direction = data.direction;
+    // if(direction == 'up'){
+    //   this.showTabs = true;
+    // }
 
-    if(direction == 'down'){
-      this.showTabs = false;
-    }
+    // if(direction == 'down'){
+    //   this.showTabs = false;
+    // }
   }
 
   initialize(){

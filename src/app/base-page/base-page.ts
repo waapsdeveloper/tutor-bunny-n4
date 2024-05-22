@@ -28,37 +28,52 @@ export abstract class BasePage {
     this.events = injector.get(EventsService);
     this.nav = injector.get(NavService);
     this.modals = injector.get(ModalService);
-}
-
-  private lastScrollTop: number = 0;
-  onScroll(event: CustomEvent) {
-    console.log(event);
-    
-    const currentScrollTop = event.detail.scrollTop;
-
-    if (currentScrollTop > this.lastScrollTop) {
-      let obj = {
-        direction: 'down'
-      }
-
-      this.directionObj = obj;
-
-    } else {
-      let obj = {
-        direction: 'up'
-      }
-      this.directionObj = obj;
-    }
-
-    this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
-    // console.log(this.lastScrollTop);
-    
   }
 
-  onScrollEnd(event: CustomEvent){
+  private hiddenTabs: boolean = false;
+  // onScroll(event: CustomEvent) {
+  //   console.log(event);
+
+  //   const currentScrollTop = event.detail.scrollTop;
+
+  //   if (currentScrollTop > this.lastScrollTop) {
+  //     let obj = {
+  //       direction: 'down'
+  //     }
+
+  //     this.directionObj = obj;
+
+  //   } else {
+  //     let obj = {
+  //       direction: 'up'
+  //     }
+  //     this.directionObj = obj;
+  //   }
+
+  //   this.lastScrollTop = currentScrollTop;
+  //   // console.log(this.lastScrollTop);
+
+  // }
+
+  onScroll(event) {
+    // used a couple of "guards" to prevent unnecessary assignments if scrolling in a direction and the var is set already:
+    if (event.detail.deltaY > 0 && this.hiddenTabs) return;
+    if (event.detail.deltaY < 0 && !this.hiddenTabs) return;
+    if (event.detail.deltaY > 0) {
+      console.log("scrolling down, hiding footer...");
+      this.hiddenTabs = false;
+    } else {
+      console.log("scrolling up, revealing footer...");
+      this.hiddenTabs = true;
+    };
+  };
+
+  onScrollEnd(event: CustomEvent) {
     // console.log(event);
-    
-    this.events.publish('page-scroll-event', this.directionObj)
+
+    this.events.publish('page-scroll-event', {
+      hide: this.hiddenTabs
+    })
   }
 
 
