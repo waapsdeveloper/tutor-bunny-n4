@@ -81,18 +81,46 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       scrollElement.scrollHeight - scrollElement.clientHeight
     ) {
       console.info('max bottom was reached!');
-      this.events.publish('page-scroll-event', {
-        hide: true
-      })
+
       return;
     }
 
-    console.log(scrollElement)
+    // console.log(event )
+    let startY = event.detail.startY;
+    let currentY = event.detail.currentY;
+
+
+    const diff = startY - currentY;
+    console.log(startY, currentY, diff);
+    if(diff != 0 && startY < currentY ){
+      localStorage.setItem('efr', 'hide');
+    }
+
+    if(diff != 0 && startY > currentY ){
+      localStorage.setItem('efr', 'show');
+    }
+    // this.events.publish('page-scroll-event', {
+    //   hide: true
+    // })
+
+    // console.log(scrollElement)
 
   }
 
+  private isThrottled: boolean = false;
   onScrollEnd(event: any){
+    if (this.isThrottled) {
+      return;
+    }
 
+    this.isThrottled = true;
+    this.events.publish('page-scroll-event-end', {
+      showTabs: false
+    });
+
+    setTimeout(() => {
+      this.isThrottled = false;
+    }, 800); // 2 seconds
   }
 
 
