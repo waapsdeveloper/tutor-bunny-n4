@@ -152,7 +152,14 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   async onSlideChange() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
+    console.log(f);
+    
     if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.city || !f.zip_code || !f.languages || !f.subjects) {
+      return
+    }
+    if (f.languages.length == 0) {
+      console.log(f.teacher.languages.length);
+      
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
@@ -183,12 +190,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
       return
     }
-    if (f.teacher.languages.length == 0) {
-      console.log(f.teacher.languages.length);
-      
-      return
-    }
-    if (f.teacher.subjects.length == 0) {
+   
+    if (f.subjects.length == 0) {
       return
     }
 

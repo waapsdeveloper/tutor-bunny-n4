@@ -64,7 +64,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
   openEditProfile() {
     this.nav.push('/teacher-profile/teacher-profile-edit', {
-      backUrl: '/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
+      backUrl: '/tabs/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
     })
   }
   getFlag(){
