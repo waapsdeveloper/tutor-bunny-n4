@@ -15,7 +15,22 @@ export class LanguageListComponent extends BasePage implements OnInit {
   search: "";
   param;
   page = 1;
-  @Input() obj;
+
+  private _preSelectedLanguages: any[] = [];
+  @Input('preSelectedLanguages')
+  public get preSelectedLanguages(){
+    return this._preSelectedLanguages;
+  };
+
+  public set preSelectedLanguages(value: any[]) {
+    this._preSelectedLanguages = value;
+
+  }
+
+
+
+
+
   searchTerm: string = '';
   selectedContactId: any = null;
   constructor(injector: Injector) {
@@ -26,7 +41,7 @@ export class LanguageListComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
-    console.log(this.obj);
+
 
     this.search = "";
     this.page = 1;
@@ -54,12 +69,28 @@ export class LanguageListComponent extends BasePage implements OnInit {
         page: this.page
       }
       this.lang = await this.network.getLanguage(obj) as any[];
+
+
+
+
+
+
       this.page = this.lang.current_page;
       if (this.page == 1) {
         this.list = this.lang["data"];
       } else {
         this.list = [...this.list, ...this.lang["data"]]
       }
+
+      // // set selected languages
+      this.list = this.list.map( (item) => {
+        const fi = this.preSelectedLanguages.find(x => x.id == item.id);
+        if(fi){
+          item.checked = true;
+        }
+        return item;
+      });
+
       resolve(true);
     })
   }

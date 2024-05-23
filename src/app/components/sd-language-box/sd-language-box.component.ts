@@ -51,7 +51,7 @@ export class SdLanguageBoxComponent implements OnInit {
   async openLanguageSelection() {
 
     let obj = {
-      lang: this.language
+      preSelectedLanguages: this.language
     }
 
     const res = (await this.modals.present(

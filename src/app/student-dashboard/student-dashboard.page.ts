@@ -123,6 +123,4 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     }, 800); // 2 seconds
   }
 
-
-
 }
