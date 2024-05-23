@@ -1,10 +1,8 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<!-- <ion-header class="ion-no-border ion-no-shadow">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <!-- <div class="image-box-89657" [style.background-image]="'url(' + user.image + ')'" *ngIf="showWarning == true"> </div> -->
-
-      <!-- *ngIf="showWarning == false" -->
-      <div class="image-box-89656" (click)="updateProfile()"  [style.background-image]="user.image ? 'url(' + user.image + ')' : '/assets/svg/signup.svg'">
+      <div class="image-box-89656" (click)="updateProfile()"
+        [style.background-image]="user.image ? 'url(' + user.image + ')' : '/assets/svg/signup.svg'">
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
       </div>
     </div>
@@ -18,19 +16,56 @@
             <img class="icon-box-77" src="assets/icon/heart.svg" />
           </div>
           <div class="icon-box-77">
-            <img  class="icon-box-77"src="assets/icon/notification-bell.svg" />
+            <img class="icon-box-77" src="assets/icon/notification-bell.svg" />
           </div>
         </div>
       </div>
-      <div class="name-box">
-        <div class="pl-heading outfit-semibold" style="color: black;">Hi, {{displayName}}</div>
-        <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
+      <div class="flag-box">
+        <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+        <div class="name-box">
+          <div class="pl-heading outfit-semibold" style="color: black;">Hi, {{displayName}}</div>
+          <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header> -->
+
+<ion-header class="ion-no-border ion-no-shadow ion-header-bg">
+  <div class="profile-bc-header-678956">
+    <div class="pl-box-785">
+      <div class="image-box-89656" (click)="updateProfile()"
+        [style.background-image]="user.image ? 'url(' + user.image + ')' : '/assets/svg/signup.svg'">
+        <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
+      </div>
+    </div>
+    <div class="noti-795">
+      <div class="icon-box">
+        <div class="icon-box-outer">
+          <div class="icon-box-77">
+            <img class="icon-box-77" src="assets/icon/header-search.svg" />
+          </div>
+          <div class="icon-box-77">
+            <img class="icon-box-77" src="assets/icon/heart.svg" />
+          </div>
+          <div class="icon-box-77">
+            <img class="icon-box-77" src="assets/icon/notification-bell.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="flag-box">
+        <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+        <div class="name-box">
+          <div class="pl-heading outfit-semibold" style="color: black;">Hi, {{displayName}}</div>
+          <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
+        </div>
       </div>
     </div>
   </div>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" [scrollEvents]="true"  (ionScroll)="onScroll($event)"  (ionScrollEnd)="onScrollEnd($event)" >
+<ion-content class="ion-content-bg ion-padding" [scrollEvents]="true" (ionScroll)="onScroll($event)"
+  (ionScrollEnd)="onScrollEnd($event)">
   <app-profile-search-box></app-profile-search-box>
 
   <div class="body-content-68448" style="margin-top: 16px;">

@@ -9,7 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class GalleryImagePage extends BasePage implements OnInit {
 params
 backBtn ='';
-image= " "
+image= ""
 
   constructor(injector:Injector) { 
 

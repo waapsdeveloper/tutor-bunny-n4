@@ -14,13 +14,18 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   user;
   displayName: string = '';
   showWarning = false;
+  flag;
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
+    this.initialize()
   }
 
   ngOnInit() {
-    this.initialize()
+    this.events.subscribe('get-user-after-submit-form', (data) => {
+      this.initialize()
+
+    })
   }
 
   ionViewWillEnter(){
@@ -37,10 +42,25 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
+      this.flag = this.getFlag();
     }
+    console.log(res);
+    
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
+  }
+  getFlag(){
+    if(this.user && this.user.student && this.user.student.country){
+      const flag = this.user.student.country.iso2;
+      if(flag){
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
+      return ""
+    }
   }
 
 

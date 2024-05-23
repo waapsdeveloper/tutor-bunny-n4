@@ -17,16 +17,16 @@ export class SdInputBoxComponent implements OnInit {
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
   isRequired = false;
+  @Input() image = ''
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private events: EventsService) {}
+  constructor(private events: EventsService) { }
 
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
       if (this.key == 'title' || this.key == 'description') {
         return;
       }
-
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;
@@ -35,7 +35,7 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
       }
     }, false);
-
+    
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
       if (this.key == 'title') {
@@ -83,7 +83,8 @@ export class SdInputBoxComponent implements OnInit {
     }
   }
 
-  onPasteHandler($event){
+  onPasteHandler($event) {
+
     const v = $event.clipboardData.getData('text/plain');
     let obj = {
       target: {
@@ -91,7 +92,7 @@ export class SdInputBoxComponent implements OnInit {
       }
     }
 
-    this.result(obj);
+    this.onChange.emit(v);
 
   }
 
