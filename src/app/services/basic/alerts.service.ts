@@ -52,6 +52,7 @@ export class AlertsService {
       message: this.strings.capitalizeEachFirst((msg) ? msg : 'ERROR'),
       duration: 5000,
       position: 'top',
+      color: "danger",
       cssClass: 'failureToast'
     });
 
