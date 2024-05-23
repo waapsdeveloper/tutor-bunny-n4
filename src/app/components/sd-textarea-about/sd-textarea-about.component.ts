@@ -61,10 +61,6 @@ export class SdTextareaAboutComponent implements OnInit {
   result($event) {
     let v = $event.target.value;
 
-    if (this.key == 'description') {
-      let maxValue: string = v.substring(0, 400);
-      ($event.target as HTMLInputElement).value = maxValue;
-    }
 
     this.onChange.emit(v)
   }
