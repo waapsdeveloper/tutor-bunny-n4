@@ -91,16 +91,23 @@ ion-header {
   --box-shadow: none !important;
 }
 
-.button-read{
+.button-read {
   background-color: --tb-page-bg-color;
 }
 
 .failureToast {
+
   .toast-container {
-    background-color: yellow;
+    background-color: rgb(255, 0, 0);
+
+    .toast-content {
+      background-color: rgb(255, 0, 0);
+
+      .toast-message {
+        color: rgb(255, 255, 255);
+      }
+
+    }
   }
 
-  .toast-md .toast-message {
-    color: red;
-  }
 }
