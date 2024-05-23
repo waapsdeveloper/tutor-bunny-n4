@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="backBtn" [title]="title"></app-sd-header-top>
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <form>
@@ -54,7 +54,7 @@
             <div class="input-box-lines languages">
               <div class="language">
                 <app-sd-language-box (onChange)="result($event, 'languages')" placeholder="Select Languages"
-                  [key]="'languages'" [errorText]="'Languages is required'"></app-sd-language-box>
+                  [key]="'languages'" [errorText]="'Language is required'"></app-sd-language-box>
               </div>
             </div>
           </div>

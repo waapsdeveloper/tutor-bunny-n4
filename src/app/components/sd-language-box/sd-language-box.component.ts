@@ -14,7 +14,7 @@ export class SdLanguageBoxComponent implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
-  lang = [];
+  language = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
@@ -28,9 +28,9 @@ export class SdLanguageBoxComponent implements OnInit {
 
       let v = formData[this.key];
 
-      if(!v || v == ''){
+      if (!v || v == '') {
         this.isRequired = true;
-        setTimeout( () => {
+        setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
@@ -44,23 +44,28 @@ export class SdLanguageBoxComponent implements OnInit {
     }
 
     const res2 = await this.network.getMyLanguages(obj)
-    this.lang = res2.result;
-    this.onChange.emit(this.lang);
+    this.language = res2.result;
+    this.onChange.emit(this.language);
   }
 
   async openLanguageSelection() {
 
+    let obj = {
+      lang: this.language
+    }
+
     const res = (await this.modals.present(
       LanguageListComponent,
+      obj
     )) as any;
 
     if (res.data) {
-      this.lang = res.data;
+      this.language = res.data;
 
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
-        languages: this.lang.map(x => x.id)
+        languages: this.language.map(x => x.id)
       }
 
       const res2 = await this.network.addLanguage(obj)
@@ -68,10 +73,10 @@ export class SdLanguageBoxComponent implements OnInit {
     }
   }
 
-  async removeLanguage(item){
+  async removeLanguage(item) {
 
-    let index = this.lang.findIndex(x => x.id == item.id);
-    this.lang.splice(index, 1);
+    let index = this.language.findIndex(x => x.id == item.id);
+    this.language.splice(index, 1);
 
     let user = JSON.parse(localStorage.getItem('user'));
 
@@ -81,7 +86,7 @@ export class SdLanguageBoxComponent implements OnInit {
     }
 
     const res2 = await this.network.removeMyLanguages(obj)
-    this.onChange.emit(this.lang);
+    this.onChange.emit(this.language);
 
   }
 

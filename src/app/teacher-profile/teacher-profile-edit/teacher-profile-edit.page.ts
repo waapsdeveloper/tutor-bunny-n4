@@ -21,6 +21,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   params: any;
   backUrl = '/teacher-profile';
   btn: any;
+  showBack
   title = "Create profile";
   backBtn = false;
   formData: any = {
@@ -61,6 +62,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
+
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -68,6 +71,10 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
     if (this.params.title) {
       this.title = this.params.title;
+    }
+
+    if (this.params.showBack) {
+      this.showBack = this.params.showBack;
     }
 
 
@@ -79,6 +86,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
+    console.log(res);
+    
     if (res) {
       this.users.setUser(res.user);
       this.setFormDta(res.user);
@@ -174,6 +183,14 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
       return
     }
+    if (f.teacher.languages.length == 0) {
+      console.log(f.teacher.languages.length);
+      
+      return
+    }
+    if (f.teacher.subjects.length == 0) {
+      return
+    }
 
     if (!f.image || !f.photo_id) {
       return;
@@ -186,7 +203,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
     console.log(res);
-    
+
     this.nav.push('/tabs/teacher-dashboard')
 
   }

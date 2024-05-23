@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -8,21 +9,25 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './language-list.component.html',
   styleUrls: ['./language-list.component.scss'],
 })
-export class LanguageListComponent implements OnInit {
+export class LanguageListComponent extends BasePage implements OnInit {
   list = [];
-  lang
+  lang;
   search: "";
+  param;
   page = 1;
+  @Input() obj;
   searchTerm: string = '';
   selectedContactId: any = null;
-  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
-
+  constructor(injector: Injector) {
+    super(injector)
   }
   ngOnInit() {
     this.initialize()
   }
 
   async initialize() {
+    console.log(this.obj);
+
     this.search = "";
     this.page = 1;
     this.callApi();
@@ -43,7 +48,7 @@ export class LanguageListComponent implements OnInit {
     $event.target.complete();
   }
   callApi() {
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
       let obj = {
         search: this.search,
         page: this.page
@@ -69,7 +74,7 @@ export class LanguageListComponent implements OnInit {
     // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }
 
-  capitalizeFirst(string){
+  capitalizeFirst(string) {
     return this.utility.capitalizeEachFirst(string)
   }
 
