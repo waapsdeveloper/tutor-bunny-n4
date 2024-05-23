@@ -25,7 +25,7 @@ export class TabsPage implements OnInit {
 
   pageScrollCondition(data){
 
-    this.showTabs = data.hide;
+    this.showTabs = !data.hide;
     // let direction = data.direction;
     // if(direction == 'up'){
     //   this.showTabs = true;

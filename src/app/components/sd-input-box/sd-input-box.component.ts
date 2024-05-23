@@ -35,7 +35,7 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
       }
     }, false);
-    
+
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
       if (this.key == 'title') {
@@ -83,17 +83,22 @@ export class SdInputBoxComponent implements OnInit {
     }
   }
 
-  onPasteHandler($event) {
-
+  onPasteHandler($event){
     const v = $event.clipboardData.getData('text/plain');
-    let obj = {
-      target: {
-        value: v
-      }
-    }
+    // let obj = {
+    //   target: {
+    //     value: v
+    //   }
+    // }
 
-    this.onChange.emit(v);
+    // this.result(obj);
 
+  }
+
+  modelChange($event){
+    console.log($event);
+    let v = $event;
+    this.onChange.emit(v)
   }
 
 
