@@ -61,10 +61,10 @@ export abstract class BasePage {
     if (event.detail.deltaY < 0 && !this.hiddenTabs) return;
     if (event.detail.deltaY > 0) {
       console.log("scrolling down, hiding footer...");
-      this.hiddenTabs = false;
+      this.hiddenTabs = true;
     } else {
       console.log("scrolling up, revealing footer...");
-      this.hiddenTabs = true;
+      this.hiddenTabs = false;
     };
   };
 
