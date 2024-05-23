@@ -81,10 +81,18 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       scrollElement.scrollHeight - scrollElement.clientHeight
     ) {
       console.info('max bottom was reached!');
+      this.events.publish('page-scroll-event', {
+        hide: true
+      })
       return;
     }
 
-    this.debouncedScrollHandler(event);
+    console.log(scrollElement)
+
+  }
+
+  onScrollEnd(event: any){
+
   }
 
 
