@@ -20,20 +20,15 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('page-scroll-event', this.pageScrollCondition.bind(this), false)
+    this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }
 
-  pageScrollCondition(data){
+  pageScrollConditionEnd(data){
+    const efr = localStorage.getItem('efr');
+    if(efr){
+      this.showTabs = efr == 'show'// this.efr;
+    }
 
-    this.showTabs = !data.hide;
-    // let direction = data.direction;
-    // if(direction == 'up'){
-    //   this.showTabs = true;
-    // }
-
-    // if(direction == 'down'){
-    //   this.showTabs = false;
-    // }
   }
 
   initialize(){
