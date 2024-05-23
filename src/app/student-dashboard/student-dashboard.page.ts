@@ -1,8 +1,9 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { NavService } from '../services/nav.service';
 import { NetworkService } from '../services/network.service';
 import { BasePage } from '../base-page/base-page';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -15,6 +16,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   displayName: string = '';
   showWarning = false;
   flag;
+  @ViewChild('content', {static: true}) content: IonContent;
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
@@ -45,7 +47,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
     console.log(res);
-    
+
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
@@ -69,6 +71,20 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.nav.push('/student-profile/student-profile-edit', {
       backUrl: '/tabs/student-dashboard', showBack: true
     });
+  }
+
+  async onScroll(event: any) {
+
+    const scrollElement = await this.content.getScrollElement();
+    if (
+      scrollElement.scrollTop ===
+      scrollElement.scrollHeight - scrollElement.clientHeight
+    ) {
+      console.info('max bottom was reached!');
+      return;
+    }
+
+    this.debouncedScrollHandler(event);
   }
 
 
