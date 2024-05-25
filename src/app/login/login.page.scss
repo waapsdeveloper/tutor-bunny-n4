@@ -31,7 +31,7 @@
 }
 
 .image{
-  height: 30px;
+  height: 18px;
 }
 
 .sign-up-box{
@@ -39,4 +39,17 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+}
+.not-have-account{
+  color: #A2A2A2;
+}
+.sign-up-span{
+  color: #454545;
+}
+
+.input-title-2{
+    font-size: 14px;
+    color: black;
+    margin-bottom: 3px;
+    text-align: end;
 }
