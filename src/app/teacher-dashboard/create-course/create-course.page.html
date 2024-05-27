@@ -1,0 +1,30 @@
+<ion-header>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <img src="assets/icon/home/my-corces.svg" class="image" alt="">
+      <div class="header-title  roboto-regular ">Create</div>
+    </div>
+    <div class="header-right-items-78956" (click)="back()">
+      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    </div>
+  </div>
+
+</ion-header>
+<ion-content class="ion-padding ">
+  <div class="content-outer-98540">
+
+    <div class="content-image-98541">
+      <img src="../../../assets/svg/course-back.svg" alt="">
+    </div>
+    <div class="course-button-outer-98542">
+      <div class="course-button-inter-98543">
+        <div class="course-button-text">What do you want to create?</div>
+        <app-sd-button-gray [text]="'Monthly subscription course'"
+          (click)="setcourseType('1', 'Create Subscription Course ')"></app-sd-button-gray>
+        <app-sd-button-clear [text]="'Crash Course/Events/workshop'"
+          (click)="setcourseType('2', 'Create Crash Course')"></app-sd-button-clear>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

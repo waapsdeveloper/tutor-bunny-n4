@@ -1,0 +1,22 @@
+
+
+<ion-header>
+  <app-sd-header-top [showBack]="false" [title]="'Languages'"></app-sd-header-top>
+  <ion-searchbar class="fs-16 outfit" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of list" >
+      <div class="fs-16 outfit">{{ item.name}}</div>
+      <ion-radio slot="start" [(ngModel)]="item.checked"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+<ion-footer class="ion-padding">
+  <app-sd-button-gray [text]="'Save'" (click)="selectedLanguage()"></app-sd-button-gray>
+</ion-footer>

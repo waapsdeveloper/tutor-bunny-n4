@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title"></app-sd-header-top>
+</ion-header>
+<ion-content class="ion-padding ion-content-medium-background">
+  <form>
+    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
+      <swiper-slide>
+        <div class="body-content-68448">
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Title</div>
+            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
+              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+              [maxlength]="100"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Details</div>
+            <app-sd-textarea-about placeholder="Provide the brief details of the course (Minimum 250 characters)"
+              (onChange)="result($event, 'detail')" [inputText]="formData.detail" [key]="'detail'"
+              [errorText]="'detail is required'" [minlength]="400"></app-sd-textarea-about>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-12 roboto-medium">Language of communication</div>
+            <app-course-language placeholder="Select" (onChange)="result($event, 'language')" [country]="formData.language"
+              [key]="'language'" [errorText]="'language is required'"></app-course-language>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+
+      </swiper-slide>
+    </swiper-container>
+  </form>
+</ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
+  <div class="d-flex flex-column gap-16">
+    <div class="number-selection-outer-678956">
+      <div class="number-box-7896">
+        <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
+        <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>
+      </div>
+      <div class="center-line-hr-96895"></div>
+    </div>
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Save'" *ngIf="step == 2"></app-sd-button-gray>
+    </div>
+  </div>
+
+</ion-footer>

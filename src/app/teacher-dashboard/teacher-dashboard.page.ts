@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { NetworkService } from '../services/network.service';
 import { FirebaseService } from '../services/firebase.service';
 import { BasePage } from '../base-page/base-page';
+import { CreateCoursePage } from './create-course/create-course.page';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -98,4 +99,21 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     const params = { user_id: this.user.id, showBack: true };
     this.nav.push('/tabs/teacher-profile', params );
   }
+
+  async createCourse(){
+    let res = await this.modals.present(CreateCoursePage,{}, "", 0.6)
+    console.log(res);
+
+
+    const params = {
+       backUrl: '/tabs/teacher-dashboard',
+       title: res.data.title,
+       type: res.data.type,
+
+      };
+      console.log(params);
+      
+    this.nav.push('/course-form', params)
+  }
+
 }

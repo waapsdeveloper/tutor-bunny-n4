@@ -60,6 +60,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'course-form',
+    loadChildren: () => import('./course-form/course-form.module').then( m => m.CourseFormPageModule)
+  },
 
   
 
