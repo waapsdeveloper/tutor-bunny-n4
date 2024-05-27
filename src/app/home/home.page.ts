@@ -14,7 +14,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   loading = false;
   googleauth;
   params: any;
-
+  role_Id;
   constructor(
     injector: Injector,
     public authService: AuthenticationService,
@@ -24,6 +24,14 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
+    // console.log(this.params);
+
+    if (this.params.role) {
+      this.role_Id = this.params.role;
+      console.log(this.role_Id);
+
+    }
+
   }
 
 
@@ -54,6 +62,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   async continueWithFake() {
+
     const res = await this.modals.present(FakeAccountsComponent, {
       role: this.params.role
     }, '', 0.5);
@@ -65,7 +74,9 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   async gotoEmailDashboard() {
-    let res = await this.modals.present(LoginPage, {}, "", 0.7);
+    let res = await this.modals.present(LoginPage, {
+      role: this.params.role
+    }, "", 0.7);
 
     if (res.data) {
       let user = res.data;

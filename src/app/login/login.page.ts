@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
 
 @Component({
@@ -13,7 +13,18 @@ export class LoginPage extends BasePage implements OnInit {
     email: null,
     password: null,
   };
+  private _role: any[] = [];
+  @Input('preSelectedLanguages')
+  public get role(){
+    return this._role;
+  };
 
+  public set role(value: any[]) {
+    this._role = value;
+    console.log(this._role);
+    
+
+  }
   constructor(injector: Injector) {
     super(injector)
   }
@@ -31,7 +42,8 @@ export class LoginPage extends BasePage implements OnInit {
     }
     let obj = {
       email: this.formData.email,
-      password: this.formData.password
+      password: this.formData.password,
+      role_id: this._role
     }
     const res = await this.network.loginViaEmail(obj) as any;
     if(res){

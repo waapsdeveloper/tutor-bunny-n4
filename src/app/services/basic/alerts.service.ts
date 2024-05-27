@@ -41,6 +41,7 @@ export class AlertsService {
       message: this.strings.capitalizeEachFirst(msg),
       duration: 5000,
       position: 'top',
+      color: "success",
       cssClass: 'successToast'
     });
 

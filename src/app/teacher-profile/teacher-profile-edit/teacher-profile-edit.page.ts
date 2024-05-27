@@ -205,6 +205,9 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     // return
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
+    if(res && res.message){
+      this.utility.presentSuccessToast(res.message)
+    }
     console.log(res);
 
     this.nav.push('/tabs/teacher-dashboard')

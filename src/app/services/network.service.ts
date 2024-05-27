@@ -121,7 +121,7 @@ export class NetworkService {
   }
 
   updateTeacherProfile(data, id) {
-    return this.httpPostResponse('user/teacher/' + id, data);
+    return this.httpPostResponse('user/teacher/' + id, data, null, true, true);
   }
 
   updateStudentProfile(data, id) {

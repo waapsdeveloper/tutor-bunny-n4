@@ -7,7 +7,7 @@
     <div class="header-oblique-double-675">
       <div class="header-line-678576">
         <div class="header-line-box-678576">
-          <img src="../../assets/svg/arrow.svg"/>
+          <img src="../../assets/svg/arrow.svg" />
           <img src="assets/boxes.png" />
           <img src="assets/bell.png" />
         </div>
@@ -18,9 +18,14 @@
           <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
         <div class="header-info-misc-68448 outfit">
-          <div class="d-flex flex-row gap-8 align-center"><img src="assets/icon/star.svg" /><span class="fs-14 roboto-medium" style="color: white;">4.9 (8K reviews)</span></div>
-          <div class="d-flex flex-row gap-8 align-center" *ngIf="status == 'In Review'"><div class="ed-circ-67895464"></div> <span class="fs-14 roboto-medium ed-rv-67895464">{{status}}</span></div>
-          <div class="d-flex flex-row gap-8 align-center" *ngIf="status == 'rejected'"><div class="ed-circ-67895465"></div> <span class="fs-14 roboto-medium ed-rv-67895465">{{status}}</span></div>
+          <div class="d-flex flex-row gap-8 align-center"><img src="assets/icon/star.svg" /><span
+              class="fs-14 roboto-medium" style="color: white;">4.9 (8K reviews)</span></div>
+          <div class="d-flex flex-row gap-8 align-center" *ngIf="status == 'In Review'">
+            <div class="ed-circ-67895464"></div> <span class="fs-14 roboto-medium ed-rv-67895464">{{status}}</span>
+          </div>
+          <div class="d-flex flex-row gap-8 align-center" *ngIf="status == 'rejected'">
+            <div class="ed-circ-67895465"></div> <span class="fs-14 roboto-medium ed-rv-67895465">{{status}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +38,7 @@
     <app-youtube-box></app-youtube-box>
     <!-- <app-students-box></app-students-box>
     <app-trial-box></app-trial-box> -->
-    <ion-fab class="bottom-bt-fab-yellow-67856745"  style=""  >
+    <ion-fab class="bottom-bt-fab-yellow-67856745" style="">
       <img src="../../assets/svg/add.svg" alt="" style="height: 50px;">
     </ion-fab>
   </div>
