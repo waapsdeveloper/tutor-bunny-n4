@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from '../base-page/base-page';
 
@@ -9,7 +9,7 @@ import { BasePage } from '../base-page/base-page';
 })
 export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   swiperModules = [IonicSlides];
-
+  @ViewChild('slides', { static: false }) slides: any;
   params;
   backUrl;
   showBack
@@ -57,8 +57,17 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   onSlideChange(){
-    
+    this.slides?.nativeElement.swiper.slideTo(1, false, false);
     this.step = 2;
+  }
+
+  async changeToPrev() {
+
+    if (this.step == 2) {
+      this.step = 1;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+
   }
 
 }

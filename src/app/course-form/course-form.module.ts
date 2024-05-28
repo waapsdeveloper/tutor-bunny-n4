@@ -21,6 +21,9 @@ import { SdSubjectBoxModule } from '../components/sd-subject-box/sd-subject-box.
 import { SdTextareaAboutModule } from '../components/sd-textarea-about/sd-textarea-about.module';
 import { SdTextareaBoxModule } from '../components/sd-textarea-box/sd-textarea-box.module';
 import { CourseLanguageModule } from '../components/course-language/course-language.module';
+import { CoursePhotoModule } from '../components/course-photo/course-photo.module';
+import { ModeOfTeachingModule } from '../components/mode-of-teaching/mode-of-teaching.module';
+import { SearchKeywordModule } from '../components/search-keyword/search-keyword.module';
 
 @NgModule({
   imports: [
@@ -41,7 +44,10 @@ import { CourseLanguageModule } from '../components/course-language/course-langu
     SdStateBoxModule,
     SdDailcodeBoxModule,
     SdBbackBtnModule,
-    CourseLanguageModule
+    CourseLanguageModule,
+    CoursePhotoModule,
+    ModeOfTeachingModule,
+    SearchKeywordModule
   ],
   declarations: [CourseFormPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

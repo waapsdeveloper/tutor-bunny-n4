@@ -1,0 +1,12 @@
+<div class="top-header-78956">
+  <div class="image-78558">
+    <div class="image-box-78559" (click)="fileInput.click()"
+      [ngStyle]="{ 'background-image': coursePhoto ? 'url(' + coursePhoto + ')' : 'none' }">
+      <img *ngIf="!coursePhoto" src="../../../assets/svg/course-photo.svg" alt="Selected Image">
+    </div>
+    <input type="file" formControlName="profile_photo" (change)="onProfileSelected($event)" accept="image/*"
+      style="display: none" #fileInput />
+    <!-- <p class="image-heading">Profile Photo*</p> -->
+    <!-- <ion-icon *ngIf="profilePhoto" class="upload-done-circle" name="checkmark-circle"></ion-icon> -->
+  </div>
+</div>

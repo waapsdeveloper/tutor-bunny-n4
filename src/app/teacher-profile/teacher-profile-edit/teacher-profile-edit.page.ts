@@ -149,6 +149,14 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   async selevtedSubject(event) {
     this.sub = event.list;
   }
+  async changeToPrev() {
+
+    if (this.step == 2) {
+      this.step = 1;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+
+  }
   async onSlideChange() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
@@ -173,14 +181,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
   }
 
-  async changeToPrev() {
-
-    if (this.step == 2) {
-      this.step = 1;
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
-    }
-
-  }
   async submit() {
     const data = this.formData;
     this.userId = this.user.id;

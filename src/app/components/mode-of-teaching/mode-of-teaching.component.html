@@ -1,0 +1,28 @@
+<div class="sd-input-box-outer-675315">
+  <div class="mode-box-outer-78521">
+    <div class="modes-of-teching-78522">
+      <div class="modes-heading-78524">Mode of teaching</div>
+      <div class="modes-selection-78525">
+        <div [ngClass]="{'online-mode-78526': isOnlineMode, 'person-mode-78526': !isOnlineMode}" (click)="toggleMode()">
+          Online
+        </div>
+        <div [ngClass]="{'online-mode-78526': !isOnlineMode, 'person-mode-78526': isOnlineMode}" (click)="toggleMode()">
+          In Person
+        </div>
+      </div>
+    </div>
+
+    <div class="capacity-78523">
+      <div class="modes-heading-78524">Capacity</div>
+      <div class="modes-selection-78525">
+        <div class="online-mode-78526"
+          [ngClass]="{'online-mode-78526': isGroup, 'person-mode-78526': !isGroup}" (click)="toggleCapacity()">
+          1-1
+        </div>
+        <div class="person-mode-78526"
+          [ngClass]="{'online-mode-78526': !isGroup, 'person-mode-78526': isGroup}" (click)="toggleCapacity()">
+          Group</div>
+      </div>
+    </div>
+  </div>
+</div>

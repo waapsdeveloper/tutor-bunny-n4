@@ -1,0 +1,48 @@
+.top-header-78956 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .image-78558 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 33%;
+    position: relative;
+
+    .upload-done-circle {
+      position: absolute;
+      top: 4px;
+      right: 8px;
+      font-size: 30px;
+      color: green;
+    }
+  }
+
+}
+
+.image-box-78559 {
+  height: 50px;
+  width: 60px;
+  // padding: 15px;
+  // border: 1px solid rgba(69, 69, 69, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+}
+
+.image-heading {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}

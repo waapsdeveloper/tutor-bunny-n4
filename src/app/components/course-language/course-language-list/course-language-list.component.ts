@@ -7,27 +7,22 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./course-language-list.component.scss'],
 })
 export class CourseLanguageListComponent extends BasePage implements OnInit {
+  
   list = [];
+  selectedItemId = 0;
   lang;
   search: "";
   param;
   page = 1;
-
   private _preSelectedLanguages: any[] = [];
   @Input('preSelectedLanguages')
   public get preSelectedLanguages() {
     return this._preSelectedLanguages;
   };
-
   public set preSelectedLanguages(value: any[]) {
     this._preSelectedLanguages = value;
 
   }
-
-
-
-
-
   searchTerm: string = '';
   selectedContactId: any = null;
   constructor(injector: Injector) {
@@ -38,21 +33,26 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
-
-
     this.search = "";
     this.page = 1;
     this.callApi();
   }
-  selection(item: any) {
-    this.modals.dismiss(item);
-  }
+
   isListItemSelected() {
     return this.list.filter(x => x.checked == true).length > 0;
   }
   selectedLanguage() {
-    let list = this.list.filter(x => x.checked == true);
-    this.modals.dismiss(list);
+    let item  = this.list.find(x => x.id === this.selectedItemId);
+    console.log(item);
+
+    if(!item){
+      this.modals.dismiss();
+      return;
+    }
+  
+    this.modals.dismiss({
+      item: item
+    });
   }
   async loadMore($event) {
     this.page = this.lang.current_page + 1;
@@ -66,20 +66,12 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
         page: this.page
       }
       this.lang = await this.network.getLanguage(obj) as any[];
-
-
-
-
-
-
       this.page = this.lang.current_page;
       if (this.page == 1) {
         this.list = this.lang["data"];
       } else {
         this.list = [...this.list, ...this.lang["data"]]
       }
-
-      // // set selected languages
       this.list = this.list.map((item) => {
         const fi = this.preSelectedLanguages.find(x => x.id == item.id);
         if (fi) {
@@ -87,7 +79,6 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
         }
         return item;
       });
-
       resolve(true);
     })
   }
@@ -104,6 +95,11 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
 
   capitalizeFirst(string) {
     return this.utility.capitalizeEachFirst(string)
+  }
+  selection(item) {
+    console.log(item);
+
+    this.modals.dismiss(item);
   }
 
 
