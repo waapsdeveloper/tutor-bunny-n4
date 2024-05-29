@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'course-form',
     loadChildren: () => import('./course-form/course-form.module').then( m => m.CourseFormPageModule)
   },
+  {
+    path: 'add-dates',
+    loadChildren: () => import('./add-dates/add-dates.module').then( m => m.AddDatesPageModule)
+  },
 
   
 

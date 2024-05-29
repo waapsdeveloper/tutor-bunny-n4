@@ -28,14 +28,14 @@
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium" style="text-align: center;">Course photo</div>
               <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.photo_id"
-                (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, 'photo_id')"></app-course-photo>
+                (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, ' ')"></app-course-photo>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <!-- <div class="input-title fs-12 roboto-medium">Details</div> -->
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
-              (onChange)="result($event, 'detail')" [inputText]="formData.detail" [key]="'detail'"
-              [errorText]="'detail is required'" [minlength]="400"></app-mode-of-teaching>
+              (onChange)="result($event, 'teachingMode')" [inputText]="formData.teachingMode" [key]="'teachingMode'"
+              [errorText]="'Teaching Mode is required'" [minlength]="400"></app-mode-of-teaching>
           </div>
           <div class="input-box-lines city-zip">
             <div class="city d-flex flex-column gap-8">
@@ -45,7 +45,7 @@
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Hours/month</div>
-              <app-sd-input-box (onChange)="result($event, 'Hours')" [inputText]="formData.Hours" [key]="'Hours'"
+              <app-sd-input-box (onChange)="result($event, 'hours')" [inputText]="formData.hours" [key]="'hours'"
                 [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
@@ -67,28 +67,33 @@
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">Category</div>
-            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'category')"
+              [inputText]="formData.category" [key]="'category'" [errorText]="'Category is required'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">Search Keyword</div>
             <div class="input-box-lines" style="width: 100%;">
-              <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add"
-                [key]="'keyword'" [errorText]="'Subject is required'"></app-search-keyword>
+              <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add" [key]="'keyword'"
+                [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">Location (only for In person class, optional)</div>
-            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')"
+              [inputText]="formData.location" [key]="'location'"  [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">Meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting')"
+              [inputText]="formData.meeting" [key]="'meeting'" [errorText]="'meeting is required'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+
+            <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"
+              [key]="'schedule'"></app-course-dates>
           </div>
         </div>
       </swiper-slide>

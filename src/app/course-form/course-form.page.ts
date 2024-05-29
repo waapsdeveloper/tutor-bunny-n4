@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from '../base-page/base-page';
+import { AddDatesPage } from '../add-dates/add-dates.page';
 
 @Component({
   selector: 'app-course-form',
@@ -14,29 +15,36 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   backUrl;
   showBack
   title;
+
   step = 1;
   formData: any = {
-    name: null,
-    country: null,
-    state: null,
-    dial_code: null,
-    phone_number: null,
-    city: null,
-    zip_code: null,
-    languages: null,
-    subjects: null,
     title: null,
-    description: null,
-    terms: false,
-    image: null,
-    photo_id: null
+    detail: null,
+    language: null,
+    photo_id: null,
+    teachingMode: null,
+    fees: null,
+    hours: null,
+    from_age: null,
+    to_age: null,
+    category: null,
+    keyword: null,
+    location: false,
+    meeting: null,
+    schedules: []
 
   };
   constructor(injector: Injector) {
     super(injector)
+    this.initialize();
   }
 
   ngOnInit() {
+  }
+
+  async initialize() {
+
+      // this.setFormDta();
   }
   ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -51,9 +59,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
 
   }
+
+  
   result(value, key){
     console.log(value, key);
-    
+    this.formData[key] = value;
   }
 
   onSlideChange(){

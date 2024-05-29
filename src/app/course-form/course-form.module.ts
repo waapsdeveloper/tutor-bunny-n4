@@ -24,6 +24,7 @@ import { CourseLanguageModule } from '../components/course-language/course-langu
 import { CoursePhotoModule } from '../components/course-photo/course-photo.module';
 import { ModeOfTeachingModule } from '../components/mode-of-teaching/mode-of-teaching.module';
 import { SearchKeywordModule } from '../components/search-keyword/search-keyword.module';
+import { CourseDatesModule } from '../components/course-dates/course-dates.module';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { SearchKeywordModule } from '../components/search-keyword/search-keyword
     CourseLanguageModule,
     CoursePhotoModule,
     ModeOfTeachingModule,
-    SearchKeywordModule
+    SearchKeywordModule,
+    CourseDatesModule
   ],
   declarations: [CourseFormPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

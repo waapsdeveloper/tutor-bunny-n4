@@ -1,0 +1,47 @@
+<ion-header>
+  <app-sd-header-top [showBack]="false" [title]="'Add Schedule'"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448">
+    <div class="sd-input-box-outer-675315">
+      <div class="mode-box-outer-78521">
+        <div class="modes-of-teching-78522">
+          <div class="modes-heading-78524">Select Day</div>
+          <div class="modes-selection-78525">
+            <div (click)="swapMode('sunday')" [class.online-mode-78526]="day == 'sunday'" [class.person-mode-78526]="day != 'sunday'">Sunday</div>
+            <div (click)="swapMode('monday')" [class.online-mode-78526]="day == 'monday'" [class.person-mode-78526]="day != 'monday'">Monday</div>
+            <div (click)="swapMode('tuesday')" [class.online-mode-78526]="day == 'tuesday'" [class.person-mode-78526]="day != 'tuesday'">Tuesday</div>
+            <div (click)="swapMode('wednesday')" [class.online-mode-78526]="day == 'wednesday'" [class.person-mode-78526]="day != 'wednesday'">Wednesday</div>
+            <div (click)="swapMode('thursday')" [class.online-mode-78526]="day == 'thursday'" [class.person-mode-78526]="day != 'thursday'">Thursday</div>
+            <div (click)="swapMode('friday')" [class.online-mode-78526]="day == 'friday'" [class.person-mode-78526]="day != 'friday'">Friday</div>
+            <div (click)="swapMode('saturday')" [class.online-mode-78526]="day == 'saturday'" [class.person-mode-78526]="day != 'saturday'">Saturday</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="date-time-outer-85632">
+      <div class="time-start-85632">
+        <div class="fs-16 roboto-medium">From:</div>
+        <ion-datetime-button datetime="startDatetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="startDatetime" (ionChange)="onDateTimeChange($event, 'start')"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+      <div class="time-end-85632">
+        <div class="fs-16 roboto-medium">To:</div>
+        <ion-datetime-button datetime="endDatetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="endDatetime" (ionChange)="onDateTimeChange($event, 'end')"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-padding">
+  <app-sd-button-gray [text]="'Done'" (click)="selectedDates()"></app-sd-button-gray>
+</ion-footer>
