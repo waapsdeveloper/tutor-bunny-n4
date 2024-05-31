@@ -8,8 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class ModeOfTeachingComponent implements OnInit {
 
   teachingMode = {
-    mode: 'online',
-    capacity: '1-1'
+    mode: '',
+    capacity: ''
   }
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();

@@ -4,6 +4,7 @@ import { CourseCategoryComponent } from './course-category.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-info.module';
+import { SdCategoryListModule } from './sd-category-list/sd-category-list.module';
 
 
 
@@ -13,7 +14,8 @@ import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-in
     CommonModule,
     IonicModule,
     FormsModule,
-    SdErrorInputInfoModule
+    SdErrorInputInfoModule,
+    SdCategoryListModule
   ],
   exports:[CourseCategoryComponent]
 })

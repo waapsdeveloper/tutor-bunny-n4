@@ -87,7 +87,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     };
     let res = await this.network.getUserByEmail(obj);
     console.log(res);
-    
+
     if (res) {
       this.users.setUser(res.user);
       this.setFormDta(res.user);
@@ -161,13 +161,13 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
     console.log(f);
-    
+
     if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.city || !f.zip_code || !f.languages || !f.subjects) {
       return
     }
     if (f.languages.length == 0) {
       console.log(f.teacher.languages.length);
-      
+
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
@@ -177,8 +177,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
     }
-
-
   }
 
   async submit() {
@@ -190,7 +188,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
       return
     }
-   
+
     if (f.subjects.length == 0) {
       return
     }
@@ -205,7 +203,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     // return
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
-    if(res && res.message){
+    if (res && res.message) {
       this.utility.presentSuccessToast(res.message)
     }
     console.log(res);

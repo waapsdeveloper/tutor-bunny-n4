@@ -43,41 +43,12 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
 
     if (res && res.data && res.data.item) {
 
-      // console.log(res.data)
-
       this.selectedLanguage = res.data.item;
       console.log(this.selectedLanguage);
-
-
-
-      // this.language = res.data;
-
-      // let user = JSON.parse(localStorage.getItem('user'));
-      // let obj = {
-      //   user_id: user.id,
-      //   languages: this.language.map(x => x.id)
-      // }
-
-      // const res2 = await this.network.addLanguage(obj)
-      // this.onChange.emit(res.data);
+      this.onChange.emit(this.selectedLanguage);
     }
   }
 
-  async removeLanguage(item) {
 
-    let index = this.language.findIndex(x => x.id == item.id);
-    this.language.splice(index, 1);
-
-    let user = JSON.parse(localStorage.getItem('user'));
-
-    let obj = {
-      user_id: user.id,
-      language_id: item.id
-    }
-
-    const res2 = await this.network.removeMyLanguages(obj)
-    this.onChange.emit(this.language);
-
-  }
 
 }

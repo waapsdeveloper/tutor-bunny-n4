@@ -23,10 +23,13 @@ export class CoursePhotoComponent extends BasePage  implements OnInit {
     reader.onload = async () => {
       const pmi = reader.result as string;
      
-      console.log(pmi);
-      this.onChange.emit(pmi);
-
       this.coursePhoto = pmi;
+      console.log(pmi);
+      let obj={
+        image : pmi
+      }
+      this.onChange.emit(obj);
+
     
       // const res = await this.network.postProfileImage(obj)
       // this.updateCourseImage.emit(this.coursePhoto)

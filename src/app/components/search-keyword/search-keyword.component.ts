@@ -26,7 +26,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
   async ngOnInit() {
 
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
 

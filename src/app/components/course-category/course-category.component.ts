@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { SdCategoryListComponent } from './sd-category-list/sd-category-list.component';
 // import { CategoryListComponent } from './category-list/category-list.component';
 
 @Component({
@@ -16,15 +17,27 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  selectedCategory = {
+    "created_at": null,
+    "id": 3,
+    "name": "",
+    "updated_at": null
+  };
   constructor(injector:Injector) {
     super(injector)
    }
 
   ngOnInit() { }
   async openCategory(){
-    // let res = await this.modals.present(CategoryListComponent);
-    // console.log(res);
-    
+    let res = await this.modals.present(SdCategoryListComponent) as any;
+    console.log(res);
+    if (res && res.data && res.data.item) {
+
+      this.selectedCategory = res.data.item;
+      console.log(this.selectedCategory);
+      this.onChange.emit(this.selectedCategory);
+
+    }
   }
 
 }

@@ -11,6 +11,7 @@ export class SdCategoryListComponent extends BasePage  implements OnInit {
 
 
   list = [];
+  data;
   selectedItemId = 0;
 
   constructor(injector: Injector) {
@@ -21,9 +22,11 @@ export class SdCategoryListComponent extends BasePage  implements OnInit {
 
   ngOnInit() { }
 
-  initialize() {
-    let res = this.network.getCategory()
-    console.log(res);
+  async initialize() {
+    this.data = await this.network.getCategory() as any[];
+    console.log(this.data);
+
+    this.list = this.data.result;
 
   }
   selectedCategory() {

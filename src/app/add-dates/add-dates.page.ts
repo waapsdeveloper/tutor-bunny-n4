@@ -18,6 +18,7 @@ export class AddDatesPage extends BasePage implements OnInit {
 
   ngOnInit() {
   }
+
   swapMode(selectedDay: string) {
     this.day = selectedDay;
   }
@@ -30,13 +31,19 @@ export class AddDatesPage extends BasePage implements OnInit {
     }
   }
 
-  selectedDates() {
+  async selectedDates() {
+
+    let courseId = localStorage.getItem('course_Id');
     const selectedObj = {
       day: this.day,
-      startDateTime: this.startDateTime,
-      endDateTime: this.endDateTime
+      start_date: this.startDateTime,
+      end_date: this.endDateTime,
+      course_id: courseId
     };
-    console.log(selectedObj); 
-    this.modals.dismiss(selectedObj)
+    console.log(selectedObj);
+    let res = await this.network.AddSchedule(selectedObj)
+    console.log(res);
+
+    // this.modals.dismiss(selectedObj)
   }
 }

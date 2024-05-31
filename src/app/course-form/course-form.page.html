@@ -27,15 +27,15 @@
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium" style="text-align: center;">Course photo</div>
-              <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.photo_id"
-                (updateImage)="result($event, 'image')" (updatePhotoId)="result($event, ' ')"></app-course-photo>
+              <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.image"
+                (onChange)="result($event, 'image')" [errorText]="'Teaching Mode is required'"></app-course-photo>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <!-- <div class="input-title fs-12 roboto-medium">Details</div> -->
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
               (onChange)="result($event, 'mode_type')" [inputText]="formData.mode_type" [key]="'mode_type'"
-              [errorText]="'Teaching Mode is required'" [minlength]="400"></app-mode-of-teaching>
+              [errorText]="'Teaching Mode is required'"></app-mode-of-teaching>
           </div>
           <div class="input-box-lines city-zip">
             <div class="city d-flex flex-column gap-8">
@@ -45,8 +45,8 @@
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Hours/month</div>
-              <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration" [key]="'duration'"
-                [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
+              <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
+                [key]="'duration'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines city-zip">
@@ -80,19 +80,17 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'inPerson'">
             <div class="input-title fs-12 roboto-medium">Location (only for In person class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')"
-              [inputText]="formData.location" [key]="'location'"  [minlength]="50"
-              [maxlength]="100"></app-sd-input-box>
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')" [inputText]="formData.location"
+              [key]="'location'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
             <div class="input-title fs-12 roboto-medium">Meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting')"
-              [inputText]="formData.meeting" [key]="'meeting'" [errorText]="'meeting is required'" [minlength]="50"
-              [maxlength]="100"></app-sd-input-box>
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting')" [inputText]="formData.meeting"
+              [key]="'meeting'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
 
-            <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"
+            <app-course-dates (onChange)="result($event, 'schedule')" [inputText]="formData.schedule"
               [key]="'schedule'"></app-course-dates>
           </div>
         </div>
@@ -113,7 +111,7 @@
 
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray [text]="'Save'" *ngIf="step == 2"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Save'" *ngIf="step == 2" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 

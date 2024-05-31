@@ -79,12 +79,15 @@ export class NetworkService {
     return this.httpPostResponse('languages/add-teacher-language', data);
   }
 
-  getCategory(){
+  getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
 
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
+  }
+  getSchedule(id) {
+    return this.httpGetResponse('schedule/list/by-course ' + id, null, false, false);
   }
 
   getMyLanguages(data) {
@@ -126,6 +129,12 @@ export class NetworkService {
 
   updateTeacherProfile(data, id) {
     return this.httpPostResponse('user/teacher/' + id, data, null, true, true);
+  }
+  SubmitCourse(data) {
+    return this.httpPostResponse('courses/add', data, null, true, true);
+  }
+  AddSchedule(data) {
+    return this.httpPostResponse('schedule/add', data, null, true, true);
   }
 
   updateStudentProfile(data, id) {
