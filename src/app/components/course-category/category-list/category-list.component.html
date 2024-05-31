@@ -1,0 +1,19 @@
+<ion-header>
+  <app-sd-header-top [showBack]="false" [title]="'Languages'"></app-sd-header-top>
+  <!-- <ion-searchbar class="fs-16 outfit" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar> -->
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="selectedItemId">
+      <ion-item *ngFor="let item of list" >
+        <ion-label>{{ item.name }}</ion-label>
+        <ion-radio slot="start" class="fs-16 outfit" [value]="item.id"  ></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+</ion-content>
+<ion-footer class="ion-padding">
+  <app-sd-button-gray [text]="'Save'" (click)="selectedCategory()"></app-sd-button-gray>
+</ion-footer>

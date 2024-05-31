@@ -7,8 +7,11 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./course-language-list.component.scss'],
 })
 export class CourseLanguageListComponent extends BasePage implements OnInit {
-  
+
   list = [];
+
+
+
   selectedItemId = 0;
   lang;
   search: "";
@@ -42,14 +45,14 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
     return this.list.filter(x => x.checked == true).length > 0;
   }
   selectedLanguage() {
-    let item  = this.list.find(x => x.id === this.selectedItemId);
+    let item = this.list.find(x => x.id === this.selectedItemId);
     console.log(item);
 
-    if(!item){
+    if (!item) {
       this.modals.dismiss();
       return;
     }
-  
+
     this.modals.dismiss({
       item: item
     });
