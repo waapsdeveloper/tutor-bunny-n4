@@ -15,24 +15,24 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   backUrl;
   showBack
   title;
-
+  onlineMode;
   step = 1;
   formData: any = {
     title: null,
-    detail: null,
-    language: null,
-    photo_id: null,
-    teachingMode: null,
-    fees: null,
-    hours: null,
+    description: null,
+    language_id: null,
+    language: {},
+    image: null,
+    mode_type: {},
+    price: null,
+    duration: null,
     from_age: null,
     to_age: null,
     category: null,
-    keyword: null,
+    keyword: {},
     location: false,
     meeting: null,
     schedules: []
-
   };
   constructor(injector: Injector) {
     super(injector)
@@ -44,6 +44,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async initialize() {
 
+    console.log(this.formData);
+    
       // this.setFormDta();
   }
   ionViewWillEnter() {
@@ -63,6 +65,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   
   result(value, key){
     console.log(value, key);
+    if(key == 'mode_type'){
+      this.onlineMode = value.mode;
+    }
     this.formData[key] = value;
   }
 

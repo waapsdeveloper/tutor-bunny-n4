@@ -10,7 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CoursePhotoComponent extends BasePage  implements OnInit {
   @Input('coursePhoto') coursePhoto: SafeUrl | undefined;
   @Output('updateImage') updateCourseImage: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(injector:Injector) { 
     super(injector)
   }
@@ -22,14 +22,14 @@ export class CoursePhotoComponent extends BasePage  implements OnInit {
     const reader = new FileReader();
     reader.onload = async () => {
       const pmi = reader.result as string;
-      let user = JSON.parse(localStorage.getItem('user'));
-      let obj = {
-        user_id: user.id,
-        image: pmi
-      }
+     
+      console.log(pmi);
+      this.onChange.emit(pmi);
+
+      this.coursePhoto = pmi;
+    
       // const res = await this.network.postProfileImage(obj)
-      // this.coursePhoto = res.result.image;
-      this.updateCourseImage.emit(this.coursePhoto)
+      // this.updateCourseImage.emit(this.coursePhoto)
 
     };
     reader.readAsDataURL(file);

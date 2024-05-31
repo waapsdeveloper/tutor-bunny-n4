@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { AddDatesPage } from 'src/app/add-dates/add-dates.page';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CourseDatesComponent extends BasePage  implements OnInit {
 
   schedules = [];
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
 
   constructor(injector:Injector) {
@@ -25,6 +26,7 @@ export class CourseDatesComponent extends BasePage  implements OnInit {
     let data = res.data
 
     this.schedules.push(data)
+    this.onChange.emit(data);
 
   }
   editSchedule(item){

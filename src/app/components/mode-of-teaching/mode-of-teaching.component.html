@@ -3,10 +3,10 @@
     <div class="modes-of-teching-78522">
       <div class="modes-heading-78524">Mode of teaching</div>
       <div class="modes-selection-78525">
-        <div [ngClass]="{'online-mode-78526': isOnlineMode, 'person-mode-78526': !isOnlineMode}" (click)="toggleMode()">
+        <div [class.online-mode-78526]="teachingMode.mode == 'online'" [class.person-mode-78526]="teachingMode.mode != 'online'"  (click)="toggleMode('online')">
           Online
         </div>
-        <div [ngClass]="{'online-mode-78526': !isOnlineMode, 'person-mode-78526': isOnlineMode}" (click)="toggleMode()">
+        <div  [class.online-mode-78526]="teachingMode.mode == 'inPerson'" [class.person-mode-78526]="teachingMode.mode != 'inPerson'"  (click)="toggleMode('inPerson')">
           In Person
         </div>
       </div>
@@ -16,11 +16,11 @@
       <div class="modes-heading-78524">Capacity</div>
       <div class="modes-selection-78525">
         <div class="online-mode-78526"
-          [ngClass]="{'online-mode-78526': isGroup, 'person-mode-78526': !isGroup}" (click)="toggleCapacity()">
+        [class.online-mode-78526]="teachingMode.capacity == '1-1'" [class.person-mode-78526]="teachingMode.capacity != '1-1'"   (click)="toggleCapacity('1-1')">
           1-1
         </div>
         <div class="person-mode-78526"
-          [ngClass]="{'online-mode-78526': !isGroup, 'person-mode-78526': isGroup}" (click)="toggleCapacity()">
+        [class.online-mode-78526]="teachingMode.capacity == 'group'" [class.person-mode-78526]="teachingMode.capacity != 'group'"  (click)="toggleCapacity('group')">
           Group</div>
       </div>
     </div>
