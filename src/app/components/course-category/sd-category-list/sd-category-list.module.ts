@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryListComponent } from './category-list.component';
+import { SdCategoryListComponent } from './sd-category-list.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { SdHeaderTopModule } from '../../sd-header-top/sd-header-top.module';
@@ -9,7 +9,7 @@ import { SdButtonGrayModule } from '../../sd-button-gray/sd-button-gray.module';
 
 
 @NgModule({
-  declarations: [CategoryListComponent],
+  declarations: [SdCategoryListComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -17,6 +17,6 @@ import { SdButtonGrayModule } from '../../sd-button-gray/sd-button-gray.module';
     SdHeaderTopModule,
     SdButtonGrayModule
   ],
-  exports: [CategoryListComponent]
+  exports:[SdCategoryListComponent]
 })
-export class CategoryListModule { }
+export class SdCategoryListModule { }

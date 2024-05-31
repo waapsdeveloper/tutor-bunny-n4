@@ -1,13 +1,14 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { initializeAuth } from 'firebase/auth';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss'],
+  selector: 'app-sd-category-list',
+  templateUrl: './sd-category-list.component.html',
+  styleUrls: ['./sd-category-list.component.scss'],
 })
-export class CategoryListComponent extends BasePage implements OnInit {
+export class SdCategoryListComponent extends BasePage  implements OnInit {
+
+
 
   list = [];
   selectedItemId = 0;
