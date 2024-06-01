@@ -208,7 +208,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
     console.log(res);
 
-    this.nav.push('/tabs/teacher-dashboard')
+    this.nav.pop('/tabs/teacher-dashboard')
 
   }
   disableIfIncomplete() {

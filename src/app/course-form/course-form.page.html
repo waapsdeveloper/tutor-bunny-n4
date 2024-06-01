@@ -19,14 +19,14 @@
               [errorText]="'Detail is required'" [minlength]="400"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines city-zip">
-            <div class="city d-flex flex-column gap-8">
+            <div class="city-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Language of communication</div>
               <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
                 [country]="formData.language" [key]="'language'"
                 [errorText]="'language is required'"></app-course-language>
             </div>
-            <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium" style="text-align: center;">Course photo</div>
+            <div class="zip-code-3 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium" style="justify-content: center;">Course photo</div>
               <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.image"
                 (onChange)="result($event, 'image')" [errorText]="'Teaching Mode is required'"></app-course-photo>
             </div>

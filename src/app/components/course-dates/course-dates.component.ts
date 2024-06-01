@@ -24,7 +24,6 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   async initialize() {
     this.course_id = localStorage.getItem('course_Id')
     if (this.course_id) {
-
       let res = await this.network.getSchedule(this.course_id)
       console.log(res);
 

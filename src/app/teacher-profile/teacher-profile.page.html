@@ -13,7 +13,7 @@
           <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
 
         </div>
-        <div class="header-info-misc-68448 outfit" ><img src="../../assets/svg/location.svg" /> <span>{{city}},
+        <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/location.svg" /> <span>{{city}},
             {{country}}</span><span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
       </div>
@@ -45,7 +45,10 @@
     <app-teacher-profile-statistics></app-teacher-profile-statistics>
     <div class="line"></div>
 
-    <div class="fs-16 outfit">
+    <div class="fs-16 outfit" style="display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;">
       <div class="about-heading">About</div>
       <div class="about-para">
         {{user?.teacher?.title}}

@@ -43,7 +43,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       active: 0,
     },
   ];
-  constructor(injector: Injector, private fcm : FirebaseService) {
+  constructor(injector: Injector, private fcm: FirebaseService) {
     super(injector);
   }
 
@@ -53,13 +53,13 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
 
     this.events.subscribe('dashboard:refreshpage', () => {
       console.log("test token");
-      
-      this.initialize();
-  });
-  }
-  
 
-  ionViewWillEnter(){
+      this.initialize();
+    });
+  }
+
+
+  ionViewWillEnter() {
     this.initialize()
   }
 
@@ -78,14 +78,14 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       this.displayName = this.utility.getAmericanName(this.user.name)
       this.status = res.user.teacher.status;
       console.log(this.status);
-      
+
 
     }
   }
-  getFlag(){
-    if(this.user && this.user.teacher && this.user.teacher.country){
+  getFlag() {
+    if (this.user && this.user.teacher && this.user.teacher.country) {
       const flag = this.user.teacher.country.iso2;
-      if(flag){
+      if (flag) {
         return flag.toLowerCase();
       } else {
         return ""
@@ -97,23 +97,26 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
 
   openProfile() {
     const params = { user_id: this.user.id, showBack: true };
-    this.nav.push('/tabs/teacher-profile', params );
+    this.nav.push('/tabs/teacher-profile', params);
   }
 
-  async createCourse(){
-    let res = await this.modals.present(CreateCoursePage,{}, "", 0.6)
+  async createCourse() {
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
     console.log(res);
 
+    if (res.data.title) {
 
-    const params = {
-       backUrl: '/tabs/teacher-dashboard',
-       title: res.data.title,
-       type: res.data.type,
+
+      const params = {
+        backUrl: '/tabs/teacher-dashboard',
+        title: res.data.title,
+        type: res.data.type,
 
       };
       console.log(params);
-      
-    this.nav.push('/course-form', params)
+
+      this.nav.push('/course-form', params)
+    }
   }
 
 }

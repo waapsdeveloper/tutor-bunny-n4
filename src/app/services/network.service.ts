@@ -24,7 +24,7 @@ export class NetworkService {
   }
 
   signUpviaEmail(data) {
-    return this.httpPostResponse('signup-via-email', data);
+    return this.httpPostResponse('signup-via-email', data, null, true, true);
   }
 
   postImages(data) {

@@ -80,43 +80,43 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
   }
   async onSlideChange() {
-    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-    const f = this.formData;
-    console.log(f);
+    // this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+    // const f = this.formData;
+    // console.log(f);
 
-    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
-      console.log("dsada");
+    // if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
+    //   console.log("dsada");
 
-      return
-    }
-    if (f.language.length == 0) {
-      console.log(f.teacher.languages.length);
+    //   return
+    // }
+    // if (f.language.length == 0) {
+    //   console.log(f.teacher.languages.length);
 
-      return
-    }
-    if (f.mode_type.length == 0) {
-      console.log(f.teacher.languages.length);
+    //   return
+    // }
+    // if (f.mode_type.length == 0) {
+    //   console.log(f.teacher.languages.length);
 
-      return
-    }
-    const user = JSON.parse(localStorage.getItem('user'));
+    //   return
+    // }
+    // const user = JSON.parse(localStorage.getItem('user'));
 
-    f['user_id'] = user.id
+    // f['user_id'] = user.id
 
-    console.log(f)
+    // console.log(f)
 
-    const res = await this.network.SubmitCourse(f);
-    console.log(res);
+    // const res = await this.network.SubmitCourse(f);
+    // console.log(res);
 
-    let courseId = res.result.id;
-    console.log(courseId);
-    localStorage.setItem('course_Id', courseId)
+    // let courseId = res.result.id;
+    // console.log(courseId);
+    // localStorage.setItem('course_Id', courseId)
 
 
-    if (res) {
+    // if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-    }
+    // }
   }
 
   async changeToPrev() {
