@@ -27,7 +27,26 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
     super(injector)
    }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
+
+      if (!formData.image) {
+        this.isRequired = true;
+        this.errorText = 'Image is required to upload'
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      } else if (!formData.photo_id) {
+        this.isRequired = true;
+        this.errorText = 'Photo ID is required to upload'
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+
+    }, false)
+  }
   async openCategory(){
     let res = await this.modals.present(SdCategoryListComponent) as any;
     console.log(res);

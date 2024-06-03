@@ -38,9 +38,7 @@ export class SdInputBoxComponent implements OnInit {
 
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      if (this.key == 'title') {
-        return;
-      }
+      
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;

@@ -44,6 +44,6 @@ export class AddDatesPage extends BasePage implements OnInit {
     let res = await this.network.AddSchedule(selectedObj)
     console.log(res);
 
-    // this.modals.dismiss(selectedObj)
+    this.modals.dismiss(selectedObj)
   }
 }

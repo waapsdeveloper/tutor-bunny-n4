@@ -26,7 +26,7 @@
       <div class="suggestions-list-678564">
 
         <div class="sub-chips" *ngFor="let item of subs">
-          <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item.name}}<ion-icon name="close-circle-outline"
+          <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item?.name}}<ion-icon name="close-circle-outline"
               (click)="removeMySubject(item)"></ion-icon></ion-chip>
         </div>
 

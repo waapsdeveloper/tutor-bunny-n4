@@ -35,10 +35,7 @@ export class SdTextareaAboutComponent implements OnInit {
     }, false);
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      if (this.key == 'description') {
-        return;
-      }
-
+      
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;

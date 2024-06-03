@@ -86,8 +86,9 @@ export class NetworkService {
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
   }
+
   getSchedule(id) {
-    return this.httpGetResponse('schedule/list/by-course ' + id, null, false, false);
+    return this.httpGetResponse('schedule/list/by-course/' + id, null, false, false);
   }
 
   getMyLanguages(data) {
@@ -102,19 +103,35 @@ export class NetworkService {
   addSubject(data) {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
+  addKeyword(data) {
+    return this.httpPostResponse('keywords/add-keyword', data);
+  }
 
   getMySubjects(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('subjects/my-list' + '?' + str, null, false, false);
   }
 
+  getMyKeyword(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('keywords/my-list' + '?' + str, null, false, false);
+  }
+
   removeMySubjects(data) {
+    return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
+  }
+  removeMyKeyword(data) {
     return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
   }
 
   getSubject(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('subjects/list' + '?' + str, null, false, false);
+  }
+
+  getKeywords(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('keywords/list' + '?' + str, null, false, false);
   }
 
   getUserByEmail(data) {

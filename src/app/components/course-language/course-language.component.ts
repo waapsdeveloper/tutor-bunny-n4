@@ -27,7 +27,17 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
     super(injector)
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
+      if(!formData.country){
+        this.isRequired = true;
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
+
+  }
 
 
   async openLanguageSelection() {

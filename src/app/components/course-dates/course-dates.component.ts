@@ -9,38 +9,76 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CourseDatesComponent extends BasePage implements OnInit {
   @Input() schedule = {}
-
+  @Input('errorText') errorText = '';
+  isRequired = false;
   schedules = [];
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  course_id;
+  course_Id;
   constructor(injector: Injector) {
     super(injector)
 
+    this.initialize()
   }
 
-  ngOnInit() { }
+
+
+  ngOnInit() {
+    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
+
+      if (!formData.schedules) {
+        this.isRequired = true;
+        this.errorText = 'schedules is required to upload'
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      } 
+
+    }, false)
+  }
 
   async initialize() {
-    this.course_id = localStorage.getItem('course_Id')
-    if (this.course_id) {
-      let res = await this.network.getSchedule(this.course_id)
+    console.log("ttt");
+
+    this.events.subscribe('course_Id-get', async (course_Id: any) => {
+
+      this.callApi();
+
+
+    })
+  }
+
+  async callApi() {
+    this.course_Id = localStorage.getItem('course_Id')
+    console.log(this.course_Id);
+
+
+    if (this.course_Id) {
+      let res = await this.network.getSchedule(this.course_Id)
       console.log(res);
 
-      let data = res.data
+      this.schedules = res.result
+      console.log(this.schedule);
+      
+      
 
-      this.schedules.push(data)
-      this.onChange.emit(data);
+      this.onChange.emit(this.schedules);
     }
   }
 
-  addCourseDate() {
-    this.modals.present(AddDatesPage)
+  async addCourseDate() {
+    let res = await this.modals.present(AddDatesPage);
+    console.log(res);
+
+    this.callApi()
+    console.log("dsdadadadasd");
+
 
   }
 
-  editSchedule(item) {
-    this.modals.present(AddDatesPage, item)
+  async editSchedule(item) {
+    let res = await this.modals.present(AddDatesPage, item)
+    this.initialize()
   }
 
 

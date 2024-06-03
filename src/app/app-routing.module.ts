@@ -68,6 +68,10 @@ const routes: Routes = [
     path: 'add-dates',
     loadChildren: () => import('./add-dates/add-dates.module').then( m => m.AddDatesPageModule)
   },
+  {
+    path: 'courses',
+    loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
+  },
 
   
 

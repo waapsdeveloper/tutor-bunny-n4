@@ -14,7 +14,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   params;
   backUrl;
   lang;
-
   showBack
   title;
   image
@@ -39,37 +38,28 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     super(injector)
     this.initialize();
   }
-
   ngOnInit() {
   }
   async initialize() {
-
     console.log(this.formData);
-
   }
   ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
-
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-
     if (this.params.title) {
       this.title = this.params.title;
     }
-
   }
   result(value, key) {
-    // console.log(value, key);
     this.formData[key] = value;
-
     if (key == 'mode_type') {
       this.onlineMode = value.mode
       this.formData['mode_type'] = value.mode;
       this.formData['capacity'] = value.capacity;
     }
-
     if (key == 'image') {
       this.formData['image'] = value.image;
     }
@@ -80,56 +70,62 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
   }
   async onSlideChange() {
-    // this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-    // const f = this.formData;
-    // console.log(f);
-
-    // if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
-    //   console.log("dsada");
-
-    //   return
-    // }
-    // if (f.language.length == 0) {
-    //   console.log(f.teacher.languages.length);
-
-    //   return
-    // }
-    // if (f.mode_type.length == 0) {
-    //   console.log(f.teacher.languages.length);
-
-    //   return
-    // }
-    // const user = JSON.parse(localStorage.getItem('user'));
-
-    // f['user_id'] = user.id
-
-    // console.log(f)
-
-    // const res = await this.network.SubmitCourse(f);
-    // console.log(res);
-
-    // let courseId = res.result.id;
-    // console.log(courseId);
-    // localStorage.setItem('course_Id', courseId)
-
-
-    // if (res) {
+    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+    const f = this.formData;
+    console.log(f);
+    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
+      console.log("dsada");
+      return
+    }
+    if (f.language.length == 0) {
+      console.log(f.teacher.language.length);
+      return
+    }
+    if (f.mode_type.length == 0) {
+      console.log(f.teacher.language.length);
+      return
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    f['user_id'] = user.id
+    console.log(f)
+    const res = await this.network.SubmitCourse(f);
+    console.log(res);
+    let courseId = res.course.id;
+    console.log(courseId);
+    localStorage.setItem('course_Id', courseId)
+    this.events.publish('course_Id-get', courseId)
+    if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-    // }
+    }
   }
-
   async changeToPrev() {
-
     if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
 
   }
+  async submit() {
+    this.events.publish('teacher-course-second-screen-submit-call', this.formData);
+    const f = this.formData;
+    if (!f.category) {
+      console.log("dsada");
+      return
+    }
+    if (!f.schedules) {
+      console.log("dadasda");
 
-  submit() {
+      return
+    }
+    console.log(f)
+    const res = await this.network.SubmitCourse(f);
+    if (res && res.message) {
+      this.utility.presentSuccessToast(res.message)
+    }
+    console.log(res);
+
+    this.nav.pop('/tabs/teacher-dashboard')
 
   }
-
 }

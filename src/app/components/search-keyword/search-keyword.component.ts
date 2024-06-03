@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { SubjectListComponent } from '../sd-subject-box/subject-list/subject-list.component';
+import { KeywordListComponent } from './keyword-list/keyword-list.component';
 
 @Component({
   selector: 'app-search-keyword',
@@ -26,7 +27,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
   async ngOnInit() {
 
-    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-course-second-screen-submit-call', async (formData: any) => {
 
       let v = formData[this.key];
 
@@ -36,6 +37,16 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
+      let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+
+      let obj = {
+        course_id: course_Id,
+        name: this.inputText
+      }
+
+      const res2 = await this.network.getMyKeyword(obj)
+      this.subs = res2.result;
+      this.onChange.emit(this.subs);
     }, false)
 
     this.events.subscribe('update-subs-list', (obj) => {
@@ -43,20 +54,11 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     })
 
     this.inputText = '';
-    let user = JSON.parse(localStorage.getItem('user'));
 
-    let obj = {
-      user_id: user.id,
-      name: this.inputText
-    }
-
-    const res2 = await this.network.getMySubjects(obj)
-    this.subs = res2.result;
-    this.onChange.emit(this.subs);
   }
 
   async openSubjectSelection() {
-    const res = (await this.modals.present(SubjectListComponent, {
+    const res = (await this.modals.present(KeywordListComponent, {
       subs: this.subs
     })) as any;
 
@@ -69,14 +71,14 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   }
 
   async addSubject() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
     if (this.inputText) {
       let obj = {
-        user_id: user.id,
+        course_id: course_Id,
         name: this.inputText
       }
-      const res = await this.network.addSubject(obj)
-      const res2 = await this.network.getMySubjects(obj)
+      const res = await this.network.addKeyword(obj)
+      const res2 = await this.network.getMyKeyword(obj)
 
 
       this.inputText = '';
@@ -114,15 +116,15 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   }
 
   async addToSubjects(item) {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
 
 
     let obj = {
-      user_id: user.id,
+      course_id: course_Id,
       name: item.name
     }
-    const res = await this.network.addSubject(obj)
-    const res2 = await this.network.getMySubjects(obj)
+    const res = await this.network.addKeyword(obj)
+    const res2 = await this.network.getMyKeyword(obj)
 
 
     this.inputText = '';
@@ -137,14 +139,14 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     let index = this.subs.findIndex(x => x.id == item.id);
     this.subs.splice(index, 1);
 
-    let user = JSON.parse(localStorage.getItem('user'));
+    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
 
     let obj = {
-      user_id: user.id,
+      course_id: course_Id,
       subject_id: item.id
     }
 
-    const res2 = await this.network.removeMySubjects(obj)
+    const res2 = await this.network.removeMyKeyword(obj)
     this.onChange.emit(this.subs);
 
 

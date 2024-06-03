@@ -39,6 +39,7 @@ export class SubjectListComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   async initialize() {
+    
     this.search = "";
     this.page = 1;
     this.callApi();

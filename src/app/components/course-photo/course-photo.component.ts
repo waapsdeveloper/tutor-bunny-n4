@@ -11,11 +11,26 @@ export class CoursePhotoComponent extends BasePage  implements OnInit {
   @Input('coursePhoto') coursePhoto: SafeUrl | undefined;
   @Output('updateImage') updateCourseImage: EventEmitter<any> = new EventEmitter<any>();
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input('errorText') errorText = '';
+  isRequired = false;
   constructor(injector:Injector) { 
     super(injector)
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
+
+      if (!formData.image) {
+        this.isRequired = true;
+        this.errorText = 'Image is required to upload'
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      } 
+
+    }, false)
+
+  }
 
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
