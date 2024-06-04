@@ -16,6 +16,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   lang;
   showBack
   title;
+  category;
   image
   onlineMode;
   step = 1;
@@ -31,7 +32,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     to_age: null,
     category: null,
     keyword: null,
-    meeting: null,
+    meeting_link: null,
     schedules: null
   };
   constructor(injector: Injector) {
@@ -55,6 +56,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
   result(value, key) {
     this.formData[key] = value;
+    if (key == 'category') {
+      this.category = value.id;
+      this.formData['category_id'] = value.id;
+      this.formData['category'] = value;}
     if (key == 'mode_type') {
       this.onlineMode = value.mode
       this.formData['mode_type'] = value.mode;
@@ -119,7 +124,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       return
     }
     console.log(f)
-    const res = await this.network.SubmitCourse(f);
+
+    const course_id = localStorage.getItem('user');
+    const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message)
     }

@@ -1,0 +1,78 @@
+<div class="student-box-outer-689567">
+  <div class="sb-heading-7895">
+    <div class="sb-heading-title-7895 outfit-semibold">Recommended Courses</div>
+  </div>
+  <div class="sb-content-7895"></div>
+</div>
+
+<div class="courses-block-outer-789565">
+
+  <div class="courses-block-item-789565" *ngFor="let item of course">
+
+    <div class="block-item-header">
+      <div class="block-item-header-title outfit-medium ">
+        {{item?.title}}
+      </div>
+    </div>
+
+    <div class="block-item-body">
+
+      <div class="profile-item-block">
+        <div>
+          <div class="profile-item-image-block" [style.backgroundImage]="'url(assets/learn-piano.jpeg)'">
+          </div>
+        </div>
+        <div class="profile-content-78678564">
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/calander.svg">
+            <div class="label-789575 fs-16 outfit"> Created {{item.created_at}}</div>
+          </div>
+          <div class="profile-line-789575">
+            <img class="img1-789575" width="16px" src="../../../assets/svg/update.svg" />
+            <div class="label-789575 fs-16 outfit"> Updated {{item.updated_at}}</div>
+          </div>
+          <div class="line"></div>
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/id.svg" />
+            <div class="label-789575 fs-16 outfit">S-1098342</div>
+            <img class="img1-789575" src="../../../assets/svg/rev-calander.svg" />
+          </div>
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/p-tag.svg" />
+            <div class="label-789577 fs-20 outfit">${{item.price}}/month</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-below-footer-986985">
+        <div class="ble-buttons-789576856">
+          <div class="btn-alg-77">
+            <img src="../../../assets/svg/student-hat.svg" />
+            <div class="label-789575 fs-16 outfit">9 Students</div>
+          </div>
+        </div>
+        <div class="right-980676">
+          <div class="profile-line-789576">
+            <img src="../../../assets/svg/live.svg" />
+            <div class="label-789576 fs-14 outfit">Live</div>
+          </div>
+          <div class="profile-line-789576">
+            <img src="../../../assets/svg/option.svg" id="click-trigger" />
+          </div>
+          <ion-popover trigger="click-trigger" triggerAction="click">
+            <ng-template>
+              <div class="profile-line-789578"> <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
+                <div class="label-789575 fs-16 outfit">Edit</div>
+              </div>
+              <div class="profile-line-789578"> <img class="img1-789575" src="../../../assets/svg/eye.svg" />
+                <div class="label-789575 fs-16 outfit">Inactive</div>
+              </div>
+              <div class="profile-line-789578"> <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                <div class="label-789575 fs-16 outfit">Delete</div>
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

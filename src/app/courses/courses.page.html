@@ -1,17 +1,24 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top  [showBack]="false" [title]="'My Courses'"></app-sd-header-top>
+  <app-sd-header-top [showBack]="false" [title]="'My Courses'"></app-sd-header-top>
 </ion-header>
-
-<ion-content  class="ion-content-bg ion-padding" [fullscreen]="true">
-  <div class="search-box-outer-89655">
-    <div class="search-box-input-outer">
-      <img src="assets/icon/input-search-gray.svg" />
-      <input type="text" placeholder="Search Course" />
+<ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
+  <div class="body-content">
+    <div class="search-box-outer-89655">
+      <div class="search-box-input-outer">
+        <img src="assets/icon/input-search-gray.svg" />
+        <input type="text" placeholder="Search Course" />
+      </div>
     </div>
+    <div class="dashboard-top-fixed-98563">
+      <div class="header-chips">
+        <div class="header-chip">
+          <ion-chip>All</ion-chip>
+          <ion-chip>Subscription</ion-chip>
+          <ion-chip>Crash Course</ion-chip>
+          <ion-chip>Event</ion-chip>
+        </div>
+      </div>
+    </div>
+    <app-course-card></app-course-card>
   </div>
-  <div>
-    
-  </div>
-  
-  
 </ion-content>

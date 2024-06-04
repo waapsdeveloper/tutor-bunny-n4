@@ -82,6 +82,9 @@ export class NetworkService {
   getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
+  getCourseList(id) {
+    return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
+  }
 
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
@@ -149,6 +152,9 @@ export class NetworkService {
   }
   SubmitCourse(data) {
     return this.httpPostResponse('courses/add', data, null, true, true);
+  }
+  SubmitSecondCourse(data, id) {
+    return this.httpPostResponse('courses/update-new-params/' + id, data, null, true, true);
   }
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, true, true);

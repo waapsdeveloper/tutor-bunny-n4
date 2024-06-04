@@ -83,9 +83,9 @@
               [key]="'location'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
-            <div class="input-title fs-12 roboto-medium">Meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting')" [inputText]="formData.meeting"
-              [key]="'meeting'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
+            <div class="input-title fs-12 roboto-medium">meeting link (only for In online class, optional)</div>
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')" [inputText]="formData.meeting_link"
+              [key]="'meeting_link'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"
