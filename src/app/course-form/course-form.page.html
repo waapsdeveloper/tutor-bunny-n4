@@ -36,7 +36,7 @@
               (onChange)="result($event, 'mode_type')" [inputText]="formData.mode_type" [key]="'mode_type'"
               [errorText]="'Teaching Mode is required'"></app-mode-of-teaching>
           </div>
-          <div class="input-box-lines city-zip">
+          <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Fees $/month</div>
               <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
@@ -46,6 +46,23 @@
               <div class="input-title fs-12 roboto-medium">Hours/month</div>
               <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
                 [key]="'duration'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
+            </div>
+          </div>
+          <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
+            <div class="city d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Fees $/month</div>
+              <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
+                [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
+            </div>
+            <div class="zip-code-2 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Hours/month</div>
+              <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
+                [key]="'duration'" [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
+            </div>
+            <div class="zip-code-2 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Total lesson</div>
+              <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson"
+                [key]="'lesson'" [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines city-zip">
@@ -84,8 +101,21 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
             <div class="input-title fs-12 roboto-medium">meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')" [inputText]="formData.meeting_link"
-              [key]="'meeting_link'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')"
+              [inputText]="formData.meeting_link" [key]="'meeting_link'" [minlength]="50"
+              [maxlength]="100"></app-sd-input-box>
+          </div>
+          <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
+            <div class="city d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">Start Date (optional)</div>
+              <app-sd-input-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date" [key]="'strat_date'"
+                [errorText]="'strat_date is required'" [type]="'date'"></app-sd-input-box>
+            </div>
+            <div class="zip-code-2 d-flex flex-column gap-8">
+              <div class="input-title fs-12 roboto-medium">End Date (optional)</div>
+              <app-sd-input-box (onChange)="result($event, 'end_date')" [inputText]="formData.end_date"
+                [key]="'end_date'" [errorText]="'Required'" [type]="'date'"> </app-sd-input-box>
+            </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"

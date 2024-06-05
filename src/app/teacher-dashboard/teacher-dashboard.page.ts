@@ -101,7 +101,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   }
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.7)
     console.log(res);
 
     if (res.data.title) {

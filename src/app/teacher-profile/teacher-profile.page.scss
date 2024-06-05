@@ -217,6 +217,7 @@
   gap: 8px;
   width: 100px;
 }
+
 .techer-subject-content {
   display: flex;
   align-items: center;
@@ -236,6 +237,7 @@
   padding: 0px 3px 0 3px;
   background-color: rgba(69, 69, 69, 0.25);
 }
+
 .chips-outer {
   display: flex;
   align-items: center;
@@ -245,6 +247,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .techer-card-outer-78965 {
   display: flex;
   align-items: flex-start;
@@ -268,9 +271,9 @@
   // height: 150px;
   width: 100%;
   display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
 
   .discription-para {
     overflow: hidden;
@@ -283,6 +286,7 @@
     -webkit-line-clamp: unset;
   }
 }
+
 .read-more {
   width: 100%;
   margin-top: 16;
@@ -295,10 +299,11 @@
   font-size: 16x;
   font-weight: 600;
 }
-.line{
+
+.line {
   width: 100%;
   height: 0.5px;
   opacity: 0.5;
   border: 0.5px solid rgba(48, 48, 48, 0.25);
- 
+
 }

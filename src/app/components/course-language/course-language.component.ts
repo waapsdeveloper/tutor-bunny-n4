@@ -29,7 +29,7 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
-      if(!formData.country){
+      if(!formData.language){
         this.isRequired = true;
         setTimeout( () => {
           this.isRequired = false;

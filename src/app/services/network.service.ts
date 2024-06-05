@@ -82,6 +82,9 @@ export class NetworkService {
   getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
+  getcourseById(id) {
+    return this.httpGetResponse('courses/byid/' + id, null, false, false);
+  }
   getCourseList(id) {
     return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
   }

@@ -16,10 +16,12 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   lang;
   showBack
   title;
+  type;
   category;
   image
   onlineMode;
-  step = 1;
+  courseId;
+  step =1;
   formData: any = {
     title: null,
     description: null,
@@ -30,8 +32,12 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     duration: null,
     from_age: null,
     to_age: null,
+    strat_date:null,
+    type:null,
+    end_date:null,
     category: null,
     keyword: null,
+    lesson: null,
     meeting_link: null,
     schedules: null
   };
@@ -44,7 +50,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize() {
     console.log(this.formData);
   }
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
     if (this.params.backUrl) {
@@ -53,7 +59,31 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.params.title) {
       this.title = this.params.title;
     }
+    if (this.params.type) {
+      this.type = this.params.type;
+      console.log(this.type);
+      
+    }
+    if (this.params.course_Id) {
+      this.courseId = this.params.course_Id;
+      console.log(this.courseId);
+      let res =  await this.network.getcourseById(this.courseId) as any;
+      console.log(res);
+      this.setFormDta(res.course);
+    }
   }
+  setFormDta(data){
+    this.formData['title'] = data['title'];
+    this.formData['description'] = data['description'];
+    this.formData['language_id'] = data['language_id'];
+    this.formData['price'] = data['price'];
+    this.formData['from_age'] = data['from_age'];
+    this.formData['to_age'] = data['to_age'];
+    this.formData['duration'] = data['duration'];
+    this.formData['capacity'] = data['capacity'];
+    this.formData['mode_type'] = data['mode_type'];
+  }
+
   result(value, key) {
     this.formData[key] = value;
     if (key == 'category') {
@@ -91,8 +121,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
-    f['user_id'] = user.id
-    console.log(f)
+    f['user_id'] = user.id;
+    f['type'] = this.type
+    console.log(f);
     const res = await this.network.SubmitCourse(f);
     console.log(res);
     let courseId = res.course.id;
@@ -118,14 +149,12 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       console.log("dsada");
       return
     }
-    if (!f.schedules) {
-      console.log("dadasda");
-
-      return
-    }
+   
     console.log(f)
 
-    const course_id = localStorage.getItem('user');
+    const course_id = localStorage.getItem('course_Id');
+    console.log("herr", f, course_id)
+
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message)

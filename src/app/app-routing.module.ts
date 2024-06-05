@@ -44,7 +44,8 @@ const routes: Routes = [
   {
     path: 'student-profile',
     loadChildren: () => import('./student-profile/student-profile.module').then( m => m.StudentProfilePageModule)
-  },  {
+  },
+  {
     path: 'blocked',
     loadChildren: () => import('./blocked/blocked.module').then( m => m.BlockedPageModule)
   },
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'courses',
     loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
+  },
+  {
+    path: 'course-detail',
+    loadChildren: () => import('./course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
   },
 
   
