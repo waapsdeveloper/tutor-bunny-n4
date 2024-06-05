@@ -7,13 +7,13 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './course-photo.component.html',
   styleUrls: ['./course-photo.component.scss'],
 })
-export class CoursePhotoComponent extends BasePage  implements OnInit {
+export class CoursePhotoComponent extends BasePage implements OnInit {
   @Input('coursePhoto') coursePhoto: SafeUrl | undefined;
   @Output('updateImage') updateCourseImage: EventEmitter<any> = new EventEmitter<any>();
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('errorText') errorText = '';
   isRequired = false;
-  constructor(injector:Injector) { 
+  constructor(injector: Injector) {
     super(injector)
   }
 
@@ -23,10 +23,10 @@ export class CoursePhotoComponent extends BasePage  implements OnInit {
       if (!formData.image) {
         this.isRequired = true;
         this.errorText = 'Image is required to upload'
-        setTimeout( () => {
+        setTimeout(() => {
           this.isRequired = false;
         }, 5000);
-      } 
+      }
 
     }, false)
 
@@ -37,17 +37,16 @@ export class CoursePhotoComponent extends BasePage  implements OnInit {
     const reader = new FileReader();
     reader.onload = async () => {
       const pmi = reader.result as string;
-     
+
       this.coursePhoto = pmi;
       console.log(pmi);
-      let obj={
-        image : pmi
+      let obj = {
+        image: pmi
       }
       this.onChange.emit(obj);
 
-    
-      // const res = await this.network.postProfileImage(obj)
-      // this.updateCourseImage.emit(this.coursePhoto)
+
+      // const res = await this.network.postProfileImage(obj)s
 
     };
     reader.readAsDataURL(file);

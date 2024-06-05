@@ -9,6 +9,7 @@ import { CourseDetailPageRoutingModule } from './course-detail-routing.module';
 import { CourseDetailPage } from './course-detail.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
 import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
+import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
     IonicModule,
     CourseDetailPageRoutingModule,
     SdHeaderTopModule,
-    YoutubeBoxModule
+    OtherCoursesModule
   ],
   declarations: [CourseDetailPage]
 })

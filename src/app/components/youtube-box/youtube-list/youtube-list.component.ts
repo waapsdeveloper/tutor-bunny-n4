@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonicSlides } from '@ionic/angular';
-import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-youtube-list',

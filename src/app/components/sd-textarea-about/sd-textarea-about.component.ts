@@ -35,10 +35,17 @@ export class SdTextareaAboutComponent implements OnInit {
     }, false);
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      
+
       let v = formData[this.key];
-      if (!v || v == '') {
+      if (!v || v == 'description') {
         this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+      if (v && v.length < 250) {
+        this.isRequired = true;
+        this.errorText = 'The Detail field should have minimum 250 characters'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
@@ -80,7 +87,7 @@ export class SdTextareaAboutComponent implements OnInit {
     this.onChange.emit('')
   }
 
-  onPasteHandler($event){
+  onPasteHandler($event) {
     const v = $event.clipboardData.getData('text/plain');
     // let obj = {
     //   target: {
@@ -92,7 +99,7 @@ export class SdTextareaAboutComponent implements OnInit {
 
   }
 
-  modelChange($event){
+  modelChange($event) {
     console.log($event);
     let v = $event;
     this.onChange.emit(v)

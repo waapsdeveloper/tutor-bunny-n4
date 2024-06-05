@@ -37,6 +37,9 @@ export class NetworkService {
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
+  postCoursePhoto( data) {
+    return this.httpPostResponse('courses/update-course-image', data );
+  }
   saveFcmToken(data) {
     return this.httpPostResponse('update-firebase-token', data);
   }

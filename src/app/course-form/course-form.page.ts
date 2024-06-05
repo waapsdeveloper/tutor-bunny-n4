@@ -128,6 +128,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(res);
     let courseId = res.course.id;
     console.log(courseId);
+    let obj = {
+      course_id: courseId,
+      image:this.formData.image
+    }
+    if(this.courseId){
+      let image = await this.network.postCoursePhoto(obj);
+      console.log(image);
+      
+    }
     localStorage.setItem('course_Id', courseId)
     this.events.publish('course_Id-get', courseId)
     if (res) {

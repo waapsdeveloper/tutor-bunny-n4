@@ -1,0 +1,48 @@
+.student-box-outer-689567 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .sb-heading-7895 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 9px;
+
+    .sb-heading-title-7895 {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      img {
+        height: 24px;
+      }
+    }
+
+    .sb-heading-sl-7895 {
+      font-size: 14px;
+    }
+  }
+}
+
+.vedio-box-outer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.vedio-box-inner {
+  border-radius: 6px;
+
+  iframe {
+    border-radius: 6px;
+  }
+}
+
+.component-style {
+  width: 100%;
+}

@@ -20,8 +20,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
   serial_number;
   created_at;
   price;
-  startTime: string;
-  endTime: string;
+  startTime;
+  endTime;
   updated_at;
   schedules;
   constructor(injector: Injector) {
