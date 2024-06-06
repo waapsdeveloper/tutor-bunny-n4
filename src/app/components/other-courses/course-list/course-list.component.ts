@@ -37,4 +37,17 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
+  oepnDeatils(item) {
+    console.log(item);
+
+    const params = {
+      id: item.id,
+      backUrl: '/tabs/courses'
+    }
+    console.log(params);
+    this.nav.push('/tabs/course-detail', params)
+    
+
+
+  }
 }

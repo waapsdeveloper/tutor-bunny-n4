@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecCoursesComponent } from './rec-courses.component';
 import { IonicModule } from '@ionic/angular';
+import { CourseListModule } from './course-list/course-list.module';
 
 
 
@@ -9,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [RecCoursesComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    CourseListModule
   ],
   exports: [
     RecCoursesComponent

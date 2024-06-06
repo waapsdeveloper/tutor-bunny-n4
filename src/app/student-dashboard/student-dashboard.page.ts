@@ -20,7 +20,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
-    this.initialize()
+  this.initialize()  
   }
 
   ngOnInit() {

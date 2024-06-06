@@ -21,7 +21,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   image
   onlineMode;
   courseId;
-  step =1;
+  step = 1;
   formData: any = {
     title: null,
     description: null,
@@ -32,9 +32,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     duration: null,
     from_age: null,
     to_age: null,
-    strat_date:null,
-    type:null,
-    end_date:null,
+    strat_date: null,
+    type: null,
+    end_date: null,
     category: null,
     keyword: null,
     lesson: null,
@@ -62,17 +62,17 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.params.type) {
       this.type = this.params.type;
       console.log(this.type);
-      
+
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
       console.log(this.courseId);
-      let res =  await this.network.getcourseById(this.courseId) as any;
+      let res = await this.network.getcourseById(this.courseId) as any;
       console.log(res);
       this.setFormDta(res.course);
     }
   }
-  setFormDta(data){
+  setFormDta(data) {
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
     this.formData['language_id'] = data['language_id'];
@@ -89,7 +89,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (key == 'category') {
       this.category = value.id;
       this.formData['category_id'] = value.id;
-      this.formData['category'] = value;}
+      this.formData['category'] = value;
+    }
     if (key == 'mode_type') {
       this.onlineMode = value.mode
       this.formData['mode_type'] = value.mode;
@@ -128,14 +129,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(res);
     let courseId = res.course.id;
     console.log(courseId);
-    let obj = {
-      course_id: courseId,
-      image:this.formData.image
-    }
-    if(this.courseId){
+
+    if (courseId) {
+      let obj = {
+        course_id: courseId,
+        image: this.formData.image
+      }
       let image = await this.network.postCoursePhoto(obj);
       console.log(image);
-      
+
     }
     localStorage.setItem('course_Id', courseId)
     this.events.publish('course_Id-get', courseId)
@@ -158,7 +160,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       console.log("dsada");
       return
     }
-   
+
     console.log(f)
 
     const course_id = localStorage.getItem('course_Id');
