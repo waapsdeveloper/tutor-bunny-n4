@@ -1,16 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
 })
-export class CourseListComponent implements OnInit {
+export class CourseListComponent extends BasePage implements OnInit {
   @Input() item: any;
 languageName: any;
 
-  constructor() {
-
+  constructor(injector:Injector) {
+    super(injector)
     this.initialize();
   }
 
@@ -20,6 +21,6 @@ languageName: any;
 
   ngOnInit() { }
   goToDeatil() {
-
+    this.nav.push('student-course-detail')
   }
 }
