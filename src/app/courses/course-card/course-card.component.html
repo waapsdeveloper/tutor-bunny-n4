@@ -14,7 +14,7 @@
     <div class="block-item-body">
       <div class="profile-item-block" (click)="oepnDeatils(item)">
         <div>
-          <div class="profile-item-image-block" [style.backgroundImage]="'url(assets/learn-piano.jpeg)'">
+          <div class="profile-item-image-block" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
           </div>
         </div>
         <div class="profile-content-78678564">

@@ -138,7 +138,8 @@
     </div>
 
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Next'"  *ngIf="step == 1 && edit == 'false'"  (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Next'" *ngIf="step == 1 && edit == 'true'" (click)="onSlideChangeEdit()"></app-sd-button-gray>
       <app-sd-button-gray [text]="'Save'" *ngIf="step == 2" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>

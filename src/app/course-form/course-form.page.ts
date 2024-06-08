@@ -20,7 +20,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   category;
   image
   onlineMode;
+  language_id;  
   courseId;
+  edit;
   step = 1;
   formData: any = {
     title: null,
@@ -59,10 +61,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.params.title) {
       this.title = this.params.title;
     }
+    if (this.params.showBack) {
+      this.showBack = this.params.showBack;
+    }
+    if (this.params.edit) {
+      this.edit = this.params.edit;
+    }
     if (this.params.type) {
       this.type = this.params.type;
       console.log(this.type);
-
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
@@ -80,8 +87,19 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['from_age'] = data['from_age'];
     this.formData['to_age'] = data['to_age'];
     this.formData['duration'] = data['duration'];
+    this.formData['image'] = data['image'];
+    this.formData['capacity'] = data['capacity'];
     this.formData['capacity'] = data['capacity'];
     this.formData['mode_type'] = data['mode_type'];
+    this.formData['language'] = data['language'];
+    const lang = data['language']
+    console.log(lang);
+    if (lang) {
+      this.language_id = lang.id;
+      console.log(this.language_id);
+      this.formData['language_id'] = this.language_id;
+      
+    }
   }
 
   result(value, key) {
@@ -126,6 +144,48 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     f['type'] = this.type
     console.log(f);
     const res = await this.network.SubmitCourse(f);
+    console.log(res);
+    let courseId = res.course.id;
+    console.log(courseId);
+
+    if (courseId) {
+      let obj = {
+        course_id: courseId,
+        image: this.formData.image
+      }
+      let image = await this.network.postCoursePhoto(obj);
+      console.log(image);
+
+    }
+    localStorage.setItem('course_Id', courseId)
+    this.events.publish('course_Id-get', courseId)
+    if (res) {
+      this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.step = 2;
+    }
+  }
+  async onSlideChangeEdit() {
+    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+    const f = this.formData;
+    console.log(f);
+    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
+      console.log("dsada");
+      return
+    }
+    if (f.language.length == 0) {
+      console.log(f.teacher.language.length);
+      return
+    }
+    if (f.mode_type.length == 0) {
+      console.log(f.teacher.language.length);
+      return
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    f['user_id'] = user.id;
+    f['type'] = this.type
+    console.log(f);
+    this.courseId
+    const res = await this.network.SubmitCourseEdit(f, this.courseId);
     console.log(res);
     let courseId = res.course.id;
     console.log(courseId);

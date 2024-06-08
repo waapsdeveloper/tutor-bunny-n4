@@ -32,11 +32,12 @@ export class CourseCardComponent extends BasePage implements OnInit {
     console.log(item);
 
     const params = {
-      backUrl: '/tabs/teacher-dashboard',
+      backUrl: '/tabs/courses',
       title: 'Edit Course',
       type: item.type,
-      course_Id: item.id
-
+      showBack: true,
+      course_Id: item.id,
+      edit: true
     };
     console.log(params);
 

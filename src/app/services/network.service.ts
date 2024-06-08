@@ -126,7 +126,8 @@ export class NetworkService {
   }
 
   getMyKeyword(data) {
-    return this.httpGetResponse('keywords/my-list', data, null, false,);
+    const str = this.serialize(data);
+    return this.httpGetResponse('keywords/my-list' + '?' + str, null, false, false);
   }
 
   removeMySubjects(data) {
@@ -161,6 +162,9 @@ export class NetworkService {
   }
   SubmitCourse(data) {
     return this.httpPostResponse('courses/add', data, null, true, true);
+  }
+  SubmitCourseEdit(data, id) {
+    return this.httpPostResponse('courses/edit', data, id, true, true);
   }
   SubmitSecondCourse(data, id) {
     return this.httpPostResponse('course/update-params/' + id, data, null, true, true);
