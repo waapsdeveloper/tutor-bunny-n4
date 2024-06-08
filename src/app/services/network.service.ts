@@ -126,8 +126,7 @@ export class NetworkService {
   }
 
   getMyKeyword(data) {
-    const str = this.serialize(data);
-    return this.httpGetResponse('keywords/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse('keywords/my-list', data, null, false,);
   }
 
   removeMySubjects(data) {

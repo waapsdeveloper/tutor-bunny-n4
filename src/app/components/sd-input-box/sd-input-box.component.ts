@@ -37,37 +37,23 @@ export class SdInputBoxComponent implements OnInit {
     }, false);
 
 
+
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      
+
       let v = formData[this.key];
-      if (!v || v == '') {
+      if (!v || v == 'title') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
-    }, false);
-
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
-      let v = formData[this.key];
-      if (this.key == 'title') {
-        if (!v || v == '') {
-          this.isRequired = true;
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-          return;
-        }
-
-        if (v.length < 50 || v.length > 100) {
-          this.isRequired = true;
-          this.errorText = 'The Title should be between 50-100 characters';
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-        }
+      if (v && v.length < 250 && v == 'title') {
+        this.isRequired = true;
+        this.errorText = 'The Detail field must be 50 to 100 characters'
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
       }
-
     }, false);
   }
 
@@ -95,7 +81,7 @@ export class SdInputBoxComponent implements OnInit {
     }
   }
 
-  onPasteHandler($event){
+  onPasteHandler($event) {
     const v = $event.clipboardData.getData('text/plain');
     // let obj = {
     //   target: {
@@ -107,7 +93,7 @@ export class SdInputBoxComponent implements OnInit {
 
   }
 
-  modelChange($event){
+  modelChange($event) {
     console.log($event);
     let v = $event;
     this.onChange.emit(v)

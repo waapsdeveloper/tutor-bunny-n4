@@ -20,7 +20,12 @@ languageName: any;
   }
 
   ngOnInit() { }
-  goToDeatil() {
-    this.nav.push('student-course-detail')
+  goToDeatil(item) {
+    const params = {
+      id: item.id,
+      backUrl: '/tabs/courses'
+    }
+    console.log(params);
+    this.nav.push('student-course-detail', params)
   }
 }

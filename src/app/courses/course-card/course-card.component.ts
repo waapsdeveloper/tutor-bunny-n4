@@ -34,7 +34,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
     const params = {
       backUrl: '/tabs/teacher-dashboard',
       title: 'Edit Course',
-      type: "res.data.type",
+      type: item.type,
       course_Id: item.id
 
     };

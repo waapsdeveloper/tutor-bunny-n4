@@ -5,6 +5,10 @@
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
 
+    <div>
+      <app-sd-button-gray [image]="'assets/svg/send.svg'"  [text]="'Request Free Trial'"></app-sd-button-gray>
+    </div>
+
     <div class="course-heading-78521">
       {{title}}
     </div>
@@ -75,3 +79,14 @@
     <app-other-courses></app-other-courses>
   </div>
 </ion-content>
+
+
+<ion-footer>
+  <div class="footer-main-85632">
+    <div class="amount-box-98564">
+      <div class="amount-text-98569">${{price}}/month</div>
+      <div class="days-text-98575">15 days money back.</div>
+    </div>
+    <div class="subscribe-button-78523">Subscribe</div>
+  </div>
+</ion-footer>
