@@ -10,57 +10,55 @@ import { UsersService } from '../services/users.service';
 export class TabsPage implements OnInit {
 
   showTabs = true;
+  roleId;
   user;
   constructor(private events: EventsService, private users: UsersService) {
     this.initialize()
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.user = this.users.getUser()
+    console.log(this.user);
+
+    this.roleId = this.user.role_id
+
   }
 
   ngOnInit() {
     this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }
 
-  pageScrollConditionEnd(data){
+  pageScrollConditionEnd(data) {
     const efr = localStorage.getItem('efr');
-    if(efr){
+    if (efr) {
       this.showTabs = efr == 'show'// this.efr;
     }
 
   }
 
-  initialize(){
-    // let user = this.users.getUser();
+  initialize() {
   }
 
-  returnDashboardLink(){
-    if(!this.user){
+  returnDashboardLink() {
+    if (!this.user) {
       return '';
     }
 
-    if(!this.user.role_id){
+    if (!this.user.role_id) {
       return '';
     }
 
     const roleId = parseInt(this.user.role_id);
 
-    if(roleId == 2){
+    if (roleId == 2) {
       return 'student-dashboard'
     }
 
-    if(roleId == 3){
+    if (roleId == 3) {
       return 'teacher-dashboard'
     }
 
     return ''
-
-
-
-
-
-
 
   }
 

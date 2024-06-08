@@ -13,7 +13,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   trail = false;
   alertButtons = [
     {
-      text: 'Cancel',
+      text: 'No',
       role: 'cancel',
       handler: () => {
         console.log('Cancel clicked');
@@ -21,7 +21,7 @@ export class CourseListComponent extends BasePage implements OnInit {
       }
     },
     {
-      text: 'OK',
+      text: 'Yes',
       handler: () => {
         console.log('OK clicked');
         this.handleOkClick();
@@ -59,7 +59,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async presentAlert() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertController.create({ 
       header: 'Cancel Trial Request',
       message: 'Are you sure to cancel trail Request',
       buttons: this.alertButtons
@@ -70,13 +70,13 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   setResult() {
     console.log('Alert dismissed with role:');
-    this.trail = false;
+    this.trail = true;
   }
 
   handleOkClick() {
     // Handle the OK click here
     console.log('Handling OK click');
-    this.trail = true;
+    this.trail = false;
   }
  
 }

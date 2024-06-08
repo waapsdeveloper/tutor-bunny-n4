@@ -80,6 +80,10 @@ const routes: Routes = [
     path: 'student-course-detail',
     loadChildren: () => import('./student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
+  {
+    path: 'my-teachers',
+    loadChildren: () => import('./my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
+  },
 
 
   
