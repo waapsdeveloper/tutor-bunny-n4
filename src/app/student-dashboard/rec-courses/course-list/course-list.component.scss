@@ -268,7 +268,8 @@
     background: #E29F1B;
     height: 24px;
     color: #FFFFFF;
-    width: 113px;
+    // width: 113px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -281,13 +282,26 @@
     font-size: 16px;
     background: #454545;
     height: 24px;
-    width: 113px;
+    // width: 113px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
     border-radius: 16px;
 
+  }
+  .free-trial-btn-89676{
+     // height: 26px;
+     font-size: 16px;
+     height: 24px;
+     // width: 113px;
+     padding: 0 12px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #808080 ;
+     border-radius: 16px;
   }
 }
 
@@ -306,7 +320,7 @@
   position: absolute;
   top: -5px;
   right: -27px;
-  height: 24px;
+  height: 16px;
   color: red;
 
 }

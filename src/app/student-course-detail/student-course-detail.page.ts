@@ -19,6 +19,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   title;
   serial_number;
   created_at;
+  image;
   price;
   startTime;
   endTime;
@@ -58,6 +59,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.price = this.data.price;
     this.schedules = this.data.schedules;
     this.created_at = this.data.created_at;
+    this.image = this.data.image;
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
     const endTime = this.schedules.end_date;

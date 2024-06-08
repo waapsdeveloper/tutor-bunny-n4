@@ -1,15 +1,18 @@
-<div class="courses-block-outer-789565" (click)="goToDeatil(item)">
+<div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
     <div class="block-item-header">
       <div class="block-item-header-title outfit-medium">{{item?.title}}</div>
     </div>
     <div class="block-item-body">
       <div class="profile-item-block">
-        <div>
-          <div class="profile-item-image-block" [style.backgroundImage]="'url(assets/learn-piano.jpeg)'"></div>
+        <div (click)="goToDeatil(item)">
+          <div class="profile-item-image-block"
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
         </div>
         <div class="profile-content-78678564">
-          <img src="../../../assets/svg/heart.svg" alt="" class="loved-icon">
+          <img src="../../../assets/svg/heart.svg" *ngIf="fav==true" alt="" (click)="RemoveToFav()" class="loved-icon">
+          <img src="../../../assets/svg/heart-fill.svg" alt="" *ngIf="fav==false" (click)="addToFav()"
+            class="loved-icon">
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/techer-card.svg">
             <div class="label-789575 outfit">{{item.user.name}}</div>
@@ -58,7 +61,14 @@
         </div>
         <div class="right-980676">
           <div class="buy-now-btn-89675 outfit-medium">Subscribe</div>
-          <div class="free-trial-btn-89675 outfit-medium">Free Trial</div>
+          <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false" (click)="requestTrail()">Free Trial
+          </div>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true"> <img
+              src="../../../../assets/svg/trail.svg" alt=""><button (click)="presentAlert()">Trial Requested</button>
+          </div>
+          <ion-alert id="myAlert" header="A Short Title Is Best" subHeader="Cancel Trial Request"
+            message="Are you sure to cancel trail Request"   [buttons]="alertButtons">
+          </ion-alert>
         </div>
       </div>
     </div>

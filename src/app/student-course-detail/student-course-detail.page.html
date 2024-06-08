@@ -6,7 +6,7 @@
   <div class="body-content">
 
     <div>
-      <app-sd-button-gray [image]="'assets/svg/send.svg'"  [text]="'Request Free Trial'"></app-sd-button-gray>
+      <app-sd-button-gray [image]="'assets/svg/send.svg'" [text]="'Request Free Trial'"></app-sd-button-gray>
     </div>
 
     <div class="course-heading-78521">
@@ -17,7 +17,8 @@
         <div class="block-item-body">
           <div class="profile-item-block">
             <div>
-              <div class="profile-item-image-block" [style.backgroundImage]="'url(assets/learn-piano.jpeg)'">
+              <div class="profile-item-image-block"
+                [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'">
               </div>
             </div>
             <div class="profile-content-78678564">

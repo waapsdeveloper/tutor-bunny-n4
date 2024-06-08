@@ -14,7 +14,8 @@
     <div class="block-item-body">
       <div class="profile-item-block" (click)="oepnDeatils(item)">
         <div>
-          <div class="profile-item-image-block" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+          <div class="profile-item-image-block"
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
           </div>
         </div>
         <div class="profile-content-78678564">
@@ -38,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="profile-below-footer-986985"> 
+      <div class="profile-below-footer-986985">
         <div class="ble-buttons-789576856">
           <div class="btn-alg-77">
             <img src="../../../assets/svg/student-hat.svg" />
@@ -55,15 +56,27 @@
           </div>
           <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click">
             <ng-template>
-              <div class="profile-line-789578" (click)="editCourse(item)"> <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
-                <div class="label-789575 fs-16 outfit" >Edit</div>
-              </div>
-              <div class="profile-line-789578"> <img class="img1-789575" src="../../../assets/svg/eye.svg" />
-                <div class="label-789575 fs-16 outfit">Inactive</div>
-              </div>
-              <div class="profile-line-789578"> <img class="img1-789575" src="../../../assets/svg/trash.svg" />
-                <div class="label-789575 fs-16 outfit">Delete</div>
-              </div>
+              <ion-list>
+                <ion-item class="profile-line-789578" (click)="editCourse(item)">
+                  <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
+                  <div class="label-789575 fs-16 outfit">Edit</div>
+
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="../../../assets/svg/eye.svg" />
+                  <div class="label-789575 fs-16 outfit">Inactive</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                  <div class="label-789575 fs-16 outfit">Delete</div>
+
+                </ion-item>
+              </ion-list>
+
             </ng-template>
           </ion-popover>
         </div>
