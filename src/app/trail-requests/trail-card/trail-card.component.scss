@@ -1,3 +1,43 @@
+.trail-card-outer-12345{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.trail-card-header-12346 {
+  width: 100%;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #454545;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;   
+
+  .trail-card-header-date-12347 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+
+    .trail-card-header-day-12348 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .trail-card-header-time-12349{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+}
+
+
 .trial-box-outer-689567{
   display: flex;
   flex-direction: column;
@@ -83,6 +123,7 @@
       .content-box-outer{
         display: flex;
         padding-top: 5px;
+        gap: 8px;
         flex-direction: column;
         justify-content: space-between;
         flex-grow: 1;
@@ -117,22 +158,17 @@
 
     .options-box-outer-78906{
       background: #FFFFFF;
-      border-radius: 20px;
-      box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
-      // height: 60px;
       display: flex;
       flex-direction: row;
-      justify-content:space-evenly;
+      justify-content:space-between;
       align-items: center;
-      padding: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.5);
 
       .statistics-box-item-78906{
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 8px;
         border-right: 0.25px solid rgba(103,113,105, 0.15);
         .nbl-687{
           font-size: 14px;
@@ -175,6 +211,11 @@
   flex-direction: row;
   justify-content: flex-start;
   gap: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  text-align: justify;
+  -webkit-box-orient: vertical;
   align-items: flex-start;
 }
 .profile-line-789578 {
@@ -189,4 +230,14 @@
     height: 18px;
    
   }
+}
+
+.course-button-78523{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 6px 24px;
+  border-radius: 24px;
+  background-color: #454545;
 }

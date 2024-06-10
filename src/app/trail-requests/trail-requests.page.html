@@ -1,0 +1,9 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="'Trial request'" [backUrl]="'techer-card'"></app-sd-header-top>
+</ion-header>
+
+<ion-content  class="ion-content-bg ion-padding" [fullscreen]="true">
+  <div class="body-content">
+    <app-trail-card *ngFor="let item of trial" [item]="item"></app-trail-card>
+  </div>
+</ion-content>

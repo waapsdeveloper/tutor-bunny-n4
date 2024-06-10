@@ -1,0 +1,27 @@
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from '../base-page/base-page';
+
+@Component({
+  selector: 'app-trail-requests',
+  templateUrl: './trail-requests.page.html',
+  styleUrls: ['./trail-requests.page.scss'],
+})
+export class TrailRequestsPage  extends BasePage implements OnInit {
+;
+  user;
+  trial;
+
+  constructor(injector: Injector) {
+    super(injector);
+    this.initialize();
+  }
+
+  ngOnInit() { }
+
+  async initialize() { 
+    this.user = this.users.getUser();
+
+    this.trial = await this.network.geTrailRequests(this.user.id)
+    console.log(this.trial);
+  }
+}

@@ -1,0 +1,55 @@
+<div class="trail-card-outer-12345">
+  <div class="trail-card-header-12346">
+    <div class="fs-14 roboto-regular">Requested On</div>
+    <div class="trail-card-header-date-12347">
+      <div class="trail-card-header-day-12348 fs-14 roboto-regular"><img src="../../../assets/svg/trail-date.svg"
+          alt="">{{item.trial_requested_date}}</div>
+      <div class="trail-card-header-time-12349 fs-14 roboto-regular"><img src="../../../assets/svg/clock.svg"
+          alt="">{{time}}</div>
+    </div>
+  </div>
+  <div class="trial-box-item-outer-689567">
+    <div class="trial-box-item-689567">
+      <div class="profile-line-content">
+        <div class="image-box-outer">
+          <div class="image-circle-789675" [style.backgroundImage]="'url(assets/profileimg.png)'"></div>
+        </div>
+        <div class="content-box-outer">
+          <div class="content-box-outer-heading-top">
+            <div class="title-heading-789 outfit-semibold">
+              {{item.student.name}}
+            </div>
+            <div class="pnd-678956">
+              <img src="assets/icon/hour-glass.svg" />
+              <div class="pnd-inner-7895">Pending</div>
+            </div>
+          </div>
+          <div class="country-heading-789">
+            <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
+            <span class="country-name-789 outfit">{{item.student.country}}</span>
+          </div>
+          <div class="er-title-789 outfit">
+            <span>{{item.course.title}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="options-box-outer-78906">
+        <div class="statistics-box-item-78906">
+          <div  class="statistics-box-item-78906">
+            <img src="assets/icon/check-circle.svg"(click)="trailStatus('Accepted')" />
+          </div>
+          <div  class="statistics-box-item-78906">
+            <img src="assets/icon/reject-circle.svg"  (click)="trailStatus('Rejected ')"/>
+          </div>
+          <div  class="statistics-box-item-78906">
+            <img src="assets/icon/block-circle.svg"  (click)="trailStatus('Blocked')"/>
+          </div>
+        </div>
+        <div class="course-button-78523">
+          Course
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

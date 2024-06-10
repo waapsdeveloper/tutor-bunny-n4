@@ -8,7 +8,16 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent extends BasePage implements OnInit {
-  @Input() item: any;
+  private _item: any;
+  loading = false;
+  @Input('item')
+  public get item() {
+    return this._item;
+  };
+  public set item(value: any) {
+    this._item = value;
+    this.callApi()
+  }
   fav = false;
   trail = false;
   alertButtons = [
@@ -30,7 +39,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   ];
   languageName: any;
 
-  constructor(injector: Injector,private alertController: AlertController) {
+  constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
     this.initialize();
   }
@@ -40,6 +49,30 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() { }
+
+  async callApi() {
+    this.loading = true;
+
+    let user = this.users.getUser()
+    console.log(user);
+
+    let obj = {
+      user_id: user.id,
+      course_id: this.item.id
+    }
+    let res = await this.network.getTrail(obj)
+    console.log(res)
+
+    if (res && !res.trial) {
+      this.trail = false;
+      this.loading = false;
+    }
+    if(res && res.trial){
+      this.trail = true;
+      this.loading = false;
+
+    }
+  }
   goToDeatil(item) {
     const params = {
       id: item.id,
@@ -48,18 +81,28 @@ export class CourseListComponent extends BasePage implements OnInit {
     console.log(params);
     this.nav.push('student-course-detail', params)
   }
-  requestTrail() {
+  async requestTrail(id) {
     this.trail = true;
+    let user = this.users.getUser()
+    console.log(user);
+
+    let obj = {
+      user_id: user.id,
+      course_id: id
+    }
+    let res = await this.network.requestTrail(obj)
+    console.log(res);
+
   }
-  addToFav(){
+  addToFav() {
     this.fav = true;
   }
-  RemoveToFav(){
+  RemoveToFav() {
     this.fav = false;
   }
 
   async presentAlert() {
-    const alert = await this.alertController.create({ 
+    const alert = await this.alertController.create({
       header: 'Cancel Trial Request',
       message: 'Are you sure to cancel trail Request',
       buttons: this.alertButtons
@@ -78,5 +121,5 @@ export class CourseListComponent extends BasePage implements OnInit {
     console.log('Handling OK click');
     this.trail = false;
   }
- 
+
 }

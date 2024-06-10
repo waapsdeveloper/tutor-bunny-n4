@@ -89,6 +89,9 @@ export class NetworkService {
   getAllCourses() {
     return this.httpGetResponse('courses/list', null, false, false);
   }
+  geTrailRequests(id) {
+    return this.httpGetResponse('course/trials/' + id, null, false, false);
+  }
   getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
@@ -98,6 +101,9 @@ export class NetworkService {
 
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
+  }
+  getOneTrial(id) {
+    return this.httpGetResponse('get-one/course/trials/' + id, null, false, false);
   }
 
   getSchedule(id) {
@@ -171,6 +177,18 @@ export class NetworkService {
   }
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, true, true);
+  }
+
+  changeTrailStuts(data, id) {
+    return this.httpPostResponse('course/update-status/' + id, data, null, true, true);
+  }
+
+  requestTrail(data){
+    return this.httpPostResponse('course-trial/send-request', data, null, true, true);
+  }
+
+  getTrail(data){
+    return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
   }
 
   updateStudentProfile(data, id) {

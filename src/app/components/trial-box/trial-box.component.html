@@ -1,54 +1,71 @@
 <div class="trial-box-outer-689567">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">Trial Requests (2)</div>
-    <!-- <div class="sb-heading-sl-7895 outfit">see all</div> -->
+    <div class="sb-heading-title-7895 outfit-semibold">Trial Requests</div>
+    <div class="sb-heading-sl-7895 outfit" (click)="goToTrailReq()">see all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-<div class="trial-box-item-outer-689567" >
+<div class="trial-box-item-outer-689567" *ngIf="trail">
 
-  <div class="trial-box-item-689567" *ngFor="let item of [1,2]">
+  <div class="trial-box-item-689567">
 
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" [style.backgroundImage]="'url(assets/profileimg.png)'"></div>
+        <div class="image-circle-789675"  [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'"></div>
+        <div class="pnd-678956">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895">Pending</div>
+        </div>
       </div>
       <div class="content-box-outer">
 
         <div class="content-box-outer-heading-top">
           <div class="title-heading-789 outfit-semibold">
-            D**********ip
+           {{student}} 
           </div>
           <div class="pnd-678956">
-            <img src="assets/icon/hour-glass.svg" />
-            <div class="pnd-inner-7895">Pending</div>
+            <img src="../../../assets/svg/option.svg" id="click-trigger"/>
           </div>
+          <ion-popover trigger="click-trigger" triggerAction="click">
+            <ng-template>
+              <ion-list>
+                <ion-item class="profile-line-789578" >
+                  <img class="img1-789575" src="assets/icon/check-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Accept</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="assets/icon/reject-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Reject</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Block</div>
+
+                </ion-item>
+              </ion-list>
+
+            </ng-template>
+          </ion-popover>
         </div>
 
         <div class="country-heading-789">
-          <img class="country-flag-i-7685" src="assets/flag.png">
-          <span class="country-name-789 outfit">India</span>
+          <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
+          <span class="country-name-789 outfit">{{country}} ({{age}})</span>
         </div>
-        <div class="age-title-789 outfit">Age: 7 years</div>
-        <div class="er-title-789 outfit">
-          <span>Piano class for teens and students</span>
-          <img src="assets/icon/info.svg" />
-        </div>
-
+        <div class="age-title-789 outfit">Course ID: {{serial_number}}</div>
 
       </div>
-
 
     </div>
-
-    <div class="options-box-outer-78906">
-
-      <div *ngFor="let item of list" class="statistics-box-item-78906" >
-        <img [src]="item.img" />
-        <div class="nbl-687 outfit-semibold {{item.colorClass}}">{{ item.nbl}}</div>
-      </div>
-
+    <div class="line"></div>
+    <div class="er-title-789 outfit">
+      <img src="assets/icon/info.svg" />
+      <span>{{courseName}}</span>
     </div>
 
   </div>
