@@ -88,6 +88,10 @@ const routes: Routes = [
     path: 'trail-requests',
     loadChildren: () => import('./trail-requests/trail-requests.module').then( m => m.TrailRequestsPageModule)
   },
+  {
+    path: 'my-students',
+    loadChildren: () => import('./my-students/my-students.module').then( m => m.MyStudentsPageModule)
+  },
 
 
   
