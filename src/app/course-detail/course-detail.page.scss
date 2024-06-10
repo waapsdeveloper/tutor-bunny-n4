@@ -4,12 +4,12 @@
   align-items: stretch;
   justify-content: center;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .course-heading-78521 {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
 
 }
 
@@ -371,7 +371,7 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 
   .detail-head-78523 {
     display: flex;
@@ -402,6 +402,7 @@
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 6;
+      line-height: 21px;
       -webkit-box-orient: vertical;
     }
 
@@ -428,21 +429,23 @@
   font-weight: 600;
 }
 
-.weekly-schedule-outer-78526{
+.weekly-schedule-outer-78526 {
   background-color: white;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 16px;
-  .weekly-schedule-heding-78527{
+
+  .weekly-schedule-heding-78527 {
     font-size: 16px;
     font-weight: 600;
     color: white;
     width: 100%;
     padding: 8px 16px;
     background-color: #454545;
-    border-radius: 16px;
+    border-radius: 16px 16px 0 0;
   }
-  .weekly-schedule-date-78528{
+
+  .weekly-schedule-date-78528 {
     width: 100%;
     display: flex;
     align-items: center;
@@ -450,13 +453,15 @@
     gap: 16px;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
     padding: 8px 16px;
-    .schedule-day-78528{
+
+    .schedule-day-78528 {
       font-size: 16px;
       font-weight: 500;
       color: black;
     }
   }
 }
+
 .line {
   width: 100%;
   height: 0.5px;

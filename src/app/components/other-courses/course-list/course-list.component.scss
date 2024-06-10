@@ -1,6 +1,6 @@
 .vedio-box-outer {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -115,8 +115,13 @@ swiper-slide {
 
 .video-para {
   color: white;
-  margin-left: 10px;
-  font-size: 16px;
+  margin-left: 5px;
+  overflow: hidden;
+  display: -webkit-box;
+  line-height: 21px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 14px;
 }
 
 .you-img {

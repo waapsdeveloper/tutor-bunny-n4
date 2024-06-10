@@ -264,7 +264,7 @@
 .about-para {
   font-size: 16px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 21px;
 }
 
 .discription-text {
@@ -278,6 +278,8 @@
   .discription-para {
     overflow: hidden;
     display: -webkit-box;
+    line-height: 21px;
+
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
   }

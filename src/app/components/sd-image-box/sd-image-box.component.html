@@ -16,7 +16,9 @@
     </div>
     <input type="file" formControlName="phto_id" (change)="onFileSelected($event)" accept="image/*"
       style="display: none" #photoInput />
-    <p class="image-heading">Photo ID*</p>
+      <div class="body-data-784521">
+        <p class="image-heading">Photo ID*</p> <div class="quetion-mark">?</div>
+      </div>
     <!-- <ion-icon *ngIf="photoId" class="upload-done-circle" name="checkmark-circle"></ion-icon> -->
   </div>
   <div class="image-78558">
@@ -26,7 +28,7 @@
       <ion-ripple-effect></ion-ripple-effect>
       <img *ngIf="sampleGalleryImage == '/assets/gallary.png'" [src]="sampleGalleryImage" alt="">
     </div>
-    <p class="image-heading">Gallary</p>
+    <p class="image-heading">Gallery</p>
   </div>
 </div>
 <app-sd-error-input-info *ngIf="isRequired" [errorText]="errorText" ></app-sd-error-input-info>

@@ -401,6 +401,8 @@
     .discription-para {
       overflow: hidden;
       display: -webkit-box;
+      line-height: 21px;
+
       -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
     }
@@ -428,12 +430,13 @@
   font-weight: 600;
 }
 
-.weekly-schedule-outer-78526{
+.weekly-schedule-outer-78526 {
   background-color: white;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 16px;
-  .weekly-schedule-heding-78527{
+
+  .weekly-schedule-heding-78527 {
     font-size: 16px;
     font-weight: 600;
     color: white;
@@ -442,7 +445,8 @@
     background-color: #454545;
     border-radius: 16px;
   }
-  .weekly-schedule-date-78528{
+
+  .weekly-schedule-date-78528 {
     width: 100%;
     display: flex;
     align-items: center;
@@ -450,13 +454,15 @@
     gap: 16px;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
     padding: 8px 16px;
-    .schedule-day-78528{
+
+    .schedule-day-78528 {
       font-size: 16px;
       font-weight: 500;
       color: black;
     }
   }
 }
+
 .line {
   width: 100%;
   height: 0.5px;
@@ -465,15 +471,16 @@
 
 }
 
-.footer-main-85632{
+.footer-main-85632 {
   height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #454545;
-  border-radius: 16px 16px  0 0 ; 
-  .amount-box-98564{
+  border-radius: 16px 16px 0 0;
+
+  .amount-box-98564 {
     width: 100%;
     height: 70px;
     display: flex;
@@ -481,12 +488,14 @@
     flex-direction: column;
     padding: 8px 16px;
     align-items: center;
-    .amount-text-98569{
+
+    .amount-text-98569 {
       font-size: 25px;
       font-weight: 600;
       color: white;
     }
-    .days-text-98575{
+
+    .days-text-98575 {
       font-size: 12px;
       font-weight: 500;
       color: white;
@@ -494,7 +503,8 @@
     }
 
   }
-  .subscribe-button-78523{
+
+  .subscribe-button-78523 {
     height: 70px;
     width: 100%;
     font-size: 25px;
