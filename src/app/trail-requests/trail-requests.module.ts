@@ -8,7 +8,7 @@ import { TrailRequestsPageRoutingModule } from './trail-requests-routing.module'
 
 import { TrailRequestsPage } from './trail-requests.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
-import { TrailCardModule } from './trail-card/trail-card.module';
+import { TrailCardModule } from '../my-students/trail-card/trail-card.module';
 
 @NgModule({
   imports: [
@@ -21,4 +21,4 @@ import { TrailCardModule } from './trail-card/trail-card.module';
   ],
   declarations: [TrailRequestsPage]
 })
-export class TrailRequestsPageModule {}
+export class TrailRequestsPageModule { }

@@ -52,7 +52,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     }
   }
   goToTrailReq(){
-    this.nav.push('trail-requests')
+    this.nav.push('my-students')
   }
 
 }

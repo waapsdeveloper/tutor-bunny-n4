@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>my-students</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="'My Students'" [backUrl]="'/tabs/teacher-dashboard'"></app-sd-header-top>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">my-students</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
+  <div class="body-content">
+    <div class="search-box-outer-89655">
+      <div class="search-box-input-outer">
+        <img src="assets/icon/input-search-gray.svg" />
+        <input type="text" placeholder="Search Students" />
+      </div>
+    </div>
+    <div class="dashboard-top-fixed-98563">
+      <div class="header-chips">
+        <div class="header-chip">
+          <ion-chip style="color: #F17401;">New</ion-chip>
+          <ion-chip style="color: #17A43E;">Active</ion-chip>
+          <ion-chip style="color: #AF1B1B;">Inactive</ion-chip>
+        </div>
+      </div>
+    </div>
+    <app-trail-card *ngFor="let item of trial" [item]="item"></app-trail-card>
+  </div>
 </ion-content>
