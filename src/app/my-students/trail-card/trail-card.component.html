@@ -1,47 +1,113 @@
-<div class="trail-card-outer-12345">
-
-  <div class="trial-box-item-outer-689567">
-    <div class="trial-box-item-689567">
-      <div class="profile-line-content">
-        <div class="image-box-outer">
-          <div class="image-circle-789675" [style.backgroundImage]="'url(assets/profileimg.png)'"></div>
+<div class="trial-box-item-outer-689567">
+  <div class="trial-box-item-689567">
+    <div class="profile-line-content">
+      <div class="image-box-outer">
+        <div class="image-circle-789675"
+          [style.background-image]="item.student.student_image ? 'url(' + item.student.student_image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="content-box-outer">
-          <div class="content-box-outer-heading-top">
-            <div class="title-heading-789 outfit-semibold">
-              {{item.student.name}}
-            </div>
-            <div class="pnd-678956">
-              <img src="assets/icon/hour-glass.svg" />
-              <div class="pnd-inner-7895">Pending</div>
-            </div>
-          </div>
-          <div class="country-heading-789">
-            <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
-            <span class="country-name-789 outfit">{{item.student.country}}</span>
-          </div>
-          <div class="er-title-789 outfit">
-            <span>{{item.course.title}}</span>
-          </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Pending'">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895">Pending</div>
+        </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Complete'">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895">Complete</div>
+        </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Rejected'">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895">Rejected</div>
+        </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Schedule_pending'">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895" style="text-wrap: wrap; width: 60px;">Schedule
+            pending</div>
+        </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Scheduled'">
+          <img src="../../../assets/svg/panding.svg" />
+          <div class="pnd-inner-7895">Scheduled</div>
+        </div>
+        <div class="pnd-678956" *ngIf="item.status == 'Blocked'">
+          <img src="assets/icon/block-circle.svg" />
+          <div class="pnd-inner-7895">Blocked</div>
         </div>
       </div>
-      <div class="line"></div>
-      <div class="options-box-outer-78906">
-        <div class="statistics-box-item-78906">
-          <div  class="statistics-box-item-78906">
-            <img src="assets/icon/check-circle.svg"(click)="trailStatus('Accepted')" />
+      <div class="content-box-outer">
+        <div class="content-box-outer-heading-top">
+          <div class="title-heading-789 outfit-semibold">
+            {{item.student.name}}
           </div>
-          <div  class="statistics-box-item-78906">
-            <img src="assets/icon/reject-circle.svg"  (click)="trailStatus('Rejected ')"/>
+          <div class="pnd-678956" *ngIf="item.status != 'Rejected'">
+            <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
           </div>
-          <div  class="statistics-box-item-78906">
-            <img src="assets/icon/block-circle.svg"  (click)="trailStatus('Blocked')"/>
-          </div>
+          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click">
+            <ng-template>
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item class="profile-line-789578" (click)="trailStatus('Schedule_pending')">
+                  <img class="img1-789575" src="assets/icon/check-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Accept</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item class="profile-line-789578" (click)="trailStatus('Rejected')">
+                  <img class="img1-789575" src="assets/icon/reject-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Reject</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item class="profile-line-789578" (click)="trailStatus('Blocked')">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Block</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578"
+                  *ngIf="item.status == 'Complete' && item.status == 'Schedule_pending' && item.status == 'Scheduled'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Chat</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578"
+                  *ngIf=" item.status == 'Schedule_pending'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Schedule</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578"
+                  *ngIf="item.status == 'Schedule_pending' && item.status == 'Scheduled'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Cancel</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" *ngIf="item.status == 'Scheduled'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Reschedule</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" *ngIf="item.status == 'Scheduled'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Complete</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" *ngIf="item.status == 'Blocked'">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Unblock</div>
+                </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
         </div>
-        <div class="course-button-78523">
-          Course
+        <div class="country-heading-789">
+          <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
+          <span class="country-name-789 outfit">{{item.student.country}}</span>
         </div>
+        <div class="age-title-789 outfit">Course ID: {{item.course.serial_number}}</div>
       </div>
     </div>
+    <div class="line"></div>
   </div>
 </div>

@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
 }
-swiper-slide{
+
+swiper-slide {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -13,8 +14,12 @@ swiper-slide{
 .vedio-box-inner {
   border-radius: 6px;
   width: 95%;
+  display: flex;
   height: 150px;
-  background-color: #393939;
+  background-color: #484848;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 
   .video-89651 {
     height: 105px;
@@ -60,6 +65,7 @@ swiper-slide{
     background-size: cover;
     // background-position: center;
   }
+
   .video-89654 {
     height: 105px;
     width: 100%;
@@ -121,13 +127,13 @@ swiper-slide{
   width: 35px;
 }
 
-.line{
+.line {
   width: 95%;
   height: 0.15px;
   background-color: #677169;
 }
 
-.vedio-content-89658{
+.vedio-content-89658 {
 
   display: flex;
   align-items: center;

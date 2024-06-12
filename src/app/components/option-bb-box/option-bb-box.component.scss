@@ -22,6 +22,11 @@
     // padding: 10px;
     .nbl-687 {
       font-size: 16px;
+      display: -webkit-box;
+      line-height: 21px;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .nbl-danger {

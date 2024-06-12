@@ -15,39 +15,22 @@
             class="loved-icon">
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/techer-card.svg">
-            <div class="label-789575 outfit">{{item.user.name}}</div>
-            <img src="assets/icon/info.svg" />
-            <div class="info-misc-68448 outfit"><img src="assets/icon/star.svg" /> <span>4.9</span></div>
-          </div>
-          <div class="group-96589">
-            <div class="line-789575">
-              <img class="i-7685" src="../../../assets/svg/speaks.svg" />
-              <div class="badges-outer-44 outfit">
-                <div class="gray-badge-44">{{item.language.name}}</div>
-              </div>
-            </div>
-            <div class="line-789575">
-              <img class="i-7685" src="assets/svg/cake.svg" />
-              <div class="label outfit">Age {{item.from_age}}-{{item.to_age}}</div>
-            </div>
-          </div>
-          <div class="line-789575">
-            <img class="i-7685" src="../../../assets/svg/time.svg" />
-            <div class="label outfit">{{item.duration}} hrs/month</div>
+            <div class="label-789575 fs-16 outfit">{{item.user.name}}</div>
+            <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span></div>
           </div>
           <div class="group-96589">
             <div class="line-789575">
               <img class="i-7685" src="../../../assets/svg/online.svg" />
-              <div class="label outfit">{{item.mode_type}}</div>
+              <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.mode_type}}</div>
             </div>
             <div class="line-789575">
               <img class="i-7685" src="assets/icon/smgroup-icon.svg" />
-              <div class="label outfit">{{item.capacity}}</div>
+              <div class="label fs-16 outfit">{{item.capacity}}</div>
             </div>
           </div>
           <div class="profile-above-footer-986985">
             <div class="us-status-btn">
-              <div class="us-status-btn-label outfit-medium">$ {{item.price}}/month</div>
+              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt=""> {{item.price}}/month</div>
             </div>
           </div>
         </div>
@@ -56,19 +39,20 @@
         <div class="ble-buttons-789576856">
           <div class="btn-alg-77">
             <img src="../../../assets/svg/share.svg" />
-            <div class="outfit">Share</div>
+            <div class="outfit fs-16">Share</div>
           </div>
         </div>
         <div class="right-980676">
-          <div class="buy-now-btn-89675 outfit-medium">Subscribe</div>
-          <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false && loading == false" (click)="requestTrail(item.id)">Free Trial
+          <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
+          <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false && loading == false"
+            (click)="requestTrail(item.id)">Free Trial
           </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false"> <img
-              src="../../../../assets/svg/trail.svg" alt=""><button (click)="presentAlert()">Trial Requested</button>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false">
+            <img src="../../../../assets/svg/trail.svg" alt=""><button (click)="presentAlert()">Trial Requested</button>
           </div>
           <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
           <ion-alert id="myAlert" header="A Short Title Is Best" subHeader="Cancel Trial Request"
-            message="Are you sure to cancel trail Request"   [buttons]="alertButtons">
+            message="Are you sure to cancel trail Request" [buttons]="alertButtons">
           </ion-alert>
         </div>
       </div>

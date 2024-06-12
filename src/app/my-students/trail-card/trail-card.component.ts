@@ -1,7 +1,6 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
-
 @Component({
   selector: 'app-trail-card',
   templateUrl: './trail-card.component.html',

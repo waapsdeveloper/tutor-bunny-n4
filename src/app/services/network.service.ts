@@ -90,7 +90,7 @@ export class NetworkService {
     return this.httpGetResponse('courses/list', null, false, false);
   }
   geTrailRequests(id) {
-    return this.httpGetResponse('course/trials/' + id, null, false, false);
+    return this.httpGetResponse('course/recent/trials/' + id, null, false, false);
   }
   getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);

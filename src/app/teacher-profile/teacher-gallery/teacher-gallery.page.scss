@@ -1,9 +1,10 @@
 .gallery-outer-8965 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 8px;
+  display: flex;
+  gap: 16px;
   width: 100%;
   height: auto;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .image-card-78975 {
