@@ -24,12 +24,14 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() { }
+  ngOnInit() { };
   async initialize() {
     this.user = this.users.getUser();
 
-    this.trail = await this.network.getOneTrial(this.user.id)
-    console.log(this.trail);
+    let res = await this.network.getOneTrial(this.user.id)
+    console.log(res);
+
+    this.trail = res.message.trail;
 
     this.student = this.trail.student.name;
     this.country = this.trail.student.country;
@@ -37,7 +39,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.image = this.trail.student.student_image;
     this.age = this.trail.student.age;
     this.serial_number = this.trail.course.serial_number;
-    this.courseName =this. trail.course.title;
+    this.courseName = this.trail.course.title;
     this.flag = this.getFlag()
 
   }
@@ -53,7 +55,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
       return ""
     }
   }
-  goToTrailReq(){
+  goToTrailReq() {
     this.nav.push('my-students')
   }
 

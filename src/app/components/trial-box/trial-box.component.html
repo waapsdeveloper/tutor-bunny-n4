@@ -1,4 +1,4 @@
-<div class="trial-box-outer-689567">
+<div class="trial-box-outer-689567" *ngIf="this.trail">
   <div class="sb-heading-7895">
     <div class="sb-heading-title-7895 outfit-semibold">Trial Requests</div>
     <div class="sb-heading-sl-7895 outfit" (click)="goToTrailReq()">See all</div>
@@ -6,7 +6,7 @@
   <div class="sb-content-7895"></div>
 </div>
 
-<div class="trial-box-item-outer-689567" *ngIf="trail">
+<div class="trial-box-item-outer-689567" *ngIf="this.trail">
 
   <div class="trial-box-item-689567">
 
