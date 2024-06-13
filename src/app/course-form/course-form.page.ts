@@ -20,7 +20,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   category;
   image
   onlineMode;
-  language_id;  
+  language_id;
   courseId;
   edit;
   step = 1;
@@ -98,7 +98,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.language_id = lang.id;
       console.log(this.language_id);
       this.formData['language_id'] = this.language_id;
-      
+
     }
   }
 
@@ -143,7 +143,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     f['user_id'] = user.id;
     f['type'] = this.type
     console.log(f);
-    const res = await this.network.SubmitCourse(f);
+
+    const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
+
     console.log(res);
     let courseId = res.course.id;
     console.log(courseId);
@@ -164,48 +166,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.step = 2;
     }
   }
-  async onSlideChangeEdit() {
-    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-    const f = this.formData;
-    console.log(f);
-    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
-      console.log("dsada");
-      return
-    }
-    if (f.language.length == 0) {
-      console.log(f.teacher.language.length);
-      return
-    }
-    if (f.mode_type.length == 0) {
-      console.log(f.teacher.language.length);
-      return
-    }
-    const user = JSON.parse(localStorage.getItem('user'));
-    f['user_id'] = user.id;
-    f['type'] = this.type
-    console.log(f);
-    this.courseId
-    const res = await this.network.SubmitCourseEdit(f, this.courseId);
-    console.log(res);
-    let courseId = res.course.id;
-    console.log(courseId);
 
-    if (courseId) {
-      let obj = {
-        course_id: courseId,
-        image: this.formData.image
-      }
-      let image = await this.network.postCoursePhoto(obj);
-      console.log(image);
 
-    }
-    localStorage.setItem('course_Id', courseId)
-    this.events.publish('course_Id-get', courseId)
-    if (res) {
-      this.slides?.nativeElement.swiper.slideTo(1, false, false);
-      this.step = 2;
-    }
-  }
   async changeToPrev() {
     if (this.step == 2) {
       this.step = 1;
