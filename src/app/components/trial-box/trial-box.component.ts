@@ -9,7 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class TrialBoxComponent extends BasePage implements OnInit {
 
   user;
-  trail
+  trial
   student;
   country;
   age;
@@ -31,21 +31,23 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     let res = await this.network.getOneTrial(this.user.id)
     console.log(res);
 
-    this.trail = res.message.trail;
+    this.trial = res.trial;
+    console.log(this.trial);
+    
 
-    this.student = this.trail.student.name;
-    this.country = this.trail.student.country;
-    this.city = this.trail.student.city;
-    this.image = this.trail.student.student_image;
-    this.age = this.trail.student.age;
-    this.serial_number = this.trail.course.serial_number;
-    this.courseName = this.trail.course.title;
+    this.student = this.trial.student.name;
+    this.country = this.trial.student.country;
+    this.city = this.trial.student.city;
+    this.image = this.trial.student.student_image;
+    this.age = this.trial.student.age;
+    this.serial_number = this.trial.course.serial_number;
+    this.courseName = this.trial.course.title;
     this.flag = this.getFlag()
 
   }
   getFlag() {
-    if (this.trail && this.trail.student && this.trail.student.flag) {
-      const flag = this.trail.student.flag;
+    if (this.trial && this.trial.student && this.trial.student.flag) {
+      const flag = this.trial.student.flag;
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -55,7 +57,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
       return ""
     }
   }
-  goToTrailReq() {
+  goToTrialReq() {
     this.nav.push('my-students')
   }
 

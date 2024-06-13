@@ -13,7 +13,7 @@ import { CreateCoursePage } from './create-course/create-course.page';
 })
 export class TeacherDashboardPage extends BasePage implements OnInit {
   user;
-  displayName = 'LL'
+  displayName = ''
   flag
   status;
   footerlist = [

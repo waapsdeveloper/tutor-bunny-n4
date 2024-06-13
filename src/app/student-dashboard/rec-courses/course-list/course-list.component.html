@@ -15,7 +15,7 @@
             class="loved-icon">
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/techer-card.svg">
-            <div class="label-789575 fs-16 outfit">{{item.user.name}}</div>
+            <div class="label-789575 fs-16 outfit">{{displayName}}</div>
             <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span></div>
           </div>
           <div class="group-96589">
@@ -30,7 +30,8 @@
           </div>
           <div class="profile-above-footer-986985">
             <div class="us-status-btn">
-              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt=""> {{item.price}}/month</div>
+              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
+                {{item.price}}/month</div>
             </div>
           </div>
         </div>
@@ -48,7 +49,7 @@
             (click)="requestTrail(item.id)">Free Trial
           </div>
           <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false">
-            <img src="../../../../assets/svg/trail.svg" alt=""><button (click)="presentAlert()">Trial Requested</button>
+            <img src="../../../../assets/svg/trail.svg" alt=""><button style="background-color: transparent;" (click)="presentAlert()">Trial Requested</button>
           </div>
           <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
           <ion-alert id="myAlert" header="A Short Title Is Best" subHeader="Cancel Trial Request"

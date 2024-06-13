@@ -9,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CourseListComponent extends BasePage implements OnInit {
   private _item: any;
+  displayName;
   loading = false;
   @Input('item')
   public get item() {
@@ -16,6 +17,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   };
   public set item(value: any) {
     this._item = value;
+    this.displayName = this.utility.getAmericanName(this.item.user.name)
     this.callApi()
   }
   fav = false;
@@ -46,6 +48,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   initialize() {
 
+    
   }
 
   ngOnInit() { }
@@ -62,7 +65,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     let res = await this.network.getTrail(obj)
     console.log(res)
-
     if (res && !res.trial) {
       this.trail = false;
       this.loading = false;

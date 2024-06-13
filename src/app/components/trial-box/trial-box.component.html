@@ -1,12 +1,12 @@
-<div class="trial-box-outer-689567" *ngIf="this.trail">
+<div class="trial-box-outer-689567" *ngIf="this.trial">
   <div class="sb-heading-7895">
     <div class="sb-heading-title-7895 outfit-semibold">Trial Requests</div>
-    <div class="sb-heading-sl-7895 outfit" (click)="goToTrailReq()">See all</div>
+    <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-<div class="trial-box-item-outer-689567" *ngIf="this.trail">
+<div class="trial-box-item-outer-689567" *ngIf="this.trial">
 
   <div class="trial-box-item-689567">
 
@@ -23,7 +23,7 @@
 
         <div class="content-box-outer-heading-top">
           <div class="title-heading-789 outfit-semibold">
-            {{student}} ({{age}})
+            {{student| names}} ({{age}})
           </div>
           <div class="pnd-678956">
             <img src="../../../assets/svg/option.svg" id="click-trigger" />
