@@ -37,8 +37,8 @@ export class NetworkService {
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
-  postCoursePhoto( data) {
-    return this.httpPostResponse('courses/update-course-image', data );
+  postCoursePhoto(data) {
+    return this.httpPostResponse('courses/update-course-image', data);
   }
   saveFcmToken(data) {
     return this.httpPostResponse('update-firebase-token', data);
@@ -169,6 +169,13 @@ export class NetworkService {
   SubmitCourse(data) {
     return this.httpPostResponse('courses/add', data, null, true, true);
   }
+  sendEmail(data) {
+    return this.httpPostResponse('forget-password', data, null, true, true);
+  }
+
+  resetPassword(data) {
+    return this.httpPostResponse('validate-otp-and-change-password', data, null, true, true);
+  }
   SubmitCourseEdit(data, id) {
     return this.httpPostResponse('courses/edit', data, id, true, true);
   }
@@ -183,11 +190,11 @@ export class NetworkService {
     return this.httpPostResponse('course/update-status/' + id, data, null, true, true);
   }
 
-  requestTrail(data){
+  requestTrail(data) {
     return this.httpPostResponse('course-trial/send-request', data, null, true, true);
   }
 
-  getTrail(data){
+  getTrail(data) {
     return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
   }
 

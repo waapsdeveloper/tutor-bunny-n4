@@ -25,16 +25,12 @@
     <div class="input-box-lines d-flex flex-column gap-8">
       <div style="display:flex; align-items: center; justify-content: space-between;">
         <div class="input-title fs-12 roboto-medium">Password</div>
-        <div class="input-title-2 fs-12 roboto-medium">Forgot?</div>
+        <div class="input-title-2 fs-12 roboto-medium" (click)="forgetPassword()">Forgot?</div>
       </div>
       <app-sd-input-box [image]="'assets/svg/password.svg'" placeholder="Enter your password"
         (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
         [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
     </div>
-
-
-
-
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
         <app-sd-button-gray [text]="'Login'" (click)="submit()"></app-sd-button-gray>
@@ -45,7 +41,7 @@
     </div>
     <div class="input-box-lines d-flex gap-8 sign-up-box">
       <img class="image" src="../../assets/svg/signup.svg" alt="">
-      <div class="fs-18 roboto-medium not-have-account" >
+      <div class="fs-18 roboto-medium not-have-account">
         Do not have an account? <span class="sign-up-span" (click)="signUp()">Sign up</span> </div>
     </div>
   </div>

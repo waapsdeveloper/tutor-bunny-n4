@@ -1,5 +1,6 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -82,6 +83,10 @@ export class LoginPage extends BasePage implements OnInit {
 
   back() {
     this.modals.dismiss()
+  }
+  forgetPassword(){
+    this.modals.dismiss();
+    this.modals.present(ForgetPasswordComponent,{},'', 0.7);
   }
 
 }
