@@ -27,6 +27,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   from_age;
   to_age;
   startTime;
+  flag;
   endTime;
   updated_at;
   schedules;
@@ -64,6 +65,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.from_age = this.data.from_age;
     this.to_age = this.data.to_age;
     this.displayName = this.utility.getAmericanName(this.data.user.name);
+    this.flag = this.getFlag();
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
     this.price = this.data.price;
@@ -75,6 +77,21 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     const endTime = this.schedules.end_date;
     this.startTime = moment(startTime).format('hh:mm');
     this.endTime = moment(endTime).format('hh:mm');
+  }
+  getFlag() {
+    console.log(this.data.user.teacher);
+    if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
+      const flag = this.data.user.teacher.country.iso2;
+      console.log(flag);
+      
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
+      return ""
+    }
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;

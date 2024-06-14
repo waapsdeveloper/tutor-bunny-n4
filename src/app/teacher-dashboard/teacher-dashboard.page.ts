@@ -111,6 +111,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
         type: res.data.type,
+        
 
       };
       console.log(params);

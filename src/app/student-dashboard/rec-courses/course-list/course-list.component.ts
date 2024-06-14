@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CourseListComponent extends BasePage implements OnInit {
   private _item: any;
   displayName;
+  flag
   loading = false;
   @Input('item')
   public get item() {
@@ -17,42 +18,57 @@ export class CourseListComponent extends BasePage implements OnInit {
   };
   public set item(value: any) {
     this._item = value;
-    this.displayName = this.utility.getAmericanName(this.item.user.name)
+    this.displayName = this.utility.getAmericanName(this.item.user.name);
+    this.flag = this.getFlag();
     this.callApi()
   }
   fav = false;
   trail = false;
-  alertButtons = [
-    {
-      text: 'No',
-      role: 'cancel',
-      handler: () => {
-        console.log('Cancel clicked');
-        this.setResult()
-      }
-    },
-    {
-      text: 'Yes',
-      handler: () => {
-        console.log('OK clicked');
-        this.handleOkClick();
-      }
-    }
-  ];
+  // alertButtons = [
+  //   {
+  //     text: 'No',
+  //     role: 'cancel',
+  //     handler: () => {
+  //       console.log('Cancel clicked');
+  //       this.setResult()
+  //     }
+  //   },
+  //   {
+  //     text: 'Yes',
+  //     handler: () => {
+  //       console.log('OK clicked');
+  //       this.handleOkClick();
+  //     }
+  //   }
+  // ];
   languageName: any;
 
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
     this.initialize();
   }
+  initialize() { 
 
-  initialize() {
-
+   
+    
     
   }
-
   ngOnInit() { }
-
+  getFlag() {
+    console.log(this.item.user.teacher);
+    if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
+      const flag = this.item.user.teacher.country.iso2;
+      console.log(flag);
+      
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
+      return ""
+    }
+  }
   async callApi() {
     this.loading = true;
 
@@ -84,7 +100,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.nav.push('student-course-detail', params)
   }
   async requestTrail(id) {
-    this.presentAlert();
+    // this.presentAlert();
     this.trail = true;
     let user = this.users.getUser()
     console.log(user);
@@ -104,15 +120,15 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.fav = false;
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Cancel Trial Request',
-      message: 'Are you sure to cancel trail Request',
-      buttons: this.alertButtons
-    });
+  // async presentAlert() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Cancel Trial Request',
+  //     message: 'Are you sure to cancel trail Request',
+  //     buttons: this.alertButtons
+  //   });
 
-    await alert.present();
-  }
+  //   await alert.present();
+  // }
 
   setResult() {
     console.log('Alert dismissed with role:');

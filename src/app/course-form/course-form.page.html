@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title"></app-sd-header-top>
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding ">
   <form>
@@ -9,7 +9,7 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-12 roboto-medium">Title</div>
             <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
+              [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -69,12 +69,12 @@
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">From Age in Yrs (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'from_age')" [inputText]="formData.from_age"
-                [key]="'from_age'" [errorText]="'from_age is required'" [type]="'number'"></app-sd-input-box>
+                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2" [type]="'number'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">To Age in Yrs (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'"
-                [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
+                [errorText]="'Required'" [type]="'number'" [maxlength]="2"> </app-sd-input-box>
             </div>
           </div>
         </div>

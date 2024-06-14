@@ -39,7 +39,6 @@ export class SdInputBoxComponent implements OnInit {
 
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-
       let v = formData[this.key];
       if (!v || v == 'title') {
         this.isRequired = true;
@@ -47,7 +46,7 @@ export class SdInputBoxComponent implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
-      if (v && v.length < 250 && v == 'title') {
+      if (v  && v.length < 50) {
         this.isRequired = true;
         this.errorText = 'The Detail field must be 50 to 100 characters'
         setTimeout(() => {
@@ -55,6 +54,7 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
       }
     }, false);
+
   }
 
   result($event) {
