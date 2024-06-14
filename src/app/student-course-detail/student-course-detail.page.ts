@@ -11,16 +11,21 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   data;
   params;
   backUrl;
+  displayName
   course_Id;
+  language;
   capacity;
   description;
   duration;
+  mode_type;
   isExpanded = false;
   title;
   serial_number;
   created_at;
   image;
   price;
+  from_age;
+  to_age;
   startTime;
   endTime;
   updated_at;
@@ -53,7 +58,12 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     console.log(this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
+    this.mode_type = this.data.mode_type;
     this.description = this.data.description;
+    this.language = this.data.language.name;
+    this.from_age = this.data.from_age;
+    this.to_age = this.data.to_age;
+    this.displayName = this.utility.getAmericanName(this.data.user.name);
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
     this.price = this.data.price;
@@ -63,8 +73,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
     const endTime = this.schedules.end_date;
-    this.startTime = moment(startTime).format('hh:mm a');
-    this.endTime = moment(endTime).format('hh:mm a');
+    this.startTime = moment(startTime).format('hh:mm');
+    this.endTime = moment(endTime).format('hh:mm');
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;

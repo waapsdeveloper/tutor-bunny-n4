@@ -84,6 +84,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.nav.push('student-course-detail', params)
   }
   async requestTrail(id) {
+    this.presentAlert();
     this.trail = true;
     let user = this.users.getUser()
     console.log(user);

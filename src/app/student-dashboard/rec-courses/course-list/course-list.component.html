@@ -1,22 +1,32 @@
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
-    <div class="block-item-header">
+    <div class="block-item-header" (click)="goToDeatil(item)">
       <div class="block-item-header-title outfit-medium">{{item?.title}}</div>
+      <img src="../../../../assets/svg/left-arrow.svg" alt="">
     </div>
     <div class="block-item-body">
       <div class="profile-item-block">
-        <div (click)="goToDeatil(item)">
+        <div >
           <div class="profile-item-image-block"
-            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+            <img src="../../../assets/svg/heart.svg" *ngIf="fav==true" alt="" (click)="RemoveToFav()"
+              class="loved-icon">
+            <img src="../../../assets/svg/heart-fill.svg" alt="" *ngIf="fav==false" (click)="addToFav()"
+              class="loved-icon">
+          </div>
         </div>
         <div class="profile-content-78678564">
-          <img src="../../../assets/svg/heart.svg" *ngIf="fav==true" alt="" (click)="RemoveToFav()" class="loved-icon">
-          <img src="../../../assets/svg/heart-fill.svg" alt="" *ngIf="fav==false" (click)="addToFav()"
-            class="loved-icon">
+
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/techer-card.svg">
-            <div class="label-789575 fs-16 outfit">{{displayName}}</div>
+            <div class="label-789575 fs-16 outfit-medium" >{{displayName}}</div>
             <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span></div>
+          </div>
+          <div class="profile-above-footer-986985">
+            <div class="us-status-btn">
+              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
+                {{item.price}}/month</div>
+            </div>
           </div>
           <div class="group-96589">
             <div class="line-789575">
@@ -28,12 +38,7 @@
               <div class="label fs-16 outfit">{{item.capacity}}</div>
             </div>
           </div>
-          <div class="profile-above-footer-986985">
-            <div class="us-status-btn">
-              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
-                {{item.price}}/month</div>
-            </div>
-          </div>
+
         </div>
       </div>
       <div class="profile-below-footer-986985">
@@ -41,6 +46,7 @@
           <div class="btn-alg-77">
             <img src="../../../assets/svg/share.svg" />
             <div class="outfit fs-16">Share</div>
+
           </div>
         </div>
         <div class="right-980676">
@@ -49,7 +55,8 @@
             (click)="requestTrail(item.id)">Free Trial
           </div>
           <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false">
-            <img src="../../../../assets/svg/trail.svg" alt=""><button style="background-color: transparent;" (click)="presentAlert()">Trial Requested</button>
+            <img src="../../../../assets/svg/trail.svg" alt=""><button style="background-color: transparent;"
+              >Trial Requested</button>
           </div>
           <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
           <ion-alert id="myAlert" header="A Short Title Is Best" subHeader="Cancel Trial Request"
