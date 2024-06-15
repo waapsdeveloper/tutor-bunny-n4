@@ -140,7 +140,7 @@ export class NetworkService {
     return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
   }
   removeMyKeyword(data) {
-    return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
+    return this.httpPostResponse('keywords/remove-from-my-list', data, false, false);
   }
 
   getSubject(data) {
@@ -182,6 +182,7 @@ export class NetworkService {
   SubmitSecondCourse(data, id) {
     return this.httpPostResponse('course/update-params/' + id, data, null, true, true);
   }
+
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, true, true);
   }

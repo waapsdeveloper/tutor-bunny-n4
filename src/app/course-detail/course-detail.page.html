@@ -65,12 +65,13 @@
     <div class="line"></div>
     <div class="weekly-schedule-outer-78526">
       <div class="weekly-schedule-heding-78527">Weekly Schedule</div>
-      <div class="weekly-schedule-date-78528" *ngFor="let item of schedules">
+      <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
+      <!-- <div class="weekly-schedule-date-78528">
         <div class="schedule-day-78528">{{item.day}}</div>
         <div class="fs-16">{{startTime}}</div>
         <div class="fs-16">{{endTime}}</div>
-      </div>
-    </div>
+      </div> -->
+    </div> 
     <div class="line"></div>
     <app-other-courses></app-other-courses>
   </div>

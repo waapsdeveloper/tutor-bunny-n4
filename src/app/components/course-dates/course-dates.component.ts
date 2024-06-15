@@ -9,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CourseDatesComponent extends BasePage implements OnInit {
   @Input() schedule = {}
+  @Input() courseId = {}
   @Input('errorText') errorText = '';
   isRequired = false;
   schedules = [];
@@ -24,23 +25,15 @@ export class CourseDatesComponent extends BasePage implements OnInit {
 
 
   ngOnInit() {
-    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
-      if (!formData.schedules) {
-        this.isRequired = true;
-        this.errorText = 'schedules is required to upload'
-        setTimeout( () => {
-          this.isRequired = false;
-        }, 5000);
-      } 
-
-    }, false)
   }
 
   async initialize() {
     console.log("ttt");
 
     this.events.subscribe('course_Id-get', async (course_Id: any) => {
+      console.log("ghfhgsdfhgfdgh");
+      
 
       this.callApi();
 
@@ -49,7 +42,7 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   }
 
   async callApi() {
-    this.course_Id = localStorage.getItem('course_Id')
+    this.course_Id = this.courseId
     console.log(this.course_Id);
 
 

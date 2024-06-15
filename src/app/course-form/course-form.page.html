@@ -61,15 +61,16 @@
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Total lesson</div>
-              <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson"
-                [key]="'lesson'" [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
+              <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
+                [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines city-zip">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">From Age in Yrs (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'from_age')" [inputText]="formData.from_age"
-                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2" [type]="'number'"></app-sd-input-box>
+                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2"
+                [type]="'number'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">To Age in Yrs (optional)</div>
@@ -108,8 +109,8 @@
           <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">Start Date (optional)</div>
-              <app-sd-input-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date" [key]="'strat_date'"
-                [errorText]="'strat_date is required'" [type]="'date'"></app-sd-input-box>
+              <app-sd-input-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
+                [key]="'strat_date'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-12 roboto-medium">End Date (optional)</div>
@@ -119,7 +120,7 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"
-              [key]="'schedules'"></app-course-dates>
+              [courseId]="courseId" [key]="'schedules'"></app-course-dates>
           </div>
         </div>
       </swiper-slide>
@@ -138,7 +139,7 @@
     </div>
 
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'"  *ngIf="step == 1"  (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
       <app-sd-button-gray [text]="'Save'" *ngIf="step == 2" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>

@@ -60,6 +60,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
+    console.log(startTime);
+    
     const endTime = this.schedules.end_date;
     this.startTime = moment(startTime).format('hh:mm a'); 
     this.endTime = moment(endTime).format('hh:mm a'); 
