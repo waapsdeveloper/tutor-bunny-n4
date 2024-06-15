@@ -52,7 +52,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     this.fcm.setTokenToServer();
 
     this.events.subscribe('dashboard:refreshpage', () => {
-      console.log("test token");
 
       this.initialize();
     });
@@ -77,7 +76,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name)
       this.status = res.user.teacher.status;
-      console.log(this.status);
 
 
     }
@@ -102,7 +100,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
 
   async createCourse() {
     let res = await this.modals.present(CreateCoursePage, {}, "", 0.7)
-    console.log(res);
 
     if (res.data.title) {
 
@@ -111,10 +108,9 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
         type: res.data.type,
-        
+
 
       };
-      console.log(params);
 
       this.nav.push('/course-form', params)
     }

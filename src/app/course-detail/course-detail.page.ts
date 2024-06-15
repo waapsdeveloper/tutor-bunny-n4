@@ -34,7 +34,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -45,11 +44,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   }
 
-  async callApi(){
+  async callApi() {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
     this.data = res.course;
-    console.log(this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.description = this.data.description;
@@ -60,11 +58,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
-    console.log(startTime);
-    
+
     const endTime = this.schedules.end_date;
-    this.startTime = moment(startTime).format('hh:mm a'); 
-    this.endTime = moment(endTime).format('hh:mm a'); 
+    this.startTime = moment(startTime).format('hh:mm a');
+    this.endTime = moment(endTime).format('hh:mm a');
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;

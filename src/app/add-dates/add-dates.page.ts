@@ -40,9 +40,7 @@ export class AddDatesPage extends BasePage implements OnInit {
       end_date: this.endDateTime,
       course_id: courseId
     };
-    console.log(selectedObj);
-    let res = await this.network.AddSchedule(selectedObj)
-    console.log(res);
+    let res = await this.network.AddSchedule(selectedObj);
 
     this.modals.dismiss(selectedObj)
   }

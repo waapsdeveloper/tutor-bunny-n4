@@ -6,7 +6,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './sd-category-list.component.html',
   styleUrls: ['./sd-category-list.component.scss'],
 })
-export class SdCategoryListComponent extends BasePage  implements OnInit {
+export class SdCategoryListComponent extends BasePage implements OnInit {
 
 
 
@@ -24,14 +24,12 @@ export class SdCategoryListComponent extends BasePage  implements OnInit {
 
   async initialize() {
     this.data = await this.network.getCategory() as any[];
-    console.log(this.data);
 
     this.list = this.data.result;
 
   }
   selectedCategory() {
     let item = this.list.find(x => x.id === this.selectedItemId);
-    console.log(item);
 
     if (!item) {
       this.modals.dismiss();

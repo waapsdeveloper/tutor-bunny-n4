@@ -17,9 +17,9 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(injector:Injector) {
+  constructor(injector: Injector) {
     super(injector)
-   }
+  }
 
   ngOnInit() {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
@@ -31,20 +31,18 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
-      
+
 
     }, false)
   }
   toggleMode(mode: string) {
     this.teachingMode.mode = mode;
-    console.log(this.teachingMode);
     this.onChange.emit(this.teachingMode);
 
 
   }
   toggleCapacity(capacity: string) {
     this.teachingMode.capacity = capacity;
-    console.log(this.teachingMode);
     this.onChange.emit(this.teachingMode);
 
   }

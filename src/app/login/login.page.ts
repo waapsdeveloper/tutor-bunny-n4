@@ -16,15 +16,12 @@ export class LoginPage extends BasePage implements OnInit {
   };
   private _role: any[] = [];
   @Input('preSelectedLanguages')
-  public get role(){
+  public get role() {
     return this._role;
   };
 
   public set role(value: any[]) {
     this._role = value;
-    console.log(this._role);
-    
-
   }
   constructor(injector: Injector) {
     super(injector)
@@ -47,7 +44,7 @@ export class LoginPage extends BasePage implements OnInit {
       role_id: this._role
     }
     const res = await this.network.loginViaEmail(obj) as any;
-    if(res){
+    if (res) {
       this.users.setUser(res.user);
       this.modals.dismiss(res.user)
     }
@@ -68,15 +65,15 @@ export class LoginPage extends BasePage implements OnInit {
       email: this.formData.email,
       password: this.formData.password,
       name: this.formData.name,
-      confirm_password:this.formData.confirm_password,
+      confirm_password: this.formData.confirm_password,
       login_type: "email",
       role_id: key
     }
     let res = await this.network.signUpviaEmail(obj) as any;
-    if(res){
+    if (res) {
       this.users.setUser(res.user);
       this.formData.password = null;
-     this.step = 'login'
+      this.step = 'login'
     }
 
   }
@@ -84,9 +81,9 @@ export class LoginPage extends BasePage implements OnInit {
   back() {
     this.modals.dismiss()
   }
-  forgetPassword(){
+  forgetPassword() {
     this.modals.dismiss();
-    this.modals.present(ForgetPasswordComponent,{},'', 0.7);
+    this.modals.present(ForgetPasswordComponent, {}, '', 0.7);
   }
 
 }

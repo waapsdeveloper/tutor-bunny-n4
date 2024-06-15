@@ -38,8 +38,7 @@ export class SdInputBoxComponent implements OnInit {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
-      console.log(v);
-      
+
       if (!v || v == 'title') {
         this.isRequired = true;
         setTimeout(() => {
@@ -96,7 +95,6 @@ export class SdInputBoxComponent implements OnInit {
   }
 
   modelChange($event) {
-    console.log($event);
     let v = $event;
     this.onChange.emit(v)
   }

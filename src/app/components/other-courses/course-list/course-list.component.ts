@@ -20,10 +20,8 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async initialize() {
     let user = JSON.parse(localStorage.getItem('user'))
-    console.log(user);
 
     this.list = await this.network.getCourseList(user.id) as any[];
-    console.log(this.list);
 
     this.course = this.list.result
 
@@ -38,15 +36,13 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
   oepnDeatils(item) {
-    console.log(item);
 
     const params = {
       id: item.id,
       backUrl: '/tabs/courses'
     }
-    console.log(params);
     this.nav.push('/tabs/course-detail', params)
-    
+
 
 
   }

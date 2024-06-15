@@ -34,8 +34,7 @@ export class OptionBbBoxComponent extends BasePage implements OnInit {
   ngOnInit() { }
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.7)
-    console.log(res);
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.7);
 
 
     if (res.data.title) {
@@ -47,7 +46,6 @@ export class OptionBbBoxComponent extends BasePage implements OnInit {
         type: res.data.type,
 
       };
-      console.log(params);
 
       this.nav.push('/course-form', params)
     }

@@ -50,11 +50,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   ngOnInit() {
   }
   async initialize() {
-    console.log(this.formData);
   }
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -69,13 +67,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     if (this.params.type) {
       this.type = this.params.type;
-      console.log(this.type);
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
-      console.log(this.courseId);
       let res = await this.network.getcourseById(this.courseId) as any;
-      console.log(res);
       this.setFormDta(res.course);
     }
   }
@@ -93,10 +88,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
     const lang = data['language']
-    console.log(lang);
     if (lang) {
       this.language_id = lang.id;
-      console.log(this.language_id);
       this.formData['language_id'] = this.language_id;
 
     }
@@ -126,29 +119,23 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log(f);
     if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
-      console.log("dsada");
+
       return
     }
     if (f.language.length == 0) {
-      console.log(f.teacher.language.length);
       return
     }
     if (f.mode_type.length == 0) {
-      console.log(f.teacher.language.length);
       return
     }
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
-    f['type'] = this.type
-    console.log(f);
+    f['type'] = this.type;
 
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
 
-    console.log(res);
     let courseId = res.course.id;
-    console.log(courseId);
 
     if (courseId) {
       let obj = {
@@ -156,7 +143,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         image: this.formData.image
       }
       let image = await this.network.postCoursePhoto(obj);
-      console.log(image);
 
     }
     localStorage.setItem('course_Id', courseId)
@@ -179,20 +165,16 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     const f = this.formData;
     if (!f.category) {
-      console.log("dsada");
       return
     }
 
-    console.log(f)
 
     const course_id = localStorage.getItem('course_Id');
-    console.log("herr", f, course_id)
 
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message)
     }
-    console.log(res);
 
     this.nav.pop('/tabs/teacher-dashboard')
 

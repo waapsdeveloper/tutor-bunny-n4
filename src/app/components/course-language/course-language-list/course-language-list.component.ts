@@ -42,7 +42,6 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
   }
   selectedLanguage() {
     let item = this.list.find(x => x.id === this.selectedItemId);
-    console.log(item);
 
     if (!item) {
       this.modals.dismiss();
@@ -96,7 +95,6 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
     return this.utility.capitalizeEachFirst(string)
   }
   selection(item) {
-    console.log(item);
 
     this.modals.dismiss(item);
   }

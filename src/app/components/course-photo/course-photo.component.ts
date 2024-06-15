@@ -39,7 +39,6 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
       const pmi = reader.result as string;
 
       this.coursePhoto = pmi;
-      console.log(pmi);
       let obj = {
         image: pmi
       }

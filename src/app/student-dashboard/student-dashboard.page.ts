@@ -16,11 +16,11 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   displayName: string = '';
   showWarning = false;
   flag;
-  @ViewChild('content', {static: true}) content: IonContent;
+  @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public authService: AuthenticationService,) {
     super(injector)
-  this.initialize()  
+    this.initialize()
   }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     })
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.initialize()
   }
 
@@ -46,16 +46,15 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.user = this.users.getUser();
       this.flag = this.getFlag();
     }
-    console.log(res);
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
   }
-  getFlag(){
-    if(this.user && this.user.student && this.user.student.country){
+  getFlag() {
+    if (this.user && this.user.student && this.user.student.country) {
       const flag = this.user.student.country.iso2;
-      if(flag){
+      if (flag) {
         return flag.toLowerCase();
       } else {
         return ""
@@ -85,30 +84,23 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       return;
     }
 
-    // console.log(event )
     let startY = event.detail.startY;
     let currentY = event.detail.currentY;
 
 
     const diff = startY - currentY;
-    console.log(startY, currentY, diff);
-    if(diff != 0 && startY < currentY ){
+    if (diff != 0 && startY < currentY) {
       localStorage.setItem('efr', 'hide');
     }
 
-    if(diff != 0 && startY > currentY ){
+    if (diff != 0 && startY > currentY) {
       localStorage.setItem('efr', 'show');
     }
-    // this.events.publish('page-scroll-event', {
-    //   hide: true
-    // })
-
-    // console.log(scrollElement)
 
   }
 
   private isThrottled: boolean = false;
-  onScrollEnd(event: any){
+  onScrollEnd(event: any) {
     if (this.isThrottled) {
       return;
     }

@@ -17,11 +17,9 @@ export class CourseCardComponent extends BasePage implements OnInit {
   ngOnInit() { }
 
   async initialize() {
-    let user = JSON.parse(localStorage.getItem('user'))
-    console.log(user);
+    let user = JSON.parse(localStorage.getItem('user'));
 
     this.list = await this.network.getCourseList(user.id) as any[];
-    console.log(this.list);
 
     this.course = this.list.result
 
@@ -29,8 +27,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
   }
 
   editCourse(item) {
-    console.log(item);
-
     const params = {
       backUrl: '/tabs/courses',
       title: 'Edit Course',
@@ -39,21 +35,18 @@ export class CourseCardComponent extends BasePage implements OnInit {
       course_Id: item.id,
       edit: true
     };
-    console.log(params);
 
     this.nav.push('/course-form', params)
 
   }
   oepnDeatils(item) {
-    console.log(item);
 
     const params = {
       id: item.id,
       backUrl: '/tabs/courses'
     }
-    console.log(params);
     this.nav.push('/tabs/course-detail', params)
-    
+
 
 
   }

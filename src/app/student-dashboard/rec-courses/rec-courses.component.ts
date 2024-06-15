@@ -6,7 +6,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './rec-courses.component.html',
   styleUrls: ['./rec-courses.component.scss'],
 })
-export class   RecCoursesComponent extends BasePage implements OnInit {
+export class RecCoursesComponent extends BasePage implements OnInit {
   course: any[];
   data: any;
 
@@ -20,6 +20,5 @@ export class   RecCoursesComponent extends BasePage implements OnInit {
   async initialize() {
     this.data = await this.network.getAllCourses() as any[];
     this.course = this.data.result;
-    console.log(this.course);
   }
 }

@@ -41,7 +41,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -56,7 +55,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
     this.data = res.course;
-    console.log(this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -79,11 +77,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.endTime = moment(endTime).format('hh:mm');
   }
   getFlag() {
-    console.log(this.data.user.teacher);
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
       const flag = this.data.user.teacher.country.iso2;
-      console.log(flag);
-      
+
       if (flag) {
         return flag.toLowerCase();
       } else {

@@ -19,14 +19,13 @@ export class CreateCoursePage extends BasePage implements OnInit {
     this.modals.dismiss()
   }
   setcourseType(key, title) {
-    
-    let obj ={
-      type :  key,
+
+    let obj = {
+      type: key,
       title: title
     }
 
-    console.log(obj);
-    
+
     this.modals.dismiss(obj)
 
   }

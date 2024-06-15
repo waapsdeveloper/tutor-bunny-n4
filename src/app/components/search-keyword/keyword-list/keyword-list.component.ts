@@ -88,7 +88,6 @@ export class KeywordListComponent implements OnInit {
         course_id: course_Id,
         name: this.inputText
       }
-      console.log(obj);
       // return;
       const res = await this.network.addKeyword(obj)
       let data = {
@@ -131,20 +130,16 @@ export class KeywordListComponent implements OnInit {
       course_id: course_Id,
       keyword_id: item.id
     }
-    console.log(obj);
-    // return
-    
+
     const res = await this.network.addKeyword(obj)
 
     let data = {
       course_id: course_Id,
     }
 
-    const res2 = await this.network.getMyKeyword(data)
-    console.log(res2);
+    const res2 = await this.network.getMyKeyword(data);
     this.inputText = '';
     this.subs = res2.result;
-    console.log(this.subs);
 
     this.suggestionsList = [];
 

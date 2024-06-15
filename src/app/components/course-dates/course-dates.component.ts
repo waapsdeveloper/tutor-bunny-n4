@@ -29,11 +29,9 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
-    console.log("ttt");
 
     this.events.subscribe('course_Id-get', async (course_Id: any) => {
-      console.log("ghfhgsdfhgfdgh");
-      
+
 
       this.callApi();
 
@@ -43,17 +41,14 @@ export class CourseDatesComponent extends BasePage implements OnInit {
 
   async callApi() {
     this.course_Id = this.courseId
-    console.log(this.course_Id);
 
 
     if (this.course_Id) {
       let res = await this.network.getSchedule(this.course_Id)
-      console.log(res);
 
       this.schedules = res.result
-      console.log(this.schedule);
-      
-      
+
+
 
       this.onChange.emit(this.schedules);
     }
@@ -61,10 +56,8 @@ export class CourseDatesComponent extends BasePage implements OnInit {
 
   async addCourseDate() {
     let res = await this.modals.present(AddDatesPage);
-    console.log(res);
 
     this.callApi()
-    console.log("dsdadadadasd");
 
 
   }

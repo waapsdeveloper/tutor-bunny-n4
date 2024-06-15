@@ -62,7 +62,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
 
 
     if (this.params.backUrl) {
@@ -86,7 +85,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       email: this.user.email,
     };
     let res = await this.network.getUserByEmail(obj);
-    console.log(res);
 
     if (res) {
       this.users.setUser(res.user);
@@ -160,13 +158,11 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   async onSlideChange() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log(f);
 
     if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.city || !f.zip_code || !f.languages || !f.subjects) {
       return
     }
     if (f.languages.length == 0) {
-      console.log(f.teacher.languages.length);
 
       return
     }
@@ -206,7 +202,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message)
     }
-    console.log(res);
 
     this.nav.pop('/tabs/teacher-dashboard')
 

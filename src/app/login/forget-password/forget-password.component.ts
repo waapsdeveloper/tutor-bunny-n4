@@ -35,36 +35,29 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
   }
 
   async sendEmail() {
-    if(!this.formData.email){
+    if (!this.formData.email) {
       return;
     }
     let obj = {
       email: this.formData.email
     }
-    console.log(obj);
 
     let res = await this.network.sendEmail(obj);
-
-    console.log(res.result.code);
-    this.receivedCode = res.result.code; 
-    this.userId = res.result.user_id; 
+    this.receivedCode = res.result.code;
+    this.userId = res.result.user_id;
     this.step = "otp";
   }
 
   sendOTP() {
     const enteredCode = parseInt(this.getEnteredCode(), 10);
     const receivedCode = parseInt(this.receivedCode, 10);
-  
-    console.log(enteredCode);
-  
+
     if (enteredCode === receivedCode) {
       this.step = "reset";
     } else {
-      console.log('The entered code does not match the received code.');
-      // You can show an error message to the user here
     }
   }
-  
+
 
   getEnteredCode(): string {
     let code = '';
@@ -82,7 +75,6 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
         this.getCodeBoxElement(index + 1).focus();
       } else {
         currentElement.blur();
-        console.log('submit code');
       }
     }
     if (eventCode === 8 && index !== 1) {
@@ -112,8 +104,8 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
     this.isButtonDisabled = !allFilled;
   }
 
-  async submit(){
-    if ( !this.formData.password || !this.formData.confirm_password) {
+  async submit() {
+    if (!this.formData.password || !this.formData.confirm_password) {
       return
     }
 
@@ -125,9 +117,8 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.resetPassword(obj);
-    console.log(res);
     this.modals.dismiss()
-    
+
 
   }
 }

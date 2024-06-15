@@ -28,12 +28,10 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   async initialize() {
     this.user = this.users.getUser();
 
-    let res = await this.network.getOneTrial(this.user.id)
-    console.log(res);
+    let res = await this.network.getOneTrial(this.user.id);
 
     this.trial = res.trial;
-    console.log(this.trial);
-    
+
 
     this.student = this.trial.student.name;
     this.country = this.trial.student.country;

@@ -24,11 +24,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    // console.log(this.params);
-
     if (this.params.role) {
       this.role_Id = this.params.role;
-      console.log(this.role_Id);
 
     }
 

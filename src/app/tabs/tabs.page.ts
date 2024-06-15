@@ -18,7 +18,6 @@ export class TabsPage implements OnInit {
 
   ionViewWillEnter() {
     this.user = this.users.getUser()
-    console.log(this.user);
 
     this.roleId = this.user.role_id
 
