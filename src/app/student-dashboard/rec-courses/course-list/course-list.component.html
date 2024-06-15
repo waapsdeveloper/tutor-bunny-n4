@@ -52,7 +52,8 @@
         <div class="right-980676">
           <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
           <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false && loading == false"
-            (click)="requestTrail(item.id)">Free Trial
+            (click)="requestTrail(item.id)">
+            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
           </div>
           <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false">
             <img src="../../../../assets/svg/trail.svg" alt=""><button style="background-color: transparent; color:#808080 ;"

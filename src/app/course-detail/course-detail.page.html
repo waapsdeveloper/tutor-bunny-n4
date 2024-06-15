@@ -12,36 +12,53 @@
       <div class="courses-block-item-789565">
         <div class="block-item-body">
           <div class="profile-item-block">
-            <div>
-              <div class="profile-item-image-block" [style.backgroundImage]="'url(assets/learn-piano.jpeg)'">
+            <div style="display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            padding-bottom: 8px;
+            border: 0.5px solid rgba(0, 0, 0, 0.25);
+            border-radius: 16px;">
+              <div class="profile-item-image-block"
+                [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'">
+              </div>
+              <div class="profile-line-789575"
+                style="display: flex;align-items: center;justify-content: flex-start; gap: 8px;">
+                <img class="img1-789575" src="../../../assets/svg/id.svg" />
+                <div class="label-789575 fs-16 outfit">{{serial_number}}</div>
               </div>
             </div>
             <div class="profile-content-78678564">
               <div class="profile-line-789575">
-                <img class="img1-789575" src="../../../assets/svg/calander.svg">
-                <div class="label-789575 fs-16 outfit"> Created {{created_at}}</div>
+                <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+                <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+                <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
+                </div>
               </div>
-              <div class="profile-line-789575">
-                <img class="img1-789575" width="16px" src="../../../assets/svg/update.svg" />
-                <div class="label-789575 fs-16 outfit"> Updated {{updated_at}}</div>
+              <div class="profile-above-footer-986985">
+                <div class="us-status-btn">
+                  <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
+                    ${{price}}/month</div>
+                </div>
               </div>
               <div class="line"></div>
               <div class="profile-line-789575">
-                <img class="img1-789575" src="../../../assets/svg/id.svg" />
-                <div class="label-789575 fs-16 outfit">{{serial_number}}</div>
-                <img class="img1-789575" src="../../../assets/svg/rev-calander.svg" />
+                <img class="img1-789575" src="../../../assets/svg/time.svg" />
+                <div class="label fs-16 outfit" style="text-transform: capitalize;">{{duration}} hrs/month</div>
+              </div>
+              <div class="group-96589">
+                <div class="line-789575">
+                  <img class="i-7685" src="../../../assets/svg/online.svg" />
+                  <div class="label fs-16 outfit" style="text-transform: capitalize;">{{mode_type}}</div>
+                </div>
+                <div class="line-789575">
+                  <img class="i-7685" src="assets/icon/smgroup-icon.svg" />
+                  <div class="label fs-16 outfit">{{capacity}}</div>
+                </div>
               </div>
               <div class="profile-line-789575">
-                <img class="img1-789575" src="../../../assets/svg/p-tag.svg" />
-                <div class="label-789577 fs-20 outfit">${{price}}/month</div>
-              </div>
-            </div>
-          </div>
-          <div class="profile-below-footer-986985">
-            <div class="ble-buttons-789576856">
-              <div class="btn-alg-77">
-                <img src="../../../assets/svg/student-hat.svg" />
-                <div class="label-789575 fs-16 outfit">9 Students</div>
+                <img class="img1-789575" src="../../../assets/svg/cake.svg" />
+                <div class="label fs-16 outfit" style="text-transform: capitalize;"> Age {{from_age}}-{{to_age}} </div>
               </div>
             </div>
           </div>
@@ -52,7 +69,10 @@
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
-        <div class="detail-heading-left--78524">Category: Hobbies</div>
+        <div class="detail-heading-left--78524"
+          style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: #7A7A7A;">
+          <img src="../../assets/svg/speaks.svg" alt="" style="height: 16px;">{{language}}
+        </div>
       </div>
       <div class="fs-16 outfit discription-text">
         <div class="discription-para" [class.collapsed]="isExpanded">
@@ -66,12 +86,7 @@
     <div class="weekly-schedule-outer-78526">
       <div class="weekly-schedule-heding-78527">Weekly Schedule</div>
       <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
-      <!-- <div class="weekly-schedule-date-78528">
-        <div class="schedule-day-78528">{{item.day}}</div>
-        <div class="fs-16">{{startTime}}</div>
-        <div class="fs-16">{{endTime}}</div>
-      </div> -->
-    </div> 
+    </div>
     <div class="line"></div>
     <app-other-courses></app-other-courses>
   </div>

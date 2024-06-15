@@ -16,9 +16,13 @@
       <img src="../../assets/svg/myteacher.svg" />
       <div class="footer-tab-label">My Teachers</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" tab="courses">
+    <ion-tab-button class="ion-tab-button-67895675" tab="courses" *ngIf="roleId == 3">
       <img src="assets/icon/home/my-corces.svg" />
       <div class="footer-tab-label">My Courses</div>
+    </ion-tab-button>
+    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 2" tab="my-teachers">
+      <img src="../../assets/svg/trails.svg" />
+      <div class="footer-tab-label">Trail</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="search">
       <img src="../../assets/svg/more.svg" style="height: 24px; width: 24px;"/>

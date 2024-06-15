@@ -7,26 +7,26 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Title</div>
-            <app-sd-input-box placeholder="Course title (50-100 characters)" (onChange)="result($event, 'title')"
+            <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""></div>
+            <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Details</div>
-            <app-sd-textarea-about placeholder="Provide the brief details of the course (Minimum 250 characters)"
+            <div class="input-title fs-14 roboto-medium">Details</div>
+            <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
               [errorText]="'Detail is required'" [minlength]="400"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines city-zip">
             <div class="city-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Language of communication</div>
+              <div class="input-title fs-14 roboto-medium">Language of communication</div>
               <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
                 [country]="formData.language" [key]="'language'"
                 [errorText]="'language is required'"></app-course-language>
             </div>
             <div class="zip-code-3 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium" style="justify-content: center;">Course photo</div>
+              <div class="input-title fs-14 roboto-medium" style="justify-content: center;">Course photo</div>
               <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.image"
                 (onChange)="result($event, 'image')" [errorText]="'Teaching Mode is required'"></app-course-photo>
             </div>
@@ -38,43 +38,43 @@
           </div>
           <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
             <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Fees $/month</div>
+              <div class="input-title fs-14 roboto-medium">Fees $/month</div>
               <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
                 [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Hours/month</div>
+              <div class="input-title fs-14 roboto-medium">Hours/month</div>
               <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
                 [key]="'duration'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
             <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Fees $/month</div>
+              <div class="input-title fs-14 roboto-medium">Fees $/month</div>
               <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
                 [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Hours/month</div>
+              <div class="input-title fs-14 roboto-medium">Hours/month</div>
               <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
                 [key]="'duration'" [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Total lesson</div>
+              <div class="input-title fs-14 roboto-medium">Total lesson</div>
               <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
                 [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines city-zip">
             <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">From Age in Yrs (optional)</div>
+              <div class="input-title fs-14 roboto-medium">Age in Yrs (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'from_age')" [inputText]="formData.from_age"
-                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2"
+                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2" [placeholder]="'From'"
                 [type]="'number'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">To Age in Yrs (optional)</div>
-              <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'"
+              <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
+              <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'" [placeholder]="'To'"
                 [errorText]="'Required'" [type]="'number'" [maxlength]="2"> </app-sd-input-box>
             </div>
           </div>
@@ -83,37 +83,37 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Category</div>
+            <div class="input-title fs-14 roboto-medium">Category</div>
             <app-course-category placeholder="Course title (50-100 characters)" (onChange)="result($event, 'category')"
               [inputText]="formData.category" [key]="'category'" [errorText]="'Category is required'" [minlength]="50"
               [maxlength]="100"></app-course-category>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Search Keyword</div>
+            <div class="input-title fs-14 roboto-medium">Search Keyword</div>
             <div class="input-box-lines" style="width: 100%;">
               <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add" [key]="'keyword'"
                 [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'inPerson'">
-            <div class="input-title fs-12 roboto-medium">Location (only for In person class, optional)</div>
+            <div class="input-title fs-14 roboto-medium">Location (only for In person class, optional)</div>
             <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')" [inputText]="formData.location"
               [key]="'location'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
-            <div class="input-title fs-12 roboto-medium">meeting link (only for In online class, optional)</div>
+            <div class="input-title fs-14 roboto-medium">meeting link (only for In online class, optional)</div>
             <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')"
               [inputText]="formData.meeting_link" [key]="'meeting_link'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>
           <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
             <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Start Date (optional)</div>
+              <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
                 [key]="'strat_date'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">End Date (optional)</div>
+              <div class="input-title fs-14 roboto-medium">End Date (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'end_date')" [inputText]="formData.end_date"
                 [key]="'end_date'" [errorText]="'Required'" [type]="'date'"> </app-sd-input-box>
             </div>

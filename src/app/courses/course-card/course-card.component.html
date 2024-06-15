@@ -1,9 +1,4 @@
-<div class="student-box-outer-689567">
-  <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">Recommended Courses</div>
-  </div>
-  <div class="sb-content-7895"></div>
-</div>
+
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565" *ngFor="let item of course">
     <div class="block-item-header">
@@ -58,22 +53,29 @@
             <ng-template>
               <ion-list>
                 <ion-item class="profile-line-789578" (click)="editCourse(item)">
-                  <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
-                  <div class="label-789575 fs-16 outfit">Edit</div>
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
+                    <div class="label-789575 fs-16 outfit">Edit</div>
+                  </div>
 
                 </ion-item>
               </ion-list>
               <ion-list>
                 <ion-item class="profile-line-789578">
-                  <img class="img1-789575" src="../../../assets/svg/eye.svg" />
-                  <div class="label-789575 fs-16 outfit">Inactive</div>
+
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/eye.svg" />
+                    <div class="label-789575 fs-16 outfit">Inactive</div>
+                  </div>
                 </ion-item>
               </ion-list>
               <ion-list>
                 <ion-item class="profile-line-789578">
-                  <img class="img1-789575" src="../../../assets/svg/trash.svg" />
-                  <div class="label-789575 fs-16 outfit">Delete</div>
 
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                    <div class="label-789575 fs-16 outfit">Delete</div>
+                  </div>
                 </ion-item>
               </ion-list>
 

@@ -43,10 +43,9 @@
   .courses-block-item-789565 {
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 16px;
     background: #FFFFFF;
     border: 0.5px solid rgb(103 113 105 / 50%);
-    box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     gap: 8px;
 
@@ -173,8 +172,6 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding-top: 8px;
-      padding-bottom: 8px;
 
       .us-status-btn {
         display: flex;

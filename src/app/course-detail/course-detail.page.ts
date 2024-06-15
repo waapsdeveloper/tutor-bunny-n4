@@ -18,10 +18,17 @@ export class CourseDetailPage extends BasePage implements OnInit {
   isExpanded = false;
   title;
   serial_number;
+  mode_type
   created_at;
   price;
   startTime;
+  flag;
+  displayName;
+  image;
   endTime;
+  from_age;
+  language;
+  to_age;
   updated_at;
   schedules;
   constructor(injector: Injector) {
@@ -49,12 +56,20 @@ export class CourseDetailPage extends BasePage implements OnInit {
     let res = await this.network.getcourseById(this.course_Id) as any;
     this.data = res.course;
     this.title = this.data.title;
+    
+    this.language = this.data.language.name;
     this.capacity = this.data.capacity;
+    this.mode_type = this.data.mode_type;
     this.description = this.data.description;
+    this.from_age = this.data.from_age;
+    this.to_age = this.data.to_age;
+    this.displayName = this.utility.getAmericanName(this.data.user.name);
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
+    this.image = this.data.image;
     this.price = this.data.price;
     this.schedules = this.data.schedules;
+    this.flag = this.getFlag();
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
@@ -65,5 +80,18 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
+  }
+  getFlag() {
+    if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
+      const flag = this.data.user.teacher.country.iso2;
+
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
+    } else {
+      return ""
+    }
   }
 }
