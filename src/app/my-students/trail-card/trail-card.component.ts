@@ -42,7 +42,8 @@ export class TrailCardComponent extends BasePage implements OnInit {
     let trialId = this.item.id;
 
     let res = await this.network.changeTrailStuts(obj, trialId);
-
+    console.log(res);
+    
   }
 
 }

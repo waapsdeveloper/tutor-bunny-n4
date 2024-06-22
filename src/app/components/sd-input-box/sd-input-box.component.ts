@@ -46,7 +46,7 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
         return
       }
-      if (v && v == 'title' && v.length < 50) {
+      if (v && v == 'title' && v.length > 50) {
         this.isRequired = true;
         this.errorText = 'The Detail field must be 50 to 100 characters'
         setTimeout(() => {

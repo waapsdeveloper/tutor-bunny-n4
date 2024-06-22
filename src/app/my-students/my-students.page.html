@@ -1,5 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'My Students'" [backUrl]="'/tabs/teacher-dashboard'"></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'My Students'"
+    [backUrl]="'/tabs/teacher-dashboard'"></app-sd-header-top>
 </ion-header>
 
 
@@ -14,9 +15,14 @@
     <div class="dashboard-top-fixed-98563">
       <div class="header-chips">
         <div class="header-chip">
-          <ion-chip style="color: #F17401;">New</ion-chip>
-          <ion-chip style="color: #17A43E;">Active</ion-chip>
-          <ion-chip style="color: #AF1B1B;">Inactive</ion-chip>
+          <!-- <ion-chip style="color: #F17401;">New</ion-chip>
+          <ion-chip style="color: #17A43E;">Active</ion-chip> -->
+          <ion-chip id="click-trigger">Status <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
+          <ion-popover trigger="click-trigger" triggerAction="click">
+            <ng-template>
+              <ion-content class="ion-padding">Pending, Accepted, Complete, Rejected, Blocked.</ion-content>
+            </ng-template>
+          </ion-popover>
         </div>
       </div>
     </div>
