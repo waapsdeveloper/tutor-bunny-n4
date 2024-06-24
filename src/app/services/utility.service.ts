@@ -37,12 +37,16 @@ export class UtilityService {
   getAmericanName(name) {
     const nameParts = name.trim().split(' ');
 
+    let ln = nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+
     let obj = {
       first_name: nameParts[0] || '',
-      last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+      last_name: ln
     }
 
-    return obj.first_name + ' ' + obj.last_name.charAt(0) + '.';
+
+
+    return obj.first_name + ' ' + (ln.length > 0 ? ln.charAt(0) + '.' : '');
 
   }
 

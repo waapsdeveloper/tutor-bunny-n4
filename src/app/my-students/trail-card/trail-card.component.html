@@ -3,7 +3,7 @@
     <div class="profile-line-content">
       <div class="image-box-outer">
         <div class="image-circle-789675"
-          [style.background-image]="item.student.student_image ? 'url(' + item.student.student_image + ')' : 'assets/profileimg.png'">
+          [style.background-image]="item.student.image ? 'url(' + item.student.image + ')' : 'assets/profileimg.png'">
         </div>
         <div class="pnd-678956" *ngIf="item.status == 'Pending'">
           <img src="../../../assets/svg/panding.svg" />

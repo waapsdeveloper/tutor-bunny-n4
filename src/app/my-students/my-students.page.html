@@ -2,8 +2,6 @@
   <app-sd-header-top [showBack]="true" [title]="'My Students'"
     [backUrl]="'/tabs/teacher-dashboard'"></app-sd-header-top>
 </ion-header>
-
-
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
     <div class="search-box-outer-89655">
@@ -26,6 +24,6 @@
         </div>
       </div>
     </div>
-    <app-trail-card *ngFor="let item of trial" [item]="item"></app-trail-card>
+    <app-trail-card *ngFor="let item of list" [item]="item"></app-trail-card>
   </div>
 </ion-content>

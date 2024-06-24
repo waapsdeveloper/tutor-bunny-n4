@@ -7,9 +7,9 @@ import { BasePage } from '../base-page/base-page';
   styleUrls: ['./my-students.page.scss'],
 })
 export class MyStudentsPage extends BasePage implements OnInit {
-  ;
+  
   user;
-  trial;
+  list: any[] = [];
 
   constructor(injector: Injector) {
     super(injector);
@@ -21,7 +21,9 @@ export class MyStudentsPage extends BasePage implements OnInit {
   async initialize() {
     this.user = this.users.getUser();
 
-    this.trial = await this.network.geTrailRequests(this.user.id);
+    const res = await this.network.geTrailRequests(this.user.id);
+    console.log(res);
+    this.list = res.trials;
 
   }
 }

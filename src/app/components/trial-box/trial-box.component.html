@@ -13,7 +13,7 @@
     <div class="profile-line-content">
       <div class="image-box-outer">
         <div class="image-circle-789675"
-          [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'"></div>
+          [style.background-image]="!image ? 'assets/profileimg.png' : 'url(' + image + ')'"></div>
         <div class="pnd-678956">
           <img src="../../../assets/svg/panding.svg" />
           <div class="pnd-inner-7895">Pending</div>
