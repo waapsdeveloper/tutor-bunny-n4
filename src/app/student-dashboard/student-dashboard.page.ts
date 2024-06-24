@@ -14,6 +14,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   user;
   displayName: string = '';
+  country;
   showWarning = false;
   flag;
   @ViewChild('content', { static: true }) content: IonContent;
@@ -46,6 +47,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.user = this.users.getUser();
       this.flag = this.getFlag();
     }
+
+    this.country = this.user.student.country.name;
+    console.log(this.country);
+    
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     this.displayName = this.utility.splitName(this.user.name).first_name;

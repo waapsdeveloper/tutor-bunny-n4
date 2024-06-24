@@ -11,16 +11,13 @@ export class TrailCardComponent extends BasePage implements OnInit {
   flag;
   date;
   time;
-
   constructor(injector: Injector) {
     super(injector)
   }
-
   ngOnInit() {
     this.flag = this.getFlag()
     let currentDate = this.item.created_at;
     this.time = moment(currentDate).format('HH:mm a');
-
   }
   getFlag() {
     if (this.item && this.item.student && this.item.student.flag) {
@@ -38,12 +35,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
     let obj = {
       status: key
     };
-
     let trialId = this.item.id;
-
     let res = await this.network.changeTrailStuts(obj, trialId);
-    console.log(res);
-    
   }
-
 }

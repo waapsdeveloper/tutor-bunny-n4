@@ -9,9 +9,9 @@
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
-          <!-- <div class="icon-box-77">
-            <img class="icon-box-77" src="assets/icon/header-search.svg" />
-          </div> -->
+          <div class="icon-box-77">
+            <img class="icon-box-77" src="../../assets/svg/event.svg" />
+          </div>
           <div class="icon-box-77">
             <img class="icon-box-77" src="assets/icon/heart.svg" />
           </div>
@@ -21,10 +21,13 @@
         </div>
       </div>
       <div class="flag-box">
-        <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+        <div class="country-box">
+          <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span><div class="fs-16">{{country}}</div>
+        </div>
         <div class="name-box">
-          <div class="pl-heading outfit-semibold" style="color: black;">Hi, {{displayName}}</div>
-          <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
+          <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == true">Hi, {{displayName}}</div>
+          <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == false">Complete your profile</div>
+          <img src="../../assets/svg/student-edit.svg" alt="" *ngIf="showWarning == true" (click)="updateProfile()">
         </div>
       </div>
     </div>

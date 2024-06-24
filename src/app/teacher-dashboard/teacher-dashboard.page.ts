@@ -115,5 +115,8 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       this.nav.push('/course-form', params)
     }
   }
+  gotoNotification(){
+    this.nav.push('notifications')
+  }
 
 }

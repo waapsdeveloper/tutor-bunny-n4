@@ -1,0 +1,45 @@
+.notification-box-outer-78521{
+  width: 100%;
+  border-bottom: 0.5px solid rgb(69, 69, 69, 0.25);
+  padding: 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  .notification-image-box-78522{
+    width: 20%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    .notification-image-78523{
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      background-color: bisque;
+    }
+  }
+  .notification-content-box-78524{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-direction: column;
+    .notification-top-box-78525{
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      .notification-heading-box-78526{
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .notification-time-box-78527{
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+    .notification-para-box-78528{
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}

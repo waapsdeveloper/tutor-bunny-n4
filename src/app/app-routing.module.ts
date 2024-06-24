@@ -92,6 +92,10 @@ const routes: Routes = [
     path: 'my-students',
     loadChildren: () => import('./my-students/my-students.module').then( m => m.MyStudentsPageModule)
   },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
 
 
   

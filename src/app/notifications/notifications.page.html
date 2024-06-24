@@ -1,0 +1,7 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="'Notifications'"
+    [backUrl]="'/tabs/teacher-dashboard'"></app-sd-header-top>
+</ion-header>
+<ion-content class="ion-content-bg ion-padding">
+  <app-notification-box *ngFor="let item of notifications" [item]="item"></app-notification-box>
+</ion-content>

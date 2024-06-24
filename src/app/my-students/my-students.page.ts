@@ -22,5 +22,6 @@ export class MyStudentsPage extends BasePage implements OnInit {
     this.user = this.users.getUser();
 
     this.trial = await this.network.geTrailRequests(this.user.id);
+
   }
 }

@@ -92,6 +92,11 @@ export class NetworkService {
   geTrailRequests(id) {
     return this.httpGetResponse('course/recent/trials/' + id, null, false, false);
   }
+
+  getNotifications(id) {
+    return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
+  }
+
   getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
