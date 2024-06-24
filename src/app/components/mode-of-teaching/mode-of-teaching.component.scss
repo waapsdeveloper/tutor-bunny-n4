@@ -1,5 +1,4 @@
 .sd-input-box-outer-675315 {
-  height: 90px;
   border-radius: 8px;
   background: #ffffff;
   width: 100%;
@@ -14,7 +13,6 @@
   gap: 8px;
 
   .mode-box-outer-78521 {
-    height: 65px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -22,7 +20,6 @@
     // background-color: antiquewhite;
 
     .modes-of-teching-78522 {
-      height: 65px;
       width: 100%;
       display: flex;
       align-items: stretch;
@@ -41,7 +38,9 @@
       .modes-selection-78525 {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
 
         .online-mode-78526 {
           height: 25px;
@@ -71,7 +70,6 @@
     }
 
     .capacity-78523 {
-      height: 65px;
       width: 100%;
       display: flex;
       align-items: stretch;
@@ -88,10 +86,11 @@
       .modes-selection-78525 {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
 
         .online-mode-78526 {
-          height: 25px;
           width: 80px;
           border-radius: 16px;
           display: flex;
@@ -103,7 +102,6 @@
         }
 
         .person-mode-78526 {
-          height: 25px;
           width: 80px;
           border-radius: 16px;
           display: flex;

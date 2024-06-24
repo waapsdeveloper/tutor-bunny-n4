@@ -29,7 +29,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.student = this.trial.student.name;
     this.country = this.trial.student.country;
     this.city = this.trial.student.city;
-    this.image = this.trial.student.student_image;
+    this.image = this.trial.student.image;
     this.age = this.trial.student.age;
     this.serial_number = this.trial.course.serial_number;
     this.courseName = this.trial.course.title;

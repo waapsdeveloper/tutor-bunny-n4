@@ -79,7 +79,7 @@
 
 
       .profile-item-image-block {
-        min-width: 148px;
+        min-width: 100px;
         width: 100%;
         background: antiquewhite;
         padding-bottom: 100%;
@@ -107,6 +107,7 @@
         justify-content: space-evenly;
         gap: 8px;
         width: 60%;
+        min-width: fit-content;
 
         .profile-line-789575 {
           display: flex;

@@ -153,7 +153,7 @@ export class KeywordListComponent implements OnInit {
     let course_Id = JSON.parse(localStorage.getItem('course_Id'));
     let obj = {
       course_id: course_Id,
-      subject_id: item.id
+      keyword_id: item.id
     }
     const res2 = await this.network.removeMyKeyword(obj)
     this.onChange.emit({
