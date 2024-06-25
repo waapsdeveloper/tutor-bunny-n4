@@ -27,7 +27,7 @@
         <div class="name-box">
           <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == true">Hi, {{displayName}}</div>
           <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == false">Complete your profile</div>
-          <img src="../../assets/svg/student-edit.svg" alt="" *ngIf="showWarning == true" (click)="updateProfile()">
+          <img src="../../assets/svg/student-edit.svg" alt="" *ngIf="showWarning == false" (click)="updateProfile()">
         </div>
       </div>
     </div>
