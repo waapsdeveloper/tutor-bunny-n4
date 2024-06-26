@@ -30,6 +30,11 @@ export class NetworkService {
   postImages(data) {
     return this.httpPostResponse('gallery/add', data);
   }
+
+  sendMessage(data) {
+    return this.httpPostResponse('add-chat-message', data);
+  }
+
   deleteImage(id) {
     return this.httpDeleteResponse('gallery/delete/ ' + id, true)
   }
@@ -91,6 +96,14 @@ export class NetworkService {
   }
   geTrailRequests(id) {
     return this.httpGetResponse('course/recent/trials/' + id, null, false, false);
+  }
+
+  getMessagesRoom(id) {
+    return this.httpGetResponse('chat-rooms/' + id, null, false, false);
+  }
+
+  getMessages(id) {
+    return this.httpGetResponse('messages/by-chatroom-id/' + id, null, false, false);
   }
 
   getNotifications(id) {
@@ -160,12 +173,7 @@ export class NetworkService {
 
   getUserByEmail(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse(
-      'user-by-email' + '?' + str,
-      null,
-      false
-    );
-
+    return this.httpGetResponse('user-by-email' + '?' + str, null, false);
   }
 
   updateTeacherProfile(data, id) {
