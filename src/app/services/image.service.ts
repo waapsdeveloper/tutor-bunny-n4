@@ -16,11 +16,8 @@ export class ImageService {
         img.onload = () => {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          
           let width = img.width;
           let height = img.height;
-          
-          // Calculate the new dimensions
           if (width > height) {
             if (width > maxWidth) {
               height *= maxWidth / width;
@@ -32,15 +29,9 @@ export class ImageService {
               height = maxHeight;
             }
           }
-          
-          // Set canvas dimensions
           canvas.width = width;
           canvas.height = height;
-          
-          // Draw the image to the canvas
           ctx.drawImage(img, 0, 0, width, height);
-          
-          // Convert canvas to data URL
           resolve(canvas.toDataURL('image/jpeg', quality));
         }
         img.src = reader.result as string;
