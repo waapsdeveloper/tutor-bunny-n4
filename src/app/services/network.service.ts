@@ -208,6 +208,10 @@ export class NetworkService {
     return this.httpPostResponse('course-trial/send-request', data, null, true, true);
   }
 
+  cancelTrail(data) {
+    return this.httpPostResponse('course-trial/cancel-request', data, null, true, true);
+  }
+
   getTrail(data) {
     return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
   }

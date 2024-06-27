@@ -77,6 +77,16 @@ export class SdInputBoxComponent implements OnInit {
       v = ($event.target as HTMLInputElement).value;
     }
 
+    if (this.key == 'from_age') {
+      let maxValue: string = v.substring(0, 2);
+      ($event.target as HTMLInputElement).value = maxValue;
+    }
+
+    if (this.key == 'to_age') {
+      let maxValue: string = v.substring(0, 2);
+      ($event.target as HTMLInputElement).value = maxValue;
+    }
+
     if (!this.isReadOnly) {
       this.onChange.emit(v);
     }

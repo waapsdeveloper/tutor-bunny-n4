@@ -90,6 +90,17 @@ export class CourseListComponent extends BasePage implements OnInit {
     let res = await this.network.requestTrail(obj)
 
   }
+
+  async cancelTrail(id){
+    this.trail = true;
+    let user = this.users.getUser()
+
+    let obj = {
+      user_id: user.id,
+      course_id: id
+    }
+    let res = await this.network.cancelTrail(obj)
+  }
   addToFav() {
     this.fav = true;
   }

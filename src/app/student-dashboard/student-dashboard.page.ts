@@ -4,6 +4,7 @@ import { NavService } from '../services/nav.service';
 import { NetworkService } from '../services/network.service';
 import { BasePage } from '../base-page/base-page';
 import { IonContent } from '@ionic/angular';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -19,12 +20,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   flag;
   @ViewChild('content', { static: true }) content: IonContent;
 
-  constructor(injector: Injector, public authService: AuthenticationService,) {
+  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
     super(injector)
     this.initialize()
   }
 
   ngOnInit() {
+    this.fcm.setTokenToServer();
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
 
