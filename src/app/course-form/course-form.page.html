@@ -34,7 +34,7 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
               (onChange)="result($event, 'mode_type')" [inputText]="formData.mode_type" [key]="'mode_type'"
-              [errorText]="'Teaching Mode is required'"></app-mode-of-teaching>
+              [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
           </div>
           <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
             <div class="city d-flex flex-column gap-8">
@@ -98,11 +98,11 @@
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'inPerson'">
             <div class="input-title fs-14 roboto-medium">Location (only for In person class, optional)</div>
             <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')" [inputText]="formData.location"
-              [key]="'location'" [minlength]="50" [maxlength]="100"></app-sd-input-box>
+              [key]="'location'" [minlength]="50" [maxlength]="100" [needed]="false"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
             <div class="input-title fs-14 roboto-medium">meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')"
+            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')" [needed]="false"
               [inputText]="formData.meeting_link" [key]="'meeting_link'" [minlength]="50"
               [maxlength]="100"></app-sd-input-box>
           </div>

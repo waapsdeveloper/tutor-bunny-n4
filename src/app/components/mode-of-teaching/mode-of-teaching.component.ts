@@ -8,13 +8,21 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class ModeOfTeachingComponent extends BasePage implements OnInit {
   @Input('errorText') errorText = '';
+  @Input() type = 'text';
+  @Input() placeholder = '';
+  @Input() inputText = '';
+  @Input() isReadOnly = false;
+  @Input('key') key = '';
+  @Input() minlength;
+  @Input() maxlength;
+  @Input('needed') needed = true;
+  @Input() image = ''
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   isRequired = false;
   teachingMode = {
     mode: '',
     capacity: ''
   }
-
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
 
   constructor(injector: Injector) {
@@ -22,19 +30,24 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
 
-      if (!formData.mode_type) {
+      let v = formData[this.key];
+
+      console.log(v, this.key)
+
+      if (!v || v == '') {
         this.isRequired = true;
-        this.errorText = 'Image is required to upload'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
 
-
     }, false)
+
   }
+
+  
   toggleMode(mode: string) {
     this.teachingMode.mode = mode;
     this.onChange.emit(this.teachingMode);
