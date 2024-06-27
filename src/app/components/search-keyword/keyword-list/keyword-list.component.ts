@@ -89,7 +89,7 @@ export class KeywordListComponent implements OnInit {
         name: this.inputText
       }
       // return;
-      const res = await this.network.addKeyword(obj)
+      const res = await this.network.addInputKeyword(obj)
       let data = {
         course_id: course_Id,
       }

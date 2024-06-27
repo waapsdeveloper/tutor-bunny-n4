@@ -144,6 +144,10 @@ export class NetworkService {
     return this.httpPostResponse('keywords/add-keyword', data);
   }
 
+  addInputKeyword(data) {
+    return this.httpPostResponse('keywords/add-name-keyword', data);
+  }
+
   getMySubjects(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('subjects/my-list' + '?' + str, null, false, false);
