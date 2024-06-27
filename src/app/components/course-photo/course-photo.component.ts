@@ -41,21 +41,23 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
 
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const pmi = reader.result as string;
 
-      this.coursePhoto = pmi;
-      let obj = {
-        image: pmi
-      }
-      this.onChange.emit(obj);
-
-
-      // const res = await this.network.postProfileImage(obj)s
-
-    };
-    reader.readAsDataURL(file);
+    if (file.size > 1048576) { // Check if file size is greater than 1MB
+      this.imageService.resizeImage(file, 800, 800).then((pmi) => {
+        this.coursePhoto = pmi;
+        this.onChange.emit({ image: pmi });
+      }).catch((error) => {
+        console.error("Error resizing image", error);
+      });
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const pmi = reader.result as string;
+        this.coursePhoto = pmi;
+        this.onChange.emit({ image: pmi });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 }
