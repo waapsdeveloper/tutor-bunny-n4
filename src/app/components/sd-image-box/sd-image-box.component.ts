@@ -73,9 +73,7 @@ export class SdImageBoxComponent implements OnInit {
     if(list.length > 0){
       let item = list[0];
       this.sampleGalleryImage = item.image
-
     }
-
   }
 
   onProfileSelected(event: any) {

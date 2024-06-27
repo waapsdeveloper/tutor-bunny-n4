@@ -62,7 +62,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.language = this.data.language.name;
     this.from_age = this.data.from_age;
     this.to_age = this.data.to_age;
-    this.displayName = this.utility.getAmericanName(this.data.user.name);
+    this.displayName = this.utility.splitName(this.data.user.name).first_name;
     this.flag = this.getFlag();
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;

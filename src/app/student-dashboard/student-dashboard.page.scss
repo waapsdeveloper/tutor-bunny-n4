@@ -76,19 +76,14 @@
   .header-chip {
     display: flex;
     align-items: center;
-    // padding-left: 120px;
     justify-content: flex-start;
 
-    ion-chip {
+    .ion-chip {
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 16px;
-      background-color: #ffffff;
-      border: 0.5px solid rgb(103 113 105 / 50%);
-      padding: 0 22px;
-      // /* width: 100%;
-
+      padding: 0 10px;
     }
 
   }
@@ -172,4 +167,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+
+.body-scroll{
+  padding: 0 6px;
 }

@@ -4,17 +4,17 @@
       <img src="assets/icon/home/home-icon.svg" />
       <div class="footer-tab-label">Home</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" tab="radio">
+    <ion-tab-button class="ion-tab-button-67895675" tab="chat">
       <img src="assets/icon/home/chat-icon.svg" />
       <div class="footer-tab-label">Chat</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" tab="library">
-      <img src="assets/icon/home/calendar-icon.svg" />
-      <div class="footer-tab-label">Calendar</div>
+    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" (click)="createCourse()">
+      <img src="../../assets/svg/add-course.svg" />
+      <div class="footer-tab-label">Create</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 2" tab="my-teachers">
-      <img src="../../assets/svg/myteacher.svg" />
-      <div class="footer-tab-label">My Teachers</div>
+      <img src="../../assets/svg/search.svg" />
+      <div class="footer-tab-label">Search</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="courses" *ngIf="roleId == 3">
       <img src="assets/icon/home/my-corces.svg" />
@@ -22,7 +22,7 @@
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 2" >
       <img src="../../assets/svg/trails.svg" />
-      <div class="footer-tab-label">Trial</div>
+      <div class="footer-tab-label">Requests</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="search">
       <img src="../../assets/svg/more.svg" style="height: 24px; width: 24px;"/>
@@ -30,4 +30,3 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-

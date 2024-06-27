@@ -17,13 +17,17 @@ export class TrailCardComponent extends BasePage implements OnInit {
   ngOnInit() {
     console.log(this.item)
     this.flag = this.getFlag()
+    console.log(this.flag);
+
     let currentDate = this.item.created_at;
     this.time = moment(currentDate).format('HH:mm a');
 
   }
   getFlag() {
-    if (this.item && this.item.student && this.item.student.flag) {
-      const flag = this.item.student.flag;
+    console.log(this.item.student.student.country.flag);
+
+    if (this.item && this.item.student && this.item.student.student.country.flag) {
+      const flag = this.item.student.student.country.iso2;
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -35,9 +39,13 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
   async trailStatus(key) {
     let obj = {
-      status: key
+      status: key,
+      user_id: this.item.student.id
     };
     let trialId = this.item.id;
     let res = await this.network.changeTrailStuts(obj, trialId);
+  }
+  goToChat() {
+    this.nav.push('/tabs/chat')
   }
 }

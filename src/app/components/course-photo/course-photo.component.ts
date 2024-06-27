@@ -18,7 +18,7 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
 
       if (!formData.image) {
         this.isRequired = true;

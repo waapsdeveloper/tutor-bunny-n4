@@ -45,6 +45,10 @@ const routes: Routes = [
         path: 'my-teachers',
         loadChildren: () => import('../my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
       },
+      {
+        path: 'chat',
+        loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)
+      },
 
     ]
   }

@@ -25,9 +25,9 @@
           <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span><div class="fs-16">{{country}}</div>
         </div>
         <div class="name-box">
-          <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == true">Hi, {{displayName}}</div>
-          <div class="pl-heading outfit-semibold" style="color: black;" *ngIf="showWarning == false">Complete your profile</div>
-          <img src="../../assets/svg/student-edit.svg" alt="" *ngIf="showWarning == true" (click)="updateProfile()">
+          <div class="pl-heading roboto-medium fs-21" style="color: black;" *ngIf="showWarning == true">Hi, {{displayName}}</div>
+          <div class="pl-heading roboto-medium fs-21" style="color: black; font-size: 14px;" *ngIf="showWarning == false">Complete your profile</div>
+          <img src="../../assets/svg/student-edit.svg" alt=""  (click)="updateProfile()">
         </div>
       </div>
     </div>
@@ -44,20 +44,17 @@
     <div class="dashboard-top-fixed-98563">
       <div class="header-chips" style="margin-top: -16px;">
         <div class="header-chip">
-          <ion-chip>All</ion-chip>
-          <ion-chip>Academic</ion-chip>
-          <ion-chip>Hobby</ion-chip>
-          <ion-chip>Language</ion-chip>
-          <ion-chip>K2Tution</ion-chip>
+          <div class="ion-chip">All</div>
+          <div class="ion-chip">Academic</div>
+          <div class="ion-chip">Hobby</div>
+          <div class="ion-chip">Language</div>
+          <div class="ion-chip">K2Tution</div>
         </div>
       </div>
     </div>
-
     <div class="body-content-68448" style="margin-top: 16px;">
-
       <!-- <app-rec-teachers></app-rec-teachers> -->
       <app-rec-courses></app-rec-courses>
-
     </div>
   </div>
 

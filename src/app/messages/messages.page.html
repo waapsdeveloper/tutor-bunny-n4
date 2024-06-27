@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <app-sd-bback-btn (click)="back()"></app-sd-bback-btn>
+      <div class="header-image-78415"
+        [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'">
+      </div>
+      <div style="display: flex; align-items: flex-start; flex-direction: column;
+      gap: 8px;">
+        <div class="header-title ">Emelie <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span></div>
+        <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
+      </div>
+    </div>
+    <div class="header-right-items-78956" *ngIf="item.user.teacher">
+      <div class="bsearch-btn-7895 ion-activatable ripple-parent rectangle">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="../../assets/svg/options.svg" />
+      </div>
+    </div>
+  </div>
+</ion-header>
+<ion-content #content class="ion-content-bg ion-padding">
+  <div class="body-content">
+    <div class="chat-day-heading-85621">Today</div>
+    <div [class.chat-right-box]="user_id != item.user_id" [class.chat-left-box]="user_id == item.user_id"
+      *ngFor="let item of chat">
+      <div [class.chat-recive-85622]="user_id != item.user_id" [class.chat-send-85625]="user_id == item.user_id">
+        <div  [class.chat-recive-text-85623]="user_id != item.user_id" [class.chat-send-text-85626]="user_id == item.user_id">{{item.message}}
+        </div>
+        <div class="chat-recive-time-85624">{{time}}</div>
+      </div>
+    </div>
+    <!-- <div class="chat-left-box">
+      <div class="chat-send-85625">
+        <div class=""></div>
+        <div class="chat-send-time-85627">3:05 PM</div>
+      </div>
+    </div> -->
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div class="footer-box-78521">
+    <div class="input-box-78522">
+      <input type="text" placeholder="Write your text here" (keyup)="onKeyUp($event)">
+      <img src="../../assets/svg/addImgae.svg" alt="">
+    </div>
+    <div class="send-box-78522">
+      <img src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">
+    </div>
+  </div>
+</ion-footer>
