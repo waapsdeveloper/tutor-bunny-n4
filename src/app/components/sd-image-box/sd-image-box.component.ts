@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -8,7 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './sd-image-box.component.html',
   styleUrls: ['./sd-image-box.component.scss'],
 })
-export class SdImageBoxComponent implements OnInit {
+export class SdImageBoxComponent extends BasePage implements OnInit {
   @Input('profilePhoto') profilePhoto: SafeUrl | undefined;
   @Input('photoId') photoId: SafeUrl | undefined;
   @Output('openGallery') openGallery: EventEmitter<any> = new EventEmitter<any>();
@@ -23,7 +24,8 @@ export class SdImageBoxComponent implements OnInit {
 
   sampleGalleryImage = '/assets/gallary.png'
 
-  constructor(private network: NetworkService, private events: EventsService, public users: UsersService) {
+  constructor(Injector: Injector) {
+    super(Injector)
     this.initialize()
   }
   ngOnInit() {
@@ -75,38 +77,41 @@ export class SdImageBoxComponent implements OnInit {
       this.sampleGalleryImage = item.image
     }
   }
-
-  onProfileSelected(event: any) {
-    const file: File = event.target.files[0];
+  async handleFile(file: File, postFunction: (obj: any) => Promise<any>, emitFunction: (image: string) => void) {
     const reader = new FileReader();
     reader.onload = async () => {
-      const pmi = reader.result as string;
+      let pmi = reader.result as string;
+      
+      // Resize if file size is greater than 1MB
+      if (file.size > 1048576) {
+        pmi = await this.imageService.resizeImage(file, 800, 800);
+      }
+
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
         image: pmi
       }
-      const res = await this.network.postProfileImage(obj)
-      this.profilePhoto = res.result.image;
-      this.updateImage.emit(this.profilePhoto)
 
+      const res = await postFunction(obj);
+      emitFunction(res.result.image);
     };
     reader.readAsDataURL(file);
   }
+
+  onProfileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.handleFile(file, this.network.postProfileImage.bind(this.network), (image: string) => {
+      this.profilePhoto = image;
+      this.updateImage.emit(this.profilePhoto);
+    });
+  }
+
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const pmil = reader.result as string;
-      let user = JSON.parse(localStorage.getItem('user'));
-      let obj = {
-        user_id: user.id,
-        image: pmil
-      }
-      const res = await this.network.postPhotoIdImage(obj)
-      this.photoId = res.result.image;
-      this.updatePhotoId.emit(this.photoId)
-    };
-    reader.readAsDataURL(file);
+    this.handleFile(file, this.network.postPhotoIdImage.bind(this.network), (image: string) => {
+      this.photoId = image;
+      this.updatePhotoId.emit(this.photoId);
+    });
   }
 }

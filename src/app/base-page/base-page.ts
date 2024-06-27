@@ -6,6 +6,7 @@ import { NetworkService } from "../services/network.service";
 import { UsersService } from "../services/users.service";
 import { UtilityService } from "../services/utility.service";
 import { ProfileService } from "../services/profile.service";
+import { ImageService } from "../services/image.service";
 
 export abstract class BasePage {
 
@@ -15,6 +16,7 @@ export abstract class BasePage {
   public events: EventsService;
   public users: UsersService;
   public profiles: ProfileService;
+  public imageService: ImageService
   public modals: ModalService;
 
   constructor(injector: Injector) {
@@ -23,6 +25,7 @@ export abstract class BasePage {
     this.network = injector.get(NetworkService);
     this.utility = injector.get(UtilityService);
     this.events = injector.get(EventsService);
+    this.imageService = injector.get(ImageService);
     this.nav = injector.get(NavService);
     this.modals = injector.get(ModalService);
   }
