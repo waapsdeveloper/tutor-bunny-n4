@@ -9,7 +9,7 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""></div>
             <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'" 
+              [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'"
               [maxlength]="50"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -70,12 +70,12 @@
               <div class="input-title fs-14 roboto-medium">Age in Yrs (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'from_age')" [inputText]="formData.from_age"
                 [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2" [placeholder]="'From'"
-                [type]="'number'"></app-sd-input-box>
+                [type]="'number'" [needed]="false"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
               <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'"
-                [placeholder]="'To'" [errorText]="'Required'" [type]="'number'" [maxlength]="2"> </app-sd-input-box>
+                [placeholder]="'To'" [errorText]="'Required'" [type]="'number'" [maxlength]="2" [needed]="false"> </app-sd-input-box>
             </div>
           </div>
         </div>

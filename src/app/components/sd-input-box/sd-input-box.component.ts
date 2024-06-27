@@ -39,14 +39,14 @@ export class SdInputBoxComponent implements OnInit {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
 
-      if (!v && v == 'title') {
+      if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
-        return
       }
-      if (v && v == 'title' && v.length >= 50) {
+
+      if (v && this.key == 'title' && v.length >= 50) {
         this.isRequired = true;
         this.errorText = 'The title field must be maximum 50 charecters'
         setTimeout(() => {
