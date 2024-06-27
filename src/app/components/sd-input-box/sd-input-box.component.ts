@@ -18,7 +18,9 @@ export class SdInputBoxComponent implements OnInit {
   @Input('needed') needed = true;
   isRequired = false;
   @Input() image = ''
+  showPassword = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() icon = 'assets/svg/clear.svg';
 
   constructor(private events: EventsService) { }
 
@@ -57,7 +59,11 @@ export class SdInputBoxComponent implements OnInit {
 
   }
 
+  showPasword(key){
 
+    this.showPassword = key;
+
+  }
   result($event) {
     let v = $event.target.value;
 

@@ -50,6 +50,9 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
       CourseLanguageListComponent,
       obj
     )) as any;
+    console.log('====================================');
+    console.log(res);
+    console.log('====================================');
 
     if (res && res.data && res.data.item) {
 
