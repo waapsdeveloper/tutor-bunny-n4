@@ -92,7 +92,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async cancelTrail(id){
-    this.trail = true;
+    this.trail = false;
     let user = this.users.getUser()
 
     let obj = {
