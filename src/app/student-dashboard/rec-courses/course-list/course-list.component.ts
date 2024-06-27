@@ -20,7 +20,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this._item = value;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
-    this.callApi()
+
   }
   fav = false;
   trail = false;
@@ -37,7 +37,13 @@ export class CourseListComponent extends BasePage implements OnInit {
 
 
   }
-  ngOnInit() { }
+  ngOnInit() {
+
+    setTimeout( () => {
+      this.callApi()
+    }, 200);
+
+  }
   getFlag() {
     if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
       const flag = this.item.user.teacher.country.iso2;
@@ -68,8 +74,19 @@ export class CourseListComponent extends BasePage implements OnInit {
     if (res && res.trial) {
       this.trail = true;
       this.loading = false;
-
     }
+
+    // const res2 = await this.network.removeCourseFav(obj)
+    // console.log(res2)
+    // if(res2){
+
+    // }
+
+
+
+
+
+
   }
   goToDeatil(item) {
     const params = {
@@ -101,10 +118,26 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     let res = await this.network.cancelTrail(obj)
   }
-  addToFav() {
+
+  async addToFav() {
+
+    let user = this.users.getUser()
+    let obj = {
+      user_id: user.id,
+      course_id: this.item.id
+    }
+    const res = await this.network.addCourseFav(obj)
     this.fav = true;
+
   }
-  RemoveToFav() {
+
+  async removeToFav() {
+    let user = this.users.getUser()
+    let obj = {
+      user_id: user.id,
+      course_id: this.item.id
+    }
+    const res = await this.network.removeCourseFav(obj)
     this.fav = false;
   }
 

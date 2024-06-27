@@ -9,7 +9,7 @@
         <div>
           <div class="profile-item-image-block"
             [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
-            <img src="../../../assets/svg/heart.svg" *ngIf="fav==true" alt="" (click)="RemoveToFav()"
+            <img src="../../../assets/svg/heart.svg" *ngIf="fav==true" alt="" (click)="removeToFav()"
               class="loved-icon">
             <img src="../../../assets/svg/heart-fill.svg" alt="" *ngIf="fav==false" (click)="addToFav()"
               class="loved-icon">

@@ -220,6 +220,20 @@ export class NetworkService {
     return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
   }
 
+  addCourseFav(data){
+    return this.httpPostResponse('courses/list/add-fav', data, null, false, false);
+  }
+
+  removeCourseFav(data){
+    return this.httpPostResponse('courses/list/remove-fav', data, null, false, false);
+  }
+
+  isCourseFav(data){
+    return this.httpPostResponse('courses/list/is-fav', data, null, false, false);
+  }
+
+
+
   updateStudentProfile(data, id) {
     return this.httpPostResponse('students/update-info/' + id, data);
   }
