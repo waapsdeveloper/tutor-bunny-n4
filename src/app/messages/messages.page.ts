@@ -43,9 +43,19 @@ export class MessagesPage extends BasePage implements OnInit {
       } else {
         return ""
       }
+    }
+    else if(this.item && this.item.user.teacher && this.item.user.teacher.country){
+      const flag = this.item.user.teacher.country.iso2;
+
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return ""
+      }
     } else {
       return ""
     }
+    
   }
   async initialize() {
 

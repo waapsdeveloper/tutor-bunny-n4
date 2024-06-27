@@ -3,21 +3,21 @@
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <form>
-    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
+    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides style="padding: 0 6px;">
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Name</div>
+            <div class="input-title fs-14 roboto-medium">Name</div>
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
               [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Country</div>
+            <div class="input-title fs-14 roboto-medium">Country</div>
             <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country"
               [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
-            <div class="input-title fs-12 roboto-medium">State</div>
+            <div class="input-title fs-14 roboto-medium">State</div>
             <app-sd-state-box placeholder="Select" [countryId]="countryId" placeholder="State"
               (onChange)="result($event, 'state')" [state]="formData.state" [key]="'state'"
               [errorText]="'State is required'"></app-sd-state-box>
@@ -25,18 +25,18 @@
 
           <div class="input-box-lines city-zip" *ngIf="stateId">
             <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">City</div>
+              <div class="input-title fs-14 roboto-medium">City</div>
               <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')" [inputText]="formData.city"
                 [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-12 roboto-medium">Zip</div>
+              <div class="input-title fs-14 roboto-medium">Zip</div>
               <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code"
                 placeholder="Zip" [key]="'zip_code'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Phone</div>
+            <div class="input-title fs-14 roboto-medium">Phone</div>
             <div class="phone-input">
               <div class="dail-code">
                 <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="language-sec d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Language of communication</div>
+            <div class="input-title fs-14 roboto-medium">Language of communication</div>
             <div class="input-box-lines languages">
               <div class="language">
                 <app-sd-language-box (onChange)="result($event, 'languages')" placeholder="Select Languages"
@@ -64,19 +64,19 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">Title</div>
+            <div class="input-title fs-14 roboto-medium">Title</div>
             <app-sd-input-box placeholder="Profile Title (50-100 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
               [maxlength]="100" [needed]="step == 2"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">About</div>
+            <div class="input-title fs-14 roboto-medium">About</div>
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
               [errorText]="'Description is required'" [minlength]="400" [needed]="step == 2"></app-sd-textarea-about>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-12 roboto-medium">What do you teach?</div>
+            <div class="input-title fs-14 roboto-medium">What do you teach?</div>
             <div class="input-box-lines" style="width: 100%;">
               <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Type the keywords that you teach"
                 [key]="'subjects'" [errorText]="'Subject is required'"></app-sd-subject-box>

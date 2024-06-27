@@ -4,38 +4,37 @@
 
 
 <ion-content class="ion-padding ion-content-medium-background">
-  <div class="body-content-68448">
-
+  <div class="body-content-68448" style="padding: 0 6px;">
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Name</div>
+      <div class="input-title fs-14 roboto-medium">Name</div>
       <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
         [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Country</div>
+      <div class="input-title fs-14 roboto-medium">Country</div>
       <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
         [errorText]="'Country is required'"></app-sd-country-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
-      <div class="input-title fs-12 roboto-medium">State</div>
+      <div class="input-title fs-14 roboto-medium">State</div>
       <app-sd-state-box [countryId]="countryId" placeholder="Select" (onChange)="result($event, 'state')"
         [state]="formData.state" [key]="'state'" [errorText]="'State is required'"></app-sd-state-box>
     </div>
 
     <div class="input-box-lines city-zip" *ngIf="stateId">
       <div class="city d-flex flex-column gap-8">
-        <div class="input-title fs-12 roboto-medium">City</div>
+        <div class="input-title fs-14 roboto-medium">City</div>
         <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')" [inputText]="formData.city"
           [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
       </div>
       <div class="zip-code-2 d-flex flex-column gap-8">
-        <div class="input-title fs-12 roboto-medium">Zip</div>
+        <div class="input-title fs-14 roboto-medium">Zip</div>
         <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="formData.zip_code" placeholder="Zip"
           [key]="'zip_code'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
       </div>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Phone</div>
+      <div class="input-title fs-14 roboto-medium">Phone</div>
       <div class="phone-input">
         <div class="dail-code">
           <app-sd-dailcode-box (onChange)="result($event, 'dial_code')" [inputText]="formData.dial_code"
@@ -49,7 +48,7 @@
       </div>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Year of birth</div>
+      <div class="input-title fs-14 roboto-medium">Year of birth</div>
       <app-sd-year-box placeholder="Select" (onChange)="result($event, 'dob')"
         [key]="'dob'" [errorText]="'Year is required'"
         [inputText]="formData.dob"></app-sd-year-box>

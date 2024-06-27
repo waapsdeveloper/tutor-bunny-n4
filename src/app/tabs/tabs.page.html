@@ -8,9 +8,9 @@
       <img src="assets/icon/home/chat-icon.svg" />
       <div class="footer-tab-label">Chat</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" tab="library">
-      <img src="assets/icon/home/calendar-icon.svg" />
-      <div class="footer-tab-label">Calendar</div>
+    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" (click)="createCourse()">
+      <img src="../../assets/svg/add-course.svg" />
+      <div class="footer-tab-label">Create</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 2" tab="my-teachers">
       <img src="../../assets/svg/search.svg" />

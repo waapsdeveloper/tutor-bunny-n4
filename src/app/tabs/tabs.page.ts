@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { EventsService } from '../services/events.service';
 import { UsersService } from '../services/users.service';
+import { BasePage } from '../base-page/base-page';
+import { CreateCoursePage } from '../teacher-dashboard/create-course/create-course.page';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
 })
-export class TabsPage implements OnInit {
+export class TabsPage extends BasePage implements OnInit {
 
   showTabs = true;
   roleId;
   user;
-  constructor(private events: EventsService, private users: UsersService) {
+  constructor(injector:Injector) {
+    super(injector)
     this.initialize()
   }
 
@@ -36,6 +39,24 @@ export class TabsPage implements OnInit {
   }
 
   initialize() {
+  }
+
+  async createCourse() {
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.7)
+
+    if (res.data.title) {
+
+
+      const params = {
+        backUrl: '/tabs/teacher-dashboard',
+        title: res.data.title,
+        type: res.data.type,
+
+
+      };
+
+      this.nav.push('/course-form', params)
+    }
   }
 
   returnDashboardLink() {
