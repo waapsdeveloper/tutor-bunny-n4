@@ -8,11 +8,15 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./course-photo.component.scss'],
 })
 export class CoursePhotoComponent extends BasePage implements OnInit {
+
+  @Input('key') key = '';
   @Input('coursePhoto') coursePhoto: SafeUrl | undefined;
   @Output('updateImage') updateCourseImage: EventEmitter<any> = new EventEmitter<any>();
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('errorText') errorText = '';
+  @Input('needed') needed = true;
   isRequired = false;
+
   constructor(injector: Injector) {
     super(injector)
   }
@@ -20,9 +24,12 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
   ngOnInit() {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
 
-      if (!formData.image) {
+      let v = formData[this.key];
+
+      console.log(v, this.key)
+
+      if (!v || v == '') {
         this.isRequired = true;
-        this.errorText = 'Image is required to upload'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);

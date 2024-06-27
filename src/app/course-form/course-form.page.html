@@ -28,7 +28,7 @@
             <div class="zip-code-3 d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium" style="justify-content: center;">Course photo</div>
               <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')"
-                [errorText]="'Course Photo is required'"></app-course-photo>
+              [key]="'image'" [errorText]="'Missing'"></app-course-photo>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">

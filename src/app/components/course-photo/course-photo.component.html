@@ -10,3 +10,4 @@
     <!-- <ion-icon *ngIf="profilePhoto" class="upload-done-circle" name="checkmark-circle"></ion-icon> -->
   </div>
 </div>
+<app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>
