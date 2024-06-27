@@ -20,7 +20,8 @@ export class SdInputBoxComponent implements OnInit {
   @Input() image = ''
   showPassword = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  @Input() icon = 'assets/svg/clear.svg';
+  @Input('showTogglePassword') showTogglePassword = false;
+  togglePassword = true;
 
   constructor(private events: EventsService) { }
 
@@ -119,5 +120,11 @@ export class SdInputBoxComponent implements OnInit {
   clearInput() {
     this.inputText = '';
     this.onChange.emit('');
+  }
+
+  toggleShowPasword(flag){
+    this.togglePassword = !this.togglePassword
+    console.log(this.togglePassword)
+    this.type = this.togglePassword ? 'password' : 'text'
   }
 }

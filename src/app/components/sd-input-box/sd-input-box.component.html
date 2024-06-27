@@ -2,8 +2,8 @@
   <img [src]="image" alt="" class="input-image">
   <input class="fs-16 roboto-regular sd-input-box-input-675315" [minlength]="minlength" [maxlength]="maxlength" [type]="type" [placeholder]="placeholder"
     [(ngModel)]="inputText" (paste)="onPasteHandler($event)" (ngModelChange)="modelChange($event)" (keyup)="result($event)" [readOnly]="isReadOnly" />
-    <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText"  alt="" (click)="clearInput()">
-    <ion-icon name="eye-outline" (click)="showPasword('true')" *ngIf="showPassword == false"></ion-icon>
-    <ion-icon name="eye-off-outline" (click)="showPasword('false')" *ngIf="showPassword == true"></ion-icon>
+    <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText && !showTogglePassword"  alt="" (click)="clearInput()">
+
+    <ion-icon class="passw-input-678956744" *ngIf="showTogglePassword" [name]="togglePassword ? 'eye-off-outline' : 'eye-outline'" (click)="toggleShowPasword(togglePassword)"></ion-icon>
 </div>
 <app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText" ></app-sd-error-input-info>
