@@ -19,15 +19,15 @@ export class NotificationBoxComponent implements OnInit {
         s: 'a few seconds',
         ss: '%d s',
         m: "a minute",
-        mm: "%d m",
+        mm: "%dm",
         h: "an hour",
-        hh: "%d h",
+        hh: "%dh",
         d: "a day",
-        dd: "%d d",
+        dd: "%dd",
         M: "a month",
-        MM: "%d M",
+        MM: "%dM",
         y: "a year",
-        yy: "%d y"
+        yy: "%dy"
       }
     });
     this.time = moment(this.item.created_at).fromNow();
