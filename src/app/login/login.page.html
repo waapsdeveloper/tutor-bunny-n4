@@ -27,7 +27,7 @@
         <div class="input-title fs-12 roboto-medium">Password</div>
         <div class="input-title-2 fs-12 roboto-medium" (click)="forgetPassword()">Forgot?</div>
       </div>
-      <app-sd-input-box [image]="'assets/svg/password.svg'" placeholder="Enter your password"
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
         (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
         [errorText]="'Password is required'" [type]="'password'"
         ></app-sd-input-box>

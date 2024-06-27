@@ -1,3 +1,4 @@
+
 .sd-input-box-outer-675315 {
   height: 50px;
   border-radius: 8px;
@@ -7,10 +8,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // padding-left: 16px;
+  padding-left: 16px;
   border: 0.5px solid rgba(0, 0, 0, 0.75);
   padding-right: 8px;
   gap: 8px;
+}
+
+.low-padding-87678 {
+  padding-left: 0px !important;
 }
 
 .sd-input-box-input-675315 {
