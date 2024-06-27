@@ -67,7 +67,7 @@ export class SdInputBoxComponent implements OnInit {
     }
 
     if (this.key == 'title') {
-      let maxValue: string = v.substring(0, 100);
+      let maxValue: string = v.substring(0, this.maxlength);
       ($event.target as HTMLInputElement).value = maxValue;
     }
 
