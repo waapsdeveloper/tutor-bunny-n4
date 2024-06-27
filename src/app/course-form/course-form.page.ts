@@ -182,4 +182,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.nav.pop('/tabs/teacher-dashboard')
 
   }
+
+  shouldHandleBackToPrevScreen(){
+    if (this.step == 2) {
+      this.step = 1;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+  }
 }

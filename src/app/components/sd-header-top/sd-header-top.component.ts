@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavService } from 'src/app/services/nav.service';
 
 @Component({
@@ -12,11 +12,22 @@ export class SdHeaderTopComponent implements OnInit {
   @Input() showBack: boolean = false;
   @Input() backUrl: string = '';
   @Input() title: string = '';
+
+  @Input() parentHandleBack: boolean = false;
+
+  @Output('parentBack') parentBack: EventEmitter<any> = new EventEmitter<any>()
+
   constructor(private nav: NavService) {}
 
   ngOnInit() {}
 
   back() {
-    this.nav.pop(this.backUrl);
+
+    if(this.parentHandleBack){
+      this.parentBack.emit();
+    } else {
+      this.nav.pop(this.backUrl);
+    }
+
   }
 }
