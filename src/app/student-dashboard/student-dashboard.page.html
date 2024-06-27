@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89656" 
+      <div class="image-box-89656"
         [style.background-image]="user.image ? 'url(' + user.image + ')' : '/assets/svg/signup.svg'">
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
       </div>
@@ -39,7 +39,7 @@
 
 <ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true" (ionScroll)="onScroll($event)"
   (ionScrollEnd)="onScrollEnd($event)">
-  <div class="body-scroll"> 
+  <div class="body-scroll">
 
     <div class="dashboard-top-fixed-98563">
       <div class="header-chips" style="margin-top: -16px;">
@@ -54,7 +54,7 @@
     </div>
     <div class="body-content-68448" style="margin-top: 16px;">
       <!-- <app-rec-teachers></app-rec-teachers> -->
-      <app-rec-courses></app-rec-courses>
+      <app-rec-courses style="max-width: 100%;"></app-rec-courses>
     </div>
   </div>
 
