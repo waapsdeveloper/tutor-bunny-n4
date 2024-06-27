@@ -119,7 +119,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
-    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.from_age || !f.language || !f.to_age) {
+    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.language ) {
 
       return
     }
@@ -134,6 +134,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     f['type'] = this.type;
 
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
+    console.log('====================================');
+    console.log(res);
+    console.log('====================================');
 
     let courseId = res.course.id;
 

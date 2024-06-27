@@ -9,8 +9,8 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""></div>
             <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
-              [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'" [minlength]="50"
-              [maxlength]="100"></app-sd-input-box>
+              [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'" 
+              [maxlength]="50"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Details</div>
@@ -27,8 +27,8 @@
             </div>
             <div class="zip-code-3 d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium" style="justify-content: center;">Course photo</div>
-              <app-course-photo [profilePhoto]="formData.image" [photoId]="formData.image"
-                (onChange)="result($event, 'image')" [errorText]="'Teaching Mode is required'"></app-course-photo>
+              <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')"
+                [errorText]="'Course Photo is required'"></app-course-photo>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -74,8 +74,8 @@
             </div>
             <div class="zip-code-2 d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
-              <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'" [placeholder]="'To'"
-                [errorText]="'Required'" [type]="'number'" [maxlength]="2"> </app-sd-input-box>
+              <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'"
+                [placeholder]="'To'" [errorText]="'Required'" [type]="'number'" [maxlength]="2"> </app-sd-input-box>
             </div>
           </div>
         </div>
