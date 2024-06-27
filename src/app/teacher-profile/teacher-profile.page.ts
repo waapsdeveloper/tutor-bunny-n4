@@ -14,7 +14,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   user;
   displayName = 'LL'
   flag
-
+  showGellary= false;
   item;
   data;
   shield;
@@ -23,6 +23,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   city;
   language;
   subject;
+  images: any;
 
 
   constructor(injector: Injector) {
@@ -35,7 +36,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     })
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.initialize()
   }
 
@@ -54,6 +55,16 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.subject = this.user.teacher.subjects;
+      const user = this.users.getUser();
+      const data = await this.network.getImage(user.id) as any;
+      this.images = data.result;
+      console.log(this.images.length);
+      if(this.images.length != 0){
+
+        this.showGellary = true;
+
+
+      }
     }
 
     // if (this.data.status == 'approved') {
@@ -67,10 +78,10 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       backUrl: '/tabs/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
     })
   }
-  getFlag(){
-    if(this.user && this.user.teacher && this.user.teacher.country){
+  getFlag() {
+    if (this.user && this.user.teacher && this.user.teacher.country) {
       const flag = this.user.teacher.country.iso2;
-      if(flag){
+      if (flag) {
         return flag.toLowerCase();
       } else {
         return ""

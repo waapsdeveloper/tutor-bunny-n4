@@ -11,7 +11,6 @@
       <div class="header-info-box-68447">
         <div class="header-info-user-68448">
           <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
-
         </div>
         <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/location.svg" /> <span>{{city}},
             {{country}}</span><span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
@@ -44,14 +43,12 @@
     </div>
     <app-teacher-profile-statistics></app-teacher-profile-statistics>
     <div class="line"></div>
-
     <div class="fs-16 outfit"
       style="display: flex;    align-items: flex-start;    flex-direction: column;    gap: 16px;">
       <div class="about-heading">About</div>
       <div class="about-para">
         {{user?.teacher?.title}}
       </div>
-
     </div>
     <div class="fs-16 outfit discription-text">
       <div class="discription-para" [class.collapsed]="isExpanded">
@@ -63,9 +60,8 @@
     <div class="line"></div>
     <app-my-courses></app-my-courses>
     <div class="line"></div>
-    <app-my-gallery></app-my-gallery>
+    <app-my-gallery *ngIf="showGellary == true"></app-my-gallery>
 
-    <app-rating-review></app-rating-review>
+    <app-rating-review ></app-rating-review>
   </div>
-
 </ion-content>
