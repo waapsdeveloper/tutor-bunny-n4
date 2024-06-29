@@ -1,5 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step == 2" (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step == 2"
+    (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding ">
   <form>
@@ -18,25 +19,26 @@
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
               [errorText]="'Detail is required'" [minlength]="400"></app-sd-textarea-about>
           </div>
-          <div class="input-box-lines city-zip">
-            <div class="city-2 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Language of communication</div>
-              <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
-                [country]="formData.language" [key]="'language'"
-                [errorText]="'language is required'"></app-course-language>
-            </div>
-            <div class="zip-code-3 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium" style="justify-content: center;">Course photo</div>
-              <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')"
-              [key]="'image'" [errorText]="'Missing'"></app-course-photo>
-            </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Language of communication</div>
+            <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
+              [country]="formData.language" [key]="'language'"
+              [errorText]="'language is required'"></app-course-language>
+
+
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
               (onChange)="result($event, 'mode_type')" [inputText]="formData.mode_type" [key]="'mode_type'"
               [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
           </div>
-          <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
+
+          <div class="input-box-lines d-flex flex-column gap-8">
+
+            <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')" [key]="'image'"
+              [errorText]="'Course photo is required'"></app-course-photo>
+          </div>
+          <!-- <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium">Fees $/month</div>
               <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
@@ -47,8 +49,8 @@
               <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
                 [key]="'duration'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
             </div>
-          </div>
-          <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
+          </div> -->
+          <!-- <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium">Fees $/month</div>
               <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
@@ -64,20 +66,9 @@
               <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
                 [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
             </div>
-          </div>
-          <div class="input-box-lines city-zip">
-            <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Age in Yrs (optional)</div>
-              <app-sd-input-box (onChange)="result($event, 'from_age')" [inputText]="formData.from_age"
-                [key]="'from_age'" [errorText]="'from_age is required'" [maxlength]="2" [placeholder]="'From'"
-                [type]="'number'" [needed]="false"></app-sd-input-box>
-            </div>
-            <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
-              <app-sd-input-box (onChange)="result($event, 'to_age')" [inputText]="formData.to_age" [key]="'to_age'"
-                [placeholder]="'To'" [errorText]="'Required'" [type]="'number'" [maxlength]="2" [needed]="false"> </app-sd-input-box>
-            </div>
-          </div>
+          </div> -->
+          <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [inputText]="formData.age"
+            [key]="'age'" [errorText]="'age is required'"></app-sd-age-boox>
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -89,22 +80,29 @@
               [maxlength]="100"></app-course-category>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Search Keyword</div>
+            <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""></div>
             <div class="input-box-lines" style="width: 100%;">
               <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add" [key]="'keyword'"
                 [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'inPerson'">
-            <div class="input-title fs-14 roboto-medium">Location (only for In person class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'location')" [inputText]="formData.location"
-              [key]="'location'" [minlength]="50" [maxlength]="100" [needed]="false"></app-sd-input-box>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Price/Month <img src="../../assets/svg/question.svg" alt="">
+            </div>
+            <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
+              [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.onlineMode == 'online'">
-            <div class="input-title fs-14 roboto-medium">meeting link (only for In online class, optional)</div>
-            <app-sd-input-box placeholder="Type" (onChange)="result($event, 'meeting_link')" [needed]="false"
-              [inputText]="formData.meeting_link" [key]="'meeting_link'" [minlength]="50"
-              [maxlength]="100"></app-sd-input-box>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Class duration in Hours/Week <img
+                src="../../assets/svg/question.svg" alt=""></div>
+            <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration" [key]="'duration'"
+              [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Number of Lessons/Week<img
+                src="../../assets/svg/question.svg" alt=""></div>
+            <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
+              [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
             <div class="city d-flex flex-column gap-8">

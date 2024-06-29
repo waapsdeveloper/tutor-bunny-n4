@@ -1,0 +1,42 @@
+<ion-header>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <div class="header-title  roboto-regular ">Schedule</div>
+    </div>
+    <div class="header-right-items-78956" (click)="back()">
+      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448">
+    <div class="input-title fs-14 roboto-medium">Weekly Schedule <img src="../../assets/svg/add.svg" alt=""
+        (click)="addMoreSchedule()"></div>
+    <div class="sd-input-box-outer-675315">
+      <div class="dates-box-outer-65891" *ngFor="let item of schedule">
+        <ion-select aria-label="Favorite Fruit" [(ngModel)]="item.day" placeholder="Day" value="Saturday" class="date-day-65892">
+          <ion-select-option value="Saturday">Saturday</ion-select-option>
+          <ion-select-option value="Sunday">Sunday</ion-select-option>
+          <ion-select-option value="Monday">Monday</ion-select-option>
+          <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+          <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+          <ion-select-option value="Thursday">Thursday</ion-select-option>
+          <ion-select-option value="Friday">Friday</ion-select-option>
+        </ion-select>
+        <ion-select aria-label="Favorite Fruit" id="time-select" value="time"  placeholder="start time"
+          class="date-day-65892" [(ngModel)]="item.start_date">
+          <ion-select-option *ngFor="let time of start_time" [value]="time">{{ time }}</ion-select-option>
+        </ion-select>
+
+        <ion-select aria-label="Favorite Fruit" id="time-select" value="time" placeholder="end time"
+          class="date-day-65892" [(ngModel)]="item.end_date">
+          <ion-select-option *ngFor="let time of end_time" [value]="time">{{ time }}</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Done'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,20 @@
+<div class="input-box-lines city-zip">
+  <div class="zip-code-2 d-flex flex-column gap-8">
+    <div class="input-title fs-14 roboto-medium">Age in Yrs (optional)</div>
+    <div class="sd-input-box-outer-675315" (click)="openFromageSelection()">
+      <img alt="" class="input-image">
+      <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
+        [(ngModel)]="selectedFromAge.from_age" readonly />
+      <img src="assets/svg/clear.svg" class="clear-input-678956744" alt="">
+    </div>
+  </div>
+  <div class="zip-code-2 d-flex flex-column gap-8">
+    <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
+    <div class="sd-input-box-outer-675315" (click)="openToageSelection()">
+      <img alt="" class="input-image">
+      <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
+        [(ngModel)]="selectedFromAge.to_age" readonlyreadonly />
+      <img src="assets/svg/clear.svg" class="clear-input-678956744" alt="">
+    </div>
+  </div>
+</div>

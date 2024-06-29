@@ -26,6 +26,7 @@ import { ModeOfTeachingModule } from '../components/mode-of-teaching/mode-of-tea
 import { SearchKeywordModule } from '../components/search-keyword/search-keyword.module';
 import { CourseDatesModule } from '../components/course-dates/course-dates.module';
 import { CourseCategoryModule } from '../components/course-category/course-category.module';
+import { SdAgeBooxModule } from '../components/sd-age-boox/sd-age-boox.module';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { CourseCategoryModule } from '../components/course-category/course-categ
     ModeOfTeachingModule,
     SearchKeywordModule,
     CourseDatesModule,
-    CourseCategoryModule
+    CourseCategoryModule,
+    SdAgeBooxModule
   ],
   declarations: [CourseFormPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

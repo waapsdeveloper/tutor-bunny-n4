@@ -20,6 +20,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   category;
   image
   onlineMode;
+  age;
   language_id;
   courseId;
   edit;
@@ -107,6 +108,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.formData['mode_type'] = value.mode;
       this.formData['capacity'] = value.capacity;
     }
+    if (key == 'age') {
+      console.log('====================================');
+      console.log(key);
+      console.log('====================================');
+      // return
+      this.age = value.mode
+      this.formData['from_age'] = value.from_age;
+      this.formData['to_age'] = value.to_age;
+    }
     if (key == 'image') {
       this.formData['image'] = value.image;
     }
@@ -119,7 +129,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
-    if (!f.title || !f.description || !f.image || !f.price || !f.duration || !f.language ) {
+    console.log('====================================');
+    console.log(f);
+    console.log('====================================');
+    if (!f.title || !f.description || !f.image ||  !f.language ) {
 
       return
     }

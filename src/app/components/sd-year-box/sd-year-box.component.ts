@@ -17,10 +17,11 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
+
   isRequired = false;
   @ViewChild('dob') dob: ElementRef;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private modals: ModalService, private events: EventsService) {}
+  constructor(private modals: ModalService, private events: EventsService) { }
 
   ngAfterViewInit(): void {
     // Access the value of ion-datetime

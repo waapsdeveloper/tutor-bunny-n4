@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AddDatesPage } from 'src/app/add-dates/add-dates.page';
 import { BasePage } from 'src/app/base-page/base-page';
+import { AddScheduleComponent } from './add-schedule/add-schedule.component';
 
 @Component({
   selector: 'app-course-dates',
@@ -65,6 +66,12 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   async editSchedule(item) {
     let res = await this.modals.present(AddDatesPage, item)
     this.initialize()
+  }
+
+  async openSchedule(){
+    let res = await this.modals.present(AddScheduleComponent, {}, "", 0.7);
+    this.callApi()
+
   }
 
 

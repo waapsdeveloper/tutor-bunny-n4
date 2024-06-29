@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   // padding-left: 20px;
-  border: 0.5px solid rgba(0, 0, 0, 0.75);
+  // border: 0.5px solid rgba(0, 0, 0, 0.75);
   // padding-right: 8px;
   gap: 8px;
 }
@@ -16,19 +16,19 @@
 .mode-box-outer-78521 {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  // background-color: antiquewhite;
+  align-items: flex-end;
+  gap: 16px;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .modes-of-teching-78522 {
   width: 100%;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   flex-direction: column;
-  gap: 16px;
-  border-right: 0.5px solid rgb(69, 69, 69, 0.25);
-  // background-color: aqua;
+  gap: 8px;
+  border-right: 0.5px solid rgba(69, 69, 69, 0.25);
   padding: 0 8px;
 }
 
@@ -48,8 +48,8 @@
 
 .online-mode-78526 {
   height: 25px;
-  width: 80px;
-  border-radius: 16px;
+  width: 100px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,8 +60,8 @@
 
 .person-mode-78526 {
   height: 25px;
-  width: 80px;
-  border-radius: 16px;
+  width: 100px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,11 +74,10 @@
 .capacity-78523 {
   width: 100%;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   flex-direction: column;
-  gap: 16px;
-  border-right: 0.5px solid rgb(69, 69, 69, 0.25);
-  // background-color: aqua;
+  gap: 8px;
+  border-right: 0.5px solid rgba(69, 69, 69, 0.25);
   padding: 0 8px;
 }
 
@@ -97,8 +96,9 @@
 }
 
 .online-mode-78526 {
-  width: 80px;
-  border-radius: 16px;
+  height: 25px;
+  width: 100px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,8 +108,9 @@
 }
 
 .person-mode-78526 {
-  width: 80px;
-  border-radius: 16px;
+  height: 25px;
+  width: 100px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
