@@ -20,6 +20,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this._item = value;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
+    this.fav = value.is_liked_by_me;
 
   }
   fav = false;

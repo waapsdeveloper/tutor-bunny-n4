@@ -18,6 +18,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   country;
   showWarning = false;
   flag;
+  showLiked = false;
   @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
@@ -52,7 +53,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.country = this.user.student.country.name;
     console.log(this.country);
-    
+
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     this.displayName = this.utility.splitName(this.user.name).first_name;
@@ -120,6 +121,14 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     setTimeout(() => {
       this.isThrottled = false;
     }, 800); // 2 seconds
+  }
+
+  showFavCourse(){
+
+    this.showLiked = !this.showLiked;
+    this.events.publish("show-list-of-fav-courses", {
+      liked: this.showLiked
+    })
   }
 
 }

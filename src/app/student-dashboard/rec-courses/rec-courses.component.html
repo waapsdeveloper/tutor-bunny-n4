@@ -1,6 +1,13 @@
 <div class="student-box-outer-689567">
 
   <div class="sb-content-7895">
-    <app-course-list *ngFor="let item of course" [item]="item"></app-course-list>
+
+    <div *ngFor="let item of list" >
+      <app-course-list  [item]="item"></app-course-list>
+    </div>
+    <div style="width: 100%;" *ngIf="this.page != this.last_page">
+      <ion-button style="float: right;" size="sm" fill="clear" class="outfit fs-16" (click)="onIonInfinite($event)" *ngIf="list.length > 0"><ion-spinner *ngIf="loading"></ion-spinner><span *ngIf="!loading">Load More</span> </ion-button>
+    </div>
+
   </div>
 </div>
