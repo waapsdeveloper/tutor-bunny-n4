@@ -10,11 +10,14 @@ import { BasePage } from '../base-page/base-page';
 export class StudentCourseDetailPage extends BasePage implements OnInit {
   data;
   params;
+  trail = false;
   backUrl;
   displayName
   course_Id;
   language;
   capacity;
+
+  loading = false;
   description;
   duration;
   mode_type;
@@ -36,6 +39,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+
+   
+
   }
 
 
@@ -46,14 +52,23 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
     if (this.params.id) {
       this.course_Id = this.params.id;
+      console.log('====================================');
+      console.log(this.course_Id);
+      console.log('====================================');
     }
     this.callApi();
+    setTimeout(() => {
+      this.isTrailReq()
+    }, 200);
 
   }
 
   async callApi() {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
+    console.log('====================================');
+    console.log(res);
+    console.log('====================================');
     this.data = res.course;
     this.title = this.data.title;
     this.capacity = this.data.capacity;
@@ -91,5 +106,55 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  goToChat() {
+    this.nav.push('/tabs/chat')
+  }
+
+  async requestTrail() {
+
+
+    this.trail = true;
+    let user = this.users.getUser()
+
+    let obj = {
+      user_id: user.id,
+      course_id: this.course_Id
+    }
+    let res = await this.network.requestTrail(obj)
+
+  }
+
+  async cancelTrail() {
+    this.trail = false;
+    let user = this.users.getUser()
+
+    let obj = {
+      user_id: user.id,
+      course_id: this.course_Id
+    }
+    let res = await this.network.cancelTrail(obj)
+  }
+
+  async isTrailReq() {
+    this.loading = true;
+
+    let user = this.users.getUser()
+
+    let obj = {
+      user_id: user.id,
+      course_id: this.course_Id
+    }
+    let res = await this.network.getTrail(obj)
+    if (res && !res.trial) {
+      this.trail = false;
+      this.loading = false;
+    }
+    if (res && res.trial) {
+      this.trail = true;
+      this.loading = false;
+    }
+
   }
 }

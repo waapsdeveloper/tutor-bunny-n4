@@ -40,7 +40,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   ngOnInit() {
 
-    setTimeout( () => {
+    setTimeout(() => {
       this.callApi()
     }, 200);
 
@@ -77,17 +77,6 @@ export class CourseListComponent extends BasePage implements OnInit {
       this.loading = false;
     }
 
-    // const res2 = await this.network.removeCourseFav(obj)
-    // console.log(res2)
-    // if(res2){
-
-    // }
-
-
-
-
-
-
   }
   goToDeatil(item) {
     const params = {
@@ -109,7 +98,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   }
 
-  async cancelTrail(id){
+  async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser()
 

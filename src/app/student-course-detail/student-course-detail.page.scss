@@ -443,7 +443,7 @@
     width: 100%;
     padding: 8px 16px;
     background-color: #454545;
-    border-radius: 16px 16px 0 0 ;
+    border-radius: 16px 16px 0 0;
   }
 
   .weekly-schedule-date-78528 {
@@ -516,5 +516,21 @@
     justify-content: center;
     border-radius: 16px 16px 0 16px;
     background-color: #E29F1B;
+  }
+}
+
+.footer-buttons-78963 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 8px;
+
+  .button-chat-78563 {
+    width: 40%;
+  }
+
+  .button-trial-23654 {
+    width: 60%;
   }
 }

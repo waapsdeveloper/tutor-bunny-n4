@@ -1,4 +1,3 @@
-
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565" *ngFor="let item of course">
     <div class="block-item-header">
@@ -49,7 +48,7 @@
           <div class="profile-line-789576">
             <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
           </div>
-          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click">
+          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
                 <ion-item class="profile-line-789578" (click)="editCourse(item)">

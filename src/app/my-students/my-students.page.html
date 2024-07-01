@@ -16,7 +16,7 @@
           <!-- <ion-chip style="color: #F17401;">New</ion-chip>
           <ion-chip style="color: #17A43E;">Active</ion-chip> -->
           <ion-chip id="click-trigger">Status <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
-          <ion-popover trigger="click-trigger" triggerAction="click">
+          <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-content class="ion-padding">Pending, Accepted, Complete, Rejected, Blocked.</ion-content>
             </ng-template>

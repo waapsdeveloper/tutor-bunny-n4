@@ -126,14 +126,14 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.formData['language_id'] = this.lang.id;
     }
   }
+
+
+
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
-    console.log('====================================');
     console.log(f);
-    console.log('====================================');
-    if (!f.title || !f.description || !f.image ||  !f.language ) {
-
+    if (!f.title || !f.description || !f.image || !f.language) {
       return
     }
     if (f.language.length == 0) {
@@ -145,21 +145,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
-
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
-    console.log('====================================');
     console.log(res);
-    console.log('====================================');
-
     let courseId = res.course.id;
-
     if (courseId) {
       let obj = {
         course_id: courseId,
         image: this.formData.image
       }
       let image = await this.network.postCoursePhoto(obj);
-
     }
     localStorage.setItem('course_Id', courseId)
     this.events.publish('course_Id-get', courseId)
@@ -168,7 +162,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.step = 2;
     }
   }
-
 
   async changeToPrev() {
     if (this.step == 2) {
@@ -180,7 +173,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     const f = this.formData;
-    if (!f.category) {
+    if (!f.category ||  !f.price || !f.duration || !f.lesson || !f.keyword) {
       return
     }
 
@@ -196,7 +189,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   }
 
-  shouldHandleBackToPrevScreen(){
+  shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
