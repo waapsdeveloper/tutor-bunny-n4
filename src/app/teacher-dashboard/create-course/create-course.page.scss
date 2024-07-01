@@ -57,7 +57,7 @@
     .course-button-inter-98543 {
       display: flex;
       width: 100%;
-      align-items: stretch;
+      align-items: center;
       flex-direction: column;
       gap: 16px;
       .course-button-text{
@@ -68,4 +68,19 @@
       }
     }
   }
+}
+
+.create-course-button{
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.popover-title{
+  background-color: #454545;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
 }

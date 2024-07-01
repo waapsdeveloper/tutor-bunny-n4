@@ -13,6 +13,8 @@ export class TabsPage extends BasePage implements OnInit {
 
   showTabs = true;
   roleId;
+  showHome= true;
+  showChat= false;
   user;
   constructor(injector:Injector) {
     super(injector)
@@ -36,6 +38,16 @@ export class TabsPage extends BasePage implements OnInit {
       this.showTabs = efr == 'show'// this.efr;
     }
 
+  }
+
+
+  goToChat(){
+    this.showHome = false;
+    this.showChat = true;
+  }
+  goToHome(){
+    this.showHome = true;
+    this.showChat = false;
   }
 
   initialize() {

@@ -19,12 +19,58 @@
     <div class="course-button-outer-98542">
       <div class="course-button-inter-98543">
         <div class="course-button-text">What do you want to create?</div>
-        <app-sd-button-gray [text]="'Monthly subscription course'"
-          (click)="setcourseType('1', 'Create Subscription Course ')"></app-sd-button-gray>
-        <app-sd-button-clear [text]="'Crash Course'"
-          (click)="setcourseType('2', 'Create Crash Course')"></app-sd-button-clear>
-        <app-sd-button-clear [text]="'Event/Workshop'"
-          (click)="setcourseType('3', 'Create Event/Workshop')"></app-sd-button-clear>
+        <div class="create-course-button">
+          <div style="width: 80%;">
+            <app-sd-button-clear [image]="'assets/svg/calander.svg'" [text]="'Monthly subscription course'"
+              (click)="setcourseType('1', 'Create Subscription Course ')"></app-sd-button-clear>
+          </div>
+          <img src="../../assets/svg/question.svg" alt="" id="click-subscribe">
+          <ion-popover trigger="click-subscribe" triggerAction="click">
+            <ng-template style="width: 100%;">
+              <div class="ion-padding popover-title">
+                In Monthly subscription course, students will be enrolled for a recurring monthly fee and there will be
+                recurring weekly or monthly classes until the student will wish to end the subscription.
+                <br>
+                For e.g., Monthly Piano course for Kids.
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
+        <div class="create-course-button">
+          <div style="width: 80%;">
+            <app-sd-button-clear [image]="'assets/svg/crash.svg'" [text]="'Crash Course'"
+              (click)="setcourseType('2', 'Create Crash Course')"></app-sd-button-clear>
+          </div>
+          <img src="../../assets/svg/question.svg" alt="" id="click-crash">
+          <ion-popover trigger="click-crash" triggerAction="click">
+            <ng-template style="width: 100%;">
+              <div class="ion-padding popover-title">In Crash course, students will be enrolled for a one time fee for
+                the entire course. There will not be any recurring fee for this course.
+                <br>
+                <br>
+                For e.g., 3 months of Piano course for Kids.
+
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
+        <div class="create-course-button">
+          <div style="width: 80%;">
+            <app-sd-button-clear [image]="'assets/svg/event.svg'" [text]="'Event/Workshop'"
+              (click)="setcourseType('3', 'Create Event/Workshop')"></app-sd-button-clear>
+          </div>
+          <img src="../../assets/svg/question.svg" alt="" id="click-event">
+          <ion-popover trigger="click-event" triggerAction="click">
+            <ng-template style="width: 100%;">
+              <div class="ion-padding popover-title">The Event/Workshop is a short term engagement between the teacher
+                and the student (generally 1-2 days or few hours)
+                <br>
+                <br>
+                For e.g., 2 hours of Piano workshop for Kids.
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
       </div>
     </div>
 
