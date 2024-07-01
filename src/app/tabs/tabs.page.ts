@@ -15,6 +15,9 @@ export class TabsPage extends BasePage implements OnInit {
   roleId;
   showHome= true;
   showChat= false;
+  showSearch= false;
+  showCourses= false;
+  showMore= false;
   user;
   constructor(injector:Injector) {
     super(injector)
@@ -43,11 +46,46 @@ export class TabsPage extends BasePage implements OnInit {
 
   goToChat(){
     this.showHome = false;
+    this.showSearch = false;
     this.showChat = true;
+    this.showCourses = false;
+    this.showMore = false;
+
+
   }
   goToHome(){
     this.showHome = true;
+    this.showSearch = false;
     this.showChat = false;
+    this.showMore = false;
+    this.showCourses = false;
+
+
+  }
+  goToSearch(){
+    this.showSearch = true;
+    this.showChat = false;
+    this.showHome = false;
+    this.showCourses = false;
+
+    this.showMore = false;
+
+
+  }
+
+  goToCourses(){
+    this.showCourses = true;
+    this.showSearch = false;
+    this.showChat = false;
+    this.showMore = false;
+    this.showHome = false;
+  }
+  goToMore(){
+    this.showMore = true;
+    this.showCourses = false;
+    this.showSearch = false;
+    this.showChat = false;
+    this.showHome = false;
   }
 
   initialize() {
