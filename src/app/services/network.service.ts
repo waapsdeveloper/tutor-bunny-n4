@@ -28,7 +28,7 @@ export class NetworkService {
   }
 
   postImages(data) {
-    return this.httpPostResponse('gallery/add', data);
+    return this.httpPostResponse('gallery/add', data, null, false);
   }
 
   sendMessage(data) {

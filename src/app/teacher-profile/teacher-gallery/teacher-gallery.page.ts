@@ -11,20 +11,21 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   backUrl = '/teacher-profile/teacher-profile-edit';
   user;
-  images = []
+  images = [];
   list;
-  backBtn ='';
+  backBtn = '';
   params;
   title;
   gallery = "false";
 
   constructor(injector: Injector) {
     super(injector)
-
     this.initialize();
   }
+
   ngOnInit() {
   }
+
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
 
@@ -38,19 +39,18 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     if (this.params.backUrl) {
       this.backBtn = this.params.backUrl;
     }
-
-
   }
+
   async initialize() {
     const user = this.users.getUser();
     const res = await this.network.getImage(user.id) as any;
     this.images = res.result;
   }
+
   setBackgroundImage(item) {
-
     return `url('${item.image}')`
-
   }
+
   async addImageInArray(string) {
     let firstIndex = this.images.findIndex(x => x.image == null);
     if (firstIndex != -1) {
@@ -70,14 +70,14 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   }
 
   async onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      this.addImageInArray(reader.result as string)
-    };
-    reader.readAsDataURL(file);
-
-
+    const files: File[] = Array.from(event.target.files);
+    for (const file of files) {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        await this.addImageInArray(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   Back() {
@@ -88,11 +88,10 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     event.stopPropagation(); // Prevent the click event from bubbling up
     await this.network.deleteImage(id);
     this.initialize();
-}
-  openImage(image){
+  }
 
+  openImage(image) {
     this.nav.push('/teacher-profile/teacher-gallery/gallery-image', {
-
       backUrl: '/teacher-profile/teacher-gallery',
       image: image
     })

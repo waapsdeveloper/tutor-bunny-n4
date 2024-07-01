@@ -104,7 +104,7 @@
             <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
-          <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
+          <div class="input-box-lines city-zip" *ngIf="this.type != '1'">
             <div class="city d-flex flex-column gap-8">
               <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
               <app-sd-input-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
