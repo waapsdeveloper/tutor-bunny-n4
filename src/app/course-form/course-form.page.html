@@ -8,13 +8,43 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""></div>
+            <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""
+                id="click-trigger"></div>
+            <ion-popover trigger="click-trigger" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title">Add the keywords in the title, user can find the course/
+                  workshop/ event
+                  easily.!
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'title is required'"
               [maxlength]="50"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Details</div>
+            <div class="input-title fs-14 roboto-medium">Details <img src="../../assets/svg/question.svg" alt=""
+                id="click-detail"></div>
+            <ion-popover trigger="click-detail" triggerAction="click">
+              <ng-template>
+                <div class="ion-padding popover-title">
+                  Include the following details for this field.
+                  <br>
+                  <br>
+
+                  1. What students will learn <br>
+                  <br>
+                  2. Requirements for this course<br>
+                  <br>
+                  3. Course Syllabus (if any)<br>
+                  <br>
+                  4. Brief description of the course<br>
+                  <br>
+                  5. Who should take this course<br>
+
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
               [errorText]="'Detail is required'" [minlength]="400"></app-sd-textarea-about>
@@ -80,27 +110,60 @@
               [maxlength]="100"></app-course-category>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""></div>
+            <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""
+                id="click-keyword "></div>
+            <ion-popover trigger="click-keyword " triggerAction="click">
+              <ng-template>
+                <div class="ion-padding popover-title">Add multiple search keywords so that the course will come up in
+                  the search result.
+                </div>
+              </ng-template>
+            </ion-popover>
             <div class="input-box-lines" style="width: 100%;">
               <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add" [key]="'keyword'"
                 [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Price/Month <img src="../../assets/svg/question.svg" alt="">
-            </div>
+            <div class="input-title fs-14 roboto-medium">Price/Month <img src="../../assets/svg/question.svg" alt=""
+                id="click-price "></div>
+            <ion-popover trigger="click-price" triggerAction="click">
+              <ng-template>
+                <div class="ion-padding popover-title">The price or how much the student needs to pay for the
+                  subscription course per month in US Dollar ($).
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
               [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Class duration in Hours/Week <img
-                src="../../assets/svg/question.svg" alt=""></div>
+                src="../../assets/svg/question.svg" alt="" id="click-duration "></div>
+            <ion-popover trigger="click-duration" triggerAction="click">
+              <ng-template>
+                <div class="ion-padding popover-title">Total hours of the course/event in a week.
+                  <br>
+                  <br>
+                  For e.g., If there are 1 class per week of 1 hour each class, hours should be 1 hour/week.
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration" [key]="'duration'"
               [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Number of Lessons/Week<img
-                src="../../assets/svg/question.svg" alt=""></div>
+            <div class="input-title fs-14 roboto-medium">Number of Lessons/Week<img src="../../assets/svg/question.svg"
+                alt="" id="click-lesson "></div>
+            <ion-popover trigger="click-lesson" triggerAction="click">
+              <ng-template>
+                <div class="ion-padding popover-title">Number of lessons/classes per week.
+                  <br>
+                  <br>
+                  For e.g., If there are 2 lessons/classes, the field value will be 2.
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>

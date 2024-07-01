@@ -1,5 +1,5 @@
 <div class="courses-block-outer-789565">
-  <div class="courses-block-item-789565" *ngFor="let item of course">
+  <div class="courses-block-item-789565">
     <div class="block-item-header">
       <div class="block-item-header-title outfit-medium ">
         {{item?.title}}
@@ -41,9 +41,13 @@
           </div>
         </div>
         <div class="right-980676">
-          <div class="profile-line-789576">
+          <div class="profile-line-789576"  *ngIf="status == 'active'">
             <img src="../../../assets/svg/live.svg" />
             <div class="label-789576 fs-14 outfit">Live</div>
+          </div>
+          <div class="profile-line-789576"  *ngIf="status == 'inactive'">
+            <img src="../../../assets/svg/inactive.svg" />
+            <div class="label-7895766 fs-14 outfit">Inactive</div>
           </div>
           <div class="profile-line-789576">
             <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
@@ -59,9 +63,8 @@
 
                 </ion-item>
               </ion-list>
-              <ion-list>
-                <ion-item class="profile-line-789578">
-
+              <ion-list *ngIf="status == 'active'">
+                <ion-item class="profile-line-789578" (click)="inactiveCourse(item)">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <img class="img1-789575" src="../../../assets/svg/eye.svg" />
                     <div class="label-789575 fs-16 outfit">Inactive</div>
@@ -69,15 +72,21 @@
                 </ion-item>
               </ion-list>
               <ion-list>
-                <ion-item class="profile-line-789578">
-
+                <ion-item class="profile-line-789578" (click)="deleteCourse(item)">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <img class="img1-789575" src="../../../assets/svg/trash.svg" />
                     <div class="label-789575 fs-16 outfit">Delete</div>
                   </div>
                 </ion-item>
               </ion-list>
-
+              <ion-list *ngIf="status == 'inactive'">
+                <ion-item class="profile-line-789578" (click)="activeCourse(item)">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/active-eye.svg" />
+                    <div class="label-789575 fs-16 outfit">Active</div>
+                  </div>
+                </ion-item>
+              </ion-list>
             </ng-template>
           </ion-popover>
         </div>

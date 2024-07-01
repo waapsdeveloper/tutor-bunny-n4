@@ -25,9 +25,10 @@
     <div [class.chat-right-box]="user_id != item.user_id" [class.chat-left-box]="user_id == item.user_id"
       *ngFor="let item of chat">
       <div [class.chat-recive-85622]="user_id != item.user_id" [class.chat-send-85625]="user_id == item.user_id">
-        <div  [class.chat-recive-text-85623]="user_id != item.user_id" [class.chat-send-text-85626]="user_id == item.user_id">{{item.message}}
+        <div [class.chat-recive-text-85623]="user_id != item.user_id"
+          [class.chat-send-text-85626]="user_id == item.user_id">{{item.message}}
         </div>
-        <div class="chat-recive-time-85624">{{time}}</div>
+        <div class="chat-recive-time-85624">{{getTime(item.created_at)}}</div>
       </div>
     </div>
     <!-- <div class="chat-left-box">

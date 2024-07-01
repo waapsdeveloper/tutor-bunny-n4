@@ -14,7 +14,7 @@ export class MessagesPage extends BasePage implements OnInit {
   chat;
   user_id;
   flag;
-  time
+  time;
   user;
   message;
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
@@ -25,13 +25,12 @@ export class MessagesPage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.scrollToBottomOnInit();
-    console.log(this.item);
+    console.log(this.item,"ncsgghs");
     this.initialize();
     this.user = this.users.getUser();
     this.user_id = this.user.id;
     this.flag = this.getFlag();
-    let time = this.item.created_at
-    this.time = moment(time).format('hh:mm a');
+   
   }
 
   getFlag() {
@@ -60,15 +59,16 @@ export class MessagesPage extends BasePage implements OnInit {
   async initialize() {
 
     let roomId = this.item.chat_room_id;
-    console.log(roomId);
+    let res = await this.network.getMessages(roomId);
+    this.chat = res.messages;
+    console.log(this.chat);
     
 
-    let res = await this.network.getMessages(roomId);
-    console.log(res);
 
-    this.chat = res.messages;
+  }
 
-
+  getTime(time){
+    return moment(time).format('hh:mm a');
   }
 
   onKeyUp(event: any) {

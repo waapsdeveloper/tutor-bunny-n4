@@ -19,6 +19,7 @@
         </div>
       </div>
     </div>
-    <app-course-card></app-course-card>
+    <app-course-card *ngFor="let item of course" [item]="item" (courseDeleted)="onCourseDeleted($event)">
+    </app-course-card>
   </div>
 </ion-content>

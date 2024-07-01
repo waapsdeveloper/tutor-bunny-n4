@@ -203,6 +203,17 @@ export class NetworkService {
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, true, true);
   }
+  inactiveCourse(data) {
+    return this.httpPostResponse('courses/de-activate-course-by-id', data, null, true, true);
+  }
+
+  activeCourse(data) {
+    return this.httpPostResponse('courses/activate-course-by-id', data, null, true, true);
+  }
+
+  deleteCourse(data) {
+    return this.httpPostResponse('courses/delete-course-by-id', data, null, true, true);
+  }
 
   changeTrailStuts(data, id) {
     return this.httpPostResponse('course/update-status/' + id, data, null, true, true);
@@ -220,15 +231,15 @@ export class NetworkService {
     return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
   }
 
-  addCourseFav(data){
+  addCourseFav(data) {
     return this.httpPostResponse('courses/list/add-fav', data, null, false, false);
   }
 
-  removeCourseFav(data){
+  removeCourseFav(data) {
     return this.httpPostResponse('courses/list/remove-fav', data, null, false, false);
   }
 
-  isCourseFav(data){
+  isCourseFav(data) {
     return this.httpPostResponse('courses/list/is-fav', data, null, false, false);
   }
 

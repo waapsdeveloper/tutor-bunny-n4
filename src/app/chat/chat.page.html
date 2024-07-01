@@ -14,7 +14,8 @@
     <div class="chat-list-98521" *ngFor="let item of chat">
       <div class="chat-box-98522" (click)="gotoMessage(item)">
         <div class="chat-image-box-98523">
-          <div class="chat-image-98523" [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'"></div>
+          <div class="chat-image-98523"
+            [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'"></div>
         </div>
         <div class="chat-deatil-98524">
           <div class="chat-name-time-98525">

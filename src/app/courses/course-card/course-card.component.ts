@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output, output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -8,23 +8,29 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CourseCardComponent extends BasePage implements OnInit {
   list;
-  course
+  @Input() item;
+  course;
+  status;
+  @Output() courseDeleted = new EventEmitter<number>();
+
   constructor(injector: Injector) {
     super(injector)
     this.initialize()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.item);
+
+    this.status = this.item.status;
+    console.log(this.status);
+  }
 
   async initialize() {
-    let user = JSON.parse(localStorage.getItem('user'));
-
-    this.list = await this.network.getCourseList(user.id) as any[];
-
-    this.course = this.list.result
 
 
   }
+
+
 
   editCourse(item) {
     const params = {
@@ -49,6 +55,33 @@ export class CourseCardComponent extends BasePage implements OnInit {
 
 
 
+  }
+
+  async inactiveCourse(data) {
+
+    let obj = {
+      course_id: data.id,
+    }
+
+    let res = await this.network.inactiveCourse(obj)
+  }
+
+  async deleteCourse(data) {
+    let obj = {
+      course_id: data.id,
+    }
+
+    let res = await this.network.inactiveCourse(obj)
+    if (res.status == 200) {  // Assuming res has a success property to indicate the request was successful
+      this.courseDeleted.emit(data.id);  // Emit the course ID to the parent
+    }
+  }
+  async activeCourse(data) {
+    let obj = {
+      course_id: data.id,
+    }
+
+    let res = await this.network.activeCourse(obj)
   }
 
 }
