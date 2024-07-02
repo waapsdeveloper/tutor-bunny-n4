@@ -126,7 +126,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
   }
   async submit() {
     this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
-    this.events.publish('student-profile-first-screen-submit-call', this.formData);
     const f = this.formData;
     if (!f.name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.terms) {
       return

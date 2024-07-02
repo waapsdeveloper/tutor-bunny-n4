@@ -8,13 +8,14 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class TrialBoxComponent extends BasePage implements OnInit {
   user;
-  trial
+  trial;
   student;
   country;
   age;
   courseName;
   image = 'assets/profileimg.png'
   city;
+  list;
   flag;
   serial_number;
   constructor(injector: Injector) {
@@ -24,26 +25,19 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   ngOnInit() { };
   async initialize() {
     this.user = this.users.getUser();
-    let res = await this.network.getOneTrial(this.user.id);
-    console.log(res);
-    this.trial = res.trial;
-    this.student = this.trial.student.name;
-    this.country = this.trial.student.country;
-    this.city = this.trial.student.city;
-
-    const image = this.trial.student.image;
-    console.log(image); 
-
-    this.image = image;
-
-    this.age = this.trial.student.age;
-    this.serial_number = this.trial.course.serial_number;
-    this.courseName = this.trial.course.title;
+    let obj = {
+      teacher_id: this.user.id
+    }
+    let res = await this.network.getPendingTrial(this.user.id, obj,);
+    this.trial = res.trials;
+    console.log(this.trial);
     this.flag = this.getFlag()
   }
   getFlag() {
-    if (this.trial && this.trial.student && this.trial.student.flag) {
-      const flag = this.trial.student.flag;
+    if (this.trial && this.trial.student && this.trial.student.student.country.iso2) {
+      const flag = this.trial.student.student.country.iso2;
+      console.log(flag);
+      
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -56,4 +50,16 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   goToTrialReq() {
     this.nav.push('my-students')
   }
+  async trailStatus(key, item) {
+    let obj = {
+      status: key,
+      user_id: item.student.id
+    };
+    let trialId = item.id;
+    let res = await this.network.changeTrailStuts(obj, trialId);
+  }
+  goToChat() {
+    this.nav.push('/tabs/chat')
+  }
+
 }

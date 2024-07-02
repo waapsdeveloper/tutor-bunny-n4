@@ -120,8 +120,8 @@ export class NetworkService {
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
   }
-  getOneTrial(id) {
-    return this.httpGetResponse('get-one/course/trials/' + id, null, false, false);
+  getPendingTrial(id, data) {
+    return this.httpPostResponse('get-pending/course/trials/' + id, data, null, false,);
   }
 
   getSchedule(id) {

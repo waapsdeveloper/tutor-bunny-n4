@@ -6,64 +6,83 @@
   <div class="sb-content-7895"></div>
 </div>
 
-<div class="trial-box-item-outer-689567" *ngIf="this.trial">
+<div class="trial-box-item-outer-689567" *ngFor="let item of trial">
 
   <div class="trial-box-item-689567">
 
     <div class="profile-line-content">
       <div class="image-box-outer">
         <div class="image-circle-789675"
-          [style.background-image]="!image ? 'assets/profileimg.png' : 'url(' + image + ')'"></div>
+          [style.background-image]="!item.student.image ? 'assets/profileimg.png' : 'url(' + item.student.image + ')'">
+        </div>
         <div class="pnd-678956">
           <img src="../../../assets/svg/panding.svg" />
-          <div class="pnd-inner-7895">Pending</div>
+          <div class="pnd-inner-7895">{{item.status}}</div>
         </div>
       </div>
       <div class="content-box-outer">
 
         <div class="content-box-outer-heading-top">
           <div class="title-heading-789 outfit-semibold">
-            {{student| names}} {{age}}
+            {{item.student.name| names}} {{age}}
           </div>
-          <div class="pnd-678956">
-            <img src="../../../assets/svg/option.svg" id="click-trigger" />
+          <div class="pnd-678956" *ngIf="item.status != 'Rejected'">
+            <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
           </div>
-          <ion-popover id="popover" trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
+          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
-              <div class="popover-class"  (click)="goToTrialReq()">
-
-                <div class="profile-line-789578">
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="trailStatus('Accepted', item)">
                   <img class="img1-789575" src="assets/icon/check-circle.svg" />
                   <div class="nbl-687 outfit-semibold ">Accept</div>
-                </div>
-
-                <div class="line"></div>
-                <div class="profile-line-789578">
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="trailStatus('Rejected', item)">
                   <img class="img1-789575" src="assets/icon/reject-circle.svg" />
                   <div class="nbl-687 outfit-semibold ">Reject</div>
-                </div>
-
-                <div class="line"></div>
-
-                <div class="profile-line-789578">
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="trailStatus('Blocked', item)">
                   <img class="img1-789575" src="assets/icon/block-circle.svg" />
                   <div class="nbl-687 outfit-semibold ">Block</div>
-
-                </div>
-
-              </div>
-
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Complete' || item.status == 'Accepted'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="goToChat()">
+                  <img class="img1-789575" src="../../../assets/svg/chat-fill.svg" />
+                  <div class="nbl-687 outfit-semibold ">Chat</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Accepted'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="trailStatus('Complete', item)">
+                  <img class="img1-789575" src="../../../assets/svg/complete.svg " />
+                  <div class="nbl-687 outfit-semibold ">Complete</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status == 'Blocked'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="trailStatus('Unblock', item)">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold ">Unblock</div>
+                </ion-item>
+              </ion-list>
             </ng-template>
           </ion-popover>
         </div>
 
         <div class="country-heading-789">
           <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
-          <span class="country-name-789 outfit">{{city}} {{country}} </span>
+          <span class="country-name-789 outfit">{{item.student.student.city}} {{item.student.student.country.name}} </span>
         </div>
         <div class="age-title-789 outfit">
           <img src="../../../assets/svg/id.svg" alt="" class="image-id">
-          {{serial_number}}
+          {{item.course.serial_number}}
         </div>
 
       </div>
@@ -72,7 +91,7 @@
     <div class="line"></div>
     <div class="er-title-789 outfit">
       <img src="assets/icon/info.svg" />
-      <span class="discription-para">{{courseName}}</span>
+      <span class="discription-para">{{item.course.title}}</span>
     </div>
 
   </div>

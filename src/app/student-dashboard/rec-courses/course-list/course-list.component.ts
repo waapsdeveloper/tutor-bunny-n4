@@ -11,6 +11,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   private _item: any;
   displayName;
   flag
+  user;
   loading = false;
   @Input('item')
   public get item() {
@@ -61,10 +62,10 @@ export class CourseListComponent extends BasePage implements OnInit {
   async callApi() {
     this.loading = true;
 
-    let user = this.users.getUser()
+    this.user = this.users.getUser()
 
     let obj = {
-      user_id: user.id,
+      user_id: this.user.id,
       course_id: this.item.id
     }
     let res = await this.network.getTrail(obj)
@@ -87,14 +88,27 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   async requestTrail(id) {
     // this.presentAlert();
-    this.trail = true;
-    let user = this.users.getUser()
 
-    let obj = {
-      user_id: user.id,
-      course_id: id
+    let v = await this.profiles.isProfileCompleted(this.user) as any;;
+    console.log(v);
+
+    if (v || v == true) {
+      this.trail = true;
+      let user = this.users.getUser()
+
+      let obj = {
+        user_id: user.id,
+        course_id: id
+      }
+      let res = await this.network.requestTrail(obj)
     }
-    let res = await this.network.requestTrail(obj)
+    else {
+      this.nav.push('/student-profile/student-profile-edit', {
+        backUrl: '/tabs/student-dashboard', showBack: true
+      }
+      )
+    }
+
 
   }
 

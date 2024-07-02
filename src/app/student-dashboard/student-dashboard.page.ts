@@ -53,11 +53,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    this.country = this.user.student.country.name;
+    // this.country = this.user.teacher.country.name;
     console.log(this.country);
 
-
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
+    console.log(this.showWarning, "ffsfsdfsdf");
+    
+    this.events.publish('is-student-profile-completed', this.showWarning);
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
   }

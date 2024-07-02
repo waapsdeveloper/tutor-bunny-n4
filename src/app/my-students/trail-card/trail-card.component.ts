@@ -48,4 +48,5 @@ export class TrailCardComponent extends BasePage implements OnInit {
   goToChat() {
     this.nav.push('/tabs/chat')
   }
+
 }
