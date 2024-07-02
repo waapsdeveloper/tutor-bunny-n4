@@ -37,7 +37,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   ionViewWillEnter() {
     this.initialize()
   }
-
+  gotoNotification() {
+    this.nav.push('notifications')
+  }
 
   async initialize() {
     this.user = this.users.getUser();
@@ -123,7 +125,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     }, 800); // 2 seconds
   }
 
-  showFavCourse(){
+  showFavCourse() {
 
     this.showLiked = !this.showLiked;
     this.events.publish("show-list-of-fav-courses", {
