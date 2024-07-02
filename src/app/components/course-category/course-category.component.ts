@@ -49,9 +49,15 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   }
   async openCategory() {
     let res = await this.modals.present(SdCategoryListComponent) as any;
+    console.log(res);
+    
     if (res && res.data && res.data.item) {
 
       this.selectedCategory = res.data.item;
+      console.log(this.selectedCategory);
+      console.log(this.selectedCategory);
+      
+      
       this.onChange.emit(this.selectedCategory);
 
     }

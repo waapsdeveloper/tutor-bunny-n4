@@ -40,7 +40,12 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
   isListItemSelected() {
     return this.list.filter(x => x.checked == true).length > 0;
   }
+
+
+
   selectedLanguage() {
+    console.log(this.selectedItemId);
+    
     let item = this.list.find(x => x.id === this.selectedItemId);
 
     if (!item) {
@@ -52,6 +57,9 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
       item: item
     });
   }
+
+
+
   async loadMore($event) {
     this.page = this.lang.current_page + 1;
     await this.callApi();

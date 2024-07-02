@@ -26,14 +26,25 @@ export class SdCategoryListComponent extends BasePage implements OnInit {
     this.data = await this.network.getCategory() as any[];
 
     this.list = this.data.result;
+    console.log(this.list);
+    
 
   }
+  isListItemSelected() {
+    return this.list.filter(x => x.checked == true).length > 0;
+  }
+
+
   selectedCategory() {
+    console.log(this.selectedItemId);
+    // return
     let item = this.list.find(x => x.id === this.selectedItemId);
+    console.log(item);
+    
 
     if (!item) {
-      this.modals.dismiss();
       return;
+      this.modals.dismiss();
     }
 
     this.modals.dismiss({
