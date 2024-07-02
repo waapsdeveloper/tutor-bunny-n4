@@ -133,7 +133,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
     console.log(f);
-    if (!f.title || !f.description || !f.image || !f.language) {
+    if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
       return
     }
     if (f.language.length == 0) {

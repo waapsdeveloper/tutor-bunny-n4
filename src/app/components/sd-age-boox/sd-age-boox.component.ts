@@ -10,20 +10,39 @@ import { AgeListComponent } from './age-list/age-list.component';
 export class SdAgeBooxComponent extends BasePage implements OnInit {
   @Input() from_age = '';
   @Input() to_age = '';
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
   @Input() type = 'text';
   @Input() placeholder = '';
+  @Input() inputText = '';
+  @Input() isReadOnly = false;
+  @Input() minlength;
+  @Input() maxlength;
+  @Input('needed') needed = true;
+  @Input() image = ''
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   selectedFromAge = {
     from_age: '',
     to_age: ''
   }
+  isRequired = false;
 
-  @Input() isReadOnly = false;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(injector: Injector) {
     super(injector)
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
+      let v = formData[this.key];
+      console.log(v, this.key)
+      if (!v || v == 'age') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
+  }
 
   async openFromageSelection() {
     let res = await this.modals.present(AgeListComponent);
