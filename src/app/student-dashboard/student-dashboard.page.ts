@@ -43,6 +43,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   async initialize() {
     this.user = this.users.getUser();
+    console.log(this.user, "dfsfsd");
+    
     let obj = {
       email: this.user.email,
     };
@@ -53,7 +55,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    // this.country = this.user.teacher.country.name;
+    this.country = this.user.student.country.name;
     console.log(this.country);
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;

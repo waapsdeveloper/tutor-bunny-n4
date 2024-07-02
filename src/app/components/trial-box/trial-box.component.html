@@ -1,7 +1,7 @@
 <div class="trial-box-outer-689567" *ngIf="this.trial">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">Trial Requests</div>
-    <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all</div>
+    <div class="sb-heading-title-7895 outfit-semibold">Pending Trial Requests</div>
+    <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all trials</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
@@ -77,21 +77,21 @@
         </div>
 
         <div class="country-heading-789">
-          <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
+          <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{getFlag(item)}}"></span>
           <span class="country-name-789 outfit">{{item.student.student.city}} {{item.student.student.country.name}} </span>
         </div>
         <div class="age-title-789 outfit">
-          <img src="../../../assets/svg/id.svg" alt="" class="image-id">
-          {{item.course.serial_number}}
+          <img src="../../../assets/svg/cake.svg" alt="" class="image-id">
+          {{item.student.student.dob}}
         </div>
 
       </div>
 
     </div>
     <div class="line"></div>
-    <div class="er-title-789 outfit">
-      <img src="assets/icon/info.svg" />
-      <span class="discription-para">{{item.course.title}}</span>
+    <div class="er-title-789 outfit" style="font-weight: 500;">
+      <!-- <img src="assets/icon/info.svg" /> -->
+      <span class="discription-para" >{{item.course.title}}</span>
     </div>
 
   </div>

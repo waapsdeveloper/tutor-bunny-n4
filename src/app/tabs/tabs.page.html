@@ -9,11 +9,11 @@
       <div class="footer-tab-label">Home</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="chat" (click)="goToChat()">
-      <div class="tab-back-78523" *ngIf="showChat == true">
+      <div class="tab-back-78523" *ngIf="showChat == false">
         <img src="assets/icon/home/chat-icon.svg" />
+        <div class="footer-tab-label">Chat</div>
       </div>
-      <img src="assets/icon/home/chat-icon.svg" *ngIf="showChat == false" />
-      <div class="footer-tab-label">Chat</div>
+      <img src="assets/icon/home/chat-icon.svg" *ngIf="showChat == true" />
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" (click)="createCourse()">
       <img src="../../assets/svg/add-course.svg" />

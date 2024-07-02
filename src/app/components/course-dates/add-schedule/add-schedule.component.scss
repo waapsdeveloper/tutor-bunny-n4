@@ -1,3 +1,10 @@
+.body-content-68448{
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .top-header-78956 {
   background: #ffffff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -30,19 +37,7 @@
   }
 }
 
-.sd-input-box-outer-675315 {
-  height: 165px;
-  border-radius: 8px;
-  background: #ffffff;
-  width: 100%;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 16px;
-  border: 0.5px solid rgba(0, 0, 0, 0.75);
-  gap: 8px;
+
 
   .dates-box-outer-65891 {
     width: 100%;
@@ -81,7 +76,7 @@
       border: 0.5px solid rgba(0, 0, 0, 0.25);
     }
   }
-}
+
 
 .input-title {
   font-size: 14px;

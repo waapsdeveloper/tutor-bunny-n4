@@ -31,11 +31,12 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     let res = await this.network.getPendingTrial(this.user.id, obj,);
     this.trial = res.trials;
     console.log(this.trial);
-    this.flag = this.getFlag()
   }
-  getFlag() {
-    if (this.trial && this.trial.student && this.trial.student.student.country.iso2) {
-      const flag = this.trial.student.student.country.iso2;
+  getFlag(item) {
+    console.log(item.student);
+    
+    if (item && item.student && item.student.student.country.iso2) {
+      const flag = item.student.student.country.iso2;
       console.log(flag);
       
       if (flag) {

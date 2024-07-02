@@ -1,7 +1,7 @@
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
     <div class="block-item-header" (click)="goToDeatil(item)">
-      <div class="block-item-header-title outfit-medium">{{fav}} {{item?.title}}</div>
+      <div class="block-item-header-title outfit-medium"> {{item?.title}}</div>
       <img src="../../../../assets/svg/left-arrow.svg" alt="">
     </div>
     <div class="block-item-body">
@@ -9,15 +9,26 @@
         <div>
           <div class="profile-item-image-block"
             [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
-            <ion-icon [name]="fav == true ? 'heart' : 'heart-outline'"
-              (click)="fav == true ? removeToFav() : addToFav()" class="loved-icon"></ion-icon>
           </div>
         </div>
         <div class="profile-content-78678564">
           <div class="profile-line-789575">
-            <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-            <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
-            <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span></div>
+            <div style="display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;">
+              <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+              <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
+              </div>
+            </div>
+            <div style="    display: flex;
+            align-items: center;
+            justify-content: flex-end;">
+              <ion-icon [name]="fav == true ? 'heart' : 'heart-outline'"
+                (click)="fav == true ? removeToFav() : addToFav()"
+                [class]="fav == true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+            </div>
           </div>
           <div class="profile-above-footer-986985">
             <div class="us-status-btn">
@@ -42,7 +53,10 @@
         <div class="ble-buttons-789576856">
           <img src="../../../assets/svg/share.svg" />
           <div class="outfit fs-16">Share</div>
-
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;">
+          <img src="../../../../assets/svg/chat-dark.svg" alt="">
+          <div>Chat</div>
         </div>
         <div class="right-980676">
           <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
@@ -53,7 +67,7 @@
           <div id="present-alert" class="free-trial-btn-89676 outfit-medium" *ngIf="trail == true && loading == false"
             (click)="cancelTrail(item.id)">
             <img src="../../../../assets/svg/trail.svg" alt=""><button
-              style="background-color: transparent; color:#808080 ;">Cancel Requested</button>
+              style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
           </div>
           <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
           <!-- <ion-alert id="myAlert" header="A Short Title Is Best" subHeader="Cancel Trial Request"
