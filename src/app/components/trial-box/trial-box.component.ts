@@ -10,6 +10,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   user;
   trial;
   student;
+  trailCount;
   country;
   age;
   courseName;
@@ -29,16 +30,17 @@ export class TrialBoxComponent extends BasePage implements OnInit {
       teacher_id: this.user.id
     }
     let res = await this.network.getPendingTrial(this.user.id, obj,);
+    this.trailCount = res.total
     this.trial = res.trials;
     console.log(this.trial);
   }
   getFlag(item) {
     console.log(item.student);
-    
+
     if (item && item.student && item.student.student.country.iso2) {
       const flag = item.student.student.country.iso2;
       console.log(flag);
-      
+
       if (flag) {
         return flag.toLowerCase();
       } else {
