@@ -54,6 +54,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
   async callApi() {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
+    console.log(res);
+    
     this.data = res.course;
     this.title = this.data.title;
     

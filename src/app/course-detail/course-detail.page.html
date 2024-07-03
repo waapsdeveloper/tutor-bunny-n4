@@ -82,9 +82,9 @@
         <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</ion-button>
       </div>
     </div>
-    <div class="line"></div>
+    <div class="line"  *ngIf="schedules != 0"></div >
 
-    <div class="weekly-schedule-outer-78526">
+    <div class="weekly-schedule-outer-78526" *ngIf="schedules != 0">
       <div class="weekly-schedule-heding-78527">Weekly Schedule</div>
       <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
     </div>

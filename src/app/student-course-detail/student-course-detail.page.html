@@ -87,7 +87,8 @@
         <div class="detail-heading-78524 outfit-medium">Instructor</div>
         <div class="instructor-box-content-78561">
           <div class="instructor-head-78562">
-            <div class="instructor-image-78563" [style.background-image]="techerImg ? 'url(' + techerImg + ')' : 'assets/learn-piano.jpeg'"></div>
+            <div class="instructor-image-78563"
+              [style.background-image]="techerImg ? 'url(' + techerImg + ')' : 'assets/learn-piano.jpeg'"></div>
             <div class="instructor-info-78564">
               <div class="instructor-name-78565"> {{displayName}}
                 <div class="instructor-reting-78566"> <img src="assets/icon/star.svg" />4.9</div>
@@ -96,13 +97,14 @@
                 <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span> {{country}}
               </div>
             </div>
+            <img src="../../assets/svg/arrow-right.svg" style="position: absolute; right: 0; top: 9px;" alt="">
           </div>
           <div class="instructor-title-78568">{{techerTitle}}</div>
         </div>
       </div>
     </div>
-    <div class="line"></div>
-    <div class="weekly-schedule-outer-78526">
+    <div class="line" *ngIf="schedules != 0"></div>
+    <div class="weekly-schedule-outer-78526" *ngIf="schedules != 0">
       <div class="weekly-schedule-heding-78527">Weekly Schedule</div>
       <div class="weekly-schedule-date-78528" *ngFor="let item of schedules">
         <div class="schedule-day-78528">{{item.day}}</div>
@@ -123,13 +125,18 @@
 <ion-footer>
   <div class="footer-buttons-78963">
     <div class="button-chat-78563" *ngIf="trail == false && loading == false">
-      <app-sd-button-clear [image]="'assets/svg/chat.svg'" (click)="goToChat()" [text]="'Chat'"></app-sd-button-clear>
+      <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/svg/chat.svg" />
+        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+      </div>
+      <!-- <app-sd-button-clear [image]="'assets/svg/chat.svg'" [text]="'Chat'"></app-sd-button-clear> -->
     </div>
     <div class="button-trial-23654" *ngIf="trail == false && loading == false">
-      <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()" >
+      <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-medium fs-16 "> Request Free Trial </span>
+        <span class="roboto-medium fs-20 " style="font-size: 20px;"> Request Free Trial </span>
       </div>
       <!-- <app-sd-button-gray [image]="'assets/svg/send.svg'" 
         [text]="''"></app-sd-button-gray> -->

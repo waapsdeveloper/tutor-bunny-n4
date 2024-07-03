@@ -9,16 +9,41 @@
         <img src="assets/icon/input-search-gray.svg" />
         <input type="text" placeholder="Search Students" />
       </div>
-    </div>
-    <div class="dashboard-top-fixed-98563">
       <div class="header-chips">
         <div class="header-chip">
-          <!-- <ion-chip style="color: #F17401;">New</ion-chip>
-          <ion-chip style="color: #17A43E;">Active</ion-chip> -->
           <ion-chip id="click-trigger">Status <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
           <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
-              <ion-content class="ion-padding">Pending, Accepted, Complete, Rejected, Blocked.</ion-content>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="../../../assets/svg/panding.svg" />
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Pending</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="../../../assets/svg/accepted.svg" />
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Accepted</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="../../../assets/svg/complete.svg " />
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Completed</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="assets/icon/reject-circle.svg" />
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Rejected</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Blocked</div>
+                </ion-item>
+              </ion-list>
             </ng-template>
           </ion-popover>
         </div>
