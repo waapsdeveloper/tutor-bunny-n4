@@ -623,3 +623,23 @@
   }
 
 }
+
+.sd-clear-btn-967896 {
+  height: 57px;
+  width: 100%;
+  // border: 0.5px solid #000000;
+  border-radius: 10px;
+  background: #E29F1B;
+  color: #000000;
+  box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.disabled-gray-btn{
+  opacity: 0.5;
+}

@@ -126,8 +126,13 @@
       <app-sd-button-clear [image]="'assets/svg/chat.svg'" (click)="goToChat()" [text]="'Chat'"></app-sd-button-clear>
     </div>
     <div class="button-trial-23654" *ngIf="trail == false && loading == false">
-      <app-sd-button-gray [image]="'assets/svg/send.svg'" (click)="requestTrail()"
-        [text]="'Request Free Trial'"></app-sd-button-gray>
+      <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()" >
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/svg/send.svg" />
+        <span class="roboto-medium fs-16 "> Request Free Trial </span>
+      </div>
+      <!-- <app-sd-button-gray [image]="'assets/svg/send.svg'" 
+        [text]="''"></app-sd-button-gray> -->
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
     <div style="width: 100%;" *ngIf="trail == true">
