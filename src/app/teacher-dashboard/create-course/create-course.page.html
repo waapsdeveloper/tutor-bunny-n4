@@ -25,9 +25,11 @@
               (click)="setcourseType('1', 'Create Subscription Course ')"></app-sd-button-clear>
           </div>
           <img src="../../assets/svg/question.svg" alt="" id="click-subscribe">
-          <ion-popover id="top-center" trigger="click-subscribe" triggerAction="click">
+          <ion-popover [dismissOnSelect]="true" id="top-center" class="center-popover-outer-78568" trigger="click-subscribe"
+            triggerAction="click">
             <ng-template style="width: 100%;">
-              <div class="ion-padding popover-title">
+              <div class="ion-padding popover-title center-popover-78568">
+                <img src="../../../assets/svg/cancel-white.svg" style="position: absolute; right: 10px;" alt="">
                 In Monthly subscription course, students will be enrolled for a recurring monthly fee and there will be
                 recurring weekly or monthly classes until the student will wish to end the subscription.
                 <br>
@@ -42,9 +44,11 @@
               (click)="setcourseType('2', 'Create Crash Course')"></app-sd-button-clear>
           </div>
           <img src="../../assets/svg/question.svg" alt="" id="click-crash">
-          <ion-popover id="top-center" trigger="click-crash" triggerAction="click">
+          <ion-popover [dismissOnSelect]="true" id="top-center" trigger="click-crash" triggerAction="click">
             <ng-template style="width: 100%;">
-              <div class="ion-padding popover-title">In Crash course, students will be enrolled for a one time fee for
+              <div class="ion-padding popover-title center-popover-78569">
+                <img src="../../../assets/svg/cancel-white.svg" style="position: absolute; right: 10px;" alt="">In Crash
+                course, students will be enrolled for a one time fee for
                 the entire course. There will not be any recurring fee for this course.
                 <br>
                 <br>
@@ -60,9 +64,11 @@
               (click)="setcourseType('3', 'Create Event/Workshop')"></app-sd-button-clear>
           </div>
           <img src="../../assets/svg/question.svg" alt="" id="click-event">
-          <ion-popover id="top-center" trigger="click-event" triggerAction="click">
+          <ion-popover [dismissOnSelect]="true" id="top-center" trigger="click-event" triggerAction="click">
             <ng-template style="width: 100%;">
-              <div class="ion-padding popover-title">The Event/Workshop is a short term engagement between the teacher
+              <div class="ion-padding popover-title center-popover-78570">
+                <img src="../../../assets/svg/cancel-white.svg" style="position: absolute; right: 10px;" alt="">The
+                Event/Workshop is a short term engagement between the teacher
                 and the student (generally 1-2 days or few hours)
                 <br>
                 <br>

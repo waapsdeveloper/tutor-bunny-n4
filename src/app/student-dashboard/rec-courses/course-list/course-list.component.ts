@@ -1,6 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
+import { TrailMessageComponent } from './trail-message/trail-message.component';
 
 @Component({
   selector: 'app-course-list',
@@ -87,18 +88,24 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.nav.push('student-course-detail', params)
   }
   async requestTrail(id) {
-    // this.presentAlert();
 
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
     console.log(v);
 
     if (v || v == true) {
+
+      let data = await this.modals.present(TrailMessageComponent, {
+      }, "", 0.7);;
+      console.log(data);
+      // return
+
       this.trail = true;
       let user = this.users.getUser()
 
       let obj = {
         user_id: user.id,
-        course_id: id
+        course_id: id,
+        message: data.result
       }
       let res = await this.network.requestTrail(obj)
     }

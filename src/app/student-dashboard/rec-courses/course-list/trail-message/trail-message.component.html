@@ -1,0 +1,38 @@
+<ion-header>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <div class="header-title  roboto-regular ">Are you sure to send the Trial request?</div>
+    </div>
+    <div class="header-right-items-78956" (click)="back()">
+      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    </div>
+  </div>
+
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+
+  <div class="body-content-68448">
+
+    <div class="input-box-lines d-flex flex-column gap-8">
+
+      <div class="input-title fs-12 roboto-medium">Additional notes</div>
+
+      <div class="sd-input-box-outer-675315">
+        <textarea class="fs-16 outfit sd-input-box-input-675315" rows="10" [(ngModel)]="message"
+          placeholder="Mention additional notes, your preferred schedule, specific requirements etc. for the teacher"></textarea>
+      </div>
+
+    </div>
+    <div class="d-flex flex-column gap-16">
+      <div class="input-box-lines">
+        <app-sd-button-gray [text]="'Send'" (click)="submit()"></app-sd-button-gray>
+      </div>
+      <div class="input-box-lines">
+        <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>
