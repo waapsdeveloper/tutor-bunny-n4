@@ -9,8 +9,8 @@ export class StatisticBoxComponent  implements OnInit {
 
   list = [
     {
-      nbl: '$0',
-      label: 'Earnings',
+      nbl: '0',
+      label: 'Views',
       colorClass: ''
     },
     {
@@ -30,7 +30,7 @@ export class StatisticBoxComponent  implements OnInit {
     },
     {
       nbl: '0',
-      label: 'Students',
+      label: 'Event',
       colorClass: ''
     }
   ]

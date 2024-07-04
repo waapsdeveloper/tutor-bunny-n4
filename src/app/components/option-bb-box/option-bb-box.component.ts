@@ -11,9 +11,9 @@ export class OptionBbBoxComponent extends BasePage implements OnInit {
 
   list = [
     {
-      nbl: 'Schedule',
+      nbl: 'Trail',
       colorClass: '',
-      img: 'assets/icon/calendar.svg',
+      img: 'assets/svg/trail-light.svg',
 
     },
     {
