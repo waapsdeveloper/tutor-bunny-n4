@@ -32,9 +32,9 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     this.getCourses('', 1);
   }
 
-  getCourses(search = '', page = 1, liked = false){
+  getCourses(search = '', page = 1, liked = false) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
       let obj = {
         search: search,
@@ -57,15 +57,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   }
 
   async onIonInfinite(ev) {
-
     this.loading = true;
-    if(this.page <= this.last_page){
+    if (this.page <= this.last_page) {
       const np = this.page + 1;
       await this.getCourses(this.search, np)
     }
     this.loading = false;
-
   }
-
-
 }

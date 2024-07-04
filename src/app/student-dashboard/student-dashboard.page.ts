@@ -19,7 +19,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   showWarning = false;
   flag;
   showLiked = false;
-  @ViewChild('content', { static: true }) content: IonContent;
+  // @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
     super(injector)
@@ -86,32 +86,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     });
   }
 
-  async onScroll(event: any) {
-
-    const scrollElement = await this.content.getScrollElement();
-    if (
-      scrollElement.scrollTop ===
-      scrollElement.scrollHeight - scrollElement.clientHeight
-    ) {
-      console.info('max bottom was reached!');
-
-      return;
-    }
-
-    let startY = event.detail.startY;
-    let currentY = event.detail.currentY;
-
-
-    const diff = startY - currentY;
-    if (diff != 0 && startY < currentY) {
-      localStorage.setItem('efr', 'hide');
-    }
-
-    if (diff != 0 && startY > currentY) {
-      localStorage.setItem('efr', 'show');
-    }
-
-  }
+ 
 
   private isThrottled: boolean = false;
   onScrollEnd(event: any) {
