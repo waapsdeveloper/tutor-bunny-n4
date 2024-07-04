@@ -22,10 +22,14 @@ export class SdDateBoxComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('showTogglePassword') showTogglePassword = false;
   togglePassword = true;
-  selecteddates = {
-    strat_date: '',
-    end_date: ''
-  }
+  // selecteddates = {
+  //   strat_date: '',
+  //   end_date: ''
+  // }
+  startDate;
+  endDate;
+
+
 
   constructor(private events: EventsService) { }
 
@@ -81,5 +85,13 @@ export class SdDateBoxComponent implements OnInit {
     this.togglePassword = !this.togglePassword
     console.log(this.togglePassword)
     this.type = this.togglePassword ? 'password' : 'text'
+  }
+
+  setStartTime($event){
+    console.log($event)
+  }
+
+  setEnfTime($event){
+    console.log($event)
   }
 }
