@@ -41,11 +41,11 @@
           </div>
         </div>
         <div class="right-980676">
-          <div class="profile-line-789576"  *ngIf="status == 'active'">
+          <div class="profile-line-789576" *ngIf="status == 'active'">
             <img src="../../../assets/svg/live.svg" />
             <div class="label-789576 fs-14 outfit">Live</div>
           </div>
-          <div class="profile-line-789576"  *ngIf="status == 'inactive'">
+          <div class="profile-line-789576" *ngIf="status == 'inactive'">
             <img src="../../../assets/svg/inactive.svg" />
             <div class="label-7895766 fs-14 outfit">Inactive</div>
           </div>
@@ -72,13 +72,13 @@
                 </ion-item>
               </ion-list>
               <ion-list>
-                <ion-item class="profile-line-789578" (click)="deleteCourse(item)">
+                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <img class="img1-789575" src="../../../assets/svg/trash.svg" />
                     <div class="label-789575 fs-16 outfit">Delete</div>
                   </div>
                 </ion-item>
-              </ion-list>
+              </ion-list>              
               <ion-list *ngIf="status == 'inactive'">
                 <ion-item class="profile-line-789578" (click)="activeCourse(item)">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">

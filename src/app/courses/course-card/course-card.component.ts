@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output, output } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -13,7 +14,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
   status;
   @Output() courseDeleted = new EventEmitter<number>();
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
     this.initialize()
   }
@@ -30,7 +31,45 @@ export class CourseCardComponent extends BasePage implements OnInit {
 
   }
 
+  async presentAlert(item) {
+    const alert = await this.alertController.create({
+      header: 'Are you sure to delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Alert canceled');
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.deleteCourse(item);
+            console.log('Alert confirmed');
+          },
+        },
+      ],
+    });
 
+    await alert.present();
+  }
+
+  setResult(ev) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
+  }
+
+  async deleteCourse(data) {
+    let obj = {
+      course_id: data.id,
+    };
+
+    let res = await this.network.inactiveCourse(obj);
+    if (res.status === 200) {
+      this.courseDeleted.emit(data.id);
+    }
+  }
 
   editCourse(item) {
     const params = {
@@ -66,16 +105,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
     let res = await this.network.inactiveCourse(obj)
   }
 
-  async deleteCourse(data) {
-    let obj = {
-      course_id: data.id,
-    }
 
-    let res = await this.network.inactiveCourse(obj)
-    if (res.status == 200) {  // Assuming res has a success property to indicate the request was successful
-      this.courseDeleted.emit(data.id);  // Emit the course ID to the parent
-    }
-  }
   async activeCourse(data) {
     let obj = {
       course_id: data.id,
