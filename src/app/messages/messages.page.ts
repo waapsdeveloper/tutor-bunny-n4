@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./messages.page.scss'],
 })
 export class MessagesPage extends BasePage implements OnInit {
-
+  @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
   @Input('item') item: any;
   chat;
   user_id;
@@ -20,17 +20,53 @@ export class MessagesPage extends BasePage implements OnInit {
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
   constructor(injector: Injector) {
     super(injector)
-    
+
+
   }
 
   ngOnInit() {
     this.scrollToBottomOnInit();
-    console.log(this.item,"ncsgghs");
+    // console.log(this.item, "ncsgghs");
     this.initialize();
     this.user = this.users.getUser();
     this.user_id = this.user.id;
     this.flag = this.getFlag();
-   
+    this.messageReceivedViaPusher()
+
+  }
+  messageReceivedViaPusher() {
+    this.events.registerPusherEvent(this.user.id);
+    this.events.subscribe('message-received-via-pusher', this.updateChatsByMessageReceived.bind(this))
+  }
+
+  updateChatsByMessageReceived(data: any) {
+    console.log(data);
+    if (!data) {
+      return;
+    }
+
+    const dm = data;
+
+    console.log(dm.chat_room_id, this.item.chat_room_id, dm.chat_room_id == this.item.chat_room_id)
+    if (dm.chat_room_id == this.item.chat_room_id) {
+      this.chat.push(dm);
+      setTimeout(() => {
+        this.scrollToBottom()
+      }, 200);
+
+    }
+
+  }
+  scrollToBottom(): void {
+    try {
+      console.log(this.scrollableDiv)
+      if (this.scrollableDiv) {
+        this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
+      }
+
+    } catch (err) {
+      console.error('Error scrolling to bottom:', err);
+    }
   }
 
   getFlag() {
@@ -43,7 +79,7 @@ export class MessagesPage extends BasePage implements OnInit {
         return ""
       }
     }
-    else if(this.item && this.item.user.teacher && this.item.user.teacher.country){
+    else if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
       const flag = this.item.user.teacher.country.iso2;
 
       if (flag) {
@@ -54,20 +90,20 @@ export class MessagesPage extends BasePage implements OnInit {
     } else {
       return ""
     }
-    
+
   }
   async initialize() {
 
     let roomId = this.item.chat_room_id;
     let res = await this.network.getMessages(roomId);
     this.chat = res.messages;
-    console.log(this.chat);
-    
+    // console.log(this.chat);
+
 
 
   }
 
-  getTime(time){
+  getTime(time) {
     return moment(time).format('hh:mm a');
   }
 
@@ -75,17 +111,17 @@ export class MessagesPage extends BasePage implements OnInit {
     this.message = event.target.value
   }
 
-  async sendMessage(){
-    
+  async sendMessage() {
+
     if (!this.message) {
       return;
     }
-    let obj= {
+    let obj = {
       chat_room_id: this.item.chat_room_id,
       user_id: this.user.id,
       message: this.message
     }
-    console.log(obj);
+    // console.log(obj);
 
     let res = await this.network.sendMessage(obj);
 

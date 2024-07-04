@@ -35,14 +35,16 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     const times = [];
     const start = new Date();
     start.setHours(0, 0, 0, 0);
-
+  
     for (let i = 0; i < 48; i++) {
-      const hours = start.getHours().toString().padStart(2, '0');
+      const hours = start.getHours();
       const minutes = start.getMinutes().toString().padStart(2, '0');
-      times.push(`${hours}:${minutes}`);
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM/PM
+      times.push(`${formattedHours}:${minutes} ${ampm}`);
       start.setMinutes(start.getMinutes() + 30);
     }
-
+  
     return times;
   }
 

@@ -27,6 +27,7 @@ import { SearchKeywordModule } from '../components/search-keyword/search-keyword
 import { CourseDatesModule } from '../components/course-dates/course-dates.module';
 import { CourseCategoryModule } from '../components/course-category/course-category.module';
 import { SdAgeBooxModule } from '../components/sd-age-boox/sd-age-boox.module';
+import { SdDateBoxModule } from '../components/sd-date-box/sd-date-box.module';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { SdAgeBooxModule } from '../components/sd-age-boox/sd-age-boox.module';
     SearchKeywordModule,
     CourseDatesModule,
     CourseCategoryModule,
-    SdAgeBooxModule
+    SdAgeBooxModule,
+    SdDateBoxModule
   ],
   declarations: [CourseFormPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

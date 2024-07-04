@@ -26,9 +26,9 @@ export class ChatPage extends BasePage implements OnInit {
   async initialize() {
     this.user = this.users.getUser();
     let res = await this.network.getMessagesRoom(this.user.id)
-    console.log(res);
+    // console.log(res);
     this.chat = res.data;
-    console.log(this.chat);
+    // console.log(this.chat);
    
 
   }
@@ -54,7 +54,7 @@ export class ChatPage extends BasePage implements OnInit {
       }
     });
     this.time = moment(time).fromNow();
-    console.log(this.time);
+    // console.log(this.time);
     return this.time
   }
 

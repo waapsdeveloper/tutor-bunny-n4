@@ -22,6 +22,10 @@ export class SdDateBoxComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('showTogglePassword') showTogglePassword = false;
   togglePassword = true;
+  selecteddates = {
+    strat_date: '',
+    end_date: ''
+  }
 
   constructor(private events: EventsService) { }
 

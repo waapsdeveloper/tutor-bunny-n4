@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NgxPubSubService } from "@pscoped/ngx-pub-sub";
+import Pusher from 'pusher-js';
 
 @Injectable({
   providedIn: "root",
@@ -7,12 +8,20 @@ import { NgxPubSubService } from "@pscoped/ngx-pub-sub";
 export class EventsService {
   latestEvent = "randomLast";
   historicalEvent = "randomHistory";
-
+  private pusher: Pusher;
+  chatChannel: any;
   subscriptions: any[] = [];
 
   constructor(public pubsubSvc: NgxPubSubService) {
     pubsubSvc.registerEventWithHistory(this.historicalEvent, 6);
     pubsubSvc.registerEventWithLastValue(this.latestEvent, undefined);
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true
+    };
+
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.chatChannel = this.pusher.subscribe("chats-channel");
   }
 
   publish(key: string, data = {}) {
@@ -21,7 +30,7 @@ export class EventsService {
 
   async subscribe(key, handler, unsubPrior = true) {
 
-    if(unsubPrior){
+    if (unsubPrior) {
       const item = this.subscriptions.find((x) => x.key === key);
       if (item) {
         this.unsubscribe(key);
@@ -33,6 +42,19 @@ export class EventsService {
     this.subscriptions.push({ key, subs });
 
     //this.subscribe[key] = subs;
+  }
+
+  registerPusherEvent(id: any) {
+    console.log(id);
+    
+    this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
+  }
+
+  chatChannelReceived($event: any) {
+    console.log($event);
+
+    // this.playMessageNotificationSound();
+    this.publish('message-received-via-pusher', $event);
   }
 
   unsubscribe(key) {

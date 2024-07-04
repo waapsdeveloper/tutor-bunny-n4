@@ -1,0 +1,74 @@
+
+.zip-code-3 {
+  width: 30%;
+
+}
+
+.zip-code-2 {
+  width: 50%;
+
+}
+
+.city {
+  width: 50%;
+}
+
+.city-2 {
+  width: 70%;
+}
+
+.city-zip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sd-input-box-outer-675315 {
+  height: 50px;
+  border-radius: 8px;
+  background: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8px;
+  border: 0.5px solid rgba(0, 0, 0, 0.75);
+  padding-right: 8px;
+  gap: 8px;
+}
+
+.low-padding-87678 {
+  padding-left: 0px !important;
+}
+
+.sd-input-box-input-675315 {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.sd-input-box-input-675315:focus {
+  /* Additional styles when input is focused */
+  /* You can customize this block based on your requirements */
+  box-shadow: none;
+  /* Remove any focus box-shadow */
+}
+
+.clear-input-678956744 {
+  width:  16px;
+  opacity: 0.6;
+
+}
+
+.input-image {
+  height: 18px;
+
+}
+
+.passw-input-678956744 {
+  font-size: 22px;
+}
