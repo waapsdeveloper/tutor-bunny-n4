@@ -221,7 +221,26 @@
 
 }
 
-.popover-title{
+.popover-title {
+  background-color: #454545;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.center-line-hr-96895 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 0.25px;
+  width: 36px;
+  background-color: #484848;
+}
+
+
+
+.popover-title {
   background-color: #454545;
   color: white;
   font-weight: 400;

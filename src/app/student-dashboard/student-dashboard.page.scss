@@ -122,14 +122,14 @@
   background: rgb(255, 255, 255);
   background-repeat: repeat;
   display: flex;
-  background-image: url(../../assets/svg/signup.svg);
+  background-image: url(../../assets/svg/profile.svg);
   align-items: center;
   position: relative;
   background-repeat: no-repeat;
   border: 1px solid black;
   justify-content: center;
-  background-size: cover;
-  background-position: center center;
+  background-size: contain;
+  background-position: center ;
 }
 
 .icon-box {

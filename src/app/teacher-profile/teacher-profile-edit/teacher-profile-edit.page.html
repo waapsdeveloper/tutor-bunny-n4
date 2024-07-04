@@ -3,7 +3,8 @@
 </ion-header>
 <ion-content class="ion-padding ion-content-medium-background">
   <form>
-    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides style="padding: 0 6px;">
+    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides
+      style="padding: 0 6px;">
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -64,19 +65,43 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Title</div>
+            <div class="input-title fs-14 roboto-medium">Title<img src="../../assets/svg/question.svg" alt=""
+                id="click-trigger"></div>
+            <ion-popover trigger="click-trigger" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title">Provide the suitable title of the profile so that students can
+                  search
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-input-box placeholder="Profile Title (50-100 characters)" (onChange)="result($event, 'title')"
               [inputText]="formData.title" [key]="'title'" [errorText]="'Profile title is required'" [minlength]="50"
               [maxlength]="100" [needed]="step == 2"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">About</div>
+            <div class="input-title fs-14 roboto-medium">About<img src="../../assets/svg/question.svg" alt=""
+                id="click-about"></div>
+            <ion-popover trigger="click-about" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
+                  experiences, skills, background details. Do not share personal contact information here.
+                </div>
+              </ng-template>
+            </ion-popover>
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
               [errorText]="'Description is required'" [minlength]="400" [needed]="step == 2"></app-sd-textarea-about>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">What do you teach?</div>
+            <div class="input-title fs-14 roboto-medium">What do you teach?<img src="../../assets/svg/question.svg"
+                alt="" id="click-teach"></div>
+            <ion-popover trigger="click-teach" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title"> Enter the Subjects you teach, your skills, knowledge and
+                  experiences.
+                </div>
+              </ng-template>
+            </ion-popover>
             <div class="input-box-lines" style="width: 100%;">
               <app-sd-subject-box (onChange)="result($event, 'subjects')" placeholder="Type the keywords that you teach"
                 [key]="'subjects'" [errorText]="'Subject is required'"></app-sd-subject-box>
@@ -106,7 +131,7 @@
       </div>
       <div class="center-line-hr-96895"></div>
 
-    </div>      
+    </div>
 
     <div class="input-box-lines">
       <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>

@@ -119,8 +119,12 @@
 }
 
 .input-title {
-  // font-size: 12px;
+  font-size: 14px;
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
   margin-bottom: 3px;
 }
 
@@ -206,4 +210,11 @@
     background-color: #484848;
   }
 
+}
+
+.popover-title {
+  background-color: #454545;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
 }
