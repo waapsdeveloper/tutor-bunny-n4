@@ -1,4 +1,4 @@
-.body-content-68448{
+.body-content-68448 {
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -39,43 +39,43 @@
 
 
 
-  .dates-box-outer-65891 {
-    width: 100%;
+.dates-box-outer-65891 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .date-day-65892 {
+    width: 110px;
+    padding: 5px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-
-    .date-day-65892 {
-      width: 110px;
-      padding: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 7px;
-      height: 45px;
-      border: 0.5px solid rgba(0, 0, 0, 0.25);
-    }
-
-    .date-from-65893 {
-      width: 110px;
-      padding: 5px;
-      display: flex;
-      align-items: end;
-      border-radius: 7px;
-      height: 45px;
-      border: 0.5px solid rgba(0, 0, 0, 0.25);
-    }
-
-    .date-to-65894 {
-      width: 110px;
-      padding: 5px;
-      display: flex;
-      align-items: end;
-      border-radius: 7px;
-      height: 45px;
-      border: 0.5px solid rgba(0, 0, 0, 0.25);
-    }
+    align-items: center;
+    border-radius: 7px;
+    height: 45px;
+    border: 0.5px solid rgba(0, 0, 0, 0.25);
   }
+
+  .date-from-65893 {
+    width: 110px;
+    padding: 5px;
+    display: flex;
+    align-items: end;
+    border-radius: 7px;
+    height: 45px;
+    border: 0.5px solid rgba(0, 0, 0, 0.25);
+  }
+
+  .date-to-65894 {
+    width: 110px;
+    padding: 5px;
+    display: flex;
+    align-items: end;
+    border-radius: 7px;
+    height: 45px;
+    border: 0.5px solid rgba(0, 0, 0, 0.25);
+  }
+}
 
 
 .input-title {
@@ -86,4 +86,17 @@
   justify-content: flex-start;
   gap: 8px;
   margin-bottom: 3px;
+}
+
+.date-time-button-112 {
+
+  width: 110px;
+  /* padding: 5px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 7px;
+  height: 45px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+
 }

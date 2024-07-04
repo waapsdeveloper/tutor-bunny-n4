@@ -9,15 +9,19 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class AddScheduleComponent extends BasePage implements OnInit {
   start_time: string[] = [];
   end_time: string[] = [];
+  courseType;
+  date: '';
 
-
-  schedule = [{ day: '', start_date: '', end_date: '', course_id: '' }];
+  schedule = [{ day: '', start_date: '', end_date: '', course_id: ''}];
 
   constructor(injecter: Injector) {
     super(injecter);
   }
 
   async ngOnInit() {
+    this.courseType = localStorage.getItem('courseType');
+    console.log(this.courseType);
+
     this.start_time = await this.generateTimes();
     this.end_time = await this.generateTimes();
     console.log(this.start_time);
@@ -42,37 +46,22 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     return times;
   }
 
-  // Add method to add more schedule items
   addMoreSchedule() {
-    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '' });
+    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: ''});
   }
+
   async submit() {
     let courseId = localStorage.getItem('course_Id');
     this.schedule.forEach(item => {
       item.course_id = courseId;
+      item.day = this.date
     });
     console.log(this.schedule);
     let res = await this.network.AddSchedule(this.schedule);
     console.log(res);
+
     if (res.status == 200) {
       this.modals.dismiss();
     }
-
-  }
-
-  // Method to handle the ionChange event
-  onTimeChange(event: any) {
-    console.log('Selected time:', event.detail.value);
-    this.schedule['start_date'] = event.detail.value;
-  }
-  onEndTimeChange(event: any) {
-    console.log('Selected time:', event.detail.value);
-    this.schedule['end_date'] = event.detail.value;
-
-  }
-  onDaySelect(event: any) {
-    console.log('Selected time:', event.detail.value);
-    this.schedule['day'] = event.detail.value;
-
   }
 }

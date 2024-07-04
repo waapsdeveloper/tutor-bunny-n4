@@ -54,6 +54,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
+    
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -68,6 +70,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     if (this.params.type) {
       this.type = this.params.type;
+      localStorage.setItem('courseType', this.type)
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
