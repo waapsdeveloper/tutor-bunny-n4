@@ -25,6 +25,7 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
     from_age: '',
     to_age: ''
   }
+  ageError = '';
   isRequired = false;
 
   constructor(injector: Injector) {
@@ -46,9 +47,6 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
 
   async openFromageSelection() {
     let res = await this.modals.present(AgeListComponent);
-    console.log('====================================');
-    console.log(res);
-    console.log('====================================');
     if (res.data) {
       this.selectedFromAge.from_age = res.data.name;
       this.onChange.emit(this.selectedFromAge);
@@ -57,13 +55,21 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
 
   async openToageSelection() {
     let res = await this.modals.present(AgeListComponent);
-    console.log('====================================');
-    console.log(res);
-    console.log('====================================');
     if (res.data) {
       this.selectedFromAge.to_age = res.data.name;
-      this.onChange.emit(this.selectedFromAge);
+      if (this.validateAges()) {
+        this.onChange.emit(this.selectedFromAge);
+      }
     }
   }
 
+  validateAges(): boolean {
+    if (parseInt(this.selectedFromAge.to_age) <= parseInt(this.selectedFromAge.from_age)) {
+      this.ageError  = 'To age needs to be greater than From age';
+      this.selectedFromAge.to_age = '';
+      return false;
+    }
+    this.ageError  = '';
+    return true;
+  }
 }
