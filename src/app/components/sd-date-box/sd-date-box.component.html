@@ -3,11 +3,11 @@
     <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
     <div class="sd-input-box-outer-675315">
       <ion-datetime-button class="fs-16 roboto-regular sd-input-box-input-675315"
-        datetime="startDatetime"></ion-datetime-button>
+        datetime="startDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="startDatetime{{selecteddates.strat_date}}" presentation="date"
-            [(ngModel)]="selecteddates.strat_date"></ion-datetime>
+          <ion-datetime id="startDate" presentation="date" [(ngModel)]="startDate" (ngModelChange)="setStartTime($event)"
+            ></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
@@ -17,11 +17,11 @@
     <div class="input-title fs-14 roboto-medium">End Date (optional)</div>
     <div class="sd-input-box-outer-675315">
       <ion-datetime-button class="fs-16 roboto-regular sd-input-box-input-675315"
-        datetime="startDatetime"></ion-datetime-button>
+        datetime="endDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="startDatetime{{selecteddates.end_date}}" presentation="date"
-            [(ngModel)]="selecteddates.end_date"></ion-datetime>
+          <ion-datetime id="endDate" presentation="date" [(ngModel)]="endDate" (ngModelChange)="setEnfTime($event)"
+            ></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
