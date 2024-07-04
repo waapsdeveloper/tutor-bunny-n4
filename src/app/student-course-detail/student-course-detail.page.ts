@@ -93,8 +93,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;
     const endTime = this.schedules.end_date;
-    this.startTime = moment(startTime).format('YY:MM:DD');
-    this.endTime = moment(endTime).format('YY:MM:DD');
+    this.startTime = moment(startTime).format('hh:mm a');
+    this.endTime = moment(endTime).format('hh:mm a');
   }
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {

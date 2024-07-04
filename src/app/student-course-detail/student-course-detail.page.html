@@ -103,16 +103,19 @@
         </div>
       </div>
     </div>
-    <div class="line" *ngIf="schedules != 0"></div>
-    <div class="weekly-schedule-outer-78526" *ngIf="schedules != 0">
-      <div class="weekly-schedule-heding-78527">Weekly Schedule</div>
-      <div class="weekly-schedule-date-78528" *ngFor="let item of schedules">
-        <div class="schedule-day-78528">{{item.day}}</div>
-        <div style="display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2px;">
-          <div class="fs-16">{{startTime}}</div>-<div class="fs-16">{{endTime}}</div>
+    <div class="line"></div>
+    <div class="detail-box-outer-78522" *ngIf="schedules != 0">
+      <div class="detail-head-785234" *ngIf="schedules != 0">
+        <div class="detail-heading-78524 outfit-medium">
+          Weekly Schedule
+        </div>
+        <div class="days-box">
+          <div class="weekly-schedule-date-78528" *ngFor="let item of schedules">
+            <div class="schedule-day-78528 outfit-semibold">{{item.day}}</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 2px;">
+              <div class="fs-16">{{startTime}}</div>-<div class="fs-16">{{endTime}}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

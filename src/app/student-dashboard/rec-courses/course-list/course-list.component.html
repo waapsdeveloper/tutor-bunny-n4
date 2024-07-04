@@ -7,7 +7,7 @@
     <div class="block-item-body">
       <div class="profile-item-block">
         <div>
-          <div class="profile-item-image-block"
+          <div class="profile-item-image-block" (click)="goToDeatil(item)"
             [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
           </div>
         </div>
