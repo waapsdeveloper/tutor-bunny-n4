@@ -3,29 +3,25 @@
     <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
     <div class="sd-input-box-outer-675315">
       <ion-datetime-button class="fs-16 roboto-regular sd-input-box-input-675315"
-        datetime="startDatetime{{selecteddates.strat_date}}" trigger="openDatetimeModal"></ion-datetime-button>
-
-      <ion-modal [keepContentsMounted]="true" trigger="openDatetimeModal">
+        datetime="startDatetime"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
         <ng-template>
           <ion-datetime id="startDatetime{{selecteddates.strat_date}}" presentation="date"
-            [(ngModel)]="selecteddates.strat_date" (ngModelChange)="modelChange($event)"
-            (keyup)="result($event)"></ion-datetime>
+            [(ngModel)]="selecteddates.strat_date"></ion-datetime>
         </ng-template>
       </ion-modal>
-
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
     </div>
   </div>
   <div class="zip-code-2 d-flex flex-column gap-8">
     <div class="input-title fs-14 roboto-medium">End Date (optional)</div>
     <div class="sd-input-box-outer-675315">
-      <ion-datetime-button class="fs-16 roboto-regular sd-input-box-input-675315" datetime="startDatetime"
-        class="date-time-button-112"></ion-datetime-button>
+      <ion-datetime-button class="fs-16 roboto-regular sd-input-box-input-675315"
+        datetime="startDatetime"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
           <ion-datetime id="startDatetime{{selecteddates.end_date}}" presentation="date"
-            [(ngModel)]="selecteddates.end_date" (ngModelChange)="modelChange($event)"
-            (keyup)="result($event)"></ion-datetime>
+            [(ngModel)]="selecteddates.end_date"></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
