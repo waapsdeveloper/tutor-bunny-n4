@@ -11,7 +11,6 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
-  language = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
@@ -23,6 +22,20 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
     "updated_at": null
   };
 
+  private _language;
+
+  @Input()
+  public set language(value: any){
+    this._language = value;
+    if(value && value.name){
+      this.selectedLanguage = value;
+    }
+
+  }
+
+  public get language(): any{
+    return this._language
+  }
   constructor(injector: Injector) {
     super(injector)
   }

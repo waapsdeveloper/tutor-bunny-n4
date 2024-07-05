@@ -41,7 +41,6 @@
                   4. Brief description of the course<br>
                   <br>
                   5. Who should take this course<br>
-
                 </div>
               </ng-template>
             </ion-popover>
@@ -52,51 +51,20 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Language of communication</div>
             <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
-              [country]="formData.language" [key]="'language'"
+              [language]="formData.language" [key]="'language'"
               [errorText]="'language is required'"></app-course-language>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
-              (onChange)="result($event, 'mode_type')" [inputText]="formData.mode_type" [key]="'mode_type'"
+              (onChange)="result($event, 'mode_type')" [mode]="formData.mode_type" [capacity]="formData.capacity" [key]="'mode_type'"
               [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
           </div>
-
           <div class="input-box-lines d-flex flex-column gap-8">
-
             <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')" [key]="'image'"
               [errorText]="'Course photo is required'"></app-course-photo>
           </div>
-          <!-- <div class="input-box-lines city-zip" *ngIf="this.type == '1'">
-            <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Fees $/month</div>
-              <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
-                [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
-            </div>
-            <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Hours/month</div>
-              <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
-                [key]="'duration'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
-            </div>
-          </div> -->
-          <!-- <div class="input-box-lines city-zip" *ngIf="this.type == '2'">
-            <div class="city d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Fees $/month</div>
-              <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="formData.price" [key]="'price'"
-                [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
-            </div>
-            <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Hours/month</div>
-              <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="formData.duration"
-                [key]="'duration'" [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
-            </div>
-            <div class="zip-code-2 d-flex flex-column gap-8">
-              <div class="input-title fs-14 roboto-medium">Total lesson</div>
-              <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
-                [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
-            </div>
-          </div> -->
-          <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [inputText]="formData.age"
-            [key]="'age'" [errorText]="'Age is required'"></app-sd-age-boox>
+          <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="formData.from_age"
+            [to_age]="formData.to_age" [key]="'age'" [errorText]="'Age is required'"></app-sd-age-boox>
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -123,8 +91,8 @@
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Price/Month (US $) <img src="../../assets/svg/question.svg" alt=""
-                id="click-price"></div>
+            <div class="input-title fs-14 roboto-medium">Price/Month (US $) <img src="../../assets/svg/question.svg"
+                alt="" id="click-price"></div>
             <ion-popover trigger="click-price" triggerAction="click">
               <ng-template>
                 <div class="ion-padding popover-title">The price student needs to pay for the
@@ -166,9 +134,9 @@
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.type != '1'">
-              <app-sd-date-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
-                [key]="'strat_date'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-date-box>
-            </div>
+            <app-sd-date-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
+              [key]="'strat_date'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-date-box>
+          </div>
 
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"

@@ -14,11 +14,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   params;
   backUrl;
   lang;
-  showBack
+  showBack;
   title;
   type;
   category;
-  image
+  image;
   onlineMode;
   age;
   language_id;
@@ -44,18 +44,20 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     meeting_link: null,
     schedules: null
   };
+
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
     this.initialize();
   }
-  ngOnInit() {
-  }
-  async initialize() {
-  }
+
+  ngOnInit() { }
+
+  async initialize() { }
+
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
-    
+
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -70,7 +72,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     if (this.params.type) {
       this.type = this.params.type;
-      localStorage.setItem('courseType', this.type)
+      localStorage.setItem('courseType', this.type);
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
@@ -78,6 +80,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.setFormDta(res.course);
     }
   }
+
   setFormDta(data) {
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
@@ -85,17 +88,17 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['price'] = data['price'];
     this.formData['from_age'] = data['from_age'];
     this.formData['to_age'] = data['to_age'];
+    console.log(this.formData['to_age']);
     this.formData['duration'] = data['duration'];
     this.formData['image'] = data['image'];
     this.formData['capacity'] = data['capacity'];
-    this.formData['capacity'] = data['capacity'];
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
-    const lang = data['language']
+
+    const lang = data['language'];
     if (lang) {
       this.language_id = lang.id;
       this.formData['language_id'] = this.language_id;
-
     }
   }
 
@@ -107,7 +110,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.formData['category'] = value;
     }
     if (key == 'mode_type') {
-      this.onlineMode = value.mode
+      this.onlineMode = value.mode;
       this.formData['mode_type'] = value.mode;
       this.formData['capacity'] = value.capacity;
     }
@@ -115,8 +118,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       console.log('====================================');
       console.log(key);
       console.log('====================================');
-      // return
-      this.age = value.mode
+      this.age = value.mode;
       this.formData['from_age'] = value.from_age;
       this.formData['to_age'] = value.to_age;
     }
@@ -130,20 +132,18 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
   }
 
-
-
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
     const f = this.formData;
     console.log(f);
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
-      return
+      return;
     }
     if (f.language.length == 0) {
-      return
+      return;
     }
     if (f.mode_type.length == 0) {
-      return
+      return;
     }
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
@@ -155,11 +155,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       let obj = {
         course_id: courseId,
         image: this.formData.image
-      }
+      };
       let image = await this.network.postCoursePhoto(obj);
     }
-    localStorage.setItem('course_Id', courseId)
-    this.events.publish('course_Id-get', courseId)
+    localStorage.setItem('course_Id', courseId);
+    this.events.publish('course_Id-get', courseId);
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
@@ -171,25 +171,20 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
-
   }
+
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     const f = this.formData;
-    if (!f.category ||  !f.price || !f.duration || !f.lesson || !f.keyword) {
-      return
+    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
+      return;
     }
-
-
     const course_id = localStorage.getItem('course_Id');
-
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
-      this.utility.presentSuccessToast(res.message)
+      this.utility.presentSuccessToast(res.message);
     }
-
-    this.nav.pop('/tabs/teacher-dashboard')
-
+    this.nav.pop('/tabs/teacher-dashboard');
   }
 
   shouldHandleBackToPrevScreen() {

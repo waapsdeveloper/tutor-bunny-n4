@@ -10,7 +10,8 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
   @Input('errorText') errorText = '';
   @Input() type = 'text';
   @Input() placeholder = '';
-  @Input() inputText = '';
+  @Input() mode = '';
+  @Input() capacity = '';
   @Input() isReadOnly = false;
   @Input('key') key = '';
   @Input() minlength;
@@ -23,40 +24,31 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
     mode: '',
     capacity: ''
   }
-
-
   constructor(injector: Injector) {
     super(injector)
   }
-
   ngOnInit() {
+    this.teachingMode.mode = this.mode;
+    this.teachingMode.capacity = this.capacity;
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
-
       let v = formData[this.key];
-
       console.log(v, this.key)
-
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
-
     }, false)
-
   }
 
   
   toggleMode(mode: string) {
     this.teachingMode.mode = mode;
     this.onChange.emit(this.teachingMode);
-
-
   }
   toggleCapacity(capacity: string) {
     this.teachingMode.capacity = capacity;
     this.onChange.emit(this.teachingMode);
-
   }
 }

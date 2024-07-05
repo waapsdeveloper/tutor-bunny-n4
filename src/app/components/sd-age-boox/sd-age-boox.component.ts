@@ -14,35 +14,41 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
   @Input('errorText') errorText = '';
   @Input() type = 'text';
   @Input() placeholder = '';
-  @Input() inputText = '';
   @Input() isReadOnly = false;
   @Input() minlength;
   @Input() maxlength;
   @Input('needed') needed = true;
-  @Input() image = ''
+  @Input() image = '';
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+
   selectedFromAge = {
     from_age: '',
     to_age: ''
-  }
+  };
+
   ageError = '';
   isRequired = false;
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
+    console.log(this.selectedFromAge);
+    
+    this.selectedFromAge.from_age = this.from_age;
+    this.selectedFromAge.to_age = this.to_age;
   }
 
   ngOnInit() {
+    
+
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
-      console.log(v, this.key)
       if (!v || v == 'age') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
-    }, false)
+    }, false);
   }
 
   async openFromageSelection() {
@@ -65,11 +71,11 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
 
   validateAges(): boolean {
     if (parseInt(this.selectedFromAge.to_age) <= parseInt(this.selectedFromAge.from_age)) {
-      this.ageError  = 'To age needs to be greater than From age';
+      this.ageError = 'To age needs to be greater than From age';
       this.selectedFromAge.to_age = '';
       return false;
     }
-    this.ageError  = '';
+    this.ageError = '';
     return true;
   }
 }

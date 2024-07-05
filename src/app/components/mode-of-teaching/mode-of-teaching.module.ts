@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModeOfTeachingComponent } from './mode-of-teaching.component';
 import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-info.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,8 @@ import { SdErrorInputInfoModule } from '../sd-error-input-info/sd-error-input-in
   declarations: [ModeOfTeachingComponent],
   imports: [
     CommonModule,
-    SdErrorInputInfoModule
+    SdErrorInputInfoModule,
+    FormsModule
   ],
   exports:[ModeOfTeachingComponent]
 })
