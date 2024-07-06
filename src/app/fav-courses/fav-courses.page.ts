@@ -1,17 +1,14 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
-import { NavService } from '../services/nav.service';
-import { NetworkService } from '../services/network.service';
+import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
-import { IonContent } from '@ionic/angular';
+import { AuthenticationService } from '../services/authentication.service';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
-  selector: 'app-student-dashboard',
-  templateUrl: './student-dashboard.page.html',
-  styleUrls: ['./student-dashboard.page.scss'],
+  selector: 'app-fav-courses',
+  templateUrl: './fav-courses.page.html',
+  styleUrls: ['./fav-courses.page.scss'],
 })
-export class StudentDashboardPage extends BasePage implements OnInit {
+export class FavCoursesPage extends BasePage implements OnInit {
 
   user;
   displayName: string = '';
@@ -27,11 +24,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.fcm.setTokenToServer();
-    this.events.subscribe('get-user-after-submit-form', (data) => {
-      this.initialize()
-
-    })
+   
   }
 
   ionViewWillEnter() {

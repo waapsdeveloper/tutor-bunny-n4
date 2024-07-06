@@ -104,6 +104,10 @@ const routes: Routes = [
     path: 'messages',
     loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
   },
+  {
+    path: 'fav-courses',
+    loadChildren: () => import('./fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
+  },
 
 
   

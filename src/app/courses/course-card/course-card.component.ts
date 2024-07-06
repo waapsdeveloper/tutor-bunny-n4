@@ -33,7 +33,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
 
   async presentAlert(item) {
     const alert = await this.alertController.create({
-      header: 'Are you sure to delete?',
+      header: 'Are you sure to delete the course?',
       buttons: [
         {
           text: 'Cancel',
