@@ -163,7 +163,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-    }
+    // }
   }
 
   async changeToPrev() {
