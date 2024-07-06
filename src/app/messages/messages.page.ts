@@ -34,6 +34,35 @@ export class MessagesPage extends BasePage implements OnInit {
     this.messageReceivedViaPusher()
 
   }
+
+
+  async initialize() {
+
+    let roomId = this.item.chat_room_id;
+    let res = await this.network.getMessages(roomId);
+    this.chat = res.messages;
+    this.getChatRead(this.chat)
+
+  }
+
+  async getChatRead(chat) {
+    console.log(chat);
+
+    const ids = chat.filter(x => x.is_read == 0).map(y => y.id)
+    console.log(ids);
+    let obj = {
+      ids: ids
+    }
+
+    let res = await this.network.getChatRead(obj);
+    console.log('====================================');
+    console.log(res);
+    console.log('====================================');
+
+
+  }
+
+
   messageReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
     this.events.subscribe('message-received-via-pusher', this.updateChatsByMessageReceived.bind(this))
@@ -92,16 +121,7 @@ export class MessagesPage extends BasePage implements OnInit {
     }
 
   }
-  async initialize() {
 
-    let roomId = this.item.chat_room_id;
-    let res = await this.network.getMessages(roomId);
-    this.chat = res.messages;
-    // console.log(this.chat);
-
-
-
-  }
 
   getTime(time) {
     return moment(time).format('hh:mm a');

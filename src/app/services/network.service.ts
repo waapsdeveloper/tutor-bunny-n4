@@ -45,6 +45,11 @@ export class NetworkService {
   postCoursePhoto(data) {
     return this.httpPostResponse('courses/update-course-image', data);
   }
+
+  getChatRead(data) {
+    return this.httpPostResponse('message/is-read', data);
+  }
+
   saveFcmToken(data) {
     return this.httpPostResponse('update-firebase-token', data);
   }

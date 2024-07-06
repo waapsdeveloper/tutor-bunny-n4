@@ -29,12 +29,12 @@ export class ChatPage extends BasePage implements OnInit {
     // console.log(res);
     this.chat = res.data;
     // console.log(this.chat);
-   
+
 
   }
-  getTime(time){
+  getTime(time) {
     // console.log(time);
-    
+
     moment.updateLocale('en', {
       relativeTime: {
         future: "in %s",
@@ -58,9 +58,10 @@ export class ChatPage extends BasePage implements OnInit {
     return this.time
   }
 
-  gotoMessage(item) {
-    this.modals.present(MessagesPage, {
+  async gotoMessage(item) {
+    let res = await this.modals.present(MessagesPage, {
       item: item
     })
+    this.initialize()
   }
 }

@@ -21,7 +21,7 @@ import { SdBbackBtnModule } from '../components/sd-bback-btn/sd-bback-btn.module
     SdHeaderTopModule,
     SdBbackBtnModule,
     SdBsearchBtnModule,
-    SdBontiBtnModule
+    SdBontiBtnModule,
   ],
   declarations: [MessagesPage]
 })
