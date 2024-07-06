@@ -35,6 +35,11 @@ export class AddScheduleComponent extends BasePage implements OnInit {
   }
   async initialize() {
 
+
+    console.log('====================================');
+    console.log();
+    console.log('====================================');
+
     let course_Id = localStorage.getItem('course_Id')
 
     this.callApi(course_Id);
@@ -44,11 +49,8 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     console.log(id);
 
     this.course_Id = id
-
-
     if (this.course_Id) {
       let res = await this.network.getSchedule(this.course_Id)
-
       this.schedule = res.result
       console.log('====================================');
       console.log(this.schedule);
@@ -87,7 +89,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     let courseId = localStorage.getItem('course_Id');
     this.schedule.forEach(item => {
       item.course_id = courseId;
-      item.day = this.date
+      // item.day = this.date
     });
     console.log(this.schedule);
     let res = await this.network.AddSchedule(this.schedule);

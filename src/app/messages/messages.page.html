@@ -33,13 +33,11 @@
       </div>
     </div>
   </div>
-
 </ion-content>
-
 <ion-footer>
   <div class="footer-box-78521">
     <div class="input-box-78522">
-      <input type="text" placeholder="Write your text here" (keyup)="onKeyUp($event)">
+      <input #messageInput type="text" placeholder="Write your text here" (keyup)="onKeyUp($event)">
       <img src="../../assets/svg/addImgae.svg" alt="">
     </div>
     <div class="send-box-78522">

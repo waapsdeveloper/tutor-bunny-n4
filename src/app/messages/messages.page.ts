@@ -10,58 +10,41 @@ import * as moment from 'moment';
 })
 export class MessagesPage extends BasePage implements OnInit {
   @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
+  @ViewChild('messageInput') messageInput!: ElementRef;
   @Input('item') item: any;
   chat;
   user_id;
   flag;
   time;
   user;
-  message;
+  message = '';
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
+
   constructor(injector: Injector) {
     super(injector)
-
-
   }
 
   ngOnInit() {
     this.scrollToBottomOnInit();
-    // console.log(this.item, "ncsgghs");
     this.initialize();
     this.user = this.users.getUser();
     this.user_id = this.user.id;
     this.flag = this.getFlag();
     this.messageReceivedViaPusher()
-
   }
 
-
   async initialize() {
-
     let roomId = this.item.chat_room_id;
     let res = await this.network.getMessages(roomId);
     this.chat = res.messages;
     this.getChatRead(this.chat)
-
   }
 
   async getChatRead(chat) {
-    console.log(chat);
-
     const ids = chat.filter(x => x.is_read == 0).map(y => y.id)
-    console.log(ids);
-    let obj = {
-      ids: ids
-    }
-
-    let res = await this.network.getChatRead(obj);
-    console.log('====================================');
-    console.log(res);
-    console.log('====================================');
-
-
+    let obj = { ids: ids }
+    await this.network.getChatRead(obj);
   }
-
 
   messageReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
@@ -69,30 +52,23 @@ export class MessagesPage extends BasePage implements OnInit {
   }
 
   updateChatsByMessageReceived(data: any) {
-    console.log(data);
     if (!data) {
       return;
     }
-
     const dm = data;
-
-    console.log(dm.chat_room_id, this.item.chat_room_id, dm.chat_room_id == this.item.chat_room_id)
     if (dm.chat_room_id == this.item.chat_room_id) {
       this.chat.push(dm);
       setTimeout(() => {
         this.scrollToBottom()
       }, 200);
-
     }
-
   }
+
   scrollToBottom(): void {
     try {
-      console.log(this.scrollableDiv)
       if (this.scrollableDiv) {
         this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
       }
-
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
@@ -101,38 +77,24 @@ export class MessagesPage extends BasePage implements OnInit {
   getFlag() {
     if (this.item && this.item.user.student && this.item.user.student.country) {
       const flag = this.item.user.student.country.iso2;
-
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return ""
-      }
-    }
-    else if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
+      return flag ? flag.toLowerCase() : "";
+    } else if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
       const flag = this.item.user.teacher.country.iso2;
-
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return ""
-      }
+      return flag ? flag.toLowerCase() : "";
     } else {
-      return ""
+      return "";
     }
-
   }
-
 
   getTime(time) {
     return moment(time).format('hh:mm a');
   }
 
   onKeyUp(event: any) {
-    this.message = event.target.value
+    this.message = event.target.value;
   }
 
   async sendMessage() {
-
     if (!this.message) {
       return;
     }
@@ -141,19 +103,18 @@ export class MessagesPage extends BasePage implements OnInit {
       user_id: this.user.id,
       message: this.message
     }
-    // console.log(obj);
-
     let res = await this.network.sendMessage(obj);
-
-    console.log(res);
+    if (res) {
+      this.message = '';
+      this.messageInput.nativeElement.value = ''; // Clear the input field
+    }
     this.initialize();
-
-
   }
 
   back() {
     this.modals.dismiss();
   }
+
   scrollToBottomOnInit() {
     setTimeout(() => {
       this.myContent.scrollToBottom(100);

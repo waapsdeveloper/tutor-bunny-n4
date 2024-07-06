@@ -42,7 +42,7 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
     }, false)
   }
 
-  
+
   toggleMode(mode: string) {
     this.teachingMode.mode = mode;
     this.onChange.emit(this.teachingMode);

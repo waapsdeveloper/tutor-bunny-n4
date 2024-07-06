@@ -4,7 +4,7 @@
   padding: 8px;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   .notification-image-box-78522{
     width: 20%;
@@ -22,6 +22,7 @@
     display: flex;
     align-items: flex-start;
     gap: 8px;
+    width: 100%;
     flex-direction: column;
     .notification-top-box-78525{
       display: flex;

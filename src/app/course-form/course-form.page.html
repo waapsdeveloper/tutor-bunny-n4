@@ -56,8 +56,8 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
-              (onChange)="result($event, 'mode_type')" [mode]="formData.mode_type" [capacity]="formData.capacity" [key]="'mode_type'"
-              [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
+              (onChange)="result($event, 'mode_type')" [mode]="formData.mode_type" [capacity]="formData.capacity"
+              [key]="'mode_type'" [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')" [key]="'image'"
