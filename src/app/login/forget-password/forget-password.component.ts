@@ -9,7 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class ForgetPasswordComponent extends BasePage implements OnInit {
   step = 'email';
   userId;
-
+wrongOtp= false;
   formData: any = {
     email: null,
   };
@@ -52,9 +52,11 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
     const enteredCode = parseInt(this.getEnteredCode(), 10);
     const receivedCode = parseInt(this.receivedCode, 10);
 
+    
     if (enteredCode === receivedCode) {
       this.step = "reset";
     } else {
+      this.wrongOtp = true;
     }
   }
 
@@ -70,6 +72,12 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
   onKeyUpEvent(index: number, event: KeyboardEvent): void {
     const eventCode = event.which || event.keyCode;
     const currentElement = this.getCodeBoxElement(index);
+  
+    // Ensure the input value length does not exceed 1
+    if (currentElement.value.length > 1) {
+      currentElement.value = currentElement.value.slice(0, 1);
+    }
+  
     if (currentElement.value.length === 1) {
       if (index !== 4) {
         this.getCodeBoxElement(index + 1).focus();
@@ -77,11 +85,14 @@ export class ForgetPasswordComponent extends BasePage implements OnInit {
         currentElement.blur();
       }
     }
+  
     if (eventCode === 8 && index !== 1) {
       this.getCodeBoxElement(index - 1).focus();
     }
+  
     this.checkIfAllInputsFilled();
   }
+  
 
   onFocusEvent(index: number): void {
     for (let item = 1; item < index; item++) {

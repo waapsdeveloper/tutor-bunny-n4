@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CourseListComponent extends BasePage implements OnInit {
   list;
   course
+  @Input() item
   @ViewChild('slides', { static: false }) slides: any;
   constructor(private _sanitizer: DomSanitizer, injector: Injector) {
     super(injector)
