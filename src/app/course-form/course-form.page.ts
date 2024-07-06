@@ -159,7 +159,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
-    this.events.publish('course_Id-get', courseId);
+    this.events.publish('course_Id_get', courseId);
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;

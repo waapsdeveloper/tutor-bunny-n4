@@ -20,7 +20,6 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   constructor(injector: Injector) {
     super(injector)
 
-    this.initialize()
   }
 
 
@@ -29,48 +28,21 @@ export class CourseDatesComponent extends BasePage implements OnInit {
 
   }
 
-  async initialize() {
-
-    this.events.subscribe('course_Id-get', async (course_Id: any) => {
-
-
-      this.callApi();
-
-
-    })
-  }
-
-  async callApi() {
-    this.course_Id = this.courseId
-
-
-    if (this.course_Id) {
-      let res = await this.network.getSchedule(this.course_Id)
-
-      this.schedules = res.result
-
-
-
-      this.onChange.emit(this.schedules);
-    }
-  }
+ 
 
   async addCourseDate() {
-    let res = await this.modals.present(AddDatesPage);
+    let res = await this.modals.present(AddDatesPage, this.courseId);
 
-    this.callApi()
 
 
   }
 
   async editSchedule(item) {
     let res = await this.modals.present(AddDatesPage, item)
-    this.initialize()
   }
 
-  async openSchedule(){
+  async openSchedule() {
     let res = await this.modals.present(AddScheduleComponent, {}, "", 0.7);
-    this.callApi()
 
   }
 

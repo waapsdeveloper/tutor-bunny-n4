@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -9,13 +9,20 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class AddScheduleComponent extends BasePage implements OnInit {
   start_time: string[] = [];
   end_time: string[] = [];
+  @Input() courseId = {}
   courseType;
-  date: '';
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  schedule = [{ day: '', start_date: '', end_date: '', course_id: ''}];
+  date: '';
+  course_Id
+
+
+  schedule = [{ day: '', start_date: '', end_date: '', course_id: '' }];
 
   constructor(injecter: Injector) {
     super(injecter);
+    this.initialize()
+
   }
 
   async ngOnInit() {
@@ -26,7 +33,29 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     this.end_time = await this.generateTimes();
     console.log(this.start_time);
   }
+  async initialize() {
 
+    let course_Id = localStorage.getItem('course_Id')
+
+    this.callApi(course_Id);
+  }
+
+  async callApi(id) {
+    console.log(id);
+
+    this.course_Id = id
+
+
+    if (this.course_Id) {
+      let res = await this.network.getSchedule(this.course_Id)
+
+      this.schedule = res.result
+      console.log('====================================');
+      console.log(this.schedule);
+      console.log('====================================');
+      this.onChange.emit(this.schedule);
+    }
+  }
   back() {
     this.modals.dismiss();
   }
@@ -35,7 +64,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     const times = [];
     const start = new Date();
     start.setHours(0, 0, 0, 0);
-  
+
     for (let i = 0; i < 48; i++) {
       const hours = start.getHours();
       const minutes = start.getMinutes().toString().padStart(2, '0');
@@ -44,12 +73,14 @@ export class AddScheduleComponent extends BasePage implements OnInit {
       times.push(`${formattedHours}:${minutes} ${ampm}`);
       start.setMinutes(start.getMinutes() + 30);
     }
-  
+
     return times;
   }
 
+
+
   addMoreSchedule() {
-    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: ''});
+    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '' });
   }
 
   async submit() {

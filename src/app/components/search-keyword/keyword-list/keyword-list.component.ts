@@ -36,7 +36,7 @@ export class KeywordListComponent implements OnInit {
   ngOnInit() {
   }
   async initialize() {
-    this.events.subscribe('course_Id-get', async (course_Id: any) => {
+    this.events.subscribe('course_Id_get', async (course_Id: any) => {
       this.search = "";
       this.page = 1;
       this.callApi();
