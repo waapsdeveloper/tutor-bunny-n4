@@ -28,6 +28,9 @@ export class FavRecCoursesComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
+    console.log('====================================');
+    console.log('sdfsdfsfsd');
+    console.log('====================================');
     this.getCourses('', 1);
   }
 
