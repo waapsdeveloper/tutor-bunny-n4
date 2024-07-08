@@ -96,6 +96,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['language'] = data['language'];
     this.formData['keywords'] = data['keywords'];
     this.formData['lesson'] = data['lesson'];
+    this.formData['category'] = data['category'][0]
+
 
     const lang = data['language'];
     if (lang) {
@@ -106,6 +108,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish("set-mode-and-capacity", data)
     this.events.publish("set-from-and-to-age", data)
     this.events.publish("set-form-course-image", data)
+
   }
 
   result(value, key) {
@@ -169,6 +172,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
+
+      this.events.publish("set-form-course-category", this.formData)
     }
   }
 

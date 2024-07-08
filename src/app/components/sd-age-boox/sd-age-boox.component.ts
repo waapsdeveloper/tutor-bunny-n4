@@ -41,6 +41,7 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
     this.events.subscribe("set-from-and-to-age", (data) => {
       this.selectedFromAge.from_age = data.from_age;
       this.selectedFromAge.to_age = data.to_age;
+      this.onChange.emit(this.selectedFromAge);
     })
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
