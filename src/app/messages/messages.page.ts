@@ -16,6 +16,7 @@ export class MessagesPage extends BasePage implements OnInit {
   user_id;
   flag;
   time;
+  days;
   user;
   message = '';
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
@@ -36,8 +37,13 @@ export class MessagesPage extends BasePage implements OnInit {
   async initialize() {
     let roomId = this.item.chat_room_id;
     let res = await this.network.getMessages(roomId);
-    this.chat = res.messages;
-    this.getChatRead(this.chat)
+    console.log(res.data);
+    this.days = res.data;
+    
+    console.log(this.chat);
+    
+    
+    // this.getChatRead(this.chat)
   }
 
   async getChatRead(chat) {
@@ -106,7 +112,7 @@ export class MessagesPage extends BasePage implements OnInit {
     let res = await this.network.sendMessage(obj);
     if (res) {
       this.message = '';
-      this.messageInput.nativeElement.value = ''; // Clear the input field
+      this.messageInput.nativeElement.value = '';
     }
     this.initialize();
   }

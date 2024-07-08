@@ -4,7 +4,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-radio-group [(ngModel)]="selectedItemId" (click)="selectedCategory()">
+    <ion-radio-group [(ngModel)]="selectedItemId" (ngModelChange)="selectedCategory()">
       <ion-item *ngFor="let item of list">
         <ion-label>{{ item.name }}</ion-label>
         <ion-radio slot="start" class="fs-16 outfit" [value]="item.id"></ion-radio>
