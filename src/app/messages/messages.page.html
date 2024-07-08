@@ -22,7 +22,11 @@
 </ion-header>
 <ion-content #content class="ion-content-bg ion-padding">
   <div class="body-content" *ngFor="let item of days">
-    <div class="chat-day-heading-85621">{{item.date}}</div>
+    <div class="chat-day-heading-85621">
+      <div style="padding: 8px;
+      background: antiquewhite;
+      border-radius: 8px;">{{item.date}}</div>
+    </div>
     <div [class.chat-right-box]="user_id != chat.user_id" [class.chat-left-box]="user_id == chat.user_id"
       *ngFor="let chat of item.messages">
       <div [class.chat-recive-85622]="user_id != chat.user_id" [class.chat-send-85625]="user_id == chat.user_id">
@@ -37,7 +41,8 @@
 <ion-footer>
   <div class="footer-box-78521">
     <div class="input-box-78522">
-      <input #messageInput type="text" placeholder="Write your text here" style="background: white;" (keyup)="onKeyUp($event)">
+      <input #messageInput type="text" placeholder="Write your text here" style="background: white;"
+        (keyup)="onKeyUp($event)">
       <img src="../../assets/svg/addImgae.svg" alt="">
     </div>
     <div class="send-box-78522">
