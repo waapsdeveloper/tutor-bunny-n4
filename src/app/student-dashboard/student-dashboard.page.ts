@@ -38,7 +38,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.initialize()
   }
   gotoNotification() {
-    this.nav.push('notifications')
+    this.nav.push('notifications',  {
+      backUrl: '/tabs/student-dashboard', showBack: true
+    })
   }
 
   async initialize() {

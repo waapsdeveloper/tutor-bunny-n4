@@ -8,9 +8,24 @@ import { BasePage } from '../base-page/base-page';
 })
 export class NotificationsPage extends BasePage implements OnInit {
   user;
+  params: any;
+  backUrl = '';
+  showBack = false;
   notifications;
   constructor(injector: Injector) {
     super(injector)
+  }
+  ionViewWillEnter(): void {
+    this.params = this.nav.getQueryParams();
+    if (this.params.backUrl) {
+      this.backUrl = this.params.backUrl;
+    }
+
+    if (this.params.showBack) {
+      this.showBack = this.params.showBack;
+    }
+
+
   }
 
   ngOnInit() {

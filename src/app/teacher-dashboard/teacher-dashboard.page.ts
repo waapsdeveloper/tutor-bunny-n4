@@ -116,7 +116,9 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     }
   }
   gotoNotification(){
-    this.nav.push('notifications')
+    this.nav.push('notifications', {
+      backUrl: '/tabs/teacher-dashboard', showBack: true
+    })
   }
 
 }
