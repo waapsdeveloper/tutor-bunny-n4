@@ -11,6 +11,9 @@ import { SdCategoryListComponent } from './sd-category-list/sd-category-list.com
 export class CourseCategoryComponent extends BasePage implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
+  @Input() inputText = '';
+  @Input() inputCategory;
+
   categury = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
@@ -46,6 +49,10 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
 
   ngOnInit() {
 
+    this.events.subscribe("set-form-course-category", (data) => {
+      this.selectedCategory = data.category
+    })
+
     this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
       if (!formData.image) {
@@ -67,14 +74,14 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   async openCategory() {
     let res = await this.modals.present(SdCategoryListComponent) as any;
     console.log(res);
-    
+
     if (res && res.data && res.data.item) {
 
       this.selectedCategory = res.data.item;
       console.log(this.selectedCategory);
       console.log(this.selectedCategory);
-      
-      
+
+
       this.onChange.emit(this.selectedCategory);
 
     }

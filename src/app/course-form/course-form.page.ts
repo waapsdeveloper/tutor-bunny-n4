@@ -97,6 +97,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['language'] = data['language'];
     this.formData['keywords'] = data['keywords'];
     this.formData['lesson'] = data['lesson'];
+    this.formData['category'] = data['category'][0]
+
 
     const lang = data['language'];
     if (lang) {
@@ -107,6 +109,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish("set-mode-and-capacity", data)
     this.events.publish("set-from-and-to-age", data)
     this.events.publish("set-form-course-image", data)
+
   }
 
   result(value, key) {
@@ -170,6 +173,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
+
+      this.events.publish("set-form-course-category", this.formData)
     }
   }
 
@@ -182,11 +187,16 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
-    const f = this.formData;
+    let f = this.formData;
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
     }
     const course_id = localStorage.getItem('course_Id');
+
+    if(f.category && f.category.id){
+      f.category_id = f.category.id
+    }
+
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
