@@ -13,7 +13,8 @@
             [placeholder]="'Search'" (keyup)="checkSuggestions($event)" [readOnly]="subs.length > 4" />
           <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
         </div>
-        <div class="add-sub ion-activatable ripple-parent rectangle" *ngIf="suggestionsList.length == 0"
+        <!-- *ngIf="suggestionsList.length == 0" -->
+        <div class="add-sub ion-activatable ripple-parent rectangle"
           (click)="addSubject()">
           <ion-ripple-effect></ion-ripple-effect>
           <img src="assets/icon/add-circle.svg" alt="">
