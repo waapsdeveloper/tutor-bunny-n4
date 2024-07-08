@@ -29,7 +29,7 @@
   flex-direction: column;
   gap: 8px;
   border-right: 0.5px solid rgba(69, 69, 69, 0.25);
-  padding: 0 8px;
+  // padding: 0 8px;
 }
 
 .modes-heading-78524 {
@@ -78,7 +78,7 @@
   flex-direction: column;
   gap: 8px;
   border-right: 0.5px solid rgba(69, 69, 69, 0.25);
-  padding: 0 8px;
+  // padding: 0 8px;
 }
 
 .modes-heading-78524 {
@@ -117,4 +117,8 @@
   font-size: 14px;
   color: rgba(69, 69, 69, 1);
   border: 1px solid rgba(69, 69, 69, 1);
+}
+
+.nop-78565 {
+  padding: 0 !important;
 }
