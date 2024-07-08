@@ -187,11 +187,16 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
-    const f = this.formData;
+    let f = this.formData;
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
     }
     const course_id = localStorage.getItem('course_Id');
+
+    if(f.category && f.category.id){
+      f.category_id = f.category.id
+    }
+
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
