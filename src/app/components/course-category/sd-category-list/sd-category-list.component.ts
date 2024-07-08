@@ -43,7 +43,7 @@ export class SdCategoryListComponent extends BasePage implements OnInit {
     
 
     if (!item) {
-      return;
+      // return;
       this.modals.dismiss();
     }
 
