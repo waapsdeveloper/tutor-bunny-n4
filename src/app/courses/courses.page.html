@@ -19,7 +19,8 @@
         </div>
       </div>
     </div>
-    <app-course-card *ngFor="let item of course" [item]="item" (courseDeleted)="onCourseDeleted($event)">
+    <app-course-card *ngFor="let item of course" [item]="item" (courseDeleted)="onCourseDeleted($event)"
+      (activeTab)="courseActive()" (inActiveTab)="courseInctive()">
     </app-course-card>
   </div>
 </ion-content>

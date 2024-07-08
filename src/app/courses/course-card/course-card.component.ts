@@ -13,6 +13,8 @@ export class CourseCardComponent extends BasePage implements OnInit {
   course;
   status;
   @Output() courseDeleted = new EventEmitter<number>();
+  @Output() activeTab = new EventEmitter<number>();
+  @Output() inActiveTab = new EventEmitter<number>();
 
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
@@ -103,6 +105,11 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.inactiveCourse(obj)
+    console.log(res);
+    if (res.status === 200) {
+      this.inActiveTab.emit();
+    }
+    
   }
 
 
@@ -112,6 +119,9 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.activeCourse(obj)
+    if (res.status === 200) {
+      this.activeTab.emit();
+    }
   }
 
 }

@@ -28,4 +28,11 @@ export class CoursesPage extends BasePage implements OnInit {
   onCourseDeleted(courseId: number) {
     this.course = this.course.filter(course => course.id !== courseId);
   }
+  courseActive() {
+    this.initialize()
+  }
+  courseInctive() {
+    this.initialize()
+
+  }
 }
