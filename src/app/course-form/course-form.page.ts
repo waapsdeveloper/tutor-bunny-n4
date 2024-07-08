@@ -100,6 +100,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.language_id = lang.id;
       this.formData['language_id'] = this.language_id;
     }
+
+    this.events.publish("set-mode-and-capacity", data)
   }
 
   result(value, key) {
