@@ -92,6 +92,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['duration'] = data['duration'];
     this.formData['image'] = data['image'];
     this.formData['capacity'] = data['capacity'];
+    this.formData['category'] = data['category'];
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
     this.formData['keywords'] = data['keywords'];

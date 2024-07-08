@@ -14,10 +14,29 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   @Input() inputText = '';
   @Input() inputCategory;
 
+  categury = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+
+
+    private _category;
+
+  @Input()
+  public set category(value: any) {
+    this._category = value;
+    if (value && value.name) {
+      this.selectedCategory = value;
+      console.log(this.selectedCategory, "dsadsadadasdsa");
+
+    }
+
+  }
+
+  public get category(): any {
+    return this._category
+  }
   selectedCategory = {
     "created_at": null,
     "id": 3,
