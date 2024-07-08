@@ -86,7 +86,7 @@
               </ng-template>
             </ion-popover>
             <div class="input-box-lines" style="width: 100%;">
-              <app-search-keyword (onChange)="result($event, 'keyword')" placeholder="Type and add" [key]="'keyword'"
+              <app-search-keyword (onChange)="result($event, 'keyword')" [inputText]="formData.keywords" placeholder="Type and add" [key]="'keyword'"
                 [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>

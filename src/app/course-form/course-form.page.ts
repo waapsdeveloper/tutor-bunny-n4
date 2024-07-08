@@ -94,6 +94,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['capacity'] = data['capacity'];
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
+    this.formData['keywords'] = data['keywords'];
+    this.formData['lesson'] = data['lesson'];
 
     const lang = data['language'];
     if (lang) {
@@ -136,37 +138,37 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async onSlideChange() {
-    // this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-    // const f = this.formData;
-    // console.log(f);
-    // if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
-    //   return;
-    // }
-    // if (f.language.length == 0) {
-    //   return;
-    // }
-    // if (f.mode_type.length == 0) {
-    //   return;
-    // }
-    // const user = JSON.parse(localStorage.getItem('user'));
-    // f['user_id'] = user.id;
-    // f['type'] = this.type;
-    // const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
-    // console.log(res);
-    // let courseId = res.course.id;
-    // if (courseId) {
-    //   let obj = {
-    //     course_id: courseId,
-    //     image: this.formData.image
-    //   };
-    //   let image = await this.network.postCoursePhoto(obj);
-    // }
-    // localStorage.setItem('course_Id', courseId);
-    // this.events.publish('course_Id_get', courseId);
-    // if (res) {
+    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+    const f = this.formData;
+    console.log(f);
+    if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
+      return;
+    }
+    if (f.language.length == 0) {
+      return;
+    }
+    if (f.mode_type.length == 0) {
+      return;
+    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    f['user_id'] = user.id;
+    f['type'] = this.type;
+    const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
+    console.log(res);
+    let courseId = res.course.id;
+    if (courseId) {
+      let obj = {
+        course_id: courseId,
+        image: this.formData.image
+      };
+      let image = await this.network.postCoursePhoto(obj);
+    }
+    localStorage.setItem('course_Id', courseId);
+    this.events.publish('course_Id_get', courseId);
+    if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-    // }
+    }
   }
 
   async changeToPrev() {
