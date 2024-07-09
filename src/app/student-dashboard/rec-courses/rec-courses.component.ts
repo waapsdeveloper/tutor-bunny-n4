@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { log } from 'console';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -33,9 +34,7 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   }
 
   getCourses(search = '', page = 1, liked = false) {
-
     return new Promise(async resolve => {
-
       let obj = {
         search: search,
         page: page,
@@ -46,24 +45,30 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       console.log(res)
       const data = res.result;
       this.page = data.current_page;
-      this.list = data.data;
       this.last_page = data.last_page;
 
+      if (page === 1) {
+        this.list = data.data;
+      } else {
+        this.list = [...this.list, ...data.data];
+      }
 
       resolve(true);
-
     });
-
   }
 
   async onIonInfinite(ev) {
     this.loading = true;
     if (this.page <= this.last_page) {
       const np = this.page + 1;
-      await this.getCourses(this.search, np)
+      console.log(np);
+      
+      await this.getCourses('', np);
     }
     this.loading = false;
+    (ev as InfiniteScrollCustomEvent).target.complete();
   }
+
   reloadList(){
     this.getCourses('', 1);
   }
