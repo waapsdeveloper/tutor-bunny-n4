@@ -21,10 +21,12 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
 
-    private _category;
+  private _category;
 
   @Input()
   public set category(value: any) {
+    console.log(value);
+
     this._category = value;
     if (value && value.name) {
       this.selectedCategory = value;
@@ -35,6 +37,8 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   }
 
   public get category(): any {
+    console.log(this.category);
+
     return this._category
   }
   selectedCategory = {
@@ -50,8 +54,11 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe("set-form-course-category", (data) => {
-      this.selectedCategory = data.category
-    })
+      if (data && data.category) {
+        this.selectedCategory = data.category;
+      }
+    });
+    
 
     this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
@@ -76,15 +83,11 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
     console.log(res);
 
     if (res && res.data && res.data.item) {
-
-      this.selectedCategory = res.data.item;
+      this.selectedCategory = res.data.item || this.selectedCategory;
       console.log(this.selectedCategory);
-      console.log(this.selectedCategory);
-
-
       this.onChange.emit(this.selectedCategory);
-
     }
+
   }
 
 }

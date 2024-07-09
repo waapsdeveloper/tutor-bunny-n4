@@ -16,27 +16,23 @@ export class AcceptTermsProfileComponent implements OnInit {
   constructor(private events: EventsService) { }
 
   ngOnInit() {
-
     this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
-
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
-
         return;
       }
-
-
-
     }, false)
 
     this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      if (!v || v == '') {
+      console.log(v);
+      
+      if (!v || v == false) {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
@@ -44,9 +40,6 @@ export class AcceptTermsProfileComponent implements OnInit {
 
         return;
       }
-
-
-
     }, false)
 
   }

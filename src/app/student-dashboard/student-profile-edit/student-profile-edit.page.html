@@ -7,13 +7,13 @@
   <div class="body-content-68448" style="padding: 0 6px;">
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Name</div>
-      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')"
-        [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+      <app-sd-input-box placeholder="Student full name" (onChange)="result($event, 'name')" [inputText]="formData.name"
+        [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Country</div>
-      <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country" [key]="'country'"
-        [errorText]="'Country is required'"></app-sd-country-box>
+      <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country"
+        [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8" *ngIf="countryId">
       <div class="input-title fs-14 roboto-medium">State</div>
@@ -49,26 +49,21 @@
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Year of birth</div>
-      <app-sd-year-box placeholder="Select" (onChange)="result($event, 'dob')"
-        [key]="'dob'" [errorText]="'Year is required'"
-        [inputText]="formData.dob"></app-sd-year-box>
+      <app-sd-year-box placeholder="Select" (onChange)="result($event, 'dob')" [key]="'dob'"
+        [errorText]="'Year is required'" [inputText]="formData.dob"></app-sd-year-box>
     </div>
     <div class="image-upload-box-st-78955674" (click)="photoInput.click()">
       <div class="icno-text-88666">
         <div *ngIf="formData.image" class="image-box-89657" [style.background-image]="'url(' + formData.image + ')'">
         </div>
         <img *ngIf="!formData.image" class="img-67855" src="assets/icon/user-avatar-stp.png" />
-        <div class="roboto-regular fs-14">Upload Profile Photo (optional)</div>
+        <div class="roboto-regular fs-14">Upload Profile Photo </div>
       </div>
-      <!-- *ngIf="!formData.image" -->
       <ion-icon name="chevron-forward-outline"></ion-icon>
-      <!-- <ion-icon *ngIf="formData.image" class="upload-done-circle" name="checkmark-circle"></ion-icon> -->
-      <!-- *ngIf="formData.image" -->
     </div>
     <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput />
     <div class="terms-agree" *ngIf="!hideTerms">
-      <app-accept-terms-profile [terms]="formData.terms"
-        [key]="'terms'" [errorText]="'Please accept terms'"
+      <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"
         (onChange)="result($event, 'terms')"></app-accept-terms-profile>
     </div>
 

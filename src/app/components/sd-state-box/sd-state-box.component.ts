@@ -68,6 +68,15 @@ export class SdStateBoxComponent  implements OnInit {
       }
     }, false)
 
+    this.events.subscribe('student-profile-first-screen-submit-call', (formData) => {
+      if(!formData.state){
+        this.isRequired = true;
+        setTimeout( () => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
+
   }
   async openStateSelection() {
 
