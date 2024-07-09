@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
@@ -14,6 +14,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   flag
   user;
   loading = false;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('item')
   public get item() {
     return this._item;
@@ -80,12 +81,14 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
 
   }
-  goToDeatil(item) {
+  async goToDeatil(item) {
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
     }
-    this.nav.push('student-course-detail', params)
+    let res =await this.nav.push('student-course-detail', params)
+    this.onChange.emit(res);
+
   }
   async requestTrail(id) {
 
@@ -96,18 +99,26 @@ export class CourseListComponent extends BasePage implements OnInit {
 
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);;
-      console.log(data);
+      console.log(data.data);
       // return
+      let send = data.data.send;
+      console.log(send);
+      
 
-      this.trail = true;
-      let user = this.users.getUser()
-
-      let obj = {
-        user_id: user.id,
-        course_id: id,
-        message: data.result
+      if(send == true){        
+        this.trail = true;
+        let user = this.users.getUser()
+        let obj = {
+          user_id: user.id,
+          course_id: id,
+          message: data.data.message
+        }
+        let res = await this.network.requestTrail(obj)
+        console.log(res);
       }
-      let res = await this.network.requestTrail(obj)
+      else{
+        return
+      }
     }
     else {
       this.nav.push('/student-profile/student-profile-edit', {

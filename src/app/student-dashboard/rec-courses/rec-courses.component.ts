@@ -64,4 +64,7 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     }
     this.loading = false;
   }
+  reloadList(){
+    this.getCourses('', 1);
+  }
 }
