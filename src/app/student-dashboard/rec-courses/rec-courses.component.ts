@@ -51,9 +51,14 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       console.log(res);
       this.course = res.course;
 
-      // Add the received course to the list
+      // Add the received course to the list or update if it exists
       if (this.course) {
-        this.list = [this.course, ...this.list];
+        const index = this.list.findIndex(c => c.id === this.course.id);
+        if (index !== -1) {
+          this.list[index] = this.course;
+        } else {
+          this.list = [this.course, ...this.list];
+        }
       }
     }
   }
@@ -82,9 +87,14 @@ export class RecCoursesComponent extends BasePage implements OnInit {
         this.list = [...this.list, ...data.data];
       }
 
-      // If a course was received, add it to the list
+      // If a course was received, add it to the list or update if it exists
       if (this.course && page === 1) {
-        this.list = [this.course, ...this.list];
+        const index = this.list.findIndex(c => c.id === this.course.id);
+        if (index !== -1) {
+          this.list[index] = this.course;
+        } else {
+          this.list = [this.course, ...this.list];
+        }
       }
 
       resolve(true);
