@@ -201,6 +201,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
+    return
     this.nav.pop('/tabs/teacher-dashboard');
   }
 

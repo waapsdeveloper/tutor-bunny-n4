@@ -13,7 +13,9 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   list: any[] = [];
   page: number = 1;
   last_page = -1;
+  course;
   search: string = '';
+  user;
   data: any;
   loading = false;
 
@@ -26,7 +28,34 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     this.events.subscribe("show-list-of-fav-courses", (data) => {
       console.log("show liked", data);
       this.getCourses('', 1, data.liked);
-    })
+    });
+    this.user = this.users.getUser();
+    this.courseReceivedViaPusher();
+  }
+
+  courseReceivedViaPusher() {
+    this.events.registerPusherEvent(this.user.id);
+    console.log("sdfsf");
+
+    this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
+  }
+
+  async updateCourseList(data: any) {
+    console.log(data['course_Id']);
+
+    let course_Id = data.course_id;
+    console.log(course_Id);
+
+    if (course_Id) {
+      let res = await this.network.getcourseById(course_Id) as any;
+      console.log(res);
+      this.course = res.course;
+
+      // Add the received course to the list
+      if (this.course) {
+        this.list = [this.course, ...this.list];
+      }
+    }
   }
 
   async initialize() {
@@ -39,10 +68,10 @@ export class RecCoursesComponent extends BasePage implements OnInit {
         search: search,
         page: page,
         liked: liked
-      }
+      };
 
       const res = await this.network.getAllCourses(obj) as any;
-      console.log(res)
+      console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
@@ -51,6 +80,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
         this.list = data.data;
       } else {
         this.list = [...this.list, ...data.data];
+      }
+
+      // If a course was received, add it to the list
+      if (this.course && page === 1) {
+        this.list = [this.course, ...this.list];
       }
 
       resolve(true);
@@ -62,14 +96,14 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     if (this.page <= this.last_page) {
       const np = this.page + 1;
       console.log(np);
-      
+
       await this.getCourses('', np);
     }
     this.loading = false;
     (ev as InfiniteScrollCustomEvent).target.complete();
   }
 
-  reloadList(){
+  reloadList() {
     this.getCourses('', 1);
   }
 }

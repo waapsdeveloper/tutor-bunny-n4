@@ -62,7 +62,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     setTimeout(() => {
       this.isTrailReq()
     }, 200);
-
   }
 
   async callApi() {
