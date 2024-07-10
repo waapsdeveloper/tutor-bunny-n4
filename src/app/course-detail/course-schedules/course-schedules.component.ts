@@ -10,9 +10,13 @@ export class CourseSchedulesComponent implements OnInit {
   startTime;
   endTime
   @Input() item: any;
+  schedules;
   constructor() { }
 
   ngOnInit() {
+
+    this.schedules = this.item.schedules
+
     const startTime = this.item.start_date;
     const endTime = this.item.end_date;
     this.startTime = moment(startTime).format('hh:mm a');

@@ -24,6 +24,8 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async initialize() {
+    console.log("ffgcgc");
+    
     this.user = this.users.getUser();
     let res = await this.network.getMessagesRoom(this.user.id)
     // console.log(res);
