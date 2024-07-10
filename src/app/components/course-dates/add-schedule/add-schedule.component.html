@@ -34,7 +34,6 @@
         class="date-day-65892" [(ngModel)]="item.start_date">
         <ion-select-option *ngFor="let time of start_time" [value]="time">{{ time }}</ion-select-option>
       </ion-select>
-
       <ion-select aria-label="Favorite Fruit" interface="popover" id="time-select" value="time" placeholder="End time"
         class="date-day-65892" [(ngModel)]="item.end_date">
         <ion-select-option *ngFor="let time of end_time" [value]="time">{{ time }}</ion-select-option>
