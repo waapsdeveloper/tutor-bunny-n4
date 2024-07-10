@@ -8,7 +8,6 @@
     </div>
   </div>
 </ion-header>
-
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="body-content-68448">
     <div class="input-title fs-14 roboto-medium">Weekly Schedule <img src="../../assets/svg/add.svg" alt=""
@@ -41,6 +40,7 @@
         <ion-select-option *ngFor="let time of end_time" [value]="time">{{ time }}</ion-select-option>
       </ion-select>
     </div>
+    <div style="color: red;" *ngIf="error == true"> Please fill all the fields</div>
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Done'" (click)="submit()"></app-sd-button-gray>
     </div>

@@ -12,12 +12,12 @@ export class AddScheduleComponent extends BasePage implements OnInit {
   @Input() courseId = {}
   courseType;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-
+  error = false;
   date: '';
   course_Id
 
 
-  schedule = [{ day: '', start_date: '', end_date: '', course_id: '' }];
+  schedule = [{ day: '', start_date: '', end_date: '', course_id: '', id: '' }];
 
   constructor(injecter: Injector) {
     super(injecter);
@@ -82,15 +82,26 @@ export class AddScheduleComponent extends BasePage implements OnInit {
 
 
   addMoreSchedule() {
-    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '' });
+    this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '', id: '' });
   }
 
   async submit() {
     let courseId = localStorage.getItem('course_Id');
+    for (let item of this.schedule) {
+      if (!item.day || !item.start_date || !item.end_date) {
+        console.log('One or more fields are empty:', item);
+        this.error = true;
+        setTimeout(() => {
+          this.error = false;
+        }, 3000);
+        return;
+      }
+    }
+
     this.schedule.forEach(item => {
       item.course_id = courseId;
-      // item.day = this.date
     });
+
     console.log(this.schedule);
     let res = await this.network.AddSchedule(this.schedule);
     console.log(res);
@@ -99,4 +110,5 @@ export class AddScheduleComponent extends BasePage implements OnInit {
       this.modals.dismiss();
     }
   }
+
 }
