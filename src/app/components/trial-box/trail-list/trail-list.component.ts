@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -11,6 +11,7 @@ export class TrailListComponent extends BasePage  implements OnInit {
   @Input() item;
   flag;
   age;
+  @Output() removeFromList = new EventEmitter<number>();
 
   constructor(injector:Injector) {
     super(injector)
@@ -31,6 +32,9 @@ export class TrailListComponent extends BasePage  implements OnInit {
     };
     let trialId = item.id;
     let res = await this.network.changeTrailStuts(obj, trialId);
+    if (res.status === 200) {
+      this.removeFromList.emit(item.id);
+    }
   }
   goToChat() {
     this.nav.push('/tabs/chat')

@@ -64,5 +64,8 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   goToChat() {
     this.nav.push('/tabs/chat')
   }
+  removeFromList(id){
+    this.trial = this.trial.filter(trial => trial.id !== id);
+  }
 
 }

@@ -5,4 +5,4 @@
   </div>
   <div class="sb-content-7895"></div>
 </div>
-<app-trail-list *ngFor="let item of trial" [item]="item"></app-trail-list>
+<app-trail-list *ngFor="let item of trial" [item]="item" (removeFromList)="removeFromList($event)"></app-trail-list>

@@ -6,14 +6,14 @@
         <img src="assets/icon/home/home-icon.svg" />
       </div>
       <img src="assets/icon/home/home-icon.svg" *ngIf="showHome == false"/>
-      <div class="footer-tab-label">Home</div>
+      <div class="footer-tab-label"  *ngIf="showHome == false">Home</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="chat" (click)="goToChat()">
-      <div class="tab-back-78523" *ngIf="showChat == false">
+      <div class="tab-back-78523" *ngIf="showChat == true">
         <img src="assets/icon/home/chat-icon.svg" />
-        <div class="footer-tab-label">Chat</div>
       </div>
-      <img src="assets/icon/home/chat-icon.svg" *ngIf="showChat == true" />
+      <img src="assets/icon/home/chat-icon.svg" *ngIf="showChat == false" />
+      <div class="footer-tab-label" *ngIf="showChat == false">Chat</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 3" (click)="createCourse()">
       <img src="../../assets/svg/add-course.svg" />
@@ -24,14 +24,14 @@
         <img src="../../assets/svg/search.svg" />
       </div>
       <img src="../../assets/svg/search.svg" *ngIf="showSearch == false"/>
-      <div class="footer-tab-label" >Search</div>
+      <div class="footer-tab-label"  *ngIf="showSearch == false">Search</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="courses" *ngIf="roleId == 3" (click)="goToCourses()">
       <div class="tab-back-78523" *ngIf="showCourses == true">
         <img src="assets/icon/home/my-corces.svg" />
       </div>
       <img src="assets/icon/home/my-corces.svg" *ngIf="showCourses == false"/>
-      <div class="footer-tab-label">My Courses</div>
+      <div class="footer-tab-label" *ngIf="showCourses == false">My Courses</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId == 2">
       <img src="../../assets/svg/trails.svg" />
@@ -42,7 +42,7 @@
         <img src="../../assets/svg/more.svg" style="height: 24px; width: 24px;" />
       </div>
       <img src="../../assets/svg/more.svg" *ngIf="showMore == false" style="height: 24px; width: 24px;" />
-      <div class="footer-tab-label">More</div>
+      <div class="footer-tab-label" *ngIf="showMore == false">More</div>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
