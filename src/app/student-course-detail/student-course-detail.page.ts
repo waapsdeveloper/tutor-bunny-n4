@@ -36,6 +36,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   endTime;
   updated_at;
   schedules;
+  acheduleTime;
   constructor(injector: Injector) {
     super(injector)
   }
@@ -84,14 +85,15 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.serial_number = this.data.serial_number;
     this.price = this.data.price;
     this.schedules = this.data.schedules;
+    this.acheduleTime = this.schedules;
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
     this.techerImg = this.data.user.image
     this.country = this.data.user.teacher.country.name
     this.updated_at = this.data.updated_at;
-    const startTime = this.schedules.start_date;
-    const endTime = this.schedules.end_date;
+    const startTime = this.acheduleTime.start_date;
+    const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
   }

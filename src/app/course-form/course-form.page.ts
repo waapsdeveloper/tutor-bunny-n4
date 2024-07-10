@@ -193,7 +193,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     const course_id = localStorage.getItem('course_Id');
 
-    if(f.category && f.category.id){
+    if (f.category && f.category.id) {
       f.category_id = f.category.id
     }
 
@@ -210,4 +210,5 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
   }
+
 }

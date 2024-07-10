@@ -10,7 +10,7 @@ import { CourseDetailPage } from './course-detail.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
 import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
 import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
-import { CourseSchedulesModule } from './course-schedules/course-schedules.module';
+import { CourseSchedulesModule } from '../components/course-schedules/course-schedules.module';
 
 @NgModule({
   imports: [

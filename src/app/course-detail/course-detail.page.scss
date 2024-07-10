@@ -4,7 +4,7 @@
   align-items: stretch;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .course-heading-78521 {
@@ -365,21 +365,18 @@
   }
 }
 
+
 .detail-box-outer-78522 {
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 
   .detail-head-78523 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .detail-heading-78524 {
-      font-size: 20px;
-      font-weight: 600;
-    }
 
     .detail-heading-left-78524 {
       font-size: 14px;
@@ -399,8 +396,9 @@
     .discription-para {
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 6;
       line-height: 21px;
+
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
     }
 
@@ -466,4 +464,18 @@
   opacity: 0.5;
   border: 0.5px solid rgba(48, 48, 48, 0.25);
 
+}
+
+.days-box {
+  width: 100%;
+  background: #fff;
+  // padding: 6px 16px 0 16px;
+  margin-top: 16px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.detail-heading-78524 {
+  font-size: 20px;
+  font-weight: 600;
 }

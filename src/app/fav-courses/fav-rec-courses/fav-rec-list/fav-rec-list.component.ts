@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from 'src/app/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
@@ -14,6 +14,8 @@ export class FavRecListComponent extends BasePage implements OnInit {
   flag
   user;
   loading = false;
+  @Output() unFav = new EventEmitter<number>();
+
   @Input('item')
   public get item() {
     return this._item;
@@ -150,6 +152,9 @@ export class FavRecListComponent extends BasePage implements OnInit {
     }
     const res = await this.network.removeCourseFav(obj)
     this.fav = false;
+    if (res.status === 200) {
+      this.unFav.emit(this.item.id);
+    }
   }
 
 

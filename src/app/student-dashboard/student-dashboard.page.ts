@@ -5,6 +5,7 @@ import { NetworkService } from '../services/network.service';
 import { BasePage } from '../base-page/base-page';
 import { IonContent } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
+import { FavCoursesPage } from '../fav-courses/fav-courses.page';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -106,9 +107,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     }, 800); // 2 seconds
   }
 
-  showFavCourse() {
+  async showFavCourse() {
+    let res = await this.modals.present(FavCoursesPage)
 
-    this.nav.push('/tabs/fav-courses')
+    this.initialize()
+
+
 
     // this.showLiked = !this.showLiked;
     // this.events.publish("show-list-of-fav-courses", {

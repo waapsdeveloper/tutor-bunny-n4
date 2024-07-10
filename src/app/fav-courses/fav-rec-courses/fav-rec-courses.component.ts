@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -6,7 +7,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './fav-rec-courses.component.html',
   styleUrls: ['./fav-rec-courses.component.scss'],
 })
-export class FavRecCoursesComponent extends BasePage implements OnInit {
+export class FavRecCoursesComponent extends BasePage implements OnInit,  ViewWillEnter {
 
   list: any[] = [];
   page: number = 1;
@@ -17,6 +18,9 @@ export class FavRecCoursesComponent extends BasePage implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
+    this.initialize();
+  }
+  ionViewWillEnter(): void {
     this.initialize();
   }
 
@@ -56,6 +60,10 @@ export class FavRecCoursesComponent extends BasePage implements OnInit {
 
     });
 
+  }
+
+  removeFormFav(id){
+    this.list = this.list.filter(list => list.id !== id);
   }
 
 

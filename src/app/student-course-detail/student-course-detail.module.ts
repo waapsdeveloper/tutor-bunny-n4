@@ -11,6 +11,7 @@ import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.mod
 import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
 import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
 import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-clear.module';
+import { CourseSchedulesModule } from '../components/course-schedules/course-schedules.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-cle
     SdHeaderTopModule,
     SdButtonGrayModule,
     SdButtonClearModule,
-    OtherCoursesModule
+    OtherCoursesModule,
+    CourseSchedulesModule
   ],
   declarations: [StudentCourseDetailPage]
 })

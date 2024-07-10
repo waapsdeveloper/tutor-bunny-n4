@@ -434,12 +434,8 @@
 
 .weekly-schedule-date-78528 {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
-  padding: 8px 0px;
+  padding: 8px 8px;
 
   .schedule-day-78528 {
     font-size: 16px;
@@ -660,7 +656,7 @@
 .days-box {
   width: 100%;
   background: #fff;
-  padding: 6px 16px  0  16px;
+  // padding: 6px 16px 0 16px;
   margin-top: 16px;
   border: 0.5px solid rgba(0, 0, 0, 0.25);
   border-radius: 16px;

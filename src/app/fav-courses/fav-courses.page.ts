@@ -9,7 +9,7 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./fav-courses.page.scss'],
 })
 export class FavCoursesPage extends BasePage implements OnInit {
-
+  backUrl
 
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
     super(injector)
@@ -17,7 +17,7 @@ export class FavCoursesPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   ionViewWillEnter() {
@@ -25,9 +25,12 @@ export class FavCoursesPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-  
+
   }
 
-
-
+  shouldHandleBackToPrevScreen() {
+    this.modals.dismiss();
+  }
 }
+
+
