@@ -12,6 +12,7 @@ import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.
 import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
 import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-clear.module';
 import { CourseSchedulesModule } from '../components/course-schedules/course-schedules.module';
+import { StudentOtherCoursesModule } from './student-other-courses/student-other-courses.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { CourseSchedulesModule } from '../components/course-schedules/course-sch
     SdButtonGrayModule,
     SdButtonClearModule,
     OtherCoursesModule,
-    CourseSchedulesModule
+    CourseSchedulesModule,
+    StudentOtherCoursesModule
   ],
   declarations: [StudentCourseDetailPage]
 })

@@ -44,7 +44,5 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     this.nav.push('/tabs/course-detail', params)
 
-
-
   }
 }

@@ -86,8 +86,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...data.data];
       }
-
-      // If a course was received, add it to the list or update if it exists
       if (this.course && page === 1) {
         const index = this.list.findIndex(c => c.id === this.course.id);
         if (index !== -1) {

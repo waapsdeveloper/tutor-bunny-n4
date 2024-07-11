@@ -19,8 +19,8 @@ import { CourseSchedulesModule } from '../components/course-schedules/course-sch
     IonicModule,
     CourseDetailPageRoutingModule,
     SdHeaderTopModule,
-    OtherCoursesModule,
-    CourseSchedulesModule
+    CourseSchedulesModule,
+    OtherCoursesModule
   ],
   declarations: [CourseDetailPage]
 })
