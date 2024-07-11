@@ -44,6 +44,10 @@
             <img src="../../../assets/svg/live.svg" />
             <div class="label-789576 fs-14 outfit">Live</div>
           </div>
+          <div class="profile-line-789576" *ngIf="status == 'in-progress'">  
+            <img src="../../../assets/svg/inactive.svg" />
+            <div class="label-7895766 fs-14 outfit">In Progress</div>
+          </div>
           <div class="profile-line-789576" *ngIf="status == 'inactive'">
             <img src="../../../assets/svg/inactive.svg" />
             <div class="label-7895766 fs-14 outfit">Inactive</div>
