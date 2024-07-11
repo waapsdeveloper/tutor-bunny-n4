@@ -49,6 +49,6 @@
         </div>
       </div>
     </div>
-    <app-trail-card *ngFor="let item of list" [item]="item"></app-trail-card>
+    <app-trail-card *ngFor="let item of list" [item]="item" (removeFromList)="removeFromList($event)"></app-trail-card>
   </div>
 </ion-content>

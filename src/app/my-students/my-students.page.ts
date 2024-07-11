@@ -26,4 +26,7 @@ export class MyStudentsPage extends BasePage implements OnInit {
     this.list = res.trials;
 
   }
+  removeFromList(id){
+    this.initialize();
+  }
 }
