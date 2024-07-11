@@ -17,17 +17,12 @@ export class TrailCardComponent extends BasePage implements OnInit {
     super(injector)
   }
   ngOnInit() {
-    console.log(this.item)
-    this.flag = this.getFlag()
-    console.log(this.flag);
-
+    this.flag = this.getFlag();
     let currentDate = this.item.created_at;
     this.time = moment(currentDate).format('HH:mm a');
 
   }
   getFlag() {
-    console.log(this.item.student.student.country.flag);
-
     if (this.item && this.item.student && this.item.student.student.country.flag) {
       const flag = this.item.student.student.country.iso2;
       if (flag) {
@@ -39,10 +34,8 @@ export class TrailCardComponent extends BasePage implements OnInit {
       return ""
     }
   }
-  async trailStatus(key) {
-
+  async trailStatus(key: string) {
     // return
-
     let obj = {
       status: key,
       user_id: this.item.student.id
@@ -54,127 +47,64 @@ export class TrailCardComponent extends BasePage implements OnInit {
     }
   }
 
-  async presentAlert(item) {
+  async presentAlert(item: string) {
     console.log(item);
-    // return
-    if (item = 'Accepted') {
-      const alert = await this.alertController.create({
-        header: 'Are you sure to Accept this trail?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
-            },
-          },
-          {
-            text: 'Yes',
-            role: 'confirm',
-            handler: () => {
-              this.trailStatus(item);
-              console.log('Alert confirmed');
-            },
-          },
-        ],
-      });
-      await alert.present();
+
+    let alertHeader: string;
+    switch (item) {
+      case 'Accepted':
+        alertHeader = 'Are you sure to Accept this trail?';
+        break;
+      case 'Rejected':
+        alertHeader = 'Are you sure to Reject this trail?';
+        break;
+      case 'Blocked':
+        alertHeader = 'Are you sure to Block this trail?';
+        break;
+      case 'Unblock':
+        alertHeader = 'Are you sure to Unblock this trail?';
+        break;
+      case 'Complete':
+        alertHeader = 'Are you sure to Complete this trail?';
+        break;
+      default:
+        return;
     }
-    else if (item = 'Rejected') {
-      const alert = await this.alertController.create({
-        header: 'Are you sure to Reject this trail?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
-            },
+
+    const alert = await this.alertController.create({
+      header: alertHeader,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Alert canceled');
           },
-          {
-            text: 'Yes',
-            role: 'confirm',
-            handler: () => {
-              this.trailStatus(item);
-              console.log('Alert confirmed');
-            },
+        },
+        {
+          text: 'Yes',
+          role: 'confirm',
+          handler: () => {
+            this.trailStatus(item);
+            console.log('Alert confirmed');
           },
-        ],
-      });
-      await alert.present();
-    }
-    else if (item = 'Blocked') {
-      const alert = await this.alertController.create({
-        header: 'Are you sure to Block this trail?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
-            },
-          },
-          {
-            text: 'Yes',
-            role: 'confirm',
-            handler: () => {
-              this.trailStatus(item);
-              console.log('Alert confirmed');
-            },
-          },
-        ],
-      });
-      await alert.present();
-    }
-    else if (item = 'Unblock') {
-      const alert = await this.alertController.create({
-        header: 'Are you sure to Unblock this trail?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
-            },
-          },
-          {
-            text: 'Yes',
-            role: 'confirm',
-            handler: () => {
-              this.trailStatus(item);
-              console.log('Alert confirmed');
-            },
-          },
-        ],
-      });
-      await alert.present();
-    }
-    else if (item = 'Complete') {
-      const alert = await this.alertController.create({
-        header: 'Are you sure to Complete this trail?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
-            },
-          },
-          {
-            text: 'Yes',
-            role: 'confirm',
-            handler: () => {
-              this.trailStatus(item);
-              console.log('Alert confirmed');
-            },
-          },
-        ],
-      });
-      await alert.present();
-    }
+        },
+      ],
+    });
+    await alert.present();
   }
+
   goToChat() {
     this.nav.push('/tabs/chat')
+  }
+  goToDeatil() {
+
+    const params = {
+      id: this.item.course.id,
+      backUrl: 'my-students'
+    }
+    this.nav.push('/tabs/course-detail', params)
+
   }
 
 }

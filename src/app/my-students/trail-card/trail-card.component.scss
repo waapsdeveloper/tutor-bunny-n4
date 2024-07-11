@@ -85,7 +85,7 @@
         width: 60px;
         padding-bottom: 60px;
         border-radius: 50px;
-        background-size: cover;
+        background-size: contain;
         background-position: center center;
       }
       .country-flag-i-7685{
@@ -254,3 +254,11 @@
   background-color: #454545;
 }
 
+.er-title-789 {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
