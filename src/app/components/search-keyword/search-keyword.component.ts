@@ -28,9 +28,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   async ngOnInit() {
 
     this.events.subscribe('teacher-course-second-screen-submit-call', async (formData: any) => {
-
       let v = formData[this.key];
-
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -48,6 +46,8 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
       this.subs = res2.result;
       this.onChange.emit(this.subs);
     }, false);
+
+
     let course_Id = JSON.parse(localStorage.getItem('course_Id'));
     let obj = {
       course_id: course_Id,

@@ -188,7 +188,12 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     let f = this.formData;
+    console.log(f);
+    // return
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
+      return;
+    }
+    if (f.keyword.length == 0) {
       return;
     }
     const course_id = localStorage.getItem('course_Id');
@@ -201,6 +206,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
+    // return
     this.nav.pop('/tabs/teacher-dashboard');
   }
 
