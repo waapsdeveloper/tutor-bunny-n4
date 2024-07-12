@@ -99,6 +99,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
       this.modals.dismiss();
     }
   }
+  
   async deleteShedule(id) {
     let res = await this.network.deleteShedule(id);
     await this.callApi(this.course_Id);
