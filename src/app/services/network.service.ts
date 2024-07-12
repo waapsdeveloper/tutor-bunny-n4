@@ -220,6 +220,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/delete-course-by-id', data, null, true, true);
   }
 
+  deleteShedule(id) {
+    return this.httpDeleteResponse('schedule/delete/' + id, null);
+  }
+
   changeTrailStuts(data, id) {
     return this.httpPostResponse('course/update-status/' + id, data, null, true, true);
   }

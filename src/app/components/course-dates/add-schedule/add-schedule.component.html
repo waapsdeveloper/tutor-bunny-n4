@@ -38,6 +38,9 @@
         class="date-day-65892" [(ngModel)]="item.end_date">
         <ion-select-option *ngFor="let time of end_time" [value]="time">{{ time }}</ion-select-option>
       </ion-select>
+      <div style="padding: 0px 8px;" (click)="deleteShedule(item.id)">
+        <img src="../../../../assets/svg/trash.svg" alt="">
+      </div>
     </div>
     <div style="color: red;" *ngIf="error == true"> Please fill all the fields</div>
     <div class="input-box-lines">
