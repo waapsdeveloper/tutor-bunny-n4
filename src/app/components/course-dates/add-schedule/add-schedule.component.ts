@@ -26,15 +26,10 @@ export class AddScheduleComponent extends BasePage implements OnInit {
   async ngOnInit() {
     this.courseType = localStorage.getItem('courseType');
     console.log(this.courseType);
-
     this.start_time = await this.generateTimes();
     this.end_time = await this.generateTimes();
     console.log(this.start_time);
-
-    // Load initial schedule
     await this.callApi(this.course_Id);
-
-    // Ensure at least one schedule entry is present
     if (this.schedule.length === 0) {
       this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '', id: '' });
     }
@@ -44,18 +39,15 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     console.log('====================================');
     console.log();
     console.log('====================================');
-
     let course_Id = localStorage.getItem('course_Id');
     this.course_Id = course_Id;
-
     if (this.course_Id) {
       await this.callApi(this.course_Id);
     }
   }
 
   async callApi(id: any) {
-    console.log(id);
-
+    console.log(id)
     if (id) {
       let res = await this.network.getSchedule(id);
       this.schedule = res.result;
@@ -74,7 +66,6 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     const times = [];
     const start = new Date();
     start.setHours(0, 0, 0, 0);
-
     for (let i = 0; i < 48; i++) {
       const hours = start.getHours();
       const minutes = start.getMinutes().toString().padStart(2, '0');
@@ -83,7 +74,6 @@ export class AddScheduleComponent extends BasePage implements OnInit {
       times.push(`${formattedHours}:${minutes} ${ampm}`);
       start.setMinutes(start.getMinutes() + 30);
     }
-
     return times;
   }
 
@@ -103,15 +93,12 @@ export class AddScheduleComponent extends BasePage implements OnInit {
         return;
       }
     }
-
     this.schedule.forEach(item => {
       item.course_id = courseId;
     });
-
     console.log(this.schedule);
     let res = await this.network.AddSchedule(this.schedule);
     console.log(res);
-
     if (res.status === 200) {
       this.modals.dismiss();
     }
