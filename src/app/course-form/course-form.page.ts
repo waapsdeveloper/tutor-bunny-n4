@@ -55,6 +55,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize() { }
 
   async ionViewWillEnter() {
+    // localStorage.removeItem('course_Id');
+    // console.log("dsfvghghfghdfs");
+    
+
     this.params = this.nav.getQueryParams();
     console.log(this.params);
 
@@ -144,6 +148,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+   
     const f = this.formData;
     console.log(f);
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
@@ -206,6 +211,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
+    this.events.publish('initilize-the-list', res);
+
     // return
     this.nav.pop('/tabs/teacher-dashboard');
   }

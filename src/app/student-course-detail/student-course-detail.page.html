@@ -103,31 +103,14 @@
         </div>
       </div>
     </div>
-    <div class="line"></div>
+    <div class="line" *ngIf="schedules != 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules != 0">
       <div class="detail-head-785234" *ngIf="schedules != 0">
         <div class="detail-heading-78524 outfit-medium">
           Weekly Schedule
         </div>
         <div class="days-box">
-        <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
-          <!-- <div class="weekly-schedule-date-78528" *ngFor="let item of schedules">
-            <div class="schedule-day-78528 outfit-semibold">{{item.day}}</div>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 2px;">
-              <div class="fs-16">{{startTime}}</div>-<div class="fs-16">{{endTime}}</div>
-            </div>
-          </div> -->
-          <!-- <ion-grid class="weekly-schedule-date-78528" *ngFor="let item of schedules">
-            <ion-row>
-              <ion-col size="4" class="schedule-day-78528">{{item.day}}</ion-col>
-              <ion-col size="8">
-                <div *ngFor="let item of acheduleTime">
-                  <div class="fs-16">{{startTime}} - {{endTime}}</div>
-                  <br>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid> -->
+          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
         </div>
       </div>
     </div>

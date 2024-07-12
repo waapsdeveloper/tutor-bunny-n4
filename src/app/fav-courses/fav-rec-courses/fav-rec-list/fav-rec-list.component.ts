@@ -155,6 +155,10 @@ export class FavRecListComponent extends BasePage implements OnInit {
     if (res.status === 200) {
       this.unFav.emit(this.item.id);
     }
+
+    this.events.publish("show-list-of-fav-courses", {
+     
+    })
   }
 
 

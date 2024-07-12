@@ -36,6 +36,8 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
         }, 5000);
       }
       let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+      console.log(course_Id);
+      
 
       let obj = {
         course_id: course_Id,
@@ -46,16 +48,6 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
       this.subs = res2.result;
       this.onChange.emit(this.subs);
     }, false);
-
-
-    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-    let obj = {
-      course_id: course_Id,
-      name: this.inputText
-    }
-    const res2 = await this.network.getMyKeyword(obj)
-    this.subs = res2.result;
-    this.onChange.emit(this.subs);
 
     this.events.subscribe('update-subs-list', (obj) => {
       this.subs = obj.subs

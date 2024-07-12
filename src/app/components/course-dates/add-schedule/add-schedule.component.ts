@@ -9,20 +9,18 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class AddScheduleComponent extends BasePage implements OnInit {
   start_time: string[] = [];
   end_time: string[] = [];
-  @Input() courseId = {}
-  courseType;
+  @Input() courseId = {};
+  courseType: any;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   error = false;
-  date: '';
-  course_Id
-
+  date = '';
+  course_Id: any;
 
   schedule = [{ day: '', start_date: '', end_date: '', course_id: '', id: '' }];
 
   constructor(injecter: Injector) {
     super(injecter);
-    this.initialize()
-
+    this.initialize();
   }
 
   async ngOnInit() {
@@ -32,32 +30,42 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     this.start_time = await this.generateTimes();
     this.end_time = await this.generateTimes();
     console.log(this.start_time);
+
+    // Load initial schedule
+    await this.callApi(this.course_Id);
+
+    // Ensure at least one schedule entry is present
+    if (this.schedule.length === 0) {
+      this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '', id: '' });
+    }
   }
+
   async initialize() {
-
-
     console.log('====================================');
     console.log();
     console.log('====================================');
 
-    let course_Id = localStorage.getItem('course_Id')
+    let course_Id = localStorage.getItem('course_Id');
+    this.course_Id = course_Id;
 
-    this.callApi(course_Id);
+    if (this.course_Id) {
+      await this.callApi(this.course_Id);
+    }
   }
 
-  async callApi(id) {
+  async callApi(id: any) {
     console.log(id);
 
-    this.course_Id = id
-    if (this.course_Id) {
-      let res = await this.network.getSchedule(this.course_Id)
-      this.schedule = res.result
+    if (id) {
+      let res = await this.network.getSchedule(id);
+      this.schedule = res.result;
       console.log('====================================');
       console.log(this.schedule);
       console.log('====================================');
       this.onChange.emit(this.schedule);
     }
   }
+
   back() {
     this.modals.dismiss();
   }
@@ -78,8 +86,6 @@ export class AddScheduleComponent extends BasePage implements OnInit {
 
     return times;
   }
-
-
 
   addMoreSchedule() {
     this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '', id: '' });
@@ -106,9 +112,8 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     let res = await this.network.AddSchedule(this.schedule);
     console.log(res);
 
-    if (res.status == 200) {
+    if (res.status === 200) {
       this.modals.dismiss();
     }
   }
-
 }

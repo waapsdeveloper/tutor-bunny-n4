@@ -54,8 +54,6 @@ export class FavRecCoursesComponent extends BasePage implements OnInit,  ViewWil
       this.page = data.current_page;
       this.list = data.data;
       this.last_page = data.last_page;
-
-
       resolve(true);
 
     });

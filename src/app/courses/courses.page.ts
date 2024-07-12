@@ -16,7 +16,15 @@ export class CoursesPage extends BasePage implements OnInit {
     this.initialize()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.events.subscribe('initilize-the-list', (res) => {
+      console.log("data A gaya");
+
+      this.initialize()
+    });
+
+  }
 
   async initialize() {
     let user = JSON.parse(localStorage.getItem('user'));
