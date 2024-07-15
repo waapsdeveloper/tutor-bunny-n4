@@ -22,6 +22,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   country;
   city;
   language;
+  state
   subject;
   images: any;
 
@@ -52,6 +53,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
+      this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.subject = this.user.teacher.subjects;
