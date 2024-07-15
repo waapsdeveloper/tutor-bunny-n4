@@ -39,7 +39,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.initialize()
   }
   gotoNotification() {
-    this.nav.push('notifications',  {
+    this.nav.push('notifications', {
       backUrl: '/tabs/student-dashboard', showBack: true
     })
   }
@@ -47,7 +47,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async initialize() {
     this.user = this.users.getUser();
     console.log(this.user, "dfsfsd");
-    
+
     let obj = {
       email: this.user.email,
     };
@@ -63,7 +63,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
     console.log(this.showWarning, "ffsfsdfsdf");
-    
+
     this.events.publish('is-student-profile-completed', this.showWarning);
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
@@ -89,7 +89,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     });
   }
 
- 
+
 
   private isThrottled: boolean = false;
   onScrollEnd(event: any) {
@@ -110,7 +110,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async showFavCourse() {
     let res = await this.modals.present(FavCoursesPage)
 
-    this.initialize()
+    this.events.publish('Update-Fv-Screen', {
+      res
+    });
 
 
 

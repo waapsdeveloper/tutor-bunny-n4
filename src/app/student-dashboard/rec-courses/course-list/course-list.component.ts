@@ -70,12 +70,12 @@ export class CourseListComponent extends BasePage implements OnInit {
       user_id: this.user.id,
       course_id: this.item.id
     }
-    let res = await this.network.getTrail(obj)
-    if (res && !res.trial) {
+    // let res = await this.network.getTrail(obj)
+    if (this.item && !this.item.trial) {
       this.trail = false;
       this.loading = false;
     }
-    if (res && res.trial) {
+    if (this.item && this.item.trial) {
       this.trail = true;
       this.loading = false;
     }
@@ -86,7 +86,7 @@ export class CourseListComponent extends BasePage implements OnInit {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
     }
-    let res =await this.nav.push('student-course-detail', params)
+    let res = await this.nav.push('student-course-detail', params)
     this.onChange.emit(res);
 
   }
@@ -103,9 +103,10 @@ export class CourseListComponent extends BasePage implements OnInit {
       // return
       let send = data.data.send;
       console.log(send);
-      
 
-      if(send == true){        
+
+
+      if (send == true) {
         this.trail = true;
         let user = this.users.getUser()
         let obj = {
@@ -116,7 +117,7 @@ export class CourseListComponent extends BasePage implements OnInit {
         let res = await this.network.requestTrail(obj)
         console.log(res);
       }
-      else{
+      else {
         return
       }
     }

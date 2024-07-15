@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrailCardComponent } from './trail-card.component';
 import { IonicModule } from '@ionic/angular';
+import { NamesPipeModule } from 'src/app/name.pipe.module';
 
 
 
@@ -9,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [TrailCardComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    NamesPipeModule
   ],
   exports: [TrailCardComponent]
 })

@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrailListComponent } from './trail-list.component';
 import { IonicModule } from '@ionic/angular';
-import { NamesPipe } from 'src/app/names.pipe';
+import { NamesPipeModule } from 'src/app/name.pipe.module';
 
 
 
 @NgModule({
-  declarations: [TrailListComponent, NamesPipe],
+  declarations: [TrailListComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    NamesPipeModule
   ],
   exports: [TrailListComponent]
 })

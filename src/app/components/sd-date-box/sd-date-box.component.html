@@ -2,12 +2,10 @@
   <div class="zip-code-2 d-flex flex-column gap-8">
     <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
     <div class="sd-input-box-outer-675315">
-      <ion-datetime-button class="fs-16 roboto-regular"
-        datetime="startDate"></ion-datetime-button>
+      <ion-datetime-button class="fs-16 roboto-regular" datetime="startDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="startDate" presentation="date" [(ngModel)]="startDate" (ngModelChange)="setStartTime($event)"
-            ></ion-datetime>
+          <ion-datetime id="startDate" presentation="date" [(ngModel)]="startDate" (ngModelChange)="setStartTime($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
@@ -16,16 +14,14 @@
   <div class="zip-code-2 d-flex flex-column gap-8">
     <div class="input-title fs-14 roboto-medium">End Date (optional)</div>
     <div class="sd-input-box-outer-675315">
-      <ion-datetime-button class="fs-16 roboto-regular"
-        datetime="endDate"></ion-datetime-button>
+      <ion-datetime-button class="fs-16 roboto-regular" datetime="endDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="endDate" presentation="date" [(ngModel)]="endDate" (ngModelChange)="setEnfTime($event)"
-            ></ion-datetime>
+          <ion-datetime id="endDate" presentation="date" [(ngModel)]="endDate" (ngModelChange)="setEndTime($event)"></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
     </div>
   </div>
 </div>
-
+<div *ngIf="dateError" class="error-text" style="color: red; margin-top: 8px;">{{ dateError }}</div>

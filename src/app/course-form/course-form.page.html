@@ -144,7 +144,6 @@
             <app-sd-date-box (onChange)="result($event, 'strat_date')" [inputText]="formData.strat_date"
               [key]="'strat_date'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-date-box>
           </div>
-
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-dates (onChange)="result($event, 'schedules')" [inputText]="formData.schedules"
               [courseId]="courseId" [key]="'schedules'"></app-course-dates>

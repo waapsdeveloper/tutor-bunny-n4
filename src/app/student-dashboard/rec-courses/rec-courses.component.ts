@@ -25,8 +25,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe("show-list-of-fav-courses", () => {
+    this.events.subscribe('Update-Fv-Screen', (data) => {
       this.getCourses('', 1);
+    })
+    this.events.subscribe("show-list-of-fav-courses", () => {
+     
     });
     this.user = this.users.getUser();
     this.courseReceivedViaPusher();

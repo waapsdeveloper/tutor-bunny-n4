@@ -31,8 +31,11 @@
       </div>
       <div class="content-box-outer">
         <div class="content-box-outer-heading-top">
-          <div class="title-heading-789 outfit-semibold">
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status != 'Pending'">
             {{item.student.name}}
+          </div>
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status == 'Pending'">
+            {{item.student.name| names}}
           </div>
           <div class="pnd-678956" *ngIf="item.status != 'Rejected'" (click)="presentPopover($event)">
             <img src="../../../assets/svg/option.svg"  />
