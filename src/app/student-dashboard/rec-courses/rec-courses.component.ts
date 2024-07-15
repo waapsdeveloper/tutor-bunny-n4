@@ -32,6 +32,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     this.courseReceivedViaPusher();
   }
 
+  async handleRefresh(event) {
+    await this.getCourses('', 1);
+    event.target.complete();
+  }
+
   courseReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
     console.log("sdfsf");

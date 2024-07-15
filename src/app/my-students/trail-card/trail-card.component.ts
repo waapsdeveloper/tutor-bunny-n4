@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -12,6 +12,9 @@ export class TrailCardComponent extends BasePage implements OnInit {
   flag;
   date;
   time;
+  @ViewChild('popover') popover;
+
+  isOpen = false;
   @Output() removeFromList = new EventEmitter<number>();
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
@@ -46,7 +49,10 @@ export class TrailCardComponent extends BasePage implements OnInit {
       this.removeFromList.emit(this.item.id);
     }
   }
-
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
+  }
   async presentAlert(item: string) {
     console.log(item);
 

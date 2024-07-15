@@ -10,6 +10,8 @@ export class SdHeaderTopComponent implements OnInit {
   @Input() showSearch: boolean = false;
   @Input() showNotification: boolean = false;
   @Input() showBack: boolean = false;
+  @Input() showEdit: boolean = false;
+  @Input() showShare: boolean = false;
   @Input() backUrl: string = '';
   @Input() title: string = '';
 
@@ -17,17 +19,21 @@ export class SdHeaderTopComponent implements OnInit {
 
   @Output('parentBack') parentBack: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor(private nav: NavService) {}
+  constructor(private nav: NavService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   back() {
 
-    if(this.parentHandleBack){
+    if (this.parentHandleBack) {
       this.parentBack.emit();
     } else {
       this.nav.pop(this.backUrl);
     }
+
+  }
+
+  editCourse() {
 
   }
 }

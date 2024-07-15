@@ -92,7 +92,7 @@ export class NetworkService {
     return this.httpPostResponse('languages/add-teacher-language', data);
   }
 
-  getCategory() {
+   getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
 

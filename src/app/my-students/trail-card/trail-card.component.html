@@ -34,10 +34,10 @@
           <div class="title-heading-789 outfit-semibold">
             {{item.student.name}}
           </div>
-          <div class="pnd-678956" *ngIf="item.status != 'Rejected'">
-            <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
+          <div class="pnd-678956" *ngIf="item.status != 'Rejected'" (click)="presentPopover($event)">
+            <img src="../../../assets/svg/option.svg"  />
           </div>
-          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
+          <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" [dismissOnSelect]="true">
             <ng-template>
               <ion-list *ngIf="item.status == 'Pending'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
