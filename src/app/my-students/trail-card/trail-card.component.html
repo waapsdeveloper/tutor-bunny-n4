@@ -40,19 +40,22 @@
           <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list *ngIf="item.status == 'Pending'">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="presentAlert('Accepted')">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Accepted')">
                   <img class="img1-789575" src="assets/icon/check-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Accept</div>
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="item.status == 'Pending'">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="presentAlert('Rejected')">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Rejected')">
                   <img class="img1-789575" src="assets/icon/reject-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Reject</div>
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="item.status == 'Pending'">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="presentAlert('Blocked')">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Blocked')">
                   <img class="img1-789575" src="assets/icon/block-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Block</div>
                 </ion-item>
@@ -64,20 +67,21 @@
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="item.status == 'Accepted'">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="presentAlert('Complete')">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Complete')">
                   <img class="img1-789575" src="../../../assets/svg/complete.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Complete</div>
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="item.status == 'Blocked'" style="border: none;">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="presentAlert('Unblock')">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Unblock')">
                   <img class="img1-789575" src="assets/icon/block-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Unblock</div>
                 </ion-item>
               </ion-list>
             </ng-template>
           </ion-popover>
-          
         </div>
         <div class="country-heading-789">
           <span *ngIf="flag" slot="start" style="border-radius: 5px;" class="fi fi-{{flag}}"></span>
