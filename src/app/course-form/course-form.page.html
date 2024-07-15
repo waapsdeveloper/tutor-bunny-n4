@@ -27,8 +27,12 @@
               [maxlength]="50"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Details <img src="../../assets/svg/question.svg" alt=""
-                id="click-detail"></div>
+            <div class="input-title fs-14 roboto-medium label-with-word-count">
+              <div class="label-with-word-count-left">
+                <span>Description</span> <img src="../../assets/svg/question.svg" alt="" id="click-trigger">
+              </div>
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.description?.length || 0 }} / 250 </div>
+            </div>
             <ion-popover trigger="click-detail" triggerAction="click">
               <ng-template>
                 <div class="ion-padding popover-title">
@@ -75,9 +79,8 @@
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Category</div>
-            <app-course-category placeholder="Select" (onChange)="result($event, 'category')"
-              [key]="'category'" [errorText]="'Category is required'" [minlength]="50"
-              [maxlength]="100"></app-course-category>
+            <app-course-category placeholder="Select" (onChange)="result($event, 'category')" [key]="'category'"
+              [errorText]="'Category is required'" [minlength]="50" [maxlength]="100"></app-course-category>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""
@@ -90,8 +93,8 @@
               </ng-template>
             </ion-popover>
             <div class="input-box-lines" style="width: 100%;">
-              <app-search-keyword (onChange)="result($event, 'keyword')" [inputText]="formData.keywords" placeholder="Type and add" [key]="'keyword'"
-                [errorText]="'keyword is required'"></app-search-keyword>
+              <app-search-keyword (onChange)="result($event, 'keyword')" [inputText]="formData.keywords"
+                placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">

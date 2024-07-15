@@ -169,7 +169,7 @@
   align-items: center;
   position: relative;
 
-  .dark-bg-895675{
+  .dark-bg-895675 {
     background-color: #484848;
     color: #ffffff !important;
   }
@@ -200,7 +200,7 @@
 
   }
 
-  .center-line-hr-96895{
+  .center-line-hr-96895 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -217,4 +217,24 @@
   color: white;
   font-weight: 400;
   font-size: 16px;
+}
+
+.label-with-word-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  align-items: center;
+
+  .label-with-word-count-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .label-with-word-count-right {}
+
+
+
 }
