@@ -8,8 +8,12 @@
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Title <img src="../../assets/svg/question.svg" alt=""
-                id="click-trigger"></div>
+            <div class="input-title fs-14 roboto-medium label-with-word-count">
+              <div class="label-with-word-count-left">
+                <span>Title</span> <img src="../../assets/svg/question.svg" alt="" id="click-trigger">
+              </div>
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.title?.length || 0 }} / 50 </div>
+            </div>
             <ion-popover trigger="click-trigger" triggerAction="click">
               <ng-template style="width: 100%;">
                 <div class="ion-padding popover-title">Add the keywords in the title, user can find the course/
