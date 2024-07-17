@@ -124,7 +124,12 @@ export class NetworkService {
 
   getMyCourseList(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/my-course-list/' + '?' + str, null, false, false);
+    return this.httpGetResponse('courses/my-course-list' + '?' + str, null, false, false);
+  }
+
+  getOtherCourseList(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('courses/other-course-list' + '?' + str, null, false, false);
   }
 
   getvideos() {

@@ -79,6 +79,7 @@ export class TabsPage extends BasePage implements OnInit {
     this.showChat = false;
     this.showMore = false;
     this.showHome = false;
+    this.nav.push('/tabs/courses');
   }
   goToMore(){
     this.showMore = true;

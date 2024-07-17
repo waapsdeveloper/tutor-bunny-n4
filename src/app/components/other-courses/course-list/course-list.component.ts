@@ -8,7 +8,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent extends BasePage implements OnInit {
-  list;
+  @Input() list: any[] = [];
   course
   @Input() item
   @ViewChild('slides', { static: false }) slides: any;
@@ -20,11 +20,11 @@ export class CourseListComponent extends BasePage implements OnInit {
   ngOnInit() { }
 
   async initialize() {
-    let user = JSON.parse(localStorage.getItem('user'))
+    // let user = JSON.parse(localStorage.getItem('user'))
 
-    this.list = await this.network.getCourseList(user.id) as any[];
+    // this.list = await this.network.getCourseList(user.id) as any[];
 
-    this.course = this.list.result
+    // this.course = this.list.result
 
   }
 

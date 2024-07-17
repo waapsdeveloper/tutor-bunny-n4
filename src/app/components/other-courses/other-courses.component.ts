@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -8,25 +8,43 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class OtherCoursesComponent extends BasePage implements OnInit {
 
-  list;
-  count;
+  @Input() count = 0;
+  @Output() openOtherCourses = new EventEmitter<any>()
+
+  private _list;
+  @Input()
+  public get list(): any[]{
+    return this._list;
+  };
+
+  public set list(value: any[]){
+    this._list = value;
+    console.log(value);
+  };
+
+
   constructor(injector: Injector) {
     super(injector)
-    this.initialize();
-  }
-
-  ngOnInit() { }
-
-  async initialize() {
-    let user = JSON.parse(localStorage.getItem('user'))
-
-    this.list = await this.network.getCourseList(user.id) as any[];
-
-    this.count = this.list.count
 
   }
+
+  ngOnInit() {
+
+  }
+
+  // async initialize() {
+  //   const obj = {
+  //     category_id: this.categoryId
+  //   }
+  //   const res = await this.network.getOtherCourseList(obj) as any;
+  //   console.log(res)
+
+  //   // this.count = this.list.count
+
+  // }
   gotoCourseList() {
-    this.nav.push('/tabs/courses')
+    this.openOtherCourses.emit()
+    // this.nav.push('/tabs/courses?category_id=')
   }
 
 }

@@ -15,6 +15,8 @@ export class CoursesPage extends BasePage implements OnInit {
   list: any[] = [];
   course;
   status;
+  categoryId;
+  pageTitle = 'My Courses'
 
   constructor(injector: Injector) {
     super(injector)
@@ -32,6 +34,18 @@ export class CoursesPage extends BasePage implements OnInit {
 
   }
 
+  ionViewWillEnter(){
+    const params = this.nav.getQueryParams() as any
+    console.log(params)
+    if(params.category_id){
+      this.categoryId = params.category_id;
+      this.pageTitle = 'Courses'
+      this.search = '';
+      this.getCourses(this.search, 1)
+    }
+
+  }
+
   async getCourses(search = '', page = 1) {
 
     return new Promise( async resolve => {
@@ -39,7 +53,13 @@ export class CoursesPage extends BasePage implements OnInit {
         search: search,
         page: page
       }
-      const res = await this.network.getMyCourseList(obj) as any;
+
+      if(this.categoryId){
+        obj['category_id'] = this.categoryId
+      }
+
+
+      const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj) as any;
       console.log(res)
       const result = res.result;
       this.page = result.current_page;
@@ -67,6 +87,30 @@ export class CoursesPage extends BasePage implements OnInit {
 
   }
 
+  openDetails(obj){
+
+    const params = {
+      id: obj.id,
+      backUrl: '/tabs/courses'
+    }
+    this.nav.push('/tabs/course-detail', params)
+
+  }
+
+  async doSearch($event){
+    console.log(this.search)
+    await this.getCourses(this.search, 1);
+  }
+
+  async handleRefresh(event) {
+
+    await this.getCourses(this.search, 1);
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 500);
+  }
+
   async onIonInfinite(ev) {
 
     console.log(this.last_page , this.page, this.last_page < this.page)
@@ -77,5 +121,9 @@ export class CoursesPage extends BasePage implements OnInit {
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
+  }
+
+  parentback(){
+    this.nav.pop()
   }
 }

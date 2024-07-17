@@ -1,12 +1,12 @@
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
     <div class="block-item-header">
-      <div class="block-item-header-title outfit-medium ">
+      <div class="block-item-header-title outfit-medium " (click)="oepnDeatils(item)">
         {{item?.title}}
       </div>
     </div>
     <div class="block-item-body">
-      <div class="profile-item-block" (click)="oepnDeatils(item)">
+      <div class="profile-item-block" >
         <div>
           <div class="profile-item-image-block"
             [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">

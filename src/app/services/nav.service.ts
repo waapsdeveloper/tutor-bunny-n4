@@ -40,10 +40,15 @@ export class NavService {
     });
   }
 
-  async pop(link) {
+  async pop(link = '') {
     return new Promise<void>(async (resolve) => {
-      // this.location.back();
-      this.navc.navigateBack(link);
+      // ;
+      if(link){
+        this.navc.navigateBack(link);
+      } else {
+        this.location.back()
+      }
+
       resolve();
     });
   }

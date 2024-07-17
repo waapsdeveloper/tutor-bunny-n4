@@ -74,9 +74,14 @@ const routes: Routes = [
     loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
   },
   {
+    path: 'other-courses',
+    loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
+  },
+  {
     path: 'course-detail',
     loadChildren: () => import('./course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
-  },  {
+  },
+  {
     path: 'student-course-detail',
     loadChildren: () => import('./student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
@@ -110,7 +115,7 @@ const routes: Routes = [
   },
 
 
-  
+
 
 ];
 

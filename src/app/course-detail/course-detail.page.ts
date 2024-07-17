@@ -31,6 +31,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
   to_age;
   updated_at;
   schedules;
+  categoryId;
+  otherCourseList: any[] = [];
+  otherCourseListTotalCount: number = 0;
+
   constructor(injector: Injector) {
     super(injector)
   }
@@ -55,10 +59,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
     console.log(res);
-    
+
     this.data = res.course;
     this.title = this.data.title;
-    
+
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -79,7 +83,31 @@ export class CourseDetailPage extends BasePage implements OnInit {
     const endTime = this.schedules.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
+
+    if(this.data.category && this.data.category.length > 0){
+      console.log(this.data.category[0].id);
+      this.categoryId = this.data.category[0].id;
+      this.getOtherCourseList(this.categoryId)
+    }
+
   }
+
+  async getOtherCourseList(id){
+
+    const obj = {
+      category_id: id
+    }
+    const res = await this.network.getOtherCourseList(obj)
+    console.log(res);
+    const result = res.result;
+    this.otherCourseListTotalCount = result.total;
+    this.otherCourseList = result.data;
+    // otherCourseList
+
+  }
+
+
+
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
   }
@@ -95,5 +123,9 @@ export class CourseDetailPage extends BasePage implements OnInit {
     } else {
       return ""
     }
+  }
+
+  openOtherCourses($event){
+    this.nav.push('/tabs/other-courses', {category_id: this.categoryId})
   }
 }

@@ -15,6 +15,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
   @Output() courseDeleted = new EventEmitter<number>();
   @Output() activeTab = new EventEmitter<number>();
   @Output() inActiveTab = new EventEmitter<number>();
+  @Output() detailsAction = new EventEmitter<any>();
 
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
@@ -85,11 +86,10 @@ export class CourseCardComponent extends BasePage implements OnInit {
   }
   oepnDeatils(item) {
 
-    const params = {
-      id: item.id,
-      backUrl: '/tabs/courses'
-    }
-    this.nav.push('/tabs/course-detail', params)
+    this.detailsAction.emit({
+      id: item.id
+    })
+
 
 
 

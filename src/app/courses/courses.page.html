@@ -1,16 +1,15 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="false" [title]="'My Courses'"></app-sd-header-top>
-
+  <app-sd-header-top [showBack]="!!categoryId" [parentHandleBack]="!!categoryId" (parentBack)="parentback()" [title]="pageTitle"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
     <div class="search-box-outer-89655">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
-        <input type="text" placeholder="Search Course" />
+        <input type="text" placeholder="Search Course" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />
       </div>
     </div>
-    <div class="dashboard-top-fixed-98563">
+    <!-- <div class="dashboard-top-fixed-98563">
       <div class="header-chips">
         <div class="header-chip">
           <ion-chip>All</ion-chip>
@@ -19,9 +18,12 @@
           <ion-chip>Event</ion-chip>
         </div>
       </div>
-    </div>
+    </div> -->
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <app-course-card *ngFor="let item of list" [item]="item" (courseDeleted)="onCourseDeleted($event)"
-      (activeTab)="courseActive()" (inActiveTab)="courseInctive()">
+      (activeTab)="courseActive()" (inActiveTab)="courseInctive()" (detailsAction)="openDetails($event)">
     </app-course-card>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
