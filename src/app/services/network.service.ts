@@ -122,6 +122,11 @@ export class NetworkService {
     return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
   }
 
+  getMyCourseList(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('courses/my-course-list/' + '?' + str, null, false, false);
+  }
+
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
   }
@@ -209,15 +214,15 @@ export class NetworkService {
     return this.httpPostResponse('schedule/add', data, null, true, true);
   }
   inactiveCourse(data) {
-    return this.httpPostResponse('courses/de-activate-course-by-id', data, null, true, true);
+    return this.httpPostResponse('courses/de-activate-course-by-id', data, null, false, false);
   }
 
   activeCourse(data) {
-    return this.httpPostResponse('courses/activate-course-by-id', data, null, true, true);
+    return this.httpPostResponse('courses/activate-course-by-id', data, null, false, false);
   }
 
   deleteCourse(data) {
-    return this.httpPostResponse('courses/delete-course-by-id', data, null, true, true);
+    return this.httpPostResponse('courses/delete-course-by-id', data, null, false, false);
   }
 
   deleteShedule(id) {

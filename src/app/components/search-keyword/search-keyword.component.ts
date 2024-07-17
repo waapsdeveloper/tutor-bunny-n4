@@ -31,7 +31,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
       let v = formData[this.key];
 
-      if (this.subs.length == 0) {
+      if (this.subs && this.subs.length == 0) {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;

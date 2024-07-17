@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 @Component({
   selector: 'app-courses',
@@ -7,40 +8,74 @@ import { BasePage } from '../base-page/base-page';
   styleUrls: ['./courses.page.scss'],
 })
 export class CoursesPage extends BasePage implements OnInit {
-  list;
+  user;
+  search = '';
+  page = 1;
+  last_page = -1;
+  list: any[] = [];
   course;
   status;
 
   constructor(injector: Injector) {
     super(injector)
-    this.initialize()
+    // this.initialize()
   }
 
   ngOnInit() {
 
-    this.events.subscribe('initilize-the-list', (res) => {
-      console.log("data A gaya");
+    this.user = this.users.getUser();
+    this.getCourses('', 1)
 
-      this.initialize()
-    });
+    // this.events.subscribe('initilize-the-list', (res) => {
+    //   this.initialize()
+    // });
 
   }
 
-  async initialize() {
-    let user = JSON.parse(localStorage.getItem('user'));
-    this.list = await this.network.getCourseList(user.id) as any[];
-    this.course = this.list.result;
-    console.log(this.course);
+  async getCourses(search = '', page = 1) {
+
+    return new Promise( async resolve => {
+      let obj = {
+        search: search,
+        page: page
+      }
+      const res = await this.network.getMyCourseList(obj) as any;
+      console.log(res)
+      const result = res.result;
+      this.page = result.current_page;
+      this.last_page = result.last_page;
+      if (this.page == 1) {
+        this.list = result["data"];
+      } else {
+        this.list = [...this.list, ...result["data"]]
+      }
+
+      resolve(true)
+    })
+
+
   }
 
   onCourseDeleted(courseId: number) {
-    this.course = this.course.filter(course => course.id !== courseId);
+    this.list = this.list.filter(course => course.id !== courseId);
   }
   courseActive() {
-    this.initialize()
+    // this.initialize()
   }
   courseInctive() {
-    this.initialize()
+    // this.initialize()
 
+  }
+
+  async onIonInfinite(ev) {
+
+    console.log(this.last_page , this.page, this.last_page < this.page)
+    if(this.last_page > this.page){
+      await this.getCourses(this.search, this.page + 1);
+    }
+
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
   }
 }

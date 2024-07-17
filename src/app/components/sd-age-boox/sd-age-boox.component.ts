@@ -46,7 +46,9 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
-      if (!v || v == 'age') {
+
+
+      if (!this.selectedFromAge.to_age || this.selectedFromAge.to_age == '' || !this.selectedFromAge.from_age || this.selectedFromAge.from_age == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;

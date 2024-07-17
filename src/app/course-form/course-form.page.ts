@@ -1,5 +1,5 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from '../base-page/base-page';
 import { AddDatesPage } from '../add-dates/add-dates.page';
 
@@ -11,6 +11,7 @@ import { AddDatesPage } from '../add-dates/add-dates.page';
 export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   params;
   backUrl;
   lang;
@@ -45,7 +46,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     schedules: null
   };
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private el: ElementRef) {
     super(injector);
     this.initialize();
   }
@@ -55,12 +56,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize() { }
 
   async ionViewWillEnter() {
-    // localStorage.removeItem('course_Id');
-    // console.log("dsfvghghfghdfs");
-
 
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -92,7 +89,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['price'] = data['price'];
     this.formData['from_age'] = data['from_age'];
     this.formData['to_age'] = data['to_age'];
-    console.log(this.formData['to_age']);
     this.formData['duration'] = data['duration'];
     this.formData['image'] = data['image'];
     this.formData['capacity'] = data['capacity'];
@@ -129,9 +125,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.formData['capacity'] = value.capacity;
     }
     if (key == 'age') {
-      console.log('====================================');
-      console.log(key);
-      console.log('====================================');
       this.age = value.mode;
       this.formData['from_age'] = value.from_age;
       this.formData['to_age'] = value.to_age;
@@ -150,7 +143,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
 
     const f = this.formData;
-    console.log(f);
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
       return;
     }
@@ -164,14 +156,13 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     f['user_id'] = user.id;
     f['type'] = this.type;
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
-    console.log(res);
     let courseId = res.course.id;
     if (courseId) {
       let obj = {
         course_id: courseId,
         image: this.formData.image
       };
-      let image = await this.network.postCoursePhoto(obj);
+      // let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
 
@@ -179,11 +170,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
 
+
+
       this.events.publish("set-form-course-category", this.formData);
-      console.log('set-form-keywords-list', res.course.keywords);
-      setTimeout( () => {
-        this.events.publish('set-form-keywords-list', res.course.keywords);
-      }, 3000)
+      this.events.publish('set-form-keywords-list', res.course.keywords);
+      this.content.scrollToTop(500); // 500ms animation duration
 
 
     }
@@ -198,9 +189,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
+    console.log(this.formData)
     let f = this.formData;
-    console.log(f);
-    // return
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
     }

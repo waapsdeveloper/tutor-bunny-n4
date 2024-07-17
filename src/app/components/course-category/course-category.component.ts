@@ -13,7 +13,12 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   @Input() inputCategory;
-
+  @Input() selectedCategory = {
+    "created_at": null,
+    "id": 3,
+    "name": "",
+    "updated_at": null
+  };
   categury = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
@@ -38,15 +43,9 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
 
   public get category(): any {
     console.log(this.category);
-
     return this._category
   }
-  selectedCategory = {
-    "created_at": null,
-    "id": 3,
-    "name": "",
-    "updated_at": null
-  };
+
   constructor(injector: Injector) {
     super(injector)
   }
@@ -58,19 +57,20 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
         this.selectedCategory = data.category;
       }
     });
-    
+
 
     this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
-      if (!formData.image) {
+      console.log("cateogry point 3333", formData)
+      if (!formData.category) {
         this.isRequired = true;
-        this.errorText = 'Image is required to upload'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
-      } else if (!formData.photo_id) {
+      }
+
+      if(formData.category && !formData.category.name){
         this.isRequired = true;
-        this.errorText = 'Photo ID is required to upload'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);

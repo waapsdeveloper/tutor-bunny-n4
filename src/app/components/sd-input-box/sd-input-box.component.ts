@@ -27,6 +27,7 @@ export class SdInputBoxComponent implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+
       if (this.key == 'title' || this.key == 'description') {
         return;
       }
@@ -58,6 +59,20 @@ export class SdInputBoxComponent implements OnInit {
 
       let v = formData[this.key];
 
+
+
+      console.log(v, this.key, formData)
+      if (v && this.key == 'title' && v.length > 50) {
+
+        this.isRequired = true;
+        this.errorText = 'The title field must be maximum 50 charecters'
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+
+        return;
+      }
+
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {
@@ -65,14 +80,29 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
       }
 
-      if (v && this.key == 'title' && v.length >= 50) {
+    }, false);
+
+
+    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
+
+      if (this.key != 'price' && this.key != 'duration' && this.key != 'lesson') {
+        return;
+      }
+
+      let v = formData[this.key];
+
+      if (!v || v == '') {
         this.isRequired = true;
-        this.errorText = 'The title field must be maximum 50 charecters'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
-    }, false);
+
+
+
+
+
+    })
 
   }
 

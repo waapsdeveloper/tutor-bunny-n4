@@ -22,10 +22,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.item);
-
     this.status = this.item.status;
-    console.log(this.status);
   }
 
   async initialize() {
@@ -107,9 +104,11 @@ export class CourseCardComponent extends BasePage implements OnInit {
     let res = await this.network.inactiveCourse(obj)
     console.log(res);
     if (res.status === 200) {
+      this.item = res.course;
+      this.status = this.item.status;
       this.inActiveTab.emit();
     }
-    
+
   }
 
 
@@ -119,7 +118,10 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.activeCourse(obj)
+    console.log(res)
     if (res.status === 200) {
+      this.item = res.course;
+      this.status = this.item.status;
       this.activeTab.emit();
     }
   }

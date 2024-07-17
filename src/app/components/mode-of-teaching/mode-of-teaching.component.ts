@@ -41,12 +41,16 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
       console.log(v, this.key)
-      if (!v || v == '') {
+
+
+
+      if (!this.teachingMode.capacity || this.teachingMode.capacity == '' || !this.teachingMode.mode || this.teachingMode.mode == '') {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
+
     }, false)
   }
 

@@ -2,7 +2,7 @@
   <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step == 2"
     (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
 </ion-header>
-<ion-content class="ion-padding ">
+<ion-content class="ion-padding " #content>
   <form>
     <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
       <swiper-slide>
@@ -72,7 +72,7 @@
               [errorText]="'Course photo is required'"></app-course-photo>
           </div>
           <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="formData.from_age"
-            [to_age]="formData.to_age" [key]="'age'" [errorText]="'Age is required'"></app-sd-age-boox>
+            [to_age]="formData.to_age" [key]="'age'" [errorText]="'Age Range is required'"></app-sd-age-boox>
         </div>
       </swiper-slide>
       <swiper-slide>
