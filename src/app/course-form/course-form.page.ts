@@ -57,7 +57,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async ionViewWillEnter() {
     // localStorage.removeItem('course_Id');
     // console.log("dsfvghghfghdfs");
-    
+
 
     this.params = this.nav.getQueryParams();
     console.log(this.params);
@@ -148,7 +148,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-   
+
     const f = this.formData;
     console.log(f);
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
@@ -174,12 +174,18 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
-    this.events.publish('course_Id_get', courseId);
+
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
 
-      this.events.publish("set-form-course-category", this.formData)
+      this.events.publish("set-form-course-category", this.formData);
+      console.log('set-form-keywords-list', res.course.keywords);
+      setTimeout( () => {
+        this.events.publish('set-form-keywords-list', res.course.keywords);
+      }, 3000)
+
+
     }
   }
 
@@ -209,7 +215,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
-      this.utility.presentSuccessToast(res.message);
+
+      const message = !this.edit ? "Course created successfully" : "Course Updated Successfully";
+      this.utility.presentSuccessToast(message);
+
     }
     this.nav.pop('/tabs/teacher-dashboard');
     this.events.publish('initilize-the-list', res);

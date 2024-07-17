@@ -4,11 +4,13 @@
     <ion-col size="8">
       <div *ngFor="let item of schedules">
         <div class="fs-16">{{item.start_date}} - {{item.end_date}}</div>
-        <!-- <br> -->
       </div>
     </ion-col>
   </ion-row>
 </ion-grid>
+<div class="course-schedule-line-cmp-789675" *ngIf="!last">
+  <div class="line"></div>
+</div>
 <!-- <div class="schedule-day-78528">{{item.day}}</div>
   <div *ngFor="let item of schedules"
     style="display: flex; align-items: flex-start; flex-direction: column; flex-wrap: nowrap;">

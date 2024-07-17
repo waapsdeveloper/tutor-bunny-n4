@@ -1,13 +1,21 @@
+.weekly-schedule-date-78528 {
+  width: 100%;
+  // border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
+  padding: 8px 8px;
 
-
-  .weekly-schedule-date-78528 {
-    width: 100%;
-    // border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
-    padding: 8px 8px;
-
-    .schedule-day-78528 {
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-    }
+  .schedule-day-78528 {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
   }
+}
+
+.course-schedule-line-cmp-789675 {
+  width: 100%;
+  text-align: center;
+  .line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 0.5px solid rgb(103, 113, 105, 0.25);
+  }
+}

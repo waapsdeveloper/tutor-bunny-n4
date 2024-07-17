@@ -13,7 +13,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   noSugg = false;
-  subs = [];
+  @Input() subs = [];
   suggestionsList = [];
 
   @Input('key') key = '';
@@ -28,25 +28,27 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   async ngOnInit() {
 
     this.events.subscribe('teacher-course-second-screen-submit-call', async (formData: any) => {
+
       let v = formData[this.key];
-      if (!v || v == '') {
+
+      if (this.subs.length == 0) {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
       }
-      let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-      console.log(course_Id);
-      
+      // let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+      // console.log(course_Id);
 
-      let obj = {
-        course_id: course_Id,
-        name: this.inputText
-      }
 
-      const res2 = await this.network.getMyKeyword(obj)
-      this.subs = res2.result;
-      this.onChange.emit(this.subs);
+      // let obj = {
+      //   course_id: course_Id,
+      //   name: this.inputText
+      // }
+
+      // const res2 = await this.network.getMyKeyword(obj)
+      // this.subs = res2.result;
+      // this.onChange.emit(this.subs);
     }, false);
 
     this.events.subscribe('update-subs-list', (obj) => {

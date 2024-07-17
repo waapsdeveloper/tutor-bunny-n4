@@ -26,22 +26,25 @@ export class KeywordListComponent implements OnInit {
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(private modals: ModalService, private network: NetworkService, private events: EventsService) {
-    this.initialize()
+
   }
   ngOnDestroy(): void {
     this.events.publish('update-subs-list', {
       subs: this.subs
-    })
+    });
   }
   ngOnInit() {
+
+    // this.events.subscribe('set-form-keywords-list', async (data: any) => {
+    //   console.log("set-form-keywords-list", data);
+    //   this.list = data;
+
+    //   // this.search = "";
+    //   // this.page = 1;
+    //   // this.callApi();
+    // })
   }
-  async initialize() {
-    this.events.subscribe('course_Id_get', async (course_Id: any) => {
-      this.search = "";
-      this.page = 1;
-      this.callApi();
-    })
-  }
+
   callApi() {
     return new Promise(async resolve => {
       let obj = {

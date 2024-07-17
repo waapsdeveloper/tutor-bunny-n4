@@ -110,7 +110,7 @@
           Weekly Schedule
         </div>
         <div class="days-box">
-          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
+          <app-course-schedules *ngFor="let item of schedules; let i = index" [item]="item" [last]="i == (schedules.length - 1)"></app-course-schedules>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
         <img src="assets/svg/send.svg" />
         <span class="roboto-medium fs-20 " style="font-size: 20px;"> Request Free Trial </span>
       </div>
-      <!-- <app-sd-button-gray [image]="'assets/svg/send.svg'" 
+      <!-- <app-sd-button-gray [image]="'assets/svg/send.svg'"
         [text]="''"></app-sd-button-gray> -->
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
