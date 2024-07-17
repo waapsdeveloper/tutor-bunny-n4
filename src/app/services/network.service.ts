@@ -99,8 +99,9 @@ export class NetworkService {
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
-  geTrailRequests(id) {
-    return this.httpGetResponse('course/recent/trials/' + id, null, false, false);
+  geTrailRequests(data, id) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('course/recent/trials/' + id + '?' + str , null, false, false);
   }
 
   getMessagesRoom(id) {

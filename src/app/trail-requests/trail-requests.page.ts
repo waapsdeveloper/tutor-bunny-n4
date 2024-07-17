@@ -21,6 +21,9 @@ export class TrailRequestsPage extends BasePage implements OnInit {
   async initialize() {
     this.user = this.users.getUser();
 
-    this.trial = await this.network.geTrailRequests(this.user.id)
+    let obj = {
+
+    }
+    this.trial = await this.network.geTrailRequests(obj, this.user.id)
   }
 }
