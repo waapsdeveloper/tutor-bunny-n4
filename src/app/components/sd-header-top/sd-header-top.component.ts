@@ -8,12 +8,14 @@ import { NavService } from 'src/app/services/nav.service';
 })
 export class SdHeaderTopComponent implements OnInit {
   @Input() showSearch: boolean = false;
+  @Input() showFav: boolean = false;
   @Input() showNotification: boolean = false;
   @Input() showBack: boolean = false;
   @Input() showEdit: boolean = false;
   @Input() showShare: boolean = false;
   @Input() backUrl: string = '';
   @Input() title: string = '';
+  
 
   @Input() parentHandleBack: boolean = false;
 

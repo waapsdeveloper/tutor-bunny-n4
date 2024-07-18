@@ -42,7 +42,7 @@ export class CourseDatesComponent extends BasePage implements OnInit {
   }
 
   async openSchedule() {
-    let res = await this.modals.present(AddScheduleComponent, {}, "", 0.7);
+    let res = await this.modals.present(AddScheduleComponent,);
 
   }
 

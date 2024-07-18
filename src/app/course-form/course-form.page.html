@@ -31,7 +31,8 @@
               <div class="label-with-word-count-left">
                 <span>Description</span> <img src="../../assets/svg/question.svg" alt="" id="click-description">
               </div>
-              <div class="label-with-word-count-right roboto-light"> {{ formData?.description?.length || 0 }} Characters </div>
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.description?.length || 0 }} Characters
+              </div>
             </div>
             <ion-popover trigger="click-description" triggerAction="click">
               <ng-template>
@@ -155,14 +156,13 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
-    <div class="number-selection-outer-678956" (click)="changeToPrev()">
+    <!-- <div class="number-selection-outer-678956" (click)="changeToPrev()">
       <div class="number-box-7896">
         <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
         <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>
       </div>
       <div class="center-line-hr-96895"></div>
-
-    </div>
+    </div> -->
 
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>

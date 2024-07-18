@@ -4,9 +4,9 @@
       <div class="vedio-box-inner" (click)="oepnDeatils(item)">
         <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
         </div>
-        <p class="video-para">{{item.title}}</p>
+        <div class="video-para">{{item.title}}</div>
+        <div class="price-tag">${{item.price}}/month</div>
       </div>
-      <div class="price-tag">${{item.price}}/month</div>
     </swiper-slide>
   </swiper-container>
 </div>

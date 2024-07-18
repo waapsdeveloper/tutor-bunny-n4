@@ -7,6 +7,7 @@ import { SdBsearchBtnModule } from '../sd-bsearch-btn/sd-bsearch-btn.module';
 import { SdBontiBtnModule } from '../sd-bonti-btn/sd-bonti-btn.module';
 import { SdEditButtonModule } from "../sd-edit-button/sd-edit-button.module";
 import { SdShareButtonModule } from '../sd-share-button/sd-share-button.module';
+import { SdFavButtonModule } from '../sd-fav-button/sd-fav-button.module';
 
 @NgModule({
   declarations: [SdHeaderTopComponent],
@@ -17,7 +18,8 @@ import { SdShareButtonModule } from '../sd-share-button/sd-share-button.module';
     SdBsearchBtnModule,
     SdBontiBtnModule,
     SdEditButtonModule,
-    SdShareButtonModule
+    SdShareButtonModule,
+    SdFavButtonModule
 ],
   exports: [SdHeaderTopComponent],
 })

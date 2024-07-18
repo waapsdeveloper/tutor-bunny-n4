@@ -30,13 +30,11 @@ export class CoursesListComponent extends BasePage implements OnInit {
         page: page,
         liked: liked
       };
-
       const res = await this.network.getAllCourses(obj) as any;
       console.log(res);
       const data = res.result;
       this.page = data.current_page;
-      this.last_page = data.last_page;
-
+      this.last_page = data.last_page; 
       if (page === 1) {
         this.list = data.data;
       } else {

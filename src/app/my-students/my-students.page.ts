@@ -64,7 +64,8 @@ export class MyStudentsPage extends BasePage implements OnInit {
 
   removeFromList(id) {
     console.log(id)
-    // this.initialize();
+    this.getTrials('', 1);
+
   }
 
   filterByStatus(status = ''){
