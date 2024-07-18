@@ -95,7 +95,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['category'] = data['category'];
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
-    this.formData['keywords'] = data['keywords'];
+    this.formData['keyword'] = data['keywords'];
+    console.log(this.formData['keyword']);
+    
     this.formData['lesson'] = data['lesson'];
     this.formData['category'] = data['category'][0]
 
@@ -142,7 +144,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
 
-    let f = Object.assign({}, this.formData);
+    const f = this.formData;
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
       return;
     }
@@ -155,8 +157,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
-
-    delete f['image'];
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
     let courseId = res.course.id;
     if (courseId) {
@@ -164,7 +164,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         course_id: courseId,
         image: this.formData.image
       };
-      let image = await this.network.postCoursePhoto(obj);
+      // let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
 
@@ -193,18 +193,13 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     console.log(this.formData)
     let f = this.formData;
-    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keywords) {
-      console.log(f.keyword);
+    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
-      
     }
-    if (f.keywords.length == 0) {
-      console.log("adsda");
+    if (f.keyword.length == 0) {
       return;
     }
     const course_id = localStorage.getItem('course_Id');
-    console.log("dsads");
-    
 
     if (f.category && f.category.id) {
       f.category_id = f.category.id
