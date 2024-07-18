@@ -3,7 +3,7 @@
     <ion-col size="4" class="schedule-day-78528">{{item.day}}</ion-col>
     <ion-col size="8" style="display: flex; flex-direction: column; gap: 8px;">
       <div *ngFor="let item of schedules">
-        <div class="fs-16 " style="text-transform: uppercase;">{{item.start_date}} - {{item.end_date}}</div>
+        <div class="fs-16 " style="text-transform: uppercase;"><img src="../../../assets/clock.svg" alt=""> {{item.start_date}} - {{item.end_date}}</div>
       </div>
     </ion-col>
   </ion-row>
