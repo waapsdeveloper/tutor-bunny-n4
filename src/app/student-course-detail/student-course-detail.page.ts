@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from '../base-page/base-page';
+import { TrailMessageComponent } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -43,7 +44,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
   ngOnInit() {
 
-   
+
 
   }
 
@@ -121,14 +122,51 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   async requestTrail() {
 
 
-    this.trail = true;
+    // this.trail = true;
     let user = this.users.getUser()
 
-    let obj = {
-      user_id: user.id,
-      course_id: this.course_Id
+    // let obj = {
+    //   user_id: user.id,
+    //   course_id: this.course_Id
+    // }
+    // let res = await this.network.requestTrail(obj)
+
+    let v = await this.profiles.isProfileCompleted(user) as any;;
+    console.log(v);
+
+    if (v || v == true) {
+
+      let data = await this.modals.present(TrailMessageComponent, {
+      }, "", 0.7);;
+      console.log(data.data);
+      // return
+      let send = data.data.send;
+      console.log(send);
+
+
+
+      if (send == true) {
+        this.trail = true;
+        let user = this.users.getUser()
+        let obj = {
+          user_id: user.id,
+          course_id: this.course_Id,
+          message: data.data.message
+        }
+        let res = await this.network.requestTrail(obj)
+        console.log(res);
+        this.trail = true;
+      }
+      else {
+        return
+      }
     }
-    let res = await this.network.requestTrail(obj)
+    else {
+      this.nav.push('/student-profile/student-profile-edit', {
+        backUrl: '/tabs/student-dashboard', showBack: true
+      }
+      )
+    }
 
   }
 

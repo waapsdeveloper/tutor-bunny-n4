@@ -19,7 +19,7 @@ export class KeywordListComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   noSugg = false;
-  @Input() subs = [];
+  @Input() subs: any[] = [];
   suggestionsList = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';

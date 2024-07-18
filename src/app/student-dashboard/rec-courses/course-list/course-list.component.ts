@@ -152,6 +152,8 @@ export class CourseListComponent extends BasePage implements OnInit {
     const res = await this.network.addCourseFav(obj)
     this.fav = true;
 
+    this.events.publish('update-fav-dot-d')
+
   }
 
   async removeToFav() {
@@ -162,6 +164,8 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     const res = await this.network.removeCourseFav(obj)
     this.fav = false;
+
+    this.events.publish('update-fav-dot-d')
   }
 
 

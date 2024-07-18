@@ -34,9 +34,6 @@ export class FavCoursesPage extends BasePage implements OnInit {
         console.log(cp);
         let ls = d.data;
         this.listCount = cp == 1 && ls.length == 0 ? 0 : -1;
-
-
-
       }
     })
   }

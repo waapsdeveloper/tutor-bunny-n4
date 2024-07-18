@@ -32,7 +32,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
 
-    })
+    });
+
+    this.events.subscribe('update-fav-dot-d', (data) => {
+      this.getCountOfLikes()
+    });
+
+    this.getCountOfLikes()
   }
 
   ionViewWillEnter() {
@@ -117,12 +123,28 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       res
     });
 
+    this.getCountOfLikes()
+
 
 
     // this.showLiked = !this.showLiked;
     // this.events.publish("show-list-of-fav-courses", {
     //   liked: this.showLiked
     // })
+  }
+
+  async getCountOfLikes(){
+    let obj = {
+      liked: true
+    }
+
+    const res = await this.network.getAllCourses(obj) as any;
+    console.log(res)
+    const data = res.result;
+    const d = data.data;
+    this.showLiked = d.length > 0;
+
+
   }
 
 }

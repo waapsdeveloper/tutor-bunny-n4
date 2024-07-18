@@ -57,6 +57,7 @@
 .icon-box-77 {
   height: 24px;
   width: 24px;
+  position: relative;
 }
 
 
@@ -177,4 +178,15 @@
 
 .body-scroll{
   padding: 0 6px;
+}
+
+.red-dot-4432432532 {
+  width: 8px;
+  height: 8px;
+  background: red;
+  position: absolute;
+  top: 2px;
+  right: -1px;
+  border-radius: 50%;
+  z-index: 5;
 }
