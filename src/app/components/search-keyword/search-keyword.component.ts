@@ -13,7 +13,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   noSugg = false;
-  @Input() subs = [];
+  @Input() subs: any[] = [];
   suggestionsList = [];
 
   @Input('key') key = '';

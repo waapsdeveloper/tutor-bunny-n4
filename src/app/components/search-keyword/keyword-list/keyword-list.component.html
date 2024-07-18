@@ -5,12 +5,12 @@
 
 <ion-content class="ion-padding ion-content-medium-background" >
   <div class="d-flex flex-column gap-16">
-    <div class="subjects d-flex flex-column gap-16" [class.low-opac-6644]="subs.length > 4">
+    <div class="subjects d-flex flex-column gap-16" [class.low-opac-6644]="subs && subs.length > 4">
       <!-- <div class="fs-12 roboto-medium">Type and search your subjects</div> -->
       <div class="d-flex flex-row gap-16">
         <div class="sd-input-box-outer-675315">
           <input class="fs-16 outfit sd-input-box-input-675315" [(ngModel)]="inputText" [type]="type" placeholder="Search subjects"
-            [placeholder]="'Search'" (keyup)="checkSuggestions($event)" [readOnly]="subs.length > 4" />
+            [placeholder]="'Search'" (keyup)="checkSuggestions($event)" [readOnly]="subs && subs.length > 4" />
           <ion-icon *ngIf="inputText" name="close-outline" (click)="inputText = ''"></ion-icon>
         </div>
         <!-- *ngIf="suggestionsList.length == 0" -->

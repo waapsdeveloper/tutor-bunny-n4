@@ -215,4 +215,11 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       gallary: "true", title: 'Upload Gallery'
     })
   }
+
+  shouldHandleBackToPrevScreen() {
+    if (this.step == 2) {
+      this.step = 1;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+  }
 }

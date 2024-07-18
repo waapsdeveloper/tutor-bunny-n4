@@ -217,7 +217,7 @@ export class NetworkService {
   }
 
   AddSchedule(data) {
-    return this.httpPostResponse('schedule/add', data, null, true, true);
+    return this.httpPostResponse('schedule/add', data, null, false, true);
   }
   inactiveCourse(data) {
     return this.httpPostResponse('courses/de-activate-course-by-id', data, null, false, false);

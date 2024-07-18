@@ -3,9 +3,9 @@
     <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
     </div>
     <div class="header-oblique-double-675">
-      <div class="header-line-678576">
+      <div class="header-line-678576" (click)="openEditProfile()">
         <div class="header-line-box-678576">
-          <img src="../../assets/svg/edit.svg" (click)="openEditProfile()" />
+          <img src="../../assets/svg/edit.svg"  />
         </div>
       </div>
       <div class="header-info-box-68447">

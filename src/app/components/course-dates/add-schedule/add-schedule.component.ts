@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -6,7 +6,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './add-schedule.component.html',
   styleUrls: ['./add-schedule.component.scss'],
 })
-export class AddScheduleComponent extends BasePage implements OnInit {
+export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy {
   start_time: string[] = [];
   end_time: string[] = [];
   @Input() courseId = {};
@@ -15,7 +15,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
   error = false;
   date = '';
   course_Id: any;
-
+  submitPressed = false;
   schedule = [{ day: '', start_date: '', end_date: '', course_id: '', id: '' }];
 
   constructor(injecter: Injector) {
@@ -23,7 +23,15 @@ export class AddScheduleComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
+  ngOnDestroy(): void {
+    if(!this.submitPressed) {
+      this.submit()
+    };
+
+  }
+
   async ngOnInit() {
+    this.submitPressed = false;
     this.courseType = localStorage.getItem('courseType');
     console.log(this.courseType);
     this.start_time = await this.generateTimes();
@@ -78,6 +86,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
   }
 
   async submit() {
+    this.submitPressed = true;
     let courseId = localStorage.getItem('course_Id');
     for (let item of this.schedule) {
       if (!item.day || !item.start_date || !item.end_date) {
@@ -99,7 +108,7 @@ export class AddScheduleComponent extends BasePage implements OnInit {
       this.modals.dismiss();
     }
   }
-  
+
   async deleteShedule(id) {
     let res = await this.network.deleteShedule(id);
     await this.callApi(this.course_Id);

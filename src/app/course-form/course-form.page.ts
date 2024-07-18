@@ -142,7 +142,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
 
-    const f = this.formData;
+    let f = Object.assign({}, this.formData);
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
       return;
     }
@@ -155,6 +155,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
+
+    delete f['image'];
     const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
     let courseId = res.course.id;
     if (courseId) {
@@ -162,7 +164,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         course_id: courseId,
         image: this.formData.image
       };
-      // let image = await this.network.postCoursePhoto(obj);
+      let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
 
