@@ -68,10 +68,6 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
       }
     }
-
-    // if (this.data.status == 'approved') {
-    //   this.shield = true;
-    // }
   }
 
 

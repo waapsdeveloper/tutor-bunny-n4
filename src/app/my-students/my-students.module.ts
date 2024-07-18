@@ -17,7 +17,7 @@ import { TrailCardModule } from './trail-card/trail-card.module';
     IonicModule,
     MyStudentsPageRoutingModule,
     SdHeaderTopModule,
-    TrailCardModule
+    TrailCardModule,
   ],
   declarations: [MyStudentsPage]
 })

@@ -36,4 +36,10 @@ export class SdHeaderTopComponent implements OnInit {
   editCourse() {
 
   }
+
+  goToNotificatioon() {
+    this.nav.push('notifications', {
+      backUrl: '/tabs/menu', showBack: true
+    })
+  }
 }

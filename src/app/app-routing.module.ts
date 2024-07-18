@@ -112,7 +112,11 @@ const routes: Routes = [
   {
     path: 'fav-courses',
     loadChildren: () => import('./fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
+  },  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   },
+
 
 
 
