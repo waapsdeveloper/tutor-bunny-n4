@@ -1,10 +1,10 @@
 <div class="student-box-outer-689567">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">My Courses (5)
+    <div class="sb-heading-title-7895 outfit-semibold">My Courses ({{count}})
     </div>
     <div class="sb-heading-sl-7895 outfit">See all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-<app-course-list></app-course-list>
+<app-course-list [list]="list"></app-course-list>

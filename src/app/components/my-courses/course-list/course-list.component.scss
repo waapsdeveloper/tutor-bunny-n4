@@ -1,12 +1,14 @@
 .vedio-box-outer {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 }
-swiper-slide{
+
+swiper-slide {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
@@ -38,7 +40,7 @@ swiper-slide{
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(/assets/img-2.jpg);
+    background-image: url(../../../../assets/img-2.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
@@ -53,13 +55,14 @@ swiper-slide{
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(/assets/img-3.jpg);
+    background-image: url(../../../../assets/img-3.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
     background-size: cover;
     // background-position: center;
   }
+
   .video-89654 {
     height: 105px;
     width: 100%;
@@ -67,7 +70,7 @@ swiper-slide{
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(/assets/img-4.jpg);
+    background-image: url(../../../../assets/img-4.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
@@ -82,7 +85,7 @@ swiper-slide{
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(/assets/img-5.jpg);
+    background-image: url(../../../../assets/img-5.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
@@ -97,7 +100,7 @@ swiper-slide{
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(/assets/img-6.jpg);
+    background-image: url(../../../../assets/img-6.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
@@ -112,22 +115,30 @@ swiper-slide{
 
 .video-para {
   color: white;
-  margin-left: 10px;
-  font-size: 16px;
+  margin-left: 5px;
+  overflow: hidden;
+  display: -webkit-box;
+  line-height: 21px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 14px;
 }
 
 .you-img {
   // height: 24px;
   width: 35px;
 }
-
-.line{
+.price-tag{
+  font-size: 14px;
+  color: rgba(0, 0, 0, 1);
+}
+.line {
   width: 95%;
   height: 0.15px;
   background-color: #677169;
 }
 
-.vedio-content-89658{
+.vedio-content-89658 {
 
   display: flex;
   align-items: center;

@@ -1,28 +1,12 @@
 <div class="vedio-content-89658">
   <swiper-container #slides style="width: calc(100vw - 32px); display: flex;" slides-per-view="2">
-    <swiper-slide style="width: 100%; gap: 100px;">
-      <div class="vedio-box-inner">
-        <div class="video-89651">
-          <img src="../../../../assets/youtube.png" alt="" class="you-img">
+    <swiper-slide style="width: 100%; gap: 10px;" *ngFor="let item of list">
+      <div class="vedio-box-inner" (click)="oepnDeatils(item)">
+        <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
         </div>
-        <p class="video-para">How to create Course</p>
+        <p class="video-para">{{item.title}}</p>
       </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
-      <div class="vedio-box-inner">
-        <div class="video-89652">
-          <img src="../../../../assets/youtube.png" alt="" class="you-img">
-        </div>
-        <p class="video-para">Manage Trial requests</p>
-      </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
-      <div class="vedio-box-inner">
-        <div class="video-89653">
-          <img src="../../../../assets/youtube.png" alt="" class="you-img">
-        </div>
-        <p class="video-para">View your earnings</p>
-      </div>
+      <div class="price-tag">${{item.price}}/month</div>
     </swiper-slide>
   </swiper-container>
 </div>
