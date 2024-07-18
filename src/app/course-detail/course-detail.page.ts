@@ -35,11 +35,15 @@ export class CourseDetailPage extends BasePage implements OnInit {
   otherCourseList: any[] = [];
   otherCourseListTotalCount: number = 0;
 
+  user;
+  canEditCourse = false;
+
   constructor(injector: Injector) {
     super(injector)
   }
 
   ngOnInit() {
+
   }
 
 
@@ -56,7 +60,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   async callApi() {
-
+    this.user = this.users.getUser();
     let res = await this.network.getcourseById(this.course_Id) as any;
     console.log(res);
 
@@ -88,6 +92,14 @@ export class CourseDetailPage extends BasePage implements OnInit {
       console.log(this.data.category[0].id);
       this.categoryId = this.data.category[0].id;
       this.getOtherCourseList(this.categoryId)
+    }
+
+    // can edit course
+    const uid = this.user.id;
+    const cuid = this.data.user_id;
+    console.log(uid, cuid)
+    if(uid == cuid){
+      this.canEditCourse = true;
     }
 
   }
@@ -127,5 +139,20 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   openOtherCourses($event){
     this.nav.push('/tabs/other-courses', {category_id: this.categoryId})
+  }
+
+  openDetails(){
+    //console.log("EWER")
+    const params = {
+      course_Id: this.course_Id,
+      edit: true,
+      showBack: true,
+      title: 'Edit Course'
+      // backUrl: '/tabs/course-detail'
+    }
+    this.nav.push('/course-form', params)
+
+
+
   }
 }

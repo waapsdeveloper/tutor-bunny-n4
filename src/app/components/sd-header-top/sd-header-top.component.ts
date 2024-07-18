@@ -17,7 +17,8 @@ export class SdHeaderTopComponent implements OnInit {
 
   @Input() parentHandleBack: boolean = false;
 
-  @Output('parentBack') parentBack: EventEmitter<any> = new EventEmitter<any>()
+  @Output('parentBack') parentBack: EventEmitter<any> = new EventEmitter<any>();
+  @Output('parentEdit') parentEdit: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private nav: NavService) { }
 
@@ -34,7 +35,7 @@ export class SdHeaderTopComponent implements OnInit {
   }
 
   editCourse() {
-
+    this.parentEdit.emit()
   }
 
   goToNotificatioon() {
