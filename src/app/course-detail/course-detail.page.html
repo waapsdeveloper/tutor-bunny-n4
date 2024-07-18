@@ -1,5 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="backUrl" [showEdit]="true" [showShare]=""></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="backUrl" [showEdit]="true"
+    [showShare]=""></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
@@ -95,6 +96,7 @@
     </div>
     <div class="line"></div>
 
-    <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount" [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"></app-other-courses>
+    <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
+      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"></app-other-courses>
   </div>
 </ion-content>

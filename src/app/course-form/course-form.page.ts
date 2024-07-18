@@ -191,13 +191,18 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
     console.log(this.formData)
     let f = this.formData;
-    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
+    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keywords) {
+      console.log(f.keyword);
       return;
+      
     }
-    if (f.keyword.length == 0) {
+    if (f.keywords.length == 0) {
+      console.log("adsda");
       return;
     }
     const course_id = localStorage.getItem('course_Id');
+    console.log("dsads");
+    
 
     if (f.category && f.category.id) {
       f.category_id = f.category.id

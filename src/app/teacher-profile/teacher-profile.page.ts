@@ -14,7 +14,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   user;
   displayName = 'LL'
   flag
-  showGellary= false;
+  showGellary = false;
   item;
   data;
   shield;
@@ -61,13 +61,17 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       const data = await this.network.getImage(user.id) as any;
       this.images = data.result;
       console.log(this.images.length);
-      if(this.images.length != 0){
+      if (this.images.length != 0) {
 
         this.showGellary = true;
 
 
       }
     }
+
+    // if (this.data.status == 'approved') {
+    //   this.shield = true;
+    // }
   }
 
 

@@ -29,11 +29,11 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
               <div class="label-with-word-count-left">
-                <span>Description</span> <img src="../../assets/svg/question.svg" alt="" id="click-trigger">
+                <span>Description</span> <img src="../../assets/svg/question.svg" alt="" id="click-description">
               </div>
               <div class="label-with-word-count-right roboto-light"> {{ formData?.description?.length || 0 }} / 250 (min) </div>
             </div>
-            <ion-popover trigger="click-detail" triggerAction="click">
+            <ion-popover trigger="click-description" triggerAction="click">
               <ng-template>
                 <div class="ion-padding popover-title">
                   Include the following details for this field.

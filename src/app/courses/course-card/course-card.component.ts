@@ -90,9 +90,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
       id: item.id
     })
 
-
-
-
   }
 
   async inactiveCourse(data) {

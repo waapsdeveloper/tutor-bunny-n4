@@ -15,6 +15,7 @@ import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
 import { MyCoursesModule } from '../components/my-courses/my-courses.module';
 import { MyGalleryModule } from '../components/my-gallery/my-gallery.module';
 import { RatingReviewModule } from '../components/rating-review/rating-review.module';
+import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { RatingReviewModule } from '../components/rating-review/rating-review.mo
     YoutubeBoxModule,
     MyCoursesModule,
     MyGalleryModule,
-    RatingReviewModule
+    RatingReviewModule,
+    OtherCoursesModule
   ],
   declarations: [TeacherProfilePage],
 })
