@@ -27,10 +27,11 @@ export class CoursesPage extends BasePage implements OnInit {
 
     this.user = this.users.getUser();
     this.getCourses('', 1)
-
-    // this.events.subscribe('initilize-the-list', (res) => {
-    //   this.initialize()
-    // });
+    
+    this.events.subscribe('initilize-the-list', (res) => {
+      this.getCourses('', 1)
+      // this.initialize()
+    });
 
   }
 
@@ -88,6 +89,8 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   courseEdit() {
+    console.log("DSfsdf");
+    
     this.getCourses(this.search, 1)
   }
 

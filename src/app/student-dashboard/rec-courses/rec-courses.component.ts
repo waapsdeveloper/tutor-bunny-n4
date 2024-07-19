@@ -57,8 +57,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       let res = await this.network.getcourseById(course_Id) as any;
       console.log(res);
       this.course = res.course;
-
-      // Add the received course to the list or update if it exists
       if (this.course) {
         const index = this.list.findIndex(c => c.id === this.course.id);
         if (index !== -1) {

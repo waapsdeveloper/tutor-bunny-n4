@@ -146,6 +146,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     const params = {
       course_Id: this.course_Id,
       edit: true,
+      type: this.data.type,
       showBack: true,
       title: 'Edit Course'
       // backUrl: '/tabs/course-detail'

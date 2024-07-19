@@ -18,18 +18,43 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   city;
   list;
   flag;
+  newTrial;
   serial_number;
   constructor(injector: Injector) {
     super(injector)
     this.initialize();
   }
-  ngOnInit() { };
+  ngOnInit() { 
+    this.trialsReceivedViaPusher();
+  };
+  trialsReceivedViaPusher() {
+    this.events.registerPusherEvent(this.user.id);
+    console.log("sdfsf");
+
+    this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
+  }
+
+  updateTrailsList(data:any){
+    console.log(data);
+    this.newTrial = data;
+    this.initialize();
+
+    if (this.newTrial) {
+      const index = this.trial.findIndex(c => c.id === this.newTrial.id);
+      if (index !== -1) {
+        this.list[index] = this.newTrial;
+      } else {
+        this.list = [this.newTrial, ...this.trial];
+      }
+    }
+
+  }
   async initialize() {
     this.user = this.users.getUser();
     let obj = {
       teacher_id: this.user.id
     }
-    let res = await this.network.getPendingTrial(this.user.id, obj,);
+    let res = await this.network.getPendingTrial(this.user.id, obj);
     this.trailCount = res.total
     this.trial = res.trials;
     console.log(this.trial);
