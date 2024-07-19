@@ -29,6 +29,7 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       this.getCourses('', 1);
     })
     this.events.subscribe("show-list-of-fav-courses", () => {
+    this.initialize();
      
     });
     this.user = this.users.getUser();

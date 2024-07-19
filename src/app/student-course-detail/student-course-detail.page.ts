@@ -116,7 +116,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
     const res = await this.network.addCourseFav(obj)
 
-    this.events.publish('update-fav-dot-d')
+    this.events.publish('show-list-of-fav-courses')
     this.callApi();
   }
 
