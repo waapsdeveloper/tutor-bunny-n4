@@ -37,19 +37,23 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
-      // let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-      // console.log(course_Id);
 
-
-      // let obj = {
-      //   course_id: course_Id,
-      //   name: this.inputText
-      // }
-
-      // const res2 = await this.network.getMyKeyword(obj)
-      // this.subs = res2.result;
-      // this.onChange.emit(this.subs);
     }, false);
+
+    this.events.subscribe('set-form-keywords-list', async (data: any) => {
+      let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+      console.log(course_Id);
+
+
+      let obj = {
+        course_id: course_Id,
+        name: this.inputText
+      }
+
+      const res2 = await this.network.getMyKeyword(obj)
+      this.subs = res2.result;
+      this.onChange.emit(this.subs);
+    })
 
     this.events.subscribe('update-subs-list', (obj) => {
       this.subs = obj.subs

@@ -7,7 +7,7 @@
     <app-sd-bsearch-btn *ngIf="showSearch"></app-sd-bsearch-btn>
     <app-sd-bonti-btn *ngIf="showNotification" (click)="goToNotificatioon()"></app-sd-bonti-btn>
     <app-sd-edit-button *ngIf="showEdit" (click)="editCourse()"></app-sd-edit-button>
-    <app-sd-fav-button *ngIf="showFav"></app-sd-fav-button>
+    <app-sd-fav-button *ngIf="showFav || isfav == false" (click)="addtoFav()"></app-sd-fav-button>
     <app-sd-share-button *ngIf="showShare"></app-sd-share-button>
   </div>
 </div>

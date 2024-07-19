@@ -164,7 +164,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         course_id: courseId,
         image: this.formData.image
       };
-      // let image = await this.network.postCoursePhoto(obj);
+      let image = await this.network.postCoursePhoto(obj);
     }
     localStorage.setItem('course_Id', courseId);
 
@@ -212,7 +212,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.utility.presentSuccessToast(message);
 
     }
-    this.nav.pop('/tabs/teacher-dashboard');
+    this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
 
     // return

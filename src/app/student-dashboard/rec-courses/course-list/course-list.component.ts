@@ -82,11 +82,14 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   }
   async goToDeatil(item) {
+
+    
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
     }
     let res = await this.nav.push('student-course-detail', params)
+    this.events.publish('add-to-fav-from-detail', item);
     this.onChange.emit(res);
 
   }

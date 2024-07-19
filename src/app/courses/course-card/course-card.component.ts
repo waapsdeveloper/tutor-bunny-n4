@@ -16,6 +16,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
   @Output() activeTab = new EventEmitter<number>();
   @Output() inActiveTab = new EventEmitter<number>();
   @Output() detailsAction = new EventEmitter<any>();
+  @Output() courseEdit = new EventEmitter<any>();
 
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
@@ -71,7 +72,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
   }
 
-  editCourse(item) {
+  async editCourse(item) {
     const params = {
       backUrl: '/tabs/courses',
       title: 'Edit Course',
@@ -81,7 +82,9 @@ export class CourseCardComponent extends BasePage implements OnInit {
       edit: true
     };
 
-    this.nav.push('/course-form', params)
+    let res = await this.nav.push('/course-form', params)
+
+    this.courseEdit.emit(item.id);
 
   }
   oepnDeatils(item) {

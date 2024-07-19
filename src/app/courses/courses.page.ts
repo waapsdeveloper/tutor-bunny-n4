@@ -34,10 +34,10 @@ export class CoursesPage extends BasePage implements OnInit {
 
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     const params = this.nav.getQueryParams() as any
     console.log(params)
-    if(params.category_id){
+    if (params.category_id) {
       this.categoryId = params.category_id;
       this.pageTitle = 'Courses'
       this.search = '';
@@ -48,13 +48,13 @@ export class CoursesPage extends BasePage implements OnInit {
 
   async getCourses(search = '', page = 1) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
       let obj = {
         search: search,
         page: page
       }
 
-      if(this.categoryId){
+      if (this.categoryId) {
         obj['category_id'] = this.categoryId
       }
 
@@ -87,7 +87,11 @@ export class CoursesPage extends BasePage implements OnInit {
 
   }
 
-  openDetails(obj){
+  courseEdit() {
+    this.getCourses(this.search, 1)
+  }
+
+  openDetails(obj) {
 
     const params = {
       id: obj.id,
@@ -97,7 +101,7 @@ export class CoursesPage extends BasePage implements OnInit {
 
   }
 
-  async doSearch($event){
+  async doSearch($event) {
     console.log(this.search)
     await this.getCourses(this.search, 1);
   }
@@ -113,8 +117,8 @@ export class CoursesPage extends BasePage implements OnInit {
 
   async onIonInfinite(ev) {
 
-    console.log(this.last_page , this.page, this.last_page < this.page)
-    if(this.last_page > this.page){
+    console.log(this.last_page, this.page, this.last_page < this.page)
+    if (this.last_page > this.page) {
       await this.getCourses(this.search, this.page + 1);
     }
 
@@ -123,7 +127,7 @@ export class CoursesPage extends BasePage implements OnInit {
     }, 500);
   }
 
-  parentback(){
+  parentback() {
     this.nav.pop()
   }
 }
