@@ -7,20 +7,20 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './trail-list.component.html',
   styleUrls: ['./trail-list.component.scss'],
 })
-export class TrailListComponent extends BasePage  implements OnInit {
+export class TrailListComponent extends BasePage implements OnInit {
 
   @Input() item;
   flag;
   age;
   @Output() removeFromList = new EventEmitter<number>();
 
-  constructor(injector:Injector,  private alertController: AlertController) {
+  constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
-   }
+  }
 
   ngOnInit() {
     console.log(this.item);
-    
+
 
     this.flag = this.getFlag()
     this.calculateAge();
@@ -95,11 +95,11 @@ export class TrailListComponent extends BasePage  implements OnInit {
     this.age = currentYear - this.item.student.student.dob;
   }
   getFlag() {
-    
+
     if (this.item && this.item.student && this.item.student.student.country.iso2) {
       const flag = this.item.student.student.country.iso2;
       console.log(flag);
-      
+
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -111,8 +111,8 @@ export class TrailListComponent extends BasePage  implements OnInit {
   }
 
 
-  goToDeatil(){
-    
+  goToDeatil() {
+
     const params = {
       id: this.item.course.id,
       backUrl: '/tabs/teacher-dashboard'

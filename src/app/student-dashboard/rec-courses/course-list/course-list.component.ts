@@ -83,7 +83,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   async goToDeatil(item) {
 
-    
+
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
@@ -134,6 +134,30 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   }
 
+  async presentAlert(item) {
+    const alert = await this.alertController.create({
+      header: 'Are you sure to cancel the trail?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Alert canceled');
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.cancelTrail(item);
+            console.log('Alert confirmed');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
   async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser()
