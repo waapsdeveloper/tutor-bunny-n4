@@ -97,7 +97,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['language'] = data['language'];
     this.formData['keyword'] = data['keywords'];
     console.log(this.formData['keyword']);
-    
+
     this.formData['lesson'] = data['lesson'];
     this.formData['category'] = data['category'][0]
 
@@ -164,7 +164,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         course_id: courseId,
         image: this.formData.image
       };
-      let image = await this.network.postCoursePhoto(obj);
+      if (!this.formData.image.includes('https')) {
+        let image = await this.network.postCoursePhoto(obj);
+      }
     }
     localStorage.setItem('course_Id', courseId);
 
@@ -172,15 +174,12 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
 
-
-
       this.events.publish("set-form-course-category", this.formData);
       this.events.publish('set-form-keywords-list', res.course.keywords);
       this.content.scrollToTop(500); // 500ms animation duration
-
-
     }
   }
+
 
   async changeToPrev() {
     if (this.step == 2) {

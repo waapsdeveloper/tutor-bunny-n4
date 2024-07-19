@@ -26,12 +26,11 @@ swiper-slide {
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background-image: url(../../../../assets/img-4.jpg);
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: aliceblue;
     background-size: cover;
-    // background-position: center;
+    background-position: center center;
   }
 
 
@@ -51,7 +50,7 @@ swiper-slide {
   line-height: 21px;
   // -webkit-line-clamp: 1;
   // -webkit-box-orient: vertical;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .you-img {
@@ -59,7 +58,7 @@ swiper-slide {
   width: 35px;
 }
 .price-tag{
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 8px;
   font-weight: 600;
   color: rgba(0, 0, 0, 1);

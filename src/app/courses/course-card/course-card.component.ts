@@ -66,7 +66,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
       course_id: data.id,
     };
 
-    let res = await this.network.inactiveCourse(obj);
+    let res = await this.network.deleteCourse(obj);
     if (res.status === 200) {
       this.courseDeleted.emit(data.id);
     }

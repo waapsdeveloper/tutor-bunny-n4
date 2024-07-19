@@ -88,45 +88,38 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
 
-    if(this.data.category && this.data.category.length > 0){
+    if (this.data.category && this.data.category.length > 0) {
       console.log(this.data.category[0].id);
       this.categoryId = this.data.category[0].id;
       this.getOtherCourseList(this.categoryId)
     }
 
-    // can edit course
     const uid = this.user.id;
     const cuid = this.data.user_id;
     console.log(uid, cuid)
-    if(uid == cuid){
+    if (uid == cuid) {
       this.canEditCourse = true;
     }
 
   }
 
-  async getOtherCourseList(id){
+  async getOtherCourseList(id) {
 
     const obj = {
-      category_id: id
+      category_id: null
     }
     const res = await this.network.getOtherCourseList(obj)
     console.log(res);
     const result = res.result;
     this.otherCourseListTotalCount = result.total;
     this.otherCourseList = result.data;
-    // otherCourseList
-
   }
-
-
-
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
   }
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
       const flag = this.data.user.teacher.country.iso2;
-
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -137,19 +130,17 @@ export class CourseDetailPage extends BasePage implements OnInit {
     }
   }
 
-  openOtherCourses($event){
-    this.nav.push('/tabs/other-courses', {category_id: this.categoryId})
+  openOtherCourses($event) {
+    this.nav.push('/tabs/other-courses', { category_id: this.categoryId })
   }
 
-  openDetails(){
-    //console.log("EWER")
+  openDetails() {
     const params = {
       course_Id: this.course_Id,
       edit: true,
       type: this.data.type,
       showBack: true,
       title: 'Edit Course'
-      // backUrl: '/tabs/course-detail'
     }
     this.nav.push('/course-form', params)
 

@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from '../base-page/base-page';
 import { TrailMessageComponent } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -39,7 +40,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   schedules;
   acheduleTime;
   showFavValue = false;
-  constructor(injector: Injector) {
+  constructor(injector: Injector,  private alertController: AlertController) {
     super(injector)
   }
 
@@ -127,7 +128,10 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
     const res = await this.network.removeCourseFav(obj)
 
-    this.events.publish('update-fav-dot-d')
+   
+    this.events.publish("show-list-of-fav-courses", {
+     
+    })
     this.callApi();
 
   }
@@ -204,6 +208,30 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
       )
     }
 
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Are you sure to cancel the Trial?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Alert canceled');
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.cancelTrail();
+            console.log('Alert confirmed');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async cancelTrail() {

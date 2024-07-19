@@ -43,6 +43,11 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   ngOnInit() {
 
+    this.events.subscribe('update-fav-dot-d', (data) => {
+      console.log(data);
+      
+    });
+
     setTimeout(() => {
       this.callApi()
     }, 200);
@@ -136,7 +141,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async presentAlert(item) {
     const alert = await this.alertController.create({
-      header: 'Are you sure to cancel the trail?',
+      header: 'Are you sure to cancel the Trial?',
       buttons: [
         {
           text: 'Cancel',

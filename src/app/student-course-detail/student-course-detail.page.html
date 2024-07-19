@@ -144,7 +144,7 @@
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
     <div style="width: 100%;" *ngIf="trail == true">
-      <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="cancelTrail()"
+      <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="presentAlert()"
         [text]="'Cancel Trial Request'"></app-sd-button-clear>
     </div>
   </div>

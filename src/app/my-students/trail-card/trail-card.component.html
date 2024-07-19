@@ -2,10 +2,10 @@
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" *ngIf="item.status != 'Pending'"
+        <div class="image-circle-789675" *ngIf="item.status == 'Accepted'"
           [style.background-image]="item.student.image ? 'url(' + item.student.image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="image-circle-789675" *ngIf="item.status == 'Pending'"
+        <div class="image-circle-789675" *ngIf="item.status != 'Accepted'"
           style="background-image: url(../../../../assets/svg/pending.svg);">
         </div>
         <div class="pnd-678956" *ngIf="item.status == 'Pending'">
@@ -31,10 +31,10 @@
       </div>
       <div class="content-box-outer">
         <div class="content-box-outer-heading-top">
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status != 'Pending'">
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status == 'Accepted'">
             {{item.student.name}}
           </div>
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status == 'Pending'">
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status != 'Accepted'">
             {{item.student.name| names}}
           </div>
           <div class="pnd-678956" *ngIf="item.status != 'Rejected'" (click)="presentPopover($event)">
@@ -79,7 +79,7 @@
               <ion-list *ngIf="item.status == 'Blocked'" style="border: none;">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Unblock')">
-                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <img class="img1-789575" src="assets/icon/unblock.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Unblock</div>
                 </ion-item>
               </ion-list>
@@ -93,7 +93,7 @@
         </div>
         <div class="age-title-789 outfit">
           <img src="../../../assets/svg/cake.svg" alt="" class="image-id">
-          Age {{item.student.student.dob}}
+          Age {{age}}
         </div>
       </div>
     </div>

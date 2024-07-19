@@ -12,6 +12,8 @@ export class ChatPage extends BasePage implements OnInit {
 
   chat;
   time
+  params;
+  student;
   user
   constructor(injector: Injector) {
     super(injector);
@@ -20,6 +22,20 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+  async ionViewWillEnter() {
+    this.params = this.nav.getQueryParams();
+    console.log(this.params);
+    
+    if (this.params.backUrl) {
+      this.student = this.params.user;
+      let res = await this.modals.present(MessagesPage, {
+        item: this.student
+      })
+      this.initialize()
+    }
+
 
   }
 
@@ -35,8 +51,6 @@ export class ChatPage extends BasePage implements OnInit {
 
   }
   getTime(time) {
-    // console.log(time);
-
     moment.updateLocale('en', {
       relativeTime: {
         future: "in %s",
@@ -56,7 +70,6 @@ export class ChatPage extends BasePage implements OnInit {
       }
     });
     this.time = moment(time).fromNow();
-    // console.log(this.time);
     return this.time
   }
 
