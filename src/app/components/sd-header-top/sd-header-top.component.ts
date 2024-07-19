@@ -18,12 +18,15 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
   @Input() showShare: boolean = false;
   @Input() backUrl: string = '';
   @Input() title: string = '';
-  isfav= false;
+  isfav = false;
   fav;
   @Input() parentHandleBack: boolean = false;
 
   @Output('parentBack') parentBack: EventEmitter<any> = new EventEmitter<any>();
   @Output('parentEdit') parentEdit: EventEmitter<any> = new EventEmitter<any>();
+  @Output('addToFav') addToFav: EventEmitter<any> = new EventEmitter<any>();
+  @Output('removetoFav') removetoFav: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(injector: Injector) {
     super(injector)
@@ -53,20 +56,12 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
     })
   }
   async addtoFav() {
-    console.log("fdds");
-
-      console.log("hogaya");
-      // return
-      let user = this.users.getUser()
-      let obj = {
-        user_id: user.id,
-        course_id: this.fav.id
-      }
-      const res = await this.network.addCourseFav(obj)
-
-      this.events.publish('update-fav-dot-d')
-
-
+    this.addToFav.emit()
+  }
+  removeToFav() {
+    console.log("remove 2");
+    
+    this.removetoFav.emit()
 
   }
 }

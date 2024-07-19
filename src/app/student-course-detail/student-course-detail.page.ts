@@ -67,6 +67,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }, 200);
   }
 
+
+
   async callApi() {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
@@ -101,6 +103,37 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
     this.showFavValue = this.data.is_liked_by_me;
   }
+
+  async addToFav() {
+    console.log("dasdasaa");
+
+
+    let user = this.users.getUser()
+    let obj = {
+      user_id: user.id,
+      course_id: this.data.id
+    }
+    const res = await this.network.addCourseFav(obj)
+
+    this.events.publish('update-fav-dot-d')
+    this.callApi();
+  }
+
+  async removeFromFav() {
+    let user = this.users.getUser()
+    let obj = {
+      user_id: user.id,
+      course_id: this.data.id
+    }
+    const res = await this.network.removeCourseFav(obj)
+
+    this.events.publish('update-fav-dot-d')
+    this.callApi();
+
+  }
+
+
+
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
       const flag = this.data.user.teacher.country.iso2;
