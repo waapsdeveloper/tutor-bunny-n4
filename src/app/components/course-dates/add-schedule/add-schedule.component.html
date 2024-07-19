@@ -12,7 +12,7 @@
   <div class="body-content-68448">
     <div class="input-title fs-14 roboto-medium">Weekly Schedule <img src="../../assets/svg/add.svg" alt=""
         (click)="addMoreSchedule()"></div>
-    <div class="dates-box-outer-65891" *ngFor="let item of schedule">
+    <div class="dates-box-outer-65891" *ngFor="let item of schedule; let i = index">
       <ion-datetime-button datetime="startDatetime" *ngIf="courseType == 3"
         class="date-time-button-112"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
@@ -38,7 +38,7 @@
         class="date-day-65892" [(ngModel)]="item.end_date">
         <ion-select-option *ngFor="let time of end_time" [value]="time">{{ time }}</ion-select-option>
       </ion-select>
-      <div style="padding: 0px 8px;" *ngIf="item.id" (click)="deleteShedule(item.id)">
+      <div style="padding: 0px 8px;" (click)="deleteShedule(item.id, i)">
         <img src="../../../../assets/svg/trash.svg" alt="">
       </div>
     </div>

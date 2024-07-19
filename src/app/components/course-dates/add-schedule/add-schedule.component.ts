@@ -109,8 +109,15 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
     }
   }
 
-  async deleteShedule(id) {
-    let res = await this.network.deleteShedule(id);
-    await this.callApi(this.course_Id);
+  async deleteShedule(id, index) {
+
+
+    this.schedule.splice(index, 1);
+
+    if(id){
+      let res = await this.network.deleteShedule(id);
+      // await this.callApi(this.course_Id);
+    }
+
   }
 }
