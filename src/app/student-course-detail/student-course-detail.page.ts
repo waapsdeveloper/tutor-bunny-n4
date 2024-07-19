@@ -38,6 +38,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   updated_at;
   schedules;
   acheduleTime;
+  showFavValue = false;
   constructor(injector: Injector) {
     super(injector)
   }
@@ -97,6 +98,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
+
+    this.showFavValue = this.data.is_liked_by_me;
   }
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {

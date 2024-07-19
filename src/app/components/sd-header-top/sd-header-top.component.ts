@@ -10,6 +10,8 @@ import { NavService } from 'src/app/services/nav.service';
 export class SdHeaderTopComponent extends BasePage implements OnInit {
   @Input() showSearch: boolean = false;
   @Input() showFav: boolean = false;
+  @Input() showFavValue: boolean = false;
+
   @Input() showNotification: boolean = false;
   @Input() showBack: boolean = false;
   @Input() showEdit: boolean = false;
@@ -28,15 +30,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('add-to-fav-from-detail', async (item: any) => {
-      console.log("hogaya");
 
-      this.fav = item;
-      console.log(this.fav);
-
-      this.isfav = this.fav.is_liked_by_me;
-      
-    })
   }
 
   back() {
