@@ -24,7 +24,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   age;
   language_id;
   courseId;
-  edit;
+  edit = false;
   step = 1;
   formData: any = {
     title: null,
@@ -89,6 +89,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['price'] = data['price'];
     this.formData['from_age'] = data['from_age'];
     this.formData['to_age'] = data['to_age'];
+    this.formData['strat_date'] = data['strat_date'];
+    this.formData['end_date'] = data['end_date'];
     this.formData['duration'] = data['duration'];
     this.formData['image'] = data['image'];
     this.formData['capacity'] = data['capacity'];
@@ -97,11 +99,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['language'] = data['language'];
     this.formData['keyword'] = data['keywords'];
     console.log(this.formData['keyword']);
-
     this.formData['lesson'] = data['lesson'];
     this.formData['category'] = data['category'][0]
-
-
     const lang = data['language'];
     if (lang) {
       this.language_id = lang.id;
@@ -115,6 +114,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   result(value, key) {
+    // console.log(value, key);
+    
     this.formData[key] = value;
     if (key == 'category') {
       this.category = value.id;
@@ -130,6 +131,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.age = value.mode;
       this.formData['from_age'] = value.from_age;
       this.formData['to_age'] = value.to_age;
+    }
+    if (key == 'dates') {
+      this.age = value.mode;
+      this.formData['start_date'] = value.start_date;
+      this.formData['end_date'] = value.end_date;
     }
     if (key == 'image') {
       this.formData['image'] = value.image;
@@ -211,15 +217,17 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.utility.presentSuccessToast(message);
 
     }
+    return
     this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
 
-    // return
   }
 
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
+      this.edit = true;
+      this.courseId = localStorage.getItem('course_Id')
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
   }

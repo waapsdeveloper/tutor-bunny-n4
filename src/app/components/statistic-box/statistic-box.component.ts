@@ -1,41 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-statistic-box',
   templateUrl: './statistic-box.component.html',
   styleUrls: ['./statistic-box.component.scss'],
 })
-export class StatisticBoxComponent  implements OnInit {
+export class StatisticBoxComponent extends BasePage implements OnInit {
 
-  list = [
-    {
-      nbl: '0',
-      label: 'Views',
-      colorClass: ''
-    },
-    {
-      nbl: '0',
-      label: 'Trials',
-      colorClass: ''
-    },
-    {
-      nbl: '0',
-      label: 'Courses',
-      colorClass: ''
-    },
-    {
-      nbl: '0',
-      label: 'Credits',
-      colorClass: ''
-    },
-    {
-      nbl: '0',
-      label: 'Event',
-      colorClass: ''
-    }
-  ]
-  constructor() { }
 
-  ngOnInit() {}
+  trials;
+  courses;
+  event
+  credits;
+  views;
+  user;
+  constructor(injector: Injector) {
+    super(injector)
+    this.initialize();
+  }
+
+  async ngOnInit() {
+    this.user = this.users.getUser();
+    this.events.subscribe('get-dashboard-stats', this.initialize.bind(this))
+
+  }
+
+  async initialize() {
+
+    let res = await this.network.getdashboardcounts();
+    console.log(res);
+    this.trials = res.trials;
+    this.courses = res.courses;
+    this.event = res.events;
+    this.credits = res.events;
+    this.views = res.events;
+  }
+
+
 
 }

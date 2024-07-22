@@ -24,7 +24,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     super(injector)
     this.initialize();
   }
-  ngOnInit() { 
+  ngOnInit() {
     this.trialsReceivedViaPusher();
   };
   trialsReceivedViaPusher() {
@@ -34,10 +34,18 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   }
 
-  updateTrailsList(data:any){
+  async updateTrailsList(data: any) {
     console.log(data);
-    this.newTrial = data;
+    let trail_Id = data.id;
+
+    // return
     this.initialize();
+
+    this.events.publish('get-dashboard-stats');
+
+    this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
+    console.log(this.newTrial);
+
 
     if (this.newTrial) {
       const index = this.trial.findIndex(c => c.id === this.newTrial.id);
@@ -89,7 +97,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   goToChat() {
     this.nav.push('/tabs/chat')
   }
-  removeFromList(id){
+  removeFromList(id) {
     this.initialize();
   }
 

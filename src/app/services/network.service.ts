@@ -104,8 +104,16 @@ export class NetworkService {
     return this.httpGetResponse('course/recent/trials/' + id + '?' + str , null, false, false);
   }
 
+  geTrailRequestsByPusher(id) {
+    return this.httpGetResponse('course/trials/by-id/' + id, null, false, false);
+  }
+
   getMessagesRoom(id) {
     return this.httpGetResponse('chat-rooms/' + id, null, false, false);
+  }
+
+  getdashboardcounts() {
+    return this.httpGetResponse('teacher/dashboard/card-statistics', null, false, false);
   }
 
   getMessages(id) {

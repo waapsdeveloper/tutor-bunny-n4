@@ -13,6 +13,9 @@ export class SdDateBoxComponent implements OnInit {
   @Input() isReadOnly = false;
   @Input('key') key = '';
   @Input() minlength;
+
+  @Input() start_date = '';
+  @Input() end_date = '';
   @Input() maxlength;
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
@@ -26,6 +29,11 @@ export class SdDateBoxComponent implements OnInit {
   endDate;
   dateError = '';
 
+  selectedDates = {
+    start_date: '',
+    end_date: ''
+  }
+
   constructor(private events: EventsService) { }
 
   ngOnInit() {
@@ -36,12 +44,33 @@ export class SdDateBoxComponent implements OnInit {
 
   setStartTime($event) {
     this.startDate = $event;
+    console.log(this.startDate);
+
     this.validateDates();
+    if (this.startDate) {
+      this.selectedDates.start_date = this.startDate;
+      console.log(this.selectedDates);
+
+      this.onChange.emit(this.selectedDates);
+    }
+    else {
+      return
+    }
   }
 
   setEndTime($event) {
     this.endDate = $event;
+    console.log(this.endDate);
+
     this.validateDates();
+    if (this.startDate) {
+      this.selectedDates.end_date = this.endDate;
+      console.log(this.selectedDates);
+      this.onChange.emit(this.selectedDates);
+    }
+    else {
+      return
+    }
   }
 
   validateDates() {
