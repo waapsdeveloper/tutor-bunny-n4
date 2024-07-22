@@ -120,4 +120,6 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
     }
 
   }
+
+
 }

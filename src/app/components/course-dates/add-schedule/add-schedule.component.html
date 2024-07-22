@@ -13,13 +13,25 @@
     <div class="input-title fs-14 roboto-medium">Weekly Schedule <img src="../../assets/svg/add.svg" alt=""
         (click)="addMoreSchedule()"></div>
     <div class="dates-box-outer-65891" *ngFor="let item of schedule; let i = index">
-      <ion-datetime-button datetime="startDatetime" *ngIf="courseType == 3"
+
+
+
+
+
+
+      <ion-datetime-button presentation="date" datetime="startDatetime" *ngIf="courseType == 3"
         class="date-time-button-112"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="startDatetime{{date}}" presentation="date" [(ngModel)]="date"></ion-datetime>
+          <ion-datetime id="startDatetime" presentation="date" [(ngModel)]="item.day"  ></ion-datetime>
         </ng-template>
       </ion-modal>
+
+
+
+
+
+
       <ion-select aria-label="Favorite Fruit" interface="popover" [(ngModel)]="item.day" placeholder="Day"
         *ngIf="courseType != 3" value="Saturday" class="date-day-65892">
         <ion-select-option value="Saturday">Sat</ion-select-option>
