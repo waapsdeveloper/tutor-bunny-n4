@@ -19,11 +19,11 @@
 
 
 
-      <ion-datetime-button presentation="date" datetime="startDatetime" *ngIf="courseType == 3"
+      <ion-datetime-button presentation="date" datetime="startDatetime-{{i}}" *ngIf="courseType == 3"
         class="date-time-button-112"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true">
         <ng-template>
-          <ion-datetime id="startDatetime" presentation="date" [(ngModel)]="item.day"  ></ion-datetime>
+          <ion-datetime id="startDatetime-{{i}}" presentation="date" (ionChange)="setDateErt($event, i)" ></ion-datetime>
         </ng-template>
       </ion-modal>
 

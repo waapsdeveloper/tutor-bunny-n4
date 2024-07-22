@@ -121,5 +121,20 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
 
   }
 
+  setDateErt($event, i){
+    console.log($event, i)
+
+    let v = $event.detail.value;
+    if(v){
+      let ar = v.split('T');
+      if(ar && ar[0]){
+        console.log(ar[0])
+        this.schedule[i].day = ar[0];
+      }
+
+
+    }
+  }
+
 
 }
