@@ -121,26 +121,28 @@
     <app-student-other-courses></app-student-other-courses>
   </div>
 </ion-content>
-
-
 <ion-footer>
   <div class="footer-buttons-78963">
-    <div class="button-chat-78563" *ngIf="trail == false && loading == false">
+    <div class="button-chat-78563" *ngIf="trail == false && loading == false && trial == null">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
         <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
-      <!-- <app-sd-button-clear [image]="'assets/svg/chat.svg'" [text]="'Chat'"></app-sd-button-clear> -->
     </div>
-    <div class="button-trial-23654" *ngIf="trail == false && loading == false">
+    <div class="button-chat-7856" *ngIf="trail == false && loading == false && trial != null">
+      <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/svg/chat.svg" />
+        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+      </div>
+    </div>
+    <div class="button-trial-23654" *ngIf="trail == false && loading == false && trial == null">
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
         <span class="roboto-medium fs-20 " style="font-size: 20px;"> Request Free Trial </span>
       </div>
-      <!-- <app-sd-button-gray [image]="'assets/svg/send.svg'"
-        [text]="''"></app-sd-button-gray> -->
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
     <div style="width: 100%;" *ngIf="trail == true">

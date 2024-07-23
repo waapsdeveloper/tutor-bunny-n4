@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import { EventsService } from 'src/app/services/events.service';
 
 @Component({
@@ -43,6 +44,9 @@ export class SdDateBoxComponent implements OnInit {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
       
       console.log(this.start_date, this.end_date);
+
+      this.startDate = this.start_date;
+      this.endDate = this.end_date
     }
   )
 
@@ -64,6 +68,9 @@ export class SdDateBoxComponent implements OnInit {
     else {
       return
     }
+  }
+  closeDateModal(modal: IonModal) {
+    modal.dismiss();
   }
 
   setEndTime($event) {

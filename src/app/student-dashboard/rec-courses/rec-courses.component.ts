@@ -48,7 +48,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     this.courseId = data.course_id;
     if (this.courseId) {
       this.getCourses('', 1);
-
       const index = this.list.findIndex(c => c.id === this.courseId);
       console.log(index);
     }

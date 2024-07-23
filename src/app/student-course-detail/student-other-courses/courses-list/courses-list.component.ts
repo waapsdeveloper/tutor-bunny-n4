@@ -11,35 +11,47 @@ export class CoursesListComponent extends BasePage implements OnInit {
 
   list;
   count;
+  user
   page: number = 1;
   last_page = -1;
   constructor(injector: Injector) {
     super(injector)
-    this.initialize()
   }
 
-  ngOnInit() { }
+ 
+  ngOnInit() {
+
+    this.events.subscribe('data-for-other-corses', (data: any) => {
+      this.user = data.user;
+      console.log(this.user, "fsdsdfsdf");
+      this.initialize()
+      
+    }
+    )
+
+  }
   async initialize() {
-    this.getCourses('', 1);
+    console.log("saddsa");
+
+    this.getCourses();
   }
 
-  getCourses(search = '', page = 1, liked = false) {
+  getCourses() {
     return new Promise(async resolve => {
+      // return
+
       let obj = {
-        search: search,
-        page: page,
-        liked: liked
+        user_id: this.user.id
       };
-      const res = await this.network.getAllCourses(obj) as any;
+
+      const res = await this.network.getOtherCourseList(obj) as any;
       console.log(res);
       const data = res.result;
       this.page = data.current_page;
-      this.last_page = data.last_page; 
-      if (page === 1) {
-        this.list = data.data;
-      } else {
-        this.list = [...this.list, ...data.data];
-      }
+      this.last_page = data.last_page;
+
+      this.count = res.result.total
+
       resolve(true);
     });
   }

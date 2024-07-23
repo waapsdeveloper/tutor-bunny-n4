@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -8,45 +8,56 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class StudentOtherCoursesComponent extends BasePage implements OnInit {
 
+  private _data: any;
 
   list;
   count;
+  user
+
   page: number = 1;
   last_page = -1;
   constructor(injector: Injector) {
     super(injector)
-    this.initialize()
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.events.subscribe('data-for-other-corses', (data: any) => {
+      this.user = data.user;
+      console.log(this.user, "fsdsdfsdf");
+      this.initialize()
+      
+    }
+    )
+
+  }
   async initialize() {
-    this.getCourses('', 1);
+    console.log("saddsa");
+
+    this.getCourses();
   }
 
-  getCourses(search = '', page = 1, liked = false) {
+  getCourses() {
     return new Promise(async resolve => {
+      // return
+
       let obj = {
-        search: search,
-        page: page,
-        liked: liked
+        user_id: this.user.id
       };
 
-      const res = await this.network.getAllCourses(obj) as any;
+      const res = await this.network.getOtherCourseList(obj) as any;
       console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
 
-      if (page === 1) {
-        this.list = data.data;
-        this.count = data.total;
-      } else {
-        this.list = [...this.list, ...data.data];
-      }
+      this.count = res.result.total
+
       resolve(true);
     });
   }
-  seeAll(){
+  seeAll() {
     this.nav.pop('/tabs/student-dashboard')
   }
 

@@ -29,6 +29,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   serial_number;
   created_at;
   image;
+  trial;
   price;
   from_age;
   to_age;
@@ -74,9 +75,10 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
     console.log('====================================');
-    console.log(res);
+    console.log(res.data);
     console.log('====================================');
     this.data = res.course;
+    this.events.publish('data-for-other-corses' , this.data)
     this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -94,6 +96,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
+    if( this.data.trial){
+      this.trial = this.data.trial.status;
+    }
     this.techerImg = this.data.user.image
     this.country = this.data.user.teacher.country.name
     this.updated_at = this.data.updated_at;

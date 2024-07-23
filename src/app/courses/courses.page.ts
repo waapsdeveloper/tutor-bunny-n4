@@ -48,7 +48,6 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   async getCourses(search = '', page = 1) {
-
     return new Promise(async resolve => {
       let obj = {
         search: search,
@@ -58,8 +57,6 @@ export class CoursesPage extends BasePage implements OnInit {
       if (this.categoryId) {
         obj['category_id'] = this.categoryId
       }
-
-
       const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj) as any;
       console.log(res)
       const result = res.result;
