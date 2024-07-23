@@ -162,6 +162,7 @@ export class KeywordListComponent implements OnInit {
     this.onChange.emit({
       subs: this.subs
     });
+    
   }
   showAddSuggestionsButton() {
     if (!this.inputText) {

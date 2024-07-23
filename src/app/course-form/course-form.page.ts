@@ -217,7 +217,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.utility.presentSuccessToast(message);
 
     }
-    return
+    // return
     this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
 

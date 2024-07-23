@@ -5,7 +5,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div *ngFor="let item of list">
-      <app-course-list [item]="item" (onChange)="reloadList()"></app-course-list>
+      <app-course-list [item]="item" (onChange)="reloadList()" [trial]="item.trial"></app-course-list>
     </div>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

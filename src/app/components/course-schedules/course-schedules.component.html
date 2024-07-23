@@ -3,7 +3,8 @@
     <ion-col size="4" class="schedule-day-78528">{{item.day}}</ion-col>
     <ion-col size="8" style="display: flex; flex-direction: column; gap: 8px;">
       <div *ngFor="let item of schedules">
-        <div class="fs-16 " style="text-transform: uppercase;"><img src="../../../assets/clock.svg" alt=""> {{item.start_date}} - {{item.end_date}}</div>
+        <div class="fs-16 " style="text-transform: uppercase;"><img src="../../../assets/clock.svg" alt="">
+          {{item.start_date}} - {{item.end_date}}</div>
       </div>
     </ion-col>
   </ion-row>
@@ -11,8 +12,3 @@
 <div class="course-schedule-line-cmp-789675" *ngIf="!last">
   <div class="line"></div>
 </div>
-<!-- <div class="schedule-day-78528">{{item.day}}</div>
-  <div *ngFor="let item of schedules"
-    style="display: flex; align-items: flex-start; flex-direction: column; flex-wrap: nowrap;">
-    <div class="fs-16">{{item.start_date}}-{{item.end_date}}</div>
-  </div> -->

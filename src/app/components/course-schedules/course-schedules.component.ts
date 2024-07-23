@@ -10,6 +10,7 @@ export class CourseSchedulesComponent implements OnInit {
   startTime;
   endTime
   @Input() item: any;
+  @Input() type: any;
   @Input() last = false;
   schedules;
   constructor() { }

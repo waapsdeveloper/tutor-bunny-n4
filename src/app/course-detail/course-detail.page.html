@@ -86,11 +86,14 @@
     <div class="line" *ngIf="schedules != 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules != 0">
       <div class="detail-head-785234" *ngIf="schedules != 0">
-        <div class="detail-heading-78524 outfit-medium">
+        <div class="detail-heading-78524 outfit-medium" *ngIf="type != 3">
           Weekly Schedule
         </div>
+        <div class="detail-heading-78524 outfit-medium" *ngIf="type == 3">
+          Event Schedule
+        </div>
         <div class="days-box">
-          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
+          <app-course-schedules *ngFor="let item of schedules" [item]="item" ></app-course-schedules>
         </div>
       </div>
     </div>

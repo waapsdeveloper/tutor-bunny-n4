@@ -15,25 +15,41 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   last_page = -1;
   course;
   search: string = '';
+  courseId
   user;
   data: any;
   loading = false;
 
   constructor(injector: Injector) {
     super(injector);
+    this.user = this.users.getUser();
     this.initialize();
   }
 
   ngOnInit() {
+    this.trialsReceivedViaPusher();
     this.events.subscribe('Update-Fv-Screen', (data) => {
       this.getCourses('', 1);
     })
     this.events.subscribe("show-list-of-fav-courses", () => {
-    this.initialize();
-     
+      this.initialize();
     });
-    this.user = this.users.getUser();
     this.courseReceivedViaPusher();
+  }
+
+  trialsReceivedViaPusher() {
+    console.log("sdfsf");
+    this.events.registerPusherEvent(this.user.id);
+    this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
+  }
+
+  async updateTrailsList(data: any) {
+    console.log(data);
+    this.courseId = data.course_id;
+    if (this.courseId) {
+      const index = this.list.findIndex(c => c.id === this.courseId);
+      console.log(index);
+    }
   }
 
   async handleRefresh(event) {
@@ -44,13 +60,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   courseReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
     console.log("sdfsf");
-
     this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
   }
 
   async updateCourseList(data: any) {
     console.log(data['course_Id']);
-
     let course_Id = data.course_id;
     console.log(course_Id);
 
@@ -68,11 +82,9 @@ export class RecCoursesComponent extends BasePage implements OnInit {
       }
     }
   }
-
   async initialize() {
     this.getCourses('', 1);
   }
-
   getCourses(search = '', page = 1, liked = false) {
     return new Promise(async resolve => {
       let obj = {
@@ -80,13 +92,11 @@ export class RecCoursesComponent extends BasePage implements OnInit {
         page: page,
         liked: liked
       };
-
       const res = await this.network.getAllCourses(obj) as any;
       console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
-
       if (page === 1) {
         this.list = data.data;
       } else {
@@ -100,7 +110,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
           this.list = [this.course, ...this.list];
         }
       }
-
       resolve(true);
     });
   }
@@ -110,7 +119,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     if (this.page <= this.last_page) {
       const np = this.page + 1;
       console.log(np);
-
       await this.getCourses('', np);
     }
     this.loading = false;

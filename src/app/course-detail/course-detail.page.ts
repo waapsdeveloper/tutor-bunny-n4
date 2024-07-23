@@ -17,6 +17,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   duration;
   isExpanded = false;
   title;
+  type;
   serial_number;
   mode_type
   created_at;
@@ -78,6 +79,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.serial_number = this.data.serial_number;
     this.image = this.data.image;
     this.price = this.data.price;
+    this.type = this.data.type;
     this.schedules = this.data.schedules;
     this.flag = this.getFlag();
     this.created_at = this.data.created_at;

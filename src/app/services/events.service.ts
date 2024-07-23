@@ -57,7 +57,7 @@ export class EventsService {
   }
 
   chatChannelReceived($event: any) {
-    console.log($event);
+    // console.log($event);
 
     // this.playMessageNotificationSound();
     this.publish('message-received-via-pusher', $event);
@@ -65,13 +65,13 @@ export class EventsService {
 
 
   courseChannelReceived($event: any) {
-    console.log($event);
+    // console.log($event);
 
     this.publish('course-received-via-pusher', $event);
   }
 
   trialsChannelReceived($event: any) {
-    console.log($event);
+    // console.log($event);
 
     this.publish('trials-received-via-pusher', $event);
   }
