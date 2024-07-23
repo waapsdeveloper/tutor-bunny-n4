@@ -22,10 +22,9 @@ export class CourseListComponent extends BasePage implements OnInit {
     this._trial = value;
     console.log(this._trial);
     console.log(this.trial);
-    if(this.trial){
+    if (this.trial) {
       this.status = this.trial.status;
     }
-    
   }
   courseId;
   status;
@@ -43,19 +42,15 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   fav = false;
   trail = false;
-
   languageName: any;
-
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
     this.initialize();
     this.user = this.users.getUser()
 
   }
-  initialize() {
-    
-    
-  }
+  initialize() { }
+
   ngOnInit() {
     this.events.subscribe('update-fav-dot-d', (data) => {
       console.log(data);
@@ -63,14 +58,12 @@ export class CourseListComponent extends BasePage implements OnInit {
     setTimeout(() => {
       this.callApi()
     }, 200);
-
   }
 
 
   getFlag() {
     if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
       const flag = this.item.user.teacher.country.iso2;
-
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -80,29 +73,21 @@ export class CourseListComponent extends BasePage implements OnInit {
       return ""
     }
   }
+
+
   async callApi() {
     this.loading = true;
-
-
-    let obj = {
-      user_id: this.user.id,
-      course_id: this.item.id
-    }
-    // let res = await this.network.getTrail(obj)
     if (this.item && !this.item.trial) {
       this.trail = false;
       this.loading = false;
-      
     }
     if (this.item && this.item.trial) {
       this.trail = true;
       this.loading = false;
     }
-
   }
+
   async goToDeatil(item) {
-
-
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
@@ -110,24 +95,18 @@ export class CourseListComponent extends BasePage implements OnInit {
     let res = await this.nav.push('student-course-detail', params)
     this.events.publish('add-to-fav-from-detail', item);
     this.onChange.emit(res);
-
   }
-  async requestTrail(id) {
 
+  async requestTrail(id) {
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
     console.log(v);
-
     if (v || v == true) {
-
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);;
       console.log(data.data);
       // return
       let send = data.data.send;
       console.log(send);
-
-
-
       if (send == true) {
         this.trail = true;
         let user = this.users.getUser()
@@ -149,8 +128,6 @@ export class CourseListComponent extends BasePage implements OnInit {
       }
       )
     }
-
-
   }
 
   async presentAlert(item) {
@@ -174,13 +151,12 @@ export class CourseListComponent extends BasePage implements OnInit {
         },
       ],
     });
-
     await alert.present();
   }
+
   async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser()
-
     let obj = {
       user_id: user.id,
       course_id: id
@@ -189,7 +165,6 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addToFav() {
-
     let user = this.users.getUser()
     let obj = {
       user_id: user.id,
@@ -197,9 +172,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     const res = await this.network.addCourseFav(obj)
     this.fav = true;
-
     this.events.publish('update-fav-dot-d')
-
   }
 
   async removeToFav() {
@@ -210,7 +183,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
     const res = await this.network.removeCourseFav(obj)
     this.fav = false;
-
     this.events.publish('update-fav-dot-d')
   }
 

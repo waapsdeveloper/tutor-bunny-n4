@@ -142,7 +142,7 @@
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.type != '1'">
-            <app-sd-date-box (onChange)="result($event, 'dates')" [inputText]="formData.strat_date" [inputText]="formData.end_date"
+            <app-sd-date-box (onChange)="result($event, 'dates')" [start_date]="formData.strat_date" [end_date]="formData.end_date"
               [key]="'dates'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-date-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">

@@ -34,9 +34,17 @@ export class SdDateBoxComponent implements OnInit {
     end_date: ''
   }
 
-  constructor(private events: EventsService) { }
+  constructor(private events: EventsService) {
+
+  }
 
   ngOnInit() {
+
+    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
+      
+      console.log(this.start_date, this.end_date);
+    }
+  )
 
   }
 

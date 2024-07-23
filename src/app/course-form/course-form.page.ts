@@ -83,6 +83,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
+    console.log(data);
+    
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
     this.formData['language_id'] = data['language_id'];

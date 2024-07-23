@@ -60,12 +60,16 @@
         </div>
         <div class="right-980676">
           <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
-          <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false && loading == false " 
+          <div class="free-trial-btn-89675 outfit-medium" *ngIf="trail == false && loading == false && status != 'Rejected'"
+            (click)="requestTrail(item.id)">
+            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+          </div>
+          <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
             (click)="requestTrail(item.id)">
             <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
           </div>
           <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail == true && loading == false && status != 'Accepted'" (click)="presentAlert(item.id)">
+            *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'" (click)="presentAlert(item.id)">
             <img src="../../../../assets/svg/trail.svg" alt=""><button
               style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
           </div>
