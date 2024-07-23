@@ -12,7 +12,7 @@ export class MessagesPage extends BasePage implements OnInit {
   @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
   @Input('item') item: any;
-  chat;
+  chat: any[] = [];
   user_id;
   flag;
   time;
@@ -58,9 +58,9 @@ export class MessagesPage extends BasePage implements OnInit {
   }
 
   updateChatsByMessageReceived(data: any) {
-    if (!data) {
-      return;
-    }
+    console.log(data);
+    this.initialize();
+
     const dm = data;
     if (dm.chat_room_id == this.item.chat_room_id) {
       this.chat.push(dm);
