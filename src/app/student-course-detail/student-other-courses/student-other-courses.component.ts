@@ -27,7 +27,6 @@ export class StudentOtherCoursesComponent extends BasePage implements OnInit {
       this.user = data.user;
       console.log(this.user, "fsdsdfsdf");
       this.initialize()
-      
     }
     )
 
