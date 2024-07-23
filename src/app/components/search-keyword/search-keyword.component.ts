@@ -63,6 +63,10 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
   }
 
+  callApi(){
+    
+  }
+
   async openSubjectSelection() {
     const res = (await this.modals.present(KeywordListComponent, {
       subs: this.subs
