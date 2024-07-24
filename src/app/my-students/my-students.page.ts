@@ -24,7 +24,6 @@ export class MyStudentsPage extends BasePage implements OnInit {
   ngOnInit() { }
 
   doSearch($event) {
-    console.log(this.search);
     this.getTrials(this.search, 1)
   }
 
@@ -44,7 +43,6 @@ export class MyStudentsPage extends BasePage implements OnInit {
       }
 
       const res = await this.network.geTrailRequests(obj, this.user.id);
-      console.log(res);
       const result = res.result;
       this.page = result.current_page;
       this.last_page = result.last_page;
@@ -63,14 +61,12 @@ export class MyStudentsPage extends BasePage implements OnInit {
   }
 
   removeFromList(id) {
-    console.log(id)
     this.getTrials('', 1);
 
   }
 
-  filterByStatus(status = ''){
+  filterByStatus(status = '') {
     this.status = status;
-    console.log(status);
     this.getTrials(this.search, 1)
   }
 
@@ -89,9 +85,8 @@ export class MyStudentsPage extends BasePage implements OnInit {
 
   async onIonInfinite(ev) {
 
-    console.log(this.last_page , this.page, this.last_page > this.page)
-    if(this.last_page > this.page){
-      await this.getTrials(this.search, this.page + 1 )
+    if (this.last_page > this.page) {
+      await this.getTrials(this.search, this.page + 1)
     }
 
     setTimeout(() => {

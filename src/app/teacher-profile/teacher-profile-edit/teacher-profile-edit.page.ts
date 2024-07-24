@@ -178,10 +178,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   async submit() {
     const data = this.formData;
     this.userId = this.user.id;
-
     const f = this.formData;
-    console.log(f);
-    
     this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
     if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
       return

@@ -41,7 +41,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   schedules;
   acheduleTime;
   showFavValue = false;
-  constructor(injector: Injector,  private alertController: AlertController) {
+  constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
   }
 
@@ -59,9 +59,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
     if (this.params.id) {
       this.course_Id = this.params.id;
-      console.log('====================================');
-      console.log(this.course_Id);
-      console.log('====================================');
     }
     this.callApi();
     setTimeout(() => {
@@ -74,11 +71,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   async callApi() {
 
     let res = await this.network.getcourseById(this.course_Id) as any;
-    console.log('====================================');
-    console.log(res.data);
-    console.log('====================================');
     this.data = res.course;
-    this.events.publish('data-for-other-corses' , this.data)
+    this.events.publish('data-for-other-corses', this.data)
     this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -96,7 +90,7 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
-    if( this.data.trial){
+    if (this.data.trial) {
       this.trial = this.data.trial.status;
     }
     this.techerImg = this.data.user.image
@@ -111,9 +105,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   }
 
   async addToFav() {
-    console.log("dasdasaa");
-
-
     let user = this.users.getUser()
     let obj = {
       user_id: user.id,
@@ -133,9 +124,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
     const res = await this.network.removeCourseFav(obj)
 
-   
+
     this.events.publish("show-list-of-fav-courses", {
-     
+
     })
     this.callApi();
 
@@ -165,28 +156,12 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   }
 
   async requestTrail() {
-
-
-    // this.trail = true;
     let user = this.users.getUser()
-
-    // let obj = {
-    //   user_id: user.id,
-    //   course_id: this.course_Id
-    // }
-    // let res = await this.network.requestTrail(obj)
-
     let v = await this.profiles.isProfileCompleted(user) as any;;
-    console.log(v);
-
     if (v || v == true) {
-
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);;
-      console.log(data.data);
-      // return
       let send = data.data.send;
-      console.log(send);
 
 
 
@@ -199,7 +174,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
           message: data.data.message
         }
         let res = await this.network.requestTrail(obj)
-        console.log(res);
         this.trail = true;
       }
       else {
@@ -222,7 +196,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Alert canceled');
           },
         },
         {
@@ -230,7 +203,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.cancelTrail();
-            console.log('Alert confirmed');
           },
         },
       ],

@@ -8,26 +8,25 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class MenuListBoxComponent extends BasePage implements OnInit {
 
-role;
+  role;
   constructor(injector: Injector) {
     super(injector)
-    
+
     this.initialize()
   }
-  
-  initialize(){
+
+  initialize() {
     this.role = localStorage.getItem('role')
-    console.log(this.role);
-    
+
   }
 
   ngOnInit() { }
 
-  gotoProfile(){
+  gotoProfile() {
     this.nav.push('/tabs/teacher-profile');
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
     this.nav.push('splash')
   }

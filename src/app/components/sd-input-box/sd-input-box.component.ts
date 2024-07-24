@@ -61,7 +61,6 @@ export class SdInputBoxComponent implements OnInit {
 
 
 
-      console.log(v, this.key, formData)
       if (v && this.key == 'title' && v.length > 50) {
 
         this.isRequired = true;
@@ -106,7 +105,7 @@ export class SdInputBoxComponent implements OnInit {
 
   }
 
-  showPasword(key){
+  showPasword(key) {
 
     this.showPassword = key;
 
@@ -168,9 +167,8 @@ export class SdInputBoxComponent implements OnInit {
     this.onChange.emit('');
   }
 
-  toggleShowPasword(flag){
-    this.togglePassword = !this.togglePassword
-    console.log(this.togglePassword)
+  toggleShowPasword(flag) {
+    this.togglePassword = !this.togglePassword;
     this.type = this.togglePassword ? 'password' : 'text'
   }
 }

@@ -26,8 +26,7 @@ export class SdCategoryListComponent extends BasePage implements OnInit {
     this.data = await this.network.getCategory() as any[];
 
     this.list = this.data.result;
-    console.log(this.list);
-    
+
 
   }
   isListItemSelected() {
@@ -36,17 +35,10 @@ export class SdCategoryListComponent extends BasePage implements OnInit {
 
 
   selectedCategory() {
-    console.log(this.selectedItemId);
-    // return
     let item = this.list.find(x => x.id === this.selectedItemId);
-    console.log(item);
-    
-
     if (!item) {
-      // return;
       this.modals.dismiss();
     }
-
     this.modals.dismiss({
       item: item
     });

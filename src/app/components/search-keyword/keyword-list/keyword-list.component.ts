@@ -36,9 +36,7 @@ export class KeywordListComponent implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('set-form-keywords-list', async (data: any) => {
-      console.log("set-form-keywords-list", data);
       this.list = data;
-
       this.search = "";
       this.page = 1;
       this.callApi();
@@ -162,7 +160,7 @@ export class KeywordListComponent implements OnInit {
     this.onChange.emit({
       subs: this.subs
     });
-    
+
   }
   showAddSuggestionsButton() {
     if (!this.inputText) {

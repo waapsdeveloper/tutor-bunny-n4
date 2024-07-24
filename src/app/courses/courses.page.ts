@@ -27,7 +27,7 @@ export class CoursesPage extends BasePage implements OnInit {
 
     this.user = this.users.getUser();
     this.getCourses('', 1)
-    
+
     this.events.subscribe('initilize-the-list', (res) => {
       this.getCourses('', 1)
       // this.initialize()
@@ -37,7 +37,6 @@ export class CoursesPage extends BasePage implements OnInit {
 
   ionViewWillEnter() {
     const params = this.nav.getQueryParams() as any
-    console.log(params)
     if (params.category_id) {
       this.categoryId = params.category_id;
       this.pageTitle = 'Courses'
@@ -58,7 +57,6 @@ export class CoursesPage extends BasePage implements OnInit {
         obj['category_id'] = this.categoryId
       }
       const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj) as any;
-      console.log(res)
       const result = res.result;
       this.page = result.current_page;
       this.last_page = result.last_page;
@@ -86,8 +84,7 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   courseEdit() {
-    console.log("DSfsdf");
-    
+
     this.getCourses(this.search, 1)
   }
 
@@ -102,7 +99,6 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   async doSearch($event) {
-    console.log(this.search)
     await this.getCourses(this.search, 1);
   }
 
@@ -117,7 +113,6 @@ export class CoursesPage extends BasePage implements OnInit {
 
   async onIonInfinite(ev) {
 
-    console.log(this.last_page, this.page, this.last_page < this.page)
     if (this.last_page > this.page) {
       await this.getCourses(this.search, this.page + 1);
     }

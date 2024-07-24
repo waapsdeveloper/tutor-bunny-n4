@@ -37,13 +37,7 @@ export class MessagesPage extends BasePage implements OnInit {
   async initialize() {
     let roomId = this.item.chat_room_id;
     let res = await this.network.getMessages(roomId);
-    console.log(res.data);
     this.days = res.data;
-    
-    console.log(this.chat);
-    
-    
-    // this.getChatRead(this.chat)
   }
 
   async getChatRead(chat) {
@@ -58,7 +52,6 @@ export class MessagesPage extends BasePage implements OnInit {
   }
 
   updateChatsByMessageReceived(data: any) {
-    console.log(data);
     this.initialize();
 
     const dm = data;

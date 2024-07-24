@@ -7,7 +7,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './fav-rec-courses.component.html',
   styleUrls: ['./fav-rec-courses.component.scss'],
 })
-export class FavRecCoursesComponent extends BasePage implements OnInit,  ViewWillEnter {
+export class FavRecCoursesComponent extends BasePage implements OnInit, ViewWillEnter {
 
   list: any[] = [];
   page: number = 1;
@@ -26,15 +26,11 @@ export class FavRecCoursesComponent extends BasePage implements OnInit,  ViewWil
 
   ngOnInit() {
     this.events.subscribe("show-list-of-fav-courses", (data) => {
-      console.log("show liked", data);
       this.getCourses('', 1, data.liked);
     })
   }
 
   async initialize() {
-    console.log('====================================');
-    console.log('sdfsdfsfsd');
-    console.log('====================================');
     this.getCourses('', 1);
   }
 
@@ -49,20 +45,19 @@ export class FavRecCoursesComponent extends BasePage implements OnInit,  ViewWil
       }
 
       const res = await this.network.getAllCourses(obj) as any;
-      console.log(res)
       const data = res.result;
       this.page = data.current_page;
       this.list = data.data;
       this.last_page = data.last_page;
 
-      this.events.publish("fav-list-length", {data})
+      this.events.publish("fav-list-length", { data })
       resolve(true);
 
     });
 
   }
 
-  removeFormFav(id){
+  removeFormFav(id) {
     this.list = this.list.filter(list => list.id !== id);
   }
 

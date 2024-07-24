@@ -37,9 +37,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
   async continueWithGoogle() {
     this.googleauth = await this.authService.googleAuth();
-    console.log('====================================');
-    console.log(this.googleauth);
-    console.log('====================================');
     if (this.googleauth && this.googleauth.user && this.googleauth.user.providerData) {
       let key = localStorage.getItem('role');
       const data = {

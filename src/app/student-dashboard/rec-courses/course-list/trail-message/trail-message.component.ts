@@ -19,8 +19,8 @@ export class TrailMessageComponent extends BasePage implements OnInit {
 
   back() {
     this.send = false
-    let obj= {
-      send : this.send,
+    let obj = {
+      send: this.send,
       message: this.message
     }
     this.modals.dismiss(obj)
@@ -28,15 +28,12 @@ export class TrailMessageComponent extends BasePage implements OnInit {
 
   submit() {
 
-    this.send= true
-    let obj= {
-      send : this.send,
+    this.send = true
+    let obj = {
+      send: this.send,
       message: this.message
     }
-
-
-    console.log(this.message);
-    this.modals.dismiss(obj )
+    this.modals.dismiss(obj)
 
   }
 

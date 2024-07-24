@@ -26,8 +26,7 @@ export class ChatPage extends BasePage implements OnInit {
   }
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
-    
+
     if (this.params.backUrl) {
       this.student = this.params.user;
       let res = await this.modals.present(MessagesPage, {
@@ -40,13 +39,10 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-    console.log("ffgcgc");
-    
+
     this.user = this.users.getUser();
     let res = await this.network.getMessagesRoom(this.user.id)
-    // console.log(res);
     this.chat = res.data;
-    // console.log(this.chat);
 
 
   }

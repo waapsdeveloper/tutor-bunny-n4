@@ -57,7 +57,6 @@ export class TrailCardComponent extends BasePage implements OnInit {
     this.isOpen = true;
   }
   async presentAlert(item: string) {
-    console.log(item);
 
     let alertHeader: string;
     switch (item) {
@@ -87,7 +86,6 @@ export class TrailCardComponent extends BasePage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Alert canceled');
           },
         },
         {
@@ -95,7 +93,6 @@ export class TrailCardComponent extends BasePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.trailStatus(item);
-            console.log('Alert confirmed');
           },
         },
       ],
@@ -107,17 +104,15 @@ export class TrailCardComponent extends BasePage implements OnInit {
 
     const params = {
       user: this.item.student,
-     
+
     }
 
     this.nav.push('/tabs/chat', params)
   }
   calculateAge() {
     const currentYear = new Date().getFullYear();
-    console.log(currentYear,"tetetetete");
-    
+
     this.age = currentYear - this.item.student.student.dob;
-    console.log(this.age,"tetetetete");
 
   }
   goToDeatil() {

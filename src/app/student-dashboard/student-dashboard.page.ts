@@ -52,7 +52,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   async initialize() {
     this.user = this.users.getUser();
-    console.log(this.user, "dfsfsd");
 
     let obj = {
       email: this.user.email,
@@ -64,14 +63,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    if(this.user && this.user.student && this.user.student.country && this.user.student.country.name){
-      this.country =  this.user.student.country.name;
-      console.log(this.country);
+    if (this.user && this.user.student && this.user.student.country && this.user.student.country.name) {
+      this.country = this.user.student.country.name;
     }
 
 
     this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
-    console.log(this.showWarning, "ffsfsdfsdf");
 
     this.events.publish('is-student-profile-completed', this.showWarning);
     this.displayName = this.utility.splitName(this.user.name).first_name;
@@ -133,13 +130,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     // })
   }
 
-  async getCountOfLikes(){
+  async getCountOfLikes() {
     let obj = {
       liked: true
     }
 
     const res = await this.network.getAllCourses(obj) as any;
-    console.log(res)
     const data = res.result;
     const d = data.data;
     this.showLiked = d.length > 0;

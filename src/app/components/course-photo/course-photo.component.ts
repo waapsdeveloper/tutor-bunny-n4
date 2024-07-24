@@ -31,7 +31,6 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
 
       let v = formData[this.key];
 
-      console.log(v, this.key)
 
       if (!v || v == '') {
         this.isRequired = true;

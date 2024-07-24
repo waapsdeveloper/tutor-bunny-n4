@@ -30,19 +30,16 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
 
   @Input()
   public set category(value: any) {
-    console.log(value);
 
     this._category = value;
     if (value && value.name) {
       this.selectedCategory = value;
-      console.log(this.selectedCategory, "dsadsadadasdsa");
 
     }
 
   }
 
   public get category(): any {
-    console.log(this.category);
     return this._category
   }
 
@@ -61,7 +58,6 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
 
     this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
 
-      console.log("cateogry point 3333", formData)
       if (!formData.category) {
         this.isRequired = true;
         setTimeout(() => {
@@ -69,7 +65,7 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
         }, 5000);
       }
 
-      if(formData.category && !formData.category.name){
+      if (formData.category && !formData.category.name) {
         this.isRequired = true;
         setTimeout(() => {
           this.isRequired = false;
@@ -80,11 +76,9 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
   }
   async openCategory() {
     let res = await this.modals.present(SdCategoryListComponent) as any;
-    console.log(res);
 
     if (res && res.data && res.data.item) {
       this.selectedCategory = res.data.item || this.selectedCategory;
-      console.log(this.selectedCategory);
       this.onChange.emit(this.selectedCategory);
     }
 

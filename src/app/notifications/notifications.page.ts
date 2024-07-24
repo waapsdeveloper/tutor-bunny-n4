@@ -30,13 +30,11 @@ export class NotificationsPage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.user = this.users.getUser()
-    console.log(this.user);
     this.initialize();
   }
   async initialize() {
     let userId = this.user.id;
     let res = await this.network.getNotifications(userId);
-    console.log(res);
     this.notifications = res.result;
 
   }

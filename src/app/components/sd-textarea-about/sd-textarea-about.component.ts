@@ -37,7 +37,6 @@ export class SdTextareaAboutComponent implements OnInit {
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      console.log(v);
       if (this.key == 'description') {
         if (!v || v == '') {
           this.isRequired = true;
@@ -45,7 +44,7 @@ export class SdTextareaAboutComponent implements OnInit {
             this.isRequired = false;
           }, 5000);
         }
-        if (v  && v.length < 250) {
+        if (v && v.length < 250) {
           this.isRequired = true;
           this.errorText = 'The Detail field should have minimum 250 characters'
           setTimeout(() => {

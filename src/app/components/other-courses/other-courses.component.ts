@@ -13,13 +13,12 @@ export class OtherCoursesComponent extends BasePage implements OnInit {
 
   private _list;
   @Input()
-  public get list(): any[]{
+  public get list(): any[] {
     return this._list;
   };
 
-  public set list(value: any[]){
+  public set list(value: any[]) {
     this._list = value;
-    console.log(value);
   };
 
 
@@ -32,19 +31,9 @@ export class OtherCoursesComponent extends BasePage implements OnInit {
 
   }
 
-  // async initialize() {
-  //   const obj = {
-  //     category_id: this.categoryId
-  //   }
-  //   const res = await this.network.getOtherCourseList(obj) as any;
-  //   console.log(res)
 
-  //   // this.count = this.list.count
-
-  // }
   gotoCourseList() {
     this.openOtherCourses.emit()
-    // this.nav.push('/tabs/courses?category_id=')
   }
 
 }

@@ -40,7 +40,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Alert canceled');
           },
         },
         {
@@ -48,7 +47,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.deleteCourse(item);
-            console.log('Alert confirmed');
           },
         },
       ],
@@ -58,7 +56,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
   }
 
   setResult(ev) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
   async deleteCourse(data) {
@@ -102,7 +99,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.inactiveCourse(obj)
-    console.log(res);
     if (res.status === 200) {
       this.item = res.course;
       this.status = this.item.status;
@@ -118,7 +114,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
     }
 
     let res = await this.network.activeCourse(obj)
-    console.log(res)
     if (res.status === 200) {
       this.item = res.course;
       this.status = this.item.status;

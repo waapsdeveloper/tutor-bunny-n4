@@ -31,6 +31,5 @@ export class NotificationBoxComponent implements OnInit {
       }
     });
     this.time = moment(this.item.created_at).fromNow();
-    console.log(this.time);
   }
 }

@@ -83,8 +83,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
-    console.log(data);
-    
+
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
     this.formData['language_id'] = data['language_id'];
@@ -100,7 +99,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
     this.formData['keyword'] = data['keywords'];
-    console.log(this.formData['keyword']);
     this.formData['lesson'] = data['lesson'];
     this.formData['category'] = data['category'][0]
     const lang = data['language'];
@@ -116,8 +114,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   result(value, key) {
-    // console.log(value, key);
-    
+
     this.formData[key] = value;
     if (key == 'category') {
       this.category = value.id;
@@ -198,7 +195,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async submit() {
     this.events.publish('teacher-course-second-screen-submit-call', this.formData);
-    console.log(this.formData)
     let f = this.formData;
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;

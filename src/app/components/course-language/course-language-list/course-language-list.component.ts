@@ -44,8 +44,6 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
 
 
   selectedLanguage() {
-    console.log(this.selectedItemId);
-    
     let item = this.list.find(x => x.id === this.selectedItemId);
 
     if (!item) {

@@ -59,8 +59,6 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
     this.addToFav.emit()
   }
   removeToFav() {
-    console.log("remove 2");
-    
     this.removetoFav.emit()
 
   }

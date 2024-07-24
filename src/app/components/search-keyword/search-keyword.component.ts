@@ -42,7 +42,6 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
     this.events.subscribe('set-form-keywords-list', async (data: any) => {
       let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-      console.log(course_Id);
 
 
       let obj = {
@@ -63,8 +62,8 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
   }
 
-  callApi(){
-    
+  callApi() {
+
   }
 
   async openSubjectSelection() {

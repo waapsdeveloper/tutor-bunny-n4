@@ -92,13 +92,11 @@ export class FavRecListComponent extends BasePage implements OnInit {
   async requestTrail(id) {
 
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
-    console.log(v);
 
     if (v || v == true) {
 
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);;
-      console.log(data);
       // return
 
       this.trail = true;
@@ -157,7 +155,7 @@ export class FavRecListComponent extends BasePage implements OnInit {
     }
 
     this.events.publish("show-list-of-fav-courses", {
-     
+
     })
   }
 

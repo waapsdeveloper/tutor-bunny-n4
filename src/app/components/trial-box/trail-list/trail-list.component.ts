@@ -19,7 +19,6 @@ export class TrailListComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.item);
 
 
     this.flag = this.getFlag()
@@ -40,7 +39,6 @@ export class TrailListComponent extends BasePage implements OnInit {
   }
 
   async presentAlert(item: string) {
-    console.log(item);
 
     let alertHeader: string;
     switch (item) {
@@ -70,7 +68,6 @@ export class TrailListComponent extends BasePage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Alert canceled');
           },
         },
         {
@@ -78,7 +75,6 @@ export class TrailListComponent extends BasePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.trailStatus(item);
-            console.log('Alert confirmed');
           },
         },
       ],
@@ -98,7 +94,6 @@ export class TrailListComponent extends BasePage implements OnInit {
 
     if (this.item && this.item.student && this.item.student.student.country.iso2) {
       const flag = this.item.student.student.country.iso2;
-      console.log(flag);
 
       if (flag) {
         return flag.toLowerCase();

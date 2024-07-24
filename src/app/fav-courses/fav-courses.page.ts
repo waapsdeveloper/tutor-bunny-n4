@@ -27,11 +27,9 @@ export class FavCoursesPage extends BasePage implements OnInit {
 
   async initialize() {
     this.events.subscribe("fav-list-length", (data) => {
-      console.log(data);
-      if(data.data){
+      if (data.data) {
         const d = data.data;
         let cp = d.current_page;
-        console.log(cp);
         let ls = d.data;
         this.listCount = cp == 1 && ls.length == 0 ? 0 : -1;
       }

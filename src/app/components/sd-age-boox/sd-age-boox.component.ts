@@ -31,7 +31,6 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
 
   constructor(injector: Injector) {
     super(injector);
-    console.log(this.selectedFromAge);
 
 
   }

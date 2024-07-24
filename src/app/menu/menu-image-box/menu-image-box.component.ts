@@ -21,18 +21,15 @@ export class MenuImageBoxComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   async initialize() {
     this.user = this.users.getUser();
-
-    console.log(this.user);
-
     this.name = this.user.name;
     this.image = this.user.image;
-    this.dial_code= this.user.teacher.dial_code;
-    this.phone_number= this.user.teacher.phone_number;
+    this.dial_code = this.user.teacher.dial_code;
+    this.phone_number = this.user.teacher.phone_number;
 
-    
+
 
   }
 

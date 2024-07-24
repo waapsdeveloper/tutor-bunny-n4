@@ -25,7 +25,7 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
   }
 
   ngOnDestroy(): void {
-    if(!this.submitPressed) {
+    if (!this.submitPressed) {
       this.submit()
     };
 
@@ -34,10 +34,8 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
   async ngOnInit() {
     this.submitPressed = false;
     this.courseType = localStorage.getItem('courseType');
-    console.log(this.courseType);
     this.start_time = await this.generateTimes();
     this.end_time = await this.generateTimes();
-    console.log(this.start_time);
     await this.callApi(this.course_Id);
     if (this.schedule.length === 0) {
       this.schedule.push({ day: '', start_date: '', end_date: '', course_id: '', id: '' });
@@ -45,7 +43,6 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
   }
 
   async initialize() {
-    console.log();
     let course_Id = localStorage.getItem('course_Id');
     this.course_Id = course_Id;
     if (this.course_Id) {
@@ -54,11 +51,9 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
   }
 
   async callApi(id: any) {
-    console.log(id)
     if (id) {
       let res = await this.network.getSchedule(id);
       this.schedule = res.result;
-      console.log(this.schedule);
       this.onChange.emit(this.schedule);
     }
   }
@@ -91,7 +86,6 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
     let courseId = localStorage.getItem('course_Id');
     for (let item of this.schedule) {
       if (!item.day || !item.start_date || !item.end_date) {
-        console.log('One or more fields are empty:', item);
         this.error = true;
         setTimeout(() => {
           this.error = false;
@@ -102,9 +96,7 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
     this.schedule.forEach(item => {
       item.course_id = courseId;
     });
-    console.log(this.schedule);
     let res = await this.network.AddSchedule(this.schedule);
-    console.log(res);
     if (res.status === 200) {
       this.modals.dismiss();
     }
@@ -115,21 +107,19 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
 
     this.schedule.splice(index, 1);
 
-    if(id){
+    if (id) {
       let res = await this.network.deleteShedule(id);
       // await this.callApi(this.course_Id);
     }
 
   }
 
-  setDateErt($event, i){
-    console.log($event, i)
+  setDateErt($event, i) {
 
     let v = $event.detail.value;
-    if(v){
+    if (v) {
       let ar = v.split('T');
-      if(ar && ar[0]){
-        console.log(ar[0])
+      if (ar && ar[0]) {
         this.schedule[i].day = ar[0];
       }
 

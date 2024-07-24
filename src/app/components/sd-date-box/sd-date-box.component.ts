@@ -42,13 +42,10 @@ export class SdDateBoxComponent implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      
-      console.log(this.start_date, this.end_date);
-
       this.startDate = this.start_date;
       this.endDate = this.end_date
     }
-  )
+    )
 
   }
 
@@ -56,13 +53,10 @@ export class SdDateBoxComponent implements OnInit {
 
   setStartTime($event) {
     this.startDate = $event;
-    console.log(this.startDate);
 
     this.validateDates();
     if (this.startDate) {
       this.selectedDates.start_date = this.startDate;
-      console.log(this.selectedDates);
-
       this.onChange.emit(this.selectedDates);
     }
     else {
@@ -75,12 +69,9 @@ export class SdDateBoxComponent implements OnInit {
 
   setEndTime($event) {
     this.endDate = $event;
-    console.log(this.endDate);
-
     this.validateDates();
     if (this.startDate) {
       this.selectedDates.end_date = this.endDate;
-      console.log(this.selectedDates);
       this.onChange.emit(this.selectedDates);
     }
     else {

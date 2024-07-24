@@ -63,7 +63,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
   async callApi() {
     this.user = this.users.getUser();
     let res = await this.network.getcourseById(this.course_Id) as any;
-    console.log(res);
 
     this.data = res.course;
     this.title = this.data.title;
@@ -91,14 +90,12 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.endTime = moment(endTime).format('hh:mm a');
 
     if (this.data.category && this.data.category.length > 0) {
-      console.log(this.data.category[0].id);
       this.categoryId = this.data.category[0].id;
       this.getOtherCourseList(this.categoryId)
     }
 
     const uid = this.user.id;
     const cuid = this.data.user_id;
-    console.log(uid, cuid)
     if (uid == cuid) {
       this.canEditCourse = true;
     }

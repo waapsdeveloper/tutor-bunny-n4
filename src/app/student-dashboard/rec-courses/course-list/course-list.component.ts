@@ -49,13 +49,10 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.user = this.users.getUser()
 
   }
-  initialize(data) { 
-    console.log(data.trial);
-    
-    if(data && data.trial){
+  initialize(data) {
+    if (data && data.trial) {
       this.blocked = data.trial.status
-      console.log(this.blocked);
-      
+
     }
   }
 

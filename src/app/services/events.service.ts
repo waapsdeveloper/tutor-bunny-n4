@@ -45,34 +45,25 @@ export class EventsService {
     const subs = this.pubsubSvc.subscribe(key, (data) => handler(data));
     this.subscriptions.push({ key, subs });
 
-    //this.subscribe[key] = subs;
   }
 
   registerPusherEvent(id: any) {
-    console.log(id);
-    
+
     this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
-    this.CourseChannel.bind("course-rec-update-by-list" , this.courseChannelReceived.bind(this))
+    this.CourseChannel.bind("course-rec-update-by-list", this.courseChannelReceived.bind(this))
     this.trialChannel.bind("trials-rec-" + id, this.trialsChannelReceived.bind(this))
   }
 
   chatChannelReceived($event: any) {
-    // console.log($event);
-
-    // this.playMessageNotificationSound();
     this.publish('message-received-via-pusher', $event);
   }
 
 
   courseChannelReceived($event: any) {
-    // console.log($event);
-
     this.publish('course-received-via-pusher', $event);
   }
 
   trialsChannelReceived($event: any) {
-    // console.log($event);
-
     this.publish('trials-received-via-pusher', $event);
   }
 

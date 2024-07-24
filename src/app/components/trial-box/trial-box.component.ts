@@ -29,13 +29,11 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   };
   trialsReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
-    console.log("sdfsf");
 
     this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   }
 
   async updateTrailsList(data: any) {
-    console.log(data);
     let trail_Id = data.id;
 
     // return
@@ -44,7 +42,6 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.events.publish('get-dashboard-stats');
 
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
-    console.log(this.newTrial);
 
 
     if (this.newTrial) {
@@ -65,14 +62,11 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     let res = await this.network.getPendingTrial(this.user.id, obj);
     this.trailCount = res.total
     this.trial = res.trials;
-    console.log(this.trial);
   }
   getFlag(item) {
-    console.log(item.student);
 
     if (item && item.student && item.student.student.country.iso2) {
       const flag = item.student.student.country.iso2;
-      console.log(flag);
 
       if (flag) {
         return flag.toLowerCase();

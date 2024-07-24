@@ -25,7 +25,6 @@ export class CoursesListComponent extends BasePage implements OnInit {
 
     this.events.subscribe('data-for-other-corses', (data: any) => {
       this.user = data.user;
-      console.log(this.user, "fsdsdfsdf");
       this.initialize()
 
     }
@@ -33,7 +32,6 @@ export class CoursesListComponent extends BasePage implements OnInit {
 
   }
   async initialize() {
-    console.log("saddsa");
 
     this.getCourses();
   }
@@ -54,7 +52,6 @@ export class CoursesListComponent extends BasePage implements OnInit {
       this.count = res.result.total
 
       this.list = data.data;
-      console.log(data);
       this.listData.emit(data);
       resolve(true);
     });

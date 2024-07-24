@@ -30,7 +30,6 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe("set-mode-and-capacity", (data) => {
-      console.log(data)
       this.teachingMode.mode = data.mode_type;
       this.teachingMode.capacity = data.capacity;
     })
@@ -40,10 +39,6 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
-      console.log(v, this.key)
-
-
-
       if (!this.teachingMode.capacity || this.teachingMode.capacity == '' || !this.teachingMode.mode || this.teachingMode.mode == '') {
         this.isRequired = true;
         setTimeout(() => {

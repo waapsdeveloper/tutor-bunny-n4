@@ -30,7 +30,6 @@ export class StudentOtherCoursesComponent extends BasePage implements OnInit {
 
   }
   getListData(data) {
-    console.log(data);
     this.count = data.total;
 
 
