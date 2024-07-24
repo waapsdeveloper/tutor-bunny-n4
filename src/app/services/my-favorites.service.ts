@@ -6,6 +6,7 @@ import { NetworkService } from './network.service';
 })
 export class MyFavoritesService {
 
+  page = 1;
   public favorites: any[] = [];
 
   constructor(private network: NetworkService) { }
@@ -19,13 +20,13 @@ export class MyFavoritesService {
 
     const res = await this.network.getAllFavCourses(obj) as any;
     const data = res.result;
-    const d = data.data;
+    this.favorites = data.data;
     // this.showLiked = d.length > 0;
 
   }
 
   async removeFavorite(obj: any, user) {
-    const index = this.favorites.indexOf(obj);
+    const index = this.favorites.findIndex(x => x.id == obj.id);
     if (index > -1) {
       this.favorites.splice(index, 1);
       console.log(`Removed favorite:`, obj);
@@ -43,7 +44,8 @@ export class MyFavoritesService {
   }
 
   async addFavorite(obj: any, user) {
-    if (!this.favorites.includes(obj)) {
+    const index = this.favorites.findIndex(x => x.id == obj.id);
+    if (index == -1) {
       this.favorites.push(obj);
       console.log(`Added favorite:`, obj);
     } else {
