@@ -55,7 +55,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.events.subscribe('update-fav-dot-d', (data) => {
       console.log("sdadasdsada");
-      
       console.log(data);
       this.getCountOfLikes()
     });
