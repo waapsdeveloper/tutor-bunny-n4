@@ -30,7 +30,6 @@ export class CoursesPage extends BasePage implements OnInit {
 
     this.events.subscribe('initilize-the-list', (res) => {
       this.getCourses('', 1)
-      // this.initialize()
     });
 
   }
