@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { log } from 'console';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -17,6 +16,7 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   search: string = '';
   courseId
   user;
+  blocked;
   data: any;
   loading = false;
 
@@ -38,18 +38,15 @@ export class RecCoursesComponent extends BasePage implements OnInit {
   }
 
   trialsReceivedViaPusher() {
-    console.log("sdfsf");
     this.events.registerPusherEvent(this.user.id);
     this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   }
 
   async updateTrailsList(data: any) {
-    console.log(data);
     this.courseId = data.course_id;
     if (this.courseId) {
       this.getCourses('', 1);
       const index = this.list.findIndex(c => c.id === this.courseId);
-      console.log(index);
     }
   }
 
@@ -60,18 +57,14 @@ export class RecCoursesComponent extends BasePage implements OnInit {
 
   courseReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
-    console.log("sdfsf");
     this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
   }
 
   async updateCourseList(data: any) {
-    console.log(data['course_Id']);
     let course_Id = data.course_id;
-    console.log(course_Id);
 
     if (course_Id) {
       let res = await this.network.getcourseById(course_Id) as any;
-      console.log(res);
       this.course = res.course;
       if (this.course) {
         const index = this.list.findIndex(c => c.id === this.course.id);
@@ -94,12 +87,13 @@ export class RecCoursesComponent extends BasePage implements OnInit {
         liked: liked
       };
       const res = await this.network.getAllCourses(obj) as any;
-      console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
       if (page === 1) {
         this.list = data.data;
+
+
       } else {
         this.list = [...this.list, ...data.data];
       }
@@ -119,7 +113,6 @@ export class RecCoursesComponent extends BasePage implements OnInit {
     this.loading = true;
     if (this.page <= this.last_page) {
       const np = this.page + 1;
-      console.log(np);
       await this.getCourses('', np);
     }
     this.loading = false;

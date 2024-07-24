@@ -20,14 +20,13 @@ export class CourseListComponent extends BasePage implements OnInit {
   };
   public set trial(value: any) {
     this._trial = value;
-    console.log(this._trial);
-    console.log(this.trial);
     if (this.trial) {
       this.status = this.trial.status;
     }
   }
   courseId;
   status;
+  blocked;
   loading = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('item')
@@ -36,6 +35,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   };
   public set item(value: any) {
     this._item = value;
+    this.initialize(value);
+
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
     this.fav = value.is_liked_by_me;
@@ -45,15 +46,21 @@ export class CourseListComponent extends BasePage implements OnInit {
   languageName: any;
   constructor(injector: Injector, private alertController: AlertController) {
     super(injector)
-    this.initialize();
     this.user = this.users.getUser()
 
   }
-  initialize() { }
+  initialize(data) { 
+    console.log(data.trial);
+    
+    if(data && data.trial){
+      this.blocked = data.trial.status
+      console.log(this.blocked);
+      
+    }
+  }
 
   ngOnInit() {
     this.events.subscribe('update-fav-dot-d', (data) => {
-      console.log(data);
     });
     setTimeout(() => {
       this.callApi()
@@ -99,14 +106,11 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async requestTrail(id) {
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
-    console.log(v);
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);;
-      console.log(data.data);
       // return
       let send = data.data.send;
-      console.log(send);
       if (send == true) {
         this.trail = true;
         let user = this.users.getUser()
@@ -116,7 +120,6 @@ export class CourseListComponent extends BasePage implements OnInit {
           message: data.data.message
         }
         let res = await this.network.requestTrail(obj)
-        console.log(res);
       }
       else {
         return
@@ -138,7 +141,6 @@ export class CourseListComponent extends BasePage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Alert canceled');
           },
         },
         {
@@ -146,7 +148,6 @@ export class CourseListComponent extends BasePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.cancelTrail(item);
-            console.log('Alert confirmed');
           },
         },
       ],

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -134,6 +135,9 @@ export class AddScheduleComponent extends BasePage implements OnInit, OnDestroy 
 
 
     }
+  }
+  closeDateModal(modal: IonModal) {
+    modal.dismiss();
   }
 
 

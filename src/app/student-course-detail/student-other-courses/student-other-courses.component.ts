@@ -8,7 +8,6 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class StudentOtherCoursesComponent extends BasePage implements OnInit {
 
-  private _data: any;
 
   list;
   count;
@@ -16,6 +15,7 @@ export class StudentOtherCoursesComponent extends BasePage implements OnInit {
 
   page: number = 1;
   last_page = -1;
+  data: any;
   constructor(injector: Injector) {
     super(injector)
 
@@ -23,39 +23,19 @@ export class StudentOtherCoursesComponent extends BasePage implements OnInit {
 
   ngOnInit() {
 
-    this.events.subscribe('data-for-other-corses', (data: any) => {
-      this.user = data.user;
-      console.log(this.user, "fsdsdfsdf");
-      this.initialize()
-    }
-    )
-
   }
+
+
   async initialize() {
-    console.log("saddsa");
 
-    this.getCourses();
+  }
+  getListData(data) {
+    console.log(data);
+    this.count = data.total;
+
+
   }
 
-  getCourses() {
-    return new Promise(async resolve => {
-      // return
-
-      let obj = {
-        user_id: this.user.id
-      };
-
-      const res = await this.network.getOtherCourseList(obj) as any;
-      console.log(res);
-      const data = res.result;
-      this.page = data.current_page;
-      this.last_page = data.last_page;
-
-      this.count = res.result.total
-
-      resolve(true);
-    });
-  }
   seeAll() {
     this.nav.pop('/tabs/student-dashboard')
   }

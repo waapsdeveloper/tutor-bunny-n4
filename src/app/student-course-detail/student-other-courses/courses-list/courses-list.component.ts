@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -13,19 +13,21 @@ export class CoursesListComponent extends BasePage implements OnInit {
   count;
   user
   page: number = 1;
+  @Output('listData') listData: EventEmitter<any> = new EventEmitter<any>();
+
   last_page = -1;
   constructor(injector: Injector) {
     super(injector)
   }
 
- 
+
   ngOnInit() {
 
     this.events.subscribe('data-for-other-corses', (data: any) => {
       this.user = data.user;
       console.log(this.user, "fsdsdfsdf");
       this.initialize()
-      
+
     }
     )
 
@@ -45,13 +47,15 @@ export class CoursesListComponent extends BasePage implements OnInit {
       };
 
       const res = await this.network.getOtherCourseList(obj) as any;
-      console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
 
       this.count = res.result.total
 
+      this.list = data.data;
+      console.log(data);
+      this.listData.emit(data);
       resolve(true);
     });
   }

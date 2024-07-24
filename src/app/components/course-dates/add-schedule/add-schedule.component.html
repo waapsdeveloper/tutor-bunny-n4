@@ -20,10 +20,10 @@
 
 
       <ion-datetime-button presentation="date" datetime="startDatetime-{{i}}" *ngIf="courseType == 3"
-        class="date-time-button-112"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
+        class="date-time-button-112"></ion-datetime-button >
+      <ion-modal [keepContentsMounted]="true" #sheduledateModal>
         <ng-template>
-          <ion-datetime id="startDatetime-{{i}}" presentation="date" (ionChange)="setDateErt($event, i)" ></ion-datetime>
+          <ion-datetime id="startDatetime-{{i}}" presentation="date" (ionChange)="setDateErt($event, i)"  (ionChange)="closeDateModal(sheduledateModal)"></ion-datetime>
         </ng-template>
       </ion-modal>
 
