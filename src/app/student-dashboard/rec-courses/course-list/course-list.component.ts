@@ -2,6 +2,7 @@ import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angul
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
+import { MyFavoritesService } from 'src/app/services/my-favorites.service';
 
 @Component({
   selector: 'app-course-list',
@@ -44,7 +45,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   fav = false;
   trail = false;
   languageName: any;
-  constructor(injector: Injector, private alertController: AlertController) {
+  constructor(injector: Injector, private alertController: AlertController, public favService: MyFavoritesService) {
     super(injector)
     this.user = this.users.getUser()
 
@@ -57,8 +58,6 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('update-fav-dot-d', (data) => {
-    });
     setTimeout(() => {
       this.callApi()
     }, 200);
@@ -163,25 +162,22 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addToFav() {
-    let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.item.id
-    }
-    const res = await this.network.addCourseFav(obj)
+    let user = this.users.getUser();
+
+    this.item.is_liked_by_me = true;
     this.fav = true;
-    this.events.publish('update-fav-dot-d');
+    this.favService.addFavorite(this.item, user);
+
   }
 
   async removeToFav() {
     let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.item.id
-    }
-    const res = await this.network.removeCourseFav(obj)
+
+    this.item.is_liked_by_me = false;
     this.fav = false;
-    this.events.publish('update-fav-dot-d');
+    this.favService.removeFavorite(this.item, user);
+
+
   }
 
 

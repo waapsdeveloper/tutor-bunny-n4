@@ -24,8 +24,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
     super(injector)
-    this.initialize()
- 
+    this.initialize();
+    this.getCountOfLikes()
+
   }
 
   ngOnInit() {
@@ -35,11 +36,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     });
 
- 
 
-    
-
-    this.getCountOfLikes()
   }
 
   ionViewWillEnter() {
@@ -52,12 +49,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-
-    this.events.subscribe('update-fav-dot-d', (data) => {
-      console.log("sdadasdsada");
-      console.log(data);
-      this.getCountOfLikes()
-    });
 
     this.user = this.users.getUser();
 
@@ -122,16 +113,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   async showFavCourse() {
+
+
     let res = await this.modals.present(FavCoursesPage)
 
     this.events.publish('Update-Fv-Screen', {
       res
-      
     });
-
-    this.getCountOfLikes()
-
-
 
     // this.showLiked = !this.showLiked;
     // this.events.publish("show-list-of-fav-courses", {
@@ -140,14 +128,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   async getCountOfLikes() {
-    let obj = {
-      liked: true
-    }
 
-    const res = await this.network.getAllCourses(obj) as any;
-    const data = res.result;
-    const d = data.data;
-    this.showLiked = d.length > 0;
+
 
 
   }

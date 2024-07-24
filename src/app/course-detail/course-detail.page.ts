@@ -109,8 +109,9 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   async getOtherCourseList(id) {
 
+    let user = this.users.getUser()
     const obj = {
-      category_id: null
+      user_id: user['id']
     }
     const res = await this.network.getOtherCourseList(obj)
     const result = res.result;
