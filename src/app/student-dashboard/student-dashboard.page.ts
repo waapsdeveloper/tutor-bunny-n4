@@ -25,6 +25,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService) {
     super(injector)
     this.initialize()
+ 
   }
 
   ngOnInit() {
@@ -34,9 +35,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     });
 
-    this.events.subscribe('update-fav-dot-d', (data) => {
-      this.getCountOfLikes()
-    });
+ 
+
+    
 
     this.getCountOfLikes()
   }
@@ -51,6 +52,14 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   async initialize() {
+
+    this.events.subscribe('update-fav-dot-d', (data) => {
+      console.log("sdadasdsada");
+      
+      console.log(data);
+      this.getCountOfLikes()
+    });
+
     this.user = this.users.getUser();
 
     let obj = {
@@ -118,6 +127,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.events.publish('Update-Fv-Screen', {
       res
+      
     });
 
     this.getCountOfLikes()
