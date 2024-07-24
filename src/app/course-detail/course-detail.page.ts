@@ -71,7 +71,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
-    this.description = this.data.description;
+    this.description = this.formatDescription(this.data.description);  // Process the description
     this.from_age = this.data.from_age;
     this.to_age = this.data.to_age;
     this.displayName = this.utility.getAmericanName(this.data.user.name);
@@ -102,8 +102,13 @@ export class CourseDetailPage extends BasePage implements OnInit {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
-
   }
+
+  formatDescription(description: string): string {
+    if (!description) return '';
+    return description.replace(/\n/g, '<br>');
+  }
+
 
   async getOtherCourseList(id) {
 
@@ -111,7 +116,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
       category_id: null
     }
     const res = await this.network.getOtherCourseList(obj)
-    console.log(res);
     const result = res.result;
     this.otherCourseListTotalCount = result.total;
     this.otherCourseList = result.data;
