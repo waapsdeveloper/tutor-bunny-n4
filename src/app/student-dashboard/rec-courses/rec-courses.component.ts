@@ -37,12 +37,10 @@ export class RecCoursesComponent extends BasePage  { // implements OnInit
   //   // });
   //   // this.courseReceivedViaPusher();
   // }
-
   // trialsReceivedViaPusher() {
   //   this.events.registerPusherEvent(this.user.id);
   //   this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   // }
-
   // async updateTrailsList(data: any) {
   //   this.courseId = data.course_id;
   //   if (this.courseId) {
@@ -61,10 +59,8 @@ export class RecCoursesComponent extends BasePage  { // implements OnInit
   //   this.events.registerPusherEvent(this.user.id);
   //   this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
   // }
-
   // async updateCourseList(data: any) {
   //   let course_Id = data.course_id;
-
   //   if (course_Id) {
   //     let res = await this.network.getcourseById(course_Id) as any;
   //     this.course = res.course;
@@ -81,14 +77,9 @@ export class RecCoursesComponent extends BasePage  { // implements OnInit
   // async initialize() {
   //   this.getCourses('', 1);
   // }
-
   // async getCourses(search = '', page = 1, liked = false) {
-
   //   const res = await this.globalCourses.getAllCourses()
-
-
   //   return new Promise(async resolve => {
-
   //     // if (this.course && page === 1) {
   //     //   const index = this.list.findIndex(c => c.id === this.course.id);
   //     //   if (index !== -1) {

@@ -28,6 +28,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     super(injector)
     this.initialize();
     this.globalCourses.getCoursesFromApi()
+    this.user = this.users.getUser();
+    this.events.registerPusherEvent(this.user.id)
+
 
   }
 
@@ -36,9 +39,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
     });
-    this.user = this.users.getUser();
 
-    this.events.registerPusherEvent(this.user.id)
   }
 
   ionViewWillEnter() {

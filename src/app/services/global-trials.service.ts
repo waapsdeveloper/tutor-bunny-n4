@@ -35,18 +35,17 @@ export class GlobalTrialsService {
 
     const index = this.list.findIndex(x => x.id == trialObj.id );
     if(index != -1){
-
+      this.list[index] = trialObj;
     } else {
-
+      this.list = [trialObj, ...this.list]
     }
 
     const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id );
-    if(indexp != -1){
-
+    if(index != -1){
+      this.pendingTrials[index] = trialObj;
     } else {
-
+      this.pendingTrials = [trialObj, ...this.pendingTrials]
     }
-
 
     // const course = data.course;
     // if(course){
