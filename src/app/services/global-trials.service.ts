@@ -112,6 +112,23 @@ export class GlobalTrialsService {
 
   }
 
+  async changeStatus(obj, trialId){
+
+    let res = await this.network.changeTrailStuts(obj, trialId);
+    if (res.status === 200) {
+
+      let findIndex = this.list.findIndex( x => x.id == trialId)
+      if(findIndex != -1){
+        this.list[findIndex] = res.trial;
+      }
+
+    }
+
+
+
+
+  }
+
 
 
 }

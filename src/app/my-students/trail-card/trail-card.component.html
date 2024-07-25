@@ -2,81 +2,81 @@
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" *ngIf="item.status == 'Accepted'"
+        <div class="image-circle-789675" *ngIf="item.status === 'Accepted'"
           [style.background-image]="item.student.image ? 'url(' + item.student.image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="image-circle-789675" *ngIf="item.status != 'Accepted'"
+        <div class="image-circle-789675" *ngIf="item.status !== 'Accepted'"
           style="background-image: url(../../../../assets/svg/pending.svg);">
         </div>
-        <div class="pnd-678956" *ngIf="item.status == 'Pending'">
+        <div class="pnd-678956" *ngIf="item.status === 'Pending'">
           <img src="../../../assets/svg/panding.svg" />
           <div class="pnd-inner-7895">Pending</div>
         </div>
-        <div class="pnd-678956" *ngIf="item.status == 'Complete'">
+        <div class="pnd-678956" *ngIf="item.status === 'Complete'">
           <img src="../../../assets/svg/panding.svg" />
           <div class="pnd-inner-7895">Complete</div>
         </div>
-        <div class="pnd-678956" *ngIf="item.status == 'Accepted'">
+        <div class="pnd-678956" *ngIf="item.status === 'Accepted'">
           <img src="../../../assets/svg/accepted.svg" />
           <div class="pnd-inner-7895">Accepted</div>
         </div>
-        <div class="pnd-678956" *ngIf="item.status == 'Rejected'">
+        <div class="pnd-678956" *ngIf="item.status === 'Rejected'">
           <img src="../../../assets/svg/panding.svg" />
           <div class="pnd-inner-7895">Rejected</div>
         </div>
-        <div class="pnd-678956" *ngIf="item.status == 'Blocked'">
+        <div class="pnd-678956" *ngIf="item.status === 'Blocked'">
           <img src="assets/icon/block-circle.svg" />
           <div class="pnd-inner-7895">Blocked</div>
         </div>
       </div>
       <div class="content-box-outer">
         <div class="content-box-outer-heading-top">
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status == 'Accepted'">
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status === 'Accepted'">
             {{item.student.name}}
           </div>
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status != 'Accepted'">
+          <div class="title-heading-789 outfit-semibold"  *ngIf="item.status !== 'Accepted'">
             {{item.student.name| names}}
           </div>
-          <div class="pnd-678956" *ngIf="item.status != 'Rejected'" (click)="presentPopover($event)">
+          <div class="pnd-678956" *ngIf="item.status !== 'Rejected'" (click)="presentPopover($event)">
             <img src="../../../assets/svg/option.svg"  />
           </div>
           <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" [dismissOnSelect]="true">
             <ng-template>
-              <ion-list *ngIf="item.status == 'Pending'">
+              <ion-list *ngIf="item.status === 'Pending'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Accepted')">
                   <img class="img1-789575" src="assets/icon/check-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Accept</div>
                 </ion-item>
               </ion-list>
-              <ion-list *ngIf="item.status == 'Pending'">
+              <ion-list *ngIf="item.status === 'Pending'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Rejected')">
                   <img class="img1-789575" src="assets/icon/reject-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Reject</div>
                 </ion-item>
               </ion-list>
-              <ion-list *ngIf="item.status == 'Pending'">
+              <ion-list *ngIf="item.status === 'Pending'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Blocked')">
                   <img class="img1-789575" src="assets/icon/block-circle.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Block</div>
                 </ion-item>
               </ion-list>
-              <ion-list *ngIf="item.status == 'Complete' || item.status == 'Accepted'">
+              <ion-list *ngIf="item.status === 'Complete' || item.status === 'Accepted'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="goToChat()">
                   <img class="img1-789575" src="../../../assets/svg/chat-fill.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Chat</div>
                 </ion-item>
               </ion-list>
-              <ion-list *ngIf="item.status == 'Accepted'">
+              <ion-list *ngIf="item.status === 'Accepted'">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Complete')">
                   <img class="img1-789575" src="../../../assets/svg/complete.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Complete</div>
                 </ion-item>
               </ion-list>
-              <ion-list *ngIf="item.status == 'Blocked'" style="border: none;">
+              <ion-list *ngIf="item.status === 'Blocked'" style="border: none;">
                 <ion-item [button]="true" [detail]="false" class="profile-line-789578"
                   (click)="presentAlert('Unblock')">
                   <img class="img1-789575" src="assets/icon/unblock.svg" />

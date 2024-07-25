@@ -26,11 +26,6 @@ export class MyStudentsPage extends BasePage  { // implements OnInit
 
 
 
-  removeFromList(id) {
-    this.getTrials('', 1);
-
-  }
-
   filterByStatus(status = '') {
     this.globalTrials.status = status;
     this.globalTrials.getTrials(this.search, 1)

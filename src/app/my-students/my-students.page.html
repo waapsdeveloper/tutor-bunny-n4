@@ -52,7 +52,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <app-trail-card *ngFor="let item of globalTrials.list" [item]="item" (removeFromList)="removeFromList($event)"></app-trail-card>
+    <app-trail-card *ngFor="let item of globalTrials.list" [item]="item"></app-trail-card>
     <div class="fs-14 outfit" *ngIf="globalTrials.list.length === 0">No results Found</div>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

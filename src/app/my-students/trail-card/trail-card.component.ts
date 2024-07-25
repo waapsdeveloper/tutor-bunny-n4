@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 @Component({
   selector: 'app-trail-card',
   templateUrl: './trail-card.component.html',
@@ -16,7 +17,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
 
   isOpen = false;
   @Output() removeFromList = new EventEmitter<number>();
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private globalTrials: GlobalTrialsService) {
     super(injector)
   }
   ngOnInit() {
@@ -41,15 +42,19 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
   async trailStatus(key: string) {
     // return
+
+
     let obj = {
       status: key,
       user_id: this.item.student.id
     };
     let trialId = this.item.id;
-    let res = await this.network.changeTrailStuts(obj, trialId);
-    if (res.status === 200) {
-      this.removeFromList.emit(this.item.id);
-    }
+
+    this.globalTrials.changeStatus(obj, trialId)
+
+
+
+
   }
   presentPopover(e: Event) {
     this.popover.event = e;
