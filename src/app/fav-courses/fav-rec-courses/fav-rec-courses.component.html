@@ -2,8 +2,8 @@
 
   <div class="sb-content-7895">
     <!-- *ngFor="let item of list"  [item]="item" -->
-    <div  *ngFor="let item of list">
-      <app-fav-rec-list [item]="item" (unFav)="removeFormFav($event)"></app-fav-rec-list>
+    <div  *ngFor="let item of favService.favorites">
+      <app-fav-rec-list [item]="item"></app-fav-rec-list>
     </div>
   </div>
 </div>

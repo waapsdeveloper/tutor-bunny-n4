@@ -27,7 +27,6 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
-
     let res = await this.network.getdashboardcounts();
     this.trials = res.trials;
     this.courses = res.courses;

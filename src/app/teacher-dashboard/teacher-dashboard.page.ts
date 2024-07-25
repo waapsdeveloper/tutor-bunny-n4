@@ -5,6 +5,7 @@ import { NetworkService } from '../services/network.service';
 import { FirebaseService } from '../services/firebase.service';
 import { BasePage } from '../base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
+import { GlobalCoursesService } from '../services/global-courses.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -43,7 +44,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       active: 0,
     },
   ];
-  constructor(injector: Injector, private fcm: FirebaseService) {
+  constructor(injector: Injector, private fcm: FirebaseService, public globalCourses: GlobalCoursesService) {
     super(injector);
   }
 
@@ -52,7 +53,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     this.fcm.setTokenToServer();
 
     this.events.subscribe('dashboard:refreshpage', () => {
-
       this.initialize();
     });
   }
