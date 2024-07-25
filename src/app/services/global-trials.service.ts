@@ -41,8 +41,8 @@ export class GlobalTrialsService {
 
   trialsChannelReceived($event: any) {
     console.log($event);
-
-    // this.events.publish('trials-received-via-pusher', $event);
+    
+    this.events.publish('trials-received-via-pusher', $event);
   }
   async updateTrailsList(data: any) {
 
@@ -64,17 +64,7 @@ export class GlobalTrialsService {
       this.pendingTrials = [trialObj, ...this.pendingTrials]
     }
 
-    // const course = data.course;
-    // if(course){
-    //   const trial =
-    // }
-    // const
 
-    // this.courseId = data.course_id;
-    // if (this.courseId) {
-    //   this.getTrials('', 1);
-    //   const index = this.list.findIndex(c => c.id === this.courseId);
-    // }
   }
   getPendingTrialsFromApi(search = '', page = 1,) {
 

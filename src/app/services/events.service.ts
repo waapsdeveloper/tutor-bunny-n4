@@ -10,7 +10,6 @@ export class EventsService {
   historicalEvent = "randomHistory";
   private pusher: Pusher;
   chatChannel: any;
-  CourseChannel: any;
   subscriptions: any[] = [];
 
   constructor(public pubsubSvc: NgxPubSubService) {
@@ -23,7 +22,6 @@ export class EventsService {
 
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.chatChannel = this.pusher.subscribe("chats-channel");
-    this.CourseChannel = this.pusher.subscribe("course-channel");
   }
 
   publish(key: string, data = {}) {
@@ -49,7 +47,6 @@ export class EventsService {
     console.log(id);
     
     this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
-    this.CourseChannel.bind("course-rec-update-by-list", this.courseChannelReceived.bind(this));
   }
 
   chatChannelReceived($event: any) {

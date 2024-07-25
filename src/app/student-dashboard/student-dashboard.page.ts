@@ -32,6 +32,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.globalCourses.getCoursesFromApi()
     this.globalTrials.registerPusherEvent()
+    this.globalCourses.registerPusherEvent()
 
 
   }

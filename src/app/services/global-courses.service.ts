@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
+import Pusher from 'pusher-js';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,25 @@ export class GlobalCoursesService {
   page = 1;
   last_page = -1;
   courses: any[] = [];
+  CourseChannel: any;
+  private pusher: Pusher;
 
-  constructor(private network: NetworkService, private events: EventsService) {
-    this.courseReceivedViaPusher();
+
+  constructor(private users: UsersService,private network: NetworkService, private events: EventsService) {
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true
+    };
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.CourseChannel = this.pusher.subscribe("course-channel");
+
   }
-  courseReceivedViaPusher() {
-    this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this), false);
+  registerPusherEvent() {
+    this.CourseChannel.bind("course-rec-update-by-list", this.courseChannelReceived.bind(this));
+  }
+
+  courseChannelReceived($event: any) {
+    this.events.publish('course-received-via-pusher', $event);
   }
 
   async updateCourseList(data: any) {
