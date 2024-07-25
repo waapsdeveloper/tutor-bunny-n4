@@ -30,7 +30,8 @@ export class GlobalCoursesService {
   }
 
   courseChannelReceived($event: any) {
-    this.events.publish('course-received-via-pusher', $event);
+    console.log($event);
+    this.updateCourseList($event)
   }
 
   async updateCourseList(data: any) {
