@@ -34,27 +34,26 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   //   this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   // }
 
-  // async updateTrailsList(data: any) {
-  //   let trail_Id = data.id;
+  async updateTrailsList(data: any) {
+    let trail_Id = data.id;
 
-  //   // return
-  //   this.initialize();
+    // return
+    this.initialize();
 
-  //   this.events.publish('get-dashboard-stats');
+    this.events.publish('get-dashboard-stats');
 
-  //   this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
+    this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
 
-  //   if (this.newTrial) {
-  //     const index = this.trial.findIndex(c => c.id === this.newTrial.id);
-  //     if (index !== -1) {
-  //       this.list[index] = this.newTrial;
-  //     } else {
-  //       this.list = [this.newTrial, ...this.trial];
-  //     }
-  //   }
+    if (this.newTrial) {
+      const index = this.trial.findIndex(c => c.id === this.newTrial.id);
+      if (index !== -1) {
+        this.list[index] = this.newTrial;
+      } else {
+        this.list = [this.newTrial, ...this.trial];
+      }
+    }
 
-  // }
-
+  }
   async initialize() {
     this.globalTrials.getPendingTrials();
   }

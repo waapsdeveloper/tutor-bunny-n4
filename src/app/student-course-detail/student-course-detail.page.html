@@ -123,14 +123,14 @@
 </ion-content>
 <ion-footer>
   <div class="footer-buttons-78963">
-    <div class="button-chat-78563" *ngIf="data?.trial && data.trial.status === 'Accepted'">
+    <div class="button-chat-78563" *ngIf="!data?.trial ">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
         <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
-    <div class="button-chat-7856" *ngIf="!data?.trial">
+    <div class="button-chat-7856" *ngIf="data?.trial && data.trial.status === 'Accepted'">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
