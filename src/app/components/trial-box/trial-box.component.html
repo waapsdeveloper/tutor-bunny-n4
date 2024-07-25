@@ -1,4 +1,4 @@
-<div class="trial-box-outer-689567" *ngIf="this.trial">
+<div class="trial-box-outer-689567" *ngIf="globalTrials?.pendingTrials.length > 0">
   <div class="sb-heading-7895">
     <div class="sb-heading-title-7895 outfit-semibold">Pending requests ({{globalTrials.pendingTrials.length}}) </div>
     <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all trials</div>
