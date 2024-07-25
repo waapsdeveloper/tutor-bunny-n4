@@ -253,11 +253,11 @@ export class NetworkService {
   }
 
   requestTrail(data) {
-    return this.httpPostResponse('course-trial/send-request', data, null, true, true);
+    return this.httpPostResponse('course-trial/send-request', data, null, false, false);
   }
 
   cancelTrail(data) {
-    return this.httpPostResponse('course-trial/cancel-request', data, null, true, true);
+    return this.httpPostResponse('course-trial/cancel-request', data, null, false, false);
   }
 
   getTrail(data) {

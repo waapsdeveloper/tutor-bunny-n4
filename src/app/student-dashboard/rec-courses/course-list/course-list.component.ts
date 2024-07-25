@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { MyFavoritesService } from 'src/app/services/my-favorites.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-course-list',
@@ -15,21 +16,16 @@ export class CourseListComponent extends BasePage implements OnInit {
   displayName;
   flag
   user;
-  @Input('trial')
-  public get trial() {
-    return this._trial;
-  };
-  public set trial(value: any) {
-    this._trial = value;
-    if (this.trial) {
-      this.status = this.trial.status;
-    }
-  }
   courseId;
   status;
   blocked;
   loading = false;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  fav = false;
+  trail = false;
+  languageName: any;
+
+  // @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
+
   @Input('item')
   public get item() {
     return this._item;
@@ -41,11 +37,11 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
     this.fav = value.is_liked_by_me;
+
+    this.status = value.trial ? value.trial.status : null;
   }
-  fav = false;
-  trail = false;
-  languageName: any;
-  constructor(injector: Injector, private alertController: AlertController, public favService: MyFavoritesService) {
+
+  constructor(injector: Injector, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService ) {
     super(injector)
     this.user = this.users.getUser()
 
@@ -95,27 +91,21 @@ export class CourseListComponent extends BasePage implements OnInit {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
     }
-    let res = await this.nav.push('student-course-detail', params)
-    this.events.publish('add-to-fav-from-detail', item);
-    this.onChange.emit(res);
+    this.nav.push('student-course-detail', params)
+    // this.events.publish('add-to-fav-from-detail', item);
+    // this.onChange.emit(res);
   }
 
   async requestTrail(id) {
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
-      }, "", 0.7);;
+      }, "", 0.7);
       // return
       let send = data.data.send;
       if (send == true) {
         this.trail = true;
-        let user = this.users.getUser()
-        let obj = {
-          user_id: user.id,
-          course_id: id,
-          message: data.data.message
-        }
-        let res = await this.network.requestTrail(obj)
+        this.globalCourses.requestTrial(this.item, this.user, data.data.message )
       }
       else {
         return
@@ -129,36 +119,21 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
   }
 
-  async presentAlert(item) {
-    const alert = await this.alertController.create({
-      header: 'Are you sure to cancel the Trial?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          },
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => {
-            this.cancelTrail(item);
-          },
-        },
-      ],
-    });
-    await alert.present();
+  async presentAlert() {
+
+    const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Cancel Trial', 'Are you sure to cancel the Trial?')
+
+    if(flag){
+      this.cancelTrail(this.item);
+    }
+
   }
 
   async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: id
-    }
-    let res = await this.network.cancelTrail(obj)
+    this.globalCourses.cancelTrail(this.item, user)
+
   }
 
   async addToFav() {

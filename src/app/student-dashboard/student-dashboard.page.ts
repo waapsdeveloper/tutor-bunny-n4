@@ -7,6 +7,7 @@ import { IonContent } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
 import { FavCoursesPage } from '../fav-courses/fav-courses.page';
 import { MyFavoritesService } from '../services/my-favorites.service';
+import { GlobalCoursesService } from '../services/global-courses.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -23,10 +24,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   showLiked = false;
   // @ViewChild('content', { static: true }) content: IonContent;
 
-  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public favService: MyFavoritesService) {
+  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService) {
     super(injector)
     this.initialize();
-    this.getCountOfLikes()
+    this.globalCourses.getCoursesFromApi()
 
   }
 
@@ -128,11 +129,5 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     // })
   }
 
-  async getCountOfLikes() {
-
-
-
-
-  }
 
 }
