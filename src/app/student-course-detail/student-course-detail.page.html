@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="backUrl" [showShare]="true"
     [showFav]="true" [showFavValue]="showFavValue" (addToFav)="addToFav()"
-    (removetoFav)="removeFromFav()"></app-sd-header-top>
+    (removetoFav)="removeToFav()"></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
@@ -123,21 +123,21 @@
 </ion-content>
 <ion-footer>
   <div class="footer-buttons-78963">
-    <div class="button-chat-78563" *ngIf="trail == false && loading == false && trial == null">
+    <div class="button-chat-78563" *ngIf="data?.trial && data.trial.status === 'Accepted'">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
         <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
-    <div class="button-chat-7856" *ngIf="trail == false && loading == false && trial != null">
+    <div class="button-chat-7856" *ngIf="!data?.trial">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
         <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
-    <div class="button-trial-23654" *ngIf="trail == false && loading == false && trial == null">
+    <div class="button-trial-23654" *ngIf="!data?.trial">
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
@@ -145,7 +145,7 @@
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
-    <div style="width: 100%;" *ngIf="trail == true">
+    <div style="width: 100%;" *ngIf="data?.trial && data.trial.status === 'Pending'">
       <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="presentAlert()"
         [text]="'Cancel Trial Request'"></app-sd-button-clear>
     </div>

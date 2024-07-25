@@ -20,7 +20,6 @@ export class CourseListComponent extends BasePage implements OnInit {
   status;
   blocked;
   loading = false;
-  fav = false;
   trail = false;
   languageName: any;
 
@@ -36,8 +35,6 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
-    this.fav = value.is_liked_by_me;
-
     this.status = value.trial ? value.trial.status : null;
   }
 
@@ -140,7 +137,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     let user = this.users.getUser();
 
     this.item.is_liked_by_me = true;
-    this.fav = true;
     this.favService.addFavorite(this.item, user);
 
   }
@@ -149,7 +145,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     let user = this.users.getUser()
 
     this.item.is_liked_by_me = false;
-    this.fav = false;
     this.favService.removeFavorite(this.item, user);
 
 

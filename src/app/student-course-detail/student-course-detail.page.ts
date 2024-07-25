@@ -3,16 +3,17 @@ import * as moment from 'moment';
 import { BasePage } from '../base-page/base-page';
 import { TrailMessageComponent } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { AlertController } from '@ionic/angular';
+import { GlobalCoursesService } from '../services/global-courses.service';
+import { MyFavoritesService } from '../services/my-favorites.service';
 
 @Component({
   selector: 'app-student-course-detail',
   templateUrl: './student-course-detail.page.html',
   styleUrls: ['./student-course-detail.page.scss'],
 })
-export class StudentCourseDetailPage extends BasePage implements OnInit {
+export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   data;
   params;
-  trail = false;
   backUrl;
   displayName
   course_Id;
@@ -29,7 +30,6 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   serial_number;
   created_at;
   image;
-  trial;
   price;
   from_age;
   to_age;
@@ -41,15 +41,11 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
   schedules;
   acheduleTime;
   showFavValue = false;
-  constructor(injector: Injector, private alertController: AlertController) {
+
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService, public favService: MyFavoritesService) {
     super(injector)
   }
 
-  ngOnInit() {
-
-
-
-  }
 
 
   async ionViewWillEnter() {
@@ -60,18 +56,19 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     if (this.params.id) {
       this.course_Id = this.params.id;
     }
+
     this.callApi();
-    setTimeout(() => {
-      this.isTrailReq()
-    }, 200);
+    // setTimeout(() => {
+    //   this.isTrailReq()
+    // }, 200);
   }
 
 
 
   async callApi() {
 
-    let res = await this.network.getcourseById(this.course_Id) as any;
-    this.data = res.course;
+    let res = await this.globalCourses.getcourseById(this.course_Id) as any;
+    this.data = res;
     this.events.publish('data-for-other-corses', this.data)
     this.title = this.data.title;
     this.capacity = this.data.capacity;
@@ -90,9 +87,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
-    if (this.data.trial) {
-      this.trial = this.data.trial.status;
-    }
+    // if (this.data.trial) {
+    //   this.trial = this.data.trial.status;
+    // }
     this.techerImg = this.data.user.image
     this.country = this.data.user.teacher.country.name
     this.updated_at = this.data.updated_at;
@@ -104,31 +101,53 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.showFavValue = this.data.is_liked_by_me;
   }
 
-  async addToFav() {
-    let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.data.id
-    }
-    const res = await this.network.addCourseFav(obj)
+  // async addToFav() {
 
-    this.events.publish('show-list-of-fav-courses')
-    this.callApi();
+
+  //   let user = this.users.getUser()
+  //   let obj = {
+  //     user_id: user.id,
+  //     course_id: this.data.id
+  //   }
+  //   const res = await this.network.addCourseFav(obj)
+
+  //   this.events.publish('show-list-of-fav-courses')
+  //   this.callApi();
+  // }
+
+  // async removeFromFav() {
+  //   let user = this.users.getUser()
+  //   let obj = {
+  //     user_id: user.id,
+  //     course_id: this.data.id
+  //   }
+  //   const res = await this.network.removeCourseFav(obj)
+
+
+  //   this.events.publish("show-list-of-fav-courses", {
+
+  //   })
+  //   this.callApi();
+
+  // }
+
+  async addToFav() {
+
+    let user = this.users.getUser();
+
+    this.data.is_liked_by_me = true;
+    this.showFavValue = true;
+    this.favService.addFavorite(this.data, user);
+
   }
 
-  async removeFromFav() {
+  async removeToFav() {
     let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.data.id
-    }
-    const res = await this.network.removeCourseFav(obj)
 
+    this.data.is_liked_by_me = false;
+    this.showFavValue = false;
+    this.favService.removeFavorite(this.data, user);
 
-    this.events.publish("show-list-of-fav-courses", {
-
-    })
-    this.callApi();
 
   }
 
@@ -155,30 +174,33 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     this.nav.push('/tabs/chat')
   }
 
+
+  async presentAlert() {
+
+    const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Cancel Trial', 'Are you sure to cancel the Trial?' )
+    if(flag){
+      this.cancelTrail();
+    }
+  }
+
+
   async requestTrail() {
+
     let user = this.users.getUser()
     let v = await this.profiles.isProfileCompleted(user) as any;;
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
-      }, "", 0.7);;
+      }, "", 0.7);
       let send = data.data.send;
 
-
-
       if (send == true) {
-        this.trail = true;
-        let user = this.users.getUser()
-        let obj = {
-          user_id: user.id,
-          course_id: this.course_Id,
-          message: data.data.message
-        }
-        let res = await this.network.requestTrail(obj)
-        this.trail = true;
+        // this.trail = true;
+
+        await this.globalCourses.requestTrial(this.data, user, data.data.message)
+        this.callApi()
+
       }
-      else {
-        return
-      }
+
     }
     else {
       this.nav.push('/student-profile/student-profile-edit', {
@@ -188,58 +210,33 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     }
 
   }
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Are you sure to cancel the Trial?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          },
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => {
-            this.cancelTrail();
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
 
   async cancelTrail() {
-    this.trail = false;
-    let user = this.users.getUser()
 
-    let obj = {
-      user_id: user.id,
-      course_id: this.course_Id
-    }
-    let res = await this.network.cancelTrail(obj)
+    let user = this.users.getUser();
+    await this.globalCourses.cancelTrail(this.data, user)
+    this.callApi()
   }
 
-  async isTrailReq() {
-    this.loading = true;
+  // async isTrailReq() {
 
-    let user = this.users.getUser()
+  //   this.loading = true;
 
-    let obj = {
-      user_id: user.id,
-      course_id: this.course_Id
-    }
-    let res = await this.network.getTrail(obj)
-    if (res && !res.trial) {
-      this.trail = false;
-      this.loading = false;
-    }
-    if (res && res.trial) {
-      this.trail = true;
-      this.loading = false;
-    }
+  //   let user = this.users.getUser()
 
-  }
+  //   let obj = {
+  //     user_id: user.id,
+  //     course_id: this.course_Id
+  //   }
+  //   let res = await this.network.getTrail(obj)
+  //   if (res && !res.trial) {
+  //     this.trail = false;
+  //     this.loading = false;
+  //   }
+  //   if (res && res.trial) {
+  //     this.trail = true;
+  //     this.loading = false;
+  //   }
+
+  // }
 }

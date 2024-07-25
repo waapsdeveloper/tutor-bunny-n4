@@ -25,9 +25,9 @@
             <div style="    display: flex;
             align-items: center;
             justify-content: flex-end;">
-              <ion-icon [name]="fav == true ? 'heart' : 'heart-outline'"
-                (click)="fav == true ? removeToFav() : addToFav()"
-                [class]="fav == true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+              <ion-icon [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+                (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+                [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
             </div>
           </div>
           <div class="profile-above-footer-986985">
