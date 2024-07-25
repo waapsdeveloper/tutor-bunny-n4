@@ -101,7 +101,11 @@ export class TrailCardComponent extends BasePage implements OnInit {
   calculateAge() {
     const currentYear = new Date().getFullYear();
 
-    this.age = currentYear - this.item.student.student.dob;
+    if(this.item && this.item.student && this.item.student.student && this.item.student.student.dob){
+      this.age = currentYear - this.item.student.student.dob;
+    }
+
+
 
   }
   goToDeatil() {
