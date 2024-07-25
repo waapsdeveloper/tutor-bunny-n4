@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 
 @Component({
   selector: 'app-trial-box',
@@ -20,7 +21,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   flag;
   newTrial;
   serial_number;
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public globalTrials: GlobalTrialsService) {
     super(injector)
     this.initialize();
   }
@@ -43,7 +44,6 @@ export class TrialBoxComponent extends BasePage implements OnInit {
 
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
 
-
     if (this.newTrial) {
       const index = this.trial.findIndex(c => c.id === this.newTrial.id);
       if (index !== -1) {
@@ -55,13 +55,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
 
   }
   async initialize() {
-    this.user = this.users.getUser();
-    let obj = {
-      teacher_id: this.user.id
-    }
-    let res = await this.network.getPendingTrial(this.user.id, obj);
-    this.trailCount = res.total
-    this.trial = res.trials;
+    this.globalTrials.getPendingTrials();
   }
   getFlag(item) {
 
@@ -80,19 +74,10 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   goToTrialReq() {
     this.nav.push('my-students')
   }
-  async trailStatus(key, item) {
-    let obj = {
-      status: key,
-      user_id: item.student.id
-    };
-    let trialId = item.id;
-    let res = await this.network.changeTrailStuts(obj, trialId);
-  }
+
   goToChat() {
     this.nav.push('/tabs/chat')
   }
-  removeFromList(id) {
-    this.initialize();
-  }
+
 
 }

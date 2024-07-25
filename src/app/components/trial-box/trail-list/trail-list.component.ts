@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 
 @Component({
   selector: 'app-trail-list',
@@ -14,28 +15,27 @@ export class TrailListComponent extends BasePage implements OnInit {
   age;
   @Output() removeFromList = new EventEmitter<number>();
 
-  constructor(injector: Injector, private alertController: AlertController) {
+  constructor(injector: Injector, public globalTrials: GlobalTrialsService) {
     super(injector)
   }
 
   ngOnInit() {
-
-
     this.flag = this.getFlag()
     this.calculateAge();
   }
 
   async trailStatus(key: string) {
     // return
+
+    this.globalTrials.removeFromPendingTrials(this.item);
+
     let obj = {
       status: key,
       user_id: this.item.student.id
     };
     let trialId = this.item.id;
     let res = await this.network.changeTrailStuts(obj, trialId);
-    if (res.status === 200) {
-      this.removeFromList.emit(this.item.id);
-    }
+
   }
 
   async presentAlert(item: string) {
@@ -61,25 +61,11 @@ export class TrailListComponent extends BasePage implements OnInit {
         return;
     }
 
-    const alert = await this.alertController.create({
-      header: alertHeader,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          },
-        },
-        {
-          text: 'Yes',
-          role: 'confirm',
-          handler: () => {
-            this.trailStatus(item);
-          },
-        },
-      ],
-    });
-    await alert.present();
+    let flag = await this.utility.presentConfirm('Yes', 'Cancel', item, alertHeader);
+    if(flag){
+      this.trailStatus(item);
+    }
+
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
+import { MyFavoritesService } from 'src/app/services/my-favorites.service';
 import { TrailMessageComponent } from 'src/app/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 
 @Component({
@@ -32,7 +33,7 @@ export class FavRecListComponent extends BasePage implements OnInit {
 
   languageName: any;
 
-  constructor(injector: Injector, private alertController: AlertController) {
+  constructor(injector: Injector, public favService: MyFavoritesService) {
     super(injector)
     this.initialize();
   }
@@ -65,13 +66,14 @@ export class FavRecListComponent extends BasePage implements OnInit {
   async callApi() {
     this.loading = true;
 
-    this.user = this.users.getUser()
+    // this.user = this.users.getUser()
 
-    let obj = {
-      user_id: this.user.id,
-      course_id: this.item.id
-    }
-    let res = await this.network.getTrail(obj)
+    // let obj = {
+    //   user_id: this.user.id,
+    //   course_id: this.item.id
+    // }
+    // let res = await this.network.getTrail(obj)
+    const res = Object.assign({}, this.item);
     if (res && !res.trial) {
       this.trail = false;
       this.loading = false;
@@ -133,30 +135,29 @@ export class FavRecListComponent extends BasePage implements OnInit {
   async addToFav() {
 
     let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.item.id
-    }
-    const res = await this.network.addCourseFav(obj)
     this.fav = true;
+    this.favService.addFavorite(this.item, user)
 
   }
 
   async removeToFav() {
     let user = this.users.getUser()
-    let obj = {
-      user_id: user.id,
-      course_id: this.item.id
-    }
-    const res = await this.network.removeCourseFav(obj)
     this.fav = false;
-    if (res.status === 200) {
-      this.unFav.emit(this.item.id);
-    }
+    this.favService.removeFavorite(this.item, user)
 
-    this.events.publish("show-list-of-fav-courses", {
 
-    })
+    // let obj = {
+    //   user_id: user.id,
+    //   course_id: this.item.id
+    // }
+    // const res = await this.network.removeCourseFav(obj)
+    // if (res.status === 200) {
+    //   this.unFav.emit(this.item.id);
+    // }
+
+    // this.events.publish("show-list-of-fav-courses", {
+
+    // })
   }
 
 

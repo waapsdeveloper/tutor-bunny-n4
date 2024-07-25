@@ -249,7 +249,7 @@ export class NetworkService {
   }
 
   changeTrailStuts(data, id) {
-    return this.httpPostResponse('course/update-status/' + id, data, null, true, true);
+    return this.httpPostResponse('course/update-status/' + id, data, null, false, false);
   }
 
   requestTrail(data) {

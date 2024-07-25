@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetworkService } from './network.service';
+import { resolve } from 'path';
 
 @Injectable({
   providedIn: 'root'
@@ -7,20 +8,37 @@ import { NetworkService } from './network.service';
 export class MyFavoritesService {
 
   page = 1;
+  last_page = -1;
   public favorites: any[] = [];
 
   constructor(private network: NetworkService) { }
 
-  async setFavToApi(){
+  async setFavToApi(search = '', page = 1, liked = true){
 
+    return new Promise( async resolve => {
 
-    let obj = {
-      liked: true
-    }
+      let obj = {
+        search: search,
+        page: page,
+        liked: true
+      }
 
-    const res = await this.network.getAllFavCourses(obj) as any;
-    const data = res.result;
-    this.favorites = data.data;
+      const res = await this.network.getAllFavCourses(obj) as any;
+      const result = res.result;
+      // this.favorites = data.data;
+      this.page = result.current_page;
+      this.last_page = result.last_page;
+
+      if (this.page == 1) {
+        this.favorites = result["data"];
+      } else {
+        this.favorites = [...this.favorites, ...result["data"]]
+      }
+
+      resolve(true)
+
+    })
+
     // this.showLiked = d.length > 0;
 
   }
