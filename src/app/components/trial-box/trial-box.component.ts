@@ -29,21 +29,18 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     this.trialsReceivedViaPusher();
   };
   trialsReceivedViaPusher() {
+    this.user = this.users.getUser();
     this.events.registerPusherEvent(this.user.id);
-
     this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   }
 
   async updateTrailsList(data: any) {
     let trail_Id = data.id;
-
-    // return
     this.initialize();
-
     this.events.publish('get-dashboard-stats');
-
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
-
+    console.log(this.newTrial);
+    
     if (this.newTrial) {
       const index = this.trial.findIndex(c => c.id === this.newTrial.id);
       if (index !== -1) {
@@ -52,7 +49,6 @@ export class TrialBoxComponent extends BasePage implements OnInit {
         this.list = [this.newTrial, ...this.trial];
       }
     }
-
   }
   async initialize() {
     this.globalTrials.getPendingTrials();

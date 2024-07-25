@@ -69,6 +69,8 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
 
     let res = await this.globalCourses.getcourseById(this.course_Id) as any;
     this.data = res;
+    console.log(this.data);
+    
     this.events.publish('data-for-other-corses', this.data)
     this.title = this.data.title;
     this.capacity = this.data.capacity;
