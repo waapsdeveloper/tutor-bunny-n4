@@ -29,20 +29,20 @@ export class GlobalTrialsService {
       forceTLS: true
     };
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
-    this.trialChannel = this.pusher.subscribe("trials-channel"); 
-    let user = this.users.getUser()
-    this.registerPusherEvent(user.id)
+    this.trialChannel = this.pusher.subscribe("trials-channel");
+
   }
 
 
-  registerPusherEvent(id: any) {
-    console.log(id);
-    this.trialChannel.bind("trials-rec-" + id, this.trialsChannelReceived.bind(this))
+  registerPusherEvent() {
+    let user = this.users.getUser() as any
+    this.trialChannel.bind("trials-rec-" + user.id, this.trialsChannelReceived.bind(this))
   }
+
   trialsChannelReceived($event: any) {
     console.log($event);
 
-    this.events.publish('trials-received-via-pusher', $event);
+    // this.events.publish('trials-received-via-pusher', $event);
   }
   async updateTrailsList(data: any) {
 
