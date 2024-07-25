@@ -40,6 +40,7 @@ export class FavCoursesPage extends BasePage { //  implements OnInit
     // this.modals.dismiss();
     this.nav.pop()
   }
+
 }
 
 
