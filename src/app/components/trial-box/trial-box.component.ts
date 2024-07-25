@@ -27,8 +27,6 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   }
   ngOnInit() {
     this.user = this.users.getUser();
-
-    this.events.registerPusherEvent(this.user.id);
   };
   // trialsReceivedViaPusher() {
 

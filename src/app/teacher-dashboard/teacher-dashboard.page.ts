@@ -50,6 +50,8 @@ export class TeacherDashboardPage extends BasePage  { // implements OnInit
 
     // this.initialize();
     this.fcm.setTokenToServer();
+    const user = this.users.getUser();
+    this.events.registerPusherEvent(user.id);
     this.globalTrials.getPendingTrialsFromApi()
     // this.events.subscribe('dashboard:refreshpage', () => {
     // });

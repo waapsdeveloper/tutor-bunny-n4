@@ -22,16 +22,43 @@ export class GlobalTrialsService {
   constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
     this.trialsReceivedViaPusher();
   }
+
   trialsReceivedViaPusher() {
     this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   }
 
   async updateTrailsList(data: any) {
-    this.courseId = data.course_id;
-    if (this.courseId) {
-      this.getTrials('', 1);
-      const index = this.list.findIndex(c => c.id === this.courseId);
+
+    console.log(data);
+    const trialObj = Object.assign({}, data);
+    // trial id required
+
+    const index = this.list.findIndex(x => x.id == trialObj.id );
+    if(index != -1){
+
+    } else {
+
     }
+
+    const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id );
+    if(indexp != -1){
+
+    } else {
+
+    }
+
+
+    // const course = data.course;
+    // if(course){
+    //   const trial =
+    // }
+    // const
+
+    // this.courseId = data.course_id;
+    // if (this.courseId) {
+    //   this.getTrials('', 1);
+    //   const index = this.list.findIndex(c => c.id === this.courseId);
+    // }
   }
   getPendingTrialsFromApi(search = '', page = 1,) {
 
