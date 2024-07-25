@@ -12,7 +12,6 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 })
 export class CourseListComponent extends BasePage implements OnInit {
   private _item: any;
-  private _trial: any;
   displayName;
   flag
   user;
@@ -23,16 +22,14 @@ export class CourseListComponent extends BasePage implements OnInit {
   trail = false;
   languageName: any;
 
-  // @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
-
   @Input('item')
   public get item() {
     return this._item;
   };
+
   public set item(value: any) {
     this._item = value;
     this.initialize(value);
-
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
     this.status = value.trial ? value.trial.status : null;
@@ -41,8 +38,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   constructor(injector: Injector, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService ) {
     super(injector)
     this.user = this.users.getUser()
-
   }
+
   initialize(data) {
     if (data && data.trial) {
       this.blocked = data.trial.status

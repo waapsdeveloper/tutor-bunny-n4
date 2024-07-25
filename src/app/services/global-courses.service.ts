@@ -10,7 +10,6 @@ export class GlobalCoursesService {
   page = 1;
   last_page = -1;
   courses: any[] = [];
-  course;
 
   constructor(private network: NetworkService, private events: EventsService) {
     this.courseReceivedViaPusher();
@@ -20,17 +19,23 @@ export class GlobalCoursesService {
   }
 
   async updateCourseList(data: any) {
+    console.log(data);
+    // return
     let course_Id = data.course_id;
 
     if (course_Id) {
-      let res = await this.getcourseById(course_Id) as any;
-      this.course = res.course;
-      if (this.course) {
-        const index = this.courses.findIndex(c => c.id === this.course.id);
-        if (index !== -1) {
-          this.courses[index] = this.course;
-        } else {
-          this.courses = [this.course, ...this.courses];
+      let res = await this.network.getcourseById(course_Id) as any;
+      console.log(res);
+      
+      const course = res.course;
+      if (course) {
+        const index = this.courses.findIndex(c => c.id == course.id);
+        console.log(index);
+        
+        if (index != -1) {
+          this.courses[index] = course;
+        } else { 
+          this.courses = [course, ...this.courses];
         }
       }
     }
