@@ -11,7 +11,7 @@
       </div>
       <div class="header-chips">
         <div class="header-chip">
-          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{status ? status : 'Status' }} <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
+          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{globalTrials.status ? globalTrials.status : 'Status' }} <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
           <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
@@ -52,8 +52,8 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <app-trail-card *ngFor="let item of list" [item]="item" (removeFromList)="removeFromList($event)"></app-trail-card>
-    <div class="fs-14 outfit" *ngIf="list.length == 0">No results Found</div>
+    <app-trail-card *ngFor="let item of globalTrials.list" [item]="item" (removeFromList)="removeFromList($event)"></app-trail-card>
+    <div class="fs-14 outfit" *ngIf="globalTrials.list.length === 0">No results Found</div>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

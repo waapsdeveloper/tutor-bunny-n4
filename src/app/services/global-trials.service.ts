@@ -8,7 +8,10 @@ import { NetworkService } from './network.service';
 export class GlobalTrialsService {
 
   user: any;
-  trials: any[] = [];
+  page = 1;
+  last_page = -1;
+  status;
+  list: any[] = [];
 
   pendingTrialPage = 1;
   pendingTrialLastPage = -1;
@@ -73,6 +76,39 @@ export class GlobalTrialsService {
       console.log(`Favorite not found:`, obj);
     }
 
+
+  }
+
+  async getTrials(search = '', page = 1) {
+
+    return new Promise(async resolve => {
+
+      this.user = this.users.getUser();
+
+      let obj = {
+        search: search,
+        page: page
+      }
+
+      if (this.status) {
+        obj['status'] = this.status
+      }
+
+      const res = await this.network.geTrailRequests(obj, this.user.id);
+      const result = res.result;
+      this.page = result.current_page;
+      this.last_page = result.last_page;
+      if (this.page == 1) {
+        this.list = result["data"];
+      } else {
+        this.list = [...this.list, ...result["data"]]
+      }
+
+      resolve(true)
+
+    })
+
+    // this.list = res.trials;
 
   }
 

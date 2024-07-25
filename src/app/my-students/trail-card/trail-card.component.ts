@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 @Component({
@@ -17,7 +16,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
 
   isOpen = false;
   @Output() removeFromList = new EventEmitter<number>();
-  constructor(injector: Injector, private alertController: AlertController) {
+  constructor(injector: Injector) {
     super(injector)
   }
   ngOnInit() {
@@ -79,25 +78,10 @@ export class TrailCardComponent extends BasePage implements OnInit {
         return;
     }
 
-    const alert = await this.alertController.create({
-      header: alertHeader,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          },
-        },
-        {
-          text: 'Yes',
-          role: 'confirm',
-          handler: () => {
-            this.trailStatus(item);
-          },
-        },
-      ],
-    });
-    await alert.present();
+    const flag = await this.utility.presentConfirm('Yes', 'Cancel', item, alertHeader)
+    if(flag){
+      this.trailStatus(item);
+    }
   }
 
   goToChat() {
