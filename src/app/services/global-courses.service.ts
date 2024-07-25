@@ -53,39 +53,95 @@ export class GlobalCoursesService {
 
   }
 
-  async cancelTrail(obj, user){
-    let ite = {
-      user_id: user.id,
-      course_id: obj.id
-    }
-    let res = await this.network.cancelTrail(ite);
+  cancelTrail(obj, user){
 
-    if(res.states == 200){
-      let findIndex = this.courses.findIndex(x => x.id == obj.id);
-      if(findIndex != -1){
-        this.courses[findIndex].trial = res.trial;
+    return new Promise( async resolve => {
+      let ite = {
+        user_id: user.id,
+        course_id: obj.id
       }
+      let res = await this.network.cancelTrail(ite);
+
+      if(res.states == 200){
+        let findIndex = this.courses.findIndex(x => x.id == obj.id);
+        if(findIndex != -1){
+          this.courses[findIndex].trial = res.trial;
+        }
+      }
+
+      resolve(true)
+
+    })
+
+
+  }
+
+  requestTrial(obj, user, message){
+
+    return new Promise( async resolve => {
+      let ite = {
+        user_id: user.id,
+        course_id: obj.id,
+        message: message
+      }
+      let res = await this.network.requestTrail(ite)
+
+      if(res.states == 200){
+        let findIndex = this.courses.findIndex(x => x.id == obj.id);
+        if(findIndex != -1){
+          this.courses[findIndex].trial = res.trial;
+        }
+      }
+
+      resolve(true)
+    })
+
+
+  }
+
+  getcourseById(id){
+
+    return new Promise( async resolve => {
+
+      let findIndex = this.courses.findIndex(x => x.id == id);
+      if(findIndex != -1){
+        resolve(this.courses[findIndex])
+        return;
+      }
+
+      let res = await this.network.getcourseById(id) as any;
+      const c = res.course;
+      this.courses.push(c);
+      resolve(c);
+
+    })
+
+  }
+
+  async removeFavorite(obj: any, user) {
+
+    const index = this.courses.findIndex(x => x.id == obj.id);
+    if (index > -1) {
+      this.courses[index].is_liked_by_me = false;
+      console.log(`Removed favorite:`, obj);
+    } else {
+      console.log(`Favorite not found:`, obj);
     }
 
   }
 
-  async requestTrial(obj, user, message){
-
-    let ite = {
-      user_id: user.id,
-      course_id: obj.id,
-      message: message
+  async addFavorite(obj: any, user) {
+    const index = this.courses.findIndex(x => x.id == obj.id);
+    if (index > -1) {
+      this.courses[index].is_liked_by_me = true;
+      console.log(`Added favorite:`, obj);
+    } else {
+      console.log(`Favorite already exists:`, obj);
     }
-    let res = await this.network.requestTrail(ite)
 
-    if(res.states == 200){
-      let findIndex = this.courses.findIndex(x => x.id == obj.id);
-      if(findIndex != -1){
-        this.courses[findIndex].trial = res.trial;
-      }
-    }
 
   }
+
 
 
 }

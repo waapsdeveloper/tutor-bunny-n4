@@ -117,7 +117,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async showFavCourse() {
 
 
-    let res = await this.nav.push('/fav-courses')
+    this.nav.push('/fav-courses')
 
     // this.events.publish('Update-Fv-Screen', {
     //   res
