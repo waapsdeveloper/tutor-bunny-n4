@@ -36,9 +36,7 @@ export class FavCoursesPage extends BasePage { //  implements OnInit
     // })
   }
 
-  shouldHandleBackToPrevScreen() {
-    this.modals.dismiss();
-  }
+  
 }
 
 
