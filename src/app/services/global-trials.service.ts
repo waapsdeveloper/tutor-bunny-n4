@@ -9,10 +9,39 @@ export class GlobalTrialsService {
 
   user: any;
   trials: any[] = [];
+
+  pendingTrialPage = 1;
+  pendingTrialLastPage = -1;
   pendingTrials: any[] = []
 
 
   constructor(private users: UsersService, private network: NetworkService) { }
+
+  getPendingTrialsFromApi(search = '', page = 1,){
+
+    return new Promise( async resolve => {
+
+      this.user = this.users.getUser();
+      let obj = {
+        search: search,
+        page: page,
+        teacher_id: this.user.id
+      }
+      let res = await this.network.getPendingTrial(this.user.id, obj);
+      const data = res.result;
+      this.pendingTrialPage = data.current_page;
+      this.pendingTrialLastPage = data.last_page;
+      if (page === 1) {
+        this.pendingTrials = data.data;
+      } else {
+        this.pendingTrials = [...this.pendingTrials, ...data.data];
+      }
+
+      resolve(true)
+
+    })
+
+  }
 
   getPendingTrials(){
 

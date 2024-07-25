@@ -6,13 +6,14 @@ import { FirebaseService } from '../services/firebase.service';
 import { BasePage } from '../base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
 import { GlobalCoursesService } from '../services/global-courses.service';
+import { GlobalTrialsService } from '../services/global-trials.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage implements OnInit {
+export class TeacherDashboardPage extends BasePage  { // implements OnInit
   user;
   displayName = ''
   flag
@@ -44,18 +45,21 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       active: 0,
     },
   ];
-  constructor(injector: Injector, private fcm: FirebaseService, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector);
-  }
 
-  ngOnInit() {
-
+    // this.initialize();
     this.fcm.setTokenToServer();
+    this.globalTrials.getPendingTrialsFromApi()
+    // this.events.subscribe('dashboard:refreshpage', () => {
+    // });
 
-    this.events.subscribe('dashboard:refreshpage', () => {
-      this.initialize();
-    });
   }
+
+  // ngOnInit() {
+
+
+  // }
 
 
   ionViewWillEnter() {
@@ -76,10 +80,10 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag()
       this.displayName = this.utility.getAmericanName(this.user.name)
       this.status = res.user.teacher.status;
-
-
     }
   }
+
+
   getFlag() {
     if (this.user && this.user.teacher && this.user.teacher.country) {
       const flag = this.user.teacher.country.iso2;
