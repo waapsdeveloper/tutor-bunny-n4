@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetworkService } from './network.service';
+import { EventsService } from './events.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,36 @@ export class GlobalCoursesService {
   page = 1;
   last_page = -1;
   courses: any[] = [];
+  course;
+
+  constructor(private network: NetworkService, private events: EventsService) {
+    this.courseReceivedViaPusher();
+  }
+  courseReceivedViaPusher() {
+    this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
+  }
+
+  async updateCourseList(data: any) {
+    let course_Id = data.course_id;
+
+    if (course_Id) {
+      let res = await this.getcourseById(course_Id) as any;
+      this.course = res.course;
+      if (this.course) {
+        const index = this.courses.findIndex(c => c.id === this.course.id);
+        if (index !== -1) {
+          this.courses[index] = this.course;
+        } else {
+          this.courses = [this.course, ...this.courses];
+        }
+      }
+    }
+  }
 
 
-  constructor(private network: NetworkService) { }
+  getCoursesFromApi(search = '', page = 1, liked = false) {
 
-  getCoursesFromApi(search = '', page = 1, liked = false){
-
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
       let obj = {
         search: search,
@@ -38,11 +62,11 @@ export class GlobalCoursesService {
   }
 
 
-  getAllCourses(){
+  getAllCourses() {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
-      if(this.courses.length == 0){
+      if (this.courses.length == 0) {
         await this.getCoursesFromApi();
       }
 
@@ -53,18 +77,18 @@ export class GlobalCoursesService {
 
   }
 
-  cancelTrail(obj, user){
+  cancelTrail(obj, user) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
       let ite = {
         user_id: user.id,
         course_id: obj.id
       }
       let res = await this.network.cancelTrail(ite);
 
-      if(res.states == 200){
+      if (res.states == 200) {
         let findIndex = this.courses.findIndex(x => x.id == obj.id);
-        if(findIndex != -1){
+        if (findIndex != -1) {
           this.courses[findIndex].trial = res.trial;
         }
       }
@@ -76,9 +100,9 @@ export class GlobalCoursesService {
 
   }
 
-  requestTrial(obj, user, message){
+  requestTrial(obj, user, message) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
       let ite = {
         user_id: user.id,
         course_id: obj.id,
@@ -86,9 +110,9 @@ export class GlobalCoursesService {
       }
       let res = await this.network.requestTrail(ite)
 
-      if(res.states == 200){
+      if (res.states == 200) {
         let findIndex = this.courses.findIndex(x => x.id == obj.id);
-        if(findIndex != -1){
+        if (findIndex != -1) {
           this.courses[findIndex].trial = res.trial;
         }
       }
@@ -99,12 +123,12 @@ export class GlobalCoursesService {
 
   }
 
-  getcourseById(id){
+  getcourseById(id) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
       let findIndex = this.courses.findIndex(x => x.id == id);
-      if(findIndex != -1){
+      if (findIndex != -1) {
         resolve(this.courses[findIndex])
         return;
       }

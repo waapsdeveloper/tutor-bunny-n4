@@ -48,7 +48,8 @@ export class EventsService {
   }
 
   registerPusherEvent(id: any) {
-
+    console.log(id);
+    
     this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
     this.CourseChannel.bind("course-rec-update-by-list", this.courseChannelReceived.bind(this))
     this.trialChannel.bind("trials-rec-" + id, this.trialsChannelReceived.bind(this))

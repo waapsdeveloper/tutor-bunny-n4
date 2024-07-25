@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
+import { EventsService } from './events.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,29 @@ export class GlobalTrialsService {
   last_page = -1;
   status;
   list: any[] = [];
-
+  courseId: any;
   pendingTrialPage = 1;
   pendingTrialLastPage = -1;
   pendingTrials: any[] = []
 
 
-  constructor(private users: UsersService, private network: NetworkService) { }
+  constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
+    this.trialsReceivedViaPusher();
+  }
+  trialsReceivedViaPusher() {
+    this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
+  }
 
-  getPendingTrialsFromApi(search = '', page = 1,){
+  async updateTrailsList(data: any) {
+    this.courseId = data.course_id;
+    if (this.courseId) {
+      this.getTrials('', 1);
+      const index = this.list.findIndex(c => c.id === this.courseId);
+    }
+  }
+  getPendingTrialsFromApi(search = '', page = 1,) {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
       this.user = this.users.getUser();
       let obj = {
@@ -46,11 +59,11 @@ export class GlobalTrialsService {
 
   }
 
-  getPendingTrials(){
+  getPendingTrials() {
 
-    return new Promise( async resolve => {
+    return new Promise(async resolve => {
 
-      if(this.pendingTrials.length > 0){
+      if (this.pendingTrials.length > 0) {
         resolve(this.pendingTrials);
         return;
       }
@@ -66,7 +79,7 @@ export class GlobalTrialsService {
 
   }
 
-  removeFromPendingTrials(obj){
+  removeFromPendingTrials(obj) {
 
     const index = this.pendingTrials.findIndex(x => x.id == obj.id);
     if (index > -1) {
@@ -112,13 +125,13 @@ export class GlobalTrialsService {
 
   }
 
-  async changeStatus(obj, trialId){
+  async changeStatus(obj, trialId) {
 
     let res = await this.network.changeTrailStuts(obj, trialId);
     if (res.status === 200) {
 
-      let findIndex = this.list.findIndex( x => x.id == trialId)
-      if(findIndex != -1){
+      let findIndex = this.list.findIndex(x => x.id == trialId)
+      if (findIndex != -1) {
         this.list[findIndex] = res.trial;
       }
 

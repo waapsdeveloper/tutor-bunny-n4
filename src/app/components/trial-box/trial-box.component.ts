@@ -25,11 +25,12 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     super(injector)
     // this.initialize();
   }
-  // ngOnInit() {
-  //   this.trialsReceivedViaPusher();
-  // };
+  ngOnInit() {
+    this.user = this.users.getUser();
+
+    this.events.registerPusherEvent(this.user.id);
+  };
   // trialsReceivedViaPusher() {
-  //   this.events.registerPusherEvent(this.user.id);
 
   //   this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
   // }
