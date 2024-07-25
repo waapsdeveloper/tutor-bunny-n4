@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
+import Pusher from 'pusher-js';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +18,48 @@ export class GlobalTrialsService {
   pendingTrialPage = 1;
   pendingTrialLastPage = -1;
   pendingTrials: any[] = []
+  trialChannel: any;
+  private pusher: Pusher;
+
 
 
   constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
-    this.trialsReceivedViaPusher();
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true
+    };
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.trialChannel = this.pusher.subscribe("trials-channel"); 
+    let user = this.users.getUser()
+    this.registerPusherEvent(user.id)
   }
 
-  trialsReceivedViaPusher() {
-    this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
-  }
 
+  registerPusherEvent(id: any) {
+    console.log(id);
+    this.trialChannel.bind("trials-rec-" + id, this.trialsChannelReceived.bind(this))
+  }
+  trialsChannelReceived($event: any) {
+    console.log($event);
+
+    this.events.publish('trials-received-via-pusher', $event);
+  }
   async updateTrailsList(data: any) {
 
     console.log(data);
     const trialObj = Object.assign({}, data);
     // trial id required
 
-    const index = this.list.findIndex(x => x.id == trialObj.id );
-    if(index != -1){
+    const index = this.list.findIndex(x => x.id == trialObj.id);
+    if (index != -1) {
       this.list[index] = trialObj;
     } else {
       this.list = [trialObj, ...this.list]
     }
 
-    const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id );
-    if(index != -1){
-      this.pendingTrials[index] = trialObj;
+    const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id);
+    if (indexp != -1) {
+      this.pendingTrials[indexp] = trialObj;
     } else {
       this.pendingTrials = [trialObj, ...this.pendingTrials]
     }
@@ -159,6 +176,8 @@ export class GlobalTrialsService {
       let findIndex = this.list.findIndex(x => x.id == trialId)
       if (findIndex != -1) {
         this.list[findIndex] = res.trial;
+        console.log(this.list);
+
       }
 
     }

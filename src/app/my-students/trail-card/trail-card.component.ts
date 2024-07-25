@@ -22,15 +22,15 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
   ngOnInit() {
     this.flag = this.getFlag();
-    let currentDate = this.item.created_at;
+    let currentDate = this.item?.created_at;
     this.time = moment(currentDate).format('HH:mm a');
     this.calculateAge();
 
 
   }
   getFlag() {
-    if (this.item && this.item.student && this.item.student.student.country.flag) {
-      const flag = this.item.student.student.country.iso2;
+    if (this.item && this.item?.student && this.item.student.student.country.flag) {
+      const flag = this.item?.student.student.country.iso2;
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -41,20 +41,12 @@ export class TrailCardComponent extends BasePage implements OnInit {
     }
   }
   async trailStatus(key: string) {
-    // return
-
-
     let obj = {
       status: key,
-      user_id: this.item.student.id
+      user_id: this.item?.student?.id
     };
     let trialId = this.item.id;
-
     this.globalTrials.changeStatus(obj, trialId)
-
-
-
-
   }
   presentPopover(e: Event) {
     this.popover.event = e;
@@ -84,7 +76,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
     }
 
     const flag = await this.utility.presentConfirm('Yes', 'Cancel', item, alertHeader)
-    if(flag){
+    if (flag) {
       this.trailStatus(item);
     }
   }
@@ -92,7 +84,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
   goToChat() {
 
     const params = {
-      user: this.item.student,
+      user: this.item?.student,
 
     }
 
@@ -101,12 +93,9 @@ export class TrailCardComponent extends BasePage implements OnInit {
   calculateAge() {
     const currentYear = new Date().getFullYear();
 
-    if(this.item && this.item.student && this.item.student.student && this.item.student.student.dob){
+    if (this.item && this.item?.student && this.item?.student?.student && this.item.student?.student?.dob) {
       this.age = currentYear - this.item.student.student.dob;
     }
-
-
-
   }
   goToDeatil() {
 

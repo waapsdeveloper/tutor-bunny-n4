@@ -15,7 +15,7 @@ export class GlobalCoursesService {
     this.courseReceivedViaPusher();
   }
   courseReceivedViaPusher() {
-    this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this));
+    this.events.subscribe('course-received-via-pusher', this.updateCourseList.bind(this), false);
   }
 
   async updateCourseList(data: any) {
