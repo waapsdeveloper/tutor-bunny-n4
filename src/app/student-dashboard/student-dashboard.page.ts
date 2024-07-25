@@ -36,9 +36,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
     });
-    this.user = this.users.getUser();
 
-    this.events.registerPusherEvent(this.user.id)
   }
 
   ionViewWillEnter() {
@@ -52,7 +50,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   async initialize() {
 
-
+    this.user = this.users.getUser();
+    this.events.registerPusherEvent(this.user.id)
     let obj = {
       email: this.user.email,
     };
