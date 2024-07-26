@@ -13,7 +13,7 @@ import { GlobalTrialsService } from '../services/global-trials.service';
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage  { // implements OnInit
+export class TeacherDashboardPage extends BasePage { // implements OnInit
   user;
   displayName = ''
   flag
@@ -53,6 +53,9 @@ export class TeacherDashboardPage extends BasePage  { // implements OnInit
     const user = this.users.getUser();
     this.events.registerPusherEvent(user.id);
     this.globalTrials.getPendingTrialsFromApi()
+    this.globalCourses.getCoursesFromApi()
+    this.globalTrials.registerPusherEvent()
+    this.globalCourses.registerPusherEvent()
     // this.events.subscribe('dashboard:refreshpage', () => {
     // });
 
@@ -121,7 +124,7 @@ export class TeacherDashboardPage extends BasePage  { // implements OnInit
       this.nav.push('/course-form', params)
     }
   }
-  gotoNotification(){
+  gotoNotification() {
     this.nav.push('notifications', {
       backUrl: '/tabs/teacher-dashboard', showBack: true
     })

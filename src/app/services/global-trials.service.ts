@@ -36,14 +36,18 @@ export class GlobalTrialsService {
 
   registerPusherEvent() {
     let user = this.users.getUser() as any
+    console.log("Dsadas");
+    
     this.trialChannel.bind("trials-rec-" + user.id, this.trialsChannelReceived.bind(this))
   }
 
   trialsChannelReceived($event: any) {
     console.log($event);
     
-    this.events.publish('trials-received-via-pusher', $event);
+    this.updateTrailsList($event);
   }
+
+
   async updateTrailsList(data: any) {
 
     console.log(data);

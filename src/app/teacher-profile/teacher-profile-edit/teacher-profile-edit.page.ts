@@ -19,7 +19,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   lang;
   sub;
   params: any;
-  backUrl = '/teacher-profile';
+  backUrl;
   btn: any;
   showBack
   title = "Create profile";
@@ -62,10 +62,13 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
+    
 
 
-    if (this.params.backUrl) {
+    if (this.params.backUrl) {  
       this.backUrl = this.params.backUrl;
+      console.log(this.backUrl);
     }
 
     if (this.params.title) {

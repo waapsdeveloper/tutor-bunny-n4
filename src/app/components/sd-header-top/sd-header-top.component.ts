@@ -42,6 +42,8 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
       this.parentBack.emit();
     } else {
       this.nav.pop(this.backUrl);
+      console.log(this.backUrl);
+      
     }
 
   }
