@@ -39,8 +39,6 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     // return
     this.initialize();
 
-    this.events.publish('get-dashboard-stats');
-
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
 
     if (this.newTrial) {

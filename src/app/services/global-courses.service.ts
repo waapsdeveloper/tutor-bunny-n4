@@ -31,6 +31,7 @@ export class GlobalCoursesService {
 
   courseChannelReceived($event: any) {
     console.log($event);
+    this.events.publish('get-dashboard-stats');
     this.updateCourseList($event)
   }
 
@@ -42,15 +43,15 @@ export class GlobalCoursesService {
     if (course_Id) {
       let res = await this.network.getcourseById(course_Id) as any;
       console.log(res);
-      
+
       const course = res.course;
       if (course) {
         const index = this.courses.findIndex(c => c.id == course.id);
         console.log(index);
-        
+
         if (index != -1) {
           this.courses[index] = course;
-        } else { 
+        } else {
           this.courses = [course, ...this.courses];
         }
       }
