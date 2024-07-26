@@ -24,8 +24,10 @@ export class CoursesListComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('data-for-other-corses', (data: any) => {
+      console.log(data);
+
       this.user = data.user;
-      this.initialize()
+      this.getCourses(data);
 
     }
     )
@@ -33,15 +35,14 @@ export class CoursesListComponent extends BasePage implements OnInit {
   }
   async initialize() {
 
-    this.getCourses();
   }
 
-  getCourses() {
+  getCourses(course: any) {
     return new Promise(async resolve => {
-      // return
 
       let obj = {
-        user_id: this.user.id
+        user_id: this.user.id,
+        except_course_id : course.id
       };
 
       const res = await this.network.getOtherCourseList(obj) as any;

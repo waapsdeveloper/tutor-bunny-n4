@@ -58,9 +58,9 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     }
 
     this.callApi();
-    // setTimeout(() => {
-    //   this.isTrailReq()
-    // }, 200);
+    setTimeout(() => {
+      this.isTrailReq()
+    }, 200);
   }
 
 
@@ -220,25 +220,23 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.callApi()
   }
 
-  // async isTrailReq() {
+  async isTrailReq() {
 
-  //   this.loading = true;
+    this.loading = true;
 
-  //   let user = this.users.getUser()
+    let user = this.users.getUser()
 
-  //   let obj = {
-  //     user_id: user.id,
-  //     course_id: this.course_Id
-  //   }
-  //   let res = await this.network.getTrail(obj)
-  //   if (res && !res.trial) {
-  //     this.trail = false;
-  //     this.loading = false;
-  //   }
-  //   if (res && res.trial) {
-  //     this.trail = true;
-  //     this.loading = false;
-  //   }
+    let obj = {
+      user_id: user.id,
+      course_id: this.course_Id
+    }
+    let res = await this.network.getTrail(obj)
+    if (res && !res.trial) {
+      this.loading = false;
+    }
+    if (res && res.trial) {
+      this.loading = false;
+    }
 
-  // }
+  }
 }
