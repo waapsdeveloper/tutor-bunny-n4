@@ -5,4 +5,6 @@
   </div>
   <div class="sb-content-7895"></div>
 </div>
-<app-trail-list *ngFor="let item of globalTrials.pendingTrials" [item]="item"></app-trail-list>
+<ng-container *ngFor="let item of globalTrials.pendingTrials">
+  <app-trail-list *ngIf="item.status == 'Pending'" [item]="item"></app-trail-list>
+</ng-container>

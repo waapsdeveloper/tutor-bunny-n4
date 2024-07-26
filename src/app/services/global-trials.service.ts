@@ -43,7 +43,7 @@ export class GlobalTrialsService {
 
   trialsChannelReceived($event: any) {
     console.log($event);
-    this.events.publish('get-dashboard-stats');
+
     this.updateTrailsList($event);
   }
 
@@ -67,7 +67,6 @@ export class GlobalTrialsService {
     } else {
       this.pendingTrials = [trialObj, ...this.pendingTrials]
     }
-
 
   }
   getPendingTrialsFromApi(search = '', page = 1,) {
