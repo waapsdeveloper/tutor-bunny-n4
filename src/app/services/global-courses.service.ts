@@ -149,11 +149,11 @@ export class GlobalCoursesService {
 
     return new Promise(async resolve => {
 
-      let findIndex = this.courses.findIndex(x => x.id == id);
-      if (findIndex != -1) {
-        resolve(this.courses[findIndex])
-        return;
-      }
+      // let findIndex = this.courses.findIndex(x => x.id == id);
+      // if (findIndex != -1) {
+      //   resolve(this.courses[findIndex])
+      //   return;
+      // }
 
       let res = await this.network.getcourseById(id) as any;
       const c = res.course;

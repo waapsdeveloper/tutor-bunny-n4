@@ -223,5 +223,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
+  else{
+    this.nav.pop()
+  }
   }
 }

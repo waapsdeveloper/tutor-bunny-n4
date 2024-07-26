@@ -135,7 +135,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   openOtherCourses($event) {
-    this.nav.push('/tabs/other-courses', { category_id: this.categoryId })
+    this.nav.push('/tabs/other-courses')
   }
 
   openDetails() {

@@ -14,6 +14,8 @@ export class NotificationsPage extends BasePage implements OnInit {
   notifications;
   constructor(injector: Injector) {
     super(injector)
+
+    this.events.subscribe('dashboard:notificationReceived', this.initialize())
   }
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -24,8 +26,6 @@ export class NotificationsPage extends BasePage implements OnInit {
     if (this.params.showBack) {
       this.showBack = this.params.showBack;
     }
-
-
   }
 
   ngOnInit() {

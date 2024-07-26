@@ -43,6 +43,7 @@ export class GlobalTrialsService {
 
   trialsChannelReceived($event: any) {
     console.log($event);
+    this.events.publish('get-dashboard-stats');
 
     this.updateTrailsList($event);
   }
