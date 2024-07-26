@@ -6,5 +6,5 @@
   <div class="sb-content-7895"></div>
 </div>
 <ng-container *ngFor="let item of globalTrials.pendingTrials">
-  <app-trail-list *ngIf="item.status == 'Pending'" [item]="item"></app-trail-list>
+  <app-trail-list *ngIf="item.status === 'Pending'" [item]="item"></app-trail-list>
 </ng-container>

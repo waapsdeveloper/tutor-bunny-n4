@@ -61,11 +61,23 @@ export class GlobalTrialsService {
       this.list = [trialObj, ...this.list]
     }
 
+
     const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id);
     if (indexp != -1) {
-      this.pendingTrials[indexp] = trialObj;
+
+      if(trialObj.status == 'Pending'){
+        this.pendingTrials[indexp] = trialObj;
+      } else {
+        this.pendingTrials.splice(indexp, 1);
+      }
+
+
     } else {
-      this.pendingTrials = [trialObj, ...this.pendingTrials]
+
+      if(trialObj.status == 'Pending'){
+        this.pendingTrials = [trialObj, ...this.pendingTrials]
+      }
+
     }
 
   }
