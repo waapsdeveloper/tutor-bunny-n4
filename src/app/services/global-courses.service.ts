@@ -16,7 +16,7 @@ export class GlobalCoursesService {
   private pusher: Pusher;
 
 
-  constructor(private users: UsersService,private network: NetworkService, private events: EventsService) {
+  constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
     const options = {
       cluster: 'ap2',
       forceTLS: true
@@ -107,14 +107,12 @@ export class GlobalCoursesService {
         course_id: obj.id
       }
       let res = await this.network.cancelTrail(ite);
-
       if (res.states == 200) {
         let findIndex = this.courses.findIndex(x => x.id == obj.id);
         if (findIndex != -1) {
           this.courses[findIndex].trial = res.trial;
         }
       }
-
       resolve(true)
 
     })

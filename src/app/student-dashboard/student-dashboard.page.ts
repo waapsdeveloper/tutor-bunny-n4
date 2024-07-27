@@ -28,12 +28,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector)
     this.initialize();
-
-
-    this.globalCourses.getCoursesFromApi()
-    this.globalTrials.registerPusherEvent()
-    this.globalCourses.registerPusherEvent()
-
+    this.getlists();
 
   }
 
@@ -43,6 +38,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.initialize()
     });
 
+  }
+
+  getlists(){
+
+    this.globalCourses.getCoursesFromApi()
+    this.globalTrials.registerPusherEvent()
+    this.globalCourses.registerPusherEvent()
   }
 
   ionViewWillEnter() {

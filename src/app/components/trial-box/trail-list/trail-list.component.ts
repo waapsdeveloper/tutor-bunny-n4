@@ -43,19 +43,19 @@ export class TrailListComponent extends BasePage implements OnInit {
     let alertHeader: string;
     switch (item) {
       case 'Accepted':
-        alertHeader = 'Are you sure to Accept this trail?';
+        alertHeader = 'Are you sure to Accept this trial?';
         break;
       case 'Rejected':
-        alertHeader = 'Are you sure to Reject this trail?';
+        alertHeader = 'Are you sure to Reject this trial?';
         break;
       case 'Blocked':
-        alertHeader = 'Are you sure to Block this trail?';
+        alertHeader = 'Are you sure to Block this trial?';
         break;
       case 'Unblock':
-        alertHeader = 'Are you sure to Unblock this trail?';
+        alertHeader = 'Are you sure to Unblock this trial?';
         break;
       case 'Complete':
-        alertHeader = 'Are you sure to Complete this trail?';
+        alertHeader = 'Are you sure to Complete this trial?';
         break;
       default:
         return;

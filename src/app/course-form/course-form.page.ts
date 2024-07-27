@@ -90,7 +90,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['price'] = data['price'];
     this.formData['from_age'] = data['from_age'];
     this.formData['to_age'] = data['to_age'];
-    this.formData['strat_date'] = data['strat_date'];
+    this.formData['start_date'] = data['start_date'];
     this.formData['end_date'] = data['end_date'];
     this.formData['duration'] = data['duration'];
     this.formData['image'] = data['image'];

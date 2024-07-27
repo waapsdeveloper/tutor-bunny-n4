@@ -53,19 +53,14 @@ export class GlobalTrialsService {
 
     console.log(data);
     const trialObj = Object.assign({}, data);
-    // trial id required
-
     const index = this.list.findIndex(x => x.id == trialObj.id);
     if (index != -1) {
       this.list[index] = trialObj;
     } else {
       this.list = [trialObj, ...this.list]
     }
-
-
     const indexp = this.pendingTrials.findIndex(x => x.id == trialObj.id);
     if (indexp != -1) {
-
       if(trialObj.status == 'Pending'){
         this.pendingTrials[indexp] = trialObj;
       } else {

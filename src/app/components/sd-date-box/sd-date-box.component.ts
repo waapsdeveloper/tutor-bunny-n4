@@ -28,6 +28,7 @@ export class SdDateBoxComponent implements OnInit {
   togglePassword = true;
   startDate;
   endDate;
+  data;
   dateError = '';
 
   selectedDates = {
@@ -42,45 +43,37 @@ export class SdDateBoxComponent implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      this.startDate = this.start_date;
-      this.endDate = this.end_date
-    }
-    )
+      console.log(formData);
+
+      console.log(formData)
+      this.startDate = formData.start_date;
+      this.endDate = formData.end_date
+    })
 
   }
 
 
 
-  setStartTime($event) {
-    this.startDate = $event;
 
-    this.validateDates();
-    if (this.startDate) {
-      this.selectedDates.start_date = this.startDate;
-      this.onChange.emit(this.selectedDates);
+  closeDateModal($event, type, modal: IonModal) {
+    console.log($event);
+    let v = $event.detail.value;
+    if (type == 'start_date') {
+      this.selectedDates.start_date = v;
+      this.validateDates();
     }
-    else {
-      return
+    if (type == 'end_date') {
+      this.selectedDates.end_date = v;
+      this.validateDates();
     }
-  }
-  closeDateModal(modal: IonModal) {
+    this.onChange.emit(this.selectedDates)
     modal.dismiss();
   }
 
-  setEndTime($event) {
-    this.endDate = $event;
-    this.validateDates();
-    if (this.startDate) {
-      this.selectedDates.end_date = this.endDate;
-      this.onChange.emit(this.selectedDates);
-    }
-    else {
-      return
-    }
-  }
 
   validateDates() {
-    if (this.startDate && this.endDate && new Date(this.endDate) < new Date(this.startDate)) {
+    if (this.selectedDates.start_date && this.selectedDates.end_date && new Date(this.selectedDates.end_date) < new Date(this.selectedDates.start_date)) {
+
       this.dateError = 'End date cannot be earlier than start date';
     } else {
       this.dateError = '';

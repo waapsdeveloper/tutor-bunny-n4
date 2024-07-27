@@ -5,8 +5,8 @@
       <ion-datetime-button class="fs-16 roboto-regular" datetime="startDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true" #dateModal>
         <ng-template>
-          <ion-datetime id="startDate" presentation="date" [(ngModel)]="startDate"
-            (ngModelChange)="setStartTime($event)" (ionChange)="closeDateModal(dateModal)"></ion-datetime>
+          <ion-datetime id="startDate" presentation="date" [value]="startDate"
+            (ionChange)="closeDateModal($event, 'start_date', dateModal)"></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">
@@ -18,8 +18,8 @@
       <ion-datetime-button class="fs-16 roboto-regular" datetime="endDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true" #dateendModal>
         <ng-template>
-          <ion-datetime id="endDate" presentation="date" [(ngModel)]="endDate"
-            (ngModelChange)="setEndTime($event)" (ionChange)="closeDateModal(dateendModal)"></ion-datetime>
+          <ion-datetime id="endDate" presentation="date" [value]="endDate"
+             (ionChange)="closeDateModal($event, 'end_date', dateendModal)"></ion-datetime>
         </ng-template>
       </ion-modal>
       <img src="assets/svg/calander.svg" class="clear-input-678956744" alt="">

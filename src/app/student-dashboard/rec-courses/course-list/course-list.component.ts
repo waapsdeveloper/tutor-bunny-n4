@@ -35,7 +35,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.status = value.trial ? value.trial.status : null;
   }
 
-  constructor(injector: Injector, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService ) {
+  constructor(injector: Injector, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService) {
     super(injector)
     this.user = this.users.getUser()
   }
@@ -86,12 +86,16 @@ export class CourseListComponent extends BasePage implements OnInit {
       backUrl: '/tabs/student-dashboard'
     }
     this.nav.push('student-course-detail', params)
-    // this.events.publish('add-to-fav-from-detail', item);
+
     // this.onChange.emit(res);
   }
 
   async requestTrail(id) {
+    this.user = this.users.getUser()
+
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
+    console.log(v);
+    
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);
@@ -99,7 +103,7 @@ export class CourseListComponent extends BasePage implements OnInit {
       let send = data.data.send;
       if (send == true) {
         this.trail = true;
-        this.globalCourses.requestTrial(this.item, this.user, data.data.message )
+        this.globalCourses.requestTrial(this.item, this.user, data.data.message)
       }
       else {
         return
@@ -117,7 +121,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Cancel Trial', 'Are you sure to cancel the Trial?')
 
-    if(flag){
+    if (flag) {
       this.cancelTrail(this.item);
     }
 

@@ -21,6 +21,8 @@ export class TrailCardComponent extends BasePage implements OnInit {
     super(injector)
   }
   ngOnInit() {
+    console.log(this.item);
+    
     this.flag = this.getFlag();
     let currentDate = this.item?.created_at;
     this.time = moment(currentDate).format('HH:mm a');

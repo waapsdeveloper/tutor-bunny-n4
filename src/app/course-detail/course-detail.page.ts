@@ -91,7 +91,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
     if (this.data.category && this.data.category.length > 0) {
       this.categoryId = this.data.category[0].id;
-      this.getOtherCourseList(this.categoryId)
+      this.getOtherCourseList(this.data.id)
     }
 
     const uid = this.user.id;
@@ -111,7 +111,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
     let user = this.users.getUser()
     const obj = {
-      user_id: user['id']
+      user_id: user['id'],
+      except_course_id : id
     }
     const res = await this.network.getOtherCourseList(obj)
     const result = res.result;

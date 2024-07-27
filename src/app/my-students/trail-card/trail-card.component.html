@@ -1,11 +1,14 @@
-<div class="trial-box-item-outer-689567">
+<div class="trial-box-item-outer-689567" *ngIf="item?.status != 'canceled' ">
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" *ngIf="item?.status === 'Accepted'"
+        <div class="image-circle-789675" *ngIf="item?.status == 'Accepted' "
           [style.background-image]="item?.student.image ? 'url(' + item?.student.image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="image-circle-789675" *ngIf="item?.status !== 'Accepted'"
+        <div class="image-circle-789675" *ngIf="item?.status == 'Complete'"
+          [style.background-image]="item?.student.image ? 'url(' + item?.student.image + ')' : 'assets/profileimg.png'">
+        </div>
+        <div class="image-circle-789675" *ngIf="item?.status != 'Accepted' &&  item?.status != 'Complete'"
           style="background-image: url(../../../../assets/svg/pending.svg);">
         </div>
         <div class="pnd-678956" *ngIf="item?.status === 'Pending'">
@@ -13,7 +16,7 @@
           <div class="pnd-inner-7895">Pending</div>
         </div>
         <div class="pnd-678956" *ngIf="item?.status === 'Complete'">
-          <img src="../../../assets/svg/panding.svg" />
+          <img src="../../../assets/svg/complete.svg" />
           <div class="pnd-inner-7895">Complete</div>
         </div>
         <div class="pnd-678956" *ngIf="item?.status === 'Accepted'">
@@ -31,14 +34,17 @@
       </div>
       <div class="content-box-outer">
         <div class="content-box-outer-heading-top">
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item?.status === 'Accepted'">
+          <div class="title-heading-789 outfit-semibold" *ngIf="item?.status == 'Accepted'">
             {{item?.student?.name}}
           </div>
-          <div class="title-heading-789 outfit-semibold"  *ngIf="item?.status !== 'Accepted'">
+          <div class="title-heading-789 outfit-semibold" *ngIf=" item?.status == 'Complete'">
+            {{item?.student?.name}}
+          </div>
+          <div class="title-heading-789 outfit-semibold" *ngIf="item?.status != 'Accepted' &&  item?.status != 'Complete'">
             {{item?.student?.name| names}}
           </div>
           <div class="pnd-678956" *ngIf="item?.status !== 'Rejected'" (click)="presentPopover($event)">
-            <img src="../../../assets/svg/option.svg"  />
+            <img src="../../../assets/svg/option.svg" />
           </div>
           <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" [dismissOnSelect]="true">
             <ng-template>
