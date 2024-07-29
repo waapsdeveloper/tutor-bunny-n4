@@ -14,7 +14,7 @@ swiper-slide {
 
 .vedio-box-inner {
   border-radius: 6px;
-  width: 95%;
+  // width: 95%;
   // height: 150px;
   // background-color: #393939;
 
@@ -71,9 +71,56 @@ swiper-slide {
 
 .vedio-content-89658 {
 
+  // display: flex;
+  // align-items: center;
+  // justify-content: flex-start;
+  // flex-direction: column;
+  // gap: 16px;
+}
+
+.card-container {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  gap: 8px;
+  // padding: 16px;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.card {
+  min-width: calc(50vw - 24px);
+  scroll-snap-align: start;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+}
+
+.card-image {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-title {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-price {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #666;
 }

@@ -95,7 +95,7 @@ export class GlobalCoursesService {
           } else {
 
             if (course.status != 'inactive') {
-              this.otherCourses[findIndexO] = course;
+              this.otherCourses.push(course);
               console.log(this.otherCourses);
 
             }
