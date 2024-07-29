@@ -33,6 +33,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+    this.events.subscribe('update-course-list', () => {
+    this.getlists();
+    console.log("Dsadasd");
+    
+    });
+
     this.fcm.setTokenToServer();
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()

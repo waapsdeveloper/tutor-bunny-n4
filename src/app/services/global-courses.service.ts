@@ -121,7 +121,6 @@ export class GlobalCoursesService {
   }
 
   requestTrial(obj, user, message) {
-
     return new Promise(async resolve => {
       let ite = {
         user_id: user.id,
@@ -136,30 +135,17 @@ export class GlobalCoursesService {
           this.courses[findIndex].trial = res.trial;
         }
       }
-
       resolve(true)
     })
-
-
   }
 
   getcourseById(id) {
-
     return new Promise(async resolve => {
-
-      // let findIndex = this.courses.findIndex(x => x.id == id);
-      // if (findIndex != -1) {
-      //   resolve(this.courses[findIndex])
-      //   return;
-      // }
-
       let res = await this.network.getcourseById(id) as any;
       const c = res.course;
       this.courses.push(c);
       resolve(c);
-
     })
-
   }
 
   async removeFavorite(obj: any, user) {

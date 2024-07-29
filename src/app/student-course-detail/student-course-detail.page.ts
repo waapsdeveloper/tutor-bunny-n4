@@ -194,13 +194,10 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);
       let send = data.data.send;
-
       if (send == true) {
-        // this.trail = true;
-
         await this.globalCourses.requestTrial(this.data, user, data.data.message)
         this.callApi()
-
+        this.events.publish('update-course-list');
       }
 
     }
