@@ -53,6 +53,7 @@ export class GlobalCoursesService {
 
       const course = res.course;
       if (course) {
+
         const index = this.courses.findIndex(c => c.id == course.id);
         console.log(index);
 
@@ -61,6 +62,58 @@ export class GlobalCoursesService {
         } else {
           this.courses = [course, ...this.courses];
         }
+
+        // check in other courses
+
+        // if other course has the course by index
+
+        // whet is the user id in other course id ?
+        let ouid  = -1;
+
+        if(this.otherCourses.length > 0){
+          let a = this.otherCourses[0].user_id;
+          let b = course.user_id;
+
+          if(a == b){
+            ouid = a;
+          }
+        }
+
+
+        if(ouid != -1){
+
+
+          let findIndexO = this.otherCourses.findIndex(x => x.id == course.id);
+          if(findIndexO != -1){
+
+            // you found it here
+            if(course.states == 'inactive'){
+              this.otherCourses.splice(findIndexO, 1);
+            } else {
+              this.otherCourses[findIndexO] = course;
+            }
+
+          } else {
+
+            if(course.states != 'inactive'){
+              this.otherCourses[findIndexO] = course;
+            }
+
+          }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
       }
     }
   }
