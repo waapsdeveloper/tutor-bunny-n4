@@ -84,7 +84,7 @@ export class GlobalCoursesService {
           if (findIndexO != -1) {
 
             // you found it here
-            if (course.states == 'inactive') {
+            if (course.status == 'inactive') {
               this.otherCourses.splice(findIndexO, 1);
               console.log(this.otherCourses);
 
@@ -94,7 +94,7 @@ export class GlobalCoursesService {
             }
           } else {
 
-            if (course.states != 'inactive') {
+            if (course.status != 'inactive') {
               this.otherCourses[findIndexO] = course;
               console.log(this.otherCourses);
 
