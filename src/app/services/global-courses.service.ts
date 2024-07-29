@@ -15,6 +15,13 @@ export class GlobalCoursesService {
   CourseChannel: any;
   private pusher: Pusher;
 
+  otherCoursesPage = 1;
+  otherCoursesLastPage = -1;
+  otherCourses: any[] = [];
+  otherCourseUserId = 0;
+  otherExceptCourseId = 0;
+
+
 
   constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
     const options = {
@@ -169,7 +176,32 @@ export class GlobalCoursesService {
       console.log(`Favorite already exists:`, obj);
     }
 
+  }
 
+  getOtherCourses(userId, exceptCOurseId) {
+    this.otherCourseUserId = userId;
+    this.otherExceptCourseId = exceptCOurseId;
+
+    return new Promise(async resolve => {
+
+      let obj = {
+        user_id: this.otherCourseUserId,
+        except_course_id : this.otherExceptCourseId
+      };
+
+      const res = await this.network.getOtherCourseList(obj) as any;
+      const data = res.result;
+      this.otherCoursesPage = data.current_page;
+      this.otherCoursesLastPage = data.last_page;
+
+      if (this.otherCoursesPage === 1) {
+        this.otherCourses = data.data;
+      } else {
+        this.otherCourses = [...this.otherCourses, ...data.data];
+      }
+
+      resolve(true);
+    });
   }
 
 
