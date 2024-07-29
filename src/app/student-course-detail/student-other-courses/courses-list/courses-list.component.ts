@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,15 +9,9 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CoursesListComponent extends BasePage implements OnInit {
 
+  user;
 
-  list;
-  count;
-  user
-  page: number = 1;
-  @Output('listData') listData: EventEmitter<any> = new EventEmitter<any>();
-
-  last_page = -1;
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
   }
 
@@ -24,32 +19,12 @@ export class CoursesListComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('data-for-other-corses', (data: any) => {
-      console.log(data);
       this.user = data.user;
-      this.getCourses(data);
-    }
-    )
-  }
-  async initialize() {
+      this.globalCourses.getOtherCourses(data.user.id, data.id);
+    })
 
   }
 
-  getCourses(course: any) {
-    return new Promise(async resolve => {
-      let obj = {
-        user_id: this.user.id,
-        except_course_id: course.id
-      };
-      const res = await this.network.getOtherCourseList(obj) as any;
-      const data = res.result;
-      this.page = data.current_page;
-      this.last_page = data.last_page;
-      this.count = res.result.total
-      this.list = data.data;
-      this.listData.emit(data);
-      resolve(true);
-    });
-  }
 
   async oepnDeatils(item) {
     const params = {

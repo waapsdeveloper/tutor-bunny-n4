@@ -15,6 +15,13 @@ export class GlobalCoursesService {
   CourseChannel: any;
   private pusher: Pusher;
 
+  otherCoursesPage = 1;
+  otherCoursesLastPage = -1;
+  otherCourses: any[] = [];
+  otherCourseUserId = 0;
+  otherExceptCourseId = 0;
+
+
 
   constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
     const options = {
@@ -46,6 +53,7 @@ export class GlobalCoursesService {
 
       const course = res.course;
       if (course) {
+
         const index = this.courses.findIndex(c => c.id == course.id);
         console.log(index);
 
@@ -54,6 +62,59 @@ export class GlobalCoursesService {
         } else {
           this.courses = [course, ...this.courses];
         }
+
+        // check in other courses
+
+        // if other course has the course by index
+
+        // whet is the user id in other course id ?
+        let ouid  = -1;
+
+        if(this.otherCourses.length > 0){
+          let a = this.otherCourses[0].user_id;
+          let b = course.user_id;
+
+          if(a == b){
+            ouid = a;
+          }
+        }
+
+
+        if(ouid != -1){
+
+
+          let findIndexO = this.otherCourses.findIndex(x => x.id == course.id);
+          if(findIndexO != -1){
+
+            // you found it here
+            if(course.states == 'inactive'){
+              this.otherCourses.splice(findIndexO, 1);
+            } else {
+              this.otherCourses[findIndexO] = course;
+            }
+            
+
+          } else {
+
+            if(course.states != 'inactive'){
+              this.otherCourses[findIndexO] = course;
+            }
+
+          }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
       }
     }
   }
@@ -169,7 +230,32 @@ export class GlobalCoursesService {
       console.log(`Favorite already exists:`, obj);
     }
 
+  }
 
+  getOtherCourses(userId, exceptCOurseId) {
+    this.otherCourseUserId = userId;
+    this.otherExceptCourseId = exceptCOurseId;
+
+    return new Promise(async resolve => {
+
+      let obj = {
+        user_id: this.otherCourseUserId,
+        except_course_id : this.otherExceptCourseId
+      };
+
+      const res = await this.network.getOtherCourseList(obj) as any;
+      const data = res.result;
+      this.otherCoursesPage = data.current_page;
+      this.otherCoursesLastPage = data.last_page;
+
+      if (this.otherCoursesPage === 1) {
+        this.otherCourses = data.data;
+      } else {
+        this.otherCourses = [...this.otherCourses, ...data.data];
+      }
+
+      resolve(true);
+    });
   }
 
 

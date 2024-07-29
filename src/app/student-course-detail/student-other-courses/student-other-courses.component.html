@@ -1,10 +1,10 @@
-<div class="student-box-outer-689567">
+<div class="student-box-outer-689567" *ngIf="globalCourses?.otherCourses?.length > 0">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">Other Courses ({{count}})
+    <div class="sb-heading-title-7895 outfit-semibold">Other Courses ({{globalCourses?.otherCourses?.length}})
     </div>
     <div class="sb-heading-sl-7895 outfit" (click)="seeAll()">See all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-<app-courses-list (listData)="getListData($event)" ></app-courses-list>
+<app-courses-list></app-courses-list>
