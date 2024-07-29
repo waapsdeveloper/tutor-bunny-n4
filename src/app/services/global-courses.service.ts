@@ -68,36 +68,36 @@ export class GlobalCoursesService {
         // if other course has the course by index
 
         // whet is the user id in other course id ?
-        let ouid  = -1;
-
-        if(this.otherCourses.length > 0){
+        let ouid = -1;
+        console.log(ouid);
+        if (this.otherCourses.length > 0) {
           let a = this.otherCourses[0].user_id;
           let b = course.user_id;
-
-          if(a == b){
+          console.log(a, b);
+          if (a == b) {
             ouid = a;
+            console.log(ouid);
           }
         }
-
-
-        if(ouid != -1){
-
-
+        if (ouid != -1) {
           let findIndexO = this.otherCourses.findIndex(x => x.id == course.id);
-          if(findIndexO != -1){
+          if (findIndexO != -1) {
 
             // you found it here
-            if(course.states == 'inactive'){
+            if (course.states == 'inactive') {
               this.otherCourses.splice(findIndexO, 1);
+              console.log(this.otherCourses);
+
             } else {
               this.otherCourses[findIndexO] = course;
+              console.log(this.otherCourses);
             }
-            
-
           } else {
 
-            if(course.states != 'inactive'){
+            if (course.states != 'inactive') {
               this.otherCourses[findIndexO] = course;
+              console.log(this.otherCourses);
+
             }
 
           }
@@ -240,7 +240,7 @@ export class GlobalCoursesService {
 
       let obj = {
         user_id: this.otherCourseUserId,
-        except_course_id : this.otherExceptCourseId
+        except_course_id: this.otherExceptCourseId
       };
 
       const res = await this.network.getOtherCourseList(obj) as any;
