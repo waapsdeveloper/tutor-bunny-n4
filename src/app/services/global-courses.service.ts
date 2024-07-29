@@ -92,6 +92,7 @@ export class GlobalCoursesService {
             } else {
               this.otherCourses[findIndexO] = course;
             }
+            
 
           } else {
 
