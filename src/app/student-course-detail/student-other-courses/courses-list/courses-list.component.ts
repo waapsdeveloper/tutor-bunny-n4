@@ -25,13 +25,10 @@ export class CoursesListComponent extends BasePage implements OnInit {
 
     this.events.subscribe('data-for-other-corses', (data: any) => {
       console.log(data);
-
       this.user = data.user;
       this.getCourses(data);
-
     }
     )
-
   }
   async initialize() {
 
@@ -39,19 +36,15 @@ export class CoursesListComponent extends BasePage implements OnInit {
 
   getCourses(course: any) {
     return new Promise(async resolve => {
-
       let obj = {
         user_id: this.user.id,
-        except_course_id : course.id
+        except_course_id: course.id
       };
-
       const res = await this.network.getOtherCourseList(obj) as any;
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
-
       this.count = res.result.total
-
       this.list = data.data;
       this.listData.emit(data);
       resolve(true);
@@ -59,7 +52,6 @@ export class CoursesListComponent extends BasePage implements OnInit {
   }
 
   async oepnDeatils(item) {
-
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
