@@ -211,7 +211,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
 
-      const message = !this.edit ? "Course created successfully" : "Course Updated Successfully";
+      const message = !this.edit ? "Course created successfully" : "Course created Successfully";
       this.utility.presentSuccessToast(message);
 
     }

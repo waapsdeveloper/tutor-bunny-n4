@@ -7,12 +7,13 @@
       </div>
       <div style="display: flex; align-items: flex-start; flex-direction: column;
       gap: 8px;">
-        <div class="header-title ">{{item.user.name}} <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+        <div class="header-title ">
+          <div>{{item.user.name}}</div> <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
         <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
       </div>
     </div>
-    <div class="header-right-items-78956" *ngIf="item.user.teacher">
+    <div class="header-right-items-78956">
       <div class="bsearch-btn-7895 ion-activatable ripple-parent rectangle">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="../../assets/svg/options.svg" />

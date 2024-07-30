@@ -32,7 +32,7 @@ export class NetworkService {
   }
 
   sendMessage(data) {
-    return this.httpPostResponse('add-chat-message', data);
+    return this.httpPostResponse('add-chat-message', data, null, false, false);
   }
 
   deleteImage(id) {
