@@ -35,7 +35,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.events.subscribe('update-course-list', () => {
     this.getlists();
     console.log("Dsadasd");
-    
+
     });
 
     this.fcm.setTokenToServer();
@@ -47,7 +47,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   getlists(){
 
-    this.globalCourses.getCoursesFromApi()
+    this.globalCourses.getCoursesFromApi();
+    this.globalCourses.setFavToApi();
     this.globalTrials.registerPusherEvent()
     this.globalCourses.registerPusherEvent()
   }

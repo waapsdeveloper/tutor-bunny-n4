@@ -26,9 +26,9 @@ export class FavRecCoursesComponent extends BasePage { // implements OnInit, Vie
   //   this.initialize();
   // }
 
-  ngOnInit() {
+  // ngOnInit() {
 
-  }
+  // }
 
   async initialize() {
     // this.getCourses('', 1);
