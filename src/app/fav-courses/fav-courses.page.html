@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [title]="'Favorite  Courses'" [showBack]="true" 
-   [backUrl]="'/tabs/student-dashboard'"></app-sd-header-top>
+  <app-sd-header-top [title]="'Favorite  Courses'" [showBack]="true"
+    [backUrl]="'/tabs/student-dashboard'"></app-sd-header-top>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-content-bg ion-padding">
-  <div class="ion-padding" *ngIf="favService.favorites.length === 0">
+  <div class="ion-padding" *ngIf="globalCourses.favorites.length === 0">
     <div class="label fs-16 outfit">No Favorite Courses Found</div>
   </div>
   <div class="body-content-68448" style="margin-top: 16px;">

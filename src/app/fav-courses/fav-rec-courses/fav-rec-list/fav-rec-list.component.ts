@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { MyFavoritesService } from 'src/app/services/my-favorites.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TrailMessageComponent } from 'src/app/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 
 @Component({
@@ -33,7 +33,7 @@ export class FavRecListComponent extends BasePage implements OnInit {
 
   languageName: any;
 
-  constructor(injector: Injector, public favService: MyFavoritesService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
     this.initialize();
   }
@@ -136,14 +136,14 @@ export class FavRecListComponent extends BasePage implements OnInit {
 
     let user = this.users.getUser()
     this.fav = true;
-    this.favService.addFavorite(this.item, user)
+    this.globalCourses.addFavorite(this.item, user)
 
   }
 
   async removeToFav() {
     let user = this.users.getUser()
     this.fav = false;
-    this.favService.removeFavorite(this.item, user)
+    this.globalCourses.removeFavorite(this.item, user)
 
 
     // let obj = {

@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
 import { AuthenticationService } from '../services/authentication.service';
 import { FirebaseService } from '../services/firebase.service';
-import { MyFavoritesService } from '../services/my-favorites.service';
+import { GlobalCoursesService } from '../services/global-courses.service';
 
 @Component({
   selector: 'app-fav-courses',
@@ -12,7 +12,7 @@ import { MyFavoritesService } from '../services/my-favorites.service';
 export class FavCoursesPage extends BasePage { //  implements OnInit
 
 
-  constructor(injector: Injector, public authService: AuthenticationService, public favService: MyFavoritesService) {
+  constructor(injector: Injector, public authService: AuthenticationService, public globalCourses: GlobalCoursesService) {
     super(injector)
     this.initialize()
   }

@@ -1,14 +1,14 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { MyFavoritesService } from 'src/app/services/my-favorites.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-fav-rec-courses',
   templateUrl: './fav-rec-courses.component.html',
   styleUrls: ['./fav-rec-courses.component.scss'],
 })
-export class FavRecCoursesComponent extends BasePage  { // implements OnInit, ViewWillEnter
+export class FavRecCoursesComponent extends BasePage { // implements OnInit, ViewWillEnter
 
   // list: any[] = [];
   // page: number = 1;
@@ -17,7 +17,7 @@ export class FavRecCoursesComponent extends BasePage  { // implements OnInit, Vi
   // data: any;
   loading = false;
 
-  constructor(injector: Injector, public favService: MyFavoritesService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
     // this.initialize();
   }
@@ -26,11 +26,9 @@ export class FavRecCoursesComponent extends BasePage  { // implements OnInit, Vi
   //   this.initialize();
   // }
 
-  // ngOnInit() {
-  //   // this.events.subscribe("show-list-of-fav-courses", (data) => {
-  //     // this.getCourses('', 1, data.liked);
-  //   // })
-  // }
+  ngOnInit() {
+
+  }
 
   async initialize() {
     // this.getCourses('', 1);
@@ -68,9 +66,9 @@ export class FavRecCoursesComponent extends BasePage  { // implements OnInit, Vi
 
   async onIonInfinite(ev) {
     this.loading = true;
-    if (this.favService.page <= this.favService.last_page) {
-      const np = this.favService.page + 1;
-      await this.favService.setFavToApi('', np)
+    if (this.globalCourses.page <= this.globalCourses.fav_last_page) {
+      const np = this.globalCourses.fav_page + 1;
+      await this.globalCourses.setFavToApi('', np)
     }
     this.loading = false;
   }

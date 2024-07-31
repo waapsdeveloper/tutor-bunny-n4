@@ -66,16 +66,11 @@ export class GlobalTrialsService {
       } else {
         this.pendingTrials.splice(indexp, 1);
       }
-
-
     } else {
-
       if(trialObj.status == 'Pending'){
         this.pendingTrials = [trialObj, ...this.pendingTrials]
       }
-
     }
-
   }
   getPendingTrialsFromApi(search = '', page = 1,) {
 

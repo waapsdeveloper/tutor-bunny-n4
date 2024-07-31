@@ -4,7 +4,6 @@ import { BasePage } from '../base-page/base-page';
 import { TrailMessageComponent } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { AlertController } from '@ionic/angular';
 import { GlobalCoursesService } from '../services/global-courses.service';
-import { MyFavoritesService } from '../services/my-favorites.service';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -42,7 +41,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   acheduleTime;
   showFavValue = false;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService, public favService: MyFavoritesService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService, ) {
     super(injector)
   }
 
@@ -139,7 +138,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
 
     this.data.is_liked_by_me = true;
     this.showFavValue = true;
-    this.favService.addFavorite(this.data, user);
+    this.globalCourses.addFavorite(this.data, user);
 
   }
 
@@ -148,7 +147,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
 
     this.data.is_liked_by_me = false;
     this.showFavValue = false;
-    this.favService.removeFavorite(this.data, user);
+    this.globalCourses.removeFavorite(this.data, user);
 
 
   }

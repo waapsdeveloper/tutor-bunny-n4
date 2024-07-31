@@ -6,7 +6,6 @@ import { BasePage } from '../base-page/base-page';
 import { IonContent } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
 import { FavCoursesPage } from '../fav-courses/fav-courses.page';
-import { MyFavoritesService } from '../services/my-favorites.service';
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
 
@@ -25,7 +24,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   showLiked = false;
   // @ViewChild('content', { static: true }) content: IonContent;
 
-  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public favService: MyFavoritesService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
+  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector)
     this.initialize();
     this.getlists();

@@ -14,7 +14,9 @@ export class GlobalCoursesService {
   courses: any[] = [];
   CourseChannel: any;
   private pusher: Pusher;
-
+  fav_page = 1;
+  fav_last_page = -1;
+  public favorites: any[] = [];
   otherCoursesPage = 1;
   otherCoursesLastPage = -1;
   otherCourses: any[] = [];
@@ -23,7 +25,7 @@ export class GlobalCoursesService {
 
 
 
-  constructor(private users: UsersService, private network: NetworkService, private events: EventsService) {
+  constructor( private network: NetworkService, private events: EventsService,) {
     const options = {
       cluster: 'ap2',
       forceTLS: true
@@ -39,35 +41,29 @@ export class GlobalCoursesService {
   courseChannelReceived($event: any) {
     console.log($event);
     this.events.publish('get-dashboard-stats');
-    this.updateCourseList($event)
+    this.updateCourseList($event);
   }
 
   async updateCourseList(data: any) {
     console.log(data);
-    // return
     let course_Id = data.course_id;
-
     if (course_Id) {
       let res = await this.network.getcourseById(course_Id) as any;
       console.log(res);
-
       const course = res.course;
       if (course) {
-
         const index = this.courses.findIndex(c => c.id == course.id);
         console.log(index);
-
         if (index != -1) {
           this.courses[index] = course;
         } else {
           this.courses = [course, ...this.courses];
         }
+        let obj = {
+          course: course
+        }
+        this.events.publish('update-Fav-list', obj);
 
-        // check in other courses
-
-        // if other course has the course by index
-
-        // whet is the user id in other course id ?
         let ouid = -1;
         console.log(ouid);
         if (this.otherCourses.length > 0) {
@@ -93,28 +89,12 @@ export class GlobalCoursesService {
               console.log(this.otherCourses);
             }
           } else {
-
             if (course.status != 'inactive') {
               this.otherCourses.push(course);
               console.log(this.otherCourses);
-
             }
-
           }
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
       }
     }
   }
@@ -229,7 +209,6 @@ export class GlobalCoursesService {
     } else {
       console.log(`Favorite already exists:`, obj);
     }
-
   }
 
   getOtherCourses(userId, exceptCOurseId) {
@@ -258,6 +237,78 @@ export class GlobalCoursesService {
     });
   }
 
+  async setFavToApi(search = '', fav_page = 1, liked = true) {
 
+    return new Promise(async resolve => {
+
+      let obj = {
+        search: search,
+        fav_page: fav_page,
+        liked: true
+      }
+
+      const res = await this.network.getAllFavCourses(obj) as any;
+      const result = res.result;
+      // this.favorites = data.data;
+      this.fav_page = result.current_fav_page;
+      this.fav_last_page = result.fav_last_page;
+
+      if (this.fav_page == 1) {
+        this.favorites = result["data"];
+      } else {
+        this.favorites = [...this.favorites, ...result["data"]]
+      }
+
+      resolve(true)
+
+    })
+
+    // this.showLiked = d.length > 0;
+
+  }
+
+  async removeFavorites(obj: any, user) {
+    const index = this.favorites.findIndex(x => x.id == obj.id);
+    if (index > -1) {
+      this.favorites.splice(index, 1);
+      console.log(`Removed favorite:`, obj);
+    } else {
+      console.log(`Favorite not found:`, obj);
+    }
+
+    this.removeFavorite(obj, user)
+
+
+    let ite = {
+      user_id: user.id,
+      course_id: obj.id
+    }
+    const res = await this.network.removeCourseFav(ite)
+
+  }
+
+  async addFavorites(obj: any, user) {
+    const index = this.favorites.findIndex(x => x.id == obj.id);
+    if (index == -1) {
+      this.favorites.push(obj);
+      console.log(`Added favorite:`, obj);
+    } else {
+      console.log(`Favorite already exists:`, obj);
+    }
+
+    this.addFavorite(obj, user)
+
+    let ite = {
+      user_id: user.id,
+      course_id: obj.id
+    }
+    const res = await this.network.addCourseFav(ite)
+
+
+  }
+
+  getAllFavorites(): any[] {
+    return this.favorites;
+  }
 
 }
