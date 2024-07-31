@@ -1,5 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+
 
 @Component({
   selector: 'app-menu-list-box',
@@ -26,7 +28,11 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     this.nav.push('/tabs/teacher-profile');
   }
 
-  logout() {
+  async logout() {
+    await FirebaseAuthentication.signOut();
+    console.log('====================================');
+    console.log("Dsadas");
+    console.log('====================================');
     localStorage.removeItem('token');
     this.nav.push('splash')
   }

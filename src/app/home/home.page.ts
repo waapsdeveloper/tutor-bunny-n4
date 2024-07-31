@@ -86,10 +86,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   async redirectDependsOnRole(user) {
     console.log(user);
-
-
-
-
     const isProfileCompleted = await this.profiles.isProfileCompleted(user);
     const roleId = parseInt(user.role_id);
     let role_Id = localStorage.getItem('role')
@@ -134,9 +130,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
         return;
       }
     }
-
-
-
   }
 
 
