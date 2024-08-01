@@ -1,0 +1,92 @@
+<div class="courses-block-outer-789565">
+  <div class="courses-block-item-789565">
+    <div class="block-item-header">
+      <div class="block-item-header-title outfit-medium"> {{item?.title}}</div>
+      <img src="../../../../assets/svg/left-arrow.svg" alt="">
+    </div>
+    <div class="block-item-body">
+      <div class="profile-item-block">
+        <div>
+          <div class="profile-item-image-block"
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+          </div>
+        </div>
+        <div class="profile-content-78678564">
+          <div class="profile-line-789575">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;">
+              <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+              <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
+              </div>
+            </div>
+            <div style="    display: flex;
+            align-items: center;
+            justify-content: flex-end;">
+              <ion-icon [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+                (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+                [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+            </div>
+          </div>
+          <div class="profile-above-footer-986985">
+            <div class="us-status-btn">
+              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
+                ${{item.price}}/month</div>
+            </div>
+          </div>
+          <div class="group-96589">
+            <div class="line-789575">
+              <img class="i-7685" src="../../../assets/svg/online.svg" />
+              <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.mode_type}}</div>
+            </div>
+            <div class="line-789575">
+              <img class="i-7685" src="assets/icon/smgroup-icon.svg" />
+              <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.capacity}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="profile-below-footer-986985">
+        <div class="ble-buttons-789576856">
+          <img src="../../../assets/svg/share.svg" />
+          <div class="outfit fs-16">Share</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;">
+          <img src="../../../../assets/svg/chat-dark.svg" alt="">
+          <div>Chat</div>
+        </div>
+        <div class="right-980676">
+          <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
+          <div class="free-trial-btn-89675 outfit-medium"
+            *ngIf="trail == false && loading == false && status != 'Rejected'">
+            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+          </div>
+          <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false ">
+            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+          </div>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+            *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected' && status != 'Complete' && status != 'Blocked'">
+            <img src="../../../../assets/svg/trail.svg" alt=""><button
+              style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
+          </div>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+            *ngIf="trail == true && loading == false && status == 'Accepted'">
+            <img src="../../../../assets/icon/inProgress.svg" alt="">In Progress
+          </div>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+            *ngIf="trail == true && loading == false && status == 'Complete' ">
+            <img src="../../../../assets/svg/complete.svg" alt="">Trial Completed
+          </div>
+          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+            *ngIf="trail == true && loading == false && status == 'Blocked'">
+            <img src="../../../../assets/icon/block-circle.svg" alt="">Blocked
+          </div>
+          <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

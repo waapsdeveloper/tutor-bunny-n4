@@ -92,7 +92,7 @@ export class NetworkService {
     return this.httpPostResponse('languages/add-teacher-language', data);
   }
 
-   getCategory() {
+  getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
 
@@ -103,10 +103,13 @@ export class NetworkService {
   getAllFavCourses(data: any) {
     return this.httpPostResponse('courses/fav-list', data, null, false, false);
   }
+  getAllReqCourses(id: any) {
+    return this.httpPostResponse('get-requested/course/trials/' + id, null, false, false);
+  }
 
   geTrailRequests(data, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('course/recent/trials/' + id + '?' + str , null, false, false);
+    return this.httpGetResponse('course/recent/trials/' + id + '?' + str, null, false, false);
   }
 
   geTrailRequestsByPusher(id) {
