@@ -235,4 +235,11 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     }
 
   }
+  goToTeacher(){
+
+    const params ={
+      email: this.data.user.email
+    }
+    this.nav.push('/tabs/teacher-profile', params)
+  }
 }

@@ -1,9 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NetworkService } from '../services/network.service';
 import { ViewWillEnter } from '@ionic/angular';
-import { EventsService } from '../services/events.service';
-import { NavService } from '../services/nav.service';
 import { BasePage } from '../base-page/base-page';
+import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -21,10 +19,14 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   isExpanded = false;
   country;
   city;
+  email;
   language;
   state
   subject;
   images: any;
+  params
+  studentEmail
+  roleId;
 
 
   constructor(injector: Injector) {
@@ -38,13 +40,28 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   }
 
   ionViewWillEnter() {
+    this.user = this.users.getUser();
+    console.log(this.user);
+    this.params = this.nav.getQueryParams();
+    console.log(this.params);
+    if (this.params.email) {
+      this.studentEmail = this.params.email;
+    }
     this.initialize()
   }
 
   async initialize() {
-    this.user = this.users.getUser();
+    this.roleId = localStorage.getItem('role');
+    console.log(this.roleId);
+    
+    if(this.roleId == 3){
+      this.email = this.user.email;
+    }
+    else{
+      this.email = this.studentEmail;
+    }
     let obj = {
-      email: this.user.email,
+      email: this.email,
     };
     let res = await this.network.getUserByEmail(obj);
     if (res) {
@@ -95,6 +112,10 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  openQulification(){
+    this.modals.present(TeacherQualificationComponent, {},"",  0.7 )
   }
 
 }

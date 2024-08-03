@@ -294,6 +294,10 @@
   width: 100%;
   margin-top: 16;
   height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   border-radius: 50px;
   color: black;
   background-color: white;

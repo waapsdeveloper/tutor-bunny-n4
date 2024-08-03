@@ -89,9 +89,9 @@
         <div class="detail-heading-78524 outfit-medium">Instructor</div>
         <div class="instructor-box-content-78561">
           <div class="instructor-head-78562">
-            <div class="instructor-image-78563"
+            <div class="instructor-image-78563" (click)="goToTeacher()"
               [style.background-image]="techerImg ? 'url(' + techerImg + ')' : 'assets/learn-piano.jpeg'"></div>
-            <div class="instructor-info-78564">
+            <div class="instructor-info-78564" (click)="goToTeacher()">
               <div class="instructor-name-78565"> {{displayName}}
                 <div class="instructor-reting-78566"> <img src="assets/icon/star.svg" />4.9</div>
               </div>
@@ -99,7 +99,7 @@
                 <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span> {{country}}
               </div>
             </div>
-            <img src="../../assets/svg/arrow-right.svg" style="position: absolute; right: 0; top: 9px;" alt="">
+            <img (click)="goToTeacher()" src="../../assets/svg/arrow-right.svg" style="position: absolute; right: 0; top: 9px;" alt="">
           </div>
           <div class="instructor-title-78568">{{techerTitle}}</div>
         </div>

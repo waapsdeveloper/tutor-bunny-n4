@@ -16,6 +16,7 @@ import { MyCoursesModule } from '../components/my-courses/my-courses.module';
 import { MyGalleryModule } from '../components/my-gallery/my-gallery.module';
 import { RatingReviewModule } from '../components/rating-review/rating-review.module';
 import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
+import { TeacherQualificationModule } from './teacher-qualification/teacher-qualification.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { OtherCoursesModule } from '../components/other-courses/other-courses.mo
     MyCoursesModule,
     MyGalleryModule,
     RatingReviewModule,
-    OtherCoursesModule
+    OtherCoursesModule,
+    TeacherQualificationModule
   ],
   declarations: [TeacherProfilePage],
 })
