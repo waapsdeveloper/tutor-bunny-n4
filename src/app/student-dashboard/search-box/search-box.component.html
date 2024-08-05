@@ -1,11 +1,20 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
-    <div class="bback-btn-7895 ion-activatable ripple-parent rectangle">
+    <div class="bback-btn-7895 ion-activatable ripple-parent rectangle" (click)="back()">
       <ion-ripple-effect></ion-ripple-effect>
-      <img src="assets/svg/chv-back -black.svg" />
+      <img src="assets/svg/chv-back-black.svg" />
     </div>
     <div style="width: 100%;">
-      <app-profile-search-box></app-profile-search-box>
+      <div class="search-box-outer-89655">
+        <div class="search-box-input-outer">
+          <img src="assets/icon/input-search-gray.svg" />
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="search-box-filter-outer" style="width: 24px;" >
+          <img class="img-986675555" src="assets/icon/filter-icon.svg" >
+          <!-- <div class="label-986675555">Filter</div> -->
+        </div>
+      </div>
     </div>
   </div>
 </ion-header>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { StudentDashboradTeachersPageRoutingModule } from './student-dashborad-teachers-routing.module';
 
 import { StudentDashboradTeachersPage } from './student-dashborad-teachers.page';
+import { RecTechersBoxModule } from '../rec-techers-box/rec-techers-box.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StudentDashboradTeachersPageRoutingModule
+    StudentDashboradTeachersPageRoutingModule,
+    RecTechersBoxModule
   ],
   declarations: [StudentDashboradTeachersPage]
 })
