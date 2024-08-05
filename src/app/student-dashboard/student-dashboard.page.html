@@ -30,23 +30,17 @@
   <!-- <div class=" ion-padding" style="background-color: #f5f5f5;">
   </div> -->
 </ion-header>
-
-<ion-content class="ion-content-bg ion-padding" >
-  <div class="body-scroll">
-
-    <div class="dashboard-top-fixed-98563">
-      <div class="header-chips" style="margin-top: -16px;">
-        <div class="header-chip">
-          <div class="ion-chip" (click)="toogleView('course')">Courses</div>
-          <div class="ion-chip" (click)="toogleView('teacher')">Teachers</div>
-        </div>
-      </div>
+<div class="dashboard-top-fixed-98563">
+  <div class="header-chips">
+    <div class="header-chip">
+      <div class="ion-chip" (click)="toogleView('course')">Courses</div>
+      <div class="ion-chip" (click)="toogleView('teacher')">Teachers</div>
     </div>
-    <ion-router-outlet></ion-router-outlet>
-    <!-- <div class="body-content-68448" style="margin-top: 16px;">
-      <app-rec-courses style="max-width: 100%;" *ngIf="view == 'course'"></app-rec-courses>
-      <app-rec-techers-box *ngIf="view == 'teacher'"></app-rec-techers-box>
-    </div> -->
   </div>
+</div>
+<ion-content class="ion-content-bg ion-padding" >
+
+    <ion-router-outlet></ion-router-outlet>
+
 
 </ion-content>

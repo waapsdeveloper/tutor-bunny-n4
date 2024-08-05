@@ -134,6 +134,14 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   toogleView(view) {
     this.view = view;
+    if(view == 'course'){
+      this.nav.push('/tabs/student-dashboard/student-dashborad-courses')
+    }
+
+    if(view == 'teacher'){
+      this.nav.push('/tabs/student-dashboard/student-dashborad-teachers')
+    }
+
   }
 
 

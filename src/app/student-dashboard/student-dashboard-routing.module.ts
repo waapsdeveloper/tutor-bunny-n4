@@ -9,6 +9,11 @@ const routes: Routes = [
     component: StudentDashboardPage,
     children: [
       {
+        path: '',
+        redirectTo: 'student-dashborad-courses',
+        pathMatch: 'full',
+      },
+      {
         path: 'student-dashborad-courses',
         loadChildren: () => import('./student-dashborad-courses/student-dashborad-courses.module').then(m => m.StudentDashboradCoursesPageModule)
       },
