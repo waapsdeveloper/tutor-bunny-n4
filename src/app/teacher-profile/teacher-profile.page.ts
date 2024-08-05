@@ -53,11 +53,11 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   async initialize() {
     this.roleId = localStorage.getItem('role');
     console.log(this.roleId);
-    
-    if(this.roleId == 3){
+
+    if (this.roleId == 3) {
       this.email = this.user.email;
     }
-    else{
+    else {
       this.email = this.studentEmail;
     }
     let obj = {
@@ -78,10 +78,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       const data = await this.network.getImage(user.id) as any;
       this.images = data.result;
       if (this.images.length != 0) {
-
         this.showGellary = true;
-
-
       }
     }
 
@@ -114,8 +111,8 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     this.isExpanded = !this.isExpanded;
   }
 
-  openQulification(){
-    this.modals.present(TeacherQualificationComponent, {},"",  0.7 )
+  openQulification() {
+    this.modals.present(TeacherQualificationComponent, {}, "", 0.8)
   }
 
 }

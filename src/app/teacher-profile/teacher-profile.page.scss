@@ -314,3 +314,21 @@
   border: 0.5px solid rgba(48, 48, 48, 0.25);
 
 }
+
+.video-box-98563 {
+  height: 215px;
+  width: 100%;
+  border-radius: 8px;
+  background-image: url('../../assets/vedio.jpeg');
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+
+  .youtube {
+    position: absolute;
+    width: 43px;
+    right: 8px;
+    bottom: 7px;
+    opacity: 60%;
+  }
+}

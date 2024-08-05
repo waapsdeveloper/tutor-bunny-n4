@@ -12,12 +12,20 @@ export class GalleryListComponent extends BasePage implements OnInit {
   user;
   images = []
   list;
+  params: any;
+  userId;
   constructor( injector:Injector) {
     super(injector)
     this.initialize();
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.params = this.nav.getQueryParams();
+    console.log(this.params);
+    if (this.params.id) {
+      this.userId = this.params.id;
+    }
+  }
 
   async initialize() {
     const user = this.users.getUser();

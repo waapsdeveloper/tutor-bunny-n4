@@ -34,3 +34,95 @@
     gap: 8px;
   }
 }
+
+.qulification-box-outer-98521 {
+
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+
+  .qulification-box-edu-98522 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+
+    .qulification-box-edu-heading-98523 {
+
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .qulification-box-edu-para-98524 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .qulification-box-edu-readmore-98525 {
+
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .qulification-box-edu-button-98526 {
+
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #393939;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        text-wrap: nowrap;
+
+      }
+    }
+  }
+
+  .education-box-edu-98522 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+
+    .education-box-edu-heading-98523 {
+
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .education-box-edu-para-98524 {
+
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .education-box-edu-readmore-98525 {
+
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .education-box-edu-button-98526 {
+
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #393939;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        text-wrap: nowrap;
+      }
+    }
+  }
+}
