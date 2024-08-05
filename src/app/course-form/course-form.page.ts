@@ -56,9 +56,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize() { }
 
   async ionViewWillEnter() {
-
     this.params = this.nav.getQueryParams();
-
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -83,7 +81,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
-
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
     this.formData['language_id'] = data['language_id'];
@@ -106,7 +103,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.language_id = lang.id;
       this.formData['language_id'] = this.language_id;
     }
-
     this.events.publish("set-mode-and-capacity", data)
     this.events.publish("set-from-and-to-age", data)
     this.events.publish("set-form-course-image", data)
@@ -114,7 +110,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   result(value, key) {
-
     this.formData[key] = value;
     if (key == 'category') {
       this.category = value.id;
@@ -148,7 +143,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
   async onSlideChange() {
     this.events.publish('teacher-course-first-screen-submit-call', this.formData);
-
     const f = this.formData;
     if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
       return;
@@ -174,11 +168,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       }
     }
     localStorage.setItem('course_Id', courseId);
-
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-
       this.events.publish("set-form-course-category", this.formData);
       this.events.publish('set-form-keywords-list', res.course.keywords);
       this.content.scrollToTop(500); // 500ms animation duration
@@ -203,22 +195,16 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       return;
     }
     const course_id = localStorage.getItem('course_Id');
-
     if (f.category && f.category.id) {
       f.category_id = f.category.id
     }
-
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
-
-      const message = !this.edit ? "Course created successfully" : "Course created Successfully";
+      const message = !this.edit ? "Course created successfully" : "Course Updated Successfully";
       this.utility.presentSuccessToast(message);
-
     }
-    // return
     this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
-
   }
 
   shouldHandleBackToPrevScreen() {

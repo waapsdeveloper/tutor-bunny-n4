@@ -6,15 +6,10 @@
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
       </div>
     </div>
-    <div class="">
-      <app-profile-search-box></app-profile-search-box>
-    </div>
+    <app-profile-search-box></app-profile-search-box>
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
-          <!-- <div class="icon-box-77">
-            <img class="icon-box-77" src="../../assets/svg/event.svg" />
-          </div> -->
           <div class="icon-box-77" (click)="showFavCourse()">
             <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0"></div>
             <img class="icon-box-77" [src]="'../../assets/icon/heart.svg'" />
@@ -38,9 +33,9 @@
     </div>
   </div>
 </div>
-<ion-content class="ion-content-bg ion-padding" >
+<ion-content class="ion-content-bg ion-padding">
 
-    <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet></ion-router-outlet>
 
 
 </ion-content>

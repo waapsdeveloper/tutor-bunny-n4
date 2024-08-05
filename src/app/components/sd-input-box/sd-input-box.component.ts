@@ -26,14 +26,19 @@ export class SdInputBoxComponent implements OnInit {
   constructor(private events: EventsService) { }
 
   ngOnInit() {
-    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
 
-      if (this.key == 'title' || this.key == 'description') {
-        return;
-      }
+
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+      if (v && v.length < 50) {
+        this.isRequired = true;
+        this.errorText = 'The title field should have minimum 50 characters'
         setTimeout(() => {
           this.isRequired = false;
         }, 5000);
