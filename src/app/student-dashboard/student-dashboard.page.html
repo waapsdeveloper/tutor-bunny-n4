@@ -6,12 +6,15 @@
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
       </div>
     </div>
+    <div class="">
+      <app-profile-search-box></app-profile-search-box>
+    </div>
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
-          <div class="icon-box-77">
+          <!-- <div class="icon-box-77">
             <img class="icon-box-77" src="../../assets/svg/event.svg" />
-          </div>
+          </div> -->
           <div class="icon-box-77" (click)="showFavCourse()">
             <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0"></div>
             <img class="icon-box-77" [src]="'../../assets/icon/heart.svg'" />
@@ -21,24 +24,11 @@
           </div>
         </div>
       </div>
-      <div class="flag-box">
-        <div class="country-box">
-          <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-          <div class="fs-16 country-name-768956">{{country}}</div>
-        </div>
-        <div class="name-box">
-          <div class="pl-heading roboto-medium fs-21" style="color: black;" *ngIf="showWarning == true">Hi,
-            {{displayName}}</div>
-          <div class="pl-heading roboto-medium fs-21" style="color: black; font-size: 14px;"
-            *ngIf="showWarning == false">Complete your profile</div>
-          <img src="../../assets/svg/student-edit.svg" alt="" (click)="updateProfile()">
-        </div>
-      </div>
+ 
     </div>
   </div>
-  <div class=" ion-padding" style="background-color: #f5f5f5;">
-    <app-profile-search-box></app-profile-search-box>
-  </div>
+  <!-- <div class=" ion-padding" style="background-color: #f5f5f5;">
+  </div> -->
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true" >
