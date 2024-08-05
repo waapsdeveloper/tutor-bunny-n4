@@ -11,6 +11,7 @@ import { ProfileSearchBoxModule } from './profile-search-box/profile-search-box.
 import { RecCoursesModule } from './rec-courses/rec-courses.module';
 import { RecTeachersModule } from './rec-teachers/rec-teachers.module';
 import { SearchBoxModule } from './search-box/search-box.module';
+import { RecTechersBoxModule } from './rec-techers-box/rec-techers-box.module';
 
 @NgModule({
   imports: [
@@ -21,8 +22,9 @@ import { SearchBoxModule } from './search-box/search-box.module';
     ProfileSearchBoxModule,
     RecTeachersModule,
     RecCoursesModule,
-    SearchBoxModule
+    SearchBoxModule,
+    RecTechersBoxModule
   ],
   declarations: [StudentDashboardPage]
 })
-export class StudentDashboardPageModule {}
+export class StudentDashboardPageModule { }
