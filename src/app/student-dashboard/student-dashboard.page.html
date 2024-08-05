@@ -31,21 +31,22 @@
   </div> -->
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true">
+<ion-content class="ion-content-bg ion-padding" >
   <div class="body-scroll">
 
     <div class="dashboard-top-fixed-98563">
       <div class="header-chips" style="margin-top: -16px;">
         <div class="header-chip">
-          <div class="ion-chip">Courses</div>
-          <div class="ion-chip">Teachers</div>
+          <div class="ion-chip" (click)="toogleView('course')">Courses</div>
+          <div class="ion-chip" (click)="toogleView('teacher')">Teachers</div>
         </div>
       </div>
     </div>
-    <div class="body-content-68448" style="margin-top: 16px;">
-      <!-- <app-rec-courses style="max-width: 100%;"></app-rec-courses> -->
-      <app-rec-techers-box></app-rec-techers-box>
-    </div>
+    <ion-router-outlet></ion-router-outlet>
+    <!-- <div class="body-content-68448" style="margin-top: 16px;">
+      <app-rec-courses style="max-width: 100%;" *ngIf="view == 'course'"></app-rec-courses>
+      <app-rec-techers-box *ngIf="view == 'teacher'"></app-rec-techers-box>
+    </div> -->
   </div>
 
 </ion-content>

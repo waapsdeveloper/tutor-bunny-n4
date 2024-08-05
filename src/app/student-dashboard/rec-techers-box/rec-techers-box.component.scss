@@ -1,26 +1,192 @@
-.student-box-outer-689567 {
+.tecahers-box-outer-38521 {
+
+  padding: 16px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 0.5px solid black;
 
-  .sb-heading-7895 {
+  .tecahers-box-img-name-box-38522 {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+
+    .tecahers-box-image-38523 {
+      height: 85px;
+      width: 85px;
+      border-radius: 8px;
+      background-color: aqua;
+      background-image: url('../../../assets/vedio.jpeg');
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .tecahers-box-name-box-38524 {
+
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+
+      .tecahers-box-name-38525 {
+
+        font-size: 20px;
+        font-weight: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+
+        .tecahers-box-rate-38526 {
+
+          font-size: 14px;
+          font-weight: 400;
+          color: rgb(0, 0, 0, 1);
+
+        }
+      }
+
+      .tecahers-box-rating-box-38527 {
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 8px;
+
+        .tecahers-box-rating-38528 {
+
+          font-size: 14px;
+          font-weight: 500;
+          color: rgb(0, 0, 0, 1);
+
+          .tecahers-box-rating-number-38529 {
+
+            font-size: 14px;
+            font-weight: 400;
+            color: rgb(0, 0, 0, 1);
+
+          }
+        }
+      }
+
+      .tecahers-box-country-box-38530 {
+
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(0, 0, 0, 1);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+
+      }
+    }
+
+    .tecahers-box-icon-38531 {
+      
+    }
+  }
+
+  .tecahers-box-teches-box-38532 {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
+
+    .tecahers-box-teaches-heading-38533 {
+
+      font-size: 16px;
+      font-weight: 400;
+      color: rgb(0, 0, 0, 1);
+
+    }
+
+    .tecahers-box-teaches-chips-38534 {
+
+      display: flex;
+      align-items: center;
+      width: calc(100% - 100px);
+      justify-content: flex-start;
+      gap: 8px;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .tecahers-box-chip-38535 {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-radius: 5px;
+        padding: 0px 3px 0 3px;
+        background-color: rgba(69, 69, 69, 0.25);
+      }
+    }
+  }
+
+  .tecahers-box-speakes-box-38536 {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 16px;
+
+    .tecahers-box-speakes-heading-38537 {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgb(0, 0, 0, 1);
+    }
+
+    .tecahers-box-speakes-chips-38538 {
+
+      display: flex;
+      align-items: center;
+      width: calc(100% - 100px);
+      justify-content: flex-start;
+      gap: 8px;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .tecahers-box-chip-38539 {
+
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-radius: 5px;
+        padding: 0px 3px 0 3px;
+        background-color: rgba(69, 69, 69, 0.25);
+
+      }
+    }
+  }
+
+  .tecahers-box-footer-box-38540 {
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-top: 8px;
+    width: 100%;
+    border-top: 0.25px solid rgb(103, 113, 105, 0.5);
 
-    .sb-heading-title-7895 {
-      font-size: 20px;
+    .tecahers-box-footer-course-38541 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+
     }
 
-    .sb-heading-sl-7895 {
-      font-size: 12px;
-    }
+    .tecahers-box-footer-chat-38542 {}
   }
-}
-.sb-content-7895{
-
-  gap: 16px;
-  display: flex;
-  flex-direction: column;
 }

@@ -22,6 +22,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   showWarning = false;
   flag;
   showLiked = false;
+  view = 'course';
   // @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
@@ -33,8 +34,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('update-course-list', () => {
-    this.getlists();
-    console.log("Dsadasd");
+      this.getlists();
+      console.log("Dsadasd");
 
     });
 
@@ -45,7 +46,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   }
 
-  getlists(){
+  getlists() {
 
     this.globalCourses.getCoursesFromApi();
     this.globalCourses.setFavToApi();
@@ -126,19 +127,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     }, 800); // 2 seconds
   }
 
+
   async showFavCourse() {
-
-
     this.nav.push('/fav-courses')
+  }
 
-    // this.events.publish('Update-Fv-Screen', {
-    //   res
-    // });
-
-    // this.showLiked = !this.showLiked;
-    // this.events.publish("show-list-of-fav-courses", {
-    //   liked: this.showLiked
-    // })
+  toogleView(view) {
+    this.view = view;
   }
 
 

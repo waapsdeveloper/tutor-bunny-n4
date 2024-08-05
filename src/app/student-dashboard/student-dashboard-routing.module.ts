@@ -6,7 +6,17 @@ import { StudentDashboardPage } from './student-dashboard.page';
 const routes: Routes = [
   {
     path: '',
-    component: StudentDashboardPage
+    component: StudentDashboardPage,
+    children: [
+      {
+        path: 'student-dashborad-courses',
+        loadChildren: () => import('./student-dashborad-courses/student-dashborad-courses.module').then(m => m.StudentDashboradCoursesPageModule)
+      },
+      {
+        path: 'student-dashborad-teachers',
+        loadChildren: () => import('./student-dashborad-teachers/student-dashborad-teachers.module').then(m => m.StudentDashboradTeachersPageModule)
+      },
+    ]
   },
   {
     path: 'student-menu',
@@ -16,6 +26,8 @@ const routes: Routes = [
     path: 'student-profile-edit',
     loadChildren: () => import('./student-profile-edit/student-profile-edit.module').then(m => m.StudentProfileEditPageModule)
   },
+
+
 
 
 ];
