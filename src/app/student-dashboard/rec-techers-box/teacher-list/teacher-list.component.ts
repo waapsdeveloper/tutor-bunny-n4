@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-teacher-list',
   templateUrl: './teacher-list.component.html',
   styleUrls: ['./teacher-list.component.scss'],
 })
-export class TeacherListComponent implements OnInit {
+export class TeacherListComponent extends BasePage implements OnInit {
 
   @Input() item;
   subjects;
 
-  constructor() { }
+  constructor(injector:Injector) {
+    super(injector)
+   }
 
   ngOnInit() { 
     
@@ -26,4 +29,10 @@ export class TeacherListComponent implements OnInit {
     }
   }
 
+  gototecher(email){
+    const params ={
+      email: email
+    }
+    this.nav.push('/tabs/teacher-profile', params)
+  }
 }
