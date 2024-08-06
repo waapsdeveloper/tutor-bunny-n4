@@ -1,9 +1,10 @@
-<div class="tecahers-box-outer-38521" >
+<div class="tecahers-box-outer-38521">
   <div class="tecahers-box-img-name-box-38522">
-    <div class="tecahers-box-image-38523"></div>
+    <div class="tecahers-box-image-38523"
+      [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
     <div class="tecahers-box-name-box-38524">
       <div class="tecahers-box-name-38525">
-        Hamza Shahid
+        {{item.name}}
         <div class="tecahers-box-rate-38526"> $10/Hr</div>
       </div>
       <div class="tecahers-box-rating-box-38527">
@@ -14,33 +15,31 @@
           <img src="../../../assets/icon/star.svg" alt="">
           <img src="../../../assets/icon/star.svg" alt="">
           <div class="tecahers-box-rating-38528">
-        </div>
+          </div>
           5.0
           <span class="tecahers-box-rating-number-38529">(532)</span>
         </div>
       </div>
-      <div class="tecahers-box-country-box-38530">West Bengal, India</div>
+      <div class="tecahers-box-country-box-38530"><span slot="start" class="fi fi-{{getFlag()}}"></span>
+        {{item.teacher.state.name}}, {{item.teacher.country.name}}</div>
     </div>
     <div class="tecahers-box-icon-38531"></div>
   </div>
   <div class="tecahers-box-teches-box-38532">
     <div class="tecahers-box-teaches-heading-38533">Teaches:</div>
     <div class="tecahers-box-teaches-chips-38534">
-      <div class="tecahers-box-chip-38535"> HTML</div>
-      <div class="tecahers-box-chip-38535"> CSS</div>
-      <div class="tecahers-box-chip-38535"> Angular</div>
-      <div class="tecahers-box-chip-38535"> Ionic</div>
+      <div class="tecahers-box-chip-38535" *ngFor="let item of item.teacher.subjects">{{item.name}}</div>
     </div>
   </div>
   <div class="tecahers-box-speakes-box-38536">
     <div class="tecahers-box-speakes-heading-38537">Speaks:</div>
     <div class="tecahers-box-speakes-chips-38538">
-      <div class="tecahers-box-chip-38539">English</div>
-      <div class="tecahers-box-chip-38539">Urdu</div>
+      <div class="tecahers-box-chip-38539" *ngFor="let item of item.teacher.languages">{{item.name}}</div>
     </div>
   </div>
   <div class="tecahers-box-footer-box-38540">
-    <div class="tecahers-box-footer-course-38541">Courses</div>
+    <div class="tecahers-box-footer-course-38541"><img src="../../../../assets/svg/courses.svg" alt="">Courses
+      ({{item.course_count}})</div>
     <div class="tecahers-box-footer-chat-38542">Chat</div>
   </div>
 </div>

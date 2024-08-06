@@ -100,6 +100,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  getAllTeachers() {
+    return this.httpGetResponse('teachers/list/approved', null, null, false);
+  }
+
   getAllFavCourses(data: any) {
     return this.httpPostResponse('courses/fav-list', data, null, false, false);
   }

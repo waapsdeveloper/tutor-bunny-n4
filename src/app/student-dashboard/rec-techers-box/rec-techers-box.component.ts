@@ -1,14 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-rec-techers-box',
   templateUrl: './rec-techers-box.component.html',
   styleUrls: ['./rec-techers-box.component.scss'],
 })
-export class RecTechersBoxComponent  implements OnInit {
+export class RecTechersBoxComponent extends BasePage implements OnInit {
+  list;
+  teachers;
 
-  constructor() { }
+  constructor(injector: Injector) {
+    super(injector)
 
-  ngOnInit() {}
+    this.callApi();
+  }
+
+  ngOnInit() { }
+
+  async callApi() {
+    const res = await this.network.getAllTeachers() as any [];
+    this.list = res;
+    
+  }
 
 }
