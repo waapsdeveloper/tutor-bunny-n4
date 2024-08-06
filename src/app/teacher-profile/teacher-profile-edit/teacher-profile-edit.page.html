@@ -60,7 +60,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -129,6 +128,28 @@
 
         </div>
       </swiper-slide>
+      <swiper-slide>
+        <div class="input-box-lines d-flex flex-column gap-8">
+          <div class="input-title fs-14 roboto-medium label-with-word-count">
+            <div class="label-with-word-count-left">
+              <span>Tell us about your educational qualification</span> <img src="../../assets/svg/question.svg" alt=""
+                id="click-about">
+            </div>
+            <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
+            </div>
+          </div>
+          <ion-popover trigger="click-about" triggerAction="click">
+            <ng-template style="width: 100%;">
+              <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
+                experiences, skills, background details. Do not share personal contact information here.
+              </div>
+            </ng-template>
+          </ion-popover>
+          <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
+            (onChange)="result($event, 'education')" [inputText]="formData.education" [key]="'education'"
+            [errorText]="'education is required'"  [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step == 2"></app-sd-textarea-about>
+        </div>
+      </swiper-slide>
     </swiper-container>
   </form>
 </ion-content>
@@ -136,6 +157,7 @@
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
       <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 3" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
       <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>

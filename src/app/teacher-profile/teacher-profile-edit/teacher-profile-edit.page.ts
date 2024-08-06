@@ -38,7 +38,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     description: null,
     terms: false,
     image: null,
-    photo_id: null
+    photo_id: null,
+    education:null
 
   };
   contryCode: any;
@@ -177,7 +178,11 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.step = 2;
     }
   }
-
+  async onSlideChange2() {
+    
+   
+    
+  }
   async submit() {
     const data = this.formData;
     this.userId = this.user.id;
@@ -201,11 +206,15 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     // return
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
-    if (res && res.message) {
-      this.utility.presentSuccessToast(res.message)
+    // if (res && res.message) {
+    //   this.utility.presentSuccessToast(res.message)
+    // }
+    if (res) {
+      this.slides?.nativeElement.swiper.slideTo(2, false, false);
+      this.step = 3;
     }
 
-    this.nav.pop('/tabs/teacher-dashboard')
+    // this.nav.pop('/tabs/teacher-dashboard')
 
   }
   disableIfIncomplete() {
