@@ -129,25 +129,63 @@
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div class="input-box-lines d-flex flex-column gap-8">
-          <div class="input-title fs-14 roboto-medium label-with-word-count">
-            <div class="label-with-word-count-left">
-              <span>Tell us about your educational qualification</span> <img src="../../assets/svg/question.svg" alt=""
-                id="click-about">
-            </div>
-            <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
-            </div>
-          </div>
-          <ion-popover trigger="click-about" triggerAction="click">
-            <ng-template style="width: 100%;">
-              <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
-                experiences, skills, background details. Do not share personal contact information here.
+        <div class="body-content-68448">
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium label-with-word-count">
+              <div class="label-with-word-count-left">
+                <span>Tell us about your educational qualification</span> <img src="../../assets/svg/question.svg"
+                  alt="" id="click-about">
               </div>
-            </ng-template>
-          </ion-popover>
-          <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
-            (onChange)="result($event, 'education')" [inputText]="formData.education" [key]="'education'"
-            [errorText]="'education is required'"  [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step == 2"></app-sd-textarea-about>
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
+              </div>
+            </div>
+            <ion-popover trigger="click-about" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
+                  experiences, skills, background details. Do not share personal contact information here.
+                </div>
+              </ng-template>
+            </ion-popover>
+            <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
+              (onChange)="result($event, 'education')" [inputText]="formData.education" [key]="'education'"
+              [errorText]="'education is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
+              [needed]="step == 2"></app-sd-textarea-about>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <app-certificate-image [profilePhoto]="formData.certificate"
+              (updateCertificate)="result($event, 'certificate')"></app-certificate-image>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Select year you first started teaching</div>
+            <app-sd-year-box placeholder="Select" (onChange)="result($event, 'teaching_year')" [key]="'teaching_year'"
+              [errorText]="'Year is required'" [inputText]="formData.teaching_year"></app-sd-year-box>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium label-with-word-count">
+              <div class="label-with-word-count-left">
+                <span>Tell us about your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
+                  id="click-about">
+              </div>
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
+              </div>
+            </div>
+            <ion-popover trigger="click-about" triggerAction="click">
+              <ng-template style="width: 100%;">
+                <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
+                  experiences, skills, background details. Do not share personal contact information here.
+                </div>
+              </ng-template>
+            </ion-popover>
+            <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
+              (onChange)="result($event, 'experience')" [inputText]="formData.experience" [key]="'experience'"
+              [errorText]="'experience is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
+              [needed]="step == 2"></app-sd-textarea-about>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Hourly rate $</div>
+            <app-sd-input-box (onChange)="result($event, 'rate')" [inputText]="formData.rate" [key]="'rate'"
+              [errorText]="'rate is required'"></app-sd-input-box>
+          </div>
         </div>
       </swiper-slide>
     </swiper-container>

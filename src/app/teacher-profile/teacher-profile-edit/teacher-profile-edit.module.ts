@@ -20,6 +20,8 @@ import { SdImageBoxModule } from 'src/app/components/sd-image-box/sd-image-box.m
 import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
 import { SdDailcodeBoxModule } from 'src/app/components/sd-dailcode-box/sd-dailcode-box.module';
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
+import { CertificateImageModule } from 'src/app/components/certificate-image/certificate-image.module';
+import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.module';
 
 @NgModule({
   imports: [
@@ -40,7 +42,9 @@ import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.m
     SdImageBoxModule,
     SdStateBoxModule,
     SdDailcodeBoxModule,
-    SdBbackBtnModule
+    SdBbackBtnModule,
+    CertificateImageModule,
+    SdYearBoxModule
   ],
   declarations: [TeacherProfileEditPage],
 

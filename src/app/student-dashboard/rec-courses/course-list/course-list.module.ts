@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseListComponent } from './course-list.component';
 import { IonicModule } from '@ionic/angular';
-import { NamesPipe } from 'src/app/names.pipe';
+import { NamesPipe } from 'src/app/pipes/names.pipe';
 import { TrailMessageModule } from './trail-message/trail-message.module';
 
 
@@ -14,6 +14,6 @@ import { TrailMessageModule } from './trail-message/trail-message.module';
     IonicModule,
     TrailMessageModule
   ],
-  exports:[CourseListComponent]
+  exports: [CourseListComponent]
 })
 export class CourseListModule { }

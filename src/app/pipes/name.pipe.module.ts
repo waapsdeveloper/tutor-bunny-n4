@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NamesPipe } from 'src/app/names.pipe';
+import { NamesPipe } from 'src/app/pipes/names.pipe';
 
 
 

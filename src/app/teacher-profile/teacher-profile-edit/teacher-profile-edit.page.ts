@@ -39,7 +39,10 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     terms: false,
     image: null,
     photo_id: null,
-    education:null
+    education: null,
+    certificate: null,
+    teaching_year: null,
+    experiences: null
 
   };
   contryCode: any;
@@ -64,10 +67,10 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
-    
 
 
-    if (this.params.backUrl) {  
+
+    if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
       console.log(this.backUrl);
     }
@@ -179,9 +182,9 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
   }
   async onSlideChange2() {
-    
-   
-    
+
+
+
   }
   async submit() {
     const data = this.formData;
@@ -232,8 +235,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
-  else{
-    this.nav.pop()
-  }
+    else {
+      this.nav.pop()
+    }
   }
 }
