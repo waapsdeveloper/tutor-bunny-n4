@@ -16,10 +16,14 @@ export class SdFavButtonComponent implements OnInit {
   ngOnInit() { }
 
   async addtoFav() {
+    console.log("add");
+
     this.addToFav.emit()
   }
 
   removeToFav() {
+    console.log("remove");
+    
     this.removetoFav.emit()
 
   }

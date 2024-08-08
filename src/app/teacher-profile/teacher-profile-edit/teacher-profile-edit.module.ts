@@ -22,6 +22,8 @@ import { SdDailcodeBoxModule } from 'src/app/components/sd-dailcode-box/sd-dailc
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
 import { CertificateImageModule } from 'src/app/components/certificate-image/certificate-image.module';
 import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.module';
+import { TravelPoliceModule } from 'src/app/components/travel-police/travel-police.module';
+import { ProfileVideoModule } from "../../components/profile-video/profile-video.module";
 
 @NgModule({
   imports: [
@@ -44,8 +46,10 @@ import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.modu
     SdDailcodeBoxModule,
     SdBbackBtnModule,
     CertificateImageModule,
-    SdYearBoxModule
-  ],
+    SdYearBoxModule,
+    TravelPoliceModule,
+    ProfileVideoModule,
+],
   declarations: [TeacherProfileEditPage],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

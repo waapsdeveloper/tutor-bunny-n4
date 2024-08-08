@@ -95,6 +95,9 @@ export class NetworkService {
   getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
+  getTravelPolicy() {
+    return this.httpGetResponse('teachers/travelpolicy/list', null, false, false);
+  }
 
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);

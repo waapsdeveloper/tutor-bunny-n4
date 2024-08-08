@@ -24,6 +24,7 @@ export class MessagesPage extends BasePage implements OnInit {
   constructor(injector: Injector) {
     super(injector)
   }
+  
 
   ngOnInit() {
     this.scrollToBottomOnInit();
@@ -107,7 +108,7 @@ export class MessagesPage extends BasePage implements OnInit {
       this.message = '';
       this.messageInput.nativeElement.value = '';
     }
-    this.initialize();
+    this.ngOnInit()
   }
 
   back() {

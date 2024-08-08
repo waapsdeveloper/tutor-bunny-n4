@@ -1,3 +1,7 @@
-<p>
-  travel-police works!
-</p>
+<div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openpolicy()">
+  <ion-ripple-effect></ion-ripple-effect>
+  <input [(ngModel)]="selectedtravelpolicy.name" class="fs-16 outfit sd-input-box-input-675315" [type]="type"
+    [placeholder]="placeholder" readonly />
+  <ion-icon name="chevron-down-outline"></ion-icon>
+</div>
+<app-sd-error-input-info *ngIf="isRequired" [errorText]="errorText"></app-sd-error-input-info>

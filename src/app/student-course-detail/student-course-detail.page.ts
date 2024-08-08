@@ -102,52 +102,25 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.showFavValue = this.data.is_liked_by_me;
   }
 
-  // async addToFav() {
-
-
-  //   let user = this.users.getUser()
-  //   let obj = {
-  //     user_id: user.id,
-  //     course_id: this.data.id
-  //   }
-  //   const res = await this.network.addCourseFav(obj)
-
-  //   this.events.publish('show-list-of-fav-courses')
-  //   this.callApi();
-  // }
-
-  // async removeFromFav() {
-  //   let user = this.users.getUser()
-  //   let obj = {
-  //     user_id: user.id,
-  //     course_id: this.data.id
-  //   }
-  //   const res = await this.network.removeCourseFav(obj)
-
-
-  //   this.events.publish("show-list-of-fav-courses", {
-
-  //   })
-  //   this.callApi();
-
-  // }
-
   async addToFav() {
+    console.log("add");
 
     let user = this.users.getUser();
 
     this.data.is_liked_by_me = true;
     this.showFavValue = true;
-    this.globalCourses.addFavorite(this.data, user);
+    this.globalCourses.addFavorites(this.data, user);
 
   }
 
   async removeToFav() {
+    console.log("remove");
+
     let user = this.users.getUser()
 
     this.data.is_liked_by_me = false;
     this.showFavValue = false;
-    this.globalCourses.removeFavorite(this.data, user);
+    this.globalCourses.removeFavorites(this.data, user);
 
 
   }

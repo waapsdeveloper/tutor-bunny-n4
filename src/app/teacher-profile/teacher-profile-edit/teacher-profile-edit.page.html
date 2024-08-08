@@ -166,7 +166,7 @@
                 <span>Tell us about your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
                   id="click-about">
               </div>
-              <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.experience?.length || 0 }} Characters
               </div>
             </div>
             <ion-popover trigger="click-about" triggerAction="click">
@@ -186,6 +186,14 @@
             <app-sd-input-box (onChange)="result($event, 'rate')" [inputText]="formData.rate" [key]="'rate'"
               [errorText]="'rate is required'"></app-sd-input-box>
           </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Travel policy</div>
+            <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
+            [errorText]="'travel_policy is required'" ></app-travel-police>
+          </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <app-profile-video ></app-profile-video>
+          </div>
         </div>
       </swiper-slide>
     </swiper-container>
@@ -195,8 +203,8 @@
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
       <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray *ngIf="step == 3" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
-      <app-sd-button-gray *ngIf="step == 2" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 2" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step == 3" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 
