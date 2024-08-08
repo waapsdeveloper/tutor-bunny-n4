@@ -70,9 +70,7 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async gotoMessage(item) {
-    let res = await this.modals.present(MessagesPage, {
-      item: item
-    })
+    await this.modals.present(MessagesPage, { item }, '', 1, 'left-to-right');
     this.initialize()
   }
 }

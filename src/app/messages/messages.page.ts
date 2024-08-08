@@ -17,6 +17,7 @@ export class MessagesPage extends BasePage implements OnInit {
   flag;
   time;
   days;
+  messageIds = [];
   user;
   message = '';
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
@@ -24,26 +25,39 @@ export class MessagesPage extends BasePage implements OnInit {
   constructor(injector: Injector) {
     super(injector)
   }
-  
+
 
   ngOnInit() {
     this.scrollToBottomOnInit();
     this.initialize();
     this.user = this.users.getUser();
     this.user_id = this.user.id;
+    this.getChatRead(this.messageIds)
     this.flag = this.getFlag();
-    this.messageReceivedViaPusher()
+    this.messageReceivedViaPusher();
+
   }
 
   async initialize() {
     let roomId = this.item.chat_room_id;
-    let res = await this.network.getMessages(roomId);
+    let res = await this.network.getMessages(roomId) as any;
+    console.log(res);
+
     this.days = res.data;
+    console.log(this.days);
+    this.days.forEach(entry => {
+      entry.messages.forEach(message => {
+        this.messageIds.push(message.id);
+      });
+    });
+
+    console.log(this.messageIds);
+    // return
+
   }
 
   async getChatRead(chat) {
-    const ids = chat.filter(x => x.is_read == 0).map(y => y.id)
-    let obj = { ids: ids }
+    let obj = { ids: chat };
     await this.network.getChatRead(obj);
   }
 
@@ -108,7 +122,8 @@ export class MessagesPage extends BasePage implements OnInit {
       this.message = '';
       this.messageInput.nativeElement.value = '';
     }
-    this.ngOnInit()
+    this.scrollToBottomOnInit();
+    this.initialize();
   }
 
   back() {
