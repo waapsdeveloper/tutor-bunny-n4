@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController, AnimationController } from '@ionic/angular';
+import { ModalController, Animation, AnimationController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class ModalService {
     private animationCtrl: AnimationController
   ) {}
 
-  private enterFromLeftAnimation(baseEl: HTMLElement): any {
+  private enterFromLeftAnimation(baseEl: HTMLElement): Animation {
     const root = baseEl.shadowRoot;
     const backdropAnimation = this.animationCtrl
       .create()
@@ -38,19 +38,22 @@ export class ModalService {
     data = {},
     cssClass = '',
     initialBreakpoint = 1,
-    animationType: string = ''
+    animationType?: string
   ): Promise<any> {
     return new Promise(async (resolve) => {
-      const modal = await this.modal.create({
+      const modalOptions: any = {
         component,
         cssClass,
         componentProps: data,
         initialBreakpoint: initialBreakpoint,
         breakpoints: [0, 0.25, 0.5, 0.75, 1],
-        ...(animationType === 'left-to-right' && {
-          enterAnimation: this.enterFromLeftAnimation.bind(this),
-        }),
-      });
+      };
+
+      if (animationType === 'right-to-left') {
+        modalOptions.enterAnimation = this.enterFromLeftAnimation.bind(this);
+      }
+
+      const modal = await this.modal.create(modalOptions);
       modal.onDidDismiss().then((res) => {
         resolve(res);
       });

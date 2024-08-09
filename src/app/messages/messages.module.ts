@@ -11,6 +11,7 @@ import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.mod
 import { SdBontiBtnModule } from '../components/sd-bonti-btn/sd-bonti-btn.module';
 import { SdBsearchBtnModule } from '../components/sd-bsearch-btn/sd-bsearch-btn.module';
 import { SdBbackBtnModule } from '../components/sd-bback-btn/sd-bback-btn.module';
+import { MessageListModule } from './message-list/message-list.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SdBbackBtnModule } from '../components/sd-bback-btn/sd-bback-btn.module
     SdBbackBtnModule,
     SdBsearchBtnModule,
     SdBontiBtnModule,
+    MessageListModule
   ],
   declarations: [MessagesPage]
 })

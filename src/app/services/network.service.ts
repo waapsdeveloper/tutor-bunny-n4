@@ -46,11 +46,12 @@ export class NetworkService {
     return this.httpPostResponse('courses/update-course-image', data);
   }
 
-  getChatRead(data) {
-    return this.httpPostResponse('message/is-read', data);
+  getChatRead(data, id) {
+    return this.httpPostResponse('message/is-read/' + id, data, null, false, false);
   }
 
   saveFcmToken(data) {
+    
     return this.httpPostResponse('update-firebase-token', data);
   }
 

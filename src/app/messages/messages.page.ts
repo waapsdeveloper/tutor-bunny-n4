@@ -32,7 +32,6 @@ export class MessagesPage extends BasePage implements OnInit {
     this.initialize();
     this.user = this.users.getUser();
     this.user_id = this.user.id;
-    this.getChatRead(this.messageIds)
     this.flag = this.getFlag();
     this.messageReceivedViaPusher();
 
@@ -42,24 +41,17 @@ export class MessagesPage extends BasePage implements OnInit {
     let roomId = this.item.chat_room_id;
     let res = await this.network.getMessages(roomId) as any;
     console.log(res);
-
     this.days = res.data;
-    console.log(this.days);
-    this.days.forEach(entry => {
-      entry.messages.forEach(message => {
-        this.messageIds.push(message.id);
-      });
-    });
-
-    console.log(this.messageIds);
-    // return
+    // this.days.forEach(entry => {
+    //   entry.messages.forEach(message => {
+    //     this.messageIds.push(message.id);
+    //   });
+    // });
+    // console.log(this.messageIds);
 
   }
 
-  async getChatRead(chat) {
-    let obj = { ids: chat };
-    await this.network.getChatRead(obj);
-  }
+
 
   messageReceivedViaPusher() {
     this.events.registerPusherEvent(this.user.id);
