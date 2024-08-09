@@ -25,21 +25,16 @@ export class TrailListComponent extends BasePage implements OnInit {
   }
 
   async trailStatus(key: string) {
-    // return
-
     this.globalTrials.removeFromPendingTrials(this.item);
-
     let obj = {
       status: key,
       user_id: this.item.student.id
     };
     let trialId = this.item.id;
     let res = await this.network.changeTrailStuts(obj, trialId);
-
   }
 
   async presentAlert(item: string) {
-
     let alertHeader: string;
     switch (item) {
       case 'Accepted':
@@ -60,14 +55,11 @@ export class TrailListComponent extends BasePage implements OnInit {
       default:
         return;
     }
-
     let flag = await this.utility.presentConfirm('Yes', 'Cancel', item, alertHeader);
-    if(flag){
+    if (flag) {
       this.trailStatus(item);
     }
-
   }
-
 
   goToChat() {
     this.nav.push('/tabs/chat')
@@ -77,10 +69,8 @@ export class TrailListComponent extends BasePage implements OnInit {
     this.age = currentYear - this.item.student.student.dob;
   }
   getFlag() {
-
     if (this.item && this.item.student && this.item.student.student.country.iso2) {
       const flag = this.item.student.student.country.iso2;
-
       if (flag) {
         return flag.toLowerCase();
       } else {
@@ -93,13 +83,11 @@ export class TrailListComponent extends BasePage implements OnInit {
 
 
   goToDeatil() {
-
     const params = {
       id: this.item.course.id,
       backUrl: '/tabs/teacher-dashboard'
     }
     this.nav.push('/tabs/course-detail', params)
-
   }
 
 }

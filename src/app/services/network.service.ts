@@ -46,8 +46,8 @@ export class NetworkService {
     return this.httpPostResponse('courses/update-course-image', data);
   }
 
-  getChatRead(data, id) {
-    return this.httpPostResponse('message/is-read/' + id, data, null, false, false);
+  getChatRead(data) {
+    return this.httpPostResponse('message/is-read', data, null, false, false);
   }
 
   saveFcmToken(data) {
@@ -102,6 +102,10 @@ export class NetworkService {
 
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);
+  }
+
+  getChadRoomId(data: any) {
+    return this.httpPostResponse('chat-room-id', data, null, false, false);
   }
 
   getAllTeachers() {

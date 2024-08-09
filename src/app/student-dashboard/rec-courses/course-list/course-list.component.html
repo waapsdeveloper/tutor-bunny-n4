@@ -17,44 +17,45 @@
             align-items: center;
             justify-content: flex-start;
             gap: 8px;">
-              <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
-              <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
+
+              <div class="info-misc-68448 outfit ">
+                <img src="assets/icon/star.svg" />
+                <img src="assets/icon/star.svg" />
+                <img src="assets/icon/star.svg" />
+                <img src="assets/icon/star.svg" />
+                <img src="assets/icon/star.svg" />
+                <span class="fs-16">4.9 (385)</span>
               </div>
-            </div>
-            <div style="    display: flex;
-            align-items: center;
-            justify-content: flex-end;">
-              <ion-icon [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
-                (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
-                [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
             </div>
           </div>
           <div class="profile-above-footer-986985">
             <div class="us-status-btn">
-              <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
-                ${{item.price}}/month</div>
+              <div class="us-status-btn-label outfit-medium">
+                <!-- <img src="../../../../assets/svg/p-tag.svg" alt=""> -->
+                ${{item.price}}/month
+              </div>
             </div>
           </div>
           <div class="group-96589">
-            <div class="line-789575">
-              <img class="i-7685" src="../../../assets/svg/online.svg" />
-              <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.mode_type}}</div>
+            <div class="techer-img-98523"
+              [style.background-image]=" item.user.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'">
             </div>
-            <div class="line-789575">
-              <img class="i-7685" src="assets/icon/smgroup-icon.svg" />
-              <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.capacity}}</div>
-            </div>
+            <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+            <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+            <div>{{this.item.user.teacher.country.name}}</div>
           </div>
-
         </div>
+          <ion-icon style="  position: absolute; right: -2px;" [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+            (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+            [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+      
       </div>
       <div class="profile-below-footer-986985">
         <div class="ble-buttons-789576856">
           <img src="../../../assets/svg/share.svg" />
           <div class="outfit fs-16">Share</div>
         </div>
-        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;">
+        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;" (click)="goToChat(item)">
           <img src="../../../../assets/svg/chat-dark.svg" alt="">
           <div>Chat</div>
         </div>

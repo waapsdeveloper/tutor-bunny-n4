@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { MessagesPage } from 'src/app/messages/messages.page';
 
 @Component({
   selector: 'app-course-list',
@@ -28,13 +29,15 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
+    console.log(value);
+    
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
     this.status = value.trial ? value.trial.status : null;
   }
 
-  constructor(injector: Injector,  public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
     this.user = this.users.getUser()
   }
@@ -94,7 +97,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
     console.log(v);
-    
+
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
       }, "", 0.7);
@@ -158,6 +161,31 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   handleOkClick() {
     this.trail = false;
+  }
+  async goToChat(data) {
+    console.log(data);
+    let id = this.user.id;
+
+    let obj= {
+      user_id_1 : this.user.id,
+      user_id_2 : data.user.id
+    }
+
+
+    let res = await this.network.getChadRoomId(obj)
+    console.log(res);
+    
+
+    let params = {
+      student_id : id,
+      teacher :  JSON.stringify(data.user),
+      chat_room_id: res.chat_room.id
+    }
+
+    this.nav.push('/tabs/chat', params)
+    
+
+    
   }
 
 }

@@ -13,8 +13,11 @@ export class ChatPage extends BasePage implements OnInit {
   chat;
   time
   params;
+  teacher
   student;
   user
+  chat_room_id;
+  chat_
   constructor(injector: Injector) {
     super(injector);
 
@@ -26,15 +29,13 @@ export class ChatPage extends BasePage implements OnInit {
   }
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-
-    if (this.params.backUrl) {
-      this.student = this.params.user;
-      let res = await this.modals.present(MessagesPage, {
-        item: this.student
-      })
-      this.initialize()
+    console.log(this.params);
+    if (this.params.teacher) {
+      this.teacher = JSON.parse(this.params.teacher);
     }
-
+    if (this.params.chat_room_id) {
+      this.chat_room_id = this.params.chat_room_id;
+    }
 
   }
 
@@ -70,6 +71,8 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async gotoMessage(item) {
+    console.log(item);
+
     await this.modals.present(MessagesPage, { item }, '', 1, 'right-to-left');
     this.initialize()
   }

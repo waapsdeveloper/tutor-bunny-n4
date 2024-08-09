@@ -27,7 +27,7 @@
     .notification-top-box-78525{
       display: flex;
       width: 100%;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
       .notification-heading-box-78526{
@@ -35,7 +35,7 @@
         font-weight: 500;
       }
       .notification-time-box-78527{
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         min-width: fit-content;
       }

@@ -1,14 +1,4 @@
 <div class="vedio-content-89658">
-  <!-- <swiper-container #slides style="width: calc(100vw - 32px); display: flex;" slides-per-view="2">
-    <swiper-slide style="width: 100%; gap: 10px;" *ngFor="let item of globalCourses.otherCourses">
-      <div class="vedio-box-inner" (click)="oepnDeatils(item)">
-        <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
-        </div>
-        <div class="video-para">{{item.title}}</div>
-        <div class="price-tag">${{item.price}}/month</div>
-      </div>
-    </swiper-slide>
-  </swiper-container> -->
   <div class="card-container">
     <div class="vedio-box-inner card" *ngFor="let item of globalCourses.otherCourses" (click)="oepnDeatils(item)">
       <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>

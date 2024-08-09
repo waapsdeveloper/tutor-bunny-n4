@@ -23,33 +23,28 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   serial_number;
   constructor(injector: Injector, public globalTrials: GlobalTrialsService) {
     super(injector)
-    // this.initialize();
   }
   ngOnInit() {
     this.user = this.users.getUser();
   };
-  // trialsReceivedViaPusher() {
-
-  //   this.events.subscribe('trials-received-via-pusher', this.updateTrailsList.bind(this));
-  // }
 
   async updateTrailsList(data: any) {
     let trail_Id = data.id;
-
-    // return
     this.initialize();
-
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
-
+    console.log(this.newTrial);
     if (this.newTrial) {
       const index = this.trial.findIndex(c => c.id === this.newTrial.id);
       if (index !== -1) {
         this.list[index] = this.newTrial;
+        console.log(this.list);
+
       } else {
         this.list = [this.newTrial, ...this.trial];
+        console.log(this.list);
+        
       }
     }
-
   }
   async initialize() {
     this.globalTrials.getPendingTrials();

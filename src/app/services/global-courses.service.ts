@@ -296,7 +296,7 @@ export class GlobalCoursesService {
   async addFavorites(obj: any, user) {
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
-      this.favorites.push(obj);
+      this.favorites.unshift(obj);
       console.log(`Added favorite:`, obj);
     } else {
       console.log(`Favorite already exists:`, obj);

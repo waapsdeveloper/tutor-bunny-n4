@@ -8,7 +8,7 @@
       <div style="display: flex; align-items: flex-start; flex-direction: column;
       gap: 8px;">
         <div class="header-title ">
-          <div>{{item.user.name}}</div> <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+          <div>{{displayName}}</div> <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
         <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
       </div>
@@ -36,7 +36,7 @@
     <div class="input-box-78522">
       <input #messageInput type="text" placeholder="Write your text here" style="background: white;"
         (keyup)="onKeyUp($event)">
-      <img src="../../assets/svg/addImgae.svg" alt="">
+      <!-- <img src="../../assets/svg/addImgae.svg" alt=""> -->
     </div>
     <div class="send-box-78522">
       <img src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">

@@ -1,10 +1,12 @@
-<div class="trial-box-outer-689567" *ngIf="globalTrials?.pendingTrials.length > 0">
-  <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">Pending requests ({{globalTrials.pendingTrials.length}}) </div>
-    <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all trials</div>
+<div>
+  <div class="trial-box-outer-689567">
+    <div class="sb-heading-7895">
+      <div class="sb-heading-title-7895 outfit-semibold">Pending requests ({{globalTrials.pendingTrials.length}}) </div>
+      <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all trials</div>
+    </div>
+    <div class="sb-content-7895"></div>
   </div>
-  <div class="sb-content-7895"></div>
+  <ng-container *ngFor="let item of globalTrials.pendingTrials">
+    <app-trail-list *ngIf="item.status === 'Pending'" [item]="item"></app-trail-list>
+  </ng-container>
 </div>
-<ng-container *ngFor="let item of globalTrials.pendingTrials">
-  <app-trail-list *ngIf="item.status === 'Pending'" [item]="item"></app-trail-list>
-</ng-container>

@@ -28,6 +28,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   title;
   serial_number;
   created_at;
+  state;
   image;
   price;
   from_age;
@@ -93,6 +94,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     // }
     this.techerImg = this.data.user.image
     this.country = this.data.user.teacher.country.name
+    this.state = this.data.user.teacher.state.name
     this.updated_at = this.data.updated_at;
     const startTime = this.acheduleTime.start_date;
     const endTime = this.acheduleTime.end_date;

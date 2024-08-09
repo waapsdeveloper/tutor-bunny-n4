@@ -17,9 +17,7 @@ export class MessageListComponent extends BasePage implements OnInit {
 
   public set chat(value: any) {
     this._chat = value;
-    // console.log(value);
     this.getChatRead(value)
-
   }
 
   user;
@@ -30,8 +28,6 @@ export class MessageListComponent extends BasePage implements OnInit {
     this.user = this.users.getUser();
     this.user_id = this.user.id;
     console.log(this.chat);
-    
-
   }
 
   ngOnInit() { }
@@ -41,24 +37,19 @@ export class MessageListComponent extends BasePage implements OnInit {
   }
 
   async getChatRead(item) {
-    
-    if(item.user_id != this.user_id){
-      if(item.is_read == 0){
+
+    if (item.user_id != this.user_id) {
+      if (item.is_read == 0) {
         let obj = { ids: [item.id] };
         console.log(obj);
-        // return
-        
-        await this.network.getChatRead(obj, this.user_id);
+        await this.network.getChatRead(obj);
       }
-      else{
+      else {
         console.log("SDdsfdsfsd");
       }
     }
-    else{
+    else {
       console.log("12345678");
     }
-
   }
-
-
 }

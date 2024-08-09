@@ -20,6 +20,7 @@ export class MessagesPage extends BasePage implements OnInit {
   messageIds = [];
   user;
   message = '';
+  displayName;
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
 
   constructor(injector: Injector) {
@@ -42,12 +43,7 @@ export class MessagesPage extends BasePage implements OnInit {
     let res = await this.network.getMessages(roomId) as any;
     console.log(res);
     this.days = res.data;
-    // this.days.forEach(entry => {
-    //   entry.messages.forEach(message => {
-    //     this.messageIds.push(message.id);
-    //   });
-    // });
-    // console.log(this.messageIds);
+    this.displayName = this.utility.getAmericanName(this.item.user.name);
 
   }
 

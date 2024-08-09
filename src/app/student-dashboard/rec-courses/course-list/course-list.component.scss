@@ -60,12 +60,13 @@
       gap: 16px;
       justify-content: flex-start;
       width: 100%;
+      position: relative;
 
 
       .profile-item-image-block {
         /* min-width: 121px; */
-        width: 100px;
-        height: 87px;
+        width: 90px;
+        height: 90px;
         /* padding-bottom: 100%; */
         background-size: cover;
         // background: aqua;
@@ -277,7 +278,7 @@
   .free-trial-btn-89675 {
     // height: 26px;
     font-size: 16px;
-    background: #454545;
+    // background: #454545;
     height: 31px;
     width: 122px;
     // padding: 0 12px;
@@ -285,7 +286,7 @@
     gap: 8px;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: #454545;
     border-radius: 16px;
 
   }
@@ -329,4 +330,13 @@
   height: 30px; 
   font-size: 30px;
   color: rgb(0, 0, 0);
+}
+
+.techer-img-98523{
+  height: 24px;
+  width: 24px;
+  border-radius: 50px;
+  // background-color: #000000;
+  background-size: cover;
+  background-position: center center;
 }
