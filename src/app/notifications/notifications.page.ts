@@ -36,7 +36,6 @@ export class NotificationsPage extends BasePage implements OnInit {
     let userId = this.user.id;
     let res = await this.network.getNotifications(userId);
     this.notifications = res.result;
-
   }
 
 }

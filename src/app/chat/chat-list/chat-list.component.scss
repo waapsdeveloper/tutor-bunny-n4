@@ -1,0 +1,106 @@
+.chat-list-98521 {
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  .chat-box-98522 {
+
+    display: flex;
+    align-items: center;
+    border-bottom: 0.5px solid rgb(69, 69, 69, 0.25);
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+
+    .chat-image-box-98523 {
+
+      width: 20%;
+
+      .chat-image-98523 {
+
+        height: 62px;
+        width: 80%;
+        width: 62px;
+        border-radius: 50%;
+        background-color: #677169;
+        background-size: cover;
+        background-position: center center;
+
+      }
+    }
+
+    .chat-deatil-98524 {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80%;
+      gap: 5px;
+      flex-direction: column;
+
+      .chat-name-time-98525 {
+
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+
+        .chat-name-98526 {
+          font-size: 18px;
+          font-weight: 400;
+        }
+
+        .chat-time-98527 {
+          font-size: 16px;
+          font-weight: 400;
+          color: #ADAFBB;
+        }
+
+      }
+
+      .chat-satus-98528 {
+
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+
+        .chat-online-98529 {
+
+          display: flex;
+          align-items: center;
+          font-size: 16px;
+          font-weight: 400;
+          justify-content: flex-start;
+          gap: 2px;
+
+        }
+
+        .chat-message-98530 {
+
+          font-size: 12px;
+          font-weight: 700;
+          background-color: #E94057;
+          border-radius: 50%;
+          color: white;
+          height: 20px;
+          width: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+        }
+
+        .chat-message-98531 {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+
+      }
+    }
+  }
+}

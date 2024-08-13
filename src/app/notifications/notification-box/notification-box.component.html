@@ -1,12 +1,20 @@
-<div class="notification-box-outer-78521">
+<div [class]="is_read == 0 ? 'notification-box-outer-78522' : 'notification-box-outer-78521'">
   <div class="notification-image-box-78522">
-    <div class="notification-image-78523"></div>
+    <div class="notification-dot-785233" *ngIf="is_read == 0"></div>
+    <div class="notification-image-78524" *ngIf="loading==true">
+      <ion-skeleton-text animated style="width: 100%; height: 100%; border-radius: 50%;"></ion-skeleton-text>
+    </div>
+    <div class="notification-image-78523" *ngIf="loading!=true">
+    </div>
   </div>
   <div class="notification-content-box-78524">
     <div class="notification-top-box-78525">
-      <div class="notification-heading-box-78526">{{item.title}}</div>
-      <div class="notification-time-box-78527">{{time}}</div>
+      <div class="notification-heading-box-78526" *ngIf="loading!=true">{{item.title}}</div>
+      <ion-skeleton-text *ngIf="loading==true" animated style="width: 30%; height: 14px;"></ion-skeleton-text>
+      <div class="notification-time-box-78527" *ngIf="loading!=true">{{time}}</div>
+      <ion-skeleton-text *ngIf="loading==true" animated style="width: 30%; height: 14px;"></ion-skeleton-text>
     </div>
-    <div class="notification-para-box-78528">{{item.message}}</div>
+    <div class="notification-para-box-78528" *ngIf="loading!=true">{{item.message}}</div>
+    <ion-skeleton-text *ngIf="loading==true" animated style="width: 100%; height: 16px;"></ion-skeleton-text>
   </div>
 </div>

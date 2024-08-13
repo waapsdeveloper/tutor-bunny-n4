@@ -1,6 +1,6 @@
 import { Component, ElementRef, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
-import { IonContent } from '@ionic/angular';
+import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
 
 @Component({
@@ -8,10 +8,11 @@ import * as moment from 'moment';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.scss'],
 })
-export class MessagesPage extends BasePage implements OnInit {
+export class MessagesPage extends BasePage implements OnInit,ViewWillEnter {
   @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
-  @Input('item') item: any;
+  // @Input('item') item: any;
+  item;
   chat: any[] = [];
   user_id;
   flag;
@@ -20,22 +21,33 @@ export class MessagesPage extends BasePage implements OnInit {
   messageIds = [];
   user;
   message = '';
+  image;
   displayName;
+  params;
   @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
 
   constructor(injector: Injector) {
     super(injector)
   }
 
+  async ionViewWillEnter() {
+    this.params = this.nav.getQueryParams();
+    if (this.params.item) {
+      this.item = JSON.parse(this.params.item);
+      console.log(this.item); 
+      this.scrollToBottomOnInit();
+      this.initialize();
+      this.user = this.users.getUser();
+      this.user_id = this.user.id;
+      this.flag = this.getFlag();
+      this.messageReceivedViaPusher();
+  
+    }
+  }
+
 
   ngOnInit() {
-    this.scrollToBottomOnInit();
-    this.initialize();
-    this.user = this.users.getUser();
-    this.user_id = this.user.id;
-    this.flag = this.getFlag();
-    this.messageReceivedViaPusher();
-
+  
   }
 
   async initialize() {
@@ -44,6 +56,7 @@ export class MessagesPage extends BasePage implements OnInit {
     console.log(res);
     this.days = res.data;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
+    this.image = this.item.user.image;
 
   }
 
@@ -115,7 +128,7 @@ export class MessagesPage extends BasePage implements OnInit {
   }
 
   back() {
-    this.modals.dismiss();
+    this.nav.pop();
   }
 
   scrollToBottomOnInit() {

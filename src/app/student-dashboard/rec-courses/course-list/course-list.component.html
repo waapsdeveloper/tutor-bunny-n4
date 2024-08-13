@@ -45,10 +45,11 @@
             <div>{{this.item.user.teacher.country.name}}</div>
           </div>
         </div>
-          <ion-icon style="  position: absolute; right: -2px;" [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
-            (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
-            [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
-      
+        <ion-icon style="  position: absolute; right: -2px;"
+          [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+          (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+          [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+
       </div>
       <div class="profile-below-footer-986985">
         <div class="ble-buttons-789576856">
@@ -59,32 +60,36 @@
           <img src="../../../../assets/svg/chat-dark.svg" alt="">
           <div>Chat</div>
         </div>
-        <div class="right-980676">
-          <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
-          <div class="free-trial-btn-89675 outfit-medium"
-            *ngIf="trail == false && loading == false && status != 'Rejected'" (click)="requestTrail(item.id)">
-            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
-          </div>
-          <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
-            (click)="requestTrail(item.id)">
-            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
-            (click)="presentAlert()">
-            <img src="../../../../assets/svg/trail.svg" alt=""><button
-              style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail == true && loading == false && status == 'Accepted'">
-            <button style="background-color: transparent; color:#000000 ; font-size:16px;">Trial Accepted</button>
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail == true && loading == false && status == 'Complete'">
-            <img src="../../../../assets/svg/complete.svg" alt="">Trial Completed
-          </div>
-          <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+        <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
+        <div class="free-trial-btn-89675 outfit-medium"
+          *ngIf="trail == false && loading == false && status != 'Rejected' && type != 3"
+          (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
         </div>
+        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false && type != 3"
+          (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium"
+          *ngIf="type == 3 && loading == false && trail == false && loading == false && status != 'Rejected' "
+          (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Join
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
+          (click)="presentAlert()">
+          <img src="../../../../assets/svg/trail.svg" alt=""><button
+            style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Accepted'">
+          <button style="background-color: transparent; color:#000000 ; font-size:16px;">Trial Accepted</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Complete'">
+          <img src="../../../../assets/svg/complete.svg" alt="">Trial Completed
+        </div>
+        <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
       </div>
     </div>
   </div>

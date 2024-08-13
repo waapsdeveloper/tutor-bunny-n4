@@ -17,6 +17,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   user;
   courseId;
   status;
+  type;
   blocked;
   loading = false;
   trail = false;
@@ -45,7 +46,9 @@ export class CourseListComponent extends BasePage implements OnInit {
   initialize(data) {
     if (data && data.trial) {
       this.blocked = data.trial.status
-
+    }
+    if(data && data.type == 3){
+      this.type = data.type;
     }
   }
 
@@ -178,7 +181,8 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     let params = {
       student_id : id,
-      teacher :  JSON.stringify(data.user),
+      other_user_id: data.user.id,
+      user :  JSON.stringify(data.user),
       chat_room_id: res.chat_room.id
     }
 

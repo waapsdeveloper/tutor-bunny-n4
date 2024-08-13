@@ -1,0 +1,26 @@
+<div class="chat-list-98521">
+  <div class="chat-box-98522">
+    <div class="chat-image-box-98523">
+      <div class="chat-image-98523">
+      </div>
+    </div>
+    <div class="chat-deatil-98524">
+      <div class="chat-name-time-98525">
+        <div class="chat-name-98526"> {{item.user.name| names}}</div>
+        <div class="chat-time-98527">{{date}}</div>
+      </div>
+      <div class="chat-satus-98528">
+        <div class="chat-online-98529">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><img
+              src="../../assets/svg/cake.svg" alt="">Age {{item.user.student.dob}}</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span *ngIf="flag"
+              slot="start" class="fi fi-{{flag}}"></span>India</div>
+        </div>
+        <div class="chat-message-98531">
+          <img src="../../assets/svg/accept-green.svg" alt="" (click)="updaeStatus('accept')">
+          <img src="../../assets/svg/reject-red.svg" alt="" (click)="updaeStatus('reject')">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

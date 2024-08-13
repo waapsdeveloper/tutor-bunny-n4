@@ -1,49 +1,81 @@
 .notification-box-outer-78521{
   width: 100%;
   border-bottom: 0.5px solid rgb(69, 69, 69, 0.25);
-  padding: 8px;
+  padding: 8px 16px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 8px;
-  .notification-image-box-78522{
-    width: 20%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    .notification-image-78523{
-      height: 45px;
-      width: 45px;
-      border-radius: 50%;
-      background-color: bisque;
-    }
+
+
+}
+
+.notification-box-outer-78522{
+  width: 100%;
+  border-bottom: 0.5px solid rgb(69, 69, 69, 0.25);
+  padding: 8px 16px;
+  display: flex;
+  background-color: #ebebeb;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.notification-dot-785233{
+  height: 10px;
+  width: 10px;
+  background-color: #919090;
+  border-radius: 10px;
+  position: absolute;
+  left: -7px;
+}
+
+
+.notification-image-box-78522{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 8px;
+
+
+  .notification-image-78523{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: bisque;
   }
-  .notification-content-box-78524{
+}
+.notification-content-box-78524{
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  flex-direction: column;
+  .notification-top-box-78525{
     display: flex;
-    align-items: flex-start;
-    gap: 8px;
     width: 100%;
-    flex-direction: column;
-    .notification-top-box-78525{
-      display: flex;
-      width: 100%;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      .notification-heading-box-78526{
-        font-size: 16px;
-        font-weight: 500;
-      }
-      .notification-time-box-78527{
-        font-size: 14px;
-        font-weight: 500;
-        min-width: fit-content;
-        color:#919090 ;
-      }
-    }
-    .notification-para-box-78528{
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    .notification-heading-box-78526{
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 500;
+    }
+    .notification-time-box-78527{
+      font-size: 14px;
+      font-weight: 500;
+      min-width: fit-content;
+      color:#919090 ;
     }
   }
+  .notification-para-box-78528{
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+.notification-image-78524{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
 }

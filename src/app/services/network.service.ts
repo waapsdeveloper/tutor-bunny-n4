@@ -46,12 +46,20 @@ export class NetworkService {
     return this.httpPostResponse('courses/update-course-image', data);
   }
 
+  updateMessageReaquest(data, id) {
+    return this.httpPostResponse('chat-rooms/update-status/' + id, data);
+  }
+
   getChatRead(data) {
     return this.httpPostResponse('message/is-read', data, null, false, false);
   }
 
+  getNotificationRead(data) {
+    return this.httpPostResponse('notifications/is-read', data, null, false, false);
+  }
+
   saveFcmToken(data) {
-    
+
     return this.httpPostResponse('update-firebase-token', data);
   }
 
@@ -130,6 +138,10 @@ export class NetworkService {
 
   getMessagesRoom(id) {
     return this.httpGetResponse('chat-rooms/' + id, null, false, false);
+  }
+
+  getRequestMessagesRoom(id) {
+    return this.httpGetResponse('chat-rooms/pending/' + id, null, false, false);
   }
 
   getdashboardcounts() {

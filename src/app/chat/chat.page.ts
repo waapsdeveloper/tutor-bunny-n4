@@ -11,42 +11,72 @@ import * as moment from 'moment';
 export class ChatPage extends BasePage implements OnInit {
 
   chat;
-  time
+  request;
+  time;
   params;
   teacher
   student;
-  user
+  user_1;
+  user;
+  role_id;
   chat_room_id;
-  chat_
+  chat_;
+  other_user_id;
+  showChat = 'inbox';
   constructor(injector: Injector) {
     super(injector);
-
     this.initialize();
   }
 
   ngOnInit() {
 
+    this.events.subscribe('update-chat-list', (data) => {
+      this.initialize();
+    })
+
   }
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
-    if (this.params.teacher) {
-      this.teacher = JSON.parse(this.params.teacher);
+    if (this.params.user) {
+      this.user = JSON.parse(this.params.user);
+      console.log(this.user);
+
+    }
+    if (this.params.other_user_id) {
+      this.other_user_id = JSON.parse(this.params.other_user_id);
+      console.log(this.other_user_id);
+
     }
     if (this.params.chat_room_id) {
       this.chat_room_id = this.params.chat_room_id;
+      let item = {
+        chat_room_id: this.chat_room_id,
+        other_user_id: this.other_user_id,
+        user: this.user
+      }
+      let params = {
+        item: JSON.stringify(item)
+      }
+      let res = await this.nav.push('messages', params)
+      this.initialize()
     }
 
   }
 
   async initialize() {
 
-    this.user = this.users.getUser();
-    let res = await this.network.getMessagesRoom(this.user.id)
+    this.user_1 = this.users.getUser();
+
+    this.role_id = this.user_1.role_id;
+    console.log(this.role_id);
+
+    // this.flag = this.getFlag();
+
+    let res = await this.network.getMessagesRoom(this.user_1.id)
     this.chat = res.data;
-
-
   }
+
   getTime(time) {
     moment.updateLocale('en', {
       relativeTime: {
@@ -72,8 +102,25 @@ export class ChatPage extends BasePage implements OnInit {
 
   async gotoMessage(item) {
     console.log(item);
-
-    await this.modals.present(MessagesPage, { item }, '', 1, 'right-to-left');
+    let params = {
+      item: JSON.stringify(item)
+    }
+    let res = await this.nav.push('messages', params)
     this.initialize()
   }
+
+  async showinbox(value) {
+
+    console.log(value);
+
+    this.showChat = value;
+
+    if (this.showChat == 'requests') {
+      let res = await this.network.getRequestMessagesRoom(this.user_1.id);
+      console.log(res);
+
+      this.request = res.data;
+    }
+  }
+
 }
