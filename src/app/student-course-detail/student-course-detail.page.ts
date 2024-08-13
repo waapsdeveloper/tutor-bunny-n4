@@ -36,6 +36,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   country;
   startTime;
   flag;
+  type;
   endTime;
   updated_at;
   schedules;
@@ -89,13 +90,11 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
-    // if (this.data.trial) {
-    //   this.trial = this.data.trial.status;
-    // }
     this.techerImg = this.data.user.image
     this.country = this.data.user.teacher.country.name
     this.state = this.data.user.teacher.state.name
     this.updated_at = this.data.updated_at;
+    this.type = this.data.type;
     const startTime = this.acheduleTime.start_date;
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');

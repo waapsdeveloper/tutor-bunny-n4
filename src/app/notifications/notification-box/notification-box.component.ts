@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -9,7 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class NotificationBoxComponent extends BasePage implements OnInit {
   private _item: any;
-  loading= true;
+  loading = true;
   is_read;
   @Input('item')
   public get item() {
@@ -19,19 +19,23 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     // console.log(value);
-    this.getNotificationRead(value)
     this.is_read = value.is_read;
   }
   time;
   user;
   user_id;
-  constructor(injector:Injector) {
+  @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(injector: Injector) {
     super(injector)
     setTimeout(() => {
       this.loading = false;
-    },4000);
-    
-   }
+    }, 3000);
+
+  }
+  readNotification(item) {
+    this.getNotificationRead(item)
+  }
 
   ngOnInit() {
     moment.updateLocale('en', {
@@ -58,14 +62,13 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
 
 
   async getNotificationRead(item) {
-
     if (item.user_id != this.user_id) {
       if (item.is_read == 0) {
         let obj = { ids: [item.id] };
         console.log(obj);
         let res = await this.network.getNotificationRead(obj);
         console.log(res);
-        
+    this.reloadList.emit(res.data);
 
       }
       else {

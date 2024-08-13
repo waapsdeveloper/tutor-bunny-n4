@@ -143,11 +143,19 @@
         <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
-    <div class="button-trial-23654" *ngIf="!data?.trial">
+    <div class="button-trial-23654" *ngIf="!data?.trial && type != 3">
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
         <span class="roboto-medium fs-20 " style="font-size: 20px;"> Request Free Trial </span>
+      </div>
+      <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+    </div>
+    <div class="button-trial-23654" *ngIf="!data?.trial && type == 3">
+      <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/svg/send.svg" />
+        <span class="roboto-medium fs-20 " style="font-size: 20px;">Join </span>
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>

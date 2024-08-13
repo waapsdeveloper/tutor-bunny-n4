@@ -16,6 +16,7 @@ export class ChatPage extends BasePage implements OnInit {
   params;
   teacher
   student;
+  count;
   user_1;
   user;
   role_id;
@@ -65,16 +66,15 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-
     this.user_1 = this.users.getUser();
-
     this.role_id = this.user_1.role_id;
     console.log(this.role_id);
-
-    // this.flag = this.getFlag();
-
     let res = await this.network.getMessagesRoom(this.user_1.id)
     this.chat = res.data;
+    let data = await this.network .getRequsetCount(this.user_1.id);
+    console.log(data);
+    this.count = data.message.pending_count;
+    
   }
 
   getTime(time) {
@@ -110,17 +110,25 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async showinbox(value) {
-
     console.log(value);
-
     this.showChat = value;
-
     if (this.showChat == 'requests') {
-      let res = await this.network.getRequestMessagesRoom(this.user_1.id);
-      console.log(res);
+      this.getRequstList();
+    }else{
+    this.initialize()
 
-      this.request = res.data;
     }
   }
 
+  async getRequstList() {
+    let res = await this.network.getRequestMessagesRoom(this.user_1.id);
+    console.log(res);
+    this.request = res.data;
+  }
+
+  reloadList() {
+    this.getRequstList();
+    this.initialize()
+    
+  }
 }

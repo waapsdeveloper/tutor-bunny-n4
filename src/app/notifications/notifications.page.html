@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Notifications'"
-    [backUrl]="backUrl"></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'Notifications'" [backUrl]="backUrl"></app-sd-header-top>
 </ion-header>
-<ion-content >
-  <app-notification-box *ngFor="let item of notifications" [item]="item"></app-notification-box>
+<ion-content>
+  <app-notification-box *ngFor="let item of notifications" [item]="item"
+    (reloadList)="reloadList()"></app-notification-box>
 </ion-content>

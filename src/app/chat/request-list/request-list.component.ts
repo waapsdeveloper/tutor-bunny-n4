@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -10,6 +10,8 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class RequestListComponent extends BasePage implements OnInit {
   flag;
   date
+  @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>()
+
   private _item: any;
 
   @Input('item')
@@ -24,15 +26,15 @@ export class RequestListComponent extends BasePage implements OnInit {
 
     this.date = moment(date).format('L');
   }
-  constructor(injector:Injector) { 
-   super(injector)
+  constructor(injector: Injector) {
+    super(injector)
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getFlag() {
     console.log(this.item);
-    
+
     if (this.item && this.item.user.student && this.item.user.student.country) {
       const flag = this.item.user.student.country.iso2;
       return flag ? flag.toLowerCase() : "";
@@ -44,15 +46,15 @@ export class RequestListComponent extends BasePage implements OnInit {
     }
   }
 
-  async updaeStatus(value){
+  async updaeStatus(value) {
     console.log(value);
-    let obj ={
+    let obj = {
       request_status: value
     }
 
     let res = await this.network.updateMessageReaquest(obj, this.item.chat_room_id);
     console.log(res);
-    
-    
+    this.reloadList.emit(res.data);
+
   }
 }

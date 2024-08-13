@@ -27,7 +27,10 @@ export class NotificationsPage extends BasePage implements OnInit {
       this.showBack = this.params.showBack;
     }
   }
+  reloadList() {
+    this.initialize();
 
+  }
   ngOnInit() {
     this.user = this.users.getUser()
     this.initialize();

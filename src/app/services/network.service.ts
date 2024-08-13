@@ -140,6 +140,10 @@ export class NetworkService {
     return this.httpGetResponse('chat-rooms/' + id, null, false, false);
   }
 
+  getRequsetCount(id) {
+    return this.httpGetResponse('chat-rooms/pending/count/' + id, null, false, false);
+  }
+
   getRequestMessagesRoom(id) {
     return this.httpGetResponse('chat-rooms/pending/' + id, null, false, false);
   }
