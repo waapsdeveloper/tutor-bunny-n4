@@ -30,7 +30,7 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
     super(injector)
     setTimeout(() => {
       this.loading = false;
-    }, 3000);
+    }, 1000);
 
   }
   readNotification(item) {

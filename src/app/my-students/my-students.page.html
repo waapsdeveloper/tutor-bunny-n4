@@ -15,6 +15,11 @@
           <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
+                <ion-item class="profile-line-789578" (click)="filterByStatus('')">
+                  <div class="nbl-687 outfit-medium " style="margin-left: 16px;">All</div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
                 <ion-item class="profile-line-789578" (click)="filterByStatus('Pending')">
                   <img class="img1-789575" src="../../../assets/svg/panding.svg" />
                   <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Pending</div>
@@ -44,6 +49,7 @@
                   <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Blocked</div>
                 </ion-item>
               </ion-list>
+              
             </ng-template>
           </ion-popover>
         </div>

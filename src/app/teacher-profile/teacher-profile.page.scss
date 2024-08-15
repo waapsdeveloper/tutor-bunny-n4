@@ -318,7 +318,8 @@
 .video-box-98563 {
   height: 215px;
   width: 100%;
-  border-radius: 8px;
+  margin-top: 16px;
+  // border-radius: 8px;
   background-image: url('../../assets/vedio.jpeg');
   background-size: cover;
   background-position: center center;
@@ -331,4 +332,8 @@
     bottom: 7px;
     opacity: 60%;
   }
+}
+
+.body-content-68448{
+  padding: 16px;
 }
