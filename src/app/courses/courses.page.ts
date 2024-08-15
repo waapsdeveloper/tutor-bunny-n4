@@ -20,7 +20,6 @@ export class CoursesPage extends BasePage implements OnInit {
 
   constructor(injector: Injector) {
     super(injector)
-    // this.initialize()
   }
 
   ngOnInit() {
@@ -64,11 +63,9 @@ export class CoursesPage extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...result["data"]]
       }
-
+      this.pageTitle = `My Courses (${this.list.length})`;
       resolve(true)
     })
-
-
   }
 
   onCourseDeleted(courseId: number) {

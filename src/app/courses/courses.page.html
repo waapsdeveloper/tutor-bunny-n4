@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="!!categoryId" [parentHandleBack]="!!categoryId" (parentBack)="parentback()" 
-    [title]="'My Courses'"></app-sd-header-top>
+    [title]="pageTitle"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
@@ -10,16 +10,6 @@
         <input type="text" placeholder="Search Course" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />
       </div>
     </div>
-    <!-- <div class="dashboard-top-fixed-98563">
-      <div class="header-chips">
-        <div class="header-chip">
-          <ion-chip>All</ion-chip>
-          <ion-chip>Subscription</ion-chip>
-          <ion-chip>Crash Course</ion-chip>
-          <ion-chip>Event</ion-chip>
-        </div>
-      </div>
-    </div> -->
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
