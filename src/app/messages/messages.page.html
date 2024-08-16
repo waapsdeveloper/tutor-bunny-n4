@@ -23,7 +23,7 @@
 </ion-header>
 <ion-content #content class="ion-content-bg ion-padding">
   <div class="body-content" *ngFor="let item of days">
-    <div class="chat-day-heading-85621">
+    <div class="chat-day-heading-85621" *ngIf="item.date">
       <div style="padding: 8px;
       background: antiquewhite;
       border-radius: 8px;">{{item.date}}</div>

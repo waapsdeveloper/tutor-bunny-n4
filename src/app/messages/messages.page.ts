@@ -8,7 +8,7 @@ import * as moment from 'moment';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.scss'],
 })
-export class MessagesPage extends BasePage implements OnInit,ViewWillEnter {
+export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
   // @Input('item') item: any;
@@ -34,20 +34,20 @@ export class MessagesPage extends BasePage implements OnInit,ViewWillEnter {
     this.params = this.nav.getQueryParams();
     if (this.params.item) {
       this.item = JSON.parse(this.params.item);
-      console.log(this.item); 
+      console.log(this.item);
       this.scrollToBottomOnInit();
       this.initialize();
       this.user = this.users.getUser();
       this.user_id = this.user.id;
       this.flag = this.getFlag();
       this.messageReceivedViaPusher();
-  
+
     }
   }
 
 
   ngOnInit() {
-  
+
   }
 
   async initialize() {
@@ -113,18 +113,34 @@ export class MessagesPage extends BasePage implements OnInit,ViewWillEnter {
     if (!this.message) {
       return;
     }
+
+    let newMesg = {
+      date: '',
+      messages: [
+        {
+          chat_room_id: this.item.chat_room_id,
+          created_at: new Date(),
+          id: -1,
+          is_read: 0,
+          message: this.message,
+          updated_at: new Date(),
+          user_id: this.user.id,
+        }
+      ]
+    }
+    console.log(newMesg);
+    this.days.push(newMesg);
+    this.scrollToBottomOnInit();
+
     let obj = {
       chat_room_id: this.item.chat_room_id,
       user_id: this.user.id,
       message: this.message
     }
+    this.message = '';
+    this.messageInput.nativeElement.value = '';
     let res = await this.network.sendMessage(obj);
-    if (res) {
-      this.message = '';
-      this.messageInput.nativeElement.value = '';
-    }
-    this.scrollToBottomOnInit();
-    this.initialize();
+
   }
 
   back() {
@@ -134,6 +150,6 @@ export class MessagesPage extends BasePage implements OnInit,ViewWillEnter {
   scrollToBottomOnInit() {
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
-    }, 1000);
+    }, 500);
   }
 }
