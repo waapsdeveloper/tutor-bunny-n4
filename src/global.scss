@@ -51,6 +51,12 @@
   width: 300px;
   height: 150px;
 }
+.my-loader-class {
+  .loading-wrapper {
+    background: rgba(0, 0, 0, 0.3); // Semi-transparent black background, adjust opacity as needed
+  }
+}
+
 
 .rounded-rectangle {
   width: 185px;

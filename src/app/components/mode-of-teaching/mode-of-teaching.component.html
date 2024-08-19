@@ -5,7 +5,7 @@
       <div class="modes-selection-78525"  >
         <div [class.online-mode-78526]="teachingMode.mode == 'online'"
           [class.person-mode-78526]="teachingMode.mode != 'online'" (click)="toggleMode('online')">
-          Online
+          Online (Live)
         </div>
         <div [class.online-mode-78526]="teachingMode.mode == 'inPerson'"
           [class.person-mode-78526]="teachingMode.mode != 'inPerson'" (click)="toggleMode('inPerson')">
@@ -13,7 +13,6 @@
         </div>
       </div>
     </div>
-
     <div class="capacity-78523">
       <div class="modes-heading-78524">Capacity</div>
       <div class="modes-selection-78525">
@@ -28,5 +27,4 @@
     </div>
   </div>
 </div>
-
 <app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>

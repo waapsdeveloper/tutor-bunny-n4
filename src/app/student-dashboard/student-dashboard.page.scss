@@ -79,7 +79,7 @@
   width: 100%;
   padding: 10px 0;
   overflow-x: scroll;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 
   .header-chip {
     display: flex;
@@ -134,6 +134,23 @@
   background-size: cover;
   background-position: center ;
 }
+.image-box-89657 {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: repeat;
+  display: flex;
+  background-image: url(../../assets/svg/profile.svg);
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat;
+  border: 1px solid rgb(0, 0, 0, 0.25);
+  justify-content: center;
+  // background-size: cover;
+  background-position: center ;
+}
 
 .icon-box {
   width: 100%;
@@ -166,10 +183,10 @@
   gap: 8px;
 }
 
-// .dashboard-top-fixed-98563{
-//   position: fixed;
-//   background-color: #f5f5f5;
-// }
+.dashboard-top-fixed-98563{
+  // position: fixed;
+  background-color: #ffffff;
+}
 
 .country-box{
   display: flex;

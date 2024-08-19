@@ -2,15 +2,15 @@
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" *ngIf="item?.status == 'Accepted' "
+        <div class="image-circle-789675" 
           [style.background-image]="item?.student.image ? 'url(' + item?.student.image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="image-circle-789675" *ngIf="item?.status == 'Complete'"
+        <!-- <div class="image-circle-789675" *ngIf="item?.status == 'Complete'"
           [style.background-image]="item?.student.image ? 'url(' + item?.student.image + ')' : 'assets/profileimg.png'">
         </div>
-        <div class="image-circle-789675" *ngIf="item?.status != 'Accepted' &&  item?.status != 'Complete'"
+        <div class="image-circle-789675" *ngIf="item?.status == 'Accepted' &&  item?.status == 'Complete'"
           style="background-image: url(../../../../assets/svg/pending.svg);">
-        </div>
+        </div> -->
         <div class="pnd-678956" *ngIf="item?.status === 'Pending'">
           <img src="../../../assets/svg/panding.svg" />
           <div class="pnd-inner-7895">Pending</div>

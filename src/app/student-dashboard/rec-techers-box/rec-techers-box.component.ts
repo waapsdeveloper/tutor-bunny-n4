@@ -20,6 +20,8 @@ export class RecTechersBoxComponent extends BasePage implements OnInit {
 
   async callApi() {
     const res = await this.network.getAllTeachers() as any [];
+    console.log(res);
+    
     this.list = res;
     
   }

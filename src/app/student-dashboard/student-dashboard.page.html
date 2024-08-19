@@ -1,10 +1,13 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89656"
-        [style.background-image]="user.image ? 'url(' + user.image + ')' : '../../assets/svg/profile.svg'">
-        <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
+      <div class="image-box-89656"  *ngIf="user.image"
+        [style.background-image]="'url(' + user.image + ')' ">
+        <!-- <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563"> -->
       </div>
+      <div class="image-box-89657" *ngIf="!user.image">
+      <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563">
+    </div>
     </div>
     <app-profile-search-box style="width: 100%;"></app-profile-search-box>
     <div class="noti-795">

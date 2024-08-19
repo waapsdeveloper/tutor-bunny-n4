@@ -21,6 +21,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   country;
   showWarning = false;
   flag;
+  isProfileComplete;
   showLiked = false;
   view = 'course';
   // @ViewChild('content', { static: true }) content: IonContent;
@@ -66,6 +67,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async initialize() {
 
     this.user = this.users.getUser();
+    console.log(this.user);
     this.events.registerPusherEvent(this.user.id)
     let obj = {
       email: this.user.email,

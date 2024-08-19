@@ -2,6 +2,7 @@ import { Component, ElementRef, Injector, Input, OnInit, ViewChild } from '@angu
 import { BasePage } from '../base-page/base-page';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
+import { ImageViewComponent } from './image-view/image-view.component';
 
 @Component({
   selector: 'app-messages',
@@ -21,6 +22,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   messageIds = [];
   user;
   message = '';
+  role_id
   image;
   displayName;
   params;
@@ -38,6 +40,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.scrollToBottomOnInit();
       this.initialize();
       this.user = this.users.getUser();
+      this.role_id= this.user.role_id
       this.user_id = this.user.id;
       this.flag = this.getFlag();
       this.messageReceivedViaPusher();
@@ -145,6 +148,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   back() {
     this.nav.pop();
+  }
+
+  openImage(image){
+    this.modals.present(ImageViewComponent, image)
   }
 
   scrollToBottomOnInit() {

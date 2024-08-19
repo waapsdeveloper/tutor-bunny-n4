@@ -120,7 +120,11 @@ const routes: Routes = [
   {
     path: 'requests',
     loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
+  },  {
+    path: 'teacher-course-list',
+    loadChildren: () => import('./teacher-course-list/teacher-course-list.module').then( m => m.TeacherCourseListPageModule)
   },
+
 
 
 

@@ -1,24 +1,24 @@
 .tecahers-box-outer-38521 {
 
-  padding: 16px;
+  padding: 16px 16px 8px 16px; 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
   background-color: #ffffff;
   border-radius: 16px;
-  border: 0.5px solid black;
+  border: 0.5px solid rgb(0, 0, 0, .25);
 
   .tecahers-box-img-name-box-38522 {
 
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 8px;
+    gap: 16px;
 
     .tecahers-box-image-38523 {
-      height: 85px;
-      width: 85px;
+      height: 90px;
+      width: 90px;
       border-radius: 8px;
       background-color: aqua;
       background-image: url('../../../../assets/vedio.jpeg');
@@ -45,7 +45,7 @@
         .tecahers-box-rate-38526 {
 
           font-size: 14px;
-          font-weight: 400;
+          font-weight: 600;
           color: rgb(0, 0, 0, 1);
 
         }
@@ -187,6 +187,20 @@
 
     }
 
-    .tecahers-box-footer-chat-38542 {}
+    .tecahers-box-footer-chat-38542 {
+      padding: 6px 16px;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background-color: #F1CF8D;
+      border-radius: 16px;
+    }
+  }
+  .title-para-7825{
+    font-size: 16px;
+    font-weight: 400;
+    
   }
 }

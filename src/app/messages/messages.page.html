@@ -2,7 +2,7 @@
   <div class="top-header-78956">
     <div class="header-left-items-78956">
       <app-sd-bback-btn (click)="back()"></app-sd-bback-btn>
-      <div class="header-image-78415"
+      <div class="header-image-78415"  (click)="openImage(image)"
         [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'">
       </div>
       <div style="display: flex; align-items: flex-start; flex-direction: column;
@@ -13,7 +13,7 @@
         <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
       </div>
     </div>
-    <div class="header-right-items-78956">
+    <div class="header-right-items-78956" *ngIf="role_id == 2">
       <div class="bsearch-btn-7895 ion-activatable ripple-parent rectangle">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="../../assets/svg/options.svg" />

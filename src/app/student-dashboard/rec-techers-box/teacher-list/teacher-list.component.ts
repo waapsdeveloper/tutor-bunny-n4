@@ -7,10 +7,19 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./teacher-list.component.scss'],
 })
 export class TeacherListComponent extends BasePage implements OnInit {
+  private _item: any;
 
-  @Input() item;
+  @Input('item')
+  public get item() {
+    return this._item;
+  };
+  public set item(value: any) {
+    this._item = value;
+    this.displayName = this.utility.getAmericanName(this.item.name);
+
+  }
   subjects;
-
+  displayName;
   constructor(injector:Injector) {
     super(injector)
    }

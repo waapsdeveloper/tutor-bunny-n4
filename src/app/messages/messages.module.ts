@@ -12,6 +12,8 @@ import { SdBontiBtnModule } from '../components/sd-bonti-btn/sd-bonti-btn.module
 import { SdBsearchBtnModule } from '../components/sd-bsearch-btn/sd-bsearch-btn.module';
 import { SdBbackBtnModule } from '../components/sd-bback-btn/sd-bback-btn.module';
 import { MessageListModule } from './message-list/message-list.module';
+import { AngularImageViewerModule } from '@hreimer/angular-image-viewer';
+import { ImageViewModule } from './image-view/image-view.module';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { MessageListModule } from './message-list/message-list.module';
     SdBbackBtnModule,
     SdBsearchBtnModule,
     SdBontiBtnModule,
-    MessageListModule
+    MessageListModule,
+    ImageViewModule
   ],
   declarations: [MessagesPage]
 })

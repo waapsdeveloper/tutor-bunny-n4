@@ -14,10 +14,10 @@ export class StudentOtherCoursesComponent extends BasePage {
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
   }
-
+       
 
   seeAll() {
-    this.nav.pop('/tabs/student-dashboard')
+    this.nav.pop('teacher-course-list')
   }
 
 }

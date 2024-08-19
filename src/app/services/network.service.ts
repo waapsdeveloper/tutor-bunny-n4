@@ -420,6 +420,7 @@ export class NetworkService {
       seq.subscribe({
         next: (res: any) => {
           if (showloader === true) {
+            // return
             this.utility.hideLoader();
           }
           resolve(res);

@@ -9,7 +9,7 @@ export class TeacherProfileStatisticsComponent implements OnInit {
   list = [
     {
       nbl: '0',
-      label: 'Reviews',
+      label: 'Experience',
       colorClass: '',
     },
     {
@@ -19,7 +19,7 @@ export class TeacherProfileStatisticsComponent implements OnInit {
     },
     {
       nbl: '0',
-      label: 'Trail',
+      label: 'Rate/Hour',
       colorClass: '',
     },
     {

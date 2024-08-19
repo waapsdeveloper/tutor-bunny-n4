@@ -29,6 +29,7 @@
     "@capacitor/keyboard": "6.0.0",
     "@capacitor/push-notifications": "^6.0.0",
     "@capacitor/status-bar": "6.0.0",
+    "@hreimer/angular-image-viewer": "^0.14.1",
     "@ionic/angular": "^7.0.0",
     "@pscoped/ngx-pub-sub": "^6.0.1",
     "capacitor-resources": "^2.0.5",
