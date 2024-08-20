@@ -1,23 +1,72 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Filter'" [backUrl]="'search-box'"></app-sd-header-top>
 </ion-header>
-
-<ion-content class="ion-padding ion-content-medium-background">
+<ion-content class="ion-padding">
   <div class="body-content-68448" style="padding: 0 6px;">
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">What do you want to learn?</div>
-      <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="formData.keywords"
-      placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
+      <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="searchFilterService.formData.keywords" placeholder="Type and add"
+        [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Language of communication</div>
-      <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
-        [language]="formData.language" [key]="'language'"
-        [errorText]="'language is required'"></app-course-language>
+      <app-course-language placeholder="Select" (onChange)="result($event, 'language')" [language]="searchFilterService.formData.language"
+        [key]="'language'" [errorText]="'language is required'"></app-course-language>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-14 roboto-medium">Language of communication</div>
+      <div class="input-title fs-14 roboto-medium">course Price</div>
       <app-course-prise-range> </app-course-prise-range>
     </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
+        (onChange)="result($event, 'mode_type')" [mode]="searchFilterService.formData.mode_type" [capacity]="searchFilterService.formData.capacity"
+        [key]="'mode_type'" [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Course Price</div>
+      <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="searchFilterService.formData.price" [key]="'price'"
+        [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Name</div>
+      <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
+        [inputText]="searchFilterService.formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Country</div>
+      <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="searchFilterService.formData.country"
+        [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8" *ngIf="searchFilterService.countryId">
+      <div class="input-title fs-14 roboto-medium">State</div>
+      <app-sd-state-box placeholder="Select" [countryId]="searchFilterService.countryId" placeholder="State"
+        (onChange)="result($event, 'state')" [state]="searchFilterService.formData.state" [key]="'state'"
+        [errorText]="'State is required'"></app-sd-state-box>
+    </div>
+    <div class="input-box-lines city-zip" *ngIf="searchFilterService.stateId">
+      <div class="city d-flex flex-column gap-8">
+        <div class="input-title fs-14 roboto-medium">City</div>
+        <app-sd-input-box placeholder="City" (onChange)="result($event, 'city')" [inputText]="searchFilterService.formData.city"
+          [key]="'city'" [errorText]="'City is required'"></app-sd-input-box>
+      </div>
+      <div class="zip-code-2 d-flex flex-column gap-8">
+        <div class="input-title fs-14 roboto-medium">Zip</div>
+        <app-sd-input-box (onChange)="result($event, 'zip_code')" [inputText]="searchFilterService.formData.zip_code" placeholder="Zip"
+          [key]="'zip_code'" [errorText]="'Required'" [type]="'number'"> </app-sd-input-box>
+      </div>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Travel policy</div>
+      <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
+        [errorText]="'travel_policy is required'"></app-travel-police>
+    </div>
+    <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="searchFilterService.formData.from_age"
+      [to_age]="searchFilterService.formData.to_age" [key]="'age'" [errorText]="'Age Range is required'"></app-sd-age-boox>
   </div>
 </ion-content>
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ">
+  <div class="d-flex flex-column gap-16">
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Save'" (click)="submit()"></app-sd-button-gray>
+    </div>
+  </div>

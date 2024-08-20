@@ -7,6 +7,7 @@ import { BasePage } from '../base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -18,6 +19,7 @@ export class TeacherDashboardPage extends BasePage { // implements OnInit
   displayName = ''
   flag
   status;
+  utcTime
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -47,6 +49,9 @@ export class TeacherDashboardPage extends BasePage { // implements OnInit
   ];
   constructor(injector: Injector, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector);
+    this.utcTime = moment().utcOffset();
+    console.log(this.utcTime);
+
 
     // this.initialize();
     this.fcm.setTokenToServer();

@@ -11,6 +11,13 @@ import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.mod
 import { SearchKeywordModule } from '../components/search-keyword/search-keyword.module';
 import { CourseLanguageModule } from '../components/course-language/course-language.module';
 import { CoursePriseRangeModule } from "../components/course-prise-range/course-prise-range.module";
+import { ModeOfTeachingModule } from '../components/mode-of-teaching/mode-of-teaching.module';
+import { SdInputBoxModule } from '../components/sd-input-box/sd-input-box.module';
+import { SdCountryBoxModule } from '../components/sd-country-box/sd-country-box.module';
+import { SdStateBoxModule } from '../components/sd-state-box/sd-state-box.module';
+import { TravelPoliceModule } from '../components/travel-police/travel-police.module';
+import { SdAgeBooxModule } from '../components/sd-age-boox/sd-age-boox.module';
+import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [
@@ -22,6 +29,13 @@ import { CoursePriseRangeModule } from "../components/course-prise-range/course-
     SearchKeywordModule,
     CourseLanguageModule,
     CoursePriseRangeModule,
+    ModeOfTeachingModule,
+    SdInputBoxModule,
+    SdCountryBoxModule,
+    SdStateBoxModule,
+    TravelPoliceModule,
+    SdAgeBooxModule,
+    SdButtonGrayModule
 
 ],
   declarations: [SearchFilterPage]
