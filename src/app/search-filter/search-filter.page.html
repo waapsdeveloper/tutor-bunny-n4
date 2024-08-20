@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="'Filter'" [backUrl]="'search-box'"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding ion-content-medium-background">
+  <div class="body-content-68448" style="padding: 0 6px;">
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">What do you want to learn?</div>
+      <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="formData.keywords"
+      placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Language of communication</div>
+      <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
+        [language]="formData.language" [key]="'language'"
+        [errorText]="'language is required'"></app-course-language>
+    </div>
+    <div class="input-box-lines d-flex flex-column gap-8">
+      <div class="input-title fs-14 roboto-medium">Language of communication</div>
+      <app-course-prise-range> </app-course-prise-range>
+    </div>
+  </div>
+</ion-content>

@@ -31,7 +31,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     console.log(value);
-    
+
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
@@ -177,7 +177,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     let res = await this.network.getChadRoomId(obj)
     console.log(res);
-    
+
 
     let params = {
       student_id : id,
@@ -187,9 +187,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     }
 
     this.nav.push('/tabs/chat', params)
-    
 
-    
   }
 
 }

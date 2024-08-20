@@ -16,7 +16,7 @@ export class ProfileSearchBoxComponent extends BasePage implements OnInit {
   ngOnInit() {}
 
   openSearch(){
-    this.modals.present(SearchBoxComponent)
+    this.nav.push('search-box')
   }
 
 }

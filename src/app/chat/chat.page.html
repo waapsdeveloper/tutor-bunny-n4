@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="false" [title]="'Chat'" [backUrl]="'/tabs/teacher-dashboard'" [showNotification]="true"
-    [showSearch]="true"></app-sd-header-top>
+  <app-sd-header-top [showBack]="false" [title]="'Chat'" [backUrl]="'/tabs/teacher-dashboard'" [showNotification]="false"
+    [showSearch]="false"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
@@ -10,16 +10,16 @@
         <input type="text" placeholder="Search by name?" />
       </div>
     </div>
-    <div class="chat-top-header-78521" *ngIf="role_id == 3">
+    <div class="chat-top-header-78521" *ngIf="role_id === 3">
       <div class="chat-inbox-78522" (click)="showinbox('inbox')"><img src="../../assets/svg/inbox.svg" alt="">Inbox
       </div>
       <div class="chat-inbox-78522" (click)="showinbox('requests')"><img src="../../assets/svg/requests.svg"
           alt="">Message requests ({{count}})</div>
     </div>
-    <div *ngIf="showChat == 'inbox'">
+    <div *ngIf="showChat === 'inbox'">
       <app-chat-list *ngFor="let item of chat" [item]="item"></app-chat-list>
     </div>
-    <div *ngIf="showChat == 'requests'">
+    <div *ngIf="showChat === 'requests'">
       <app-request-list *ngFor="let item of request" [item]="item" (reloadList)="reloadList()"></app-request-list>
     </div>
   </div>

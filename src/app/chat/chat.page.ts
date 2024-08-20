@@ -42,12 +42,10 @@ export class ChatPage extends BasePage implements OnInit {
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);
       console.log(this.user);
-
     }
     if (this.params.other_user_id) {
       this.other_user_id = JSON.parse(this.params.other_user_id);
       console.log(this.other_user_id);
-
     }
     if (this.params.chat_room_id) {
       this.chat_room_id = this.params.chat_room_id;
@@ -62,7 +60,6 @@ export class ChatPage extends BasePage implements OnInit {
       let res = await this.nav.push('messages', params)
       this.initialize()
     }
-
   }
 
   async initialize() {
@@ -74,7 +71,7 @@ export class ChatPage extends BasePage implements OnInit {
     let data = await this.network .getRequsetCount(this.user_1.id);
     console.log(data);
     this.count = data.message.pending_count;
-    
+
   }
 
   getTime(time) {
@@ -129,6 +126,6 @@ export class ChatPage extends BasePage implements OnInit {
   reloadList() {
     this.getRequstList();
     this.initialize()
-    
+
   }
 }

@@ -50,8 +50,15 @@ export class TabsPage extends BasePage implements OnInit {
     this.showChat = true;
     this.showCourses = false;
     this.showMore = false;
+    let params = {
+      student_id: null,
+      other_user_id: null,
+      user: null,
+      chat_room_id: null
+    };
 
-
+    // Navigate to the chat page without any parameters
+    this.nav.push('/tabs/chat', params);
   }
   goToHome(){
     this.showHome = true;

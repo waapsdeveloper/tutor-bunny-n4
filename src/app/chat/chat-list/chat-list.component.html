@@ -11,8 +11,8 @@
         <div class="chat-time-98527">{{getTime(item.updated_at)}}</div>
       </div>
       <div class="chat-satus-98528">
-        <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
-        <div class="chat-message-98530" *ngIf="item.unread_count != 0">{{item.unread_count}}</div>
+        <div class="chat-online-98529">{{item.last_message}}</div>
+        <div class="chat-message-98530" *ngIf="item.unread_count !== 0">{{item.unread_count}}</div>
       </div>
     </div>
   </div>

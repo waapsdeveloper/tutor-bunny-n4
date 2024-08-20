@@ -124,6 +124,14 @@ const routes: Routes = [
     path: 'teacher-course-list',
     loadChildren: () => import('./teacher-course-list/teacher-course-list.module').then( m => m.TeacherCourseListPageModule)
   },
+  {
+    path: 'search-box',
+    loadChildren: () => import('./search-box/search-box.module').then( m => m.SearchBoxPageModule)
+  },
+  {
+    path: 'search-filter',
+    loadChildren: () => import('./search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
+  },
 
 
 

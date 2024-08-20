@@ -242,7 +242,7 @@
 .chips-outer {
   display: flex;
   align-items: center;
-  width: calc(100% - 100px);
+  // width: calc(100% - 100px);
   justify-content: flex-start;
   gap: 8px;
   flex-direction: row;
@@ -265,7 +265,7 @@
 .about-para {
   font-size: 16px;
   font-weight: 500;
-  line-height: 21px;
+  // line-height: 21px;
 }
 
 .discription-text {
@@ -312,7 +312,6 @@
   height: 0.5px;
   opacity: 0.5;
   border: 0.5px solid rgba(48, 48, 48, 0.25);
-
 }
 
 .video-box-98563 {
@@ -320,7 +319,7 @@
   width: 100%;
   // margin-top: 16px;
   // border-radius: 8px;
-  background-image: url('../../assets/vedio.jpeg');
+  background-image: url("../../assets/vedio.jpeg");
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -334,6 +333,10 @@
   }
 }
 
-.body-content-68448{
+.body-content-684488 {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  gap: 26px;
 }
