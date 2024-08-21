@@ -71,7 +71,6 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     let res = await this.globalCourses.getcourseById(this.course_Id) as any;
     this.data = res;
     console.log(this.data);
-    
     this.events.publish('data-for-other-corses', this.data)
     this.title = this.data.title;
     this.capacity = this.data.capacity;
@@ -99,7 +98,6 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
-
     this.showFavValue = this.data.is_liked_by_me;
   }
 

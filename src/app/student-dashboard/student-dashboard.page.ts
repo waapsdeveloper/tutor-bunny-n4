@@ -8,6 +8,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { FavCoursesPage } from '../fav-courses/fav-courses.page';
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -20,6 +21,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   displayName: string = '';
   country;
   showWarning = false;
+  utcTime
   flag;
   isProfileComplete;
   showLiked = false;
@@ -72,12 +74,23 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     let obj = {
       email: this.user.email,
     };
+
+
     let res = await this.network.getUserByEmail(obj);
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
       this.flag = this.getFlag();
     }
+
+    this.utcTime = moment().utcOffset();
+    let time = {
+      timezone_offset: this.utcTime,
+    };
+    console.log(this.utcTime);
+
+    // let data = await this.network.getTimeZone(time, this.user.id);
+    // console.log(data);
 
     if (this.user && this.user.student && this.user.student.country && this.user.student.country.name) {
       this.country = this.user.student.country.name;

@@ -40,7 +40,7 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   ngOnInit() {
     moment.updateLocale('en', {
       relativeTime: {
-        future: "in %s",
+        future: " %s ago",
         past: "%s ago",
         s: 'a few seconds',
         ss: '%d s',
@@ -56,7 +56,10 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
         yy: "%dy"
       }
     });
-    this.time = moment(this.item.created_at).fromNow();
+    let createdAt = moment(this.item.created_at);
+
+    this.time = createdAt.fromNow();
+
   }
 
 

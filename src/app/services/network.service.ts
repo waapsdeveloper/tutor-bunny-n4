@@ -112,6 +112,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  getTimeZone(data: any, id) {
+    return this.httpPostResponse('users/timezone/' + id, data, null, false, false);
+  }
+
   getChadRoomId(data: any) {
     return this.httpPostResponse('chat-room-id', data, null, false, false);
   }

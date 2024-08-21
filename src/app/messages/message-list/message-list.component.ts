@@ -17,6 +17,8 @@ export class MessageListComponent extends BasePage implements OnInit {
 
   public set chat(value: any) {
     this._chat = value;
+    console.log(value);
+
     this.getChatRead(value)
   }
 

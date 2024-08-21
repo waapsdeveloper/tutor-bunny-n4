@@ -14,12 +14,13 @@ import * as moment from 'moment';
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage { // implements OnInit
+export class TeacherDashboardPage extends BasePage {
+  // implements OnInit
   user;
-  displayName = ''
-  flag
+  displayName = '';
+  flag;
   status;
-  utcTime
+  utcTime;
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -47,52 +48,61 @@ export class TeacherDashboardPage extends BasePage { // implements OnInit
       active: 0,
     },
   ];
-  constructor(injector: Injector, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
+  constructor(
+    injector: Injector,
+    private fcm: FirebaseService,
+    public globalCourses: GlobalCoursesService,
+    public globalTrials: GlobalTrialsService
+  ) {
     super(injector);
-    this.utcTime = moment().utcOffset();
-    console.log(this.utcTime);
-
 
     // this.initialize();
     this.fcm.setTokenToServer();
     const user = this.users.getUser();
     this.events.registerPusherEvent(user.id);
-    this.globalTrials.getPendingTrialsFromApi()
-    this.globalCourses.getCoursesFromApi()
-    this.globalTrials.registerPusherEvent()
-    this.globalCourses.registerPusherEvent()
+    this.globalTrials.getPendingTrialsFromApi();
+    this.globalCourses.getCoursesFromApi();
+    this.globalTrials.registerPusherEvent();
+    this.globalCourses.registerPusherEvent();
     // this.events.subscribe('dashboard:refreshpage', () => {
     // });
-
   }
 
   // ngOnInit() {
 
-
   // }
 
-
   ionViewWillEnter() {
-    this.initialize()
+    this.initialize();
   }
-
 
   async initialize() {
     this.user = this.users.getUser();
     let obj = {
       email: this.user.email,
     };
+
     let res = await this.network.getUserByEmail(obj);
+
+
+    this.utcTime = moment().utcOffset();
+    let time = {
+      timezone_offset: this.utcTime,
+    };
+    console.log(this.utcTime);
+
+    let data = await this.network.getTimeZone(time, this.user.id);
+    console.log(data);
+
 
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
-      this.flag = this.getFlag()
-      this.displayName = this.utility.getAmericanName(this.user.name)
+      this.flag = this.getFlag();
+      this.displayName = this.utility.getAmericanName(this.user.name);
       this.status = res.user.teacher.status;
     }
   }
-
 
   getFlag() {
     if (this.user && this.user.teacher && this.user.teacher.country) {
@@ -100,10 +110,10 @@ export class TeacherDashboardPage extends BasePage { // implements OnInit
       if (flag) {
         return flag.toLowerCase();
       } else {
-        return ""
+        return '';
       }
     } else {
-      return ""
+      return '';
     }
   }
 
@@ -113,26 +123,22 @@ export class TeacherDashboardPage extends BasePage { // implements OnInit
   }
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.7)
+    let res = await this.modals.present(CreateCoursePage, {}, '', 0.7);
 
     if (res.data.title) {
-
-
       const params = {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
         type: res.data.type,
-
-
       };
 
-      this.nav.push('/course-form', params)
+      this.nav.push('/course-form', params);
     }
   }
   gotoNotification() {
     this.nav.push('notifications', {
-      backUrl: '/tabs/teacher-dashboard', showBack: true
-    })
+      backUrl: '/tabs/teacher-dashboard',
+      showBack: true,
+    });
   }
-
 }

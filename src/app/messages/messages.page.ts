@@ -143,6 +143,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.message = '';
     this.messageInput.nativeElement.value = '';
     let res = await this.network.sendMessage(obj);
+    this.initialize();
+
+
 
   }
 

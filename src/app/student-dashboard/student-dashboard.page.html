@@ -5,7 +5,7 @@
         [style.background-image]="'url(' + user.image + ')' ">
         <!-- <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563"> -->
       </div>
-      <div class="image-box-89657" *ngIf="!user.image">
+      <div class="image-box-89657" *ngIf="!user.image" (click)="updateProfile()">
       <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
     </div>
     </div>

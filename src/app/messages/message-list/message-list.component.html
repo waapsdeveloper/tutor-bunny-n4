@@ -3,6 +3,6 @@
     <div [class.chat-recive-text-85623]="user_id != chat.user_id"
       [class.chat-send-text-85626]="user_id == chat.user_id">{{chat.message}}
     </div>
-    <div class="chat-recive-time-85624">{{getTime(chat.created_at)}}</div>
+    <div class="chat-recive-time-85624" *ngIf="chat.id != -1">{{getTime(chat.created_at)}}</div>
   </div>
 </div>

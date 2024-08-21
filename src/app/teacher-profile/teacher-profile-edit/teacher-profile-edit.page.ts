@@ -187,7 +187,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     this.userId = this.user.id;
     const f = this.formData;
     console.log(f);
-    
+
     this.events.publish('teacher-profile-third-screen-submit-call', this.formData);
     if (!f.education || !f.teaching_year || !f.title.experience || !f.rate || !f.travel_policy || f.education.length < 250 || f.experience.languages < 250) {
       console.log("sdasadas");
@@ -197,9 +197,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       return;
     }
     // if (res && res.message) {
-    //   this.utility.presentSuccessToast(res.message)
-    // }
-    // this.nav.pop('/tabs/teacher-dashboard')
 
   }
   async onSlideChange2() {
@@ -221,10 +218,14 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id)
+
     if (res) {
-      this.slides?.nativeElement.swiper.slideTo(2, false, false);
-      this.step = 3;
+      this.utility.presentSuccessToast(res.message)
     }
+    this.nav.pop('/tabs/teacher-dashboard')
+    //   this.slides?.nativeElement.swiper.slideTo(2, false, false);
+    //   this.step = 3;
+    // }
   }
   disableIfIncomplete() {
     return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
