@@ -14,6 +14,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   course_Id;
   capacity;
   description;
+  currencySymbol;
   duration;
   isExpanded = false;
   title;
@@ -81,6 +82,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.type = this.data.type;
     this.schedules = this.data.schedules;
     this.flag = this.getFlag();
+    this.currencySymbol = this.data.auth_user_currency_symbol;
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     const startTime = this.schedules.start_date;

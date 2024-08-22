@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -14,7 +21,7 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   @Input('item')
   public get item() {
     return this._item;
-  };
+  }
 
   public set item(value: any) {
     this._item = value;
@@ -27,42 +34,38 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
     setTimeout(() => {
       this.loading = false;
     }, 1000);
-
   }
   readNotification(item) {
-    this.getNotificationRead(item)
+    this.getNotificationRead(item);
   }
 
   ngOnInit() {
     moment.updateLocale('en', {
       relativeTime: {
-        future: " %s ago",
-        past: "%s ago",
+        future: ' %s ago',
+        past: '%s ago',
         s: 'a few seconds',
         ss: '%d s',
-        m: "a minute",
-        mm: "%dm",
-        h: "an hour",
-        hh: "%dh",
-        d: "a day",
-        dd: "%dd",
-        M: "a month",
-        MM: "%dM",
-        y: "a year",
-        yy: "%dy"
-      }
+        m: 'a minute',
+        mm: '%dm',
+        h: 'an hour',
+        hh: '%dh',
+        d: 'a day',
+        dd: '%dd',
+        M: 'a month',
+        MM: '%dM',
+        y: 'a year',
+        yy: '%dy',
+      },
     });
     let createdAt = moment(this.item.created_at);
 
     this.time = createdAt.fromNow();
-
   }
-
-
 
   async getNotificationRead(item) {
     if (item.user_id != this.user_id) {
@@ -71,15 +74,12 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
         console.log(obj);
         let res = await this.network.getNotificationRead(obj);
         console.log(res);
-    this.reloadList.emit(res.data);
-
+        this.reloadList.emit(res.data);
+      } else {
+        console.log('SDdsfdsfsd');
       }
-      else {
-        console.log("SDdsfdsfsd");
-      }
-    }
-    else {
-      console.log("12345678");
+    } else {
+      console.log('12345678');
     }
   }
 }

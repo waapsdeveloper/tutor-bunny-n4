@@ -16,6 +16,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   backUrl;
   displayName
   course_Id;
+  currencySymbol;
   techerTitle;
   language;
   capacity;
@@ -83,7 +84,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.flag = this.getFlag();
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
-    this.price = this.data.price;
+    this.price = this.data.updated_price;
     this.schedules = this.data.schedules;
     this.acheduleTime = this.schedules;
     this.created_at = this.data.created_at;
@@ -94,6 +95,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.state = this.data.user.teacher.state.name
     this.updated_at = this.data.updated_at;
     this.type = this.data.type;
+    this.currencySymbol = this.data.auth_user_currency_symbol;
     const startTime = this.acheduleTime.start_date;
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');

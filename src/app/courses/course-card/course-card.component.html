@@ -1,11 +1,11 @@
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
     <div class="block-item-header" (click)="oepnDeatils(item)">
-      <div class="block-item-header-title outfit-medium " >
+      <div class="block-item-header-title outfit-medium ">
         {{item?.title}}
       </div>
     </div>
-    <div class="block-item-body" >
+    <div class="block-item-body">
       <div class="profile-item-block" (click)="oepnDeatils(item)">
         <div>
           <div class="profile-item-image-block"
@@ -28,7 +28,8 @@
           </div>
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/p-tag.svg" />
-            <div class="label-789577 fs-20 outfit">${{item.price}}/month</div>
+            <div class="label-789577 fs-20 outfit">{{item.course_user_currency_symbol}} {{item.price}}<span
+                style="font-size: 12px;">/month</span></div>
           </div>
         </div>
       </div>

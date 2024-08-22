@@ -89,8 +89,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     };
     console.log(this.utcTime);
 
-    // let data = await this.network.getTimeZone(time, this.user.id);
-    // console.log(data);
+    let data = await this.network.getTimeZone(time, this.user.id);
+    console.log(data);
 
     if (this.user && this.user.student && this.user.student.country && this.user.student.country.name) {
       this.country = this.user.student.country.name;
