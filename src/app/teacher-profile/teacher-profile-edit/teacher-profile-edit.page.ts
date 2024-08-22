@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -11,7 +18,10 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './teacher-profile-edit.page.html',
   styleUrls: ['./teacher-profile-edit.page.scss'],
 })
-export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWillEnter, AfterViewInit {
+export class TeacherProfileEditPage
+  extends BasePage
+  implements OnInit, ViewWillEnter
+{
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   user;
@@ -21,8 +31,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   params: any;
   backUrl;
   btn: any;
-  showBack
-  title = "Create profile";
+  showBack;
+  title = 'Create profile';
   backBtn = false;
   formData: any = {
     name: null,
@@ -38,13 +48,13 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     description: null,
     terms: false,
     image: null,
+    hourly_rate: null,
     photo_id: null,
     education: null,
     certificate: null,
     teaching_year: null,
-    experiences: null,
-    travel_policy: null
-
+    experience: null,
+    travel_policy: null,
   };
   contryCode: any;
   countryId;
@@ -53,23 +63,17 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
   step = 1;
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
     this.initialize();
   }
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit(): void {
-
+    console.log('sd');
   }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
-
-
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -83,8 +87,6 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     if (this.params.showBack) {
       this.showBack = this.params.showBack;
     }
-
-
   }
 
   async initialize() {
@@ -106,7 +108,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
     } else if (key == 'state') {
-      this.stateId = value.id
+      this.stateId = value.id;
       this.formData['state_id'] = value.id;
       this.formData['state'] = value;
     } else if (key == 'languages') {
@@ -128,7 +130,7 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       this.formData['country'] = cnty;
       this.formData['dial_code'] = '+' + cnty.phonecode;
     }
-    const stt = data['teacher']['state']
+    const stt = data['teacher']['state'];
     if (stt) {
       this.stateId = stt.id;
       this.formData['state'] = stt;
@@ -141,7 +143,8 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     this.formData['description'] = data['teacher']['description'];
     this.formData['image'] = data['image'];
     this.formData['photo_id'] = data['teacher']['photo_id'];
-    this.formData['terms'] = data['teacher']['terms'] == 1 || data['teacher']['terms'] == true;
+    this.formData['terms'] =
+      data['teacher']['terms'] == 1 || data['teacher']['terms'] == true;
     if (this.formData['terms'] == true) {
       this.hideTerms = true;
     }
@@ -156,23 +159,33 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     this.sub = event.list;
   }
   async changeToPrev() {
-
     if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
-
   }
   async onSlideChange() {
-    this.events.publish('teacher-profile-first-screen-submit-call', this.formData);
+    this.events.publish(
+      'teacher-profile-first-screen-submit-call',
+      this.formData
+    );
     const f = this.formData;
 
-    if (!f.name || !f.country || !f.state || !f.dial_code || !f.phone_number || !f.city || !f.zip_code || !f.languages || !f.subjects) {
-      return
+    if (
+      !f.name ||
+      !f.country ||
+      !f.state ||
+      !f.dial_code ||
+      !f.phone_number ||
+      !f.city ||
+      !f.zip_code ||
+      !f.languages ||
+      !f.subjects
+    ) {
+      return;
     }
     if (f.languages.length == 0) {
-
-      return
+      return;
     }
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -188,27 +201,53 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
     const f = this.formData;
     console.log(f);
 
-    this.events.publish('teacher-profile-third-screen-submit-call', this.formData);
-    if (!f.education || !f.teaching_year || !f.title.experience || !f.rate || !f.travel_policy || f.education.length < 250 || f.experience.languages < 250) {
-      console.log("sdasadas");
-      return
-    }
-    if (!f.certificate) {
+    this.events.publish(
+      'teacher-profile-third-screen-submit-call',
+      this.formData
+    );
+
+    if (
+      !f.education ||
+      !f.teaching_year ||
+      !f.experience ||
+      !f.hourly_rate ||
+      !f.travel_policy ||
+      f.education.length < 250 ||
+      f.experience.length < 250
+    ) {
+      console.log('sdasadas');
       return;
     }
-    // if (res && res.message) {
+    if (!f.certificate) {
+      // return;
+    }
+    console.log('hi');
 
+    // if (res && res.message) {
+    //   this.utility.presentSuccessToast(res.message)
+    // }
+    // this.nav.pop('/tabs/teacher-dashboard')
+    // }
   }
   async onSlideChange2() {
     const data = this.formData;
     this.userId = this.user.id;
     const f = this.formData;
-    this.events.publish('teacher-profile-second-screen-submit-call', this.formData);
-    if (!f.title || !f.description || f.title.length < 50 || f.title.length > 100 || f.description.length < 400) {
-      return
+    this.events.publish(
+      'teacher-profile-second-screen-submit-call',
+      this.formData
+    );
+    if (
+      !f.title ||
+      !f.description ||
+      f.title.length < 50 ||
+      f.title.length > 100 ||
+      f.description.length < 400
+    ) {
+      return;
     }
     if (f.subjects.length == 0) {
-      return
+      return;
     }
     if (!f.image || !f.photo_id) {
       return;
@@ -217,33 +256,39 @@ export class TeacherProfileEditPage extends BasePage implements OnInit, ViewWill
       return;
     }
     const user = JSON.parse(localStorage.getItem('user'));
-    const res = await this.network.updateTeacherProfile(f, user.id)
+    const res = await this.network.updateTeacherProfile(f, user.id);
 
     if (res) {
-      this.utility.presentSuccessToast(res.message)
+      //   this.utility.presentSuccessToast(res.message)
+      // }
+      // this.nav.pop('/tabs/teacher-dashboard')
+      this.slides?.nativeElement.swiper.slideTo(2, false, false);
+      this.step = 3;
     }
-    this.nav.pop('/tabs/teacher-dashboard')
-    //   this.slides?.nativeElement.swiper.slideTo(2, false, false);
-    //   this.step = 3;
-    // }
   }
   disableIfIncomplete() {
-    return !this.formData.terms || !this.formData.title || !this.formData.description || !this.formData.image || !this.formData.photo_id
+    return (
+      !this.formData.terms ||
+      !this.formData.title ||
+      !this.formData.description ||
+      !this.formData.image ||
+      !this.formData.photo_id
+    );
   }
   openGallery($event) {
     this.nav.push('/teacher-profile/teacher-gallery', {
       backUrl: '/teacher-profile/teacher-profile-edit',
-      gallary: "true", title: 'Upload Gallery'
-    })
+      gallary: 'true',
+      title: 'Upload Gallery',
+    });
   }
 
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
-    }
-    else {
-      this.nav.pop()
+    } else {
+      this.nav.pop();
     }
   }
 }

@@ -35,7 +35,9 @@ export class SdTextareaAboutComponent implements OnInit {
     }, false);
 
     this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
-      if (this.key == 'education' || this.key == 'experience') {
+
+
+      if (this.key != 'education' && this.key != 'experience') {
         return;
       }
 

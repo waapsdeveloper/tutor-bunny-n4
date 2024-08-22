@@ -98,7 +98,7 @@
             </ion-popover>
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
               (onChange)="result($event, 'description')" [inputText]="formData.description" [key]="'description'"
-              [errorText]="'Description is required'" [minlength]="400" [needed]="step == 2"></app-sd-textarea-about>
+              [errorText]="'Description is required'" [minlength]="400" [needed]="step === 2"></app-sd-textarea-about>
           </div>
           <div class="subject-sec d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">What do you teach?<img src="../../assets/svg/question.svg"
@@ -127,6 +127,9 @@
 
         </div>
       </swiper-slide>
+
+
+
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
@@ -148,7 +151,7 @@
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
               (onChange)="result($event, 'education')" [inputText]="formData.education" [key]="'education'"
               [errorText]="'education is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
-              [needed]="step == 2"></app-sd-textarea-about>
+              [needed]="step === 2"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-certificate-image [profilePhoto]="formData.certificate"
@@ -178,20 +181,20 @@
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
               (onChange)="result($event, 'experience')" [inputText]="formData.experience" [key]="'experience'"
               [errorText]="'experience is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
-              [needed]="step == 2"></app-sd-textarea-about>
+              [needed]="step === 2"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Hourly rate $</div>
-            <app-sd-input-box (onChange)="result($event, 'rate')" [inputText]="formData.rate" [key]="'rate'"
-              [errorText]="'rate is required'"></app-sd-input-box>
+            <app-sd-input-box (onChange)="result($event, 'hourly_rate')" [inputText]="formData.hourly_rate"
+              [key]="'hourly_rate'" [errorText]="'Hourly rate is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Travel policy</div>
             <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
-            [errorText]="'travel_policy is required'" ></app-travel-police>
+              [errorText]="'travel policy is required'"></app-travel-police>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <app-profile-video ></app-profile-video>
+            <app-profile-video></app-profile-video>
           </div>
         </div>
       </swiper-slide>
@@ -201,9 +204,9 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
-      <app-sd-button-gray *ngIf="step == 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray *ngIf="step == 2" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
-      <app-sd-button-gray *ngIf="step == 3" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step === 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step === 2" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step === 3" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 

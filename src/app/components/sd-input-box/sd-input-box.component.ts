@@ -30,11 +30,14 @@ export class SdInputBoxComponent implements OnInit {
 
 
       let v = formData[this.key];
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
+      if(v == 'title'){
+
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
       }
       if (v && v.length < 50) {
         this.isRequired = true;
@@ -101,11 +104,22 @@ export class SdInputBoxComponent implements OnInit {
           this.isRequired = false;
         }, 5000);
       }
+    })
 
+    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
 
+      if (this.key != 'hourly_rate') {
+        return;
+      }
 
+      let v = formData[this.key];
 
-
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
     })
 
   }

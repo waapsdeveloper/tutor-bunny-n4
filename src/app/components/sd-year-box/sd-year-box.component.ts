@@ -9,7 +9,7 @@ import { EventsService } from 'src/app/services/events.service';
   templateUrl: './sd-year-box.component.html',
   styleUrls: ['./sd-year-box.component.scss'],
 })
-export class SdYearBoxComponent implements OnInit, AfterViewInit {
+export class SdYearBoxComponent implements OnInit {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() inputText = '';
@@ -23,14 +23,23 @@ export class SdYearBoxComponent implements OnInit, AfterViewInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(private modals: ModalService, private events: EventsService) { }
 
-  ngAfterViewInit(): void {
-    // Access the value of ion-datetime
 
-  }
 
   ngOnInit() {
 
     this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+
+    }, false)
+
+    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
       if (!v || v == '') {

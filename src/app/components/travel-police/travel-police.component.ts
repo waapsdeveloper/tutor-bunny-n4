@@ -30,7 +30,18 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
     super(injector)
    }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
+
+      let v = formData[this.key];
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false);
+  }
 
   async openpolicy(){
     let res = await this.modals.present(PolicyListComponent) as any;
