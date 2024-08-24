@@ -8,6 +8,7 @@ import { TeacherCourseListPageRoutingModule } from './teacher-course-list-routin
 
 import { TeacherCourseListPage } from './teacher-course-list.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { TeacherOtherCourseModule } from './teacher-other-course/teacher-other-course.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.mod
     FormsModule,
     IonicModule,
     TeacherCourseListPageRoutingModule,
-    SdHeaderTopModule
+    SdHeaderTopModule,
+    TeacherOtherCourseModule
   ],
   declarations: [TeacherCourseListPage]
 })

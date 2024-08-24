@@ -127,18 +127,16 @@
 
         </div>
       </swiper-slide>
-
-
-
       <swiper-slide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
               <div class="label-with-word-count-left">
-                <span>Tell us about your educational qualification</span> <img src="../../assets/svg/question.svg"
+                <span>Tell us about your education</span> <img src="../../assets/svg/question.svg"
                   alt="" id="click-about">
               </div>
-              <div class="label-with-word-count-right roboto-light"> {{ formData?.education?.length || 0 }} Characters
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.qualification_description?.length || 0
+                }} Characters
               </div>
             </div>
             <ion-popover trigger="click-about" triggerAction="click">
@@ -149,9 +147,9 @@
               </ng-template>
             </ion-popover>
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
-              (onChange)="result($event, 'education')" [inputText]="formData.education" [key]="'education'"
-              [errorText]="'education is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
-              [needed]="step === 2"></app-sd-textarea-about>
+              (onChange)="result($event, 'qualification_description')" [inputText]="formData.qualification_description"
+              [key]="'qualification_description'" [errorText]="'education is required'"
+              [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step === 2"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-certificate-image [profilePhoto]="formData.certificate"
@@ -159,8 +157,9 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Select year you first started teaching</div>
-            <app-sd-year-box placeholder="Select" (onChange)="result($event, 'teaching_year')" [key]="'teaching_year'"
-              [errorText]="'Year is required'" [inputText]="formData.teaching_year"></app-sd-year-box>
+            <app-sd-year-box placeholder="Select" (onChange)="result($event, 'started_teaching')"
+              [key]="'started_teaching'" [errorText]="'Year is required'"
+              [inputText]="formData.started_teaching"></app-sd-year-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -168,7 +167,8 @@
                 <span>Tell us about your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
                   id="click-about">
               </div>
-              <div class="label-with-word-count-right roboto-light"> {{ formData?.experience?.length || 0 }} Characters
+              <div class="label-with-word-count-right roboto-light"> {{ formData?.experience_description?.length || 0 }}
+                Characters
               </div>
             </div>
             <ion-popover trigger="click-about" triggerAction="click">
@@ -179,9 +179,9 @@
               </ng-template>
             </ion-popover>
             <app-sd-textarea-about placeholder="Tell about yourself or the institute (Minimum 400 characters)"
-              (onChange)="result($event, 'experience')" [inputText]="formData.experience" [key]="'experience'"
-              [errorText]="'experience is required'" [placeholder]="'Minimum 250 characters'" [minlength]="250"
-              [needed]="step === 2"></app-sd-textarea-about>
+              (onChange)="result($event, 'experience_description')" [inputText]="formData.experience_description"
+              [key]="'experience_description'" [errorText]="'experience is required'"
+              [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step === 2"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Hourly rate $</div>
@@ -190,7 +190,8 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Travel policy</div>
-            <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
+            <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')"
+              [travel_policy]="formData.travel_policy" [key]="'travel_policy'"
               [errorText]="'travel policy is required'"></app-travel-police>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">

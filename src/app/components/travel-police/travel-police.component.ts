@@ -13,18 +13,35 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   @Input() inputCategory;
-  @Input() selectedtravelpolicy = {
-    "created_at": null,
-    "id": 3,
-    "name": "",
-    "updated_at": null
-  };
+
   categury = [];
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  private _travel_policy;
 
+  @Input()
+  public set travel_policy(value: any){
+    this._travel_policy = value;
+    if(value && value.name){
+      console.log(value);
+
+      this.selectedtravelpolicy = value;
+    }
+
+  }
+
+  public get travel_policy(): any{
+    return this._travel_policy
+  }
+
+  selectedtravelpolicy = {
+    "created_at": null,
+    "id": 3,
+    "name": "",
+    "updated_at": null
+  };
 
   constructor(injector:Injector) {
     super(injector)

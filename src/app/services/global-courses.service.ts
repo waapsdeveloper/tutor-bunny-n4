@@ -144,7 +144,6 @@ export class GlobalCoursesService {
         this.courses = [...this.courses, ...data.data];
       }
 
-      // this.courses = data
       resolve(this.courses);
     });
   }
@@ -268,11 +267,8 @@ export class GlobalCoursesService {
       } else {
         this.favorites = [...this.favorites, ...result['data']];
       }
-
       resolve(true);
     });
-
-    // this.showLiked = d.length > 0;
   }
 
   async removeFavorites(obj: any, user) {

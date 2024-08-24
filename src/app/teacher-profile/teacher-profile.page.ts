@@ -22,6 +22,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   email;
   language;
   state
+  travel_policy;
   subject;
   images: any;
   params
@@ -71,6 +72,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
+      this.travel_policy = this.user.teacher.travel_policy.name;
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.subject = this.user.teacher.subjects;
@@ -112,7 +114,9 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   }
 
   openQulification() {
-    this.modals.present(TeacherQualificationComponent, {}, "", 0.8)
+    let user = this.user
+
+    this.modals.present(TeacherQualificationComponent, {user}, "", 0.8)
   }
 
 }

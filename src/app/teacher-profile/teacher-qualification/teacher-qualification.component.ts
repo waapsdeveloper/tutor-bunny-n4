@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -7,15 +7,28 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./teacher-qualification.component.scss'],
 })
 export class TeacherQualificationComponent extends BasePage implements OnInit {
+  private _user: any;
 
-  constructor(injector:Injector) {
-    super(injector)
-   }
+  @Input('user')
+  public get user() {
+    return this._user;
+  };
 
-  ngOnInit() {}
-
-  back(){
-    this.modals.dismiss()
+  public set user(value: any) {
+    this._user = value;
+    console.log(value);
   }
 
+  constructor(injector: Injector) {
+    super(injector);
+  }
+
+  ngOnInit() {
+    console.log();
+
+  }
+
+  back() {
+    this.modals.dismiss();
+  }
 }

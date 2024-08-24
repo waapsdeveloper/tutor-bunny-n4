@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class RequestListComponent extends BasePage implements OnInit {
   flag;
   date
+  age
   @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>()
 
   private _item: any;
@@ -24,10 +25,16 @@ export class RequestListComponent extends BasePage implements OnInit {
     this.flag = this.getFlag();
     const date = this.item.updated_at;
 
+    this.calculateAge()
     this.date = moment(date).format('L');
   }
   constructor(injector: Injector) {
     super(injector)
+  }
+
+  calculateAge() {
+    const currentYear = new Date().getFullYear();
+    this.age = currentYear - this.item.user.student.dob;
   }
 
   ngOnInit() { }

@@ -244,9 +244,17 @@ export class NetworkService {
     return this.httpGetResponse('user-by-email' + '?' + str, null, false);
   }
 
+  getUserByToken() {
+    return this.httpGetResponse('user', null, false);
+  }
+
   updateTeacherProfile(data, id) {
     return this.httpPostResponse('user/teacher/' + id, data, null, true, true);
   }
+  updateTeacherProfile3(data, id) {
+    return this.httpPostResponse('ser/teacher/third/' + id, data, null, true, true);
+  }
+
   SubmitCourse(data) {
     return this.httpPostResponse('courses/add', data, null, true, true);
   }

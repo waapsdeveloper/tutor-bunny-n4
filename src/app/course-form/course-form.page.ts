@@ -19,6 +19,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   title;
   type;
   category;
+  user
   image;
   onlineMode;
   age;
@@ -45,10 +46,14 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     meeting_link: null,
     schedules: null
   };
-
+  currency;
   constructor(injector: Injector, private el: ElementRef) {
     super(injector);
     this.initialize();
+    this.user = this.users.getUser();
+    console.log(this.user);
+    this.currency = this.user.teacher.country.currency_symbol;
+
   }
 
   ngOnInit() { }

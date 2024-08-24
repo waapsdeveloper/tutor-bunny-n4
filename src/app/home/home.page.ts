@@ -80,8 +80,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
       this.users.setUser(user);
       this.redirectDependsOnRole(user)
     }
-
-
   }
 
   async redirectDependsOnRole(user) {

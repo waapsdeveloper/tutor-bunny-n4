@@ -4,7 +4,7 @@
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
-    <div class="search-box-outer-89655">
+    <div class="search-box-outer-89655" *ngIf="showChat === 'inbox'">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
         <input type="text" placeholder="Search by name?" />

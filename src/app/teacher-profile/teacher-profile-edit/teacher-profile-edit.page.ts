@@ -50,15 +50,16 @@ export class TeacherProfileEditPage
     image: null,
     hourly_rate: null,
     photo_id: null,
-    education: null,
+    qualification_description: null,
     certificate: null,
-    teaching_year: null,
-    experience: null,
+    started_teaching: null,
+    experience_description: null,
     travel_policy: null,
   };
   contryCode: any;
   countryId;
   stateId;
+  travel_policy_name;
   hideTerms = false;
   step = 1;
 
@@ -117,11 +118,15 @@ export class TeacherProfileEditPage
     } else if (key == 'subjects') {
       this.sub = value;
       this.formData['subjects'] = value.map((obj) => obj.id);
+    } else if (key == 'travel_policy') {
+      this.formData['travel_policy_id'] = value.id;
     } else {
       this.formData[key] = value;
     }
   }
   setFormDta(data) {
+    console.log(data);
+
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
     if (cnty) {
@@ -137,6 +142,18 @@ export class TeacherProfileEditPage
       this.formData['state_id'] = stt.id;
     }
     this.formData['phone_number'] = data['teacher']['phone_number'];
+    this.formData['qualification_description'] = data['teacher']['qualification_description'];
+    this.formData['started_teaching'] = data['teacher']['started_teaching'];
+    this.formData['experience_description'] = data['teacher']['experience_description'];
+    this.formData['hourly_rate'] = data['teacher']['hourly_rate'];
+    const travel = data['teacher']['travel_policy'];
+    if(travel){
+      this.travel_policy_name = travel.name;
+      this.formData['travel_policy'] = travel;
+      this.formData['travel_policy_id'] = travel.id;
+    }
+
+
     this.formData['city'] = data['teacher']['city'];
     this.formData['zip_code'] = data['teacher']['zip_code'];
     this.formData['title'] = data['teacher']['title'];
@@ -170,6 +187,7 @@ export class TeacherProfileEditPage
       this.formData
     );
     const f = this.formData;
+    console.log(f);
 
     if (
       !f.name ||
@@ -207,13 +225,13 @@ export class TeacherProfileEditPage
     );
 
     if (
-      !f.education ||
-      !f.teaching_year ||
-      !f.experience ||
+      !f.qualification_description ||
+      !f.started_teaching ||
+      !f.experience_description ||
       !f.hourly_rate ||
       !f.travel_policy ||
-      f.education.length < 250 ||
-      f.experience.length < 250
+      f.qualification_description.length < 250 ||
+      f.experience_description.length < 250
     ) {
       console.log('sdasadas');
       return;
@@ -222,12 +240,15 @@ export class TeacherProfileEditPage
       // return;
     }
     console.log('hi');
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(f);
+    const res = await this.network.updateTeacherProfile(f, user.id);
+    console.log(res);
+    if (res && res.message) {
+      this.utility.presentSuccessToast(res.message);
+    }
+    this.nav.pop('/tabs/teacher-dashboard')
 
-    // if (res && res.message) {
-    //   this.utility.presentSuccessToast(res.message)
-    // }
-    // this.nav.pop('/tabs/teacher-dashboard')
-    // }
   }
   async onSlideChange2() {
     const data = this.formData;
