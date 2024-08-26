@@ -16,93 +16,143 @@ export class SdTextareaAboutComponent implements OnInit {
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
   isRequired = false;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
-  constructor(private events: EventsService) {
-  }
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  constructor(private events: EventsService) {}
   ngOnInit() {
-    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData: any) => {
-      if (this.key == 'title' || this.key == 'description') {
-        return;
-      }
+    this.events.subscribe(
+      'teacher-profile-first-screen-submit-call',
+      (formData: any) => {
+        if (this.key == 'title' || this.key == 'description') {
+          return;
+        }
 
-      let v = formData[this.key];
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false);
-
-    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
-
-
-      if (this.key != 'education' && this.key != 'experience') {
-        return;
-      }
-
-      let v = formData[this.key];
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false);
-
-    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-
-      let v = formData[this.key];
-      if (this.key == 'description') {
+        let v = formData[this.key];
         if (!v || v == '') {
           this.isRequired = true;
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
         }
-        if (v && v.length < 250) {
-          this.isRequired = true;
-          this.errorText = 'The Detail field should have minimum 250 characters'
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-        }
-      }
-    }, false);
+      },
+      false
+    );
 
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
-      let v = formData[this.key];
-      if (this.key == 'description') {
-        if (!v || v == '') {
-          this.isRequired = true;
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-          return
+    this.events.subscribe(
+      'teacher-course-first-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        if (this.key == 'description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The Detail field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'teacher-profile-second-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        if (this.key == 'description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+            return;
+          }
+
+          if (v && v.length < 400) {
+            this.isRequired = true;
+            this.errorText =
+              'The About field should have minimum 400 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'teacher-profile-third-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        console.log(v);
+
+        if (
+          this.key == 'experience_description'
+        ) {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+            return
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The experience field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
         }
 
-        if (v && v.length < 400) {
-          this.isRequired = true;
-          this.errorText = 'The About field should have minimum 400 characters'
-          setTimeout(() => {
-            this.isRequired = false;
-          }, 5000);
-        }
-      }
+      },
+      false
+    );
+    this.events.subscribe(
+      'teacher-profile-third-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        console.log(v);
 
-    }, false)
+        if (
+         this.key == 'qualification_description'
+        ) {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The Education field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
   }
-
 
   result($event) {
     let v = $event.target.value;
 
-
-    this.onChange.emit(v)
+    this.onChange.emit(v);
   }
   clearInput() {
     this.inputText = '';
-    this.onChange.emit('')
+    this.onChange.emit('');
   }
 
   onPasteHandler($event) {
@@ -111,6 +161,6 @@ export class SdTextareaAboutComponent implements OnInit {
 
   modelChange($event) {
     let v = $event;
-    this.onChange.emit(v)
+    this.onChange.emit(v);
   }
 }
