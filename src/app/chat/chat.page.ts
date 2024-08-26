@@ -106,15 +106,9 @@ export class ChatPage extends BasePage implements OnInit {
     this.initialize()
   }
 
-  async showinbox(value) {
-    console.log(value);
-    this.showChat = value;
-    if (this.showChat == 'requests') {
-      this.getRequstList();
-    }else{
+  async showRequests() {
+    let res = this.nav.push('chat-requests');
     this.initialize()
-
-    }
   }
 
   async getRequstList() {
@@ -123,9 +117,5 @@ export class ChatPage extends BasePage implements OnInit {
     this.request = res.data;
   }
 
-  reloadList() {
-    this.getRequstList();
-    this.initialize()
 
-  }
 }

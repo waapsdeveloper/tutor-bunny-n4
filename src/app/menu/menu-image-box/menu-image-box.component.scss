@@ -1,13 +1,13 @@
 .menu-image-box-outer-38521 {
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  align-items: flex-start;
+  // flex-direction: column;
   gap: 16px;
   margin-top: 16px;
 
   .menu-image-box-38522 {
-    height: 130px;
-    width: 130px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     background-position: center;
     background-size: cover;
@@ -17,7 +17,7 @@
   .menu-image-box-namebox-38523 {
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     gap: 8px;
 
@@ -27,7 +27,9 @@
     }
 
     .menu-image-box-number-38525 {
-
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 18px;
       font-weight: 400;
 

@@ -10,10 +10,18 @@
     padding: 8px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
 
     .chat-inbox-78522 {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .chat-inbox-78523 {
       display: flex;
       align-items: center;
       gap: 8px;

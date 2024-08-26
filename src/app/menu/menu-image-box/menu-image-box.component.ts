@@ -11,9 +11,10 @@ export class MenuImageBoxComponent extends BasePage implements OnInit {
 
   user;
   image: any;
+  flag
   name;
   dial_code;
-  phone_number
+  country
 
 
   constructor(injector: Injector) {
@@ -26,11 +27,22 @@ export class MenuImageBoxComponent extends BasePage implements OnInit {
     this.user = this.users.getUser();
     this.name = this.user.name;
     this.image = this.user.image;
+    this.flag = this.getFlag();
     this.dial_code = this.user.teacher.dial_code;
-    this.phone_number = this.user.teacher.phone_number;
+    this.country = this.user.teacher.country.name;
+  }
 
-
-
+  getFlag() {
+    if (this.user && this.user.teacher && this.user.teacher.country) {
+      const flag = this.user.teacher.country.iso2;
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   }
 
 }

@@ -1,0 +1,13 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="'Chat Requests'" [backUrl]="" [showNotification]="false"
+    [showSearch]="false"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
+  <div class="body-content">
+    <div>
+      <app-request-list *ngFor="let item of request" [item]="item" [count]="count"
+        (reloadList)="reloadList()"></app-request-list>
+    </div>
+  </div>
+</ion-content>

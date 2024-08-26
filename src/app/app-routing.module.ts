@@ -132,6 +132,10 @@ const routes: Routes = [
     path: 'search-filter',
     loadChildren: () => import('./search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
   },
+  {
+    path: 'chat-requests',
+    loadChildren: () => import('./chat-requests/chat-requests.module').then( m => m.ChatRequestsPageModule)
+  },
 
 
 

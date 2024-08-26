@@ -10,7 +10,7 @@ import { ChatPage } from './chat.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
 import { NamesPipeModule } from '../pipes/name.pipe.module';
 import { ChatListModule } from './chat-list/chat-list.module';
-import { RequestListModule } from './request-list/request-list.module';
+import { RequestListModule } from '../chat-requests/request-list/request-list.module';
 
 @NgModule({
   imports: [
@@ -21,7 +21,6 @@ import { RequestListModule } from './request-list/request-list.module';
     SdHeaderTopModule,
     NamesPipeModule,
     ChatListModule,
-    RequestListModule
   ],
   declarations: [ChatPage]
 })

@@ -11,6 +11,7 @@ export class RequestListComponent extends BasePage implements OnInit {
   flag;
   date
   age
+  @Input() count;
   @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>()
 
   private _item: any;
@@ -29,7 +30,9 @@ export class RequestListComponent extends BasePage implements OnInit {
     this.date = moment(date).format('L');
   }
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
+    console.log(this.count);
+
   }
 
   calculateAge() {
