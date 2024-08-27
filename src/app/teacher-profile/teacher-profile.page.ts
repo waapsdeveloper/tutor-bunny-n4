@@ -28,7 +28,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   params
   studentEmail
   roleId;
-
+  experince;
 
   constructor(injector: Injector) {
     super(injector)
@@ -76,6 +76,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.subject = this.user.teacher.subjects;
+      this.experince = this.user.teacher.started_teaching;
       const user = this.users.getUser();
       const data = await this.network.getImage(user.id) as any;
       this.images = data.result;

@@ -119,7 +119,7 @@ export class TeacherDashboardPage extends BasePage {
 
   openProfile() {
     const params = { user_id: this.user.id, showBack: true };
-    this.nav.push('/tabs/teacher-profile', params);
+    this.nav.push('/teacher-profile', params);
   }
 
   async createCourse() {

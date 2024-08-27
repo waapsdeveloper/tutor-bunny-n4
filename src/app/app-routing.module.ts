@@ -120,7 +120,8 @@ const routes: Routes = [
   {
     path: 'requests',
     loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
-  },  {
+  },
+  {
     path: 'teacher-course-list',
     loadChildren: () => import('./teacher-course-list/teacher-course-list.module').then( m => m.TeacherCourseListPageModule)
   },
@@ -135,6 +136,11 @@ const routes: Routes = [
   {
     path: 'chat-requests',
     loadChildren: () => import('./chat-requests/chat-requests.module').then( m => m.ChatRequestsPageModule)
+  },
+
+  {
+    path: 'reviews-by-student',
+    loadChildren: () => import('./reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
 
 

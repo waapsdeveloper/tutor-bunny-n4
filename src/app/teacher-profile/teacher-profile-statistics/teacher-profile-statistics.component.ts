@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-teacher-profile-statistics',
@@ -6,31 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher-profile-statistics.component.scss'],
 })
 export class TeacherProfileStatisticsComponent implements OnInit {
-  list = [
-    {
-      nbl: '0',
-      label: 'Experience',
-      colorClass: '',
-    },
-    {
-      nbl: '0',
-      label: 'Courses',
-      colorClass: '',
-    },
-    {
-      nbl: '0',
-      label: 'Rate/Hour',
-      colorClass: '',
-    },
-    {
-      nbl: '0',
-      label: 'Students',
-      colorClass: '',
-    },
-  ];
+  private _experince: any;
 
-  // nbl-danger
-  constructor() {}
+  @Input('experince')
+  public get experince() {
+    return this._experince;
+  }
+
+  public set experince(value: any) {
+    this._experince = value;
+    this.calculateAge()
+    console.log(value);
+  }
+  year
+
+  constructor() {
+  }
+  calculateAge() {
+    const currentYear = new Date().getFullYear();
+    this.year = currentYear - this.experince;
+
+  }
 
   ngOnInit() {}
 }

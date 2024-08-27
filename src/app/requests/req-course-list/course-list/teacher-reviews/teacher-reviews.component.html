@@ -16,12 +16,12 @@
     <div class="teacher-review-teacher-review-heading-78531">Select a rating</div>
     <div class="teacher-review-teacher-review-stars-78532">
       <app-rating-stars [currentRating]="userRating" (ratingChange)="onRatingChange($event)"></app-rating-stars>
-
-   </div>
+    </div>
     <div class="teacher-review-teacher-review-number-78533">4 out of 5</div>
   </div>
   <div class="teacher-review-teacher-review-textarea-78530">
-    <app-sd-textarea-about (onChange)="result($event)" [placeholder]="'Write a review comments'"></app-sd-textarea-about>
+    <app-sd-textarea-about (onChange)="result($event)"
+      [placeholder]="'Write a review comments'"></app-sd-textarea-about>
   </div>
   <app-sd-button-gray [text]="'Submit'" (click)="addReview()"></app-sd-button-gray>
   <app-sd-button-clear [text]="'Cancel'" (click)="cancel()"></app-sd-button-clear>

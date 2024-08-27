@@ -14,7 +14,7 @@ import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-cle
 import { YoutubeBoxModule } from '../components/youtube-box/youtube-box.module';
 import { MyCoursesModule } from '../components/my-courses/my-courses.module';
 import { MyGalleryModule } from '../components/my-gallery/my-gallery.module';
-import { RatingReviewModule } from '../components/rating-review/rating-review.module';
+import { RatingReviewModule } from './rating-review/rating-review.module';
 import { OtherCoursesModule } from '../components/other-courses/other-courses.module';
 import { TeacherQualificationModule } from './teacher-qualification/teacher-qualification.module';
 
