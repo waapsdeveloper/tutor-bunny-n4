@@ -31,7 +31,12 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss", "node_modules/flag-icons/css/flag-icons.min.css"],
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss",
+              "node_modules/flag-icons/css/flag-icons.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -124,19 +129,14 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@ionic/angular-toolkit"
-    ],
+    "schematicCollections": ["@ionic/angular-toolkit"],
     "analytics": false
   },
   "schematics": {

@@ -1,6 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
 
 @Component({
   selector: 'app-course-list',
@@ -40,7 +41,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     if (data && data.trial) {
       console.log(data);
-      
+
       this.blocked = data.trial.status
 
     }
@@ -89,10 +90,11 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async removeToFav() {
     let user = this.users.getUser()
-
     this.item.is_liked_by_me = false;
     this.globalCourses.removeFavorites(this.item, user);
+  }
 
-
+  addReview(item){
+    this.modals.present(TeacherReviewsComponent, {item}, "", 0.7)
   }
 }

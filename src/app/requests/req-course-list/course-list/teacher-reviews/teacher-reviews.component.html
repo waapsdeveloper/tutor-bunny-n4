@@ -1,0 +1,28 @@
+<div class="teacher-review-outer-78521">
+  <div class="teacher-review-header-78522">
+    <div class="teacher-review-image-78523"
+      [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
+    <div class="teacher-review-name-box-78524">
+      <div class="teacher-review-course-name-78525">{{item.title}}</div>
+      <div class="teacher-review-teacher-name-box-78526">
+        <div class="teacher-review-teacher-heading-78527">Created by:</div>
+        <div class="teacher-review-teacher-image-78528"
+          [style.background-image]="item.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'"></div>
+        <div class="teacher-review-teacher-name-78529">{{item.user.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="teacher-review-teacher-review-box-78530">
+    <div class="teacher-review-teacher-review-heading-78531">Select a rating</div>
+    <div class="teacher-review-teacher-review-stars-78532">
+      <app-rating-stars [currentRating]="userRating" (ratingChange)="onRatingChange($event)"></app-rating-stars>
+
+   </div>
+    <div class="teacher-review-teacher-review-number-78533">4 out of 5</div>
+  </div>
+  <div class="teacher-review-teacher-review-textarea-78530">
+    <app-sd-textarea-about (onChange)="result($event)" [placeholder]="'Write a review comments'"></app-sd-textarea-about>
+  </div>
+  <app-sd-button-gray [text]="'Submit'" (click)="addReview()"></app-sd-button-gray>
+  <app-sd-button-clear [text]="'Cancel'" (click)="cancel()"></app-sd-button-clear>
+</div>

@@ -311,6 +311,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/list/add-fav', data, null, false, false);
   }
 
+  addReview(data) {
+    return this.httpPostResponse('add-review', data, null, false, false);
+  }
+
   removeCourseFav(data) {
     return this.httpPostResponse('courses/list/remove-fav', data, null, false, false);
   }

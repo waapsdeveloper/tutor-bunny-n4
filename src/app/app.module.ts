@@ -13,6 +13,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
 
+
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
