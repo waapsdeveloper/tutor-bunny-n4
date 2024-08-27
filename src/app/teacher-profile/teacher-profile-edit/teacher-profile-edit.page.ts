@@ -120,6 +120,8 @@ export class TeacherProfileEditPage
       this.formData['subjects'] = value.map((obj) => obj.id);
     } else if (key == 'travel_policy') {
       this.formData['travel_policy_id'] = value.id;
+      this.formData['travel_policy'] = value
+
     } else {
       this.formData[key] = value;
     }
@@ -148,6 +150,8 @@ export class TeacherProfileEditPage
     this.formData['hourly_rate'] = data['teacher']['hourly_rate'];
     const travel = data['teacher']['travel_policy'];
     if(travel){
+      console.log(travel);
+
       this.travel_policy_name = travel.name;
       this.formData['travel_policy'] = travel;
       this.formData['travel_policy_id'] = travel.id;
@@ -239,6 +243,9 @@ export class TeacherProfileEditPage
     if (!f.certificate) {
       // return;
     }
+    if (!this.formData.terms) {
+      return;
+    }
     console.log('hi');
     const user = JSON.parse(localStorage.getItem('user'));
     console.log(f);
@@ -273,9 +280,7 @@ export class TeacherProfileEditPage
     if (!f.image || !f.photo_id) {
       return;
     }
-    if (!this.formData.terms) {
-      return;
-    }
+
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id);
 

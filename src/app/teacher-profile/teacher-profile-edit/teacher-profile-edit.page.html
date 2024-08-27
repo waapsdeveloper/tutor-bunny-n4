@@ -120,10 +120,7 @@
               (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')"
               (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
-          <div class="terms-agree" *ngIf="!hideTerms">
-            <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"
-              (onChange)="result($event, 'terms')"></app-accept-terms-profile>
-          </div>
+
 
         </div>
       </swiper-slide>
@@ -192,10 +189,14 @@
             <div class="input-title fs-14 roboto-medium">Travel policy</div>
             <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')"
               [travel_policy]="formData.travel_policy" [key]="'travel_policy'"
-              [errorText]="'travel policy is required'"></app-travel-police>
+              [errorText]="'travel policy is required'" [needed]="step === 3"></app-travel-police>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-profile-video></app-profile-video>
+          </div>
+          <div class="terms-agree" *ngIf="!hideTerms">
+            <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"
+              (onChange)="result($event, 'terms')" [needed]="step === 3"></app-accept-terms-profile>
           </div>
         </div>
       </swiper-slide>

@@ -16,7 +16,7 @@ export class AcceptTermsProfileComponent implements OnInit {
   constructor(private events: EventsService) { }
 
   ngOnInit() {
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;
