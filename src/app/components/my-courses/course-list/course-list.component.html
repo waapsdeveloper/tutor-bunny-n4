@@ -3,7 +3,7 @@
     <div class="vedio-box-inner card" *ngFor="let item of list" (click)="oepnDeatils(item)">
       <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
       <div class="video-para">{{item.title}}</div>
-      <div class="price-tag">${{item.price}}/month</div>
+      <div class="price-tag">${{item.price}}/lesson</div>
     </div>
   </div>
 </div>

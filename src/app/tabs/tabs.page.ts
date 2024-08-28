@@ -100,7 +100,7 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.75)
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
 
     if (res.data.title) {
 

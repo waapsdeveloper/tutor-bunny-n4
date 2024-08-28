@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    border-bottom: 0.5px solid rgb(103 113 105 / 50%);
 
     .chat-inbox-78522 {
       display: flex;
@@ -24,7 +25,9 @@
     .chat-inbox-78523 {
       display: flex;
       align-items: center;
+      color: #0B5DD8;
       gap: 8px;
+      font-weight: 600;
       justify-content: center;
     }
   }

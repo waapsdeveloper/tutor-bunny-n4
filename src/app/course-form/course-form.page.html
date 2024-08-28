@@ -72,6 +72,7 @@
             <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')" [key]="'image'"
               [errorText]="'Course photo is required'"></app-course-photo>
           </div>
+
           <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="formData.from_age"
             [to_age]="formData.to_age" [key]="'age'" [errorText]="'Age Range is required'"></app-sd-age-boox>
         </div>
@@ -99,7 +100,7 @@
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Course Price ({{currency}})<img src="../../assets/svg/question.svg"
+            <div class="input-title fs-14 roboto-medium">Price / Lesson ({{currency}})<img src="../../assets/svg/question.svg"
                 alt="" id="click-price"></div>
             <ion-popover trigger="click-price" triggerAction="click">
               <ng-template>
@@ -111,7 +112,7 @@
               [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Course total duration in Hours<img
+            <div class="input-title fs-14 roboto-medium">Duration of each lesson (in Hours)<img
                 src="../../assets/svg/question.svg" alt="" id="click-duration"></div>
             <ion-popover trigger="click-duration" triggerAction="click">
               <ng-template>
@@ -126,7 +127,7 @@
               [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Total Number of Lessons<img src="../../assets/svg/question.svg"
+            <div class="input-title fs-14 roboto-medium">Total number of lessons for the entire course <img src="../../assets/svg/question.svg"
                 alt="" id="click-lesson"></div>
             <ion-popover trigger="click-lesson" triggerAction="click">
               <ng-template>
@@ -140,7 +141,7 @@
             <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="formData.lesson" [key]="'lesson'"
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8" *ngIf="this.type != '1'">
+          <div class="input-box-lines d-flex flex-column gap-8" >
             <app-sd-date-box (onChange)="result($event, 'dates')" [start_date]="formData.strat_date" [end_date]="formData.end_date"
               [key]="'dates'" [errorText]="'strat_date is required'" [type]="'date'"></app-sd-date-box>
           </div>
@@ -155,14 +156,6 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
-    <!-- <div class="number-selection-outer-678956" (click)="changeToPrev()">
-      <div class="number-box-7896">
-        <div class="number-circle one-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 1">1</div>
-        <div class="number-circle two-cir fs-16 roboto-medium" [class.dark-bg-895675]="step == 2">2</div>
-      </div>
-      <div class="center-line-hr-96895"></div>
-    </div> -->
-
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
       <app-sd-button-gray [text]="'Save'" *ngIf="step == 2" (click)="submit()"></app-sd-button-gray>

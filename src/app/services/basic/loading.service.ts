@@ -16,8 +16,8 @@ export class LoadingService {
     this.loading = await this.loadingController.create({
       cssClass: 'my-loader-class',
       spinner: "circles", // Round spinner
-      translucent: true, // This makes the background slightly transparent
-      backdropDismiss: true // Ensures the loader won't be dismissed by clicking on the backdrop
+      translucent: false,
+      backdropDismiss: false
     });
 
     await this.loading.present();

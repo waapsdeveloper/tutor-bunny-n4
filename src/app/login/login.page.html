@@ -28,9 +28,11 @@
         [errorText]="'Password is required'" [type]="'password'"
         ></app-sd-input-box>
     </div>
+
+
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
-        <app-sd-button-gray [text]="'Login'" (click)="submit()"></app-sd-button-gray>
+        <app-sd-button-gray [text]="'Login'" [disabled]="showLoader" (click)="submit()"></app-sd-button-gray>
       </div>
       <div class="input-box-lines">
         <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>

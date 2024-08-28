@@ -1,4 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
+import { flush } from '@angular/core/testing';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -19,16 +20,19 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     console.log(value);
 
     console.log(value.user.image);
+    this.displayName = this.utility.getAmericanName(value.user.name);
   }
 
   time;
-
+  showError;
   userRating: number = 0;
-  review;
+  review = false;
   user;
+  displayName
   constructor(injector: Injector) {
     super(injector);
     this.user = this.users.getUser();
+
   }
 
   ngOnInit() {
@@ -45,6 +49,13 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
   }
 
   async addReview() {
+    if(this.userRating <= 1){
+      this.showError = true
+      setTimeout(() => {
+        this.showError = false;
+      }, 5000);
+      return
+    }
     let obj = {
       rating: this.userRating,
       message: this.review,
@@ -55,10 +66,24 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     // return
     let res = await this.network.addReview(obj);
     console.log(res);
-    if (res) {
+    if (res && res.message) {
+      const message =  "Review submitted";
+      this.utility.presentSuccessToast(message);
       this.modals.dismiss();
     }
   }
+
+  async presentAlert() {
+
+    const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Submit Review', 'Are you sure to submit the Review?')
+
+    if (flag) {
+      this.addReview();
+    }
+
+  }
+
+
   cancel() {
     this.modals.dismiss();
   }

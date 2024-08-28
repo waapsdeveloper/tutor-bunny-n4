@@ -20,11 +20,11 @@ export class NetworkService {
     return this.httpPostResponse('login-via-social', data);
   }
   loginViaEmail(data) {
-    return this.httpPostResponse('login-via-email', data);
+    return this.httpPostResponse('login-via-email', data, null, false, true);
   }
 
   signUpviaEmail(data) {
-    return this.httpPostResponse('signup-via-email', data, null, true, true);
+    return this.httpPostResponse('signup-via-email', data, null, false, true);
   }
 
   postImages(data) {

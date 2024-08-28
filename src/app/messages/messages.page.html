@@ -36,10 +36,12 @@
     <div class="input-box-78522">
       <input #messageInput type="text" placeholder="Write your text here" style="background: white;"
         (keyup)="onKeyUp($event)">
-      <!-- <img src="../../assets/svg/addImgae.svg" alt=""> -->
     </div>
-    <div class="send-box-78522">
-      <img src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">
+    <div class="send-box-78522" *ngIf="message">
+      <img  src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">
+    </div>
+    <div class="send-box-78522" *ngIf="!message">
+      <img  src="../../assets/svg/sent-2.svg" alt="" >
     </div>
   </div>
 </ion-footer>

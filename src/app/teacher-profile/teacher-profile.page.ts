@@ -119,7 +119,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   openQulification() {
     let user = this.user
 
-    this.modals.present(TeacherQualificationComponent, {user}, "", 0.8)
+    this.modals.present(TeacherQualificationComponent, {user})
   }
 
 }

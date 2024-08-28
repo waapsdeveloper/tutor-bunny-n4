@@ -1,20 +1,21 @@
 <div class="input-box-lines city-zip">
-  <div class="zip-code-2 d-flex flex-column gap-8">
-    <div class="input-title fs-14 roboto-medium">Student Age in Years</div>
-    <div class="sd-input-box-outer-675315" (click)="openFromageSelection()">
-      <img alt="" class="input-image">
-      <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
-        [(ngModel)]="selectedFromAge.from_age" readonly />
-      <img src="assets/svg/arrow-dwon.svg" class="clear-input-678956744" alt="">
+  <div class="input-title fs-14 roboto-medium">Select student’s age eligible for the course</div>
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+    <div class="zip-code-2 d-flex flex-column gap-8">
+      <div class="sd-input-box-outer-675315" (click)="openFromageSelection()">
+        <img alt="" class="input-image">
+        <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
+          [(ngModel)]="selectedFromAge.from_age" readonly />
+        <img src="assets/svg/arrow-dwon.svg" class="clear-input-678956744" alt="">
+      </div>
     </div>
-  </div>
-  <div class="zip-code-2 d-flex flex-column gap-8">
-    <div class="input-title fs-14 roboto-medium" style="color: white;">a</div>
-    <div class="sd-input-box-outer-675315" (click)="openToageSelection()">
-      <img alt="" class="input-image">
-      <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
-        [(ngModel)]="selectedFromAge.to_age" readonly />
-      <img src="assets/svg/arrow-dwon.svg" class="clear-input-678956744" alt="">
+    <div class="zip-code-2 d-flex flex-column gap-8">
+      <div class="sd-input-box-outer-675315" (click)="openToageSelection()">
+        <img alt="" class="input-image">
+        <input class="fs-16 roboto-regular sd-input-box-input-675315" [type]="type" [placeholder]="placeholder"
+          [(ngModel)]="selectedFromAge.to_age" readonly />
+        <img src="assets/svg/arrow-dwon.svg" class="clear-input-678956744" alt="">
+      </div>
     </div>
   </div>
 </div>
