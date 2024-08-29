@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
 import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -24,7 +25,7 @@ export class ChatPage extends BasePage implements OnInit {
   chat_;
   other_user_id;
   showChat = 'inbox';
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.initialize();
   }
@@ -36,6 +37,8 @@ export class ChatPage extends BasePage implements OnInit {
     })
 
   }
+
+
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
@@ -62,15 +65,17 @@ export class ChatPage extends BasePage implements OnInit {
     }
   }
 
+
   async initialize() {
-    this.user_1 = this.users.getUser();
-    this.role_id = this.user_1.role_id;
-    console.log(this.role_id);
-    let res = await this.network.getMessagesRoom(this.user_1.id)
-    this.chat = res.data;
-    let data = await this.network .getRequsetCount(this.user_1.id);
-    console.log(data);
-    this.count = data.message.pending_count;
+    this.chats.getchatList();
+    // this.user_1 = this.users.getUser();
+    // this.role_id = this.user_1.role_id;
+    // console.log(this.role_id);
+    // let res = await this.network.getMessagesRoom(this.user_1.id)
+    // this.chat = res.data;
+    // let data = await this.network .getRequsetCount(this.user_1.id);
+    // console.log(data);
+    // this.count = data.message.pending_count;
 
   }
 

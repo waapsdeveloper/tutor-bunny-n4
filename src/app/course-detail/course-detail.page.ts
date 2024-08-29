@@ -32,7 +32,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
   language;
   to_age;
   updated_at;
+  lessons;
   schedules;
+  startDate;
+  endDate;
   categoryId;
   otherCourseList: any[] = [];
   otherCourseListTotalCount: number = 0;
@@ -77,6 +80,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.displayName = this.utility.getAmericanName(this.data.user.name);
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
+    this.lessons = this.data.lesson;
     this.image = this.data.image;
     this.price = this.data.price;
     this.type = this.data.type;
@@ -90,6 +94,12 @@ export class CourseDetailPage extends BasePage implements OnInit {
     const endTime = this.schedules.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
+    const startDate = this.data.start_date;
+
+    const endDate = this.data.end_date;
+    this.startDate = moment(startDate).format('DD-MM-Y');
+    this.endDate = moment(endDate).format('DD-MM-Y');
+
 
     if (this.data.category && this.data.category.length > 0) {
       this.categoryId = this.data.category[0].id;

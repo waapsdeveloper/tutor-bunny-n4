@@ -23,8 +23,21 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
     let res = await this.network.getAllReqCourses(user.id);
     this.list = res.result.data;
     console.log(this.list);
-    
-    
+
+
+  }
+
+  async refreshPage(event) {
+    console.log("sdfsd");
+
+
+    let user = this.users.getUser()
+    console.log(user);
+
+    let res = await this.network.getAllReqCourses(user.id);
+    setTimeout(() => {
+      event.target.complete();
+    }, 500);
   }
 
 }

@@ -60,6 +60,7 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
       rating: this.userRating,
       message: this.review,
       user_id: this.user.id,
+      course_id: this.item.id,
       teacher_id: this.item.user.id,
     };
     console.log(obj);

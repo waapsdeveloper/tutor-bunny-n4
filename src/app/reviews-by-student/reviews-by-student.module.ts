@@ -8,6 +8,7 @@ import { ReviewsByStudentPageRoutingModule } from './reviews-by-student-routing.
 
 import { ReviewsByStudentPage } from './reviews-by-student.page';
 import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { ReviewCardModule } from './review-card/review-card.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.mod
     FormsModule,
     IonicModule,
     ReviewsByStudentPageRoutingModule,
-    SdHeaderTopModule
+    SdHeaderTopModule,
+    ReviewCardModule
   ],
   declarations: [ReviewsByStudentPage]
 })

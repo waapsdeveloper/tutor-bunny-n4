@@ -120,6 +120,10 @@ export class NetworkService {
     return this.httpPostResponse('chat-room-id', data, null, false, false);
   }
 
+  getReviews(data: any) {
+    return this.httpPostResponse('review-by-teacher-id', data, null, false, false);
+  }
+
   getAllTeachers() {
     return this.httpGetResponse('teachers/list/approved', null, null, false);
   }

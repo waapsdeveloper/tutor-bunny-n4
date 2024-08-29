@@ -1,0 +1,23 @@
+<div class="review-card-outer-78521">
+  <div class="review-card-image-name-78522">
+    <div class="review-card-image-78523"
+      [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'"></div>
+    <div class="review-card-name-box-78524">
+      <div class="review-card-name-78525">{{item.user.name}}</div>
+      <div class="review-card-location-78526"> <img src="../../../assets/svg/locations.svg" alt="">
+        {{item.user.student.state.name}}, {{item.user.student.country.name}} <span *ngIf="flag"
+        slot="start" class="fi fi-{{flag}}"></span> </div>
+      <div class="review-card-rating-78527">
+        <div class="review-card-stars-78528">
+          <app-rating-stars [rating]="rating"></app-rating-stars>
+        </div>
+        <div class="review-card-number-78529">{{item.rating}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="review-card-content-box-78530">
+    <div class="review-card-content-78531">
+      {{item.message}}
+    </div>
+  </div>
+</div>

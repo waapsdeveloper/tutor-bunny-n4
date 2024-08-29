@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-request-list',
@@ -29,7 +30,7 @@ export class RequestListComponent extends BasePage implements OnInit {
     this.calculateAge()
     this.date = moment(date).format('L');
   }
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     console.log(this.count);
 
@@ -56,15 +57,14 @@ export class RequestListComponent extends BasePage implements OnInit {
     }
   }
 
-  async updaeStatus(value) {
-    console.log(value);
-    let obj = {
-      request_status: value
-    }
+  async updaeStatus(value, item) {
 
-    let res = await this.network.updateMessageReaquest(obj, this.item.chat_room_id);
-    console.log(res);
-    this.reloadList.emit(res.data);
-
+    this.chats.chatRequstUpdateStatus(value, item)
+    // console.log(value);
+    // let obj = {
+    //   request_status: value
+    // }
+    // let res = await this.network.updateMessageReaquest(obj, item.chat_room_id);
+    // console.log(res);
   }
 }

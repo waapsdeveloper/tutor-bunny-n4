@@ -1,78 +1,52 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="backUrl" [showEdit]="canEditCourse" (parentEdit)="openDetails()"
-    [showShare]="true" ></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="backUrl" [showEdit]="canEditCourse"
+    (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
-  <div class="body-content">
+<ion-content class="ion-content-bg " [fullscreen]="true">
+  <div class="image-card-78523" [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'">
+  </div>
+  <div class="body-content ion-padding">
 
     <div class="course-heading-78521">
       {{title}}
     </div>
-    <div class="courses-block-outer-789565">
-      <div class="courses-block-item-789565">
-        <div class="block-item-body">
-          <div class="profile-item-block">
-            <div style="display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-            padding-bottom: 8px;
-            border: 0.5px solid rgba(0, 0, 0, 0.25);
-            border-radius: 16px;">
-              <div class="profile-item-image-block"
-                [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'">
-              </div>
-              <div class="profile-line-789575"
-                style="display: flex;align-items: center;justify-content: flex-start; gap: 8px;">
-                <img class="img1-789575" src="../../../assets/svg/id.svg" />
-                <div class="label-789575 fs-16 outfit">{{serial_number}}</div>
-              </div>
-            </div>
-            <div class="profile-content-78678564">
-              <div class="profile-line-789575">
-                <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-                <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
-                <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
-                </div>
-              </div>
-              <div class="profile-above-footer-986985">
-                <div class="us-status-btn">
-                  <div class="us-status-btn-label outfit-medium">
-                    {{currencySymbol}} {{price}} <span style="font-size: 12px;">/month</span></div>
-                </div>
-              </div>
-              <div class="line"></div>
-              <div class="profile-line-789575">
-                <img class="img1-789575" src="../../../assets/svg/time.svg" />
-                <div class="label fs-16 outfit" style="text-transform: capitalize;">{{duration}} hrs/month</div>
-              </div>
-              <div class="group-96589">
-                <div class="line-789575">
-                  <img class="i-7685" src="../../../assets/svg/online.svg" />
-                  <div class="label fs-16 outfit" style="text-transform: capitalize;">{{mode_type}}</div>
-                </div>
-                <div class="line-789575">
-                  <img class="i-7685" src="assets/icon/smgroup-icon.svg" />
-                  <div class="label fs-16 outfit">{{capacity}}</div>
-                </div>
-              </div>
-              <div class="profile-line-789575">
-                <img class="img1-789575" src="../../../assets/svg/cake.svg" />
-                <div class="label fs-16 outfit" style="text-transform: capitalize;"> Age {{from_age}}-{{to_age}} </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="cource-price-and-rating-box-78541">
+      <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /month</span></div>
+      <div class="cource-rating-box-78543">
+        <div class="cource-rating-stars-78544" *ngFor=" let iem of [1,2,3,4,5]"><img src="../../assets/svg/star.svg"
+            alt=""></div>
+        <div class="cource-rating-number-78545">5.0 <span style="font-size: 12px; color: #7C7B7B;">(375)</span></div>
       </div>
     </div>
     <div class="line"></div>
+    <div class="cource-details-box-78561">
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
+          hour each lesson</div>
+        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total {{lessons}} lessons
+        </div>
+      </div>
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/online.svg" />{{mode_type}}
+        </div>
+        <div class="cource-lesson-box-78564"> <img class="i-7685" src="assets/icon/smgroup-icon.svg" />{{capacity}}
+        </div>
+      </div>
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"> <img class="img1-789575" src="../../../assets/svg/cake.svg" />Student age
+          {{from_age}}-{{to_age}}</div>
+        <div class="cource-lesson-box-78564"> <img src="../../assets/svg/speaks.svg" alt=""
+            style="height: 16px;">{{language}}</div>
+      </div>
+    </div>
+     <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
         <div class="detail-heading-left--78524"
           style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: #7A7A7A;">
-          <img src="../../assets/svg/speaks.svg" alt="" style="height: 16px;">{{language}}
+          <img src="../../assets/svg/calander.svg" alt="" style="height: 16px;">{{startDate}} to {{endDate}}
         </div>
       </div>
       <div class="fs-16 outfit discription-text">
@@ -93,7 +67,7 @@
           Event Schedule
         </div>
         <div class="days-box">
-          <app-course-schedules *ngFor="let item of schedules" [item]="item" ></app-course-schedules>
+          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
         </div>
       </div>
     </div>

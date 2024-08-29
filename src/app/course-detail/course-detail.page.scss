@@ -1,3 +1,16 @@
+.image-card-78523{
+
+  height: 250px;
+  width: 100%;
+  background-image: url("../../assets/vedio.jpeg");
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  display: block;
+
+}
+
+
 .body-content {
 
   display: flex;
@@ -9,8 +22,91 @@
 
 .course-heading-78521 {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
+  color: black;
 
+
+}
+
+.cource-price-and-rating-box-78541{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+  .cource-price--78542{
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+  }
+
+  .cource-rating-box-78543{
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    .cource-rating-stars-78544{
+
+    }
+    .cource-rating-number-78545{
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      font-size: 16px;
+      font-weight: 600;
+
+
+    }
+  }
+}
+
+.cource-details-box-78561{
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  // align-items: center;
+
+
+  .cource-time-and-lessons-78562{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .cource-time-box-78563{
+
+      width: 60%;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-size: 16px;
+      font-weight: 400;
+      color: black;
+
+    }
+    .cource-lesson-box-78564{
+
+      width: 40%;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      justify-content: flex-start;
+      font-size: 16px;
+      font-weight: 400;
+      color: black;
+
+    }
+  }
 }
 
 .student-box-outer-689567 {

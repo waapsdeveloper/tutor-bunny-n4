@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from '../base-page/base-page';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-chat-requests',
@@ -10,7 +11,7 @@ export class ChatRequestsPage extends BasePage implements OnInit {
   request;
   user
   count;
-  constructor(injector:Injector) {
+  constructor(injector:Injector, public chats: ChatService ){
     super(injector)
     this.user = this.users.getUser();
     this.initialize()
@@ -21,7 +22,7 @@ export class ChatRequestsPage extends BasePage implements OnInit {
   }
 
   initialize(){
-    this.getRequstList()
+    this.chats.getChatRequsts()
   }
 
   async getRequstList() {
@@ -31,9 +32,6 @@ export class ChatRequestsPage extends BasePage implements OnInit {
     this.request = res.data;
   }
 
-  reloadList() {
-    this.getRequstList();
-    this.initialize()
-  }
+
 
 }
