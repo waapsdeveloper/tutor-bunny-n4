@@ -112,6 +112,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  getpriceRange(id) {
+    return this.httpPostResponse('min-max/' +  id, null, null, false, false);
+  }
+
   getTimeZone(data: any, id) {
     return this.httpPostResponse('users/timezone/' + id, data, null, false, false);
   }
@@ -122,6 +126,10 @@ export class NetworkService {
 
   getReviews(data: any) {
     return this.httpPostResponse('review-by-teacher-id', data, null, false, false);
+  }
+
+  getRecentSearchs(data: any) {
+    return this.httpPostResponse('recent-searches', data, null, false, false);
   }
 
   getAllTeachers() {
@@ -262,6 +270,12 @@ export class NetworkService {
   SubmitCourse(data) {
     return this.httpPostResponse('courses/add', data, null, true, true);
   }
+
+
+  setRecentSeach(data) {
+    return this.httpPostResponse('search/course/add', data, null, true, true);
+  }
+
   sendEmail(data) {
     return this.httpPostResponse('forget-password', data, null, true, true);
   }

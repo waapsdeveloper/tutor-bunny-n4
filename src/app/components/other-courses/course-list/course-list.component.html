@@ -14,7 +14,7 @@
       <div class="video-89654"
         [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
       <div class="video-para">{{item.title}}</div>
-      <div class="price-tag">${{item.price}}/month</div>
+      <div class="price-tag">{{item.auth_user_currency_symbol}} {{item.price}} /month</div>
     </div>
   </div>
 </div>

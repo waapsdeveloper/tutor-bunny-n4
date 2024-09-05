@@ -11,8 +11,9 @@ import { SubjectListComponent } from '../../sd-subject-box/subject-list/subject-
 })
 export class KeywordListComponent implements OnInit {
   list = [];
-  sub
-  search: "";
+  sub;
+  myArray: any[] = []
+  search: '';
   page = 1;
   selectedContactId: any = null;
   @Input() type = 'text';
@@ -25,39 +26,40 @@ export class KeywordListComponent implements OnInit {
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private modals: ModalService, private network: NetworkService, private events: EventsService) {
-
-  }
+  constructor(
+    private modals: ModalService,
+    private network: NetworkService,
+    private events: EventsService
+  ) {}
   ngOnDestroy(): void {
     this.events.publish('update-subs-list', {
-      subs: this.subs
+      subs: this.subs,
     });
   }
   ngOnInit() {
-
     this.events.subscribe('set-form-keywords-list', async (data: any) => {
       this.list = data;
-      this.search = "";
+      this.search = '';
       this.page = 1;
       this.callApi();
-    })
+    });
   }
 
   callApi() {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
       let obj = {
         search: this.search,
-        page: this.page
-      }
-      this.sub = await this.network.getKeywords(obj) as any[];
+        page: this.page,
+      };
+      this.sub = (await this.network.getKeywords(obj)) as any[];
       this.page = this.sub.current_page;
       if (this.page == 1) {
-        this.list = this.sub["data"];
+        this.list = this.sub['data'];
       } else {
-        this.list = [...this.list, ...this.sub["data"]]
+        this.list = [...this.list, ...this.sub['data']];
       }
       resolve(true);
-    })
+    });
   }
   async loadMore($event) {
     this.page = this.sub.current_page + 1;
@@ -68,16 +70,14 @@ export class KeywordListComponent implements OnInit {
     this.modals.dismiss(item);
   }
   isListItemSelected() {
-    return this.list.filter(x => x.checked == true).length > 0;
+    return this.list.filter((x) => x.checked == true).length > 0;
   }
   selectedsubject() {
-    let list = this.list.filter(x => x.checked == true);
+    let list = this.list.filter((x) => x.checked == true);
     this.modals.dismiss(list);
   }
   async openSubjectSelection() {
-    const res = (await this.modals.present(
-      SubjectListComponent,
-    )) as any;
+    const res = (await this.modals.present(SubjectListComponent)) as any;
     if (res.data) {
       this.onChange.emit(res.data);
     }
@@ -87,19 +87,19 @@ export class KeywordListComponent implements OnInit {
     if (this.inputText) {
       let obj = {
         course_id: course_Id,
-        name: this.inputText
-      }
+        name: this.inputText,
+      };
       // return;
-      const res = await this.network.addInputKeyword(obj)
+      const res = await this.network.addInputKeyword(obj);
       let data = {
         course_id: course_Id,
-      }
-      const res2 = await this.network.getMyKeyword(data)
+      };
+      const res2 = await this.network.getMyKeyword(data);
       this.inputText = '';
       this.subs = res2.result;
       this.suggestionsList = [];
       this.onChange.emit({
-        subs: this.subs
+        subs: this.subs,
       });
     }
   }
@@ -107,13 +107,13 @@ export class KeywordListComponent implements OnInit {
     this.noSugg = false;
     let v = $event.target.value;
     if (!v || v == '') {
-      this.suggestionsList = []
+      this.suggestionsList = [];
       return;
     }
     let obj = {
       search: v,
-      perpage: 5
-    }
+      perpage: 5,
+    };
     this.suggestionsList = [];
     const res = await this.network.getKeywords(obj);
     if (res.data) {
@@ -126,41 +126,54 @@ export class KeywordListComponent implements OnInit {
     }
   }
   async addToSubjects(item) {
-    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-    let obj = {
-      course_id: course_Id,
-      keyword_id: item.id
+    let formtype = localStorage.getItem('formtype');
+    console.log(formtype);
+    if ((formtype = 'filter')) {
+
+      this.inputText = '';
+      this.myArray.push(item);
+      this.subs = this.myArray;
+      console.log(this.subs);
+      this.onChange.emit({
+        subs: this.subs
+      });
+
+    } else {
+      let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+      let obj = {
+        course_id: course_Id,
+        keyword_id: item.id,
+      };
+
+      const res = await this.network.addKeyword(obj);
+
+      let data = {
+        course_id: course_Id,
+      };
+
+      const res2 = await this.network.getMyKeyword(data);
+      this.inputText = '';
+      this.subs = res2.result;
+
+      this.suggestionsList = [];
+
+      this.onChange.emit({
+        subs: this.subs,
+      });
     }
-
-    const res = await this.network.addKeyword(obj)
-
-    let data = {
-      course_id: course_Id,
-    }
-
-    const res2 = await this.network.getMyKeyword(data);
-    this.inputText = '';
-    this.subs = res2.result;
-
-    this.suggestionsList = [];
-
-    this.onChange.emit({
-      subs: this.subs
-    });
   }
   async removeMySubject(item) {
-    let index = this.subs.findIndex(x => x.id == item.id);
+    let index = this.subs.findIndex((x) => x.id == item.id);
     this.subs.splice(index, 1);
     let course_Id = JSON.parse(localStorage.getItem('course_Id'));
     let obj = {
       course_id: course_Id,
-      keyword_id: item.id
-    }
-    const res2 = await this.network.removeMyKeyword(obj)
+      keyword_id: item.id,
+    };
+    const res2 = await this.network.removeMyKeyword(obj);
     this.onChange.emit({
-      subs: this.subs
+      subs: this.subs,
     });
-
   }
   showAddSuggestionsButton() {
     if (!this.inputText) {
@@ -180,7 +193,7 @@ export class KeywordListComponent implements OnInit {
 
   selectedSubjects() {
     this.modals.dismiss({
-      subs: this.subs
+      subs: this.subs,
     });
   }
 }

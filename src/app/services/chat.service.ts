@@ -14,6 +14,7 @@ export class ChatService {
   count;
   requests;
   requestCount;
+  days;
 
   constructor(
     private users: UsersService,
@@ -56,9 +57,19 @@ export class ChatService {
         obj,
         item.chat_room_id
       );
+      this.getChatRequsts()
       this.getchatList()
       console.log(res);
       resolve;
     });
+  }
+
+  getChatMessages(id){
+    return new Promise(async (resolve) => {
+      let res = (await this.network.getMessages(id)) as any;
+      this.days = res.data;
+      console.log(this.days);
+      resolve
+    })
   }
 }

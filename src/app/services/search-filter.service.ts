@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { NetworkService } from './network.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchFilterService {
-
   formData = {
     keywords: null,
     language: null,
@@ -13,20 +13,28 @@ export class SearchFilterService {
     price: null,
     name: null,
     country: null,
-    state: null,
-    city: null,
-    zip_code: null,
     from_age: null,
-    to_age: null
+    to_age: null,
+    keyword_id: null,
+    hourly_rate: null,
+    country_id: null,
+    travel_policy_id: null,
   };
+  searchList: any[] = [];
+  countryId = null;
+  stateId = null;
+  keywords;
 
-  countryId= null;
-  stateId= null;
-
-  constructor() { }
+  constructor(private network: NetworkService) {}
 
   updateFormData(value: any, key: string): void {
     this.formData[key] = value;
+    if (key == 'keyword') {
+      console.log(key, value);
+      this.formData['keyword_id'] = value[0].id;
+      this.formData['keywords'] = value;
+      console.log(this.formData['keywords'], this.formData['keyword_id']);
+    }
     console.log(this.formData);
   }
 
@@ -34,8 +42,28 @@ export class SearchFilterService {
     return this.formData;
   }
 
-  submitFormData(): void {
-    console.log("Submitting form data:", this.formData);
+  async submitFormData(): Promise<void> {
+    console.log('Submitting form data:', this.formData);
+
+    let obj = {
+      search: '',
+      page: 1,
+      liked: false,
+      language_id: this.formData.language,
+      price: this.formData.price,
+      mode: this.formData.mode_type,
+      capacity: this.formData.capacity,
+      hourly_rate: this.formData.hourly_rate,
+      teacher_name: this.formData.name,
+      country_id: this.formData.country,
+      travel_policy_id: this.formData.travel_policy_id,
+      from_age: this.formData.from_age,
+      to_age: this.formData.to_age,
+      keyword_id: this.formData.keyword_id,
+      keyword: this.formData.keywords,
+    };
+    const res = (await this.network.getAllCourses(obj)) as any;
+    console.log(res);
     // Add additional logic for submission if needed.
   }
 
@@ -53,5 +81,19 @@ export class SearchFilterService {
 
   getStateId(): string | null {
     return this.stateId;
+  }
+
+  onKeyUp(search) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        search: search,
+        page: 1,
+        liked: false,
+      };
+      let res = (await this.network.getAllCourses(obj)) as any;
+      console.log(res);
+      this.searchList = res.result.data;
+      resolve;
+    });
   }
 }

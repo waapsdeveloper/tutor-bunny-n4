@@ -54,16 +54,22 @@
       justify-content: flex-start;
       gap: 16px;
       flex-wrap: wrap;
+      width: 100%;
 
       .recent-search-chip-78524 {
 
         font-size: 16px;
         font-weight: 400;
         color: #888787;
+        max-width: 27%;
         padding: 6px 16px;
         border-radius: 20px;
         background-color: #ffffff;
-        border: 0.5px solid rgba(69, 69, 69, 1);
+        border: 0.5px solid rgb(69, 69, 69);
+        text-wrap: nowrap;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
       }
     }
@@ -110,6 +116,23 @@
         background-color: #ffffff;
         border: 0.5px solid rgba(69, 69, 69, 1);
       }
+    }
+  }
+  .search-seggetion-box-78521{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 16px 32px 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+    .search-seggetion-title-78522{
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
     }
   }
 }
@@ -163,10 +186,12 @@
     input {
       background: transparent;
       border: none;
-      color: rgba(102, 102, 104, 0.5);
+      color: rgba(0, 0, 0, 0.5);
       flex-grow: 1;
     }
 
   }
+
+
 
 }

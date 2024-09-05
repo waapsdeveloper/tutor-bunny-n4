@@ -19,6 +19,8 @@ export class ChatRequestsPage extends BasePage implements OnInit {
    }
 
   ngOnInit() {
+    console.log();
+
   }
 
   initialize(){

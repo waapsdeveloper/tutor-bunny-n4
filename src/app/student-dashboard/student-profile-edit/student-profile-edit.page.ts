@@ -10,7 +10,10 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './student-profile-edit.page.html',
   styleUrls: ['./student-profile-edit.page.scss'],
 })
-export class StudentProfileEditPage extends BasePage implements OnInit, ViewWillEnter {
+export class StudentProfileEditPage
+  extends BasePage
+  implements OnInit, ViewWillEnter
+{
   params: any;
   backUrl = '/student-profile';
   showBack = false;
@@ -26,18 +29,18 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     dial_code: null,
     phone_number: null,
     image: null,
-    terms: false
+    terms: false,
   };
   countryId;
   stateId;
   hideTerms = false;
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
     this.initialize();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -48,15 +51,17 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     if (this.params.showBack) {
       this.showBack = this.params.showBack;
     }
-
-
   }
 
   async initialize() {
     this.user = this.users.getUser();
+    console.log(this.user);
+
     let obj = {
       email: this.user.email,
     };
+    console.log(obj);
+
     let res = await this.network.getUserByEmail(obj);
     if (res) {
       this.users.setUser(res.user);
@@ -73,9 +78,9 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
       this.formData['country'] = cnty;
       this.formData['dial_code'] = '+' + cnty.phonecode;
     }
-    const stt = data['student']['state']
+    const stt = data['student']['state'];
     if (stt) {
-      this.stateId = stt.id
+      this.stateId = stt.id;
       this.formData['state'] = stt;
       this.formData['state_id'] = stt.id;
     }
@@ -84,7 +89,8 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
     this.formData['city'] = data['student']['city'];
     this.formData['zip_code'] = data['student']['zip_code'];
     this.formData['image'] = data['image'];
-    this.formData['terms'] = data['student']['terms'] == 1 || data['student']['terms'] == true;
+    this.formData['terms'] =
+      data['student']['terms'] == 1 || data['student']['terms'] == true;
     if (this.formData['terms'] == true) {
       this.hideTerms = true;
     }
@@ -97,7 +103,7 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
       this.formData['country'] = value;
       this.formData['dial_code'] = '+' + value.phonecode;
     } else if (key == 'state') {
-      this.stateId = value.id
+      this.stateId = value.id;
       this.formData['state_id'] = value.id;
       this.formData['state'] = value;
     } else {
@@ -115,31 +121,42 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
 
       let obj = {
         user_id: user.id,
-        image: pmi
-      }
+        image: pmi,
+      };
 
-      const res = await this.network.postStudentPhotoIdImage(obj)
+      const res = await this.network.postStudentPhotoIdImage(obj);
       this.formData.image = res.result.image;
-
     };
     reader.readAsDataURL(file);
   }
+
   async submit() {
-    this.events.publish('student-profile-first-screen-submit-call', this.formData);
+    this.events.publish(
+      'student-profile-first-screen-submit-call',
+      this.formData
+    );
     const f = this.formData;
-    if (!f.name || !f.country || !f.state || !f.city || !f.zip_code || !f.dial_code || !f.phone_number || !f.dob || !f.terms) {
-      return
+    if (
+      !f.name ||
+      !f.country ||
+      !f.state ||
+      !f.city ||
+      !f.zip_code ||
+      !f.dial_code ||
+      !f.phone_number ||
+      !f.dob ||
+      !f.terms
+    ) {
+      return;
     }
     const user = JSON.parse(localStorage.getItem('user'));
-    const res = await this.network.updateStudentProfile(f, user.id)
+    const res = await this.network.updateStudentProfile(f, user.id);
     if (res) {
       let user = res.user;
-      this.users.setUser(user)
-      this.events.publish('get-user-after-submit-form', user)
-      this.nav.push('/tabs/student-dashboard')
+      this.users.setUser(user);
+      this.events.publish('get-user-after-submit-form', user);
+      this.nav.push('/tabs/student-dashboard');
     }
-
-
   }
 
   skipToStudentDashboard() {
@@ -147,7 +164,6 @@ export class StudentProfileEditPage extends BasePage implements OnInit, ViewWill
   }
 
   disableIfIncomplete() {
-    return !this.formData.terms
+    return !this.formData.terms;
   }
-
 }

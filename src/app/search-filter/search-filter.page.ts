@@ -7,15 +7,15 @@ import { SearchFilterService } from '../services/search-filter.service';
   styleUrls: ['./search-filter.page.scss'],
 })
 export class SearchFilterPage implements OnInit {
-
   countryId = null;
-  stateId: string | null = null;
+  formType = 'filter';
 
-  constructor(public searchFilterService: SearchFilterService) { }
+  constructor(public searchFilterService: SearchFilterService) {
+    localStorage.setItem('formtype', this.formType)
+  }
 
   ngOnInit() {
     this.countryId = this.searchFilterService.getCountryId();
-    this.stateId = this.searchFilterService.getStateId();
   }
 
   result(value: any, key: string): void {

@@ -6,18 +6,12 @@
 <div class="suggestions-list-outer">
   <div class="fs-14 outfit-light" *ngIf="suggestionsList.length > 0">Tap on suggestions to add (max 5)</div>
   <div class="suggestions-list-678564">
-
     <div class="sub-chips" *ngFor="let item of subs">
       <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item?.name}}
-        <!-- <ion-icon name="close-circle-outline"
-          (click)="removeMySubject(item)">
-        </ion-icon> -->
       </ion-chip>
     </div>
-
     <ion-chip class="fs-14 outfit-light sub-chips-76544" fill="clear" *ngFor="let item of suggestionsList"
       (click)="addToSubjects(item)">{{item.name}}</ion-chip>
   </div>
-
 </div>
 <app-sd-error-input-info *ngIf="isRequired" [errorText]="errorText"></app-sd-error-input-info>

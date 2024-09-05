@@ -9,6 +9,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 })
 export class LoginPage extends BasePage implements OnInit {
   step = 'login';
+  user;
   formData: any = {
     email: null,
     password: null,
@@ -23,6 +24,7 @@ export class LoginPage extends BasePage implements OnInit {
   public set role(value: any[]) {
     this._role = value;
   }
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -32,6 +34,7 @@ export class LoginPage extends BasePage implements OnInit {
   result(value, key) {
     this.formData[key] = value;
   }
+
   async submit() {
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
@@ -51,8 +54,44 @@ export class LoginPage extends BasePage implements OnInit {
     if (res) {
       localStorage.setItem('token', res.token);
       this.users.setUser(res.user);
-      this.modals.dismiss(res.user);
+      this.user = res.user;
+      let roleId = res.user.role_id;
+
+      const isProfileCompleted = await this.profiles.isProfileCompleted(
+        res.user
+      );
+
+      console.log(isProfileCompleted);
+
+      if (roleId === 3) {
+        if (!isProfileCompleted) {
+          this.step = 't_welcome';
+        } else {
+          this.modals.dismiss(res.user);
+        }
+      }
+      if (roleId === 2) {
+        if (!isProfileCompleted) {
+          this.step = 's_welcome';
+        } else {
+          this.modals.dismiss(res.user);
+        }
+      }
     }
+  }
+
+  continue(){
+    this.modals.dismiss(this.user);
+  }
+
+  studentContinue(key){
+    console.log(key);
+    let obj = {
+      user: this.user,
+      key: key
+    }
+    this.modals.dismiss(obj);
+
   }
 
   signUp() {
@@ -89,6 +128,8 @@ export class LoginPage extends BasePage implements OnInit {
       this.step = 'login';
     }
   }
+
+
 
   back() {
     this.modals.dismiss();

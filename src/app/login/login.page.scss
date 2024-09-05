@@ -30,27 +30,66 @@
   }
 }
 
-.image{
+.image {
   height: 18px;
 }
 
-.sign-up-box{
+.sign-up-box {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
-.not-have-account{
-  color: #A2A2A2;
+.not-have-account {
+  color: #a2a2a2;
 }
-.sign-up-span{
+.sign-up-span {
   color: #454545;
 }
 
-.input-title-2{
-    font-size: 14px;
-    color: black;
-    margin-bottom: 3px;
-    text-align: end;
+.input-title-2 {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 3px;
+  text-align: end;
 }
 
+.teacher-welcome-image-78521 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+}
+.teacher-welcome-center-text-box-78522 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  .teacher-welcome-top-text-78523 {
+
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #666666;
+
+  }
+  .teacher-welcome-center-text-78524 {
+
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #666666;
+
+  }
+}
+
+.student-buttons-78542{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+
+}

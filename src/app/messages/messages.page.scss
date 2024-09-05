@@ -36,21 +36,15 @@
 }
 
 .body-content {
-
   display: flex;
   align-items: stretch;
   overflow-y: auto;
   justify-content: center;
   flex-direction: column;
   gap: 16px;
-
-
-
-
 }
 
 .chat-day-heading-85621 {
-
   width: 100%;
   /* text-align: center; */
   font-size: 16px;
@@ -63,24 +57,20 @@
   justify-content: center;
 }
 
-
 .chat-right-box {
   display: flex;
   align-items: stretch;
   flex-direction: column;
   justify-content: flex-start;
-
 }
 
 .chat-left-box {
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
 .chat-send-85625 {
-
   width: 65%;
   display: flex;
   align-items: flex-end;
@@ -89,9 +79,8 @@
 }
 
 .chat-send-text-85626 {
-
   width: 100%;
-  background-color: #60AD394D;
+  background-color: #60ad394d;
   text-wrap: wrap;
   color: rgb(0, 0, 0);
   box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
@@ -99,7 +88,6 @@
   border-radius: 16px 16px 0 16px;
   font-size: 16px;
   font-weight: 400;
-
 }
 
 .chat-send-time-85627 {
@@ -109,7 +97,6 @@
 }
 
 .chat-recive-85622 {
-
   width: 65%;
   display: flex;
   align-items: flex-end;
@@ -118,7 +105,6 @@
 }
 
 .chat-recive-text-85623 {
-
   width: 100%;
   background-color: #ffffff;
   text-wrap: wrap;
@@ -126,29 +112,25 @@
   box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
   border-radius: 16px 16px 16px 0;
   font-size: 16px;
-  color: #0F0500;
+  color: #0f0500;
   font-weight: 400;
-
 }
 
 .chat-recive-time-85624 {
-
   color: #919090;
   font-size: 16px;
   font-weight: 400;
   margin-top: 8px;
-
 }
 
 .footer-box-78521 {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
   justify-content: space-between;
   padding: 16px;
 
   .input-box-78522 {
-
     width: 85%;
     background: white;
     display: flex;
@@ -165,9 +147,7 @@
       padding: 8px;
       border-radius: 15px;
       border: none;
-
     }
-
   }
 
   .send-box-78522 {
@@ -181,7 +161,6 @@
     box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
   }
 }
-
 
 ion-footer {
   background: #f5f5f5;
@@ -209,12 +188,23 @@ ion-footer {
 }
 
 .chat-online-98529 {
-
   display: flex;
   align-items: center;
   font-size: 16px;
   font-weight: 400;
   justify-content: flex-start;
   gap: 2px;
+}
 
+.chat-input {
+  width: 100%;
+  padding: 16px;
+  background: white;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  min-height: 1.5em; /* Minimum height for 1 line */
+  max-height: 9em; /* Maximum height for 6 lines */
+  overflow-y: auto; /* Show scroll if more than 6 lines */
+  resize: none; /* Disable manual resize */
 }

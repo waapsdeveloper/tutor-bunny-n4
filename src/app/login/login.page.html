@@ -3,6 +3,8 @@
     <div class="header-left-items-78956">
       <div class="header-title  roboto-regular " *ngIf="step === 'login'">Login to your account</div>
       <div class="header-title  roboto-regular " *ngIf="step === 'SignUp'">Register your account</div>
+      <div class="header-title  roboto-regular " *ngIf="step === 't_welcome'">Create Profile</div>
+      <div class="header-title  roboto-regular " *ngIf="step === 's_welcome'">Complete Profile</div>
     </div>
     <div class="header-right-items-78956" (click)="back()">
       <img class="image" src="../../assets/svg/cancel.svg" alt="">
@@ -10,7 +12,7 @@
   </div>
 </ion-header>
 
-<ion-content class="ion-padding ion-content-medium-background">
+<ion-content class="ion-padding ">
   <div class="body-content-68448" *ngIf="step === 'login'">
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
@@ -23,10 +25,9 @@
         <div class="input-title fs-12 roboto-medium">Password</div>
         <div class="input-title-2 fs-12 roboto-medium" (click)="forgetPassword()">Forgot?</div>
       </div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
-        (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
-        [errorText]="'Password is required'" [type]="'password'"
-        ></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Enter your password" (onChange)="result($event, 'password')" [inputText]="formData.password"
+        [key]="'password'" [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
     </div>
 
 
@@ -59,16 +60,16 @@
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
-        (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
-        [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Enter your password" (onChange)="result($event, 'password')" [inputText]="formData.password"
+        [key]="'password'" [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
     </div>
-
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Confirm Password </div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Re-enter your password"
-        (onChange)="result($event, 'confirm_password')" [inputText]="formData.confirm_password"
-        [key]="'confirm_password'" [errorText]="'Confirm Password is required'" [type]="'password'"></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Re-enter your password" (onChange)="result($event, 'confirm_password')"
+        [inputText]="formData.confirm_password" [key]="'confirm_password'" [errorText]="'Confirm Password is required'"
+        [type]="'password'"></app-sd-input-box>
     </div>
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
@@ -78,5 +79,41 @@
         <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>
       </div>
     </div>
+  </div>
+  <div class="body-content-68448" *ngIf="step === 's_welcome'">
+    <div class="teacher-welcome-image-78521">
+      <img src="../../assets/svg/student-welcome.svg" alt="">
+    </div>
+    <div class="teacher-welcome-center-text-box-78522">
+      <div class="teacher-welcome-top-text-78523"><img src="../../assets/svg/warnings.svg" alt="">Your profile is not
+        complete!</div>
+      <div class="teacher-welcome-center-text-78524">
+        Do you want to complete your profile now
+        <br>
+        to connect to the teachers?
+      </div>
+    </div>
+    <div class="student-buttons-78542">
+      <div style="width: 50%;">
+        <app-sd-button-gray [text]="'Yes'" (click)="studentContinue('yes')"></app-sd-button-gray>
+      </div>
+      <div style="width: 50%;">
+        <app-sd-button-clear [text]="'No'" (click)="studentContinue('yes')"></app-sd-button-clear>
+      </div>
+    </div>
+  </div>
+  <div class="body-content-68448" *ngIf="step === 't_welcome'">
+    <div class="teacher-welcome-image-78521">
+      <img src="../../assets/svg/teacher-complete.svg" alt="">
+    </div>
+    <div class="teacher-welcome-center-text-box-78522">
+      <div class="teacher-welcome-top-text-78523">Thanks for registering to Tutor Bunny.</div>
+      <div class="teacher-welcome-center-text-78524">
+        Please select <span style="font-weight: 700;">Continue</span> to create the
+        <br>
+        application to join Tutor bunny as a Teacher
+      </div>
+    </div>
+    <app-sd-button-gray [text]="'Continue'" (click)="continue()"></app-sd-button-gray>
   </div>
 </ion-content>
