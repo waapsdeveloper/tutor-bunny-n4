@@ -50,6 +50,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async sendMessage() {
+
+
+
+
     if (!this.message) {
       return;
     }
@@ -68,7 +72,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         },
       ],
     };
-    this.days.push(newMesg);
+    this.chats.days.push(newMesg);
+    console.log(this.chats.days);
+
+    console.log(newMesg);
+
     this.scrollToBottomOnInit();
 
     let obj = {
