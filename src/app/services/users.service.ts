@@ -65,7 +65,6 @@ export class UsersService {
       }
       try {
         let res = await this.network.getUserByToken()
-        console.log(res);
         this.setUser(res.user)
         resolve(res.user)
       } catch (err) {

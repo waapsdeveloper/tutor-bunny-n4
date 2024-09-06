@@ -51,7 +51,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     super(injector);
     this.initialize();
     this.user = this.users.getUser();
-    console.log(this.user);
     this.currency = this.user.teacher.country.currency_symbol;
 
   }
@@ -140,9 +139,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.formData['image'] = value.image;
     }
     else if (key == 'language') {
-      console.log(value);
       this.lang = value;
-      console.log(this.lang);
 
       this.formData['language'] = value;
       this.formData['language_id'] = this.lang.id;

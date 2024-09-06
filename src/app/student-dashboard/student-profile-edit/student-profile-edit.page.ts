@@ -4,6 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { CompleteProfileComponent } from './complete-profile/complete-profile.component';
 
 @Component({
   selector: 'app-student-profile-edit',
@@ -55,12 +56,10 @@ export class StudentProfileEditPage
 
   async initialize() {
     this.user = this.users.getUser();
-    console.log(this.user);
 
     let obj = {
       email: this.user.email,
     };
-    console.log(obj);
 
     let res = await this.network.getUserByEmail(obj);
     if (res) {
@@ -151,10 +150,23 @@ export class StudentProfileEditPage
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateStudentProfile(f, user.id);
+
     if (res) {
       let user = res.user;
       this.users.setUser(user);
       this.events.publish('get-user-after-submit-form', user);
+      let data = {
+        user_id: user.id,
+        profile_complete : 1
+      }
+      let res3 = await this.network.getIsProfileComplete(user.id, data)
+      console.log(res3);
+      let profile_complete = res.user.student.profile_complete;
+      console.log(profile_complete);
+      if(profile_complete == 0){
+        let res2 = await this.modals.present(CompleteProfileComponent, {}, "", 0.6)
+        console.log(res2);
+      }
       this.nav.push('/tabs/student-dashboard');
     }
   }

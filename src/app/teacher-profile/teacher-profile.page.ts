@@ -42,9 +42,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
   ionViewWillEnter() {
     this.user = this.users.getUser();
-    console.log(this.user);
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.email) {
       this.studentEmail = this.params.email;
     }
@@ -53,7 +51,6 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
 
   async initialize() {
     this.roleId = localStorage.getItem('role');
-    console.log(this.roleId);
 
     if (this.roleId == 3) {
       this.email = this.user.email;

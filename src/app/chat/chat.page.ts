@@ -41,14 +41,11 @@ export class ChatPage extends BasePage implements OnInit {
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);
-      console.log(this.user);
     }
     if (this.params.other_user_id) {
       this.other_user_id = JSON.parse(this.params.other_user_id);
-      console.log(this.other_user_id);
     }
     if (this.params.chat_room_id) {
       this.chat_room_id = this.params.chat_room_id;
@@ -70,11 +67,9 @@ export class ChatPage extends BasePage implements OnInit {
     this.chats.getchatList();
     // this.user_1 = this.users.getUser();
     // this.role_id = this.user_1.role_id;
-    // console.log(this.role_id);
     // let res = await this.network.getMessagesRoom(this.user_1.id)
     // this.chat = res.data;
     // let data = await this.network .getRequsetCount(this.user_1.id);
-    // console.log(data);
     // this.count = data.message.pending_count;
 
   }
@@ -103,7 +98,6 @@ export class ChatPage extends BasePage implements OnInit {
   }
 
   async gotoMessage(item) {
-    console.log(item);
     let params = {
       item: JSON.stringify(item)
     }
@@ -118,7 +112,6 @@ export class ChatPage extends BasePage implements OnInit {
 
   async getRequstList() {
     let res = await this.network.getRequestMessagesRoom(this.user_1.id);
-    console.log(res);
     this.request = res.data;
   }
 

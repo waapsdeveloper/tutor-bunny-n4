@@ -17,9 +17,7 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
 
-    console.log(value.user.image);
     this.displayName = this.utility.getAmericanName(value.user.name);
   }
 
@@ -28,20 +26,16 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
   userRating: number = 0;
   review = false;
   user;
-  displayName
+  displayName;
   constructor(injector: Injector) {
     super(injector);
     this.user = this.users.getUser();
-
   }
 
-  ngOnInit() {
-    console.log('sdf');
-  }
+  ngOnInit() {}
 
   onRatingChange(newRating: number) {
     this.userRating = newRating;
-    console.log('New rating:', newRating);
   }
 
   result(value) {
@@ -49,12 +43,12 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
   }
 
   async addReview() {
-    if(this.userRating <= 1){
-      this.showError = true
+    if (this.userRating <= 1) {
+      this.showError = true;
       setTimeout(() => {
         this.showError = false;
       }, 5000);
-      return
+      return;
     }
     let obj = {
       rating: this.userRating,
@@ -63,27 +57,27 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
       course_id: this.item.id,
       teacher_id: this.item.user.id,
     };
-    console.log(obj);
     // return
     let res = await this.network.addReview(obj);
-    console.log(res);
     if (res && res.message) {
-      const message =  "Review submitted";
+      const message = 'Review submitted';
       this.utility.presentSuccessToast(message);
       this.modals.dismiss();
     }
   }
 
   async presentAlert() {
-
-    const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Submit Review', 'Are you sure to submit the Review?')
+    const flag = await this.utility.presentConfirm(
+      'OK',
+      'Cancel',
+      'Submit Review',
+      'Are you sure to submit the Review?'
+    );
 
     if (flag) {
       this.addReview();
     }
-
   }
-
 
   cancel() {
     this.modals.dismiss();

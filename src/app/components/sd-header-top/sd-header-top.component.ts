@@ -42,8 +42,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
       this.parentBack.emit();
     } else {
       this.nav.pop(this.backUrl);
-      console.log(this.backUrl);
-      
+
     }
 
   }
@@ -58,12 +57,10 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
     })
   }
   async addtoFav() {
-    console.log("add");
 
     this.addToFav.emit()
   }
   removeToFav() {
-    console.log("remove");
 
     this.removetoFav.emit()
 

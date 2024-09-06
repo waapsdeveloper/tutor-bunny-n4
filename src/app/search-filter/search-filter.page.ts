@@ -29,7 +29,6 @@ export class SearchFilterPage extends BasePage implements OnInit {
 
   async submit(): Promise<void> {
     let res = await this.searchFilterService.submitFormData() as any;
-    console.log(res);
 
   }
 }

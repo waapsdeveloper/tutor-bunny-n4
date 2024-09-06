@@ -19,7 +19,6 @@ export class ChatRequestsPage extends BasePage implements OnInit {
    }
 
   ngOnInit() {
-    console.log();
 
   }
 
@@ -29,7 +28,6 @@ export class ChatRequestsPage extends BasePage implements OnInit {
 
   async getRequstList() {
     let res = await this.network.getRequestMessagesRoom(this.user.id);
-    console.log(res);
     this.count = res.total;
     this.request = res.data;
   }

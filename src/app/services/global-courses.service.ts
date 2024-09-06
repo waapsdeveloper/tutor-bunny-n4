@@ -40,21 +40,17 @@ export class GlobalCoursesService {
   }
 
   courseChannelReceived($event: any) {
-    console.log($event);
     this.events.publish('get-dashboard-stats');
     this.updateCourseList($event);
   }
 
   async updateCourseList(data: any) {
-    console.log(data);
     let course_Id = data.course_id;
     if (course_Id) {
       let res = (await this.network.getcourseById(course_Id)) as any;
-      console.log(res);
       const course = res.course;
       if (course) {
         const index = this.courses.findIndex((c) => c.id == course.id);
-        console.log(index);
         if (index != -1) {
           this.courses[index] = course;
         } else {
@@ -97,14 +93,11 @@ export class GlobalCoursesService {
 
   setOtherCourseUpdateLOgic(course: any) {
     let ouid = -1;
-    console.log(ouid);
     if (this.otherCourses.length > 0) {
       let a = this.otherCourses[0].user_id;
       let b = course.user_id;
-      console.log(a, b);
       if (a == b) {
         ouid = a;
-        console.log(ouid);
       }
     }
     if (ouid != -1) {
@@ -113,15 +106,12 @@ export class GlobalCoursesService {
         // you found it here
         if (course.status == 'inactive') {
           this.otherCourses.splice(findIndexO, 1);
-          console.log(this.otherCourses);
         } else {
           this.otherCourses[findIndexO] = course;
-          console.log(this.otherCourses);
         }
       } else {
         if (course.status != 'inactive') {
           this.otherCourses.push(course);
-          console.log(this.otherCourses);
         }
       }
     }
@@ -207,9 +197,7 @@ export class GlobalCoursesService {
     const index = this.courses.findIndex((x) => x.id == obj.id);
     if (index > -1) {
       this.courses[index].is_liked_by_me = false;
-      console.log(`Removed favorite:`, obj);
     } else {
-      console.log(`Favorite not found:`, obj);
     }
   }
 
@@ -217,9 +205,7 @@ export class GlobalCoursesService {
     const index = this.courses.findIndex((x) => x.id == obj.id);
     if (index > -1) {
       this.courses[index].is_liked_by_me = true;
-      console.log(`Added favorite:`, obj);
     } else {
-      console.log(`Favorite already exists:`, obj);
     }
   }
 
@@ -275,9 +261,7 @@ export class GlobalCoursesService {
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index > -1) {
       this.favorites.splice(index, 1);
-      console.log(`Removed favorite:`, obj);
     } else {
-      console.log(`Favorite not found:`, obj);
     }
 
     this.removeFavorite(obj, user);
@@ -293,9 +277,7 @@ export class GlobalCoursesService {
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);
-      console.log(`Added favorite:`, obj);
     } else {
-      console.log(`Favorite already exists:`, obj);
     }
 
     this.addFavorite(obj, user);

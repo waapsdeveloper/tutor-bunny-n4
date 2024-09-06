@@ -25,7 +25,6 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    // console.log(value);
     this.is_read = value.is_read;
   }
   time;
@@ -71,15 +70,11 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
     if (item.user_id != this.user_id) {
       if (item.is_read == 0) {
         let obj = { ids: [item.id] };
-        console.log(obj);
         let res = await this.network.getNotificationRead(obj);
-        console.log(res);
         this.reloadList.emit(res.data);
       } else {
-        console.log('SDdsfdsfsd');
       }
     } else {
-      console.log('12345678');
     }
   }
 }

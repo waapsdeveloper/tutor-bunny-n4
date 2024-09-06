@@ -14,7 +14,7 @@ export class SearchBoxPage extends BasePage implements OnInit {
   user;
   recentSearch;
 
-  constructor(injector: Injector, public filter : SearchFilterService) {
+  constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
     this.user = this.users.getUser();
 
@@ -28,7 +28,6 @@ export class SearchBoxPage extends BasePage implements OnInit {
       user_id: this.user.id,
     };
     let res = await this.network.getRecentSearchs(obj);
-    console.log(res);
     this.recentSearch = res.result;
   }
 
@@ -43,40 +42,34 @@ export class SearchBoxPage extends BasePage implements OnInit {
   async onKeyUp(event: any) {
     this.search = event.target.value;
 
-    let res =  this.filter.onKeyUp(this.search)
-    console.log(res);
-
+    let res = this.filter.onKeyUp(this.search);
   }
 
   async setRecentSeach(item) {
-    console.log(item);
     let obj = {
       user_id: this.user.id,
       course_title: item.title,
       course_id: item.id,
     };
-    console.log(obj);
     let res = await this.network.setRecentSeach(obj);
-    console.log(res);
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard',
     };
-    this.nav.push('student-course-detail', params);
+    this.nav.push('search-result', params);
   }
+
+
 
   async onSearch(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const searchTerm = inputElement.value;
-    console.log('Search Term:', searchTerm);
     let obj = {
       user_id: this.user.id,
       course_title: searchTerm,
       course_id: null,
     };
-    console.log(obj);
     let res = await this.network.setRecentSeach(obj);
-    console.log(res);
     const params = {
       title: searchTerm,
     };
@@ -92,8 +85,6 @@ export class SearchBoxPage extends BasePage implements OnInit {
         liked: false,
       };
       const res = (await this.network.getAllCourses(obj)) as any;
-      console.log(res);
-
       const data = res.result;
       this.searchList = data.data;
     } else {

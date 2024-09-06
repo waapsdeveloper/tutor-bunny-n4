@@ -69,16 +69,13 @@ export class TeacherProfileEditPage
   }
 
   ngOnInit() {
-    console.log('sd');
   }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
-      console.log(this.backUrl);
     }
 
     if (this.params.title) {
@@ -127,7 +124,6 @@ export class TeacherProfileEditPage
     }
   }
   setFormDta(data) {
-    console.log(data);
 
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
@@ -150,7 +146,6 @@ export class TeacherProfileEditPage
     this.formData['hourly_rate'] = data['teacher']['hourly_rate'];
     const travel = data['teacher']['travel_policy'];
     if(travel){
-      console.log(travel);
 
       this.travel_policy_name = travel.name;
       this.formData['travel_policy'] = travel;
@@ -191,7 +186,6 @@ export class TeacherProfileEditPage
       this.formData
     );
     const f = this.formData;
-    console.log(f);
 
     if (
       !f.name ||
@@ -221,7 +215,6 @@ export class TeacherProfileEditPage
     const data = this.formData;
     this.userId = this.user.id;
     const f = this.formData;
-    console.log(f);
 
     this.events.publish(
       'teacher-profile-third-screen-submit-call',
@@ -237,7 +230,6 @@ export class TeacherProfileEditPage
       f.qualification_description.length < 250 ||
       f.experience_description.length < 250
     ) {
-      console.log('sdasadas');
       return;
     }
     if (!f.certificate) {
@@ -246,11 +238,8 @@ export class TeacherProfileEditPage
     if (!this.formData.terms) {
       return;
     }
-    console.log('hi');
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(f);
     const res = await this.network.updateTeacherProfile(f, user.id);
-    console.log(res);
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }

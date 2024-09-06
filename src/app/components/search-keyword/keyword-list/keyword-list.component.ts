@@ -127,13 +127,11 @@ export class KeywordListComponent implements OnInit {
   }
   async addToSubjects(item) {
     let formtype = localStorage.getItem('formtype');
-    console.log(formtype);
     if ((formtype = 'filter')) {
 
       this.inputText = '';
       this.myArray.push(item);
       this.subs = this.myArray;
-      console.log(this.subs);
       this.onChange.emit({
         subs: this.subs
       });

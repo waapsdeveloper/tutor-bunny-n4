@@ -32,17 +32,14 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     let trail_Id = data.id;
     this.initialize();
     this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
-    console.log(this.newTrial);
     if (this.newTrial) {
       const index = this.trial.findIndex(c => c.id === this.newTrial.id);
       if (index !== -1) {
         this.list[index] = this.newTrial;
-        console.log(this.list);
 
       } else {
         this.list = [this.newTrial, ...this.trial];
-        console.log(this.list);
-        
+
       }
     }
   }

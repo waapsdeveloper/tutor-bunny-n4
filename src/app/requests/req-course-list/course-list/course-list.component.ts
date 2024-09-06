@@ -27,7 +27,6 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
     this.initialize(value);
     this.flag = this.getFlag();
     this.status = value.trial ? value.trial.status : null;
@@ -40,7 +39,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
 
     if (data && data.trial) {
-      console.log(data);
 
       this.blocked = data.trial.status
 

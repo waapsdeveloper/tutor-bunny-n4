@@ -142,6 +142,14 @@ const routes: Routes = [
     path: 'reviews-by-student',
     loadChildren: () => import('./reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
+  {
+    path: 'search-result',
+    loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
+  },  {
+    path: 'teacher-welcome',
+    loadChildren: () => import('./teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
+  },
+
 ];
 
 @NgModule({

@@ -45,7 +45,6 @@ export class AppComponent {
         event.preventDefault();
         event.stopPropagation();
         const url = this.router.url;
-        console.log(url);
         this.createBackRoutingLogics(url);
       },
       false

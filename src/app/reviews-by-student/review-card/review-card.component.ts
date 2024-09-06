@@ -18,7 +18,6 @@ export class ReviewCardComponent  implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
     this.flag = this.getFlag();
     this.rating = value.rating;
   }
@@ -29,7 +28,6 @@ export class ReviewCardComponent  implements OnInit {
 
 
   getFlag() {
-    console.log(this.item);
 
     if (this.item && this.item.user.student && this.item.user.student.country) {
       const flag = this.item.user.student.country.iso2;

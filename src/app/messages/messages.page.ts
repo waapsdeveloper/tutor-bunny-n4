@@ -69,7 +69,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       ],
     };
     this.days.push(newMesg);
-    console.log(newMesg);
     this.scrollToBottomOnInit();
 
     let obj = {
@@ -91,7 +90,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.params = this.nav.getQueryParams();
     if (this.params.item) {
       this.item = JSON.parse(this.params.item);
-      console.log(this.item);
       this.scrollToBottomOnInit();
       this.initialize();
       this.user = this.users.getUser();
@@ -173,7 +171,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   scrollToBottomOnInit() {
     setTimeout(() => {
-      console.log("dssfssdf");
 
       this.myContent.scrollToBottom(100);
     }, 500);

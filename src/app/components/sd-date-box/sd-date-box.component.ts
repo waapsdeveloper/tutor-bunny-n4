@@ -43,9 +43,7 @@ export class SdDateBoxComponent implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-      console.log(formData);
 
-      console.log(formData)
       this.startDate = formData.start_date;
       this.endDate = formData.end_date
     })
@@ -56,7 +54,6 @@ export class SdDateBoxComponent implements OnInit {
 
 
   closeDateModal($event, type, modal: IonModal) {
-    console.log($event);
     let v = $event.detail.value;
     if (type == 'start_date') {
       this.selectedDates.start_date = v;

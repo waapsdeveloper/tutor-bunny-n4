@@ -48,9 +48,7 @@ export class MyFavoritesService {
     const index = this.favorites.findIndex(x => x.id == obj.id);
     if (index > -1) {
       this.favorites.splice(index, 1);
-      console.log(`Removed favorite:`, obj);
     } else {
-      console.log(`Favorite not found:`, obj);
     }
 
     this.gC.removeFavorite(obj, user)
@@ -68,9 +66,7 @@ export class MyFavoritesService {
     const index = this.favorites.findIndex(x => x.id == obj.id);
     if (index == -1) {
       this.favorites.push(obj);
-      console.log(`Added favorite:`, obj);
     } else {
-      console.log(`Favorite already exists:`, obj);
     }
 
     this.gC.addFavorite(obj, user)

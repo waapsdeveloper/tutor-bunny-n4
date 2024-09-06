@@ -7,7 +7,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./my-gallery.component.scss'],
 })
 export class MyGalleryComponent extends BasePage implements OnInit {
-  
+
   @Input() user;
 
   user_Id;
@@ -18,9 +18,8 @@ export class MyGalleryComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.user);
     this.user_Id = this.user.id
-    
+
    }
 
   goToGallery() {

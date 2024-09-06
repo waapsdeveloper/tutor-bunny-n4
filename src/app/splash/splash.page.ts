@@ -16,7 +16,6 @@ export class SplashPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   ngOnInit() {
-    console.log();
   }
   ionViewWillEnter(): void {
     this.initialize();
@@ -24,21 +23,17 @@ export class SplashPage extends BasePage implements OnInit, ViewWillEnter {
 
   async initialize() {
     let res = await this.users.getLoginUser();
-    console.log(res);
 
     if (res) {
-      console.log(res);
       this.redirectDependsOnRole(res)
     } else {
       this.nav.push('/role-base');
     }
   }
   async redirectDependsOnRole(user) {
-    console.log(user);
     const isProfileCompleted = await this.profiles.isProfileCompleted(user);
     const roleId = parseInt(user.role_id);
     let role_Id = localStorage.getItem('role')
-    console.log(role_Id);
     if (parseInt(role_Id) === roleId) {
 
       if (roleId === 3) {
@@ -67,7 +62,6 @@ export class SplashPage extends BasePage implements OnInit, ViewWillEnter {
 
       }
     } else {
-      console.log("Role IDs are not equal");
       if (roleId === 3) {
         const message = "This account is alredy login as a teacher";
         this.utility.presentFailureToast(message);

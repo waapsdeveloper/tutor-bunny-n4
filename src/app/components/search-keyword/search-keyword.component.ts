@@ -72,7 +72,6 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     })) as any;
 
     if (res.data) {
-      console.log(res);
 
       if (res.data.subs) {
         this.subs = res.data.subs;

@@ -32,7 +32,6 @@ export class RequestListComponent extends BasePage implements OnInit {
   }
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
-    console.log(this.count);
 
   }
 
@@ -44,7 +43,6 @@ export class RequestListComponent extends BasePage implements OnInit {
   ngOnInit() { }
 
   getFlag() {
-    console.log(this.item);
 
     if (this.item && this.item.user.student && this.item.user.student.country) {
       const flag = this.item.user.student.country.iso2;
@@ -60,11 +58,6 @@ export class RequestListComponent extends BasePage implements OnInit {
   async updaeStatus(value, item) {
 
     this.chats.chatRequstUpdateStatus(value, item)
-    // console.log(value);
-    // let obj = {
-    //   request_status: value
-    // }
-    // let res = await this.network.updateMessageReaquest(obj, item.chat_room_id);
-    // console.log(res);
+
   }
 }

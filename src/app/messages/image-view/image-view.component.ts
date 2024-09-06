@@ -5,13 +5,12 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './image-view.component.html',
   styleUrls: ['./image-view.component.scss'],
 })
-export class ImageViewComponent  implements OnInit {  
+export class ImageViewComponent  implements OnInit {
 
   @Input() image;
 
   constructor() {
-    console.log(this.image);
-    
+
    }
 
   ngOnInit() {}

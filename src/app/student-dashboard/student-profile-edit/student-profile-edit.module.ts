@@ -18,6 +18,7 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
 import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.module';
 import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
 import { SdDailcodeBoxModule } from 'src/app/components/sd-dailcode-box/sd-dailcode-box.module';
+import { CompleteProfileModule } from './complete-profile/complete-profile.module';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { SdDailcodeBoxModule } from 'src/app/components/sd-dailcode-box/sd-dailc
     SdLanguageBoxModule,
     AcceptTermsProfileModule,
     SdYearBoxModule,
-    SdDailcodeBoxModule
+    SdDailcodeBoxModule,
+    CompleteProfileModule
   ],
   declarations: [StudentProfileEditPage],
 })

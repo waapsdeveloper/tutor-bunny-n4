@@ -16,7 +16,6 @@ export class TeacherQualificationComponent extends BasePage implements OnInit {
 
   public set user(value: any) {
     this._user = value;
-    console.log(value);
   }
 
   constructor(injector: Injector) {
@@ -24,7 +23,6 @@ export class TeacherQualificationComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log();
 
   }
 

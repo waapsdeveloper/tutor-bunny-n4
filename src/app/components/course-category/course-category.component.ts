@@ -57,8 +57,7 @@ export class CourseCategoryComponent extends BasePage implements OnInit {
 
 
     this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
-      console.log(formData);
-      
+
       if (!formData.category) {
         this.isRequired = true;
         setTimeout(() => {

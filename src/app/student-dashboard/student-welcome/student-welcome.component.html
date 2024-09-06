@@ -1,0 +1,33 @@
+<ion-header>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <div class="header-title  roboto-regular ">Complete Profile</div>
+    </div>
+
+  </div>
+</ion-header>
+<ion-content  class="ion-padding ">
+
+  <div class="body-content-68448">
+    <div class="teacher-welcome-image-78521">
+      <img src="../../assets/svg/student-welcome.svg" alt="">
+    </div>
+    <div class="teacher-welcome-center-text-box-78522">
+      <div class="teacher-welcome-top-text-78523"><img src="../../assets/svg/warnings.svg" alt="">Your profile is not
+        complete!</div>
+      <div class="teacher-welcome-center-text-78524">
+        Do you want to complete your profile now
+        <br>
+        to connect to the teachers?
+      </div>
+    </div>
+    <div class="student-buttons-78542">
+      <div style="width: 50%;">
+        <app-sd-button-gray [text]="'Yes'" (click)="studentContinue(1)"></app-sd-button-gray>
+      </div>
+      <div style="width: 50%;">
+        <app-sd-button-clear [text]="'No'" (click)="studentContinue(0)"></app-sd-button-clear>
+      </div>
+    </div>
+  </div>
+</ion-content>

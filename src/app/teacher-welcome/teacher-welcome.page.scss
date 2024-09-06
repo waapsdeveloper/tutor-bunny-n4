@@ -1,0 +1,72 @@
+
+.teacher-welcome-image-78521 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+}
+.teacher-welcome-center-text-box-78522 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  .teacher-welcome-top-text-78523 {
+
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #666666;
+
+  }
+  .teacher-welcome-center-text-78524 {
+
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #666666;
+
+  }
+}
+
+.student-buttons-78542{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+
+}
+
+.top-header-78956 {
+  background: #ffffff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+
+  .header-left-items-78956 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+
+    .header-title {
+      color: #393939;
+      font-size: 20px;
+    }
+  }
+
+  .header-right-items-78956 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+  }
+}

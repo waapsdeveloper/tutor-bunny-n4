@@ -20,14 +20,7 @@ export class CertificateImageComponent extends BasePage implements OnInit {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    console.log(file);
-    
-    // this.handleFile(file,
-    //   this.network.postProfileImage.bind(this.network), (image: string) => {
-    //     this.certificate = image;
-    //     this.updateCertificate.emit(this.certificate);
-    //   }
-    // );
+
   }
 
 

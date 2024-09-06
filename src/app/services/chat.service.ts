@@ -26,11 +26,9 @@ export class ChatService {
     return new Promise(async (resolve) => {
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;
-      console.log(this.role_id);
       let res = await this.network.getMessagesRoom(this.user.id);
       this.chats = res.data;
       let data = await this.network.getRequsetCount(this.user.id);
-      console.log(data);
       this.count = data.message.pending_count;
       resolve(this.chats);
       return;
@@ -40,7 +38,6 @@ export class ChatService {
   getChatRequsts() {
     return new Promise(async (resolve) => {
       let res = await this.network.getRequestMessagesRoom(this.user.id);
-      console.log(res);
       this.requestCount = res.total;
       this.requests = res.data;
       resolve
@@ -49,7 +46,6 @@ export class ChatService {
 
   async chatRequstUpdateStatus(value, item) {
     return new Promise(async (resolve) => {
-      console.log(value, item);
       let obj = {
         request_status: value,
       };
@@ -59,7 +55,6 @@ export class ChatService {
       );
       this.getChatRequsts()
       this.getchatList()
-      console.log(res);
       resolve;
     });
   }
@@ -68,7 +63,6 @@ export class ChatService {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
-      console.log(this.days);
       resolve
     })
   }

@@ -12,6 +12,7 @@ import { RecCoursesModule } from './rec-courses/rec-courses.module';
 import { RecTeachersModule } from './rec-teachers/rec-teachers.module';
 import { SearchBoxModule } from './search-box/search-box.module';
 import { RecTechersBoxModule } from './rec-techers-box/rec-techers-box.module';
+import { StudentWelcomeModule } from './student-welcome/student-welcome.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { RecTechersBoxModule } from './rec-techers-box/rec-techers-box.module';
     RecTeachersModule,
     RecCoursesModule,
     SearchBoxModule,
-    RecTechersBoxModule
+    RecTechersBoxModule,
+    StudentWelcomeModule
   ],
   declarations: [StudentDashboardPage]
 })

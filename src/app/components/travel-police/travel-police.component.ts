@@ -25,7 +25,6 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
   public set travel_policy(value: any){
     this._travel_policy = value;
     if(value && value.name){
-      console.log(value);
 
       this.selectedtravelpolicy = value;
     }
@@ -51,8 +50,6 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
     this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
-      console.log(v);
-
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {

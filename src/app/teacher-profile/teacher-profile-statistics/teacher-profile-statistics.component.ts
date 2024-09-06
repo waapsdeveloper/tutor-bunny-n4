@@ -16,7 +16,6 @@ export class TeacherProfileStatisticsComponent implements OnInit {
   public set experince(value: any) {
     this._experince = value;
     this.calculateAge()
-    console.log(value);
   }
   year
 

@@ -28,7 +28,6 @@ export class CourseListComponent extends BasePage  implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
 
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
@@ -97,7 +96,6 @@ export class CourseListComponent extends BasePage  implements OnInit {
     this.user = this.users.getUser()
 
     let v = await this.profiles.isProfileCompleted(this.user) as any;;
-    console.log(v);
 
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {
@@ -164,7 +162,6 @@ export class CourseListComponent extends BasePage  implements OnInit {
     this.trail = false;
   }
   async goToChat(data) {
-    console.log(data);
     let id = this.user.id;
 
     let obj= {
@@ -174,7 +171,6 @@ export class CourseListComponent extends BasePage  implements OnInit {
 
 
     let res = await this.network.getChadRoomId(obj)
-    console.log(res);
 
 
     let params = {

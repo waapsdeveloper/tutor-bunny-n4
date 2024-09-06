@@ -19,9 +19,8 @@ export class GalleryListComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
     if (this.params.id) {
       this.userId = this.params.id;
     }

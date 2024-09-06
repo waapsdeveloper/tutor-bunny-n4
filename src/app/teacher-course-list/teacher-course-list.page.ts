@@ -16,7 +16,6 @@ export class TeacherCourseListPage extends BasePage implements OnInit {
    }
 
   ngOnInit() {
-    console.log();
   }
 
 

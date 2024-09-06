@@ -17,7 +17,6 @@ export class ChatListComponent extends BasePage  implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
     const time = this.item.updated_at;
     this.time = moment(time).format('hh:mm a');
   }
@@ -32,7 +31,6 @@ export class ChatListComponent extends BasePage  implements OnInit {
   ngOnInit() {}
 
   async gotoMessage(item) {
-    console.log(item);
     let params = {
       item: JSON.stringify(item)
     }

@@ -9,6 +9,7 @@ import { FavCoursesPage } from '../fav-courses/fav-courses.page';
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
+import { StudentWelcomeComponent } from './student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -33,12 +34,13 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     this.initialize();
     this.getlists();
 
+
+
   }
 
   ngOnInit() {
     this.events.subscribe('update-course-list', () => {
       this.getlists();
-      console.log("Dsadasd");
 
     });
 
@@ -58,7 +60,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.initialize()
   }
   gotoNotification() {
     this.nav.push('notifications', {
@@ -69,7 +70,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async initialize() {
 
     this.user = this.users.getUser();
-    console.log(this.user);
     this.events.registerPusherEvent(this.user.id)
     let obj = {
       email: this.user.email,
@@ -83,14 +83,29 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
+    const isProfileCompleted = await this.profiles.isProfileCompleted(this.user);
+
+    if(!isProfileCompleted){
+      let res = await this.modals.present(StudentWelcomeComponent, {} , "", 0.6)
+      console.log(res,"dfsfsdfdf");
+
+      let key = res.data.key;
+
+      if(key == 1){
+        this.nav.push('/student-profile/student-profile-edit', {
+          backUrl: '/tabs/student-dashboard',
+          showBack: true,
+        });
+      }
+
+    }
+
     this.utcTime = moment().utcOffset();
     let time = {
       timezone_offset: this.utcTime,
     };
-    console.log(this.utcTime);
 
     let data = await this.network.getTimeZone(time, this.user.id);
-    console.log(data);
 
     if (this.user && this.user.student && this.user.student.country && this.user.student.country.name) {
       this.country = this.user.student.country.name;

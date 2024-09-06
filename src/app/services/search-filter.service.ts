@@ -30,12 +30,9 @@ export class SearchFilterService {
   updateFormData(value: any, key: string): void {
     this.formData[key] = value;
     if (key == 'keyword') {
-      console.log(key, value);
       this.formData['keyword_id'] = value[0].id;
       this.formData['keywords'] = value;
-      console.log(this.formData['keywords'], this.formData['keyword_id']);
     }
-    console.log(this.formData);
   }
 
   getFormData(): any {
@@ -44,7 +41,6 @@ export class SearchFilterService {
 
   async submitFormData(): Promise<void> {
     return new Promise(async (resolve) => {
-    console.log('Submitting form data:', this.formData);
 
     let obj = {
       search: '',
@@ -64,7 +60,6 @@ export class SearchFilterService {
       keyword: this.formData.keywords,
     };
     const res = (await this.network.getAllCourses(obj)) as any;
-    console.log(res);
     this.searchList = res.result.data;
     resolve(res);
     });
@@ -95,7 +90,6 @@ export class SearchFilterService {
         liked: false,
       };
       let res = (await this.network.getAllCourses(obj)) as any;
-      console.log(res);
       this.searchList = res.result.data;
       resolve;
     });

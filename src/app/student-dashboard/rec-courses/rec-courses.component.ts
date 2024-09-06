@@ -14,8 +14,6 @@ export class RecCoursesComponent extends BasePage {
   }
 
   async handleRefresh(event) {
-    // await this.getCourses('', 1);
-    console.log("sdfsdf");
 
     await this.globalCourses.getCoursesFromApi('', 1);
     event.target.complete();

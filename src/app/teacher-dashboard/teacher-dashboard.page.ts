@@ -89,10 +89,8 @@ export class TeacherDashboardPage extends BasePage {
     let time = {
       timezone_offset: this.utcTime,
     };
-    console.log(this.utcTime);
 
     let data = await this.network.getTimeZone(time, this.user.id);
-    console.log(data);
 
 
     if (res) {

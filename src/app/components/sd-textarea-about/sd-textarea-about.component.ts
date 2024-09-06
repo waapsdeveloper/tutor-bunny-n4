@@ -91,7 +91,6 @@ export class SdTextareaAboutComponent implements OnInit {
       'teacher-profile-third-screen-submit-call',
       (formData: any) => {
         let v = formData[this.key];
-        console.log(v);
 
         if (
           this.key == 'experience_description'
@@ -120,7 +119,6 @@ export class SdTextareaAboutComponent implements OnInit {
       'teacher-profile-third-screen-submit-call',
       (formData: any) => {
         let v = formData[this.key];
-        console.log(v);
 
         if (
          this.key == 'qualification_description'

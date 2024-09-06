@@ -24,7 +24,6 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
   async callApi() {
     try {
       let res = await this.network.getpriceRange(this.user.id);
-      console.log(res);
 
       this.minValue = res.min_price;
       this.maxValue = res.max_price;
@@ -42,7 +41,6 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
   }
 
   onRangeChange(event: any) {
-    console.log('Range value changed to:', event.detail.value);
     this.currentValue = event.detail.value;
     this.onChange.emit(this.currentValue);
 

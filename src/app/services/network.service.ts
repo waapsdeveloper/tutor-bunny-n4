@@ -116,6 +116,10 @@ export class NetworkService {
     return this.httpPostResponse('min-max/' +  id, null, null, false, false);
   }
 
+  getIsProfileComplete(id, data) {
+    return this.httpPostResponse('profile-complete/' +  id, data, null, false, false);
+  }
+
   getTimeZone(data: any, id) {
     return this.httpPostResponse('users/timezone/' + id, data, null, false, false);
   }
