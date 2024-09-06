@@ -14,7 +14,7 @@
           <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><img
               src="../../assets/svg/cake.svg" alt="">Age {{age}}</div>
           <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span *ngIf="flag"
-              slot="start" class="fi fi-{{flag}}"></span>India</div>
+              slot="start" class="fi fi-{{flag}}"></span>{{item.user.student.country.name}}</div>
         </div>
         <div class="chat-message-98531">
           <img src="../../assets/svg/accept-green.svg" alt="" (click)="updaeStatus('accept', item)">
@@ -27,4 +27,3 @@
 <div *ngIf="item.length === 0">
   No new requests
 </div>
-

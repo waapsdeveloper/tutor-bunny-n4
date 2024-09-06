@@ -69,6 +69,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       ],
     };
     this.days.push(newMesg);
+    console.log(newMesg);
     this.scrollToBottomOnInit();
 
     let obj = {
@@ -78,8 +79,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     };
     this.message = '';
     this.messageInput.nativeElement.value = '';
+    this.adjustHeight(this.messageInput.nativeElement)
+
     let res = await this.network.sendMessage(obj);
     this.initialize();
+
+
   }
 
   async ionViewWillEnter() {
@@ -168,6 +173,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   scrollToBottomOnInit() {
     setTimeout(() => {
+      console.log("dssfssdf");
+
       this.myContent.scrollToBottom(100);
     }, 500);
   }

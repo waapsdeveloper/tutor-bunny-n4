@@ -43,6 +43,7 @@ export class SearchFilterService {
   }
 
   async submitFormData(): Promise<void> {
+    return new Promise(async (resolve) => {
     console.log('Submitting form data:', this.formData);
 
     let obj = {
@@ -64,6 +65,9 @@ export class SearchFilterService {
     };
     const res = (await this.network.getAllCourses(obj)) as any;
     console.log(res);
+    this.searchList = res.result.data;
+    resolve(res);
+    });
     // Add additional logic for submission if needed.
   }
 

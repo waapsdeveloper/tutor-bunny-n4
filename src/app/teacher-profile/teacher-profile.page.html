@@ -1,4 +1,3 @@
-
 <ion-content class="ion-content-medium-background">
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
@@ -14,7 +13,8 @@
           <div class="header-info-user-68448">
             <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
           </div>
-          <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/verified-profile-sheild.svg" />Verified on
+          <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/verified-profile-sheild.svg" />Verified
+            on
             23-Jul-2024
           </div>
           <div class="header-info-misc-68448 outfit">
@@ -23,7 +23,7 @@
             <img src="../../assets/svg/star.svg" />
             <img src="../../assets/svg/star.svg" />
             <img src="../../assets/svg/star.svg" />
-             5.0 (375)
+            5.0 (375)
           </div>
         </div>
       </div>
@@ -85,8 +85,14 @@
       <div class="discription-para" [class.collapsed]="isExpanded">
         {{ user?.teacher?.description }}
       </div>
-      <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</ion-button>
-      <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</ion-button>
+      <!-- <div class="qulification-box-edu-readmore-98525">
+        <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()"></div>>Read More
+      </div>
+      <div class="qulification-box-edu-readmore-98525">
+        <div class="qulification-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()"></div>>Read Less
+      </div> -->
+      <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+      <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div>
     </div>
     <div class="read-more" fill="clear" style="padding: 24px;" (click)="openQulification()">
       <img src="../../assets/svg/qulification.svg" alt="">

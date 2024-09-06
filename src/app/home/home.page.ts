@@ -79,22 +79,22 @@ export class HomePage extends BasePage implements ViewWillEnter {
         role: this.params.role,
       },
       '',
-      0.7
+      0.6
     );
     console.log(res);
     if (res.data) {
       let role_Id = localStorage.getItem('role');
-      if (parseInt(role_Id) === 2) {
-        let user = res.data.user;
-        console.log(user);
-        this.users.setUser(user);
-        this.redirectDependsOnRole(user);
-      } else {
+      // if (parseInt(role_Id) === 2) {
+      //   let user = res.data.user;
+      //   console.log(user);
+      //   this.users.setUser(user);
+      //   this.redirectDependsOnRole(user);
+      // } else {
         let user = res.data;
         this.users.setUser(user);
         this.redirectDependsOnRole(user);
       }
-    }
+    // }
   }
 
   async redirectDependsOnRole(user) {

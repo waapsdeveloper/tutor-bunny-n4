@@ -37,6 +37,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
   oepnDeatils(item) {
+    console.log("Dfsf");
 
     const params = {
       id: item.id,

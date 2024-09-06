@@ -14,7 +14,7 @@
         [key]="'language'" [errorText]="'language is required'"></app-course-language>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-14 roboto-medium">course Price</div>
+      <div class="input-title fs-14 roboto-medium">Course Price</div>
       <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'"> </app-course-prise-range>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
@@ -23,7 +23,7 @@
         [key]="'mode_type'" [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-14 roboto-medium">Course Price</div>
+      <div class="input-title fs-14 roboto-medium">Hourly rate {{curruncy}}</div>
       <app-sd-input-box (onChange)="result($event, 'hourly_rate')" [inputText]="searchFilterService.formData.hourly_rate" [key]="'hourly_rate'"
         [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
     </div>
@@ -50,6 +50,6 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Save'" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'See results'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>

@@ -327,8 +327,8 @@
   .youtube {
     position: absolute;
     width: 43px;
-    right: 8px;
-    bottom: 7px;
+    right: 25px;
+    bottom: 19px;
   }
 }
 
@@ -338,4 +338,27 @@
   flex-direction: column;
   /* flex-wrap: wrap; */
   gap: 26px;
+}
+
+
+.qulification-box-edu-readmore-98525 {
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .qulification-box-edu-button-98526 {
+
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #393939;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    text-wrap: nowrap;
+
+  }
 }
