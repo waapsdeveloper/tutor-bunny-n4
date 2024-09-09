@@ -8,28 +8,27 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./certificate-image.component.scss'],
 })
 export class CertificateImageComponent extends BasePage implements OnInit {
-  @Input('profilePhoto') certificate: SafeUrl | undefined;
-  @Output('updateCertificate') updateCertificate: EventEmitter<any> = new EventEmitter<any>();
-
+  @Input('profilePhotos') certificates: SafeUrl[] = [];
+  @Output('updateCertificates') updateCertificates: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-
+  onFilesSelected(event: any) {
+    const files: File[] = Array.from(event.target.files);
+    files.forEach(file => {
+      this.handleFile(file, this.uploadCertificate.bind(this), this.addCertificate.bind(this));
+    });
   }
-
 
   async handleFile(file: File, postFunction: (obj: any) => Promise<any>, emitFunction: (image: string) => void) {
     const reader = new FileReader();
     reader.onload = async () => {
       let pmi = reader.result as string;
 
-      // Resize if file size is greater than 1MB
       if (file.size > 1048576) {
         pmi = await this.imageService.resizeImage(file, 800, 800);
       }
@@ -37,12 +36,22 @@ export class CertificateImageComponent extends BasePage implements OnInit {
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
-        image: pmi
-      }
+        image: pmi,
+      };
 
       const res = await postFunction(obj);
       emitFunction(res.result.image);
     };
     reader.readAsDataURL(file);
+  }
+
+  async uploadCertificate(obj: any): Promise<any> {
+    console.log(obj);
+    return await this.network.postCertificate(obj);
+  }
+
+  addCertificate(image: string) {
+    this.certificates.push(image);
+    this.updateCertificates.emit(this.certificates);
   }
 }

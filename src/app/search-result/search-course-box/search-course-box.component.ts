@@ -20,6 +20,8 @@ export class SearchCourseBoxComponent extends BasePage implements OnInit {
 
   public set search(value: any) {
     this._search = value;
+    console.log(value);
+
     this.callApi(value);
   }
 

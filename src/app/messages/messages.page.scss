@@ -203,8 +203,8 @@ ion-footer {
   height: 50px;
   border: none;
   border-radius: 8px;
-  min-height: 1.5em; /* Minimum height for 1 line */
-  max-height: 9em; /* Maximum height for 6 lines */
-  overflow-y: auto; /* Show scroll if more than 6 lines */
-  resize: none; /* Disable manual resize */
+  min-height: 1.5em;
+  max-height: 9em;
+  overflow-y: auto;
+  resize: none;
 }

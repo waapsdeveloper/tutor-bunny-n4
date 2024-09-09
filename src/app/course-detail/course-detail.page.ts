@@ -39,9 +39,11 @@ export class CourseDetailPage extends BasePage implements OnInit {
   categoryId;
   otherCourseList: any[] = [];
   otherCourseListTotalCount: number = 0;
-
   user;
   canEditCourse = false;
+
+  courseImages: string[] = []; // Images array
+  currentIndex: number = 0;
 
   constructor(injector: Injector) {
     super(injector)
@@ -62,6 +64,18 @@ export class CourseDetailPage extends BasePage implements OnInit {
     }
     this.callApi();
 
+
+  }
+
+
+
+  prevImage() {
+    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.courseImages.length - 1;
+  }
+
+  // Method to show the next image
+  nextImage() {
+    this.currentIndex = (this.currentIndex < this.courseImages.length - 1) ? this.currentIndex + 1 : 0;
   }
 
   async callApi() {

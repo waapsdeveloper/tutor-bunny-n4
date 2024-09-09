@@ -1,4 +1,10 @@
-import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from '../base-page/base-page';
 import { AddDatesPage } from '../add-dates/add-dates.page';
@@ -19,10 +25,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   title;
   type;
   category;
-  user
+  user;
   image;
   onlineMode;
   age;
+  loading = false;
   language_id;
   courseId;
   edit = false;
@@ -44,7 +51,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     keyword: null,
     lesson: null,
     meeting_link: null,
-    schedules: null
+    schedules: null,
   };
   currency;
   constructor(injector: Injector, private el: ElementRef) {
@@ -52,12 +59,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.initialize();
     this.user = this.users.getUser();
     this.currency = this.user.teacher.country.currency_symbol;
-
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  async initialize() { }
+  async initialize() {}
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -79,7 +85,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
-      let res = await this.network.getcourseById(this.courseId) as any;
+      localStorage.setItem('courseId', this.courseId);
+
+      let res = (await this.network.getcourseById(this.courseId)) as any;
       this.setFormDta(res.course);
     }
   }
@@ -101,16 +109,15 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.formData['language'] = data['language'];
     this.formData['keyword'] = data['keywords'];
     this.formData['lesson'] = data['lesson'];
-    this.formData['category'] = data['category'][0]
+    this.formData['category'] = data['category'][0];
     const lang = data['language'];
     if (lang) {
       this.language_id = lang.id;
       this.formData['language_id'] = this.language_id;
     }
-    this.events.publish("set-mode-and-capacity", data)
-    this.events.publish("set-from-and-to-age", data)
-    this.events.publish("set-form-course-image", data)
-
+    this.events.publish('set-mode-and-capacity', data);
+    this.events.publish('set-from-and-to-age', data);
+    this.events.publish('set-form-course-image', data);
   }
 
   result(value, key) {
@@ -137,8 +144,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     if (key == 'image') {
       this.formData['image'] = value.image;
-    }
-    else if (key == 'language') {
+    } else if (key == 'language') {
       this.lang = value;
 
       this.formData['language'] = value;
@@ -147,9 +153,19 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async onSlideChange() {
-    this.events.publish('teacher-course-first-screen-submit-call', this.formData);
+    this.events.publish(
+      'teacher-course-first-screen-submit-call',
+      this.formData
+    );
     const f = this.formData;
-    if (!f.title || !f.description || !f.image || !f.language || !f.from_age || !f.to_age) {
+    if (
+      !f.title ||
+      !f.description ||
+      !f.image ||
+      !f.language ||
+      !f.from_age ||
+      !f.to_age
+    ) {
       return;
     }
     if (f.language.length == 0) {
@@ -161,27 +177,31 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
-    const res = !this.edit ? await this.network.SubmitCourse(f) : await this.network.SubmitCourseEdit(f, this.courseId);
+    this.loading = true;
+    const res = !this.edit
+      ? await this.network.SubmitCourse(f)
+      : await this.network.SubmitCourseEdit(f, this.courseId);
+
     let courseId = res.course.id;
     if (courseId) {
       let obj = {
         course_id: courseId,
-        image: this.formData.image
+        image: this.formData.image,
       };
       if (!this.formData.image.includes('https')) {
         let image = await this.network.postCoursePhoto(obj);
       }
     }
     localStorage.setItem('course_Id', courseId);
+    this.loading = false;
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-      this.events.publish("set-form-course-category", this.formData);
+      this.events.publish('set-form-course-category', this.formData);
       this.events.publish('set-form-keywords-list', res.course.keywords);
       this.content.scrollToTop(500); // 500ms animation duration
     }
   }
-
 
   async changeToPrev() {
     if (this.step == 2) {
@@ -191,7 +211,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async submit() {
-    this.events.publish('teacher-course-second-screen-submit-call', this.formData);
+    this.events.publish(
+      'teacher-course-second-screen-submit-call',
+      this.formData
+    );
     let f = this.formData;
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
@@ -201,11 +224,18 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
     const course_id = localStorage.getItem('course_Id');
     if (f.category && f.category.id) {
-      f.category_id = f.category.id
+      f.category_id = f.category.id;
     }
+    this.loading = true;
+
     const res = await this.network.SubmitSecondCourse(f, course_id);
+
     if (res && res.message) {
-      const message = !this.edit ? "Course created successfully" : "Course Updated Successfully";
+      this.loading = false;
+
+      const message = !this.edit
+        ? 'Course created successfully'
+        : 'Course Updated Successfully';
       this.utility.presentSuccessToast(message);
     }
     this.nav.pop('/tabs/courses');
@@ -216,9 +246,16 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.step == 2) {
       this.step = 1;
       this.edit = true;
-      this.courseId = localStorage.getItem('course_Id')
+      this.courseId = localStorage.getItem('course_Id');
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
   }
 
+  openCoursePhotos(){
+    this.nav.push('/course-photoss', {
+      backUrl: '/course-form',
+      gallary: 'true',
+      title: 'Upload Course photos',
+    });
+  }
 }

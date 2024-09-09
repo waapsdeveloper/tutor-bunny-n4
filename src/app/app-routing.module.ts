@@ -149,6 +149,10 @@ const routes: Routes = [
     path: 'teacher-welcome',
     loadChildren: () => import('./teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
   },
+  {
+    path: 'course-photoss',
+    loadChildren: () => import('./course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
+  },
 
 ];
 

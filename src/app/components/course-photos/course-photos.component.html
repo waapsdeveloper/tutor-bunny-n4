@@ -1,0 +1,9 @@
+<swiper-container #slides style="display: flex;" slides-per-view="1" [pagination]="{ el: '.swiper-pagination', clickable: true }">
+  <swiper-slide  *ngFor="let item of courseImages">
+    <div class="vedio-box-inner" >
+      <div class="video-89654"
+        [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+      </div>
+    </div>
+  </swiper-slide>
+</swiper-container>

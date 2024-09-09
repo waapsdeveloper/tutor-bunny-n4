@@ -4,9 +4,11 @@
 </ion-header>
 
 <ion-content class="ion-content-bg " [fullscreen]="true">
-  <div class="image-card-78523" [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'">
-  </div>
+
+
+  <app-course-photos [course_Id]="course_Id"></app-course-photos>
   <div class="body-content ion-padding">
+
 
     <div class="course-heading-78521">
       {{title}}
@@ -24,7 +26,8 @@
       <div class="cource-time-and-lessons-78562">
         <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
           hour each lesson</div>
-        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total {{lessons}} lessons
+        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total
+          {{lessons}} lessons
         </div>
       </div>
       <div class="cource-time-and-lessons-78562">
@@ -40,7 +43,7 @@
             style="height: 16px;">{{language}}</div>
       </div>
     </div>
-     <div class="line"></div>
+    <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>

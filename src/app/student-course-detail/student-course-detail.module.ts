@@ -14,6 +14,7 @@ import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-cle
 import { CourseSchedulesModule } from '../components/course-schedules/course-schedules.module';
 import { StudentOtherCoursesModule } from './student-other-courses/student-other-courses.module';
 import { TrailMessageModule } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.module';
+import { CoursePhotosModule } from '../components/course-photos/course-photos.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { TrailMessageModule } from '../student-dashboard/rec-courses/course-list
     OtherCoursesModule,
     CourseSchedulesModule,
     StudentOtherCoursesModule,
-    TrailMessageModule
+    TrailMessageModule,
+    CoursePhotosModule
   ],
   declarations: [StudentCourseDetailPage]
 })

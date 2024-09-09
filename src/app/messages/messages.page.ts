@@ -41,8 +41,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   adjustHeight(textArea: HTMLTextAreaElement): void {
-    textArea.style.height = '50px'; // Reset height to auto to shrink if necessary
-    textArea.style.height = `${textArea.scrollHeight}px`; // Set height based on scrollHeight
+    textArea.style.height = '50px';
+    textArea.style.height = `${textArea.scrollHeight}px`;
   }
 
   onKeyUp(event: any) {
@@ -50,10 +50,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async sendMessage() {
-
-
-
-
     if (!this.message) {
       return;
     }
@@ -86,12 +82,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     };
     this.message = '';
     this.messageInput.nativeElement.value = '';
-    this.adjustHeight(this.messageInput.nativeElement)
+    this.adjustHeight(this.messageInput.nativeElement);
 
     let res = await this.network.sendMessage(obj);
     this.initialize();
-
-
   }
 
   async ionViewWillEnter() {
@@ -111,9 +105,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   ngOnInit() {}
 
   async initialize() {
-
     let roomId = this.item.chat_room_id;
-    this.chats.getChatMessages(roomId)
+    this.chats.getChatMessages(roomId);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
   }
@@ -179,7 +172,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   scrollToBottomOnInit() {
     setTimeout(() => {
-
       this.myContent.scrollToBottom(100);
     }, 500);
   }

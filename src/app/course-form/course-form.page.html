@@ -70,7 +70,7 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-course-photo [coursePhoto]="formData.image" (onChange)="result($event, 'image')" [key]="'image'"
-              [errorText]="'Course photo is required'"></app-course-photo>
+              [errorText]="'Course photo is required'" (click)="openCoursePhotos()"></app-course-photo>
           </div>
 
           <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="formData.from_age"
@@ -157,8 +157,8 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'" *ngIf="step == 1" (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray [text]="'Save'" *ngIf="step == 2" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Next'" [disabled]="loading" *ngIf="step === 1" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Save'" *ngIf="step === 2" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 

@@ -50,6 +50,14 @@ export class NetworkService {
     return this.httpPostResponse('chat-rooms/update-status/' + id, data);
   }
 
+  postCertificate(data){
+    return this.httpPostResponse('certificate/add', data, null, false, true);
+  }
+
+  postCourseImage(data){
+    return this.httpPostResponse('course/image/add', data, null, false, true);
+  }
+
   getChatRead(data) {
     return this.httpPostResponse('message/is-read', data, null, false, false);
   }
@@ -183,6 +191,17 @@ export class NetworkService {
   getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
+
+  getCourseImages(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('course/image/list' + '?' + str, null, false, false);
+  }
+
+  deleteCourseImage(id){
+    return this.httpDeleteResponse('course/image/delete/' + id, true)
+
+  }
+
   getCourseList(id) {
     return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
   }
@@ -272,7 +291,7 @@ export class NetworkService {
   }
 
   SubmitCourse(data) {
-    return this.httpPostResponse('courses/add', data, null, true, true);
+    return this.httpPostResponse('courses/add', data, null,false , true);
   }
 
 
@@ -288,10 +307,10 @@ export class NetworkService {
     return this.httpPostResponse('validate-otp-and-change-password', data, null, true, true);
   }
   SubmitCourseEdit(data, id) {
-    return this.httpPostResponse('courses/edit', data, id, true, true);
+    return this.httpPostResponse('courses/edit', data, id, false, true);
   }
   SubmitSecondCourse(data, id) {
-    return this.httpPostResponse('course/update-params/' + id, data, null, true, true);
+    return this.httpPostResponse('course/update-params/' + id, data, null, false, true);
   }
 
   AddSchedule(data) {

@@ -16,6 +16,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   backUrl;
   displayName
   course_Id;
+  lessons;
   currencySymbol;
   techerTitle;
   language;
@@ -34,6 +35,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   price;
   from_age;
   to_age;
+  endDate
   country;
   startTime;
   flag;
@@ -42,6 +44,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   updated_at;
   schedules;
   acheduleTime;
+  startDate
   showFavValue = false;
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService, ) {
@@ -86,6 +89,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.price = this.data.updated_price;
     this.schedules = this.data.schedules;
     this.acheduleTime = this.schedules;
+    this.lessons = this.data.lesson;
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title
     this.image = this.data.image;
@@ -100,6 +104,11 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
     this.showFavValue = this.data.is_liked_by_me;
+    const startDate = this.data.start_date;
+
+    const endDate = this.data.end_date;
+    this.startDate = moment(startDate).format('DD-MM-Y');
+    this.endDate = moment(endDate).format('DD-MM-Y');
   }
 
   async addToFav() {

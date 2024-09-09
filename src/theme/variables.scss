@@ -59,12 +59,14 @@
   --ion-color-medium-shade: #3f3f3f;
   --ion-color-medium-tint: #5a5a5a;
 
-  --ion-color-dark: #484848;
+  --ion-color-dark: rgba(69, 69, 69, 0.9);
   --ion-color-dark-rgb: 72, 72, 72;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #3f3f3f;
   --ion-color-dark-tint: #5a5a5a;
+  --ion-color-alert: #484848;
+
 
   --tb-btn-color-dark: #454545;
   --tb-page-bg-color: #E4E3E380;

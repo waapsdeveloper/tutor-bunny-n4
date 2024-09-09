@@ -39,7 +39,7 @@
   <div class="footer-box-78521">
     <div class="input-box-78522">
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
-        style="background: white;" (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)">
+        (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)">
       </textarea>
     </div>
     <div class="send-box-78522" *ngIf="message">
