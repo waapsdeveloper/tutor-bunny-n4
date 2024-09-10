@@ -65,13 +65,13 @@ export class ChatPage extends BasePage implements OnInit {
 
   async initialize() {
     this.chats.getchatList();
-    // this.user_1 = this.users.getUser();
-    // this.role_id = this.user_1.role_id;
-    // let res = await this.network.getMessagesRoom(this.user_1.id)
-    // this.chat = res.data;
-    // let data = await this.network .getRequsetCount(this.user_1.id);
-    // this.count = data.message.pending_count;
 
+  }
+
+  async handleRefresh(event) {
+
+    await this.chats.getchatList('', 1);
+    event.target.complete();
   }
 
   getTime(time) {

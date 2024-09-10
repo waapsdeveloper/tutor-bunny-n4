@@ -131,18 +131,19 @@
   padding: 16px;
 
   .input-box-78522 {
-    width: 85%;
+    width: 100%;
     background: white;
     display: flex;
     align-items: center;
-    border: 0.5px solid rgba(0, 0, 0, 0.25);
+    border: 0.5px solid rgba(0, 0, 0, 0.5);
     border-radius: 15px;
+    // border: 1px rgba(0, 0, 0, 0.5);
     justify-content: space-between;
-    // padding: 0 16px 0 0;
+    padding: 0 16px 0 0;
     box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
 
     input {
-      width: 100%;
+      width: 85%;
       height: 50px;
       padding: 8px;
       border-radius: 15px;
@@ -197,12 +198,13 @@ ion-footer {
 }
 
 .chat-input {
-  width: 100%;
+  width: 90%;
   padding: 16px;
   background: white;
   height: 50px;
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
+
   min-height: 1.5em;
   max-height: 9em;
   overflow-y: auto;

@@ -1,4 +1,4 @@
-<div class="image-upload-box-st-78955674" (click)="fileInput.click()">
+<div class="image-upload-box-st-78955674" >
   <div class="icno-text-88666">
     <div class="image-box-89657" *ngFor="let certificate of certificates"
       [ngStyle]="{ 'background-image': certificate ? 'url(' + certificate + ')' : 'none' }"></div>
@@ -8,4 +8,4 @@
   </div>
   <ion-icon name="chevron-forward-outline"></ion-icon>
 </div>
-<input type="file" (change)="onFilesSelected($event)" accept="image/*" style="display: none" multiple #fileInput />
+<!-- <input type="file" (change)="onFilesSelected($event)" accept="image/*" style="display: none" multiple #fileInput /> -->

@@ -1,6 +1,9 @@
 <ion-content class="ion-content-medium-background">
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
+      <div style="padding: 0 16px 0 0;" (click)="back()">
+        <img src="../../assets/svg/white-back.svg" alt="">
+      </div>
       <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
       </div>
       <div class="header-oblique-double-675">
@@ -85,12 +88,6 @@
       <div class="discription-para" [class.collapsed]="isExpanded">
         {{ user?.teacher?.description }}
       </div>
-      <!-- <div class="qulification-box-edu-readmore-98525">
-        <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()"></div>>Read More
-      </div>
-      <div class="qulification-box-edu-readmore-98525">
-        <div class="qulification-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()"></div>>Read Less
-      </div> -->
       <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
       <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div>
     </div>

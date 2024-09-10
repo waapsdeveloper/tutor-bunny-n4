@@ -2,7 +2,7 @@
   <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title" [parentHandleBack]="true"
     (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
 </ion-header>
-<ion-content class="ion-padding ion-content-medium-background">
+<ion-content class="ion-padding ion-content-medium-background" #content [fullscreen]="true">
   <form>
     <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides
       style="padding: 0 6px;">
@@ -150,7 +150,7 @@
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-certificate-image [profilePhoto]="formData.certificate"
-              (updateCertificate)="result($event, 'certificate')"></app-certificate-image>
+              (updateCertificate)="result($event, 'certificate')" (click)="openUpdateCertificate()"></app-certificate-image>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Select year you first started teaching</div>

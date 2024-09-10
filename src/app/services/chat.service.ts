@@ -22,11 +22,16 @@ export class ChatService {
     private events: EventsService
   ) {}
 
-  getchatList() {
+  getchatList(search = '', page = 1, liked = false) {
     return new Promise(async (resolve) => {
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;
-      let res = await this.network.getMessagesRoom(this.user.id);
+      let obj = {
+        search: search,
+        page: page,
+        liked: liked,
+      };
+      let res = await this.network.getMessagesRoom(this.user.id, obj);
       this.chats = res.data;
       let data = await this.network.getRequsetCount(this.user.id);
       this.count = data.message.pending_count;

@@ -10,6 +10,9 @@
         <input type="text" placeholder="Search by name?" />
       </div>
     </div>
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <div class="chat-top-header-78521" >
       <div class="chat-inbox-78522" ><img src="../../assets/svg/inbox.svg" alt="">Inbox
       </div>

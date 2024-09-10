@@ -164,8 +164,9 @@ export class NetworkService {
     return this.httpGetResponse('course/trials/by-id/' + id, null, false, false);
   }
 
-  getMessagesRoom(id) {
-    return this.httpGetResponse('chat-rooms/' + id, null, false, false);
+  getMessagesRoom(id, data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('chat-rooms/' + id + '?' + str, null, false, false);
   }
 
   getRequsetCount(id) {
@@ -197,8 +198,18 @@ export class NetworkService {
     return this.httpGetResponse('course/image/list' + '?' + str, null, false, false);
   }
 
+  getCertificates(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('certificate/list' + '?' + str, null, false, false);
+  }
+
   deleteCourseImage(id){
     return this.httpDeleteResponse('course/image/delete/' + id, true)
+
+  }
+
+  deleteCertificates(id){
+    return this.httpDeleteResponse('certificate/delete/' + id, true)
 
   }
 

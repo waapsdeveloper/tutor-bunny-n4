@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NavService } from 'src/app/services/nav.service';
@@ -62,14 +62,16 @@ export class TeacherProfileEditPage
   travel_policy_name;
   hideTerms = false;
   step = 1;
+  @ViewChild(IonContent, { read: IonContent, static: false })
+  myContent: IonContent;
 
   constructor(injector: Injector) {
     super(injector);
     this.initialize();
+    this.scrollToTopOnInit();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -117,14 +119,18 @@ export class TeacherProfileEditPage
       this.formData['subjects'] = value.map((obj) => obj.id);
     } else if (key == 'travel_policy') {
       this.formData['travel_policy_id'] = value.id;
-      this.formData['travel_policy'] = value
-
+      this.formData['travel_policy'] = value;
     } else {
       this.formData[key] = value;
     }
   }
-  setFormDta(data) {
 
+  scrollToTopOnInit() {
+    setTimeout(() => {
+      this.myContent.scrollToTop(100);
+    }, 500);
+  }
+  setFormDta(data) {
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
     if (cnty) {
@@ -140,18 +146,18 @@ export class TeacherProfileEditPage
       this.formData['state_id'] = stt.id;
     }
     this.formData['phone_number'] = data['teacher']['phone_number'];
-    this.formData['qualification_description'] = data['teacher']['qualification_description'];
+    this.formData['qualification_description'] =
+      data['teacher']['qualification_description'];
     this.formData['started_teaching'] = data['teacher']['started_teaching'];
-    this.formData['experience_description'] = data['teacher']['experience_description'];
+    this.formData['experience_description'] =
+      data['teacher']['experience_description'];
     this.formData['hourly_rate'] = data['teacher']['hourly_rate'];
     const travel = data['teacher']['travel_policy'];
-    if(travel){
-
+    if (travel) {
       this.travel_policy_name = travel.name;
       this.formData['travel_policy'] = travel;
       this.formData['travel_policy_id'] = travel.id;
     }
-
 
     this.formData['city'] = data['teacher']['city'];
     this.formData['zip_code'] = data['teacher']['zip_code'];
@@ -210,6 +216,7 @@ export class TeacherProfileEditPage
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
     }
+    this.scrollToTopOnInit();
   }
   async submit() {
     const data = this.formData;
@@ -243,8 +250,7 @@ export class TeacherProfileEditPage
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
-    this.nav.pop('/tabs/teacher-dashboard')
-
+    this.nav.pop('/tabs/teacher-dashboard');
   }
   async onSlideChange2() {
     const data = this.formData;
@@ -280,6 +286,7 @@ export class TeacherProfileEditPage
       this.slides?.nativeElement.swiper.slideTo(2, false, false);
       this.step = 3;
     }
+    this.scrollToTopOnInit();
   }
   disableIfIncomplete() {
     return (
@@ -306,4 +313,9 @@ export class TeacherProfileEditPage
       this.nav.pop();
     }
   }
+
+  openUpdateCertificate() {
+    this.nav.push('/upload-certificate');
+  }
+
 }

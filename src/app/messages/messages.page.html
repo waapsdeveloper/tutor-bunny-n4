@@ -39,14 +39,17 @@
   <div class="footer-box-78521">
     <div class="input-box-78522">
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
-        (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)">
+        (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)" [ngModel]="emptyValue">
       </textarea>
+      <img src="../../assets/svg/sent.svg" *ngIf="message" alt="" (click)="sendMessage()">
+      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="">
+
     </div>
-    <div class="send-box-78522" *ngIf="message">
+    <!-- <div class="send-box-78522" *ngIf="message">
       <img src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">
     </div>
     <div class="send-box-78522" *ngIf="!message">
       <img src="../../assets/svg/sent-2.svg" alt="">
-    </div>
+    </div> -->
   </div>
 </ion-footer>

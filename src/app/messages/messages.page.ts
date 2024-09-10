@@ -35,7 +35,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   displayName;
   role_id;
   params;
-
+  emptyValue;
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
   }
@@ -89,10 +89,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async ionViewWillEnter() {
+    this.scrollToBottomOnInit();
     this.params = this.nav.getQueryParams();
     if (this.params.item) {
       this.item = JSON.parse(this.params.item);
-      this.scrollToBottomOnInit();
       this.initialize();
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;

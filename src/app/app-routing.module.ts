@@ -145,7 +145,8 @@ const routes: Routes = [
   {
     path: 'search-result',
     loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
-  },  {
+  },
+  {
     path: 'teacher-welcome',
     loadChildren: () => import('./teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
   },
@@ -153,6 +154,11 @@ const routes: Routes = [
     path: 'course-photoss',
     loadChildren: () => import('./course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
   },
+
+  {
+    path: 'upload-certificate',
+    loadChildren: () => import('./upload-certificate/upload-certificate.module').then( m => m.UploadCertificatePageModule)
+  }
 
 ];
 
