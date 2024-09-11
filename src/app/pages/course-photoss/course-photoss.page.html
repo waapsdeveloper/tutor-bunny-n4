@@ -9,7 +9,7 @@
     <div class="image-card-78975" *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
 
       (click)="openImage(coursePhoto)">
-
+      <ion-icon name="star" [class.set-feature-input-678956744]="featureIndex == i" class="feature-input-678956744" (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon>
       <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(i , $event)">
     </div>
   </div>

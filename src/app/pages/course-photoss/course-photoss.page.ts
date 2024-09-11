@@ -11,6 +11,8 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   params
 
+  featureIndex = -1;
+
   constructor(injector: Injector, public createCourseService: CreateCourseService) {
     super(injector);
     this.initialize();
@@ -20,6 +22,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   }
 
   async initialize() {
+    
   }
 
   setBackgroundImage(item) {
@@ -36,6 +39,24 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     };
 
     this.createCourseService.coursePhotos.push(obj);
+
+    if(this.createCourseService.coursePhotos.length == 1){
+      this.featureIndex = 0;
+      this.createCourseService.formData.image = imageString;
+
+
+      const courseId = localStorage.getItem('courseId');
+      if (courseId) {
+
+        let obj = {
+          course_id: courseId,
+          image: imageString,
+        };
+        await this.network.postCoursePhoto(obj);
+  
+      }
+
+    }
     
     const courseId = localStorage.getItem('courseId');    
     if(courseId){
@@ -58,17 +79,41 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     }
   }
 
-  async clearImage(index: any, event: Event) {
+  async updateFeatureImage(item: any, index, event: Event) {
     event.stopPropagation();
 
-    let item = Object.assign({}, this.createCourseService.coursePhotos[index]);
-    this.createCourseService.coursePhotos.splice(index, 1);
+    this.featureIndex = index;
 
+    const courseId = localStorage.getItem('courseId');
+    const img = item.image;
+    this.createCourseService.formData.image = item.image;
+
+
+    if (courseId) {
+
+      let obj = {
+        course_id: courseId,
+        image: img,
+      };
+      await this.network.postCoursePhoto(obj);
+
+    }
+    
+
+    //this.initialize();
+  }
+
+  async clearImage(index: any, event: Event) {
+    event.stopPropagation();
+    this.createCourseService.coursePhotos.splice(index, 1)
+
+    let item = this.createCourseService.coursePhotos[index];
     if(item.id){
       await this.network.deleteCourseImage(item.id);
     }
 
-    //this.initialize();
+    
+    // this.initialize();
   }
 
   openImage(image) {

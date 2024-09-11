@@ -94,6 +94,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('set-mode-and-capacity', data);
     this.events.publish('set-from-and-to-age', data);
     this.events.publish('set-form-course-image', data);
+    
   }
 
   result(value, key) {
@@ -169,7 +170,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         let image = await this.network.postCoursePhoto(obj);
       }
 
-      this.createCourseService.getCourseImages
+      this.createCourseService.getCourseImages();
     }
     localStorage.setItem('course_Id', courseId);
     this.loading = false;

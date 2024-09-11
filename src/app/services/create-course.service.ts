@@ -80,21 +80,25 @@ export class CreateCourseService {
       const user = JSON.parse(localStorage.getItem('user'));
 
       if(!item.course_id && courseId){
-        let obj = {
-          user_id: user.id,
-          course_id: courseId,
-          image: item['image']
-        };
-            
-        if(courseId){
-          obj.course_id = courseId;
-          await this.network.postCourseImage(obj);      
-        }
-      }
 
-      this.getCourseImages();
+        if (!item.image.includes('https')) {
+          let obj = {
+            user_id: user.id,
+            course_id: courseId,
+            image: item['image']
+          };
+              
+          if(courseId){
+            obj.course_id = courseId;
+            await this.network.postCourseImage(obj);      
+          }
+        }
+        
+      }
       
     }
+
+    this.getCourseImages();
     
 
   }
