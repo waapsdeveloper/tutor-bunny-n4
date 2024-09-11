@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'teacher-dashboard',
-        loadChildren: () => import('./../teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
+        loadChildren: () => import('./../pages/teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
       },
       {
         path: 'profile',
@@ -32,15 +32,15 @@ const routes: Routes = [
 
       {
         path:'courses',
-        loadChildren:() => import('../courses/courses.module').then( m => m.CoursesPageModule)
+        loadChildren:() => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
       },
       {
         path: 'other-courses',
-        loadChildren: () => import('../courses/courses.module').then( m => m.CoursesPageModule)
+        loadChildren: () => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
       },
       {
         path: 'course-detail',
-        loadChildren: () => import('../course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
+        loadChildren: () => import('../pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
       },
       {
         path: 'my-teachers',
@@ -48,19 +48,19 @@ const routes: Routes = [
       },
       {
         path: 'chat',
-        loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)
+        loadChildren: () => import('../pages/chat/chat.module').then( m => m.ChatPageModule)
       },
       {
         path: 'fav-courses',
-        loadChildren: () => import('../fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
+        loadChildren: () => import('../pages/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
       },
       {
         path: 'menu',
-        loadChildren: () => import('../menu/menu.module').then( m => m.MenuPageModule)
+        loadChildren: () => import('../pages/menu/menu.module').then( m => m.MenuPageModule)
       },
       {
         path: 'requests',
-        loadChildren: () => import('../requests/requests.module').then( m => m.RequestsPageModule)
+        loadChildren: () => import('../pages/requests/requests.module').then( m => m.RequestsPageModule)
       },
 
     ]

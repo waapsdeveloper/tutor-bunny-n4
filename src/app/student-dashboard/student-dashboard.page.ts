@@ -5,7 +5,7 @@ import { NetworkService } from '../services/network.service';
 import { BasePage } from '../base-page/base-page';
 import { IonContent } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
-import { FavCoursesPage } from '../fav-courses/fav-courses.page';
+
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';

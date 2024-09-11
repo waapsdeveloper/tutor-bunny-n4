@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { MessagesPage } from 'src/app/messages/messages.page';
+
 
 @Component({
   selector: 'app-course-list',
