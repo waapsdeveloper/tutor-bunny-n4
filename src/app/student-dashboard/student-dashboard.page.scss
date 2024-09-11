@@ -77,19 +77,21 @@
   justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 24px;
   overflow-x: scroll;
   background-color: #E4E3E380;
 
   .header-chip {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    width: 100%;
 
     .ion-chip {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       font-size: 16px;
       padding: 0 6px;
     }

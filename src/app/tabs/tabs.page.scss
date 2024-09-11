@@ -5,11 +5,12 @@
   justify-content:flex-end;
   background-color: white;
   align-items: center;
+  height: 60px;
   border-radius: 20px 20px 0 0 ;
   gap: 8px;
 
 }
- 
+
 .ion-tab-bar-67895675{
   --padding-top: 8px;
   --padding-bottom: 8px;
@@ -44,7 +45,7 @@
 .tab-bar-hight-1{
   height: 65px;
   transition: 0.1s height;
-  
+
 
 }
 
@@ -55,10 +56,12 @@ ion-tabs{
 
 
 .tab-back-78523{
-  background-color: #d3d3d3;
-  border-radius: 50%;
-  height: 60px;width: 60px;
+  height: 60px;
+  width: 40px;
   display: flex;
   align-items: center;
+  padding-top: 12px;
+  flex-direction: column;
+  border-top: 2px solid #E29F1B;
   justify-content: center;
 }

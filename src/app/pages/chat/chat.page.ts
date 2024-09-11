@@ -17,6 +17,7 @@ export class ChatPage extends BasePage implements OnInit {
   params;
   teacher
   student;
+  activeUser
   count;
   user_1;
   user;
@@ -28,6 +29,10 @@ export class ChatPage extends BasePage implements OnInit {
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.initialize();
+
+    this.activeUser =this.users.getUser();
+    console.log(this.activeUser);
+
   }
 
   ngOnInit() {
@@ -43,6 +48,8 @@ export class ChatPage extends BasePage implements OnInit {
     this.params = this.nav.getQueryParams();
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);
+      console.log(this.user);
+
     }
     if (this.params.other_user_id) {
       this.other_user_id = JSON.parse(this.params.other_user_id);
