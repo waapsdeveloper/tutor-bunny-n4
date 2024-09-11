@@ -53,17 +53,17 @@ export class CreateCourseService {
     if (lang) {
       this.formData['language_id'] = lang.id;
     }
-    
+
   }
 
   async getCourseImages(){
 
     if(this.courseId){
-      
+
       let obj = {
         course_id: this.courseId
       }
-      
+
       const res = await this.network.getCourseImages(obj) as any;
       this.coursePhotos = res.result;
       console.log(res);
@@ -71,12 +71,11 @@ export class CreateCourseService {
     }
   }
 
-  async sendPendingImages(){
+  async sendPendingImages(courseId){
 
     for(var i = 0; i < this.coursePhotos.length; i++){
 
       const item = Object.assign({}, this.coursePhotos[i])
-      const courseId = localStorage.getItem('courseId');
       const user = JSON.parse(localStorage.getItem('user'));
 
       if(!item.course_id && courseId){
@@ -87,19 +86,19 @@ export class CreateCourseService {
             course_id: courseId,
             image: item['image']
           };
-              
+
           if(courseId){
             obj.course_id = courseId;
-            await this.network.postCourseImage(obj);      
+            await this.network.postCourseImage(obj);
           }
         }
-        
+
       }
-      
+
     }
 
     this.getCourseImages();
-    
+
 
   }
 
