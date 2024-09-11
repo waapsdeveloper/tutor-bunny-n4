@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyStudentsPageRoutingModule } from './my-students-routing.module';
 
 import { MyStudentsPage } from './my-students.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { TrailCardModule } from './trail-card/trail-card.module';
 
 @NgModule({

@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { AddDatesPage } from '../add-dates/add-dates.page';
 
 @Component({

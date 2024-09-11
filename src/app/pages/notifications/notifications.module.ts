@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { NotificationBoxModule } from './notification-box/notification-box.module';
 
 @NgModule({

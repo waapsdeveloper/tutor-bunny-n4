@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCoursePage } from 'src/app/teacher-dashboard/create-course/create-course.page';
+import { CreateCoursePage } from 'src/app/pages/teacher-dashboard/create-course/create-course.page';
 
 @Component({
   selector: 'app-option-bb-box',

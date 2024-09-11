@@ -1,13 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NavService } from '../services/nav.service';
-import { AuthenticationService } from '../services/authentication.service';
-import { NetworkService } from '../services/network.service';
-import { FirebaseService } from '../services/firebase.service';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
-import { GlobalCoursesService } from '../services/global-courses.service';
-import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 
 @Component({
   selector: 'app-teacher-dashboard',

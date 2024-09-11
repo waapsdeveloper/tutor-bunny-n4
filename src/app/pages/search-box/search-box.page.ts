@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { initializeApp } from 'firebase/app';
-import { SearchFilterService } from '../services/search-filter.service';
+import { SearchFilterService } from 'src/app/services/search-filter.service';
 
 @Component({
   selector: 'app-search-box',

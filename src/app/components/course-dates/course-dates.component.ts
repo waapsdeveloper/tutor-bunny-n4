@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
-import { AddDatesPage } from 'src/app/add-dates/add-dates.page';
 import { BasePage } from 'src/app/base-page/base-page';
 import { AddScheduleComponent } from './add-schedule/add-schedule.component';
+import { AddDatesPage } from 'src/app/pages/add-dates/add-dates.page';
 
 @Component({
   selector: 'app-course-dates',

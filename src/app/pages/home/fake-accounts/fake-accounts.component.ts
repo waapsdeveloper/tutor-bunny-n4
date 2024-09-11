@@ -3,7 +3,7 @@ import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 
-const accounts = require('./../../data/users.json');
+const accounts = require('../../../data/users.json');
 @Component({
   selector: 'app-fake-accounts',
   templateUrl: './fake-accounts.component.html',

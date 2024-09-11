@@ -6,11 +6,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
 import { ImageViewComponent } from './image-view/image-view.component';
-import { ChatService } from '../services/chat.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-messages',

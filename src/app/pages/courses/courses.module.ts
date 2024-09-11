@@ -7,9 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { CoursesPageRoutingModule } from './courses-routing.module';
 
 import { CoursesPage } from './courses.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
-import { ProfileSearchBoxModule } from '../student-dashboard/profile-search-box/profile-search-box.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { CourseCardModule } from './course-card/course-card.module';
+import { ProfileSearchBoxModule } from '../profile-details/profile-search-box/profile-search-box.module';
 
 @NgModule({
   imports: [

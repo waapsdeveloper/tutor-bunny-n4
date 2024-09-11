@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { SearchFilterService } from '../services/search-filter.service';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
+import { SearchFilterService } from 'src/app/services/search-filter.service';
 
 @Component({
   selector: 'app-search-filter',

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BlockedPageRoutingModule } from './blocked-routing.module';
 
 import { BlockedPage } from './blocked.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 
 @NgModule({
   imports: [

@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { EventsService } from '../services/events.service';
 import { UsersService } from '../services/users.service';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
 
 

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angul
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { MessagesPage } from 'src/app/messages/messages.page';
 import { TrailMessageComponent } from 'src/app/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 
 @Component({

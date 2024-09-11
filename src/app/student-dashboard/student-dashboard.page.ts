@@ -2,7 +2,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { NavService } from '../services/nav.service';
 import { NetworkService } from '../services/network.service';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
 

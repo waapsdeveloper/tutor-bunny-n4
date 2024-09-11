@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { TeacherWelcomePageRoutingModule } from './teacher-welcome-routing.module';
 
 import { TeacherWelcomePage } from './teacher-welcome.page';
-import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-clear.module';
-import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
+import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
+import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [

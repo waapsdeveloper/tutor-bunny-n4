@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ReviewsByStudentPageRoutingModule } from './reviews-by-student-routing.module';
 
 import { ReviewsByStudentPage } from './reviews-by-student.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { ReviewCardModule } from './review-card/review-card.module';
 
 @NgModule({

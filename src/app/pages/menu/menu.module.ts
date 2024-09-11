@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MenuPageRoutingModule } from './menu-routing.module';
 
 import { MenuPage } from './menu.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { MenuImageBoxModule } from './menu-image-box/menu-image-box.module';
 import { MenuListBoxModule } from './menu-list-box/menu-list-box.module';
 import { MenuFooterBoxModule } from './menu-footer-box/menu-footer-box.module';

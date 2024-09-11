@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from '../base-page/base-page';
-import { ChatService } from '../services/chat.service';
+import { BasePage } from 'src/app/base-page/base-page';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-chat-requests',

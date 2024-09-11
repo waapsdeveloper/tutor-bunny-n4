@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RequestsPageRoutingModule } from './requests-routing.module';
 
 import { RequestsPage } from './requests.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { ReqCourseListModule } from './req-course-list/req-course-list.module';
 
 @NgModule({

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FavCoursesPageRoutingModule } from './fav-courses-routing.module';
 
 import { FavCoursesPage } from './fav-courses.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { FavRecCoursesModule } from './fav-rec-courses/fav-rec-courses.module';
 
 @NgModule({

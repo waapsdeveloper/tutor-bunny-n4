@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 
 @Component({

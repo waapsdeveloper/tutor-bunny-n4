@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AddDatesPageRoutingModule } from './add-dates-routing.module';
 
 import { AddDatesPage } from './add-dates.page';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
-import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
+import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [

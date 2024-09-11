@@ -1,8 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from '../base-page/base-page';
-import { AuthenticationService } from '../services/authentication.service';
-import { FirebaseService } from '../services/firebase.service';
-import { GlobalCoursesService } from '../services/global-courses.service';
+import { BasePage } from 'src/app/base-page/base-page';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-fav-courses',

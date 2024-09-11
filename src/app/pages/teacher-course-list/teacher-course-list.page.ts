@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from '../base-page/base-page';
-import { GlobalCoursesService } from '../services/global-courses.service';
+import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-teacher-course-list',
