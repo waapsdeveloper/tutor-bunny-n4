@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   Injector,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -15,7 +16,10 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
   templateUrl: './course-form.page.html',
   styleUrls: ['./course-form.page.scss'],
 })
-export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
+export class CourseFormPage
+  extends BasePage
+  implements OnInit, ViewWillEnter, OnDestroy
+{
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -37,16 +41,44 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   step = 1;
   currency;
 
-  constructor(injector: Injector, private el: ElementRef, public createCourseService: CreateCourseService) {
+  constructor(
+    injector: Injector,
+    private el: ElementRef,
+    public createCourseService: CreateCourseService
+  ) {
     super(injector);
     this.initialize();
     this.user = this.users.getUser();
     this.currency = this.user.teacher.country.currency_symbol;
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
+  ngOnDestroy(): void {
+    this.createCourseService.formData = {
+      title: null,
+      description: null,
+      language: null,
+      image: null,
+      mode_type: null,
+      price: null,
+      duration: null,
+      from_age: null,
+      to_age: null,
+      strat_date: null,
+      type: null,
+      end_date: null,
+      category: null,
+      keyword: null,
+      lesson: null,
+      meeting_link: null,
+      schedules: null,
+    };
 
-  async initialize() { }
+    this.createCourseService.courseId = null;
+    this.createCourseService.coursePhotos = [];
+  }
+
+  async initialize() {}
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -76,16 +108,10 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       // course images patch
       this.createCourseService.courseId = this.courseId;
       this.createCourseService.getCourseImages();
-
-
-
-
-
     }
   }
 
   setFormDta(data) {
-
     this.createCourseService.setFormData(data);
     const lang = data['language'];
     if (lang) {
@@ -94,7 +120,6 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('set-mode-and-capacity', data);
     this.events.publish('set-from-and-to-age', data);
     this.events.publish('set-form-course-image', data);
-
   }
 
   result(value, key) {
@@ -170,15 +195,17 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         let image = await this.network.postCoursePhoto(obj);
       }
 
-      
-      this.createCourseService.sendPendingImages(courseId)
+      this.createCourseService.sendPendingImages(courseId);
     }
     localStorage.setItem('course_Id', courseId);
     this.loading = false;
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-      this.events.publish('set-form-course-category', this.createCourseService.formData);
+      this.events.publish(
+        'set-form-course-category',
+        this.createCourseService.formData
+      );
       this.events.publish('set-form-keywords-list', res.course.keywords);
       this.content.scrollToTop(500); // 500ms animation duration
     }
@@ -203,7 +230,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (f.keyword.length == 0) {
       return;
     }
-    const course_id = localStorage.getItem('course_Id');
+    const course_id = this.createCourseService.courseId;
     if (f.category && f.category.id) {
       f.category_id = f.category.id;
     }
@@ -227,7 +254,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.step == 2) {
       this.step = 1;
       this.edit = true;
-      this.courseId = localStorage.getItem('course_Id');
+      this.courseId = this.createCourseService.courseId;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
   }
