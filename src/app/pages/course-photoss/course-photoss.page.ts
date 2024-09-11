@@ -20,8 +20,6 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-    
-
   }
 
   setBackgroundImage(item) {
@@ -30,21 +28,20 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async addImageInArray(imageString) {
     const courseId = localStorage.getItem('courseId');
-    let firstIndex = this.coursePhotos.findIndex(x => x.image == null);
-
-    if (firstIndex != -1) {
-      this.coursePhotos[firstIndex]['image'] = imageString;
-    }
-
     const user = JSON.parse(localStorage.getItem('user'));
+
     let obj = {
       user_id: user.id,
       course_id: courseId,
       image: imageString
     };
 
+    this.createCourseService.coursePhotos.push(obj);
+    
     await this.network.postCourseImage(obj);
     this.initialize();
+    
+
   }
 
   async onFileSelected(event: any) {

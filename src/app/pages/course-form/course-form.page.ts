@@ -36,7 +36,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   edit = false;
   step = 1;
   currency;
-  
+
   constructor(injector: Injector, private el: ElementRef, public createCourseService: CreateCourseService) {
     super(injector);
     this.initialize();
@@ -44,9 +44,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     this.currency = this.user.teacher.country.currency_symbol;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  async initialize() {}
+  async initialize() { }
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -74,10 +74,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       this.setFormDta(res.course);
 
       // course images patch
-      if(this.courseId){
-        this.createCourseService.courseId = this.courseId;
-        this.createCourseService.getCourseImages();
-      }
+      this.createCourseService.courseId = this.courseId;
+      this.createCourseService.getCourseImages();
+
 
 
 
@@ -86,27 +85,11 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   setFormDta(data) {
-    this.createCourseService.formData['title'] = data['title'];
-    this.createCourseService.formData['description'] = data['description'];
-    this.createCourseService.formData['language_id'] = data['language_id'];
-    this.createCourseService.formData['price'] = data['price'];
-    this.createCourseService.formData['from_age'] = data['from_age'];
-    this.createCourseService.formData['to_age'] = data['to_age'];
-    this.createCourseService.formData['start_date'] = data['start_date'];
-    this.createCourseService.formData['end_date'] = data['end_date'];
-    this.createCourseService.formData['duration'] = data['duration'];
-    this.createCourseService.formData['image'] = data['image'];
-    this.createCourseService.formData['capacity'] = data['capacity'];
-    this.createCourseService.formData['category'] = data['category'];
-    this.createCourseService.formData['mode_type'] = data['mode_type'];
-    this.createCourseService.formData['language'] = data['language'];
-    this.createCourseService.formData['keyword'] = data['keywords'];
-    this.createCourseService.formData['lesson'] = data['lesson'];
-    this.createCourseService.formData['category'] = data['category'][0];
+
+    this.createCourseService.setFormData(data);
     const lang = data['language'];
     if (lang) {
       this.language_id = lang.id;
-      this.createCourseService.formData['language_id'] = this.language_id;
     }
     this.events.publish('set-mode-and-capacity', data);
     this.events.publish('set-from-and-to-age', data);
@@ -244,7 +227,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     }
   }
 
-  openCoursePhotos(){
+  openCoursePhotos() {
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',
       gallary: 'true',

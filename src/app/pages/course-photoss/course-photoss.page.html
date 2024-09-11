@@ -6,7 +6,7 @@
 
   <div class="gallery-outer-8965">
 
-    <div class="image-card-78975" *ngFor="let coursePhoto of coursePhotos" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
+    <div class="image-card-78975" *ngFor="let coursePhoto of createCourseService.coursePhotos" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
 
       (click)="openImage(coursePhoto)">
 
