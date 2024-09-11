@@ -6,11 +6,11 @@
 
   <div class="gallery-outer-8965">
 
-    <div class="image-card-78975" *ngFor="let coursePhoto of coursePhotos" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
+    <div class="image-card-78975" *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
 
       (click)="openImage(coursePhoto)">
 
-      <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(coursePhoto.id, $event)">
+      <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(i , $event)">
     </div>
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput multiple />

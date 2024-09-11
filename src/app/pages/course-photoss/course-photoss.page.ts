@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { CreateCourseService } from 'src/app/services/create-course.service';
 
 @Component({
   selector: 'app-course-photoss',
@@ -8,10 +9,9 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
-  coursePhotos = [];
   params
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public createCourseService: CreateCourseService) {
     super(injector);
     this.initialize();
   }
@@ -19,21 +19,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter(): void {
-    this.params = this.nav.getQueryParams();
-
-
-  }
-
   async initialize() {
-    const courseId = localStorage.getItem('courseId');
-    let obj = {
-      course_id: courseId
-    }
-    const res = await this.network.getCourseImages(obj) as any;
-    this.coursePhotos = res.result;
-    console.log(res);
-
   }
 
   setBackgroundImage(item) {
@@ -41,22 +27,24 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   }
 
   async addImageInArray(imageString) {
-    const courseId = localStorage.getItem('courseId');
-    let firstIndex = this.coursePhotos.findIndex(x => x.image == null);
-
-    if (firstIndex != -1) {
-      this.coursePhotos[firstIndex]['image'] = imageString;
-    }
-
     const user = JSON.parse(localStorage.getItem('user'));
+
     let obj = {
       user_id: user.id,
-      course_id: courseId,
+      course_id: null,
       image: imageString
     };
 
-    await this.network.postCourseImage(obj);
-    this.initialize();
+    this.createCourseService.coursePhotos.push(obj);
+    
+    const courseId = localStorage.getItem('courseId');    
+    if(courseId){
+      obj.course_id = courseId;
+      await this.network.postCourseImage(obj);      
+    }
+    
+    
+
   }
 
   async onFileSelected(event: any) {
@@ -70,10 +58,17 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     }
   }
 
-  async clearImage(id: string, event: Event) {
+  async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    await this.network.deleteCourseImage(id);
-    this.initialize();
+
+    let item = Object.assign({}, this.createCourseService.coursePhotos[index]);
+    this.createCourseService.coursePhotos.splice(index, 1);
+
+    if(item.id){
+      await this.network.deleteCourseImage(item.id);
+    }
+
+    //this.initialize();
   }
 
   openImage(image) {
