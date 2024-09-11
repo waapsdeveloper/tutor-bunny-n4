@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { AddDatesPage } from '../add-dates/add-dates.page';
 import { CreateCourseService } from 'src/app/services/create-course.service';
 
 @Component({
@@ -18,7 +17,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 })
 export class CourseFormPage
   extends BasePage
-  implements OnInit, ViewWillEnter, OnDestroy
+  implements OnInit, ViewWillEnter, OnDestroy 
 {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
