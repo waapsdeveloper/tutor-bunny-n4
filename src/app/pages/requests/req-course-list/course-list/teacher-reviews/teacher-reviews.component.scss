@@ -1,0 +1,104 @@
+.teacher-review-outer-78521 {
+  padding: 32px 16PX;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .teacher-review-header-78522 {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+    .teacher-review-image-78523 {
+
+      height: 70px;
+      width: 70px;
+      border-radius: 8px;
+      background-color: aliceblue;
+      background-size: cover;
+      background-position: center center;
+
+    }
+    .teacher-review-name-box-78524 {
+
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+
+      .teacher-review-course-name-78525 {
+
+        font-size: 16px;
+        font-weight: 500;
+        color: black;
+
+      }
+      .teacher-review-teacher-name-box-78526 {
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+
+        .teacher-review-teacher-heading-78527 {
+
+          font-size: 14px;
+          font-weight: 300;
+          color: #383838;
+
+        }
+        .teacher-review-teacher-image-78528 {
+
+          height: 24px;
+          width: 24px;
+          background-color: #393939;
+          border-radius: 25px;
+          box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
+          background-size: cover;
+          background-position: center center;
+
+        }
+        .teacher-review-teacher-name-78529 {
+
+          font-size: 16px;
+          font-weight: 500;
+          color: black;
+
+        }
+      }
+    }
+  }
+  .teacher-review-teacher-review-box-78530 {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .teacher-review-teacher-review-heading-78531 {
+
+      font-size: 16px;
+      font-weight: 500;
+      color: #383838;
+
+    }
+    .teacher-review-teacher-review-stars-78532 {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+    }
+    .teacher-review-teacher-review-number-78533 {
+
+      font-size: 16px;
+      font-weight: 300;
+      color: #393939;
+
+    }
+  }
+  .teacher-review-teacher-review-textarea-78530 {
+  }
+}

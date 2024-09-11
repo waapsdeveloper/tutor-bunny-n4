@@ -1,0 +1,17 @@
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+    transition: fill 0.2s;
+
+    &.filled {
+      fill: gold;
+      border: none;
+    }
+
+
+  }
+}

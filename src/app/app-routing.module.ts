@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () =>
-      import('./splash/splash.module').then((m) => m.SplashPageModule),
+      import('./pages/splash/splash.module').then((m) => m.SplashPageModule),
+    canActivate: [authGuard],
   },
   {
     path: 'home',
@@ -99,65 +101,64 @@ const routes: Routes = [
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
   {
     path: 'chat',
-    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
     path: 'messages',
-    loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
+    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
   {
     path: 'fav-courses',
-    loadChildren: () => import('./fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
+    loadChildren: () => import('./pages/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
   },
   {
     path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
   {
     path: 'requests',
-    loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
+    loadChildren: () => import('./pages/requests/requests.module').then( m => m.RequestsPageModule)
   },
   {
     path: 'teacher-course-list',
-    loadChildren: () => import('./teacher-course-list/teacher-course-list.module').then( m => m.TeacherCourseListPageModule)
+    loadChildren: () => import('./pages/teacher-course-list/teacher-course-list.module').then( m => m.TeacherCourseListPageModule)
   },
   {
     path: 'search-box',
-    loadChildren: () => import('./search-box/search-box.module').then( m => m.SearchBoxPageModule)
+    loadChildren: () => import('./pages/search-box/search-box.module').then( m => m.SearchBoxPageModule)
   },
   {
     path: 'search-filter',
-    loadChildren: () => import('./search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
+    loadChildren: () => import('./pages/search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
   },
   {
     path: 'chat-requests',
-    loadChildren: () => import('./chat-requests/chat-requests.module').then( m => m.ChatRequestsPageModule)
+    loadChildren: () => import('./pages/chat-requests/chat-requests.module').then( m => m.ChatRequestsPageModule)
   },
-
   {
     path: 'reviews-by-student',
-    loadChildren: () => import('./reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
+    loadChildren: () => import('./pages/reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
   {
     path: 'search-result',
-    loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
+    loadChildren: () => import('./pages/search-result/search-result.module').then( m => m.SearchResultPageModule)
   },
   {
     path: 'teacher-welcome',
-    loadChildren: () => import('./teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
+    loadChildren: () => import('./pages/teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
   },
   {
     path: 'course-photoss',
-    loadChildren: () => import('./course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
+    loadChildren: () => import('./pages/course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
   },
 
   {
     path: 'upload-certificate',
-    loadChildren: () => import('./upload-certificate/upload-certificate.module').then( m => m.UploadCertificatePageModule)
+    loadChildren: () => import('./pages/upload-certificate/upload-certificate.module').then( m => m.UploadCertificatePageModule)
   }
 
 ];
