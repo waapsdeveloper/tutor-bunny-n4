@@ -170,7 +170,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
         let image = await this.network.postCoursePhoto(obj);
       }
 
-      this.createCourseService.getCourseImages();
+      
       this.createCourseService.sendPendingImages(courseId)
     }
     localStorage.setItem('course_Id', courseId);
