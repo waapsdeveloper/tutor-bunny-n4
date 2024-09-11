@@ -31,21 +31,25 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async addImageInArray(imageString) {
     const user = JSON.parse(localStorage.getItem('user'));
+    const courseId = this.createCourseService.courseId;
 
     let obj = {
       user_id: user.id,
-      course_id: null,
+      course_id: courseId,
       image: imageString
     };
 
     this.createCourseService.coursePhotos.push(obj);
 
+    if(courseId){
+      obj.course_id = courseId;
+      await this.network.postCourseImage(obj);
+    }
+
     if(this.createCourseService.coursePhotos.length == 1){
       this.featureIndex = 0;
       this.createCourseService.formData.image = imageString;
 
-
-      const courseId = this.createCourseService.courseId;
       if (courseId) {
 
         let obj = {
@@ -58,11 +62,8 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
     }
 
-        const courseId = this.createCourseService.courseId;
-        if(courseId){
-          obj.course_id = courseId;
-          await this.network.postCourseImage(obj);
-        }
+        
+        
 
 
 
