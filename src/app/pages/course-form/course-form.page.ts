@@ -159,6 +159,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       : await this.network.SubmitCourseEdit(f, this.courseId);
 
     let courseId = res.course.id;
+    this.createCourseService.courseId = courseId;
     if (courseId) {
       let obj = {
         course_id: courseId,
@@ -167,6 +168,8 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
       if (!this.createCourseService.formData.image.includes('https')) {
         let image = await this.network.postCoursePhoto(obj);
       }
+
+      this.createCourseService.getCourseImages
     }
     localStorage.setItem('course_Id', courseId);
     this.loading = false;

@@ -27,19 +27,22 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   }
 
   async addImageInArray(imageString) {
-    const courseId = localStorage.getItem('courseId');
     const user = JSON.parse(localStorage.getItem('user'));
 
     let obj = {
       user_id: user.id,
-      course_id: courseId,
+      course_id: null,
       image: imageString
     };
 
     this.createCourseService.coursePhotos.push(obj);
     
-    await this.network.postCourseImage(obj);
-    this.initialize();
+    const courseId = localStorage.getItem('courseId');    
+    if(courseId){
+      obj.course_id = courseId;
+      await this.network.postCourseImage(obj);      
+    }
+    
     
 
   }
@@ -55,10 +58,17 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     }
   }
 
-  async clearImage(id: string, event: Event) {
+  async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    await this.network.deleteCourseImage(id);
-    this.initialize();
+
+    let item = Object.assign({}, this.createCourseService.coursePhotos[index]);
+    this.createCourseService.coursePhotos.splice(index, 1);
+
+    if(item.id){
+      await this.network.deleteCourseImage(item.id);
+    }
+
+    //this.initialize();
   }
 
   openImage(image) {

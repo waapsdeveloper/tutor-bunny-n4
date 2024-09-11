@@ -71,6 +71,34 @@ export class CreateCourseService {
     }
   }
 
+  async sendPendingImages(){
+
+    for(var i = 0; i < this.coursePhotos.length; i++){
+
+      const item = Object.assign({}, this.coursePhotos[i])
+      const courseId = localStorage.getItem('courseId');
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if(!item.course_id && courseId){
+        let obj = {
+          user_id: user.id,
+          course_id: courseId,
+          image: item['image']
+        };
+            
+        if(courseId){
+          obj.course_id = courseId;
+          await this.network.postCourseImage(obj);      
+        }
+      }
+
+      this.getCourseImages();
+      
+    }
+    
+
+  }
+
 
 
 
