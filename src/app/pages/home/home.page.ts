@@ -1,8 +1,8 @@
 import { Component, Injector } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
-import { BasePage } from '../base-page/base-page';
+import { BasePage } from '../../base-page/base-page';
 import { LoginPage } from '../login/login.page';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 

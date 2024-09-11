@@ -7,10 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { EmailSignupPageRoutingModule } from './email-signup-routing.module';
 
 import { EmailSignupPage } from './email-signup.page';
-import { SdInputBoxModule } from '../components/sd-input-box/sd-input-box.module';
-import { SdHeaderTopModule } from '../components/sd-header-top/sd-header-top.module';
-import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
-import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-clear.module';
+import { SdInputBoxModule } from '../../components/sd-input-box/sd-input-box.module';
+import { SdHeaderTopModule } from '../../components/sd-header-top/sd-header-top.module';
+import { SdButtonGrayModule } from '../../components/sd-button-gray/sd-button-gray.module';
+import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
 
 @NgModule({
   imports: [

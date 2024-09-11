@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./home/home.module').then((m) => m.HomePageModule),
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   // {
   //   path: 'dashboard',
@@ -31,65 +31,65 @@ const routes: Routes = [
   {
     path: 'profile-details',
     loadChildren: () =>
-      import('./profile-details/profile-details.module').then(
+      import('./pages/profile-details/profile-details.module').then(
         (m) => m.ProfileDetailsPageModule
       ),
   },
   {
     path: 'role-base',
-    loadChildren: () => import('./role-base/role-base.module').then( m => m.RoleBasePageModule)
+    loadChildren: () => import('./pages/role-base/role-base.module').then( m => m.RoleBasePageModule)
   },
   {
     path: 'teacher-profile',
-    loadChildren: () => import('./teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
+    loadChildren: () => import('./pages/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
   },
   {
     path: 'student-profile',
-    loadChildren: () => import('./student-profile/student-profile.module').then( m => m.StudentProfilePageModule)
+    loadChildren: () => import('./pages/student-profile/student-profile.module').then( m => m.StudentProfilePageModule)
   },
   {
     path: 'blocked',
-    loadChildren: () => import('./blocked/blocked.module').then( m => m.BlockedPageModule)
+    loadChildren: () => import('./pages/blocked/blocked.module').then( m => m.BlockedPageModule)
   },
   {
     path: 'email-login',
-    loadChildren: () => import('./email-login/email-login.module').then( m => m.EmailLoginPageModule)
+    loadChildren: () => import('./pages/email-login/email-login.module').then( m => m.EmailLoginPageModule)
   },
   {
     path: 'email-signup',
-    loadChildren: () => import('./email-signup/email-signup.module').then( m => m.EmailSignupPageModule)
+    loadChildren: () => import('./pages/email-signup/email-signup.module').then( m => m.EmailSignupPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'course-form',
-    loadChildren: () => import('./course-form/course-form.module').then( m => m.CourseFormPageModule)
+    loadChildren: () => import('./pages/course-form/course-form.module').then( m => m.CourseFormPageModule)
   },
   {
     path: 'add-dates',
-    loadChildren: () => import('./add-dates/add-dates.module').then( m => m.AddDatesPageModule)
+    loadChildren: () => import('./pages/add-dates/add-dates.module').then( m => m.AddDatesPageModule)
   },
   {
     path: 'courses',
-    loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
+    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
   },
   {
     path: 'other-courses',
-    loadChildren: () => import('./courses/courses.module').then( m => m.CoursesPageModule)
+    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
   },
   {
     path: 'course-detail',
-    loadChildren: () => import('./course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
+    loadChildren: () => import('./pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
   },
   {
     path: 'student-course-detail',
-    loadChildren: () => import('./student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
+    loadChildren: () => import('./pages/student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
   {
     path: 'my-teachers',
-    loadChildren: () => import('./my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
+    loadChildren: () => import('./pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
   },
   {
     path: 'trail-requests',

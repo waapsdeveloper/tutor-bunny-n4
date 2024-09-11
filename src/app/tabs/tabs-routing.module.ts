@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./../profile-details/profile-details.module').then( m => m.ProfileDetailsPageModule)
+        loadChildren: () => import('../pages/profile-details/profile-details.module').then( m => m.ProfileDetailsPageModule)
       },
 
       {
@@ -44,7 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'my-teachers',
-        loadChildren: () => import('../my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
+        loadChildren: () => import('../pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
       },
       {
         path: 'chat',

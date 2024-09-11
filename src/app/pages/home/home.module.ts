@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { SdBbackBtnModule } from '../components/sd-bback-btn/sd-bback-btn.module';
+import { SdBbackBtnModule } from '../../components/sd-bback-btn/sd-bback-btn.module';
 import { FakeAccountsModule } from './fake-accounts/fake-accounts.module';
 
 @NgModule({

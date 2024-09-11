@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { RoleBasePageRoutingModule } from './role-base-routing.module';
 
 import { RoleBasePage } from './role-base.page';
-import { SdButtonClearModule } from '../components/sd-button-clear/sd-button-clear.module';
-import { SdButtonGrayModule } from '../components/sd-button-gray/sd-button-gray.module';
+import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
+import { SdButtonGrayModule } from '../../components/sd-button-gray/sd-button-gray.module';
 
 @NgModule({
   imports: [

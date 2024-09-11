@@ -1,9 +1,9 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { BasePage } from '../base-page/base-page';
-import { TrailMessageComponent } from '../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
+import { BasePage } from '../../base-page/base-page';
+import { TrailMessageComponent } from '../../student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { AlertController } from '@ionic/angular';
-import { GlobalCoursesService } from '../services/global-courses.service';
+import { GlobalCoursesService } from '../../services/global-courses.service';
 
 @Component({
   selector: 'app-student-course-detail',
