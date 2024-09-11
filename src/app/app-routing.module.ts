@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
-import { courseFormDeactivateGuard } from './guards/course-form-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -67,7 +66,6 @@ const routes: Routes = [
   {
     path: 'course-form',
     loadChildren: () => import('./pages/course-form/course-form.module').then( m => m.CourseFormPageModule),
-    canDeactivate: [courseFormDeactivateGuard]
   },
   {
     path: 'add-dates',

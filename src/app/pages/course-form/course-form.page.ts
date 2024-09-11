@@ -222,6 +222,7 @@ export class CourseFormPage
         : 'Course Updated Successfully';
       this.utility.presentSuccessToast(message);
     }
+    this.createCourseService.resetFormData()
     this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
   }
