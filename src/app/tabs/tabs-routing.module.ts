@@ -60,7 +60,7 @@ const routes: Routes = [
       },
       {
         path: 'requests',
-        loadChildren: () => import('../requests/requests.module').then( m => m.RequestsPageModule)
+        loadChildren: () => import('../pages/requests/requests.module').then( m => m.RequestsPageModule)
       },
 
     ]
