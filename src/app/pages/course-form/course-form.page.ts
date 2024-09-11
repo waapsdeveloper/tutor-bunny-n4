@@ -57,6 +57,7 @@ export class CourseFormPage
   async initialize() {}
 
   async ionViewWillEnter() {
+
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -234,6 +235,7 @@ export class CourseFormPage
       this.courseId = this.createCourseService.courseId;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
+
   }
 
   openCoursePhotos() {

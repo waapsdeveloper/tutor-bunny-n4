@@ -3,6 +3,7 @@ import { EventsService } from '../services/events.service';
 import { UsersService } from '../services/users.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
+import { CreateCourseService } from '../services/create-course.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class TabsPage extends BasePage implements OnInit {
   showCourses= false;
   showMore= false;
   user;
-  constructor(injector:Injector) {
+  constructor(injector:Injector,public createCourseService: CreateCourseService) {
     super(injector)
     this.initialize()
   }
@@ -104,6 +105,9 @@ export class TabsPage extends BasePage implements OnInit {
     let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
 
     if (res.data.title) {
+
+    this.createCourseService.resetFormData()
+
 
 
       const params = {

@@ -22,7 +22,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   }
 
   async initialize() {
-    
+
   }
 
   setBackgroundImage(item) {
@@ -45,7 +45,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       this.createCourseService.formData.image = imageString;
 
 
-      const courseId = localStorage.getItem('courseId');
+      const courseId = this.createCourseService.courseId;
       if (courseId) {
 
         let obj = {
@@ -53,18 +53,18 @@ export class CoursePhotossPage extends BasePage implements OnInit {
           image: imageString,
         };
         await this.network.postCoursePhoto(obj);
-  
+
       }
 
     }
-    
-    const courseId = localStorage.getItem('courseId');    
-    if(courseId){
-      obj.course_id = courseId;
-      await this.network.postCourseImage(obj);      
-    }
-    
-    
+
+        const courseId = this.createCourseService.courseId;
+        if(courseId){
+          obj.course_id = courseId;
+          await this.network.postCourseImage(obj);
+        }
+
+
 
   }
 
@@ -98,7 +98,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       await this.network.postCoursePhoto(obj);
 
     }
-    
+
 
     //this.initialize();
   }
@@ -112,7 +112,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       await this.network.deleteCourseImage(item.id);
     }
 
-    
+
     // this.initialize();
   }
 

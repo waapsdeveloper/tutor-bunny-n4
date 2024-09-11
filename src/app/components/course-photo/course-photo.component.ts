@@ -69,7 +69,7 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
 
   async uploadCourseImage(obj: any): Promise<any> {
     console.log(obj);
-    return await this.network.postCourseImage(obj);
+    // return await this.network.postCourseImage(obj);
   }
 
   addCourseImage(image: string) {
