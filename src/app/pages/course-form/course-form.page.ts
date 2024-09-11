@@ -17,7 +17,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 })
 export class CourseFormPage
   extends BasePage
-  implements OnInit, ViewWillEnter, OnDestroy 
+  implements OnInit, ViewWillEnter
 {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
@@ -52,30 +52,7 @@ export class CourseFormPage
   }
 
   ngOnInit() {}
-  ngOnDestroy(): void {
-    this.createCourseService.formData = {
-      title: null,
-      description: null,
-      language: null,
-      image: null,
-      mode_type: null,
-      price: null,
-      duration: null,
-      from_age: null,
-      to_age: null,
-      strat_date: null,
-      type: null,
-      end_date: null,
-      category: null,
-      keyword: null,
-      lesson: null,
-      meeting_link: null,
-      schedules: null,
-    };
 
-    this.createCourseService.courseId = null;
-    this.createCourseService.coursePhotos = [];
-  }
 
   async initialize() {}
 
