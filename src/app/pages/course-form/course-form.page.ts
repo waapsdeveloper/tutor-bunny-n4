@@ -8,6 +8,7 @@ import {
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { AddDatesPage } from '../add-dates/add-dates.page';
+import { CreateCourseService } from 'src/app/services/create-course.service';
 
 @Component({
   selector: 'app-course-form',
@@ -34,27 +35,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   courseId;
   edit = false;
   step = 1;
-  formData: any = {
-    title: null,
-    description: null,
-    language: null,
-    image: null,
-    mode_type: null,
-    price: null,
-    duration: null,
-    from_age: null,
-    to_age: null,
-    strat_date: null,
-    type: null,
-    end_date: null,
-    category: null,
-    keyword: null,
-    lesson: null,
-    meeting_link: null,
-    schedules: null,
-  };
   currency;
-  constructor(injector: Injector, private el: ElementRef) {
+  
+  constructor(injector: Injector, private el: ElementRef, public createCourseService: CreateCourseService) {
     super(injector);
     this.initialize();
     this.user = this.users.getUser();
@@ -89,31 +72,41 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
 
       let res = (await this.network.getcourseById(this.courseId)) as any;
       this.setFormDta(res.course);
+
+      // course images patch
+      if(this.courseId){
+        this.createCourseService.courseId = this.courseId;
+        this.createCourseService.getCourseImages();
+      }
+
+
+
+
     }
   }
 
   setFormDta(data) {
-    this.formData['title'] = data['title'];
-    this.formData['description'] = data['description'];
-    this.formData['language_id'] = data['language_id'];
-    this.formData['price'] = data['price'];
-    this.formData['from_age'] = data['from_age'];
-    this.formData['to_age'] = data['to_age'];
-    this.formData['start_date'] = data['start_date'];
-    this.formData['end_date'] = data['end_date'];
-    this.formData['duration'] = data['duration'];
-    this.formData['image'] = data['image'];
-    this.formData['capacity'] = data['capacity'];
-    this.formData['category'] = data['category'];
-    this.formData['mode_type'] = data['mode_type'];
-    this.formData['language'] = data['language'];
-    this.formData['keyword'] = data['keywords'];
-    this.formData['lesson'] = data['lesson'];
-    this.formData['category'] = data['category'][0];
+    this.createCourseService.formData['title'] = data['title'];
+    this.createCourseService.formData['description'] = data['description'];
+    this.createCourseService.formData['language_id'] = data['language_id'];
+    this.createCourseService.formData['price'] = data['price'];
+    this.createCourseService.formData['from_age'] = data['from_age'];
+    this.createCourseService.formData['to_age'] = data['to_age'];
+    this.createCourseService.formData['start_date'] = data['start_date'];
+    this.createCourseService.formData['end_date'] = data['end_date'];
+    this.createCourseService.formData['duration'] = data['duration'];
+    this.createCourseService.formData['image'] = data['image'];
+    this.createCourseService.formData['capacity'] = data['capacity'];
+    this.createCourseService.formData['category'] = data['category'];
+    this.createCourseService.formData['mode_type'] = data['mode_type'];
+    this.createCourseService.formData['language'] = data['language'];
+    this.createCourseService.formData['keyword'] = data['keywords'];
+    this.createCourseService.formData['lesson'] = data['lesson'];
+    this.createCourseService.formData['category'] = data['category'][0];
     const lang = data['language'];
     if (lang) {
       this.language_id = lang.id;
-      this.formData['language_id'] = this.language_id;
+      this.createCourseService.formData['language_id'] = this.language_id;
     }
     this.events.publish('set-mode-and-capacity', data);
     this.events.publish('set-from-and-to-age', data);
@@ -121,43 +114,43 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   result(value, key) {
-    this.formData[key] = value;
+    this.createCourseService.formData[key] = value;
     if (key == 'category') {
       this.category = value.id;
-      this.formData['category_id'] = value.id;
-      this.formData['category'] = value;
+      this.createCourseService.formData['category_id'] = value.id;
+      this.createCourseService.formData['category'] = value;
     }
     if (key == 'mode_type') {
       this.onlineMode = value.mode;
-      this.formData['mode_type'] = value.mode;
-      this.formData['capacity'] = value.capacity;
+      this.createCourseService.formData['mode_type'] = value.mode;
+      this.createCourseService.formData['capacity'] = value.capacity;
     }
     if (key == 'age') {
       this.age = value.mode;
-      this.formData['from_age'] = value.from_age;
-      this.formData['to_age'] = value.to_age;
+      this.createCourseService.formData['from_age'] = value.from_age;
+      this.createCourseService.formData['to_age'] = value.to_age;
     }
     if (key == 'dates') {
       this.age = value.mode;
-      this.formData['start_date'] = value.start_date;
-      this.formData['end_date'] = value.end_date;
+      this.createCourseService.formData['start_date'] = value.start_date;
+      this.createCourseService.formData['end_date'] = value.end_date;
     }
     if (key == 'image') {
-      this.formData['image'] = value.image;
+      this.createCourseService.formData['image'] = value.image;
     } else if (key == 'language') {
       this.lang = value;
 
-      this.formData['language'] = value;
-      this.formData['language_id'] = this.lang.id;
+      this.createCourseService.formData['language'] = value;
+      this.createCourseService.formData['language_id'] = this.lang.id;
     }
   }
 
   async onSlideChange() {
     this.events.publish(
       'teacher-course-first-screen-submit-call',
-      this.formData
+      this.createCourseService.formData
     );
-    const f = this.formData;
+    const f = this.createCourseService.formData;
     if (
       !f.title ||
       !f.description ||
@@ -186,9 +179,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (courseId) {
       let obj = {
         course_id: courseId,
-        image: this.formData.image,
+        image: this.createCourseService.formData.image,
       };
-      if (!this.formData.image.includes('https')) {
+      if (!this.createCourseService.formData.image.includes('https')) {
         let image = await this.network.postCoursePhoto(obj);
       }
     }
@@ -197,7 +190,7 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
     if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-      this.events.publish('set-form-course-category', this.formData);
+      this.events.publish('set-form-course-category', this.createCourseService.formData);
       this.events.publish('set-form-keywords-list', res.course.keywords);
       this.content.scrollToTop(500); // 500ms animation duration
     }
@@ -213,9 +206,9 @@ export class CourseFormPage extends BasePage implements OnInit, ViewWillEnter {
   async submit() {
     this.events.publish(
       'teacher-course-second-screen-submit-call',
-      this.formData
+      this.createCourseService.formData
     );
-    let f = this.formData;
+    let f = this.createCourseService.formData;
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
     }
