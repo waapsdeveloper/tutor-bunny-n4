@@ -20,7 +20,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   title;
   type;
   serial_number;
-  mode_type
+  mode_type;
   created_at;
   price;
   startTime;
@@ -46,13 +46,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
   currentIndex: number = 0;
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -63,24 +60,26 @@ export class CourseDetailPage extends BasePage implements OnInit {
       this.course_Id = this.params.id;
     }
     this.callApi();
-
-
   }
 
-
-
   prevImage() {
-    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.courseImages.length - 1;
+    this.currentIndex =
+      this.currentIndex > 0
+        ? this.currentIndex - 1
+        : this.courseImages.length - 1;
   }
 
   // Method to show the next image
   nextImage() {
-    this.currentIndex = (this.currentIndex < this.courseImages.length - 1) ? this.currentIndex + 1 : 0;
+    this.currentIndex =
+      this.currentIndex < this.courseImages.length - 1
+        ? this.currentIndex + 1
+        : 0;
   }
 
   async callApi() {
     this.user = this.users.getUser();
-    let res = await this.network.getcourseById(this.course_Id) as any;
+    let res = (await this.network.getcourseById(this.course_Id)) as any;
 
     this.data = res.course;
     this.title = this.data.title;
@@ -88,7 +87,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
-    this.description = this.formatDescription(this.data.description);  // Process the description
+    this.description = this.formatDescription(this.data.description); // Process the description
     this.from_age = this.data.from_age;
     this.to_age = this.data.to_age;
     this.displayName = this.utility.getAmericanName(this.data.user.name);
@@ -114,10 +113,9 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.startDate = moment(startDate).format('DD-MM-Y');
     this.endDate = moment(endDate).format('DD-MM-Y');
 
-
     if (this.data.category && this.data.category.length > 0) {
       this.categoryId = this.data.category[0].id;
-      this.getOtherCourseList(this.data.id)
+      this.getOtherCourseList(this.data.id);
     }
 
     const uid = this.user.id;
@@ -132,15 +130,13 @@ export class CourseDetailPage extends BasePage implements OnInit {
     return description.replace(/\n/g, '<br>');
   }
 
-
   async getOtherCourseList(id) {
-
-    let user = this.users.getUser()
+    let user = this.users.getUser();
     const obj = {
       user_id: user['id'],
-      except_course_id : id
-    }
-    const res = await this.network.getOtherCourseList(obj)
+      except_course_id: id,
+    };
+    const res = await this.network.getOtherCourseList(obj);
     const result = res.result;
     this.otherCourseListTotalCount = result.total;
     this.otherCourseList = result.data;
@@ -154,15 +150,15 @@ export class CourseDetailPage extends BasePage implements OnInit {
       if (flag) {
         return flag.toLowerCase();
       } else {
-        return ""
+        return '';
       }
     } else {
-      return ""
+      return '';
     }
   }
 
   openOtherCourses($event) {
-    this.nav.push('/tabs/courses')
+    this.nav.push('/tabs/courses');
   }
 
   openDetails() {
@@ -171,11 +167,14 @@ export class CourseDetailPage extends BasePage implements OnInit {
       edit: true,
       type: this.data.type,
       showBack: true,
-      title: 'Edit Course'
-    }
-    this.nav.push('/course-form', params)
+      title: 'Edit Course',
+    };
+    this.nav.push('/course-form', params);
+  }
 
-
-
+  getOtherCourse(event) {
+    console.log(event);
+    this.course_Id = event.id;
+    this.callApi();
   }
 }
