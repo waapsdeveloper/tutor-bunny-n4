@@ -11,8 +11,6 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   params;
 
-  featureIndex = -1;
-
   constructor(
     injector: Injector,
     public createCourseService: CreateCourseService
@@ -47,7 +45,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     }
 
     if (this.createCourseService.coursePhotos.length == 1) {
-      this.featureIndex = 0;
+      this.createCourseService.coursePhotos[0].feature = true;
       this.createCourseService.formData.image = imageString;
 
       if (courseId) {
@@ -73,7 +71,13 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async updateFeatureImage(item: any, index, event: Event) {
     event.stopPropagation();
-    this.featureIndex = index;
+
+    for(var i = 0; i < this.createCourseService.coursePhotos.length; i++){
+      this.createCourseService.coursePhotos[i].feature = false;
+    }
+
+    this.createCourseService.coursePhotos[index].feature = true;
+
     const courseId = this.createCourseService.courseId;
     const img = item.image;
     this.createCourseService.formData.image = item.image;
