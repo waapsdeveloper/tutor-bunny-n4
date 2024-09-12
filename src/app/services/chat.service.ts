@@ -37,15 +37,17 @@ export class ChatService {
       console.log(this.chats);
 
       this.unreadCount = this.getUnreadMsgCount()
-      
-      
-      
+      console.log(this.unreadCount);
+
+
+
+
       let data = await this.network.getRequsetCount(this.user.id);
       this.count = data.message.pending_count;
-      
-      
-      
-      
+
+
+
+
       resolve(this.chats);
       return;
     });
