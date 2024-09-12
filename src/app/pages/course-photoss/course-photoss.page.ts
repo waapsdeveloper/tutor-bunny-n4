@@ -95,6 +95,27 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
+
+    // check for feature image flag
+    const pht = this.createCourseService.coursePhotos[index];
+    if(!pht){
+      return;
+    }
+
+    if(pht.feature == true){
+      // check if a item behind the index exist
+      const phtPrev = this.createCourseService.coursePhotos[index - 1];
+      if(!phtPrev){
+        return;
+      }
+
+      this.createCourseService.coursePhotos[index - 1].feature = true;
+      this.createCourseService.formData.image = phtPrev.image;
+
+      
+    }
+
+
     this.createCourseService.coursePhotos.splice(index, 1);
 
     let item = this.createCourseService.coursePhotos[index];
