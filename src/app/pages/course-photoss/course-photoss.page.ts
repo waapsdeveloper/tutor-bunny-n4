@@ -112,6 +112,16 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       this.createCourseService.coursePhotos[index - 1].feature = true;
       this.createCourseService.formData.image = phtPrev.image;
 
+      const courseId = this.createCourseService.courseId;
+      
+      if (courseId) {
+        let obj = {
+          course_id: courseId,
+          image: phtPrev.image,
+        };
+        await this.network.postCoursePhoto(obj);
+      }
+
       
     }
 
