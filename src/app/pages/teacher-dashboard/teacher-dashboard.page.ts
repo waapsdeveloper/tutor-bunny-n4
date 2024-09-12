@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -49,7 +50,8 @@ export class TeacherDashboardPage extends BasePage {
     injector: Injector,
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
-    public globalTrials: GlobalTrialsService
+    public globalTrials: GlobalTrialsService,
+    public chats: ChatService
   ) {
     super(injector);
 
@@ -61,6 +63,7 @@ export class TeacherDashboardPage extends BasePage {
     this.globalCourses.getCoursesFromApi();
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
+
     // this.events.subscribe('dashboard:refreshpage', () => {
     // });
   }

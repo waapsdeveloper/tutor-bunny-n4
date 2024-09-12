@@ -12,6 +12,7 @@ export class ChatService {
   role_id: any;
   chats;
   count;
+  unreadCount;
   requests;
   requestCount;
   days;
@@ -33,6 +34,9 @@ export class ChatService {
       };
       let res = await this.network.getMessagesRoom(this.user.id, obj);
       this.chats = res.data;
+      console.log(this.chats);
+      this.unreadCount = this.chats.map((chat) => chat.unread_count.toString());
+      console.log(this.unreadCount);
       let data = await this.network.getRequsetCount(this.user.id);
       this.count = data.message.pending_count;
       resolve(this.chats);
@@ -45,7 +49,7 @@ export class ChatService {
       let res = await this.network.getRequestMessagesRoom(this.user.id);
       this.requestCount = res.total;
       this.requests = res.data;
-      resolve
+      resolve;
     });
   }
 
@@ -58,17 +62,17 @@ export class ChatService {
         obj,
         item.chat_room_id
       );
-      this.getChatRequsts()
-      this.getchatList()
+      this.getChatRequsts();
+      this.getchatList();
       resolve;
     });
   }
 
-  getChatMessages(id){
+  getChatMessages(id) {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
-      resolve
-    })
+      resolve;
+    });
   }
 }

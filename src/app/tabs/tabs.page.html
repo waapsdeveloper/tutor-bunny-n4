@@ -10,12 +10,17 @@
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="chat" (click)="goToChat()">
       <div class="tab-back-78523" *ngIf="showChat === true">
+        <div class="unread-count" *ngIf="chat.unreadCount?.length > 0">
+          {{chat.unreadCount}}</div>
         <img src="assets/icon/home/chat-icon-fill.svg" />
         <div class="footer-tab-label" style="color: #E29F1B;">Chat</div>
-
       </div>
-      <img src="assets/icon/home/chat-icon.svg" *ngIf="showChat === false" />
-      <div class="footer-tab-label" *ngIf="showChat === false">Chat</div>
+      <div class="tab-back-78524" *ngIf="showChat === false">
+        <div class="unread-count" *ngIf="chat.unreadCount?.length > 0">
+          {{chat.unreadCount}}</div>
+        <img src="assets/icon/home/chat-icon.svg" />
+        <div class="footer-tab-label">Chat</div>
+      </div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" (click)="createCourse()">
       <img src="../../assets/svg/add-course.svg" />

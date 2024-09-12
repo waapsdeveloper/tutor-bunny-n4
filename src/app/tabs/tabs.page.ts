@@ -4,6 +4,7 @@ import { UsersService } from '../services/users.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
 import { CreateCourseService } from '../services/create-course.service';
+import { ChatService } from '../services/chat.service';
 
 
 @Component({
@@ -21,9 +22,11 @@ export class TabsPage extends BasePage implements OnInit {
   showCourses= false;
   showMore= false;
   user;
-  constructor(injector:Injector,public createCourseService: CreateCourseService) {
+  constructor(injector:Injector,public createCourseService: CreateCourseService, public chat: ChatService) {
     super(injector)
     this.initialize()
+    this.chat.getchatList()
+
   }
 
   ionViewWillEnter() {
