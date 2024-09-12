@@ -10,11 +10,12 @@ import { GlobalCoursesService } from '../../services/global-courses.service';
   templateUrl: './student-course-detail.page.html',
   styleUrls: ['./student-course-detail.page.scss'],
 })
-export class StudentCourseDetailPage extends BasePage  { // implements OnInit
+export class StudentCourseDetailPage extends BasePage {
+  // implements OnInit
   data;
   params;
   backUrl;
-  displayName
+  displayName;
   course_Id;
   lessons;
   currencySymbol;
@@ -35,7 +36,7 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   price;
   from_age;
   to_age;
-  endDate
+  endDate;
   country;
   startTime;
   flag;
@@ -44,14 +45,12 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   updated_at;
   schedules;
   acheduleTime;
-  startDate
+  startDate;
   showFavValue = false;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService, ) {
-    super(injector)
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+    super(injector);
   }
-
-
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
@@ -64,17 +63,14 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
 
     this.callApi();
     setTimeout(() => {
-      this.isTrailReq()
+      this.isTrailReq();
     }, 200);
   }
 
-
-
   async callApi() {
-
-    let res = await this.globalCourses.getcourseById(this.course_Id) as any;
+    let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
     this.data = res;
-    this.events.publish('data-for-other-corses', this.data)
+    this.events.publish('data-for-other-corses', this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -91,11 +87,11 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
     this.acheduleTime = this.schedules;
     this.lessons = this.data.lesson;
     this.created_at = this.data.created_at;
-    this.techerTitle = this.data.user.teacher.title
+    this.techerTitle = this.data.user.teacher.title;
     this.image = this.data.image;
-    this.techerImg = this.data.user.image
-    this.country = this.data.user.teacher.country.name
-    this.state = this.data.user.teacher.state.name
+    this.techerImg = this.data.user.image;
+    this.country = this.data.user.teacher.country.name;
+    this.state = this.data.user.teacher.state.name;
     this.updated_at = this.data.updated_at;
     this.type = this.data.type;
     this.currencySymbol = this.data.auth_user_currency_symbol;
@@ -112,27 +108,20 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   }
 
   async addToFav() {
-
     let user = this.users.getUser();
 
     this.data.is_liked_by_me = true;
     this.showFavValue = true;
     this.globalCourses.addFavorites(this.data, user);
-
   }
 
   async removeToFav() {
-
-    let user = this.users.getUser()
+    let user = this.users.getUser();
 
     this.data.is_liked_by_me = false;
     this.showFavValue = false;
     this.globalCourses.removeFavorites(this.data, user);
-
-
   }
-
-
 
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
@@ -141,10 +130,10 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
       if (flag) {
         return flag.toLowerCase();
       } else {
-        return ""
+        return '';
       }
     } else {
-      return ""
+      return '';
     }
   }
   toggleReadMore() {
@@ -152,74 +141,77 @@ export class StudentCourseDetailPage extends BasePage  { // implements OnInit
   }
 
   goToChat() {
-    this.nav.push('/tabs/chat')
+    this.nav.push('/tabs/chat');
   }
 
-
   async presentAlert() {
-
-    const flag = await this.utility.presentConfirm('OK', 'Cancel', 'Cancel Trial', 'Are you sure to cancel the Trial?' )
-    if(flag){
+    const flag = await this.utility.presentConfirm(
+      'OK',
+      'Cancel',
+      'Cancel Trial',
+      'Are you sure to cancel the Trial?'
+    );
+    if (flag) {
       this.cancelTrail();
     }
   }
 
-
   async requestTrail() {
-
-    let user = this.users.getUser()
-    let v = await this.profiles.isProfileCompleted(user) as any;;
+    let user = this.users.getUser();
+    let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (v || v == true) {
-      let data = await this.modals.present(TrailMessageComponent, {
-      }, "", 0.7);
+      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
       let send = data.data.send;
       if (send == true) {
-        await this.globalCourses.requestTrial(this.data, user, data.data.message)
-        this.callApi()
+        await this.globalCourses.requestTrial(
+          this.data,
+          user,
+          data.data.message
+        );
+        this.callApi();
         this.events.publish('update-course-list');
       }
-
-    }
-    else {
+    } else {
       this.nav.push('/student-profile/student-profile-edit', {
-        backUrl: '/tabs/student-dashboard', showBack: true
-      }
-      )
+        backUrl: '/tabs/student-dashboard',
+        showBack: true,
+      });
     }
-
   }
 
   async cancelTrail() {
-
     let user = this.users.getUser();
-    await this.globalCourses.cancelTrail(this.data, user)
-    this.callApi()
+    await this.globalCourses.cancelTrail(this.data, user);
+    this.callApi();
   }
 
   async isTrailReq() {
-
     this.loading = true;
 
-    let user = this.users.getUser()
+    let user = this.users.getUser();
 
     let obj = {
       user_id: user.id,
-      course_id: this.course_Id
-    }
-    let res = await this.network.getTrail(obj)
+      course_id: this.course_Id,
+    };
+    let res = await this.network.getTrail(obj);
     if (res && !res.trial) {
       this.loading = false;
     }
     if (res && res.trial) {
       this.loading = false;
     }
-
   }
-  goToTeacher(){
+  goToTeacher() {
+    const params = {
+      email: this.data.user.email,
+    };
+    this.nav.push('/tabs/teacher-profile', params);
+  }
 
-    const params ={
-      email: this.data.user.email
-    }
-    this.nav.push('/tabs/teacher-profile', params)
+  getOtherCourse(event) {
+    console.log(event);
+    this.course_Id = event.id;
+    this.callApi();
   }
 }

@@ -10,6 +10,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 export class CoursesListComponent extends BasePage implements OnInit {
 
   user;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
@@ -31,7 +32,8 @@ export class CoursesListComponent extends BasePage implements OnInit {
       id: item.id,
       backUrl: '/tabs/student-dashboard'
     }
-    let res = await this.nav.push('student-course-detail', params)
+    this.onChange.emit(params);
+
 
   }
 
