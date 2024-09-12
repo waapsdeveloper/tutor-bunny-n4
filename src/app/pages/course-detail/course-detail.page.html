@@ -77,6 +77,6 @@
     <div class="line"></div>
 
     <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
-      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"></app-other-courses>
+      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)" (onChange)="getOtherCourse($event)"></app-other-courses>
   </div>
 </ion-content>

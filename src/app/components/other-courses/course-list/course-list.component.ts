@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -12,6 +12,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   course
   @Input() item
   @ViewChild('slides', { static: false }) slides: any;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private _sanitizer: DomSanitizer, injector: Injector) {
     super(injector)
     this.initialize();
@@ -42,7 +44,9 @@ export class CourseListComponent extends BasePage implements OnInit {
       id: item.id,
       backUrl: '/tabs/courses'
     }
-    this.nav.push('/tabs/course-detail', params)
+    this.onChange.emit(params);
+
+    // this.nav.push('/tabs/course-detail', params)
 
   }
 }
