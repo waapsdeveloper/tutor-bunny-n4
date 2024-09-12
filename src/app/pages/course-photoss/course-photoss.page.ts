@@ -9,21 +9,21 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 })
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
-  params
+  params;
 
   featureIndex = -1;
 
-  constructor(injector: Injector, public createCourseService: CreateCourseService) {
+  constructor(
+    injector: Injector,
+    public createCourseService: CreateCourseService
+  ) {
     super(injector);
     this.initialize();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  async initialize() {
-
-  }
+  async initialize() {}
 
   setBackgroundImage(item) {
     return `url('${item.image}')`;
@@ -36,37 +36,28 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     let obj = {
       user_id: user.id,
       course_id: courseId,
-      image: imageString
+      image: imageString,
     };
 
     this.createCourseService.coursePhotos.push(obj);
 
-    if(courseId){
+    if (courseId) {
       obj.course_id = courseId;
       await this.network.postCourseImage(obj);
     }
 
-    if(this.createCourseService.coursePhotos.length == 1){
+    if (this.createCourseService.coursePhotos.length == 1) {
       this.featureIndex = 0;
       this.createCourseService.formData.image = imageString;
 
       if (courseId) {
-
         let obj = {
           course_id: courseId,
           image: imageString,
         };
         await this.network.postCoursePhoto(obj);
-
       }
-
     }
-
-        
-        
-
-
-
   }
 
   async onFileSelected(event: any) {
@@ -82,37 +73,30 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async updateFeatureImage(item: any, index, event: Event) {
     event.stopPropagation();
-
     this.featureIndex = index;
-
-    const courseId = localStorage.getItem('courseId');
+    const courseId = this.createCourseService.courseId;
     const img = item.image;
     this.createCourseService.formData.image = item.image;
 
-
     if (courseId) {
-
       let obj = {
         course_id: courseId,
         image: img,
       };
       await this.network.postCoursePhoto(obj);
-
     }
-
 
     //this.initialize();
   }
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    this.createCourseService.coursePhotos.splice(index, 1)
+    this.createCourseService.coursePhotos.splice(index, 1);
 
     let item = this.createCourseService.coursePhotos[index];
-    if(item.id){
+    if (item.id) {
       await this.network.deleteCourseImage(item.id);
     }
-
 
     // this.initialize();
   }
@@ -120,7 +104,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   openImage(image) {
     this.nav.push('/course-profile/course-photo/gallery-image', {
       backUrl: '/course-profile/course-photo',
-      image: image
+      image: image,
     });
   }
 

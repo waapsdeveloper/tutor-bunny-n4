@@ -6,17 +6,17 @@
 
   <div class="gallery-outer-8965">
 
-    <div class="image-card-78975" *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
-
-      (click)="openImage(coursePhoto)">
-      <ion-icon name="star" [class.set-feature-input-678956744]="featureIndex == i" class="feature-input-678956744" (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon>
+    <div class="image-card-78975" *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index"
+      [style.backgroundImage]="setBackgroundImage(coursePhoto)" (click)="openImage(coursePhoto)">
+      <ion-icon name="star" [class.set-feature-input-678956744]="featureIndex == i" class="feature-input-678956744"
+        (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon>
       <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(i , $event)">
     </div>
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput multiple />
 </ion-content>
 
-<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" >
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
 
   <div class="d-flex flex-column gap-16" style="width: 100%;">
     <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"

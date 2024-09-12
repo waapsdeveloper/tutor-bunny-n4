@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { BasePage } from 'src/app/base-page/base-page';
+import { CreateCourseService } from 'src/app/services/create-course.service';
 
 @Component({
   selector: 'app-course-photo',
@@ -10,21 +11,18 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CoursePhotoComponent extends BasePage implements OnInit {
 
   @Input('key') key = '';
-  @Input('coursePhotos') coursePhotos: SafeUrl[] = [];
+  @Input('coursePhoto') coursePhoto: SafeUrl[] = [];
   @Output('updateCourseImage') updateCourseImage: EventEmitter<any> = new EventEmitter<any>();
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
   isRequired = false;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public courseForm: CreateCourseService) {
     super(injector);
   }
 
   ngOnInit() {
-    this.events.subscribe("set-form-course-image", (data) => {
-      this.coursePhotos.push(data.image);
-    });
 
     this.events.subscribe('teacher-course-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
@@ -73,7 +71,7 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
   }
 
   addCourseImage(image: string) {
-    this.coursePhotos.push(image);
-    this.updateCourseImage.emit(this.coursePhotos);
+    this.coursePhoto.push(image);
+    this.updateCourseImage.emit(this.coursePhoto);
   }
 }

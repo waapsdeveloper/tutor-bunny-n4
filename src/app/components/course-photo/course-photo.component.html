@@ -1,8 +1,8 @@
 <div class="image-upload-box-st-78955674" >
   <div class="icno-text-88666" >
-    <div *ngIf="coursePhotos" class="image-box-78559" [style.background-image]="'url(' + coursePhotos + ')'" >
+    <div *ngIf="coursePhoto" class="image-box-78559" [style.background-image]="'url(' + courseForm.formData.image + ')'" >
     </div>
-    <img *ngIf="!coursePhotos" src="../../../assets/svg/course-photo.svg" alt="Selected Image" class="img-67855" />
+    <img *ngIf="!coursePhoto" src="../../../assets/svg/course-photo.svg" alt="Selected Image" class="img-67855" />
     <div class="roboto-regular fs-14">Upload course Photo</div>
   </div>
   <ion-icon name="chevron-forward-outline"></ion-icon>
