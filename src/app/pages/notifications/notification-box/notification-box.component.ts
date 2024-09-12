@@ -37,6 +37,8 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
+
+    this.user = this.users.getUser();
   }
   readNotification(item) {
     this.getNotificationRead(item);
@@ -67,14 +69,26 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   }
 
   async getNotificationRead(item) {
-    if (item.user_id != this.user_id) {
-      if (item.is_read == 0) {
-        let obj = { ids: [item.id] };
-        let res = await this.network.getNotificationRead(obj);
-        this.reloadList.emit(res.data);
-      } else {
+    console.log(item.user_id, this.user_id);
+
+    if (this.user.role_id == 3) {
+      this.nav.push('my-students');
+      if (item.user_id != this.user_id) {
+        if (item.is_read == 0) {
+          let obj = { ids: [item.id] };
+          let res = await this.network.getNotificationRead(obj);
+          this.reloadList.emit(res.data);
+        }
       }
     } else {
+      this.nav.push('/tabs/requests');
+      if (item.user_id != this.user_id) {
+        if (item.is_read == 0) {
+          let obj = { ids: [item.id] };
+          let res = await this.network.getNotificationRead(obj);
+          this.reloadList.emit(res.data);
+        }
+      }
     }
   }
 }

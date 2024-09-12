@@ -2,7 +2,7 @@
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
-        <div class="image-circle-789675" 
+        <div class="image-circle-789675"
           [style.background-image]="item?.student.image ? 'url(' + item?.student.image + ')' : 'assets/profileimg.png'">
         </div>
         <!-- <div class="image-circle-789675" *ngIf="item?.status == 'Complete'"
@@ -70,7 +70,7 @@
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="item?.status === 'Complete' || item?.status === 'Accepted'">
-                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="goToChat()">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="goToChat(item)">
                   <img class="img1-789575" src="../../../assets/svg/chat-fill.svg" />
                   <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Chat</div>
                 </ion-item>

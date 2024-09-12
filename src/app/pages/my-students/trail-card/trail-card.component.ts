@@ -19,6 +19,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
   @Input() item: any;
   flag;
   date;
+  user;
   time;
   age;
   @ViewChild('popover') popover;
@@ -27,6 +28,8 @@ export class TrailCardComponent extends BasePage implements OnInit {
   @Output() removeFromList = new EventEmitter<number>();
   constructor(injector: Injector, private globalTrials: GlobalTrialsService) {
     super(injector);
+    this.user = this.users.getUser();
+
   }
   ngOnInit() {
     this.flag = this.getFlag();
@@ -95,9 +98,23 @@ export class TrailCardComponent extends BasePage implements OnInit {
     }
   }
 
-  goToChat() {
-    const params = {
-      user: this.item?.student,
+  async goToChat(data) {
+    console.log(data);
+
+    let id = this.user.id;
+
+    let obj = {
+      user_id_1: this.user.id,
+      user_id_2: data.student.id,
+    };
+
+    let res = await this.network.getChadRoomId(obj);
+
+    let params = {
+      student_id: id,
+      other_user_id: data.student.id,
+      user: JSON.stringify(data.student),
+      chat_room_id: res.chat_room.id,
     };
 
     this.nav.push('/tabs/chat', params);

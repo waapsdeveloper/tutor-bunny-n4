@@ -61,7 +61,7 @@ swiper-slide {
   gap: 15px;
 
   .review-box-img-78962 {
-    background-image: url(../../../../assets/review.jpg);
+    background-image: url(/assets/review.jpg);
     height: 55px;
     width: 55px;
     border-radius: 50%;
@@ -125,7 +125,7 @@ swiper-slide {
 .review-box-para-78967 p {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4; 
+  -webkit-line-clamp: 4;
   text-align: justify;
   -webkit-box-orient: vertical;
 }
