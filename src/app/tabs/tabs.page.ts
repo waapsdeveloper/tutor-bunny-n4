@@ -22,10 +22,10 @@ export class TabsPage extends BasePage implements OnInit {
   showCourses= false;
   showMore= false;
   user;
-  constructor(injector:Injector,public createCourseService: CreateCourseService, public chat: ChatService) {
+  constructor(injector:Injector,public createCourseService: CreateCourseService, public chatService: ChatService) {
     super(injector)
     this.initialize()
-    this.chat.getchatList()
+    this.chatService.getchatList()
 
   }
 
