@@ -19,7 +19,7 @@ export class SplashPage extends BasePage implements OnInit {
 
   async initialize() {
 
-    this.chats.getchatList()
+    // this.chats.getchatList()
 
   }
 

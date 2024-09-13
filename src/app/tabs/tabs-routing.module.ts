@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import { userResolver } from '../resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: TabsPage,
+    resolve: {
+      user: userResolver
+    },
     children: [
       // {
       //   path: '',

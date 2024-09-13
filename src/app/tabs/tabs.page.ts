@@ -12,44 +12,50 @@ import { ChatService } from '../services/chat.service';
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
 })
-export class TabsPage extends BasePage implements OnInit {
+export class TabsPage extends BasePage {
+
+  loading = false;
+  user: any;
 
   showTabs = true;
   roleId;
-  showHome= true;
-  showChat= false;
-  showSearch= false;
-  showCourses= false;
-  showMore= false;
-  user;
-  constructor(injector:Injector,public createCourseService: CreateCourseService, public chatService: ChatService) {
+  showHome = true;
+  showChat = false;
+  showSearch = false;
+  showCourses = false;
+  showMore = false;
+
+  constructor(injector: Injector, public createCourseService: CreateCourseService, public chatService: ChatService) {
     super(injector)
-    this.initialize()
-    this.chatService.getchatList()
+    // this.initialize()
+    // this.chatService.getchatList()
 
   }
 
   ionViewWillEnter() {
-    this.user = this.users.getUser()
+    this.initialize();
+  }
 
-    this.roleId = this.user.role_id
+  // ngOnInit() {
+
+
+  //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
+  // }
+
+  async initialize() {
+
+    this.loading = true;
+
+    this.loadResolvers();
+    this.user = this.dataR.user;
+    this.roleId = this.user.role_id;
+    await this.chatService.getchatList()
+    this.loading = false;
 
   }
 
-  ngOnInit() {
-    this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
-  }
 
-  pageScrollConditionEnd(data) {
-    const efr = localStorage.getItem('efr');
-    if (efr) {
-      this.showTabs = efr == 'show'// this.efr;
-    }
-
-  }
-
-
-  goToChat(){
+  goToChat() {
     this.showHome = false;
     this.showSearch = false;
     this.showChat = true;
@@ -65,27 +71,22 @@ export class TabsPage extends BasePage implements OnInit {
     // Navigate to the chat page without any parameters
     this.nav.push('/tabs/chat', params);
   }
-  goToHome(){
+  goToHome() {
     this.showHome = true;
     this.showSearch = false;
     this.showChat = false;
     this.showMore = false;
     this.showCourses = false;
-
-
   }
-  goToSearch(){
+  goToSearch() {
     this.showSearch = true;
     this.showChat = false;
     this.showHome = false;
     this.showCourses = false;
-
     this.showMore = false;
-
-
   }
 
-  goToCourses(){
+  goToCourses() {
     this.showCourses = true;
     this.showSearch = false;
     this.showChat = false;
@@ -93,7 +94,7 @@ export class TabsPage extends BasePage implements OnInit {
     this.showHome = false;
     this.nav.push('/tabs/courses');
   }
-  goToMore(){
+  goToMore() {
     this.showMore = true;
     this.showCourses = false;
     this.showSearch = false;
@@ -101,24 +102,15 @@ export class TabsPage extends BasePage implements OnInit {
     this.showHome = false;
   }
 
-  initialize() {
-  }
-
   async createCourse() {
     let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
 
     if (res.data.title) {
-
-    this.createCourseService.resetFormData()
-
-
-
+      this.createCourseService.resetFormData()
       const params = {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
         type: res.data.type,
-
-
       };
 
       this.nav.push('/course-form', params)

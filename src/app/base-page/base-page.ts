@@ -7,8 +7,9 @@ import { UsersService } from "../services/users.service";
 import { UtilityService } from "../services/utility.service";
 import { ProfileService } from "../services/profile.service";
 import { ImageService } from "../services/image.service";
+import { ActivatedRoute } from "@angular/router";
 
-export abstract class BasePage {
+export abstract class BasePage{
 
   public network: NetworkService;
   public utility: UtilityService;
@@ -19,6 +20,9 @@ export abstract class BasePage {
   public imageService: ImageService
   public modals: ModalService;
 
+  public activatedRoute: ActivatedRoute;  // Add ActivatedRoute here
+  public dataR: any;  // To store the resolved user data
+
   constructor(injector: Injector) {
     this.users = injector.get(UsersService);
     this.profiles = injector.get(ProfileService);
@@ -28,6 +32,15 @@ export abstract class BasePage {
     this.imageService = injector.get(ImageService);
     this.nav = injector.get(NavService);
     this.modals = injector.get(ModalService);
+
+    this.activatedRoute = injector.get(ActivatedRoute);
+
+  }
+
+  protected loadResolvers() {
+    this.activatedRoute.data.subscribe(data => {
+      this.dataR = data;  // Access the resolved 'user' data
+    });
   }
 
 
