@@ -91,8 +91,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async ionViewWillEnter() {
     this.scrollToBottomOnInit();
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
+
     if (this.params.item) {
       this.item = JSON.parse(this.params.item);
+      console.log(this.item);
+
       this.initialize();
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;
@@ -107,6 +111,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize() {
     let roomId = this.item.chat_room_id;
     this.chats.getChatMessages(roomId);
+    console.log(this.item);
+
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
   }

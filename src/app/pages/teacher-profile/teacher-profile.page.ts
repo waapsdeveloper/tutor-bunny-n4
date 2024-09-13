@@ -21,6 +21,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   city;
   email;
   language;
+  total_rating;
   state
   travel_policy;
   subject;
@@ -28,6 +29,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   params
   studentEmail
   roleId;
+  rating;
   experince;
 
   constructor(injector: Injector) {
@@ -62,6 +64,8 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       email: this.email,
     };
     let res = await this.network.getUserByEmail(obj);
+    console.log(res);
+
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
@@ -72,6 +76,8 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.travel_policy = this.user.teacher.travel_policy.name;
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
+      this.total_rating = this.user.teacher.total_rating;
+      this.rating = this.user.teacher.avg_rating
       this.subject = this.user.teacher.subjects;
       this.experince = this.user.teacher.started_teaching;
       const user = this.users.getUser();

@@ -161,7 +161,7 @@
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
               <div class="label-with-word-count-left">
-                <span>Tell us about your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
+                <span>Your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
                   id="click-about">
               </div>
               <div class="label-with-word-count-right roboto-light"> {{ formData?.experience_description?.length || 0 }}
@@ -181,9 +181,9 @@
               [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step === 3"></app-sd-textarea-about>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Hourly rate $</div>
+            <div class="input-title fs-14 roboto-medium">Hourly rate ({{curruncy}})</div>
             <app-sd-input-box (onChange)="result($event, 'hourly_rate')" [inputText]="formData.hourly_rate"
-              [key]="'hourly_rate'" [errorText]="'Hourly rate is required'"></app-sd-input-box>
+              [key]="'hourly_rate'" [type]="'number'" [errorText]="'Hourly rate is required'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Travel policy</div>

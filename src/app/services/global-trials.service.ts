@@ -103,6 +103,8 @@ export class GlobalTrialsService {
         teacher_id: this.user.id,
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
+      console.log(res);
+
       this.pendingTrials = res.trials;
     });
   }

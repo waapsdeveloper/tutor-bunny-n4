@@ -11,8 +11,6 @@ export class SearchCourseBoxComponent extends BasePage implements OnInit {
   private _search: any;
   searchList;
 
-  // search;
-
   @Input('search')
   public get search() {
     return this._search;
@@ -21,7 +19,6 @@ export class SearchCourseBoxComponent extends BasePage implements OnInit {
   public set search(value: any) {
     this._search = value;
     console.log(value);
-
     this.callApi(value);
   }
 
@@ -43,7 +40,7 @@ export class SearchCourseBoxComponent extends BasePage implements OnInit {
   ngOnInit() {
     this.events.subscribe('set-search-title', (title) => {
       this.search = title;
-      this.callApi(this.search)
-    })
+      this.callApi(this.search);
+    });
   }
 }

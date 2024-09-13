@@ -206,7 +206,7 @@ export class StudentCourseDetailPage extends BasePage {
     const params = {
       email: this.data.user.email,
     };
-    this.nav.push('/tabs/teacher-profile', params);
+    this.nav.push('/teacher-profile', params);
   }
 
   getOtherCourse(event) {

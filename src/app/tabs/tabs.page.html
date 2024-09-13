@@ -11,13 +11,13 @@
     <ion-tab-button class="ion-tab-button-67895675" tab="chat" (click)="goToChat()">
       <div class="tab-back-78523" *ngIf="showChat === true">
         <div class="unread-count" *ngIf="chatService.unreadCount !== '0'">
-          {{chatService.unreadCount}}</div>
+          </div>
         <img src="assets/icon/home/chat-icon-fill.svg" />
         <div class="footer-tab-label" style="color: #E29F1B;">Chat</div>
       </div>
       <div class="tab-back-78524" *ngIf="showChat === false">
         <div class="unread-count" *ngIf="chatService.unreadCount !== '0'">
-          {{chatService.unreadCount}}</div>
+          </div>
         <img src="assets/icon/home/chat-icon.svg" />
         <div class="footer-tab-label">Chat</div>
       </div>
@@ -51,7 +51,7 @@
     <ion-tab-button class="ion-tab-button-67895675" tab="menu" (click)="goToMore()">
       <div class="tab-back-78523" *ngIf="showMore === true">
         <img src="../../assets/svg/more-fill.svg" style="height: 24px; width: 24px;" />
-        <div class="footer-tab-label">More</div>
+        <div class="footer-tab-label"  style="color: #E29F1B;">More</div>
       </div>
       <img src="../../assets/svg/more.svg" *ngIf="showMore === false" style="height: 24px; width: 24px;" />
       <div class="footer-tab-label" *ngIf="showMore === false">More</div>

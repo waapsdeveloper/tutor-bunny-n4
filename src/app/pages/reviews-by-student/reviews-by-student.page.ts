@@ -26,11 +26,18 @@ export class ReviewsByStudentPage extends BasePage implements OnInit {
     }
 
     let res = await this.network.getReviews(obj);
+    console.log(res);
+
     this.reviews = res.result;
 
 
    }
 
+
+
+   back(){
+    this.nav.pop()
+   }
   ngOnInit() {
   }
 

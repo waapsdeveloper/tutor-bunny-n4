@@ -46,10 +46,12 @@ export class SearchBoxPage extends BasePage implements OnInit {
   }
 
   async setRecentSeach(item) {
+    console.log(item);
+
     let obj = {
       user_id: this.user.id,
-      course_title: item.title,
-      course_id: item.id,
+      keyword_name: item.name,
+      keyword_id: item.id,
     };
     let res = await this.network.setRecentSeach(obj);
     const params = {
@@ -66,8 +68,8 @@ export class SearchBoxPage extends BasePage implements OnInit {
     const searchTerm = inputElement.value;
     let obj = {
       user_id: this.user.id,
-      course_title: searchTerm,
-      course_id: null,
+      keyword_name: searchTerm,
+      keyword_id: null,
     };
     let res = await this.network.setRecentSeach(obj);
     const params = {

@@ -5,7 +5,7 @@
     <div class="tecahers-box-name-box-38524">
       <div class="tecahers-box-name-38525">
         {{displayName}}
-        <div class="tecahers-box-rate-38526"> $10/Hr</div>
+        <div class="tecahers-box-rate-38526"> {{item.teacher.country.currency_symbol}}{{item.teacher.hourly_rate}}</div>
       </div>
       <div class="tecahers-box-rating-box-38527">
         <div style="display: flex; align-items: center; justify-content: flex-start; gap: 2px;">
@@ -16,8 +16,8 @@
           <img src="../../../assets/icon/star.svg" alt="">
           <div class="tecahers-box-rating-38528">
           </div>
-          5.0
-          <span class="tecahers-box-rating-number-38529">(532)</span>
+          {{item.teacher.avg_rating}}
+          <span class="tecahers-box-rating-number-38529" *ngIf="item.teacher.total_rating">({{item.teacher.total_rating}})</span>
         </div>
       </div>
       <div class="tecahers-box-country-box-38530"><span slot="start" class="fi fi-{{getFlag()}}"></span>
@@ -43,6 +43,6 @@
   <div class="tecahers-box-footer-box-38540">
     <div class="tecahers-box-footer-course-38541"><img src="../../../../assets/svg/courses.svg" alt="">Courses
       ({{item.course_count}})</div>
-    <div class="tecahers-box-footer-chat-38542"> <img src="../../../../assets/svg/chat-emty.svg" alt="">Message</div>
+    <div class="tecahers-box-footer-chat-38542"> <img src="../../../../assets/svg/chat-emty.svg" alt="" (click)="goToChat(item)">Message</div>
   </div>
 </div>

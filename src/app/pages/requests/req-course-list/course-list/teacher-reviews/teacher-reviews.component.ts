@@ -55,7 +55,7 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
       message: this.review,
       user_id: this.user.id,
       course_id: this.item.id,
-      teacher_id: this.item.user.id,
+      teacher_id: this.item.user.teacher.teacher_id,
     };
     // return
     let res = await this.network.addReview(obj);

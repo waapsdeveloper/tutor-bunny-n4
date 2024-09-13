@@ -59,6 +59,7 @@ export class TeacherProfileEditPage
   contryCode: any;
   countryId;
   stateId;
+  curruncy;
   travel_policy_name;
   hideTerms = false;
   step = 1;
@@ -91,6 +92,8 @@ export class TeacherProfileEditPage
 
   async initialize() {
     this.user = this.users.getUser();
+    console.log(this.user);
+    this.curruncy = this.user.teacher.country.currency_symbol;
     let obj = {
       email: this.user.email,
     };
@@ -163,6 +166,7 @@ export class TeacherProfileEditPage
     this.formData['zip_code'] = data['teacher']['zip_code'];
     this.formData['title'] = data['teacher']['title'];
     this.formData['description'] = data['teacher']['description'];
+    this.formData['image'] = data['image'];
     this.formData['image'] = data['image'];
     this.formData['photo_id'] = data['teacher']['photo_id'];
     this.formData['terms'] =
@@ -317,5 +321,4 @@ export class TeacherProfileEditPage
   openUpdateCertificate() {
     this.nav.push('/upload-certificate');
   }
-
 }

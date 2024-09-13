@@ -34,9 +34,12 @@ export class MyCoursesComponent extends BasePage implements OnInit {
       if (this.categoryId) {
         obj['category_id'] = this.categoryId
       }
+      console.log(this.categoryId);
+      console.log(obj);
+      const res =  await this.network.getOtherCourseList(obj) as any;
+      // : await this.network.getMyCourseList(obj) as any
+      console.log(res);
 
-
-      const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj) as any;
       const result = res.result;
       this.count = res.result.total
       this.page = result.current_page;

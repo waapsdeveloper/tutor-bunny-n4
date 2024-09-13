@@ -12,7 +12,7 @@ import { SubjectListComponent } from '../../sd-subject-box/subject-list/subject-
 export class KeywordListComponent implements OnInit {
   list = [];
   sub;
-  myArray: any[] = []
+  myArray: any[] = [];
   search: '';
   page = 1;
   selectedContactId: any = null;
@@ -127,16 +127,11 @@ export class KeywordListComponent implements OnInit {
   }
   async addToSubjects(item) {
     let formtype = localStorage.getItem('formtype');
-    if ((formtype = 'filter')) {
+    console.log(formtype);
 
-      this.inputText = '';
-      this.myArray.push(item);
-      this.subs = this.myArray;
-      this.onChange.emit({
-        subs: this.subs
-      });
+    if (formtype != 'filter') {
+      console.log('iirirri');
 
-    } else {
       let course_Id = JSON.parse(localStorage.getItem('course_Id'));
       let obj = {
         course_id: course_Id,
@@ -144,6 +139,7 @@ export class KeywordListComponent implements OnInit {
       };
 
       const res = await this.network.addKeyword(obj);
+      console.log(res);
 
       let data = {
         course_id: course_Id,
@@ -155,6 +151,13 @@ export class KeywordListComponent implements OnInit {
 
       this.suggestionsList = [];
 
+      this.onChange.emit({
+        subs: this.subs,
+      });
+    } else {
+      this.inputText = '';
+      this.myArray.push(item);
+      this.subs = this.myArray;
       this.onChange.emit({
         subs: this.subs,
       });

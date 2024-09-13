@@ -26,7 +26,7 @@
       </div>
       <div class="recent-search-chips-78523">
         <div class="recent-search-chip-78524" *ngFor="let item of recentSearch" (click)="openFromRecentSearch(item)">
-          {{item.course_title}}</div>
+          {{item.keyword_name}}</div>
       </div>
     </div>
     <div class="line" *ngIf="!search"></div>
@@ -48,7 +48,7 @@
       <div class="search-seggetion-box-78521" *ngFor="let item of filter.searchList" (click)="setRecentSeach(item)">
         <img src="../../assets/svg/searchs.svg" alt="">
         <div class="search-seggetion-title-78522">
-          {{item.title}}
+          {{item.name}}
         </div>
       </div>
     </div>

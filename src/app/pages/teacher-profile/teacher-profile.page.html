@@ -21,12 +21,8 @@
             23-Jul-2024
           </div>
           <div class="header-info-misc-68448 outfit">
-            <img src="../../assets/svg/star.svg" />
-            <img src="../../assets/svg/star.svg" />
-            <img src="../../assets/svg/star.svg" />
-            <img src="../../assets/svg/star.svg" />
-            <img src="../../assets/svg/star.svg" />
-            5.0 (375)
+            <app-rating-stars [rating]="rating"></app-rating-stars>
+            {{rating}} ({{total_rating}})
           </div>
         </div>
       </div>
@@ -100,7 +96,7 @@
     <div class="line"></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
     <div class="line" *ngIf="showGellary === true"></div>
-    <app-rating-review></app-rating-review>
+    <app-rating-review [rating]="total_rating"></app-rating-review>
     <!-- <div class="line"></div> -->
   </div>
 </ion-content>

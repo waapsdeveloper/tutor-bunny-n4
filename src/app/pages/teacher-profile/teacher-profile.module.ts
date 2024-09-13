@@ -16,6 +16,8 @@ import { MyGalleryModule } from 'src/app/components/my-gallery/my-gallery.module
 import { OtherCoursesModule } from 'src/app/components/other-courses/other-courses.module';
 import { ProfileBoxModule } from 'src/app/components/profile-box/profile-box.module';
 import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.module';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { RatingStarsModule } from '../reviews-by-student/review-card/rating-stars/rating-stars.module';
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.mod
     MyGalleryModule,
     RatingReviewModule,
     OtherCoursesModule,
-    TeacherQualificationModule
+    TeacherQualificationModule,
+    RatingStarsModule
   ],
   declarations: [TeacherProfilePage],
 })

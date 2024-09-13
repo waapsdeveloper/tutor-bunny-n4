@@ -34,3 +34,19 @@
     display: flex;
   }
 }
+
+.image-box-89657 {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  background: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  border: 0.25px solid #484848;
+}

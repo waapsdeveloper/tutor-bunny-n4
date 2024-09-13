@@ -24,7 +24,7 @@ export class SearchFilterService {
   countryId = null;
   stateId = null;
   keywords;
-
+  searchCourses;
   constructor(private network: NetworkService) {}
 
   updateFormData(value: any, key: string): void {
@@ -89,8 +89,11 @@ export class SearchFilterService {
         page: 1,
         liked: false,
       };
-      let res = (await this.network.getAllCourses(obj)) as any;
-      this.searchList = res.result.data;
+      let res = (await this.network.searchFromKeywords(obj)) as any;
+      this.searchList = res.keywords;
+      this.searchCourses = res.result.data
+      console.log(this.searchList);
+
       resolve;
     });
   }

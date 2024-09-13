@@ -120,6 +120,10 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  searchFromKeywords(data: any) {
+    return this.httpPostResponse('courses/special-filter', data, null, false, false);
+  }
+
   getpriceRange(id) {
     return this.httpPostResponse('min-max/' +  id, null, null, false, false);
   }
