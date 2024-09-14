@@ -59,4 +59,12 @@ export class TeacherListComponent extends BasePage implements OnInit {
     console.log(params);
     this.nav.push('/tabs/chat', params);
   }
+  seeAll(user) {
+    console.log(user);
+    let params ={
+      user : JSON.stringify(user)
+    }
+
+    this.nav.push('teacher-course-list', params)
+  }
 }

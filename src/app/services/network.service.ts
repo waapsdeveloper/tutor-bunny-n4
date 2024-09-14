@@ -120,6 +120,11 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  getTeacherCourses(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('courses/course-list-by-teacher-id' + '?' + str, null, false, false);
+  }
+
   searchFromKeywords(data: any) {
     return this.httpPostResponse('courses/special-filter', data, null, false, false);
   }

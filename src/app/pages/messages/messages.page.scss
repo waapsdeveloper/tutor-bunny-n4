@@ -134,12 +134,13 @@
     width: 100%;
     background: white;
     display: flex;
+    position: relative;
     align-items: center;
     border: 0.5px solid rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     // border: 1px rgba(0, 0, 0, 0.5);
     justify-content: space-between;
-    padding: 0 16px 0 0;
+    // padding: 0 16px 0 0
     box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
 
     input {
@@ -198,7 +199,7 @@ ion-footer {
 }
 
 .chat-input {
-  width: 90%;
+  width: 100%;
   padding: 16px;
   background: white;
   height: 50px;
@@ -209,4 +210,8 @@ ion-footer {
   max-height: 9em;
   overflow-y: auto;
   resize: none;
+}
+.send-btn{
+  position: absolute;
+  right: 15px;
 }

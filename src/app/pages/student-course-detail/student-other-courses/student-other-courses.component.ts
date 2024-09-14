@@ -8,6 +8,19 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-other-courses.component.scss'],
 })
 export class StudentOtherCoursesComponent extends BasePage {
+  private _teacher;
+
+
+  @Input('teacher')
+  public get teacher() {
+    return this._teacher;
+  };
+
+  public set teacher(value: any) {
+    this._teacher = value;
+
+
+  }
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -18,7 +31,11 @@ export class StudentOtherCoursesComponent extends BasePage {
 
 
   seeAll() {
-    this.nav.pop('teacher-course-list')
+    let params ={
+      user : JSON.stringify(this.teacher)
+    }
+
+    this.nav.push('teacher-course-list', params)
   }
 
   getOtherCourse(events){

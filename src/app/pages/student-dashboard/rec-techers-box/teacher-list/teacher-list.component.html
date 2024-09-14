@@ -41,8 +41,8 @@
     {{item.teacher.title}}
   </div>
   <div class="tecahers-box-footer-box-38540">
-    <div class="tecahers-box-footer-course-38541"><img src="../../../../assets/svg/courses.svg" alt="">Courses
+    <div class="tecahers-box-footer-course-38541" (click)="seeAll(item)"><img src="../../../../assets/svg/courses.svg" alt="" >Courses
       ({{item.course_count}})</div>
-    <div class="tecahers-box-footer-chat-38542"> <img src="../../../../assets/svg/chat-emty.svg" alt="" (click)="goToChat(item)">Message</div>
+    <div class="tecahers-box-footer-chat-38542" (click)="goToChat(item)"> <img src="../../../../assets/svg/chat-emty.svg" alt="" >Message</div>
   </div>
 </div>

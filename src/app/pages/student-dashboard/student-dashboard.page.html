@@ -1,20 +1,20 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89656"  *ngIf="user.image" (click)="updateProfile()"
+      <div class="image-box-89656" *ngIf="user.image" (click)="updateProfile()"
         [style.background-image]="'url(' + user.image + ')' ">
         <!-- <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563"> -->
       </div>
       <div class="image-box-89657" *ngIf="!user.image" (click)="updateProfile()">
-      <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
-    </div>
+        <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
+      </div>
     </div>
     <app-profile-search-box style="width: 100%;"></app-profile-search-box>
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
           <div class="icon-box-77" (click)="showFavCourse()">
-            <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0"></div>
+            <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0 && showFav"></div>
             <img class="icon-box-77" [src]="'../../assets/icon/heart.svg'" />
           </div>
           <div class="icon-box-77">
@@ -28,9 +28,12 @@
 <div class="dashboard-top-fixed-98563">
   <div class="header-chips">
     <div class="header-chip">
-      <div class="ion-chip" (click)="toogleView('course')"><img src="../../assets/svg/top-cousrse.svg" alt="">Courses</div>
-      <div class="ion-chip" (click)="toogleView('teacher')"><img src="../../assets/svg/top-teacher.svg" alt="">Teachers</div>
-      <div class="ion-chip" (click)="toogleView('teacher')"><img src="../../assets/svg/studey-notes.svg" alt="">Study Notes</div>
+      <div class="ion-chip" (click)="toogleView('course')"><img src="../../assets/svg/top-cousrse.svg" alt="">Courses
+      </div>
+      <div class="ion-chip" (click)="toogleView('teacher')"><img src="../../assets/svg/top-teacher.svg" alt="">Teachers
+      </div>
+      <div class="ion-chip" (click)="toogleView('teacher')"><img src="../../assets/svg/studey-notes.svg" alt="">Study
+        Notes</div>
     </div>
   </div>
 </div>
