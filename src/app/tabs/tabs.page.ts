@@ -23,12 +23,7 @@ export class TabsPage extends BasePage implements OnInit {
   user: any;
 
   showTabs = true;
-  roleId;
-  showHome = true;
-  showChat = false;
-  showSearch = false;
-  showCourses = false;
-  showMore = false;
+  roleId; 
 
   constructor(injector: Injector,
     public createCourseService: CreateCourseService,
