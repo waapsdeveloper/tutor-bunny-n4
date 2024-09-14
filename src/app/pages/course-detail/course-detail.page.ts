@@ -1,6 +1,7 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-course-detail',
@@ -8,6 +9,9 @@ import * as moment from 'moment';
   styleUrls: ['./course-detail.page.scss'],
 })
 export class CourseDetailPage extends BasePage implements OnInit {
+
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+
   data;
   params;
   backUrl;
@@ -33,7 +37,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   to_age;
   updated_at;
   lessons;
-  schedules;
+  schedules: any[] = [];
   startDate;
   endDate;
   categoryId;
@@ -102,16 +106,12 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.currencySymbol = this.data.auth_user_currency_symbol;
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
-    const startTime = this.schedules.start_date;
 
-    const endTime = this.schedules.end_date;
-    this.startTime = moment(startTime).format('hh:mm a');
-    this.endTime = moment(endTime).format('hh:mm a');
     const startDate = this.data.start_date;
+    this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
 
     const endDate = this.data.end_date;
-    this.startDate = moment(startDate).format('DD-MM-Y');
-    this.endDate = moment(endDate).format('DD-MM-Y');
+    this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
 
     if (this.data.category && this.data.category.length > 0) {
       this.categoryId = this.data.category[0].id;
@@ -158,7 +158,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   openOtherCourses($event) {
-    this.nav.push('/tabs/courses');
+    this.nav.push('/courses');
   }
 
   openDetails() {
@@ -176,5 +176,14 @@ export class CourseDetailPage extends BasePage implements OnInit {
     console.log(event);
     this.course_Id = event.id;
     this.callApi();
+
+    this.content.scrollToTop(500); // 500ms animation duration
+
+
+    // console.log(event)
+    // // this.callApi();
+    // this.nav.push('/course-detail', {
+    //   id: event.id
+    // })
   }
 }

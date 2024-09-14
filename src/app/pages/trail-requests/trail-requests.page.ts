@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 
 @Component({
   selector: 'app-trail-requests',
@@ -7,11 +8,11 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./trail-requests.page.scss'],
 })
 export class TrailRequestsPage extends BasePage implements OnInit {
-  ;
-  user;
-  trial;
 
-  constructor(injector: Injector) {
+  user;
+  // trials: any[] = [];
+
+  constructor(injector: Injector, public trialSrvice: GlobalTrialsService) {
     super(injector);
     this.initialize();
   }
@@ -19,11 +20,11 @@ export class TrailRequestsPage extends BasePage implements OnInit {
   ngOnInit() { }
 
   async initialize() {
-    this.user = this.users.getUser();
+    // this.user = this.users.getUser();
 
-    let obj = {
+    // let obj = {
 
-    }
-    this.trial = await this.network.geTrailRequests(obj, this.user.id)
+    // }
+    // this.trials = await this.network.geTrailRequests(obj, this.user.id)
   }
 }

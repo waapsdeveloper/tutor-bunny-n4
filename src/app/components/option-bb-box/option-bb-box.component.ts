@@ -50,7 +50,12 @@ export class OptionBbBoxComponent extends BasePage implements OnInit {
       this.nav.push('/course-form', params)
     }
   }
+
   goToTrialReq() {
+    this.nav.push('trail-requests')
+  }
+
+  goToMyStudents(){
     this.nav.push('my-students')
   }
 
