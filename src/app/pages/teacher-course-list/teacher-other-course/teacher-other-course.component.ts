@@ -7,12 +7,29 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './teacher-other-course.component.html',
   styleUrls: ['./teacher-other-course.component.scss'],
 })
-export class TeacherOtherCourseComponent extends BasePage  implements OnInit {
-
+export class TeacherOtherCourseComponent extends BasePage implements OnInit {
+  params;
+  teacher;
+  list;
   constructor(public globalCourses: GlobalCoursesService, injector: Injector) {
-    super(injector)
-   }
+    super(injector);
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.params = this.nav.getQueryParams();
+    if (this.params.user) {
+      this.teacher = JSON.parse(this.params.user);
+      console.log(this.teacher);
+    }
+    this.callApi();
+  }
 
+  async callApi() {
+    let obj = {
+      user_id: this.teacher.id,
+    };
+    let res = await this.network.getTeacherCourses(obj);
+    this.list = res.result.data;
+    console.log(res);
+  }
 }

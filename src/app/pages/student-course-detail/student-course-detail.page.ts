@@ -17,6 +17,7 @@ export class StudentCourseDetailPage extends BasePage {
   displayName;
   course_Id;
   lessons;
+  teacher;
   currencySymbol;
   techerTitle;
   language;
@@ -68,7 +69,10 @@ export class StudentCourseDetailPage extends BasePage {
 
   async callApi() {
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
+    console.log(res);
+
     this.data = res;
+    this.teacher = res.user;
     this.events.publish('data-for-other-corses', this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
