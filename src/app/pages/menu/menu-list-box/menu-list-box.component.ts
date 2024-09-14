@@ -17,7 +17,7 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   }
   ngOnInit() { }
   gotoProfile() {
-    this.nav.push('/tabs/teacher-profile');
+    this.nav.push('/teacher-profile');
   }
   async logout() {
     await FirebaseAuthentication.signOut();

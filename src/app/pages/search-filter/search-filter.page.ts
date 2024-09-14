@@ -16,6 +16,8 @@ export class SearchFilterPage extends BasePage implements OnInit {
     super(injector)
     localStorage.setItem('formtype', this.formType)
     let user = this.users.getUser()
+    console.log(user);
+
     this.curruncy =user.student.country.currency_symbol;
   }
 
