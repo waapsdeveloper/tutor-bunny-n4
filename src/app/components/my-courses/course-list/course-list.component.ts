@@ -23,7 +23,7 @@ export class CourseListComponent extends BasePage implements OnInit {
       id: item.id,
       backUrl: '/tabs/courses'
     }
-    this.nav.push('/tabs/course-detail', params)
+    this.nav.push('/course-detail', params)
 
   }
 

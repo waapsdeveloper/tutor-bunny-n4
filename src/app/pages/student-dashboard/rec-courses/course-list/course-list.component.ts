@@ -11,7 +11,6 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
-
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -24,8 +23,10 @@ export class CourseListComponent extends BasePage implements OnInit {
   user;
   courseId;
   status;
+  rating;
   type;
   blocked;
+  total_rating
   loading = false;
   trail = false;
   languageName: any;
@@ -37,7 +38,9 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-
+    console.log(value);
+    this.rating = value.user.teacher.avg_rating;
+    this.total_rating = value.user.teacher.total_rating;
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
@@ -146,9 +149,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addToFav() {
-
     let showFav = true;
-    this.events.publish("show-fav-dot", showFav)
+    this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
 
     this.item.is_liked_by_me = true;

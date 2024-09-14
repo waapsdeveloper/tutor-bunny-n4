@@ -84,8 +84,14 @@
       <div class="discription-para" [class.collapsed]="isExpanded">
         {{ user?.teacher?.description }}
       </div>
-      <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
-      <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div>
+      <div class="qulification-box-edu-readmore-98525">
+        <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+      </div>
+      <div class="education-box-edu-readmore-98525">
+        <div class="education-box-edu-button-98526" *ngIf="isExpanded"  (click)="toggleReadMore()">Read less</div>
+      </div>
+      <!-- <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+      <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div> -->
     </div>
     <div class="read-more" fill="clear" style="padding: 24px;" (click)="openQulification()">
       <img src="../../assets/svg/qulification.svg" alt="">

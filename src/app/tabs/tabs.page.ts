@@ -23,7 +23,7 @@ export class TabsPage extends BasePage implements OnInit {
   user: any;
 
   showTabs = true;
-  roleId; 
+  roleId;
 
   constructor(injector: Injector,
     public createCourseService: CreateCourseService,
@@ -83,7 +83,7 @@ export class TabsPage extends BasePage implements OnInit {
     setTimeout( () => {
       this.loading = false;
     }, 3000)
-    
+
 
   }
 
@@ -125,6 +125,7 @@ export class TabsPage extends BasePage implements OnInit {
     if (!this.user.role_id) {
       return '';
     }
+    // console.log(this.user);
 
     const roleId = parseInt(this.user.role_id);
 
