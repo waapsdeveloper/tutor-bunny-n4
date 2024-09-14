@@ -18,6 +18,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   country;
   showWarning = false;
   utcTime
+  showFav= false;
   flag;
   isProfileComplete;
   showLiked = false;
@@ -36,6 +37,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   ngOnInit() {
     this.events.subscribe('update-course-list', () => {
       this.getlists();
+
+    });
+    this.events.subscribe('show-fav-dot', (showFav) => {
+      console.log(showFav);
+
+      this.showFav = showFav;
 
     });
 
