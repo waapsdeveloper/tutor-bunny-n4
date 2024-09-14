@@ -113,6 +113,6 @@ export class TrailListComponent extends BasePage implements OnInit {
       id: this.item.course.id,
       backUrl: '/tabs/teacher-dashboard',
     };
-    this.nav.push('/tabs/course-detail', params);
+    this.nav.push('/course-detail', params);
   }
 }

@@ -42,10 +42,10 @@ const routes: Routes = [
         path: 'other-courses',
         loadChildren: () => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
       },
-      {
-        path: 'course-detail',
-        loadChildren: () => import('../pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
-      },
+      // {
+      //   path: 'course-detail',
+      //   loadChildren: () => import('../pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
+      // },
       {
         path: 'my-teachers',
         loadChildren: () => import('../pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)

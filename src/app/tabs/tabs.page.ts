@@ -43,11 +43,11 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.initialize();
+
   }
 
   ngOnInit() {
-    // this.initialize()
+    this.initialize()
 
   //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }
@@ -100,7 +100,7 @@ export class TabsPage extends BasePage implements OnInit {
 
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)
+    let res = await this.modals.present(CreateCoursePage, {}, "", 0.75)
 
     if (res.data.title) {
       this.createCourseService.resetFormData()

@@ -1,6 +1,7 @@
 <div class="top-header-78956">
   <div class="header-left-items-78956">
-    <app-sd-bback-btn *ngIf="showBack" (click)="back()"></app-sd-bback-btn>
+    <!-- <app-sd-bback-btn *ngIf="showBack" (click)="back()"></app-sd-bback-btn> -->
+    <ion-back-button [text]="''" *ngIf="showBack"></ion-back-button>
     <div class="header-title ">{{title}}</div>
   </div>
   <div class="header-right-items-78956">

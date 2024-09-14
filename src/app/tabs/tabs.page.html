@@ -16,7 +16,7 @@
 
     <!-- unique create button -->
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" (click)="createCourse()">
-      <img src="assets/svg/add-course.svg" />
+      <img src="assets/svg/add-course.svg" style="height: 40px" />
       <div class="footer-tab-label">Create</div>
     </ion-tab-button>
     <!-- unique create button ends -->
@@ -44,7 +44,9 @@
 
     <ion-tab-button class="ion-tab-button-67895675" tab="menu" >
       <div class="tab-back-78523" *ngIf="selectedTab === 'menu'"></div>
-      <img [src]="selectedTab === 'menu' ? 'assets/svg/more-fill.svg' : 'assets/svg/more.svg'" />
+      <img [src]="selectedTab === 'menu' ? 'assets/svg/more-fill.svg' : 'assets/svg/more.svg'" style="height: 26px"/>
+      <!-- <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon> -->
+
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'menu'">Menu</div>
     </ion-tab-button>
 
