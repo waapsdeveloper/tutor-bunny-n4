@@ -26,6 +26,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
   @Output('parentEdit') parentEdit: EventEmitter<any> = new EventEmitter<any>();
   @Output('addToFav') addToFav: EventEmitter<any> = new EventEmitter<any>();
   @Output('removetoFav') removetoFav: EventEmitter<any> = new EventEmitter<any>();
+  @Output('toggleSearchBar') toggleSearchBar: EventEmitter<any> = new EventEmitter<any>();
 
 
   constructor(injector: Injector) {
@@ -42,7 +43,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
 
     if (this.parentHandleBack) {
       $event.stopImmediatePropagation(); // Stop the event from propagating to other handlers
-      $event.preventDefault(); 
+      $event.preventDefault();
       $event.stopPropagation();
       this.parentBack.emit();
     } else {
@@ -68,6 +69,12 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
   removeToFav() {
 
     this.removetoFav.emit()
+
+  }
+
+  showSearchBar(){
+
+    this.toggleSearchBar.emit()
 
   }
 }
