@@ -46,7 +46,7 @@ export class NavService {
       if(link){
         this.navc.navigateBack(link);
       } else {
-        this.location.back()
+        this.navc.back()
       }
 
       resolve();
