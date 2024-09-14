@@ -313,6 +313,10 @@ export class TeacherProfileEditPage
     if (this.step == 2) {
       this.step = 1;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
+    else if (this.step == 3) {
+      this.step = 2;
+      this.slides?.nativeElement.swiper.slideTo(1, false, false);
     } else {
       this.nav.pop();
     }
