@@ -1,3 +1,7 @@
+<div *ngIf="loading" class="loading-syn " >
+  <ion-spinner></ion-spinner>
+</div>
+
 <ion-tabs [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar class="ion-tab-bar-67895675" slot="bottom">
 
