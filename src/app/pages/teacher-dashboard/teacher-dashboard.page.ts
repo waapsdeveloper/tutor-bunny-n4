@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
-import * as moment from 'moment';
+
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
@@ -18,7 +18,7 @@ export class TeacherDashboardPage extends BasePage {
   displayName = '';
   flag;
   status;
-  utcTime;
+
   footerlist = [
     {
       icon: 'assets/icon/home/home-icon.svg',
@@ -48,24 +48,15 @@ export class TeacherDashboardPage extends BasePage {
   ];
   constructor(
     injector: Injector,
-    private fcm: FirebaseService,
+
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public chats: ChatService
   ) {
     super(injector);
 
-    // this.initialize();
-    this.fcm.setTokenToServer();
-    const user = this.users.getUser();
-    this.events.registerPusherEvent(user.id);
-    this.globalTrials.getPendingTrialsFromApi();
-    this.globalCourses.getCoursesFromApi();
-    this.globalTrials.registerPusherEvent();
-    this.globalCourses.registerPusherEvent();
 
-    // this.events.subscribe('dashboard:refreshpage', () => {
-    // });
+
   }
 
   // ngOnInit() {
@@ -77,7 +68,10 @@ export class TeacherDashboardPage extends BasePage {
   }
 
   async initialize() {
-    this.user = this.users.getUser();
+
+    this.loadResolvers();
+    this.user = this.dataR.user;
+
     let obj = {
       email: this.user.email,
     };
@@ -85,12 +79,7 @@ export class TeacherDashboardPage extends BasePage {
     let res = await this.network.getUserByEmail(obj);
 
 
-    this.utcTime = moment().utcOffset();
-    let time = {
-      timezone_offset: this.utcTime,
-    };
 
-    let data = await this.network.getTimeZone(time, this.user.id);
 
 
     if (res) {

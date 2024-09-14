@@ -1,5 +1,4 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 

@@ -1,15 +1,10 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
-import { NavService } from '../services/nav.service';
-import { NetworkService } from '../services/network.service';
 import { BasePage } from 'src/app/base-page/base-page';
-import { IonContent } from '@ionic/angular';
-import { FirebaseService } from '../services/firebase.service';
 
-import { GlobalCoursesService } from '../services/global-courses.service';
-import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
 import { StudentWelcomeComponent } from './student-welcome/student-welcome.component';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -29,7 +24,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   view = 'course';
   // @ViewChild('content', { static: true }) content: IonContent;
 
-  constructor(injector: Injector, public authService: AuthenticationService, private fcm: FirebaseService, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector)
     this.initialize();
     this.getlists();
@@ -44,7 +39,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     });
 
-    this.fcm.setTokenToServer();
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
     });

@@ -1,19 +1,23 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { EventsService } from '../services/events.service';
-import { UsersService } from '../services/users.service';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
 import { CreateCourseService } from '../services/create-course.service';
 import { ChatService } from '../services/chat.service';
-
+import { FirebaseService } from '../services/firebase.service';
+import { GlobalCoursesService } from '../services/global-courses.service';
+import { GlobalTrialsService } from '../services/global-trials.service';
+import * as moment from 'moment';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
 })
-export class TabsPage extends BasePage {
+export class TabsPage extends BasePage implements OnInit {
 
+  @ViewChild('tabs', { static: false }) tabs: IonTabs;
+  selectedTab = '';
   loading = false;
   user: any;
 
@@ -25,9 +29,15 @@ export class TabsPage extends BasePage {
   showCourses = false;
   showMore = false;
 
-  constructor(injector: Injector, public createCourseService: CreateCourseService, public chatService: ChatService) {
+  constructor(injector: Injector,
+    public createCourseService: CreateCourseService,
+    public chatService: ChatService,
+    private fcm: FirebaseService,
+    public globalCourses: GlobalCoursesService,
+    public globalTrials: GlobalTrialsService,
+  ) {
     super(injector)
-    // this.initialize()
+
     // this.chatService.getchatList()
 
   }
@@ -36,11 +46,16 @@ export class TabsPage extends BasePage {
     this.initialize();
   }
 
-  // ngOnInit() {
-
+  ngOnInit() {
+    // this.initialize()
 
   //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
-  // }
+  }
+
+  setCurrentTab() {
+    this.selectedTab = this.tabs.getSelected();
+    console.log(this.selectedTab)
+  }
 
   async initialize() {
 
@@ -49,18 +64,29 @@ export class TabsPage extends BasePage {
     this.loadResolvers();
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
-    await this.chatService.getchatList()
+    this.events.registerPusherEvent(this.user.id);
+    this.globalTrials.registerPusherEvent();
+    this.globalCourses.registerPusherEvent();
+    await this.chatService.getchatList();
+    this.fcm.setTokenToServer();
+
+    const utcTime = moment().utcOffset();
+    let time = {
+      timezone_offset: utcTime,
+    };
+
+    await this.network.getTimeZone(time, this.user.id);
+
+    this.globalTrials.getPendingTrialsFromApi();
+    this.globalCourses.getCoursesFromApi();
+
     this.loading = false;
 
   }
 
 
   goToChat() {
-    this.showHome = false;
-    this.showSearch = false;
-    this.showChat = true;
-    this.showCourses = false;
-    this.showMore = false;
+
     let params = {
       student_id: null,
       other_user_id: null,
@@ -71,36 +97,7 @@ export class TabsPage extends BasePage {
     // Navigate to the chat page without any parameters
     this.nav.push('/tabs/chat', params);
   }
-  goToHome() {
-    this.showHome = true;
-    this.showSearch = false;
-    this.showChat = false;
-    this.showMore = false;
-    this.showCourses = false;
-  }
-  goToSearch() {
-    this.showSearch = true;
-    this.showChat = false;
-    this.showHome = false;
-    this.showCourses = false;
-    this.showMore = false;
-  }
 
-  goToCourses() {
-    this.showCourses = true;
-    this.showSearch = false;
-    this.showChat = false;
-    this.showMore = false;
-    this.showHome = false;
-    this.nav.push('/tabs/courses');
-  }
-  goToMore() {
-    this.showMore = true;
-    this.showCourses = false;
-    this.showSearch = false;
-    this.showChat = false;
-    this.showHome = false;
-  }
 
   async createCourse() {
     let res = await this.modals.present(CreateCoursePage, {}, "", 0.6)

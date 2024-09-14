@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'student-dashboard',
-        loadChildren: () => import('./../student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule)
+        loadChildren: () => import('./../pages/student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule)
       },
       {
         path: 'teacher-dashboard',

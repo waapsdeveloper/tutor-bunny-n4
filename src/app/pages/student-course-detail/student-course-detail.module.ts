@@ -13,7 +13,7 @@ import { OtherCoursesModule } from '../../components/other-courses/other-courses
 import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
 import { CourseSchedulesModule } from '../../components/course-schedules/course-schedules.module';
 import { StudentOtherCoursesModule } from './student-other-courses/student-other-courses.module';
-import { TrailMessageModule } from '../../student-dashboard/rec-courses/course-list/trail-message/trail-message.module';
+import { TrailMessageModule } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.module';
 import { CoursePhotosModule } from '../../components/course-photos/course-photos.module';
 
 @NgModule({

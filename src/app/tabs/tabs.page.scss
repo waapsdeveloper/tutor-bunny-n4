@@ -30,6 +30,14 @@
   gap: 8px;
 }
 
+.ion-tab-button-67895675 {
+  overflow: visible; /* Ensure the parent container isn't clipping the pseudo-element */
+}
+
+.ion-tab-button-67895675.tab-selected {
+  position: relative;
+}
+
 .ion-tab-bar-67895675 {
   --padding-top: 8px;
   --padding-bottom: 8px;
@@ -44,6 +52,10 @@
   font-size: 12px;
   color: #454545;
   margin-top: 8px;
+}
+
+.footer-tab-label-active {
+  color: #e29f1b;
 }
 
 .bottom-bt-fab-yellow-67856745 {
@@ -70,15 +82,11 @@ ion-tabs {
 }
 
 .tab-back-78523 {
-  height: 60px;
+  height: 2px;
   width: 40px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-top: 12px;
-  flex-direction: column;
+  position: absolute;
+  top: 2px;
   border-top: 2px solid #e29f1b;
-  justify-content: center;
 }
 
 .tab-back-78524 {
@@ -96,8 +104,8 @@ ion-tabs {
   background-color: red;
   position: absolute;
   border-radius: 50%;
-  top: 12px;
-  right: 6px;
+  top: 14px;
+  right: 21px;
   color: white;
   font-size: 14px;
   font-weight: 500;

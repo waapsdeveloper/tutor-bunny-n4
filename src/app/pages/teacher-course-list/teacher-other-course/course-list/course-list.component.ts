@@ -1,7 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { TrailMessageComponent } from 'src/app/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
+import { TrailMessageComponent } from 'src/app/pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 
 @Component({
   selector: 'app-course-list',
