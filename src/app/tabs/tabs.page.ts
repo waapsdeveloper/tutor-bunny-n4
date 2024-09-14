@@ -21,7 +21,7 @@ export class TabsPage extends BasePage implements OnInit {
   selectedTab = '';
   loading = false;
   user: any;
-
+  showUser;
   showTabs = true;
   roleId;
 
@@ -45,6 +45,8 @@ export class TabsPage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.initialize()
+    this.showUser = this.returnDashboardLink()
+
 
   //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }

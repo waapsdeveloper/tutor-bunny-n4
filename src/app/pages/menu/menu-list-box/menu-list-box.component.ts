@@ -8,6 +8,7 @@ import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 })
 export class MenuListBoxComponent extends BasePage implements OnInit {
   role;
+  user
   constructor(injector: Injector) {
     super(injector)
     this.initialize()
@@ -17,7 +18,12 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   }
   ngOnInit() { }
   gotoProfile() {
-    this.nav.push('/teacher-profile');
+    this.user =this.users.getUser()
+    if(this.user.role_id == 2){
+      // this.nav.push('/teacher-profile');
+    }else{
+      this.nav.push('/teacher-profile');
+    }
   }
   async logout() {
     await FirebaseAuthentication.signOut();
