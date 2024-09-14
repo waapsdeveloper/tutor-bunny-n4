@@ -8,6 +8,7 @@ import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
 import { IonTabs } from '@ionic/angular';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-tabs',
@@ -35,6 +36,7 @@ export class TabsPage extends BasePage implements OnInit {
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
+    public notificationService: NotificationsService
   ) {
     super(injector)
 
@@ -68,7 +70,10 @@ export class TabsPage extends BasePage implements OnInit {
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
     await this.chatService.getchatList();
+    await this.notificationService.getNotificationsFromApi();
     this.fcm.setTokenToServer();
+
+
 
     const utcTime = moment().utcOffset();
     let time = {
