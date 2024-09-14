@@ -149,7 +149,22 @@ ion-header {
   min-width: 70vw;
   border-radius: 16px;
 }
+.tabs-opacity-0{
+  opacity: 0;
+}
+.tabs-opacity-1{
+  opacity: 1;
+}
 
+.loading-syn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
 
 .successToast{
   // background-color: rgba(69, 69, 69, 0.5);

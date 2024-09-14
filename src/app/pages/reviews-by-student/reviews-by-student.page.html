@@ -5,10 +5,8 @@
     <div class="header-teacher-name-box-78525">
       <div class="header-teacher-name-78526">{{user.name}}</div>
       <div class="header-teacher-rating-78527">
-        <div class="header-teacher-stars-78528" *ngFor="let item of [1,2,3,4,5]">
-          <img src="../../assets/svg/star.svg" alt="">
-        </div>
-        <div class="header-teacher-rating-number-78529">50</div>
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        <div class="header-teacher-rating-number-78529">{{user.teacher.avg_rating}}</div>
       </div>
     </div>
   </div>

@@ -18,6 +18,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   shield;
   isExpanded = false;
   country;
+  loading = false;
   city;
   email;
   language;
@@ -52,6 +53,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   }
 
   async initialize() {
+    this.loading = true;
     this.roleId = localStorage.getItem('role');
 
     if (this.roleId == 3) {
@@ -87,6 +89,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
         this.showGellary = true;
       }
     }
+    this.loading = false;
 
     // if (this.data.status == 'approved') {
     //   this.shield = true;

@@ -9,6 +9,7 @@ import { ReviewsByStudentPageRoutingModule } from './reviews-by-student-routing.
 import { ReviewsByStudentPage } from './reviews-by-student.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { ReviewCardModule } from './review-card/review-card.module';
+import { RatingStarsModule } from './review-card/rating-stars/rating-stars.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ReviewCardModule } from './review-card/review-card.module';
     IonicModule,
     ReviewsByStudentPageRoutingModule,
     SdHeaderTopModule,
-    ReviewCardModule
+    ReviewCardModule,
+    RatingStarsModule
   ],
   declarations: [ReviewsByStudentPage]
 })

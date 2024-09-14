@@ -11,9 +11,12 @@ export class ReviewsByStudentPage extends BasePage implements OnInit {
   user
   reviews;
   image
+  rating;
   constructor(injector:Injector) {
     super(injector)
     this.user = this.users.getUser();
+
+    this.rating = this.user.teacher.avg_rating;
     this.image = this.user.image;
     this.callApi();
 

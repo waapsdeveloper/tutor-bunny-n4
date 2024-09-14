@@ -1,4 +1,8 @@
-<ion-content class="ion-content-medium-background">
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+
+<ion-content  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-content-medium-background">
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
       <div style="padding: 0 16px 0 0;" (click)="back()">
@@ -88,7 +92,7 @@
         <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
       </div>
       <div class="education-box-edu-readmore-98525">
-        <div class="education-box-edu-button-98526" *ngIf="isExpanded"  (click)="toggleReadMore()">Read less</div>
+        <div class="education-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</div>
       </div>
       <!-- <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
       <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div> -->
