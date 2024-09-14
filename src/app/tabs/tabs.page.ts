@@ -80,7 +80,10 @@ export class TabsPage extends BasePage implements OnInit {
     this.globalTrials.getPendingTrialsFromApi();
     this.globalCourses.getCoursesFromApi();
 
-    this.loading = false;
+    setTimeout( () => {
+      this.loading = false;
+    }, 3000)
+    
 
   }
 
