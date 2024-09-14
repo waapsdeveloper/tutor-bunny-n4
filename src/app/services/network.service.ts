@@ -189,6 +189,11 @@ export class NetworkService {
     return this.httpGetResponse('messages/by-chatroom-id/' + id, null, false, false);
   }
 
+  getAllNotifications(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('notifications' + '?' + str, null, false, false);
+  }
+
   getNotifications(id) {
     return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
   }

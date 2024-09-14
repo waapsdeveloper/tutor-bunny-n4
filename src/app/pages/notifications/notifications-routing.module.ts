@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { NotificationsPage } from './notifications.page';
+import { userResolver } from 'src/app/resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: NotificationsPage
+    component: NotificationsPage,
+    resolve: {
+      user: userResolver
+    },
   }
 ];
 
