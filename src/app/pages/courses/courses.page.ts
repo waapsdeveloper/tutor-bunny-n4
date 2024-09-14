@@ -94,7 +94,7 @@ export class CoursesPage extends BasePage implements OnInit {
       id: obj.id,
       backUrl: '/tabs/courses'
     }
-    this.nav.push('/tabs/course-detail', params)
+    this.nav.push('/course-detail', params)
 
   }
 
