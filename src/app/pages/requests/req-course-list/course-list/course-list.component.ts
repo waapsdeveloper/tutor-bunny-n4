@@ -11,11 +11,13 @@ import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.compo
 export class CourseListComponent extends BasePage implements OnInit {
   private _item: any;
   displayName;
-  flag
+  flag;
   user;
   courseId;
   status;
   blocked;
+  reviewData;
+  showReviewBtn = false;
   loading = false;
   trail = false;
   languageName: any;
@@ -23,35 +25,51 @@ export class CourseListComponent extends BasePage implements OnInit {
   @Input('item')
   public get item() {
     return this._item;
-  };
+  }
 
   public set item(value: any) {
     this._item = value;
     this.initialize(value);
     this.flag = this.getFlag();
+    this.checkReview(value);
     this.status = value.trial ? value.trial.status : null;
   }
   constructor(injector: Injector, private globalCourses: GlobalCoursesService) {
-    super(injector)
+    super(injector);
   }
 
   initialize(data) {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
 
     if (data && data.trial) {
-
-      this.blocked = data.trial.status
-
+      this.blocked = data.trial.status;
     }
   }
 
-
   ngOnInit() {
     setTimeout(() => {
-      this.callApi()
+      this.callApi();
     }, 200);
   }
 
+  async checkReview(value) {
+    console.log(value);
+
+    let user = this.users.getUser();
+
+    let obj = {
+      user_id: user.id,
+      teacher_id: value.user.id,
+      course_id: value.id,
+    };
+    let res = await this.network.checkReview(obj);
+    console.log(res);
+    if (res) {
+      this.showReviewBtn = true;
+      this.reviewData = res.resolvel;
+    }
+    console.log(this.showReviewBtn);
+  }
 
   getFlag() {
     if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
@@ -59,10 +77,10 @@ export class CourseListComponent extends BasePage implements OnInit {
       if (flag) {
         return flag.toLowerCase();
       } else {
-        return ""
+        return '';
       }
     } else {
-      return ""
+      return '';
     }
   }
 
@@ -83,16 +101,17 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     this.item.is_liked_by_me = true;
     this.globalCourses.addFavorites(this.item, user);
-
   }
 
   async removeToFav() {
-    let user = this.users.getUser()
+    let user = this.users.getUser();
     this.item.is_liked_by_me = false;
     this.globalCourses.removeFavorites(this.item, user);
   }
 
-  addReview(item){
-    this.modals.present(TeacherReviewsComponent, {item}, "", 0.7)
+  addReview(item) {
+    this.modals.present(TeacherReviewsComponent, { item }, '', 0.7);
   }
+
+
 }

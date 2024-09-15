@@ -341,6 +341,12 @@ export class NetworkService {
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, false, true);
   }
+
+
+  checkReview(data) {
+    return this.httpPostResponse('check-review', data, null, false, true);
+  }
+
   inactiveCourse(data) {
     return this.httpPostResponse('courses/de-activate-course-by-id', data, null, false, false);
   }

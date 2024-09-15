@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [parentHandleBack]="false" (parentBack)="parentback()"
-    [title]="pageTitle"></app-sd-header-top>
+    [title]="pageTitle" (toggleSearchBar)="ShowSearchBar($event)" [showSearch]="true"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
-    <div class="search-box-outer-89655">
+    <div class="search-box-outer-89655" *ngIf="isSearchBarShow">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
         <input type="text" placeholder="Search Course" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />

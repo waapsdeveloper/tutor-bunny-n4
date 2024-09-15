@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'splash',
     pathMatch: 'full',
+
   },
   {
     path: 'splash',

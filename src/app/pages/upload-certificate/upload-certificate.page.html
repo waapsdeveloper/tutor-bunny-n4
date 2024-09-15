@@ -5,13 +5,23 @@
 <ion-content class="ion-padding ion-content-medium-background">
 
   <div class="gallery-outer-8965">
+    <ion-grid>
+      <ion-row>
+        <ion-col  *ngFor="let certificates of certificates" size-sm="6" size-md="6" size-lg="4">
+          <div class="image-card-78975"[style.backgroundImage]="setBackgroundImage(certificates)"
 
-    <div class="image-card-78975" *ngFor="let certificates of certificates" [style.backgroundImage]="setBackgroundImage(certificates)"
+          (click)="openImage(certificates)">
+            <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(certificates.id, $event)">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <div class="image-card-78975"[style.backgroundImage]="setBackgroundImage(certificates)"
 
       (click)="openImage(certificates)">
 
       <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(certificates.id, $event)">
-    </div>
+    </div> -->
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput multiple />
 </ion-content>

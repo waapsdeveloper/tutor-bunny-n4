@@ -241,7 +241,7 @@ export class CourseFormPage
   openCoursePhotos() {
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',
-      gallary: 'true',
+    gallary: 'true',
       title: 'Upload Course photos',
     });
   }

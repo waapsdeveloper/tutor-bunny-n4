@@ -92,6 +92,8 @@ export class TrailListComponent extends BasePage implements OnInit {
     this.age = currentYear - this.item.student.student.dob;
   }
   getFlag() {
+    console.log(this.item);
+
     if (
       this.item &&
       this.item.student &&

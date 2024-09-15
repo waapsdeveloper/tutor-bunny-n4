@@ -55,4 +55,8 @@ export class MyCoursesComponent extends BasePage implements OnInit {
 
 
   }
+
+  seeAll(){
+    this.nav.push('courses')
+  }
 }

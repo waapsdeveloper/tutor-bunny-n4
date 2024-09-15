@@ -16,6 +16,7 @@ export class ChatPage extends BasePage implements OnInit {
   time;
   params;
   teacher
+  isSearchBarShow = false;
   student;
   activeUser
   count;
@@ -120,6 +121,11 @@ export class ChatPage extends BasePage implements OnInit {
   async getRequstList() {
     let res = await this.network.getRequestMessagesRoom(this.user_1.id);
     this.request = res.data;
+  }
+
+
+  ShowSearchBar(event){
+    this.isSearchBarShow = !this.isSearchBarShow;
   }
 
 

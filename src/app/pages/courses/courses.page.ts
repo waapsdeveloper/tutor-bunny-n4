@@ -14,6 +14,7 @@ export class CoursesPage extends BasePage implements OnInit {
   last_page = -1;
   list: any[] = [];
   course;
+  isSearchBarShow = false;
   status;
   categoryId;
   pageTitle = 'My Courses'
@@ -124,5 +125,9 @@ export class CoursesPage extends BasePage implements OnInit {
 
   parentback() {
     this.nav.pop()
+  }
+
+  ShowSearchBar(event){
+    this.isSearchBarShow = !this.isSearchBarShow;
   }
 }

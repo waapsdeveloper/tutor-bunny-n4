@@ -1,11 +1,11 @@
-<div *ngIf="loading" class="loading-syn " >
- <img src="../../assets/svg/logo1.svg" alt="" class="fade-in">
+<div *ngIf="loading" class="loading-syn ">
+  <img src="../../assets/svg/logo1.svg" alt="" class="fade-in">
 </div>
 
 <ion-tabs [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar class="ion-tab-bar-67895675" slot="bottom">
 
-    <ion-tab-button class="ion-tab-button-67895675" [tab]="returnDashboardLink()">
+    <ion-tab-button class="ion-tab-button-67895675" [tab]="showUser">
       <div class="tab-back-78523"
         *ngIf=" (selectedTab === 'teacher-dashboard' || selectedTab === 'student-dashboard') "></div>
       <img
