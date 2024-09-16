@@ -11,6 +11,7 @@ export class NotificationsPage extends BasePage implements OnInit {
   user;
   params: any;
   notifications;
+  loading = false;
 
   constructor(injector: Injector, public notificationService: NotificationsService) {
     super(injector)
@@ -27,9 +28,17 @@ export class NotificationsPage extends BasePage implements OnInit {
     this.loadResolvers();
   }
 
-  loadMore($event){
-    this.notificationService.getAllNotifications()
-    $event.target.complete();
+  async loadMore($event) {
 
+    if(this.loading == true){      
+      return;
+    }
+
+
+    this.loading = true;
+    await this.notificationService.loadMoreNotifications();
+    this.loading = false;
+    $event.target.complete();
   }
+
 }
