@@ -7,24 +7,21 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./student-welcome.component.scss'],
 })
 export class StudentWelcomeComponent extends BasePage implements OnInit {
-
-
-  constructor(injector:Injector) {
-    super(injector)
-   }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {}
 
-  studentContinue(key){
+  studentContinue(key) {
+    console.log(key);
+
     let obj = {
-      key: key
-    }
+      key: key,
+    };
     this.modals.dismiss(obj);
-
   }
-  back(){
+  back() {
     this.modals.dismiss();
-
   }
-
 }
