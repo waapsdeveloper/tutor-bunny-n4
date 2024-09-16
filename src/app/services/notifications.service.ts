@@ -17,9 +17,7 @@ export class NotificationsService {
   private pusher: Pusher;
 
   constructor(
-    private users: UsersService,
-    private network: NetworkService,
-    private events: EventsService) { }
+    private network: NetworkService) { }
 
   getNotificationsFromApi(search = '', page = 1,) {
     return new Promise(async (resolve) => {
@@ -35,7 +33,6 @@ export class NotificationsService {
       } else {
         this.list = [...this.list, ...data.data];
       }
-
       resolve(this.list);
     });
   }
