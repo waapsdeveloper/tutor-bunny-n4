@@ -91,7 +91,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(TeacherWelcomePage)
+          let res = await this.modals.present(TeacherWelcomePage, {}, "auto-height-modal", 1, [0,1], false)
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home',
           });
@@ -137,4 +137,5 @@ export class HomePage extends BasePage implements ViewWillEnter {
   back() {
     this.nav.pop('/role-base');
   }
+
 }
