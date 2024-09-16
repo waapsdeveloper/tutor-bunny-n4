@@ -27,6 +27,8 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
     this._item = value;
     this.is_read = value.is_read;
   }
+
+  @Input('index') index = -1;
   time;
   user;
   user_id;

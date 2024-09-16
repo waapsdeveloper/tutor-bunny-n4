@@ -50,6 +50,17 @@ export class NotificationsService {
     });
   }
 
+  loadMoreNotifications(){
+    return new Promise( resolve => {
+      if(this.page < this.last_page){
+        this.page = this.page + 1;
+        this.getNotificationsFromApi('', this.page);
+      }
+      
+      resolve(true);
+    })
+  }
+
 
 
 

@@ -3,6 +3,9 @@
 </ion-header>
 <ion-content>
 
-  <app-notification-box *ngFor="let item of notificationService.list" [item]="item"
+  <app-notification-box *ngFor="let item of notificationService.list; let i = index" [item]="item" [index]="i" 
     ></app-notification-box>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>  
 </ion-content>
