@@ -22,6 +22,7 @@ export class ChatPage extends BasePage implements OnInit {
   count;
   user_1;
   user;
+  search;
   role_id;
   chat_room_id;
   chat_;
@@ -43,7 +44,10 @@ export class ChatPage extends BasePage implements OnInit {
     })
 
   }
+  doSearch(event){
 
+    this.chats.getchatList(this.search, 1)
+  }
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
