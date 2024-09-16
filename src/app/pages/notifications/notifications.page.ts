@@ -27,4 +27,9 @@ export class NotificationsPage extends BasePage implements OnInit {
     this.loadResolvers();
   }
 
+  loadMore($event){
+    this.notificationService.getAllNotifications()
+    $event.target.complete();
+
+  }
 }
