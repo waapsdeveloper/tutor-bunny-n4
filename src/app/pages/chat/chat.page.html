@@ -7,7 +7,7 @@
     <div class="search-box-outer-89655" *ngIf="showChat === 'inbox' && isSearchBarShow">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
-        <input type="text" placeholder="Search by name?" [(ngModel)]="search" (keyup)="doSearch($event)" />
+        <input type="text" placeholder="Search by name?" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />
       </div>
     </div>
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">

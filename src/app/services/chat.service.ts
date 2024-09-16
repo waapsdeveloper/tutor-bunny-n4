@@ -33,14 +33,11 @@ export class ChatService {
         liked: liked,
       };
       let res = await this.network.getMessagesRoom(this.user.id, obj);
-
-      if(res){
+      if (res) {
         this.chats = res.data;
         console.log(this.chats);
-
-        this.unreadCount = this.getUnreadMsgCount()
+        this.unreadCount = this.getUnreadMsgCount();
         console.log(this.unreadCount);
-
         let data = await this.network.getRequsetCount(this.user.id);
         this.count = data.message.pending_count;
       }
@@ -50,13 +47,12 @@ export class ChatService {
   }
 
   getUnreadMsgCount(): string {
-
-    if(this.chats.length == 0){
+    if (this.chats.length == 0) {
       return '';
     }
 
-    let count = this.chats.reduce( ( prev, next) => {
-      return prev + parseInt(next.unread_count)
+    let count = this.chats.reduce((prev, next) => {
+      return prev + parseInt(next.unread_count);
     }, 0);
 
     return `${count}`;
