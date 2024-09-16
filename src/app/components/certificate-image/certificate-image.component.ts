@@ -25,7 +25,19 @@ export class CertificateImageComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.events.subscribe('change-sample-certificate-to-this', (image: any) => {
+
+      if (image) {
+        this.samplecertificateImage = image;
+      }
+
+    }, false)
+
+
+
+  }
 
   onFilesSelected(event: any) {
     const files: File[] = Array.from(event.target.files);

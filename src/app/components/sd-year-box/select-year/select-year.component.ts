@@ -38,6 +38,8 @@ export class SelectYearComponent  implements OnInit {
 
   async loadMore($event) {
 
+    console.log("fdds");
+
     let yr = this.list[this.list.length - 1];
     for(var i = 0; i < 20; i++){
       const y = yr.name - i;
@@ -45,7 +47,12 @@ export class SelectYearComponent  implements OnInit {
         id: i,
         name: y
       }
-      this.list.push(obj)
+
+      let findIndex = this.list.findIndex(x => x.name == obj.name)
+      if(findIndex == -1){
+        this.list.push(obj)
+      }
+
     }
     $event.target.complete();
   }

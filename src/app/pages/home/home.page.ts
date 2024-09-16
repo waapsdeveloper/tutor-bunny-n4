@@ -91,7 +91,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(TeacherWelcomePage, {}, "", 0.6)
+          let res = await this.modals.present(TeacherWelcomePage)
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home',
           });

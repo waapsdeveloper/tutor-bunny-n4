@@ -36,7 +36,9 @@ export class UploadCertificatePage extends BasePage implements OnInit {
       image: imageString,
     };
 
-    await this.network.postCertificate(obj);
+    let res  = await this.network.postCertificate(obj);
+    let image = res.result.image
+    this.events.publish('change-sample-certificate-to-this', image)
     this.initialize();
   }
 

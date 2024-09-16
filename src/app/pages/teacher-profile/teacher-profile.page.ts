@@ -81,7 +81,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
-      this.travel_policy = this.user.teacher.travel_policy.name;
+      // this.travel_policy = this.user.teacher.travel_policy.name;
       this.city = this.user.teacher.city;
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;

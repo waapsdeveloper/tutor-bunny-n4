@@ -2,7 +2,7 @@
   <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title" [parentHandleBack]="true"
     (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
 </ion-header>
-<ion-content class="ion-padding ion-content-medium-background" #content [fullscreen]="true">
+<ion-content class="ion-padding " #content [fullscreen]="true">
   <form>
     <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides
       style="padding: 0 6px;">
@@ -130,16 +130,19 @@
             <div class="input-title fs-14 roboto-medium label-with-word-count">
               <div class="label-with-word-count-left">
                 <span>Tell us about your education</span> <img src="../../assets/svg/question.svg" alt=""
-                  id="click-about">
+                  id="click-education">
               </div>
               <div class="label-with-word-count-right roboto-light"> {{ formData?.qualification_description?.length || 0
                 }} Characters
               </div>
             </div>
-            <ion-popover trigger="click-about" triggerAction="click">
+            <ion-popover trigger="click-education" triggerAction="click">
               <ng-template style="width: 100%;">
-                <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
-                  experiences, skills, background details. Do not share personal contact information here.
+                <div class="ion-padding popover-title"> Mention your details about your degree, year you got the degree, university/college name and location.
+                  <br>
+                  <br>
+                  e.g.,<br>
+                  B.Sc. - 2002 - ABC school of economics, Boston, USA.
                 </div>
               </ng-template>
             </ion-popover>
@@ -162,16 +165,15 @@
             <div class="input-title fs-14 roboto-medium label-with-word-count">
               <div class="label-with-word-count-left">
                 <span>Your teaching experiences </span> <img src="../../assets/svg/question.svg" alt=""
-                  id="click-about">
+                  id="click-experiences">
               </div>
               <div class="label-with-word-count-right roboto-light"> {{ formData?.experience_description?.length || 0 }}
                 Characters
               </div>
             </div>
-            <ion-popover trigger="click-about" triggerAction="click">
+            <ion-popover trigger="click-experiences" triggerAction="click">
               <ng-template style="width: 100%;">
-                <div class="ion-padding popover-title"> Provide the details of your profile, include education, teaching
-                  experiences, skills, background details. Do not share personal contact information here.
+                <div class="ion-padding popover-title"> Mention your teaching work experience, year, organization name, brief details of the work.
                 </div>
               </ng-template>
             </ion-popover>

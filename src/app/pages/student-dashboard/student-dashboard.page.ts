@@ -86,7 +86,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     const isProfileCompleted = await this.profiles.isProfileCompleted(this.user);
 
     if(!isProfileCompleted){
-      let res = await this.modals.present(StudentWelcomeComponent, {} , "", 0.6)
+      let res = await this.modals.present(StudentWelcomeComponent)
       console.log(res,"dfsfsdfdf");
 
       let key = res.data.key;
