@@ -38,6 +38,9 @@ export class ModalService {
     data = {},
     cssClass = '',
     initialBreakpoint = 1,
+    breakpoints = [0, 0.25, 0.5, 0.75, 1],
+    canDismiss = true,
+    
     animationType?: string
   ): Promise<any> {
     return new Promise(async (resolve) => {
@@ -46,7 +49,8 @@ export class ModalService {
         cssClass,
         componentProps: data,
         initialBreakpoint: initialBreakpoint,
-        breakpoints: [0, 0.25, 0.5, 0.75, 1],
+        canDismiss: canDismiss,
+        breakpoints: breakpoints,
       };
 
       if (animationType === 'right-to-left') {

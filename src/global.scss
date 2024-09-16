@@ -169,3 +169,7 @@ ion-header {
 .successToast{
   // background-color: rgba(69, 69, 69, 0.5);
 }
+
+.auto-height-modal {
+  --height: auto !important;
+}
