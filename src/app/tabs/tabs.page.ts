@@ -9,6 +9,7 @@ import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
 import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
+import { TeacherService } from '../services/teacher.service';
 
 @Component({
   selector: 'app-tabs',
@@ -31,7 +32,8 @@ export class TabsPage extends BasePage implements OnInit {
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public notificationService: NotificationsService
+    public notificationService: NotificationsService,
+    public teacher:TeacherService
   ) {
     super(injector)
 
@@ -64,6 +66,7 @@ export class TabsPage extends BasePage implements OnInit {
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
     this.events.registerPusherEvent(this.user.id);
+    this.teacher.registerPusherEvent(this.user.id);
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
     await this.chatService.getchatList();

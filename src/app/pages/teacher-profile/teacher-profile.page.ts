@@ -10,7 +10,7 @@ import { TeacherQualificationComponent } from './teacher-qualification/teacher-q
 })
 export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnter {
   user;
-  displayName = 'LL'
+  displayName;
   flag
   showGellary = false;
   item;
@@ -32,6 +32,8 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   roleId;
   rating;
   experince;
+  updateRating;
+  updateTotalRating;
 
   constructor(injector: Injector) {
     super(injector)
@@ -39,9 +41,13 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   }
 
   ngOnInit() {
-    this.events.subscribe('get-user-after-submit-form', (data) => {
-    })
+    this.events.subscribe('rating-rec-update-by-id', this.initialize.bind(this)
+
+    )
   }
+
+
+
 
   ionViewWillEnter() {
     this.user = this.users.getUser();
@@ -102,7 +108,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       backUrl: '/tabs/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
     })
   }
-  back(){
+  back() {
     this.nav.pop()
   }
 
@@ -127,7 +133,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   openQulification() {
     let user = this.user
 
-    this.modals.present(TeacherQualificationComponent, {user})
+    this.modals.present(TeacherQualificationComponent, { user })
   }
 
 }

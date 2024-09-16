@@ -91,7 +91,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(TeacherWelcomePage,{}, "", 0.6)
+          let res = await this.modals.present(TeacherWelcomePage, {}, "", 0.6)
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home',
           });
@@ -119,11 +119,15 @@ export class HomePage extends BasePage implements ViewWillEnter {
       if (roleId === 3) {
         const message = "This account is alredy login as a teacher";
         this.utility.presentFailureToast(message);
+        this.nav.pop();
+
         return;
       }
       if (roleId === 2) {
         const message = "This account is alredy login as a Student";
         this.utility.presentFailureToast(message);
+        this.nav.pop();
+
         return;
       }
     }
