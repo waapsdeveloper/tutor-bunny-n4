@@ -21,6 +21,7 @@ export class SearchFilterService {
     travel_policy_id: null,
   };
   searchList: any[] = [];
+  searchTitals: any[] = []
   countryId = null;
   stateId = null;
   keywords;

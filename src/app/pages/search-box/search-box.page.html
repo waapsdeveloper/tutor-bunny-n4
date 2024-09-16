@@ -18,6 +18,7 @@
     </div>
   </div>
 </ion-header>
+
 <ion-content class="ion-content-bg ion-padding">
   <div class="body-content">
     <div class="recent-search-78521" *ngIf="!search">
@@ -44,11 +45,27 @@
         <div class="popular-search-chip-78528">Art</div>
       </div>
     </div>
+
+
+
+    <div class="recent-search-78521" *ngIf="search">
+      <div class="recent-search-heading-78522">
+       Keyword results
+      </div>
+      <div class="recent-search-chips-78523">
+        <div class="recent-search-chip-78524" *ngFor="let item of filter.searchList" (click)="setRecentSeach(item)">
+          {{item.name}}</div>
+      </div>
+    </div>
+    <div class="line" *ngIf="search"></div>
     <div *ngIf="search">
-      <div class="search-seggetion-box-78521" *ngFor="let item of filter.searchList" (click)="setRecentSeach(item)">
+      <div class="recent-search-heading-78522">
+        Course title results
+       </div>
+      <div class="search-seggetion-box-78521" *ngFor="let item of filter.searchCourses" (click)="setRecentSeach(item)">
         <img src="../../assets/svg/searchs.svg" alt="">
         <div class="search-seggetion-title-78522">
-          {{item.name}}
+          {{item.title}}
         </div>
       </div>
     </div>
