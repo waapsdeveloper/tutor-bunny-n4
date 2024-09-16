@@ -23,7 +23,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   isProfileComplete;
   showLiked = false;
   view = 'course';
-  // @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector)
