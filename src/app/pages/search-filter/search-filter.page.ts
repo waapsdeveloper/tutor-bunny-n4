@@ -11,17 +11,22 @@ export class SearchFilterPage extends BasePage implements OnInit {
   countryId = null;
   formType = 'filter';
   curruncy;
+  user;
 
   constructor(public searchFilterService: SearchFilterService, injector: Injector) {
     super(injector)
     localStorage.setItem('formtype', this.formType)
-    let user = this.users.getUser()
-    console.log(user);
-
-    this.curruncy =user.student.country.currency_symbol;
+    
   }
 
   ngOnInit() {
+    this.loadResolvers();
+    this.user = this.dataR.user;
+
+    if(this.user && this.user.student && this.user.student.country && this.user.student.country.currency_symbol){
+      this.curruncy = this.user.student.country.currency_symbol;
+    }    
+
     this.countryId = this.searchFilterService.getCountryId();
   }
 
