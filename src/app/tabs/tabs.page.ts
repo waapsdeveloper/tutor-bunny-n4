@@ -49,12 +49,6 @@ export class TabsPage extends BasePage implements OnInit {
   ngOnInit() {
     this.initialize()
     this.showUser = this.returnDashboardLink()
-    this.events.subscribe('get-dashboard-stats', () => {
-      this.globalTrials.getPendingTrialsFromApi();
-    })
-
-
-    //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }
 
   setCurrentTab() {

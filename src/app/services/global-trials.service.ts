@@ -42,23 +42,34 @@ export class GlobalTrialsService {
     );
   }
 
-  trialsChannelReceived($event: any) {
+  async trialsChannelReceived($event: any) {
     console.log($event);
+    if($event){
+      let id = $event.trial_id
+      let res = await this.network.geTrailRequestsByPusher(id);
+      console.log(res);
+      this.updateTrailsList(res.trial);
+    }
 
     this.events.publish('get-dashboard-stats');
-
-    this.updateTrailsList($event);
   }
 
   async updateTrailsList(data: any) {
+    console.log(data);
     const trialObj = Object.assign({}, data);
+    console.log(trialObj);
+
     const index = this.list.findIndex((x) => x.id == trialObj.id);
+    console.log(index);
+
     if (index != -1) {
       this.list[index] = trialObj;
     } else {
       this.list = [trialObj, ...this.list];
     }
     const indexp = this.pendingTrials.findIndex((x) => x.id == trialObj.id);
+    console.log(index);
+
     if (indexp != -1) {
       if (trialObj.status == 'Pending') {
         this.pendingTrials[indexp] = trialObj;
@@ -71,6 +82,7 @@ export class GlobalTrialsService {
       }
     }
   }
+
   getPendingTrialsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       this.user = this.users.getUser();
