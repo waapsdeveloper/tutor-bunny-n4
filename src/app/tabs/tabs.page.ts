@@ -68,11 +68,8 @@ export class TabsPage extends BasePage implements OnInit {
     this.roleId = this.user.role_id;
     this.events.registerPusherEvent(this.user.id);
     this.teacher.registerPusherEvent(this.user.id);
-
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
-
-
     await this.chatService.getchatList();
     await this.notificationService.getNotificationsFromApi();
     this.fcm.setTokenToServer();
@@ -94,24 +91,24 @@ export class TabsPage extends BasePage implements OnInit {
 
       if(this.user.role_id == 2){
         const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
-        if(!isProfileCompleted){ 
+        if(!isProfileCompleted){
           this.checkProfileCompleteOfStudent()
         }
 
       }
-      
+
     }, 3000)
 
 
   }
 
   async checkProfileCompleteOfStudent(){
-     
+
     let res = await this.modals.present(StudentWelcomeComponent, {}, "auto-height-modal", 1, [0,1], false)
     let key = res.data.key;
 
     if(key == 1){
-      this.nav.push('/student-profile/student-profile-edit', {        
+      this.nav.push('/student-profile/student-profile-edit', {
         showBack: true,
       });
     }

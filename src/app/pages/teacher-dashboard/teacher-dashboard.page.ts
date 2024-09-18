@@ -12,8 +12,7 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage {
-  // implements OnInit
+export class TeacherDashboardPage extends BasePage implements OnInit{
   user;
   displayName = '';
   flag;
@@ -54,34 +53,26 @@ export class TeacherDashboardPage extends BasePage {
     public chats: ChatService
   ) {
     super(injector);
-
-
-
   }
 
-  // ngOnInit() {
+  ngOnInit() {
 
-  // }
+  }
 
   ionViewWillEnter() {
     this.initialize();
+    this.user = this.dataR.user;
+
+    this.events.registerPusherEvent(this.user.id)
   }
 
   async initialize() {
-
     this.loadResolvers();
     this.user = this.dataR.user;
-
     let obj = {
       email: this.user.email,
     };
-
     let res = await this.network.getUserByEmail(obj);
-
-
-
-
-
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();

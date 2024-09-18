@@ -9,7 +9,9 @@ import { NetworkService } from './network.service';
 export class TeacherService {
   private pusher: Pusher;
   ratingChannel: any;
-  
+  userChannel: any;
+
+
   constructor(private network: NetworkService, private events: EventsService) { const options = {
     cluster: 'ap2',
     forceTLS: true,
@@ -21,12 +23,17 @@ export class TeacherService {
 
   registerPusherEvent(id: any) {
     console.log(id);
-    
+    this.userChannel = this.pusher.subscribe("admin-update-channel");
     this.ratingChannel.bind("rating-rec-" + id, this.ratingChannelReceived.bind(this))
   }
 
 
   ratingChannelReceived($event: any) {
     this.events.publish('rating-rec-update-by-id', $event);
+  }
+
+  userChannelReceived($event: any) {
+    console.log($event);
+    this.events.publish('user-update-via-pusher', $event);
   }
 }

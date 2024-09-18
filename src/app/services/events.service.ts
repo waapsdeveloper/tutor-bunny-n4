@@ -44,7 +44,6 @@ export class EventsService {
   }
 
   registerPusherEvent(id: any) {
-
     this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
   }
 
@@ -52,11 +51,9 @@ export class EventsService {
     this.publish('message-received-via-pusher', $event);
   }
 
-
   courseChannelReceived($event: any) {
     this.publish('course-received-via-pusher', $event);
   }
-
 
 
   unsubscribe(key) {

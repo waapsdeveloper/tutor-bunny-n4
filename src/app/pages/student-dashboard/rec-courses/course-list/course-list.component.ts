@@ -26,7 +26,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   rating;
   type;
   blocked;
-  total_rating
+  total_rating;
   loading = false;
   trail = false;
   languageName: any;
@@ -171,23 +171,20 @@ export class CourseListComponent extends BasePage implements OnInit {
   handleOkClick() {
     this.trail = false;
   }
+
   async goToChat(data) {
     let id = this.user.id;
-
     let obj = {
       user_id_1: this.user.id,
       user_id_2: data.user.id,
     };
-
     let res = await this.network.getChadRoomId(obj);
-
     let params = {
       student_id: id,
       other_user_id: data.user.id,
       user: JSON.stringify(data.user),
       chat_room_id: res.chat_room.id,
     };
-
     this.nav.push('/tabs/chat', params);
   }
 }
