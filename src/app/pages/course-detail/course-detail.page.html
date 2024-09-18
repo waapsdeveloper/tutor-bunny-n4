@@ -15,10 +15,9 @@
     </div>
     <div class="cource-price-and-rating-box-78541">
       <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /month</span></div>
-      <div class="cource-rating-box-78543">
-        <div class="cource-rating-stars-78544" *ngFor=" let iem of [1,2,3,4,5]"><img src="../../assets/svg/star.svg"
-            alt=""></div>
-        <div class="cource-rating-number-78545">5.0 <span style="font-size: 12px; color: #7C7B7B;">(375)</span></div>
+      <div class="cource-rating-box-78543" *ngIf="rating != 0">
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        <div class="cource-rating-number-78545">{{rating}} <span style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
       </div>
     </div>
     <div class="line"></div>

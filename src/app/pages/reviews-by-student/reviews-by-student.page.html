@@ -4,7 +4,7 @@
     <div class="header-teacher-image-78524" [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'"></div>
     <div class="header-teacher-name-box-78525">
       <div class="header-teacher-name-78526">{{user.name}}</div>
-      <div class="header-teacher-rating-78527">
+      <div class="header-teacher-rating-78527" *ngIf="rating != 0">
         <app-rating-stars [rating]="rating"></app-rating-stars>
         <div class="header-teacher-rating-number-78529">{{user.teacher.avg_rating}}</div>
       </div>

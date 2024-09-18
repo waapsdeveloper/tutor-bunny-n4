@@ -25,6 +25,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   type;
   serial_number;
   mode_type;
+  rating;
   created_at;
   price;
   startTime;
@@ -36,6 +37,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   language;
   to_age;
   updated_at;
+  total_rating
   lessons;
   schedules: any[] = [];
   startDate;
@@ -99,6 +101,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.serial_number = this.data.serial_number;
     this.lessons = this.data.lesson;
     this.image = this.data.image;
+    this.rating = this.data.user.teacher.avg_rating;
+    this.total_rating = this.data.user.teacher.total_rating
     this.price = this.data.price;
     this.type = this.data.type;
     this.schedules = this.data.schedules;

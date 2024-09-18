@@ -109,7 +109,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     })
   }
   back() {
-    this.nav.pop()
+    this.nav.pop('/tabs/teacher-dashboard')
   }
 
   getFlag() {
