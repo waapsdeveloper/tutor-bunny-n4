@@ -14,17 +14,16 @@ export class StudentWelcomeComponent extends BasePage implements OnInit {
   ngOnInit() {}
 
   studentContinue(key) {
+    this.events.publish('reset-modal-dismiss', {  
+      canDismiss: true
+    })
     console.log(key);
 
     let obj = {
       key: key,
     };
+
     this.modals.dismiss(obj);
   }
-  back() {
-    this.events.publish('reset-modal-dismiss', {  
-      canDismiss: true
-    })
-    this.modals.dismiss();
-  }
+    
 }
