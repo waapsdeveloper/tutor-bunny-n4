@@ -110,6 +110,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.currencySymbol = this.data.auth_user_currency_symbol;
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
+    this.loading = false;
 
     const startDate = this.data.start_date;
     this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
@@ -127,7 +128,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
-    this.loading = false
 
   }
 

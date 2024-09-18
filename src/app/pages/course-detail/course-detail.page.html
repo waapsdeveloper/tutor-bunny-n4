@@ -1,19 +1,15 @@
 <div *ngIf="loading" class="loading-syn ">
-  <img src="../../assets/svg/logo1.svg" alt="" class="fade-in">
+  <ion-spinner></ion-spinner>
 </div>
 
-<ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"  class="ion-no-border ion-no-shadow">
+<ion-header  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
     (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top>
 </ion-header>
 
-<ion-content [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"   class="ion-content-bg remove-pd-top-323243243" [fullscreen]="true" #content>
-
-
+<ion-content  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"   class="ion-content-bg remove-pd-top-323243243" #content>
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
   <div class="body-content ion-padding">
-
-
     <div class="course-heading-78521">
       {{title}}
     </div>
@@ -77,7 +73,6 @@
       </div>
     </div>
     <div class="line"></div>
-
     <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
       [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)" (onChange)="getOtherCourse($event)"></app-other-courses>
   </div>
