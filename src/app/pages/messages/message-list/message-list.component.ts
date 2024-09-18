@@ -36,7 +36,12 @@ export class MessageListComponent extends BasePage implements OnInit {
   initialize(value){
     console.log(value);
     
-    this.message = value.message;
+    this.message = this.formatDescription(value.message);
+  }
+  
+  formatDescription(description: string): string {
+    if (!description) return '';
+    return description.replace(/\n/g, '<br>');
   }
 
   ngOnInit() { }
