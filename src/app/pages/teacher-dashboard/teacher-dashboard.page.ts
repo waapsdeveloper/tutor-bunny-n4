@@ -62,6 +62,8 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
     });
   }
 
+
+
   ionViewWillEnter() {
     this.initialize();
   }

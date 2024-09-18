@@ -2,12 +2,13 @@
   <ion-spinner></ion-spinner>
 </div>
 
-<ion-header  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
+<ion-header [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
     [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
 </ion-header>
 
-<ion-content  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner"  class="ion-content-bg " [fullscreen]="true" style="--padding-top: 0px !important" #content>
+<ion-content [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-content-bg "
+  [fullscreen]="true" style="--padding-top: 0px !important" #content>
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
 
   <div class="body-content ion-padding">
@@ -18,8 +19,9 @@
     <div class="cource-price-and-rating-box-78541">
       <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /month</span></div>
       <div class="cource-rating-box-78543" *ngIf="rating != 0">
-        <app-rating-stars [rating]="rating" ></app-rating-stars>
-        <div class="cource-rating-number-78545">{{rating}} <span style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        <div class="cource-rating-number-78545">{{rating}} <span
+            style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
       </div>
     </div>
     <div class="line"></div>
@@ -44,12 +46,14 @@
             style="height: 16px;">{{language}}</div>
       </div>
       <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" /> <div style="width: 136px; text-wrap: wrap;">
-          {{state}},
-          {{country}}
+        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
+          <div style="width: 136px; text-wrap: wrap;">
+            {{state}},
+            {{country}}
+          </div>
         </div>
-        </div>
-        <div class="cource-lesson-box-78564"> <img class="i-7685" src="../../../assets/svg/course-type.svg" />Workshop/Event
+        <div class="cource-lesson-box-78564"> <img class="i-7685"
+            src="../../../assets/svg/course-type.svg" />Workshop/Event
         </div>
       </div>
     </div>
@@ -113,7 +117,7 @@
     <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses>
   </div>
 </ion-content>
-<ion-footer  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
+<ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
     <div class="button-chat-78563" *ngIf="!data?.trial ">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">

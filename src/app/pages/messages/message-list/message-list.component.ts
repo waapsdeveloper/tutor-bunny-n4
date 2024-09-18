@@ -1,4 +1,5 @@
 import { Component, Injector, Input, input, OnInit } from '@angular/core';
+import { initializeApp } from 'firebase/app';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -8,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./message-list.component.scss'],
 })
 export class MessageListComponent extends BasePage implements OnInit {
+  message
   private _chat: any;
 
   @Input('chat')
@@ -17,17 +19,24 @@ export class MessageListComponent extends BasePage implements OnInit {
 
   public set chat(value: any) {
     this._chat = value;
-
     this.getChatRead(value)
+    this.initialize(value)
   }
-
+  
   user;
   user_id;
-
+  
   constructor(injector: Injector) {
     super(injector)
     this.user = this.users.getUser();
     this.user_id = this.user.id;
+  }
+
+
+  initialize(value){
+    console.log(value);
+    
+    this.message = value.message;
   }
 
   ngOnInit() { }

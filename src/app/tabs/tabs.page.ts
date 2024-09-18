@@ -34,7 +34,7 @@ export class TabsPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notificationService: NotificationsService,
-    public teacher:TeacherService
+    public teacher: TeacherService
   ) {
     super(injector)
 
@@ -49,9 +49,12 @@ export class TabsPage extends BasePage implements OnInit {
   ngOnInit() {
     this.initialize()
     this.showUser = this.returnDashboardLink()
+    this.events.subscribe('get-dashboard-stats', () => {
+      this.globalTrials.getPendingTrialsFromApi();
+    })
 
 
-  //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
+    //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
   }
 
   setCurrentTab() {
@@ -86,12 +89,12 @@ export class TabsPage extends BasePage implements OnInit {
     this.globalTrials.getPendingTrialsFromApi();
     this.globalCourses.getCoursesFromApi();
 
-    setTimeout( async () => {
+    setTimeout(async () => {
       this.loading = false;
 
-      if(this.user.role_id == 2){
+      if (this.user.role_id == 2) {
         const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
-        if(!isProfileCompleted){
+        if (!isProfileCompleted) {
           this.checkProfileCompleteOfStudent()
         }
 
@@ -102,12 +105,12 @@ export class TabsPage extends BasePage implements OnInit {
 
   }
 
-  async checkProfileCompleteOfStudent(){
+  async checkProfileCompleteOfStudent() {
 
-    let res = await this.modals.present(StudentWelcomeComponent, {}, "auto-height-modal", 1, [0,1], false)
+    let res = await this.modals.present(StudentWelcomeComponent, {}, "auto-height-modal", 1, [0, 1], false)
     let key = res.data.key;
 
-    if(key == 1){
+    if (key == 1) {
       this.nav.push('/student-profile/student-profile-edit', {
         showBack: true,
       });

@@ -1,8 +1,8 @@
 <div class="input-box-lines city-zip">
   <div class="zip-code-2 d-flex flex-column gap-8">
     <div class="input-title fs-14 roboto-medium">Start Date (optional)</div>
-    <div class="sd-input-box-outer-675315" (click)="showdateTime()">
-      <ion-datetime-button *ngIf="showDateTime" class="fs-16 roboto-regular" datetime="startDate"></ion-datetime-button>
+    <div class="sd-input-box-outer-675315">
+      <ion-datetime-button  class="fs-16 roboto-regular" datetime="startDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true" #dateModal>
         <ng-template>
           <ion-datetime id="startDate" presentation="date" [value]="startDate"
@@ -14,8 +14,8 @@
   </div>
   <div class="zip-code-2 d-flex flex-column gap-8">
     <div class="input-title fs-14 roboto-medium">End Date (optional)</div>
-    <div class="sd-input-box-outer-675315" (click)="showdateTime()">
-      <ion-datetime-button *ngIf="showDateTime" class="fs-16 roboto-regular" datetime="endDate"></ion-datetime-button>
+    <div class="sd-input-box-outer-675315">
+      <ion-datetime-button class="fs-16 roboto-regular" datetime="endDate"></ion-datetime-button>
       <ion-modal [keepContentsMounted]="true" #dateendModal>
         <ng-template>
           <ion-datetime id="endDate" presentation="date" [value]="endDate"
