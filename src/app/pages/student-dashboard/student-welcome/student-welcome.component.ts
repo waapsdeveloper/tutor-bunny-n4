@@ -22,6 +22,9 @@ export class StudentWelcomeComponent extends BasePage implements OnInit {
     this.modals.dismiss(obj);
   }
   back() {
+    this.events.publish('reset-modal-dismiss', {  
+      canDismiss: true
+    })
     this.modals.dismiss();
   }
 }

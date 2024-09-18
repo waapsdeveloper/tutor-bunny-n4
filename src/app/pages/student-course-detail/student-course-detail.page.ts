@@ -1,8 +1,9 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from '../../base-page/base-page';
 import { TrailMessageComponent } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { GlobalCoursesService } from '../../services/global-courses.service';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -11,6 +12,9 @@ import { GlobalCoursesService } from '../../services/global-courses.service';
 })
 export class StudentCourseDetailPage extends BasePage {
   // implements OnInit
+
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+
   data;
   params;
   backUrl;
@@ -44,7 +48,7 @@ export class StudentCourseDetailPage extends BasePage {
   type;
   endTime;
   updated_at;
-  schedules;
+  schedules: any[] = [];
   total_rating
   acheduleTime;
   startDate;
@@ -220,5 +224,7 @@ export class StudentCourseDetailPage extends BasePage {
     console.log(event);
     this.course_Id = event.id;
     this.callApi();
+
+    this.content.scrollToTop(500); // 500ms animation duration
   }
 }

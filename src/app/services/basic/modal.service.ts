@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController, Animation, AnimationController } from '@ionic/angular';
+import { EventsService } from '../events.service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,8 @@ import { ModalController, Animation, AnimationController } from '@ionic/angular'
 export class ModalService {
   constructor(
     public modal: ModalController,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private events: EventsService
   ) {}
 
   private enterFromLeftAnimation(baseEl: HTMLElement): Animation {
@@ -58,6 +60,12 @@ export class ModalService {
       }
 
       const modal = await this.modal.create(modalOptions);
+      
+      this.events.subscribe('reset-modal-dismiss', (data) => {
+        modal.canDismiss = true;
+      }, true)
+
+
       modal.onDidDismiss().then((res) => {
         resolve(res);
       });
