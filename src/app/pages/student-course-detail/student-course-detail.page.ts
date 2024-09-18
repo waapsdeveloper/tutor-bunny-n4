@@ -22,6 +22,7 @@ export class StudentCourseDetailPage extends BasePage {
   techerTitle;
   language;
   capacity;
+  rating
   techerImg;
   loading = false;
   description;
@@ -44,6 +45,7 @@ export class StudentCourseDetailPage extends BasePage {
   endTime;
   updated_at;
   schedules;
+  total_rating
   acheduleTime;
   startDate;
   showFavValue = false;
@@ -92,6 +94,8 @@ export class StudentCourseDetailPage extends BasePage {
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title;
     this.image = this.data.image;
+    this.rating = this.data.user.teacher.avg_rating;
+    this.total_rating = this.data.user.teacher.total_rating
     this.techerImg = this.data.user.image;
     this.country = this.data.user.teacher.country.name;
     this.state = this.data.user.teacher.state.name;

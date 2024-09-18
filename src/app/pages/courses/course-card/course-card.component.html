@@ -64,7 +64,6 @@
                     <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
                     <div class="label-789575 fs-16 outfit">Edit</div>
                   </div>
-
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="status == 'active'">
@@ -75,19 +74,19 @@
                   </div>
                 </ion-item>
               </ion-list>
-              <ion-list>
-                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
-                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
-                    <div class="label-789575 fs-16 outfit">Delete</div>
-                  </div>
-                </ion-item>
-              </ion-list>
               <ion-list *ngIf="status == 'inactive'">
                 <ion-item class="profile-line-789578" (click)="activeCourse(item)">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <img class="img1-789575" src="../../../assets/svg/active-eye.svg" />
                     <div class="label-789575 fs-16 outfit">Active</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                    <div class="label-789575 fs-16 outfit">Delete</div>
                   </div>
                 </ion-item>
               </ion-list>

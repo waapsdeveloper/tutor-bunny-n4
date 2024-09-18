@@ -11,6 +11,8 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
 import { CoursePhotosModule } from 'src/app/components/course-photos/course-photos.module';
 import { CourseSchedulesModule } from 'src/app/components/course-schedules/course-schedules.module';
 import { OtherCoursesModule } from 'src/app/components/other-courses/other-courses.module';
+import { RatingStarsModule } from '../reviews-by-student/review-card/rating-stars/rating-stars.module';
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { OtherCoursesModule } from 'src/app/components/other-courses/other-cours
     SdHeaderTopModule,
     CourseSchedulesModule,
     OtherCoursesModule,
-    CoursePhotosModule
+    CoursePhotosModule,
+    RatingStarsModule
   ],
   declarations: [CourseDetailPage],
 

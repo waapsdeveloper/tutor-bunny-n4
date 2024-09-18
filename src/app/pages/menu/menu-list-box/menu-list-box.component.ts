@@ -27,7 +27,7 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   }
   async logout() {
     await FirebaseAuthentication.signOut();
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.nav.push('splash')
   }
 }

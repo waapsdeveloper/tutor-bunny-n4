@@ -254,7 +254,7 @@ export class TeacherProfileEditPage
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
-    this.nav.pop('/tabs/teacher-dashboard');
+    this.nav.pop('/teacher-profile');
   }
   async onSlideChange2() {
     const data = this.formData;
