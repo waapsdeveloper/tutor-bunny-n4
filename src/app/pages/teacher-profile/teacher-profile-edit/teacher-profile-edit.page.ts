@@ -46,7 +46,7 @@ export class TeacherProfileEditPage
     subjects: null,
     title: null,
     description: null,
-    terms: false,
+    terms: true,
     image: null,
     hourly_rate: null,
     photo_id: null,
@@ -134,6 +134,8 @@ export class TeacherProfileEditPage
     }, 500);
   }
   setFormDta(data) {
+    console.log(data);
+
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
     if (cnty) {

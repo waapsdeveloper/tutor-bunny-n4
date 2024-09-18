@@ -1,9 +1,13 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<div *ngIf="spinner" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+
+<ion-header  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
     [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
 </ion-header>
 
-<ion-content class="ion-content-bg " [fullscreen]="true" style="--padding-top: 0px !important" #content>
+<ion-content  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner"  class="ion-content-bg " [fullscreen]="true" style="--padding-top: 0px !important" #content>
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
 
   <div class="body-content ion-padding">
@@ -109,7 +113,7 @@
     <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses>
   </div>
 </ion-content>
-<ion-footer>
+<ion-footer  [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
     <div class="button-chat-78563" *ngIf="!data?.trial ">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">

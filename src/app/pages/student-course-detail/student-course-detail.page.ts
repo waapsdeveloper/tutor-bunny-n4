@@ -25,8 +25,9 @@ export class StudentCourseDetailPage extends BasePage {
   currencySymbol;
   techerTitle;
   language;
+  spinner = false;
   capacity;
-  rating
+  rating;
   techerImg;
   loading = false;
   description;
@@ -49,7 +50,7 @@ export class StudentCourseDetailPage extends BasePage {
   endTime;
   updated_at;
   schedules: any[] = [];
-  total_rating
+  total_rating;
   acheduleTime;
   startDate;
   showFavValue = false;
@@ -66,7 +67,6 @@ export class StudentCourseDetailPage extends BasePage {
     if (this.params.id) {
       this.course_Id = this.params.id;
     }
-
     this.callApi();
     setTimeout(() => {
       this.isTrailReq();
@@ -74,6 +74,8 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async callApi() {
+    this.spinner = true;
+
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
     console.log(res);
 
@@ -99,7 +101,7 @@ export class StudentCourseDetailPage extends BasePage {
     this.techerTitle = this.data.user.teacher.title;
     this.image = this.data.image;
     this.rating = this.data.user.teacher.avg_rating;
-    this.total_rating = this.data.user.teacher.total_rating
+    this.total_rating = this.data.user.teacher.total_rating;
     this.techerImg = this.data.user.image;
     this.country = this.data.user.teacher.country.name;
     this.state = this.data.user.teacher.state.name;
@@ -116,6 +118,7 @@ export class StudentCourseDetailPage extends BasePage {
     const endDate = this.data.end_date;
     this.startDate = moment(startDate).format('DD-MM-Y');
     this.endDate = moment(endDate).format('DD-MM-Y');
+    this.spinner = false;
   }
 
   async addToFav() {
