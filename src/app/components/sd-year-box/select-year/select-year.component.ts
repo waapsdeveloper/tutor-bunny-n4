@@ -34,6 +34,9 @@ export class SelectYearComponent  implements OnInit {
   selection(item) {
     this.modals.dismiss(item);
   }
+  back(){
+    this.modals.dismiss()
+  }
 
 
   async loadMore($event) {

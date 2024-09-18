@@ -1,9 +1,13 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<div *ngIf="loading" class="loading-syn ">
+  <img src="../../assets/svg/logo1.svg" alt="" class="fade-in">
+</div>
+
+<ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"  class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
     (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top>
 </ion-header>
 
-<ion-content class="ion-content-bg remove-pd-top-323243243" [fullscreen]="true" #content>
+<ion-content [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"   class="ion-content-bg remove-pd-top-323243243" [fullscreen]="true" #content>
 
 
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
