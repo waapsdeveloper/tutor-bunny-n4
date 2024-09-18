@@ -56,14 +56,14 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
   }
 
   ngOnInit() {
+    this.events.subscribe('user-update-via-pusher', () => {
+      this.initialize();
 
+    });
   }
 
   ionViewWillEnter() {
     this.initialize();
-    this.user = this.dataR.user;
-
-    this.events.registerPusherEvent(this.user.id)
   }
 
   async initialize() {

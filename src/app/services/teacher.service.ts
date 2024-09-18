@@ -17,14 +17,16 @@ export class TeacherService {
     forceTLS: true,
   };
   this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+  this.userChannel = this.pusher.subscribe("admin-update-channel");
   this.ratingChannel = this.pusher.subscribe('rating-channel');
 
   }
 
   registerPusherEvent(id: any) {
     console.log(id);
-    this.userChannel = this.pusher.subscribe("admin-update-channel");
+   
     this.ratingChannel.bind("rating-rec-" + id, this.ratingChannelReceived.bind(this))
+    this.userChannel.bind("admin-update-rec-" + id, this.userChannelReceived.bind(this))
   }
 
 
