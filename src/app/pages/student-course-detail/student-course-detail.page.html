@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showShare]="true" [showFav]="true"
+  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
     [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
 </ion-header>
 
-<ion-content class="ion-content-bg " [fullscreen]="true">
+<ion-content class="ion-content-bg " [fullscreen]="true" style="--padding-top: 0px !important" #content>
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
 
   <div class="body-content ion-padding">
@@ -63,6 +63,7 @@
         <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</ion-button> -->
       </div>
     </div>
+    <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-785234">
         <div class="detail-heading-78524 outfit-medium">Instructor</div>
@@ -84,9 +85,9 @@
         </div>
       </div>
     </div>
-    <div class="line" *ngIf="schedules !== 0"></div>
-    <div class="detail-box-outer-78522" *ngIf="schedules !== 0">
-      <div class="detail-head-785234" *ngIf="schedules !== 0">
+    <div class="line" *ngIf="schedules.length !== 0"></div>
+    <div class="detail-box-outer-78522" *ngIf="schedules.length !== 0">
+      <div class="detail-head-785234">
         <div class="detail-heading-78524 outfit-medium">
           Weekly Schedule
         </div>
@@ -96,7 +97,7 @@
         </div>
       </div>
     </div>
-    <div class="line"></div>
+    <!-- <div class="line" *ngIf="schedules.length !== 0"></div> -->
     <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses>
   </div>
 </ion-content>
