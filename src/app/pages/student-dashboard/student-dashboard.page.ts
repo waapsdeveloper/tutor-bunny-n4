@@ -55,8 +55,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.globalCourses.getCoursesFromApi();
     this.globalCourses.setFavToApi();
-    this.globalTrials.registerPusherEvent()
-    this.globalCourses.registerPusherEvent()
+    
   }
 
   ionViewWillEnter() {
@@ -69,8 +68,9 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   async initialize() {
 
-    this.user = this.users.getUser();
-    this.events.registerPusherEvent(this.user.id)
+    this.user = this.users.getUser();    
+    this.displayName = this.utility.splitName(this.user.name).first_name;
+
     let obj = {
       email: this.user.email,
     };
@@ -83,22 +83,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    const isProfileCompleted = await this.profiles.isProfileCompleted(this.user);
-
-    if(!isProfileCompleted){
-      let res = await this.modals.present(StudentWelcomeComponent, {}, "auto-height-modal", 1, [0,1], false)
-      console.log(res,"dfsfsdfdf");
-
-      let key = res.data.key;
-
-      if(key == 1){
-        this.nav.push('/student-profile/student-profile-edit', {
-          backUrl: '/tabs/student-dashboard',
-          showBack: true,
-        });
-      }
-
-    }
+    
 
     this.utcTime = moment().utcOffset();
     let time = {
@@ -111,11 +96,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.country = this.user.student.country.name;
     }
 
-
-    this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
+    const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
+    this.showWarning = isProfileCompleted;
+    
 
     this.events.publish('is-student-profile-completed', this.showWarning);
-    this.displayName = this.utility.splitName(this.user.name).first_name;
+    
 
   }
   getFlag() {
