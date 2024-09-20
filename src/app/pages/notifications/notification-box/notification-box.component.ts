@@ -71,8 +71,6 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   }
 
   async getNotificationRead(item) {
-    console.log(item.user_id, this.user_id);
-
     if (this.user.role_id == 3) {
       this.nav.push('my-students');
       if (item.user_id != this.user_id) {
