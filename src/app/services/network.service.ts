@@ -51,7 +51,7 @@ export class NetworkService {
   }
 
   postCertificate(data){
-    return this.httpPostResponse('certificate/add', data, null, true, true);
+    return this.httpPostResponse('certificate/add', data, null, true, false);
   }
 
   postCourseImage(data){
@@ -164,6 +164,10 @@ export class NetworkService {
     return this.httpPostResponse('get-requested/course/trials/' + id, null, false, false);
   }
 
+  deleteCouseImage(data: any) {
+    return this.httpPostResponse('course/image/null', data, false, false);
+  }
+
   geTrailRequests(data, id) {
     const str = this.serialize(data);
     return this.httpGetResponse('course/recent/trials/' + id + '?' + str, null, false, false);
@@ -218,7 +222,7 @@ export class NetworkService {
   }
 
   deleteCourseImage(id){
-    return this.httpDeleteResponse('course/image/delete/' + id, true)
+    return this.httpDeleteResponse('course/image/delete/' + id, false)
 
   }
 

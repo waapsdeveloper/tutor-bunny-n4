@@ -114,4 +114,15 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
 
+
+  async goToDeatil(item) {
+    const params = {
+      id: item.id,
+      backUrl: '/tabs/student-dashboard',
+    };
+    this.nav.push('student-course-detail', params);
+  }
+
+
+
 }
