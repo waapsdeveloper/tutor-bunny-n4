@@ -9,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class CourseCardComponent extends BasePage implements OnInit {
   list;
+  trials;
   @Input() item;
   course;
   status;
@@ -28,7 +29,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
   }
 
   async initialize() {
-
 
   }
 

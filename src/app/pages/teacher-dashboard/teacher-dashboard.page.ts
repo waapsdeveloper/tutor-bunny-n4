@@ -17,6 +17,10 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
   displayName = '';
   flag;
   status;
+  total_rating;
+  state
+  travel_policy;
+  rating;
 
   footerlist = [
     {
@@ -81,6 +85,8 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
       this.flag = this.getFlag();
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.status = res.user.teacher.status;
+      this.total_rating = this.user.teacher.total_rating;
+      this.rating = this.user.teacher.avg_rating
     }
   }
 
