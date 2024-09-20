@@ -51,11 +51,7 @@ export class NetworkService {
   }
 
   postCertificate(data){
-<<<<<<< HEAD
-    return this.httpPostResponse('certificate/add', data, null, true, false);
-=======
     return this.httpPostResponse('certificate/add', data, null, false, true);
->>>>>>> 4f562d337a67d85ab7e7d1b1e3a4eb6fc56de744
   }
 
   postCourseImage(data){
