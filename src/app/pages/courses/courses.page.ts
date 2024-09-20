@@ -124,7 +124,7 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   parentback() {
-    this.nav.pop()
+    this.nav.pop('/tabs/teacher-dashboard')
   }
 
   ShowSearchBar(event){

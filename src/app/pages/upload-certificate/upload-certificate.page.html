@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<ion-header class="ion-no-border ion-no-shadow" >
   <app-sd-header-top [title]="'Certificates'" [backUrl]="" [showBack]="true"></app-sd-header-top>
 </ion-header>
 
@@ -24,9 +24,9 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" >
 
   <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
+    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'" [disabled]="loading"
       [text]="'Upload Certificates'"></app-sd-button-gray>
-    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
+    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'" [disabled]="loading"
       [text]="'Done'"></app-sd-button-gray>
   </div>
 </ion-footer>
