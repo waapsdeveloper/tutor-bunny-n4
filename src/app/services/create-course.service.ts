@@ -34,7 +34,6 @@ export class CreateCourseService {
   resetFormData() {
     this.courseId = null;
     this.coursePhotos = [];
-  
     this.formData = {
       title: null,
       description: null,
@@ -81,9 +80,9 @@ export class CreateCourseService {
 
   }
 
-  async getCourseImages(){
+  async getCourseImages() {
 
-    if(this.courseId){
+    if (this.courseId) {
 
       let obj = {
         course_id: this.courseId
@@ -96,14 +95,14 @@ export class CreateCourseService {
     }
   }
 
-  async sendPendingImages(courseId){
+  async sendPendingImages(courseId) {
 
-    for(var i = 0; i < this.coursePhotos.length; i++){
+    for (var i = 0; i < this.coursePhotos.length; i++) {
 
       const item = Object.assign({}, this.coursePhotos[i])
       const user = JSON.parse(localStorage.getItem('user'));
 
-      if(!item.course_id && courseId){
+      if (!item.course_id && courseId) {
 
         if (!item.image.includes('https')) {
           let obj = {
@@ -112,7 +111,7 @@ export class CreateCourseService {
             image: item['image']
           };
 
-          if(courseId){
+          if (courseId) {
             obj.course_id = courseId;
             await this.network.postCourseImage(obj);
           }

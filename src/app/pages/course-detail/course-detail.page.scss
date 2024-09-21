@@ -1,7 +1,8 @@
 .remove-pd-top-323243243 {
   --padding-top: 0 !important;
 }
-.image-card-78523{
+
+.image-card-78523 {
 
 
   height: 250px;
@@ -32,14 +33,14 @@
 
 }
 
-.cource-price-and-rating-box-78541{
+.cource-price-and-rating-box-78541 {
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
 
-  .cource-price--78542{
+  .cource-price--78542 {
     font-size: 20px;
     font-weight: 500;
     color: #000000;
@@ -48,17 +49,16 @@
     justify-items: flex-start;
   }
 
-  .cource-rating-box-78543{
+  .cource-rating-box-78543 {
 
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
 
-    .cource-rating-stars-78544{
+    .cource-rating-stars-78544 {}
 
-    }
-    .cource-rating-number-78545{
+    .cource-rating-number-78545 {
 
       display: flex;
       align-items: center;
@@ -72,7 +72,7 @@
   }
 }
 
-.cource-details-box-78561{
+.cource-details-box-78561 {
 
   display: flex;
   flex-direction: column;
@@ -80,13 +80,13 @@
   // align-items: center;
 
 
-  .cource-time-and-lessons-78562{
+  .cource-time-and-lessons-78562 {
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .cource-time-box-78563{
+    .cource-time-box-78563 {
 
       width: 60%;
       display: flex;
@@ -98,7 +98,8 @@
       color: black;
 
     }
-    .cource-lesson-box-78564{
+
+    .cource-lesson-box-78564 {
 
       width: 40%;
       display: flex;
@@ -584,7 +585,8 @@
 .image-container {
   position: relative;
   width: 100%;
-  height: 400px; /* Adjust height as needed */
+  height: 400px;
+  /* Adjust height as needed */
 }
 
 .image-card-78523 {
@@ -594,7 +596,8 @@
   height: 100%;
 }
 
-.prev-button, .next-button {
+.prev-button,
+.next-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -614,13 +617,19 @@
 }
 
 .to-end-dates-included {
-  display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: #7A7A7A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #7A7A7A;
 }
 
-.tabs-opacity-0{
+.tabs-opacity-0 {
   opacity: 0;
 }
-.tabs-opacity-1{
+
+.tabs-opacity-1 {
   opacity: 1;
 }
 
@@ -632,4 +641,49 @@
   align-items: center;
   justify-content: center;
 
+}
+
+.qulification-box-edu-readmore-98525 {
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .qulification-box-edu-button-98526 {
+
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #393939;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-wrap: nowrap;
+
+  }
+}
+
+.education-box-edu-readmore-98525 {
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .education-box-edu-button-98526 {
+
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #393939;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-wrap: nowrap;
+  }
 }
