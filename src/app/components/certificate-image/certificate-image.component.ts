@@ -28,9 +28,14 @@ export class CertificateImageComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('change-sample-certificate-to-this', (image: any) => {
+      console.log(image);
+
 
       if (image) {
         this.samplecertificateImage = image;
+      }
+      else{
+        this.samplecertificateImage = '/assets/gallary.png';
       }
 
     }, false)

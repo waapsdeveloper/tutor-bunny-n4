@@ -169,6 +169,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   back() {
+
     this.nav.pop();
   }
 

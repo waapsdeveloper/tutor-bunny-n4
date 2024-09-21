@@ -29,6 +29,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
   created_at;
   price;
   startTime;
+  country;
+  state;
   flag;
   displayName;
   image;
@@ -100,6 +102,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
     this.lessons = this.data.lesson;
+    this.country = this.data.user.teacher.country.name;
+    this.state = this.data.user.teacher.state.name;
     this.image = this.data.image;
     this.rating = this.data.user.teacher.avg_rating;
     this.total_rating = this.data.user.teacher.total_rating;

@@ -56,6 +56,9 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   async clearImage(id: string, event: Event) {
     event.stopPropagation();
     await this.network.deleteCertificates(id);
+    let image  = null;
+    this.events.publish('change-sample-certificate-to-this', image);
+
     this.initialize();
   }
 

@@ -36,14 +36,16 @@
         </div>
         <div class="header-info-box-68447">
 
-          <div class="header-info-user-68448" >
+          <div class="header-info-user-68448">
             <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
             <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
           </div>
-          <div class="header-info-misc-68448 outfit"  *ngIf="rating !== 0">
+          <div class="header-info-misc-68448 outfit" *ngIf="rating !== 0">
             <app-rating-stars [rating]="rating"></app-rating-stars>
             <span class="fs-14 roboto-medium" style="color: white;"> {{rating}} ({{total_rating}})</span>
           </div>
+          <div class="header-info-misc-68448 outfit" *ngIf="rating === 0"></div>
+          <span class="fs-14 roboto-medium" style="color: white;"> No Reviews yet</span>
         </div>
       </div>
     </div>

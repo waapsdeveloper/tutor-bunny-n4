@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
@@ -9,7 +9,7 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage extends BasePage implements OnInit {
+export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
   chat;
   request;
@@ -44,6 +44,12 @@ export class ChatPage extends BasePage implements OnInit {
     })
 
   }
+
+  ngOnDestroy() {
+   this.user = null;
+   this.other_user_id = null;
+  }
+
   doSearch(event){
 
     this.chats.getchatList(this.search, 1)
