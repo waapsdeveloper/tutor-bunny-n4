@@ -17,7 +17,7 @@
 
     <ion-tab-button class="ion-tab-button-67895675" tab="chat">
       <div class="tab-back-78523" *ngIf="selectedTab === 'chat'"></div>
-      <div class="unread-count" *ngIf="chatService.unreadCount !== '0'"></div>
+      <div class="unread-count" *ngIf="chatService.unreadCount === '0'"></div>
       <img [src]="selectedTab === 'chat' ? 'assets/icon/home/chat-icon-fill.svg' : 'assets/icon/home/chat-icon.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'chat'">Chat</div>
     </ion-tab-button>

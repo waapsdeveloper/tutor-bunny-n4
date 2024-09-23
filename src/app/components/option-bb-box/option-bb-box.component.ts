@@ -52,7 +52,7 @@ export class OptionBbBoxComponent extends BasePage implements OnInit {
   }
 
   goToTrialReq() {
-    this.nav.push('trail-requests')
+    this.nav.push('my-students')
   }
 
   goToMyStudents(){
