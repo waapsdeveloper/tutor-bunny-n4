@@ -7,13 +7,9 @@
         {{displayName}}
         <div class="tecahers-box-rate-38526"> {{item.teacher.country.currency_symbol}}{{item.teacher.hourly_rate}}</div>
       </div>
-      <div class="tecahers-box-rating-box-38527">
+      <div class="tecahers-box-rating-box-38527" >
         <div style="display: flex; align-items: center; justify-content: flex-start; gap: 2px;">
-          <img src="../../../assets/icon/star.svg" alt="">
-          <img src="../../../assets/icon/star.svg" alt="">
-          <img src="../../../assets/icon/star.svg" alt="">
-          <img src="../../../assets/icon/star.svg" alt="">
-          <img src="../../../assets/icon/star.svg" alt="">
+          <app-rating-stars [rating]="rating"  *ngIf="rating != 0"></app-rating-stars>
           <div class="tecahers-box-rating-38528">
           </div>
           {{item.teacher.avg_rating}}

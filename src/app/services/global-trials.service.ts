@@ -25,6 +25,18 @@ export class GlobalTrialsService {
     private network: NetworkService,
     private events: EventsService
   ) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.user =null;
+      this.page = null;
+      this.last_page =null;
+      this.status = null
+      this.list =null;
+      this.courseId =null;
+      this.pendingTrialPage = null;
+      this.pendingTrialLastPage = null
+      this.pendingTrials =null;
+      this.trialChannel =null;
+    });
     const options = {
       cluster: 'ap2',
       forceTLS: true,

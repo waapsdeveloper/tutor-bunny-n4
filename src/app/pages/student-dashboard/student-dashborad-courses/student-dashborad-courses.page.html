@@ -1,3 +1,6 @@
 <ion-content class="ion-content-medium-background">
+  <ion-refresher slot="fixed"  (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <app-rec-courses ></app-rec-courses>
 </ion-content>

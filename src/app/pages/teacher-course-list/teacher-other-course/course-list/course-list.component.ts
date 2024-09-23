@@ -16,6 +16,8 @@ export class CourseListComponent extends BasePage  implements OnInit {
   courseId;
   status;
   type;
+  total_rating;
+  rating;
   blocked;
   loading = false;
   trail = false;
@@ -29,6 +31,7 @@ export class CourseListComponent extends BasePage  implements OnInit {
   public set item(value: any) {
     this._item = value;
 
+
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
@@ -41,12 +44,16 @@ export class CourseListComponent extends BasePage  implements OnInit {
   }
 
   initialize(data) {
+    console.log(data);
+
     if (data && data.trial) {
       this.blocked = data.trial.status
     }
     if(data && data.type == 3){
       this.type = data.type;
     }
+    this.total_rating = data.teacher.total_rating;
+    this.rating = data.teacher.avg_rating
   }
 
   ngOnInit() {

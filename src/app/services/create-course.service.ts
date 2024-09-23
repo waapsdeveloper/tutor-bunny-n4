@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { NetworkService } from './network.service';
+import { EventsService } from './events.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CreateCourseService {
-
   courseId = null;
+
   coursePhotos = [];
 
   formData: any = {
@@ -29,7 +30,11 @@ export class CreateCourseService {
     schedules: null,
   };
 
-  constructor(private network: NetworkService) { }
+  constructor(private network: NetworkService, private events: EventsService) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.resetFormData();
+    });
+  }
 
   resetFormData() {
     this.courseId = null;
@@ -77,38 +82,31 @@ export class CreateCourseService {
     if (lang) {
       this.formData['language_id'] = lang.id;
     }
-
   }
 
   async getCourseImages() {
-
     if (this.courseId) {
-
       let obj = {
-        course_id: this.courseId
-      }
+        course_id: this.courseId,
+      };
 
-      const res = await this.network.getCourseImages(obj) as any;
+      const res = (await this.network.getCourseImages(obj)) as any;
       this.coursePhotos = res.result;
       console.log(res);
-
     }
   }
 
   async sendPendingImages(courseId) {
-
     for (var i = 0; i < this.coursePhotos.length; i++) {
-
-      const item = Object.assign({}, this.coursePhotos[i])
+      const item = Object.assign({}, this.coursePhotos[i]);
       const user = JSON.parse(localStorage.getItem('user'));
 
       if (!item.course_id && courseId) {
-
         if (!item.image.includes('https')) {
           let obj = {
             user_id: user.id,
             course_id: courseId,
-            image: item['image']
+            image: item['image'],
           };
 
           if (courseId) {
@@ -116,22 +114,9 @@ export class CreateCourseService {
             await this.network.postCourseImage(obj);
           }
         }
-
       }
-
     }
 
     this.getCourseImages();
-
-
   }
-
-
-
-
-
-
-
-
-
 }

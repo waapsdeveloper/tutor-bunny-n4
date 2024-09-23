@@ -1,8 +1,6 @@
+
 <div class="student-box-outer-689567 ">
   <div class="sb-content-7895">
-    <ion-refresher slot="fixed"  (ionRefresh)="handleRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
     <div *ngFor="let item of globalCourses.courses">
       <!-- (onChange)="reloadList()" -->
       <app-course-list [item]="item"></app-course-list>

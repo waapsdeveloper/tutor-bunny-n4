@@ -18,12 +18,9 @@
             justify-content: flex-start;
             gap: 8px;">
               <div class="info-misc-68448 outfit ">
-                <img src="assets/icon/star.svg" />
-                <img src="assets/icon/star.svg" />
-                <img src="assets/icon/star.svg" />
-                <img src="assets/icon/star.svg" />
-                <img src="assets/icon/star.svg" />
-                <span class="fs-16">4.9 (385)</span>
+                <app-rating-stars [rating]="rating"></app-rating-stars>
+
+                <span class="fs-16">{{rating}} ({{total_rating}})</span>
               </div>
             </div>
           </div>
@@ -31,7 +28,7 @@
             <div class="us-status-btn">
               <div class="us-status-btn-label outfit-medium">
                 <!-- <img src="../../../../assets/svg/p-tag.svg" alt=""> -->
-                {{item.auth_user_currency_symbol}} {{item.updated_price}} <span style="font-size: 12px;">/month</span>
+                {{item.auth_user_currency_symbol}} {{item.updated_price}} <span style="font-size: 12px;">/lesson</span>
               </div>
             </div>
           </div>

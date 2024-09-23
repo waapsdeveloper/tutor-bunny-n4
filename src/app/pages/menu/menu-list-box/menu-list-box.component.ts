@@ -8,26 +8,27 @@ import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 })
 export class MenuListBoxComponent extends BasePage implements OnInit {
   role;
-  user
+  user;
   constructor(injector: Injector) {
-    super(injector)
-    this.initialize()
+    super(injector);
+    this.initialize();
   }
   initialize() {
-    this.role = localStorage.getItem('role')
+    this.role = localStorage.getItem('role');
   }
-  ngOnInit() { }
+  ngOnInit() {}
   gotoProfile() {
-    this.user =this.users.getUser()
-    if(this.user.role_id == 2){
+    this.user = this.users.getUser();
+    if (this.user.role_id == 2) {
       // this.nav.push('/teacher-profile');
-    }else{
+    } else {
       this.nav.push('/teacher-profile');
     }
   }
   async logout() {
     await FirebaseAuthentication.signOut();
+    this.events.publish('clear-all-services-data')
     localStorage.clear();
-    this.nav.push('splash')
+    this.nav.push('splash');
   }
 }

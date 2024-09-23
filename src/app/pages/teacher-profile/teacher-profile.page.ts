@@ -23,6 +23,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   email;
   language;
   total_rating;
+  rating;
   state
   travel_policy;
   subject;
@@ -30,7 +31,6 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
   params
   studentEmail
   roleId;
-  rating;
   experince;
   updateRating;
   updateTotalRating;
@@ -109,7 +109,7 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     })
   }
   back() {
-    this.nav.pop('/tabs/teacher-dashboard')
+    this.nav.pop()
   }
 
   getFlag() {

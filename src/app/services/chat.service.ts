@@ -21,7 +21,18 @@ export class ChatService {
     private users: UsersService,
     private network: NetworkService,
     private events: EventsService
-  ) {}
+  ) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.user = null;
+      this.role_id = null;
+      this.chats = null;
+      this.count = null;
+      this.unreadCount = null;
+      this.requests = null;
+      this.requestCount = null;
+      this.days = null;
+    });
+  }
 
   getchatList(search = '', page = 1, liked = false) {
     return new Promise(async (resolve) => {

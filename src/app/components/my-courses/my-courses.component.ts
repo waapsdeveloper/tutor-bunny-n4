@@ -36,8 +36,8 @@ export class MyCoursesComponent extends BasePage implements OnInit {
       }
       console.log(this.categoryId);
       console.log(obj);
-      const res =  await this.network.getOtherCourseList(obj) as any;
-      // : await this.network.getMyCourseList(obj) as any
+      const res =  await this.network.getMyCourseList(obj) as any;
+      // await this.network.getOtherCourseList(obj) as any;
       console.log(res);
 
       const result = res.result;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-student-dashborad-courses',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentDashboradCoursesPage implements OnInit {
 
-  constructor() { }
+  constructor( public globalCourses: GlobalCoursesService) {
+
+  }
 
   ngOnInit() {
   }
+  async handleRefresh(event) {
 
+    await this.globalCourses.getCoursesFromApi('', 1);
+    event.target.complete();
+  }
 }

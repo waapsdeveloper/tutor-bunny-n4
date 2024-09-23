@@ -25,6 +25,15 @@ export class GlobalCoursesService {
   otherExceptCourseId = 0;
 
   constructor(private network: NetworkService, private events: EventsService) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.otherCoursesPage = null;
+      this.otherCoursesLastPage = null;
+      this.otherCourses = null;
+      this.courses = null;
+      this.CourseChannel = null;
+      this.otherCourseUserId = null;
+      this.otherExceptCourseId = null;
+    });
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -66,29 +75,22 @@ export class GlobalCoursesService {
     }
   }
 
-  setFavCourseUpdateLogic(course){
-
+  setFavCourseUpdateLogic(course) {
     let courseId = course.id;
-    let findIndex = this.favorites.findIndex( x => x.id == courseId);
+    let findIndex = this.favorites.findIndex((x) => x.id == courseId);
 
     let isLikedByMe = course.is_liked_by_me;
-    if(findIndex != -1){
-
-      if(isLikedByMe){
+    if (findIndex != -1) {
+      if (isLikedByMe) {
         this.favorites[findIndex] = course;
       } else {
         this.favorites.splice(findIndex, 1);
       }
-
     } else {
-
-      if(isLikedByMe){
+      if (isLikedByMe) {
         this.favorites.push(course);
       }
-
     }
-
-
   }
 
   setOtherCourseUpdateLOgic(course: any) {

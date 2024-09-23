@@ -11,6 +11,8 @@ export class TeacherOtherCourseComponent extends BasePage implements OnInit {
   params;
   teacher;
   list;
+  total_rating;
+  rating;
   constructor(public globalCourses: GlobalCoursesService, injector: Injector) {
     super(injector);
   }
