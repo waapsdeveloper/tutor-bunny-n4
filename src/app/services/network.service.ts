@@ -160,8 +160,8 @@ export class NetworkService {
   getAllFavCourses(data: any) {
     return this.httpPostResponse('courses/fav-list', data, null, false, false);
   }
-  getAllReqCourses(id: any) {
-    return this.httpPostResponse('get-requested/course/trials/' + id, null, false, false);
+  getAllReqCourses(id: any, ) {
+    return this.httpGetResponse('requested/course/trials/' + id, null, false, false);
   }
 
   deleteCouseImage(data: any) {

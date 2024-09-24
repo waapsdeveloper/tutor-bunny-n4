@@ -4,7 +4,6 @@
 
 <ion-tabs [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar class="ion-tab-bar-67895675" slot="bottom">
-
     <ion-tab-button class="ion-tab-button-67895675" [tab]="showUser">
       <div class="tab-back-78523"
         *ngIf=" (selectedTab === 'teacher-dashboard' || selectedTab === 'student-dashboard') "></div>
@@ -14,51 +13,37 @@
         [class.footer-tab-label-active]="(selectedTab === 'teacher-dashboard' || selectedTab === 'student-dashboard')">
         Home</div>
     </ion-tab-button>
-
     <ion-tab-button class="ion-tab-button-67895675" tab="chat">
       <div class="tab-back-78523" *ngIf="selectedTab === 'chat'"></div>
       <div class="unread-count" *ngIf="chatService.unreadCount !== '0'"></div>
       <img [src]="selectedTab === 'chat' ? 'assets/icon/home/chat-icon-fill.svg' : 'assets/icon/home/chat-icon.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'chat'">Chat</div>
     </ion-tab-button>
-
-    <!-- unique create button -->
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" (click)="createCourse()">
       <img src="assets/svg/add-course.svg" style="height: 40px" />
       <div class="footer-tab-label">Create</div>
     </ion-tab-button>
-    <!-- unique create button ends -->
-
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="search-box">
       <div class="tab-back-78523" *ngIf="selectedTab === 'my-teachers'"></div>
       <img [src]="selectedTab === 'my-teachers' ? 'assets/svg/search-fill.svg' : 'assets/svg/search.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'my-teachers'">Search</div>
     </ion-tab-button>
-
-    <!-- courses -->
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" tab="courses">
       <div class="tab-back-78523" *ngIf="selectedTab === 'courses'"></div>
       <img
         [src]="selectedTab === 'courses' ? 'assets/icon/home/my-corces-fill.svg' : 'assets/icon/home/my-corces.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'courses'">Courses</div>
     </ion-tab-button>
-    <!-- courses end -->
-
-    <!--  -->
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="requests">
       <div class="tab-back-78523" *ngIf="selectedTab === 'requests'"></div>
       <img [src]="selectedTab === 'requests' ? 'assets/svg/trails-yellow.svg' : 'assets/svg/trails.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'requests'">Requests</div>
     </ion-tab-button>
-
     <ion-tab-button class="ion-tab-button-67895675" tab="menu">
       <div class="tab-back-78523" *ngIf="selectedTab === 'menu'"></div>
       <img [src]="selectedTab === 'menu' ? 'assets/svg/more-fill.svg' : 'assets/svg/more.svg'" style="height: 26px" />
-      <!-- <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon> -->
-
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'menu'">Menu</div>
     </ion-tab-button>
-
   </ion-tab-bar>
 </ion-tabs>
 

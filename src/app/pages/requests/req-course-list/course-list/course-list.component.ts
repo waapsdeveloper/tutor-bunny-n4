@@ -64,7 +64,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     };
     let res = await this.network.checkReview(obj);
     console.log(res);
-    if (res) {
+    if (res.message === 'Review Data') {
       this.showReviewBtn = true;
       this.reviewData = res.resolvel;
     }

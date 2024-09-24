@@ -19,7 +19,7 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
   async callApi() {
     let user = this.users.getUser()
 
-    let res = await this.network.getAllReqCourses(user.id);
+    let res = await this.network.getAllReqCourses(user.id, );
     this.list = res.result.data;
 
 
@@ -30,7 +30,8 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
 
     let user = this.users.getUser()
 
-    let res = await this.network.getAllReqCourses(user.id);
+
+    let res = await this.network.getAllReqCourses(user.id, );
     setTimeout(() => {
       event.target.complete();
     }, 500);
