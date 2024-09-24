@@ -85,16 +85,14 @@ export class TabsPage extends BasePage implements OnInit {
 
     setTimeout(async () => {
       this.loading = false;
-
-      if (this.user.role_id == 2) {
-        const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
-        if (!isProfileCompleted) {
-          this.checkProfileCompleteOfStudent()
-        }
-
+    }, 3000)
+    if (this.user.role_id == 2) {
+      const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
+      if (!isProfileCompleted) {
+        this.checkProfileCompleteOfStudent()
       }
 
-    }, 3000)
+    }
 
 
   }

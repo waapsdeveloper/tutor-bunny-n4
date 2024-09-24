@@ -13,15 +13,16 @@ export class NotificationsPage extends BasePage implements OnInit {
   notifications;
   loading = false;
 
-  constructor(injector: Injector, public notificationService: NotificationsService) {
-    super(injector)
-
+  constructor(
+    injector: Injector,
+    public notificationService: NotificationsService
+  ) {
+    super(injector);
   }
-
 
   ngOnInit() {
     this.initialize();
-    this.notificationService.getAllNotifications()
+    this.notificationService.getAllNotifications();
   }
 
   async initialize() {
@@ -29,23 +30,18 @@ export class NotificationsPage extends BasePage implements OnInit {
   }
 
   async loadMore($event) {
-
-    if(this.loading == true){
+    if (this.loading == true) {
       return;
     }
-
-
     this.loading = true;
     await this.notificationService.loadMoreNotifications();
     this.loading = false;
     $event.target.complete();
   }
 
-  reloadLIst(event){
+  reloadLIst(event) {
     this.initialize();
 
-    this.notificationService.getNotificationsFromApi()
-
+    this.notificationService.getNotificationsFromApi();
   }
-
 }

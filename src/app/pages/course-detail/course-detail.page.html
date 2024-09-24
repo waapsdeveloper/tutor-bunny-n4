@@ -15,7 +15,7 @@
       {{title}}
     </div>
     <div class="cource-price-and-rating-box-78541">
-      <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /month</span></div>
+      <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /lesson</span></div>
       <div class="cource-rating-box-78543" *ngIf="rating != 0">
         <app-rating-stars [rating]="rating"></app-rating-stars>
         <div class="cource-rating-number-78545">{{rating}} <span
@@ -43,15 +43,16 @@
         <div class="cource-lesson-box-78564"> <img src="../../assets/svg/speaks.svg" alt=""
             style="height: 16px;">{{language}}</div>
       </div>
-      <div class="cource-time-and-lessons-78562"></div>
-      <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
-        <div style="width: 136px; text-wrap: wrap;">
-          {{state}},
-          {{country}}
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
+          <div style="width: 136px; text-wrap: wrap;">
+            {{state}},
+            {{country}}
+          </div>
         </div>
-      </div>
-      <div class="cource-lesson-box-78564"> <img class="i-7685"
-          src="../../../assets/svg/course-type.svg" />Workshop/Event
+        <div class="cource-lesson-box-78564"> <img class="i-7685"
+            src="../../../assets/svg/course-type.svg" />Workshop/Event
+        </div>
       </div>
     </div>
     <div class="line"></div>

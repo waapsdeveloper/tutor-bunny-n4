@@ -30,6 +30,8 @@ export class SdInputBoxComponent implements OnInit {
 
 
       let v = formData[this.key];
+      console.log(v);
+
       if(v == 'title'){
 
         if (!v || v == '') {
@@ -58,6 +60,7 @@ export class SdInputBoxComponent implements OnInit {
         }, 5000);
       }
     }, false);
+
 
     this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
 
