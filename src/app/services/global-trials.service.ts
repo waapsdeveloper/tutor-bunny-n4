@@ -143,7 +143,10 @@ export class GlobalTrialsService {
   }
 
   async getTrials(search = '', page = 1) {
+
     return new Promise(async (resolve) => {
+      console.log("dsfsd");
+
       this.user = this.users.getUser();
 
       let obj = {
@@ -175,8 +178,13 @@ export class GlobalTrialsService {
     let res = await this.network.changeTrailStuts(obj, trialId);
     if (res.status === 200) {
       let findIndex = this.list.findIndex((x) => x.id == trialId);
+      console.log(findIndex);
+
       if (findIndex != -1) {
+        this.events.publish('update-trail-list');
         this.list[findIndex] = res.trial;
+        console.log(this.list);
+
       }
     }
   }

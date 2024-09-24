@@ -49,6 +49,13 @@ export class TabsPage extends BasePage implements OnInit {
   ngOnInit() {
     this.initialize()
     this.showUser = this.returnDashboardLink()
+    this.events.subscribe('update-trail-list', () => {
+
+      this.globalTrials.getPendingTrialsFromApi();
+      this.globalCourses.getCoursesFromApi();
+
+    });
+
   }
 
   setCurrentTab() {
