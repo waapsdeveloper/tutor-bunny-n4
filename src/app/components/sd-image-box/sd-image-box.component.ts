@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { BasePage } from 'src/app/base-page/base-page';
 import { EventsService } from 'src/app/services/events.service';
@@ -12,9 +19,12 @@ import { UsersService } from 'src/app/services/users.service';
 export class SdImageBoxComponent extends BasePage implements OnInit {
   @Input('profilePhoto') profilePhoto: SafeUrl | undefined;
   @Input('photoId') photoId: SafeUrl | undefined;
-  @Output('openGallery') openGallery: EventEmitter<any> = new EventEmitter<any>();
-  @Output('updateImage') updateImage: EventEmitter<any> = new EventEmitter<any>();
-  @Output('updatePhotoId') updatePhotoId: EventEmitter<any> = new EventEmitter<any>();
+  @Output('openGallery') openGallery: EventEmitter<any> =
+    new EventEmitter<any>();
+  @Output('updateImage') updateImage: EventEmitter<any> =
+    new EventEmitter<any>();
+  @Output('updatePhotoId') updatePhotoId: EventEmitter<any> =
+    new EventEmitter<any>();
 
   @Input('key') key = '';
   @Input('errorText') errorText = '';
@@ -22,40 +32,56 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
 
   @Input('image') image = '';
 
-  sampleGalleryImage = '/assets/gallary.png'
+  sampleGalleryImage = '/assets/gallary.png';
 
   constructor(Injector: Injector) {
-    super(Injector)
-    this.initialize()
+    super(Injector);
+    this.initialize();
   }
   ngOnInit() {
+    this.events.subscribe(
+      'teacher-profile-second-screen-submit-call',
+      (formData: any) => {
+        if (!formData.image) {
+          this.isRequired = true;
+          this.errorText = 'Image is required to upload';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        } else if (!formData.photo_id) {
+          this.isRequired = true;
+          this.errorText = 'Photo ID is required to upload';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
 
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe(
+      'change-sample-image-to-this',
+      (image: any) => {
+        console.log(image);
 
-      if (!formData.image) {
-        this.isRequired = true;
-        this.errorText = 'Image is required to upload'
-        setTimeout( () => {
-          this.isRequired = false;
-        }, 5000);
-      } else if (!formData.photo_id) {
-        this.isRequired = true;
-        this.errorText = 'Photo ID is required to upload'
-        setTimeout( () => {
-          this.isRequired = false;
-        }, 5000);
+        if (image) {
+          this.sampleGalleryImage = image;
+        }
+      },
+      false
+    );
+
+    this.events.subscribe('change-sample-gallery-to-this', (image) => {
+      console.log(image);
+      if (image.length == 0) {
+        console.log("emty");
+        this.sampleGalleryImage = '/assets/gallary.png';
+      } else {
+        console.log(image[0].image);
+        this.sampleGalleryImage = image[0].image;
+        console.log(this.sampleGalleryImage);
       }
-
-    }, false)
-
-    this.events.subscribe('change-sample-image-to-this', (image: any) => {
-
-      if (image) {
-        this.sampleGalleryImage = image;
-      }
-
-    }, false)
-
+    });
   }
 
   initialize() {
@@ -66,22 +92,25 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
     this.getGalleryImages();
   }
 
-  async getGalleryImages(){
-
+  async getGalleryImages() {
     const user = this.users.getUser();
-    const res = await this.network.getImage(user.id) as any;
+    const res = (await this.network.getImage(user.id)) as any;
 
     let list = res.result;
-    if(list.length > 0){
+    if (list.length > 0) {
       let item = list[0];
-      this.sampleGalleryImage = item.image
+      this.sampleGalleryImage = item.image;
     }
   }
-  async handleFile(file: File, postFunction: (obj: any) => Promise<any>, emitFunction: (image: string) => void) {
+  async handleFile(
+    file: File,
+    postFunction: (obj: any) => Promise<any>,
+    emitFunction: (image: string) => void
+  ) {
     const reader = new FileReader();
     reader.onload = async () => {
       let pmi = reader.result as string;
-      
+
       // Resize if file size is greater than 1MB
       if (file.size > 1048576) {
         pmi = await this.imageService.resizeImage(file, 800, 800);
@@ -90,8 +119,8 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
         user_id: user.id,
-        image: pmi
-      }
+        image: pmi,
+      };
 
       const res = await postFunction(obj);
       emitFunction(res.result.image);
@@ -101,17 +130,25 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
 
   onProfileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.handleFile(file, this.network.postProfileImage.bind(this.network), (image: string) => {
-      this.profilePhoto = image;
-      this.updateImage.emit(this.profilePhoto);
-    });
+    this.handleFile(
+      file,
+      this.network.postProfileImage.bind(this.network),
+      (image: string) => {
+        this.profilePhoto = image;
+        this.updateImage.emit(this.profilePhoto);
+      }
+    );
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.handleFile(file, this.network.postPhotoIdImage.bind(this.network), (image: string) => {
-      this.photoId = image;
-      this.updatePhotoId.emit(this.photoId);
-    });
+    this.handleFile(
+      file,
+      this.network.postPhotoIdImage.bind(this.network),
+      (image: string) => {
+        this.photoId = image;
+        this.updatePhotoId.emit(this.photoId);
+      }
+    );
   }
 }

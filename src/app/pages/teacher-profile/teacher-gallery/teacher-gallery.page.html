@@ -9,7 +9,7 @@
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(image)"
             (click)="openImage(image.image)">
             <img src="assets/svg/delete.svg" *ngIf="gallery === 'true'" class="clear-input-678956744"
-              (click)="clearImage(image.id, $event)">
+              (click)="clearImage(image.id, $event, image)">
           </div>
         </ion-col>
       </ion-row>

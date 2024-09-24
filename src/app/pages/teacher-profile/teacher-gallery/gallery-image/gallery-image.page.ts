@@ -7,18 +7,16 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./gallery-image.page.scss'],
 })
 export class GalleryImagePage extends BasePage implements OnInit {
-  params
+  params;
   backBtn = '';
-  image = ""
+  image = '';
 
   constructor(injector: Injector) {
-
-    super(injector)
+    super(injector);
   }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
-
 
     if (this.params.backUrl) {
       this.backBtn = this.params.backUrl;
@@ -27,14 +25,16 @@ export class GalleryImagePage extends BasePage implements OnInit {
     if (this.params.image) {
       this.image = this.params.image;
     }
-
-
   }
   back() {
     this.nav.pop(this.backBtn);
   }
 
   ngOnInit() {
-  }
+    this.events.subscribe('change-sample-gallery-to-this', (image) => {
+      console.log(image);
 
+      this.image = '/assets/gallary.png';
+    });
+  }
 }

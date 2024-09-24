@@ -30,7 +30,7 @@ export class NotificationsPage extends BasePage implements OnInit {
 
   async loadMore($event) {
 
-    if(this.loading == true){      
+    if(this.loading == true){
       return;
     }
 
@@ -39,6 +39,13 @@ export class NotificationsPage extends BasePage implements OnInit {
     await this.notificationService.loadMoreNotifications();
     this.loading = false;
     $event.target.complete();
+  }
+
+  reloadLIst(event){
+    this.initialize();
+
+    this.notificationService.getNotificationsFromApi()
+
   }
 
 }

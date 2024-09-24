@@ -109,7 +109,12 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     })
   }
   back() {
-    this.nav.pop()
+
+    if(this.user.role_id == 2){
+      this.nav.pop()
+    }else{
+      this.nav.pop('/tabs/teacher-dashboard')
+    }
   }
 
   getFlag() {

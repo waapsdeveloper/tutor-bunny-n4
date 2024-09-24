@@ -24,6 +24,8 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   }
 
   public set item(value: any) {
+    console.log(value);
+
     this._item = value;
     this.is_read = value.is_read;
   }
@@ -66,28 +68,27 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
       },
     });
     let createdAt = moment(this.item.created_at);
-
     this.time = createdAt.fromNow();
   }
 
   async getNotificationRead(item) {
     if (this.user.role_id == 3) {
-      this.nav.push('my-students');
       if (item.user_id != this.user_id) {
         if (item.is_read == 0) {
           let obj = { ids: [item.id] };
           let res = await this.network.getNotificationRead(obj);
           this.reloadList.emit(res.data);
         }
+        this.nav.push('my-students');
       }
     } else {
-      this.nav.push('/tabs/requests');
       if (item.user_id != this.user_id) {
         if (item.is_read == 0) {
           let obj = { ids: [item.id] };
           let res = await this.network.getNotificationRead(obj);
           this.reloadList.emit(res.data);
         }
+        this.nav.push('/tabs/requests');
       }
     }
   }

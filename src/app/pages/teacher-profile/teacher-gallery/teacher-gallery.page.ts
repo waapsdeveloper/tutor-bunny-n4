@@ -8,7 +8,6 @@ import { GalleryImagePage } from './gallery-image/gallery-image.page';
   styleUrls: ['./teacher-gallery.page.scss'],
 })
 export class TeacherGalleryPage extends BasePage implements OnInit {
-
   backUrl = '/teacher-profile/teacher-profile-edit';
   user;
   images = [];
@@ -16,15 +15,14 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   backBtn = '';
   params;
   title;
-  gallery = "false";
+  gallery = 'false';
 
   constructor(injector: Injector) {
-    super(injector)
+    super(injector);
     this.initialize();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -43,16 +41,16 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   async initialize() {
     const user = this.users.getUser();
-    const res = await this.network.getImage(user.id) as any;
+    const res = (await this.network.getImage(user.id)) as any;
     this.images = res.result;
   }
 
   setBackgroundImage(item) {
-    return `url('${item.image}')`
+    return `url('${item.image}')`;
   }
 
   async addImageInArray(string) {
-    let firstIndex = this.images.findIndex(x => x.image == null);
+    let firstIndex = this.images.findIndex((x) => x.image == null);
     if (firstIndex != -1) {
       this.images[firstIndex]['id'] = firstIndex;
       this.images[firstIndex]['image'] = string;
@@ -60,12 +58,12 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     const user = this.users.getUser();
     let obj = {
       user_id: user.id,
-      image: string
-    }
-    let res = await this.network.postImages(obj)
+      image: string,
+    };
+    let res = await this.network.postImages(obj);
     let image = res.result.image;
 
-    this.events.publish('change-sample-image-to-this', image)
+    this.events.publish('change-sample-image-to-this', image);
     this.initialize();
   }
 
@@ -81,11 +79,16 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   }
 
   Back() {
-    this.nav.pop('/teacher-profile/teacher-profile-edit')
+    this.events.publish('change-sample-gallery-to-this', this.images);
+
+    this.nav.pop();
   }
 
-  async clearImage(id: string, event: Event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up
+  async clearImage(id: string, event: Event, image) {
+    event.stopPropagation();
+    console.log(image);
+    this.events.publish('change-sample-gallery-to-this', this.images);
+
     await this.network.deleteImage(id);
     this.initialize();
   }
@@ -93,7 +96,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
   openImage(image) {
     this.nav.push('/teacher-profile/teacher-gallery/gallery-image', {
       backUrl: '/teacher-profile/teacher-gallery',
-      image: image
-    })
+      image: image,
+    });
   }
 }
