@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -9,6 +9,8 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class ReqCourseListComponent extends BasePage implements OnInit {
 
   list;
+  @Output('number') number: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(injector: Injector) {
     super(injector)
     this.callApi()
@@ -21,7 +23,7 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
 
     let res = await this.network.getAllReqCourses(user.id, );
     this.list = res.result.data;
-
+    this.number.emit(res.result.total);
 
   }
 
@@ -32,6 +34,8 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
 
 
     let res = await this.network.getAllReqCourses(user.id, );
+    this.number.emit(res.result.total);
+
     setTimeout(() => {
       event.target.complete();
     }, 500);

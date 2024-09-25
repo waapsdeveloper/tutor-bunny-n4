@@ -8,7 +8,7 @@
         {{item.user.student.state.name}}, {{item.user.student.country.name}} <span *ngIf="flag"
         slot="start" class="fi fi-{{flag}}"></span> </div>
       <div class="review-card-rating-78527">
-        <div class="review-card-stars-78528" *ngIf="rating != 0">
+        <div class="review-card-stars-78528" >
           <app-rating-stars [rating]="rating"></app-rating-stars>
         </div>
         <div class="review-card-number-78529">{{item.rating}}</div>

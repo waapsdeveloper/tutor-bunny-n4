@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
@@ -14,6 +14,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   flag;
   user;
   courseId;
+  rating
   status;
   blocked;
   reviewData;
@@ -21,6 +22,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   loading = false;
   trail = false;
   languageName: any;
+
 
   @Input('item')
   public get item() {
@@ -40,6 +42,8 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   initialize(data) {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
+
+    this.rating = data.user.teacher.avg_rating
 
     if (data && data.trial) {
       this.blocked = data.trial.status;
@@ -109,8 +113,14 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.globalCourses.removeFavorites(this.item, user);
   }
 
-  addReview(item) {
-    this.modals.present(TeacherReviewsComponent, { item }, '', 0.7);
+  async addReview(item) {
+    let res = await this.modals.present(TeacherReviewsComponent, { item }, '', 0.7) as any ;
+    console.log(res);
+    if(res.data){
+      this.showReviewBtn = true;
+    }
+
+
   }
 
 

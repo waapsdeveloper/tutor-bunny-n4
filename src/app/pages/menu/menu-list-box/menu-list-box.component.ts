@@ -16,7 +16,10 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   initialize() {
     this.role = localStorage.getItem('role');
   }
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('dfgg');
+  }
+
   gotoProfile() {
     this.user = this.users.getUser();
     if (this.user.role_id == 2) {
@@ -25,10 +28,11 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
       this.nav.push('/teacher-profile');
     }
   }
+
   async logout() {
     await FirebaseAuthentication.signOut();
-    this.events.publish('clear-all-services-data')
+    this.events.publish('clear-all-services-data');
     localStorage.clear();
-    this.nav.push('splash');
+    this.nav.pop('splash');
   }
 }

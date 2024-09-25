@@ -72,7 +72,8 @@ export class TeacherProfileEditPage
     this.scrollToTopOnInit();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -130,7 +131,7 @@ export class TeacherProfileEditPage
 
   scrollToTopOnInit() {
     setTimeout(() => {
-      this.myContent.scrollToTop(100);
+      this.myContent.scrollToTop(300);
     }, 500);
   }
   setFormDta(data) {
@@ -314,11 +315,14 @@ export class TeacherProfileEditPage
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
+
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
-    }
-    else if (this.step == 3) {
+      this.scrollToTopOnInit()
+    } else if (this.step == 3) {
       this.step = 2;
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.scrollToTopOnInit()
+
     } else {
       this.nav.pop();
     }

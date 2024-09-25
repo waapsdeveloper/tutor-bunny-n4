@@ -62,7 +62,7 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     if (res && res.message) {
       const message = 'Review submitted';
       this.utility.presentSuccessToast(res.message);
-      this.modals.dismiss();
+      this.modals.dismiss(res);
     }
   }
 

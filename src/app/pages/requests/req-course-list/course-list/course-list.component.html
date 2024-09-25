@@ -1,13 +1,13 @@
 <div class="courses-block-outer-789565">
   <div class="courses-block-item-789565">
-    <div class="block-item-header"  (click)="goToDeatil(item)">
+    <div class="block-item-header" (click)="goToDeatil(item)">
       <div class="block-item-header-title outfit-medium"> {{item?.title}}</div>
       <img src="../../../../assets/svg/left-arrow.svg" alt="">
     </div>
     <div class="block-item-body">
       <div class="profile-item-block">
         <div>
-          <div class="profile-item-image-block"  (click)="goToDeatil(item)"
+          <div class="profile-item-image-block" (click)="goToDeatil(item)"
             [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
           </div>
         </div>
@@ -16,27 +16,30 @@
             <div style="display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 8px;">
+            gap: 8px;
+            position: relative;">
               <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-              <div class="label-789575 fs-16 outfit-medium" >{{displayName}}</div>
-              <div class="info-misc-68448 outfit "><img src="assets/icon/star.svg" /> <span class="fs-16">4.9</span>
-              </div>
+              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+
             </div>
-            <div style="    display: flex;
-            align-items: center;
-            justify-content: flex-end;">
-              <ion-icon [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
-                (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
-                [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
-            </div>
+
+            <ion-icon style="  position: absolute; right: -2px;"
+              [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+              (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+              [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+
           </div>
-          <div class="profile-above-footer-986985"  (click)="goToDeatil(item)">
+          <div class="info-misc-68448 outfit " style="display: flex; align-items: center; justify-content: flex-start;">
+            <app-rating-stars [rating]="rating"></app-rating-stars>
+            {{rating}}
+          </div>
+          <div class="profile-above-footer-986985" (click)="goToDeatil(item)">
             <div class="us-status-btn">
               <div class="us-status-btn-label outfit-medium"><img src="../../../../assets/svg/p-tag.svg" alt="">
-                ${{item.price}}/month</div>
+                ${{item.price}}/lesson</div>
             </div>
           </div>
-          <div class="group-96589"  (click)="goToDeatil(item)">
+          <div class="group-96589" (click)="goToDeatil(item)">
             <div class="line-789575">
               <img class="i-7685" src="../../../assets/svg/online.svg" />
               <div class="label fs-16 outfit" style="text-transform: capitalize;">{{item.mode_type}}</div>

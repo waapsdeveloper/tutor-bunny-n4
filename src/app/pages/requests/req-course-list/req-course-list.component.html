@@ -1,9 +1,9 @@
 <div class="student-box-outer-689567">
-  <div class="sb-content-7895">
+  <div class="sb-content-7895" >
     <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
       <ion-refresher-content ></ion-refresher-content>
     </ion-refresher>
-    <div>
+    <div style="display: flex;align-items: stretch; flex-direction: column; gap: 16px;">
       <app-course-list *ngFor="let item of list" [item]="item"></app-course-list>
     </div>
     <!-- <ion-infinite-scroll>

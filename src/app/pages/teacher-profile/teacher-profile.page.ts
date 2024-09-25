@@ -87,6 +87,7 @@ export class TeacherProfilePage
         this.language = this.user.teacher.languages;
         this.total_rating = this.user.teacher.total_rating;
         this.rating = this.user.teacher.avg_rating;
+        this.travel_policy = this.user.teacher.travel_policy.name;
         this.subject = this.user.teacher.subjects;
         this.experince = this.user.teacher.started_teaching;
         const user = this.users.getUser();
@@ -105,6 +106,8 @@ export class TeacherProfilePage
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
+      this.travel_policy = this.user.teacher.travel_policy.name;
+
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
       this.rating = this.user.teacher.avg_rating;

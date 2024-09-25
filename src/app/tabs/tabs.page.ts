@@ -18,7 +18,6 @@ import { StudentWelcomeComponent } from '../pages/student-dashboard/student-welc
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage extends BasePage implements OnInit {
-
   @ViewChild('tabs', { static: false }) tabs: IonTabs;
   selectedTab = '';
   loading = false;
@@ -27,7 +26,8 @@ export class TabsPage extends BasePage implements OnInit {
   showTabs = true;
   roleId;
 
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     public createCourseService: CreateCourseService,
     public chatService: ChatService,
     private fcm: FirebaseService,
@@ -36,35 +36,36 @@ export class TabsPage extends BasePage implements OnInit {
     public notificationService: NotificationsService,
     public teacher: TeacherService
   ) {
-    super(injector)
+    super(injector);
 
     // this.chatService.getchatList()
-
   }
 
-  ionViewWillEnter() {
-
-  }
+  ionViewWillEnter() {}
 
   ngOnInit() {
-    this.initialize()
-    this.showUser = this.returnDashboardLink()
+    this.initialize();
+    this.showUser = this.returnDashboardLink();
     this.events.subscribe('update-trail-list', () => {
-
       this.globalTrials.getPendingTrialsFromApi();
       this.globalCourses.getCoursesFromApi();
-
     });
-
+    this.events.subscribe('clear-all-services-data', () => {
+      this.selectedTab = null;
+      this.loading = null;
+      this.user = null;
+      this.showUser = null;
+      this.showTabs = null;
+      this.roleId = null;
+    });
   }
 
   setCurrentTab() {
     this.selectedTab = this.tabs.getSelected();
-    console.log(this.selectedTab)
+    console.log(this.selectedTab);
   }
 
   async initialize() {
-
     this.loading = true;
 
     this.loadResolvers();
@@ -78,8 +79,6 @@ export class TabsPage extends BasePage implements OnInit {
     await this.notificationService.getNotificationsFromApi();
     this.fcm.setTokenToServer();
 
-
-
     const utcTime = moment().utcOffset();
     let time = {
       timezone_offset: utcTime,
@@ -92,21 +91,26 @@ export class TabsPage extends BasePage implements OnInit {
 
     setTimeout(async () => {
       this.loading = false;
-    }, 3000)
+    }, 3000);
     if (this.user.role_id == 2) {
-      const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
+      const isProfileCompleted = (await this.profiles.isProfileCompleted(
+        this.user
+      )) as any;
       if (!isProfileCompleted) {
-        this.checkProfileCompleteOfStudent()
+        this.checkProfileCompleteOfStudent();
       }
-
     }
-
-
   }
 
   async checkProfileCompleteOfStudent() {
-
-    let res = await this.modals.present(StudentWelcomeComponent, {}, "auto-height-modal", 1, [0, 1], false)
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
     let key = res.data.key;
 
     if (key == 1) {
@@ -114,36 +118,32 @@ export class TabsPage extends BasePage implements OnInit {
         showBack: true,
       });
     }
-
   }
 
-
   goToChat() {
-
     let params = {
       student_id: null,
       other_user_id: null,
       user: null,
-      chat_room_id: null
+      chat_room_id: null,
     };
 
     // Navigate to the chat page without any parameters
     this.nav.push('/tabs/chat', params);
   }
 
-
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.75)
+    let res = await this.modals.present(CreateCoursePage, {}, '', 0.75);
 
     if (res.data.title) {
-      this.createCourseService.resetFormData()
+      this.createCourseService.resetFormData();
       const params = {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
         type: res.data.type,
       };
 
-      this.nav.push('/course-form', params)
+      this.nav.push('/course-form', params);
     }
   }
 
@@ -160,17 +160,13 @@ export class TabsPage extends BasePage implements OnInit {
     const roleId = parseInt(this.user.role_id);
 
     if (roleId == 2) {
-      return 'student-dashboard'
+      return 'student-dashboard';
     }
 
     if (roleId == 3) {
-      return 'teacher-dashboard'
+      return 'teacher-dashboard';
     }
 
-    return ''
-
+    return '';
   }
-
-
-
 }

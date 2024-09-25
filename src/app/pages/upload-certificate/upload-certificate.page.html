@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border ion-no-shadow" >
+<ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [title]="'Certificates'" [backUrl]="" [showBack]="true"></app-sd-header-top>
 </ion-header>
 
@@ -7,26 +7,26 @@
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
-        <ion-col  *ngFor="let certificates of certificates" size-sm="6" size-md="6" size-lg="4">
-          <div class="image-card-78975"[style.backgroundImage]="setBackgroundImage(certificates)"
-
-          (click)="openImage(certificates)">
-            <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(certificates.id, $event)">
+        <ion-col *ngFor="let certificates of certificates" sizeXs="4" size-sm="4" size-md="4" size-lg="4">
+          <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(certificates)"
+            (click)="openImage(certificates)">
+            <img src="assets/svg/delete.svg" class="clear-input-678956744"
+              (click)="clearImage(certificates.id, $event)">
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-
+    <!-- sizeXs="4" size-sm="4" size-md="4" size-lg="4" -->
   </div>
   <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput multiple />
 </ion-content>
 
-<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background" >
+<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
 
   <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'" [disabled]="loading"
-      [text]="'Upload Certificates'"></app-sd-button-gray>
-    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'" [disabled]="loading"
-      [text]="'Done'"></app-sd-button-gray>
+    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
+      [disabled]="loading" [text]="'Upload Certificates'"></app-sd-button-gray>
+    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
+      [disabled]="loading" [text]="'Done'"></app-sd-button-gray>
   </div>
 </ion-footer>

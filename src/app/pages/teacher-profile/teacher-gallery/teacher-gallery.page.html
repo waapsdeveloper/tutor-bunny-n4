@@ -5,7 +5,7 @@
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let image of images" size-sm="6" size-md="6" size-lg="4">
+        <ion-col *ngFor="let image of images" sizeXs="4" size-sm="4" size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(image)"
             (click)="openImage(image.image)">
             <img src="assets/svg/delete.svg" *ngIf="gallery === 'true'" class="clear-input-678956744"
