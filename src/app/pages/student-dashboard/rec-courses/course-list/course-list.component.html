@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: flex-start;
             gap: 8px;">
-              <div class="info-misc-68448 outfit ">
+              <div class="info-misc-68448 outfit " *ngIf="rating != 0">
                 <app-rating-stars [rating]="rating"></app-rating-stars>
                 {{rating}} ({{total_rating}})
               </div>
@@ -51,10 +51,20 @@
           <img src="../../../assets/svg/share.svg" />
           <div class="outfit fs-16">Share</div>
         </div>
-        <div class="ble-buttons-789576856" (click)="goToChat(item)">
+        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;" (click)="goToChat(item)">
           <img src="../../../../assets/svg/chat-dark.svg" alt="">
           <div>Chat</div>
         </div>
+        <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
+        <div class="free-trial-btn-89675 outfit-medium"
+          *ngIf="trail == false && loading == false && status != 'Rejected' " (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
+          (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+
         <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
           *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
           (click)="presentAlert()">
