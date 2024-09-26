@@ -56,6 +56,8 @@ export class SdInputBoxComponent implements OnInit {
       'teacher-profile-first-screen-submit-call',
       (formData: any) => {
         let v = formData[this.key];
+        console.log(v);
+
         if (!v || v == '') {
           this.isRequired = true;
           setTimeout(() => {
@@ -70,6 +72,7 @@ export class SdInputBoxComponent implements OnInit {
       'student-profile-first-screen-submit-call',
       (formData: any) => {
         let v = formData[this.key];
+
         if (!v || v == '') {
           this.isRequired = true;
           setTimeout(() => {
