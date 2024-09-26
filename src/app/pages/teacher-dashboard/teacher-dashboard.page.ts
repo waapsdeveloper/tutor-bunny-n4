@@ -6,6 +6,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -16,6 +17,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
   user;
   displayName = '';
   flag;
+  shownoti = true;
   status;
   total_rating;
   state
@@ -54,12 +56,18 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
 
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public chats: ChatService
+    public chats: ChatService,
+    public notification: NotificationsService
   ) {
     super(injector);
   }
 
   ngOnInit() {
+    this.events.subscribe('show-fav-dot', (shownoti) => {
+      console.log(shownoti);
+      this.shownoti = shownoti;
+
+    });
     this.events.subscribe('user-update-via-pusher', () => {
       this.initialize();
 

@@ -21,6 +21,8 @@ export class NotificationsPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+    let shownoti = false;
+    this.events.publish('show-fav-dot', shownoti);
     this.initialize();
     this.notificationService.getAllNotifications();
   }
