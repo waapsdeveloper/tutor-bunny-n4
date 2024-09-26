@@ -59,6 +59,12 @@
               </div>
             </div>
           </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Travel policy</div>
+            <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')"
+              [travel_policy]="formData.travel_policy" [key]="'travel_policy'"
+              [errorText]="'travel policy is required'" [needed]="step === 3"></app-travel-police>
+          </div>
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -115,13 +121,16 @@
                 [key]="'subjects'" [errorText]="'Subject is required'"></app-sd-subject-box>
             </div>
           </div>
+          <div class="input-box-lines d-flex flex-column gap-8">
+            <div class="input-title fs-14 roboto-medium">Hourly rate ({{curruncy}})</div>
+            <app-sd-input-box (onChange)="result($event, 'hourly_rate')" [inputText]="formData.hourly_rate"
+              [key]="'hourly_rate'" [type]="'number'" [errorText]="'Hourly rate is required'"></app-sd-input-box>
+          </div>
           <div class="input-box-lines">
             <app-sd-image-box [profilePhoto]="formData.image" [photoId]="formData.photo_id"
               (openGallery)="openGallery($event)" (updateImage)="result($event, 'image')"
               (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
-
-
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -182,17 +191,8 @@
               [key]="'experience_description'" [errorText]="'experience is required'"
               [placeholder]="'Minimum 250 characters'" [minlength]="250" [needed]="step === 3"></app-sd-textarea-about>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Hourly rate ({{curruncy}})</div>
-            <app-sd-input-box (onChange)="result($event, 'hourly_rate')" [inputText]="formData.hourly_rate"
-              [key]="'hourly_rate'" [type]="'number'" [errorText]="'Hourly rate is required'"></app-sd-input-box>
-          </div>
-          <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Travel policy</div>
-            <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')"
-              [travel_policy]="formData.travel_policy" [key]="'travel_policy'"
-              [errorText]="'travel policy is required'" [needed]="step === 3"></app-travel-police>
-          </div>
+
+
           <div class="input-box-lines d-flex flex-column gap-8">
             <app-profile-video></app-profile-video>
           </div>

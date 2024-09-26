@@ -206,6 +206,7 @@ export class TeacherProfileEditPage
       !f.state ||
       !f.dial_code ||
       !f.phone_number ||
+      !f.travel_policy ||
       !f.city ||
       !f.zip_code ||
       !f.languages ||
@@ -239,8 +240,6 @@ export class TeacherProfileEditPage
       !f.qualification_description ||
       !f.started_teaching ||
       !f.experience_description ||
-      !f.hourly_rate ||
-      !f.travel_policy ||
       f.qualification_description.length < 250 ||
       f.experience_description.length < 250
     ) {
@@ -269,6 +268,7 @@ export class TeacherProfileEditPage
     );
     if (
       !f.title ||
+      !f.hourly_rate ||
       !f.description ||
       f.title.length < 50 ||
       f.title.length > 100 ||
@@ -302,6 +302,7 @@ export class TeacherProfileEditPage
       !this.formData.description ||
       !this.formData.image ||
       !this.formData.photo_id
+
     );
   }
   openGallery($event) {

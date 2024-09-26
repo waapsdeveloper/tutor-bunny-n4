@@ -31,7 +31,6 @@
     padding: 16px 16px 8px 16px;
     background: #ffffff;
     border: 0.5px solid rgb(103 113 105 / 50%);
-    // box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     gap: 8px;
 
@@ -40,7 +39,6 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      // padding-top: 8px;
       padding-bottom: 8px;
       border-bottom: 0.25px solid rgba(103, 113, 105, 0.5);
       width: 100%;
@@ -62,12 +60,9 @@
       position: relative;
 
       .profile-item-image-block {
-        /* min-width: 121px; */
         width: 90px;
         height: 90px;
-        /* padding-bottom: 100%; */
         background-size: cover;
-        // background: aqua;
         background-position: center center;
         border-radius: 8px;
         position: relative;
@@ -94,7 +89,6 @@
           .img1-789575 {
             width: 18px;
             height: 18px;
-            // border-radius: 18px;
           }
 
           .info-misc-68448 {
@@ -118,7 +112,6 @@
 
           .i-7685 {
             width: 16px;
-            // height: 14px;
           }
 
           .badges-outer-44 {
