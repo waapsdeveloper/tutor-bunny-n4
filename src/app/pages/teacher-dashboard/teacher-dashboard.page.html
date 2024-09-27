@@ -7,7 +7,7 @@
       <div class="header-oblique-double-675">
         <div class="header-line-678576">
           <div class="header-line-box-678576">
-            <div class="red-dot-4432432532"  *ngIf="notification.unread_count >= 0  && shownoti"></div>
+            <div class="red-dot-4432432532"  *ngIf="notification.unread_count != 0  && shownoti"></div>
             <img src="../../../assets/svg/bell.svg" (click)="gotoNotification()" />
           </div>
         </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </ion-header>
-  <div class="ion-padding body-content-68448">
+  <div class="ion-padding body-content-68448" style="margin-top: 16px;">
     <app-statistic-box></app-statistic-box>
     <app-option-bb-box></app-option-bb-box>
     <app-trial-box *ngIf="globalTrials?.pendingTrials.length > 0"></app-trial-box>

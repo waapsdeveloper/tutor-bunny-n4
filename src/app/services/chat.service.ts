@@ -12,7 +12,7 @@ export class ChatService {
   role_id: any;
   chats;
   count;
-  unreadCount: string = '';
+  unreadCount= 0;
   requests;
   requestCount;
   days;
@@ -27,7 +27,7 @@ export class ChatService {
       this.role_id = null;
       this.chats = null;
       this.count = null;
-      this.unreadCount = null;
+      this.unreadCount = 0;
       this.requests = null;
       this.requestCount = null;
       this.days = null;
@@ -47,7 +47,7 @@ export class ChatService {
       if (res) {
         this.chats = res.data;
         console.log(this.chats);
-        this.unreadCount = this.getUnreadMsgCount();
+        this.unreadCount = this.getUnreadMsgCount() as number;
         console.log(this.unreadCount);
         let data = await this.network.getRequsetCount(this.user.id);
         this.count = data.message.pending_count;
@@ -57,16 +57,16 @@ export class ChatService {
     });
   }
 
-  getUnreadMsgCount(): string {
+  getUnreadMsgCount(): number {
     if (this.chats.length == 0) {
-      return '';
+      return 0;
     }
 
     let count = this.chats.reduce((prev, next) => {
       return prev + parseInt(next.unread_count);
     }, 0);
 
-    return `${count}`;
+    return count;
   }
 
   getChatRequsts() {

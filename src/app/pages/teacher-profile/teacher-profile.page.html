@@ -2,7 +2,7 @@
   <ion-spinner></ion-spinner>
 </div>
 
-<ion-content  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-content-medium-background">
+<ion-content  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" >
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
       <div style="padding: 0 16px 0 0;" (click)="back()">
@@ -73,10 +73,12 @@
         </div>
       </div>
     </div>
+    <div class="line"></div>
+
     <div>
       <app-teacher-profile-statistics [experince]="experince"></app-teacher-profile-statistics>
     </div>
-    <div class="line"></div>
+    <!-- <div class="line"></div> -->
     <div class="fs-16 outfit"
       style="display: flex;    align-items: flex-start;    flex-direction: column;    gap: 16px;">
       <div class="about-heading">About</div>
@@ -103,10 +105,10 @@
     </div>
     <div class="line"></div>
     <app-my-courses></app-my-courses>
-    <div class="line"></div>
+    <div class="line" *ngIf="showGellary === true" ></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
     <div class="line" *ngIf="showGellary === true"></div>
-    <app-rating-review [rating]="total_rating"></app-rating-review>
+    <app-rating-review [rating]="total_rating" *ngIf="rating != 0"></app-rating-review>
     <!-- <div class="line"></div> -->
   </div>
 </ion-content>

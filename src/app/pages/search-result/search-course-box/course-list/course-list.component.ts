@@ -16,6 +16,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   user;
   courseId;
   status;
+  rating;
+  total_rating;
   type;
   blocked;
   loading = false;
@@ -31,6 +33,8 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     this._item = value;
     this.initialize(value);
+    this.rating = value.user.teacher.avg_rating;
+    this.total_rating = value.user.teacher.total_rating;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
     this.status = value.trial ? value.trial.status : null;

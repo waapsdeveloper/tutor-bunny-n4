@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-course-list',
@@ -122,10 +123,21 @@ export class CourseListComponent extends BasePage implements OnInit {
         return;
       }
     } else {
-      this.nav.push('/student-profile/student-profile-edit', {
-        backUrl: '/tabs/student-dashboard',
-        showBack: true,
-      });
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
     }
   }
 
