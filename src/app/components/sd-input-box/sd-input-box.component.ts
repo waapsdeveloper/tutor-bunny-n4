@@ -31,22 +31,19 @@ export class SdInputBoxComponent implements OnInit {
       (formData: any) => {
         let v = formData[this.key];
         console.log(v);
-
         if (!v || v == '') {
           this.isRequired = true;
           setTimeout(() => {
             this.isRequired = false;
           }, 5000);
         }
-        if (v == 'title') {
-          if (v && v.length < 50) {
-            this.isRequired = true;
-            this.errorText =
-              'The title field should have minimum 50 characters';
-            setTimeout(() => {
-              this.isRequired = false;
-            }, 5000);
-          }
+
+        if (v && v.length < 50) {
+          this.isRequired = true;
+          this.errorText = 'The title field should have minimum 50 characters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
         }
       },
       false

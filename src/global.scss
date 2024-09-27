@@ -71,6 +71,11 @@
   border-radius: 50%;
 }
 
+.modal-handle{
+  opacity: 0;
+  background-color: white;
+}
+
 .ion-content-medium-background {
   --background: var(--tb-page-bg-color);
   background: var(--tb-page-bg-color);
