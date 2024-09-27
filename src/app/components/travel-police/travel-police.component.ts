@@ -47,9 +47,11 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
    }
 
   ngOnInit() {
-    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
+    this.events.subscribe( 'teacher-profile-first-screen-submit-call', (formData: any) => {
 
       let v = formData[this.key];
+      console.log(v);
+
       if (!v || v == '') {
         this.isRequired = true;
         setTimeout(() => {

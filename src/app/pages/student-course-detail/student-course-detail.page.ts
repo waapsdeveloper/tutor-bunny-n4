@@ -67,14 +67,17 @@ export class StudentCourseDetailPage extends BasePage {
     if (this.params.id) {
       this.course_Id = this.params.id;
     }
+    this.spinner = true;
+
     this.callApi();
+    this.spinner = false;
+
     setTimeout(() => {
       this.isTrailReq();
     }, 200);
   }
 
   async callApi() {
-    this.spinner = true;
 
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
     console.log(res);
@@ -118,7 +121,6 @@ export class StudentCourseDetailPage extends BasePage {
     const endDate = this.data.end_date;
     this.startDate = moment(startDate).format('DD-MM-Y');
     this.endDate = moment(endDate).format('DD-MM-Y');
-    this.spinner = false;
   }
 
   async addToFav() {

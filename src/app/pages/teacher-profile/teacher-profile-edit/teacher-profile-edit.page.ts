@@ -30,6 +30,7 @@ export class TeacherProfileEditPage
   sub;
   params: any;
   backUrl;
+  edit = false;
   btn: any;
   showBack;
   title = 'Create profile';
@@ -72,8 +73,7 @@ export class TeacherProfileEditPage
     this.scrollToTopOnInit();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -140,6 +140,7 @@ export class TeacherProfileEditPage
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
     if (cnty) {
+      this.edit = true;
       this.countryId = cnty.id;
       this.formData['country_id'] = cnty.id;
       this.formData['country'] = cnty;
@@ -206,6 +207,7 @@ export class TeacherProfileEditPage
       !f.state ||
       !f.dial_code ||
       !f.phone_number ||
+      !f.travel_policy ||
       !f.city ||
       !f.zip_code ||
       !f.languages ||
@@ -239,8 +241,6 @@ export class TeacherProfileEditPage
       !f.qualification_description ||
       !f.started_teaching ||
       !f.experience_description ||
-      !f.hourly_rate ||
-      !f.travel_policy ||
       f.qualification_description.length < 250 ||
       f.experience_description.length < 250
     ) {
@@ -257,7 +257,11 @@ export class TeacherProfileEditPage
     if (res && res.message) {
       this.utility.presentSuccessToast(res.message);
     }
-    this.nav.pop('/teacher-profile');
+    if(this.edit){
+      this.nav.pop('/tabs/teacher-dashboard')
+    }else{
+      this.nav.push('/teacher-profile-complete');
+    }
   }
   async onSlideChange2() {
     const data = this.formData;
@@ -269,6 +273,7 @@ export class TeacherProfileEditPage
     );
     if (
       !f.title ||
+      !f.hourly_rate ||
       !f.description ||
       f.title.length < 50 ||
       f.title.length > 100 ||
@@ -317,12 +322,11 @@ export class TeacherProfileEditPage
       this.step = 1;
 
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
-      this.scrollToTopOnInit()
+      this.scrollToTopOnInit();
     } else if (this.step == 3) {
       this.step = 2;
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
-      this.scrollToTopOnInit()
-
+      this.scrollToTopOnInit();
     } else {
       this.nav.pop();
     }

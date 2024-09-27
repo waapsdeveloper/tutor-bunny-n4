@@ -61,34 +61,34 @@
           <img src="../../../../assets/svg/chat-dark.svg" alt="">
           <div>Chat</div>
         </div>
-        <div class="right-980676">
-          <div class="free-trial-btn-89675 outfit-medium"
-            *ngIf="trail === false && loading === false && status !== 'Rejected'">
-            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
-          </div>
-          <div class="free-trial-btn-89675 outfit-medium" *ngIf="status === 'Rejected' && loading === false ">
-            <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail === true && loading === false && status !== 'Accepted' && status !== 'Rejected' && status !== 'Complete' && status !== 'Blocked'">
-            <img src="../../../../assets/svg/trail.svg" alt=""><button
-              style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail === true && loading === false && status === 'Accepted'">
-            <img src="../../../../assets/icon/inProgress.svg" alt="">In Progress
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 " style="color: black;" (click)="addReview(item)"
-            *ngIf="trail === true && loading === false && status === 'Complete' && !showReviewBtn">
-            <img src="../../../../assets/svg/review-star.svg" alt="">Write a Review
-          </div>
-          <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
-            *ngIf="trail === true && loading === false && status === 'Blocked'">
-            <img src="../../../../assets/icon/block-circle.svg" alt="">Blocked
-          </div>
-          <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+        <!-- <div class="right-980676"> -->
+        <div class="ble-buttons-789576856 outfit-medium"
+          *ngIf="trail === false && loading === false && status !== 'Rejected'">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
         </div>
+        <div class="ble-buttons-789576856 outfit-medium" *ngIf="status === 'Rejected' && loading === false ">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+        <div id="present-alert" class="ble-buttons-789576856 outfit-medium"
+          *ngIf="trail === true && loading === false && status !== 'Accepted' && status !== 'Rejected' && status !== 'Complete' && status !== 'Blocked'">
+          <img src="../../../../assets/svg/trail.svg" alt=""><button
+            style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
+        </div>
+        <div id="present-alert" class="ble-buttons-789576856 outfit-medium"
+          *ngIf="trail === true && loading === false && status === 'Accepted'">
+          <img src="../../../../assets/icon/inProgress.svg" alt="">In Progress
+        </div>
+        <div id="present-alert" class="ble-buttons-789576856 " style="color: black;" (click)="addReview(item)"
+          *ngIf="trail === true && loading === false && status === 'Complete' && !showReviewBtn">
+          <img src="../../../../assets/svg/review-star.svg" alt="">Write a Review
+        </div>
+        <div id="present-alert" class="ble-buttons-789576856 outfit-medium"
+          *ngIf="trail === true && loading === false && status === 'Blocked'">
+          <img src="../../../../assets/icon/block-circle.svg" alt="">Blocked
+        </div>
+        <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
       </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>

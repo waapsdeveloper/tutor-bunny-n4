@@ -40,7 +40,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
     });
     this.events.subscribe('show-fav-dot', (showFav) => {
       console.log(showFav);
-
       this.showFav = showFav;
 
     });
@@ -55,7 +54,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.globalCourses.getCoursesFromApi();
     this.globalCourses.setFavToApi();
-    
+
   }
 
   ionViewWillEnter() {
@@ -68,7 +67,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   async initialize() {
 
-    this.user = this.users.getUser();    
+    this.user = this.users.getUser();
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
     let obj = {
@@ -83,7 +82,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    
+
 
     this.utcTime = moment().utcOffset();
     let time = {
@@ -98,10 +97,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
     this.showWarning = isProfileCompleted;
-    
+
 
     this.events.publish('is-student-profile-completed', this.showWarning);
-    
+
 
   }
   getFlag() {
