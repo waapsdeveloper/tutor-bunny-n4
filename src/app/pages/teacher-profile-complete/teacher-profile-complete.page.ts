@@ -7,9 +7,10 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./teacher-profile-complete.page.scss'],
 })
 export class TeacherProfileCompletePage extends BasePage implements OnInit {
-
+user
   constructor(injector:Injector) {
     super(injector)
+    this.user =this.users.getUser()
    }
 
   ngOnInit() {
