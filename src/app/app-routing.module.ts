@@ -161,7 +161,11 @@ const routes: Routes = [
   {
     path: 'upload-certificate',
     loadChildren: () => import('./pages/upload-certificate/upload-certificate.module').then( m => m.UploadCertificatePageModule)
-  }
+  },
+  {
+    path: 'teacher-profile-complete',
+    loadChildren: () => import('./pages/teacher-profile-complete/teacher-profile-complete.module').then( m => m.TeacherProfileCompletePageModule)
+  },
 
 ];
 
