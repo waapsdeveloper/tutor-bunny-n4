@@ -53,6 +53,7 @@ export class ModalService {
         initialBreakpoint: initialBreakpoint,
         canDismiss: canDismiss,
         breakpoints: breakpoints,
+        handle: false
       };
 
       if (animationType === 'right-to-left') {
