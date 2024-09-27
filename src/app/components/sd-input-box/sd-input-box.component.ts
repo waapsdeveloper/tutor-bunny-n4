@@ -58,6 +58,10 @@ export class SdInputBoxComponent implements OnInit {
         let v = formData[this.key];
         console.log(v);
 
+        if(this.key == 'title' || this.key == 'hourly_rate'){
+          return;
+        }
+
         if (!v || v == '') {
           this.isRequired = true;
           setTimeout(() => {

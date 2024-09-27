@@ -94,7 +94,12 @@ export class TeacherProfileEditPage
   async initialize() {
     this.user = this.users.getUser();
     console.log(this.user);
-    this.curruncy = this.user.teacher.country.currency_symbol;
+
+    this.curruncy = '$';
+    if(this.user.teacher.country && this.user.teacher.country.currency_symbol){
+      this.curruncy = this.user.teacher.country.currency_symbol;
+    }
+
     let obj = {
       email: this.user.email,
     };
