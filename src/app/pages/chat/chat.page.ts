@@ -44,6 +44,17 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
     })
 
   }
+  messageReceivedViaPusher() {
+    this.events.registerPusherEvent(this.user.id);
+    this.events.subscribe(
+      'message-received-via-pusher',
+      this.updateChatsByMessageReceived.bind(this)
+    );
+  }
+
+  updateChatsByMessageReceived(data: any) {
+    this.initialize();
+  }
 
   ngOnDestroy() {
    this.user = null;
@@ -56,6 +67,8 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
   async ionViewWillEnter() {
+    this.messageReceivedViaPusher();
+
     this.params = this.nav.getQueryParams();
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);

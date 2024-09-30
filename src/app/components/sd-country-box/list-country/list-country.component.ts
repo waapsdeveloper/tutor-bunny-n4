@@ -66,4 +66,7 @@ export class ListCountryComponent implements OnInit {
   capitalizeFirst(string){
     return this.utility.capitalizeEachFirst(string)
   }
+  back(){
+    this.modals.dismiss()
+  }
 }

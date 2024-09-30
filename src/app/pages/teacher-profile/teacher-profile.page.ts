@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -30,35 +31,55 @@ export class TeacherProfilePage
   state;
   travel_policy;
   subject;
+  total_course;
   images: any;
   params;
   studentEmail;
+  courses;
   roleId;
   experince;
   updateRating;
   updateTotalRating;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.events.subscribe(
       'rating-rec-update-by-id',
       this.initialize.bind(this)
     );
-  }
-
-  ionViewWillEnter() {
     this.user = this.users.getUser();
     this.params = this.nav.getQueryParams();
     if (this.params.email) {
       this.studentEmail = this.params.email;
     }
     this.initialize();
+
+  }
+
+  getCourses(events){
+    console.log(events);
+
+
+  }
+
+  async ionViewWillEnter() {
+    let obj = {
+      search: 'search',
+      page: 1
+    }
+
+    const res = await this.network.getMyCourseList(obj) as any;
+    console.log(res);
+    this.total_course = res.result.total
+
   }
 
   async initialize() {
+
+
     this.loading = true;
     this.roleId = localStorage.getItem('role');
 
@@ -99,8 +120,8 @@ export class TeacherProfilePage
       }
     } else {
       console.log(this.roleId, 'dsffs');
-
       this.user = res.user;
+      localStorage.setItem('teacher', JSON.stringify(this.user));
       this.flag = this.getFlag();
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;

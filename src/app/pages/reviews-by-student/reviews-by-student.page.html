@@ -1,15 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <div class="header-outer-box-78521">
-    <div class="header-back-btn-78522"><img src="../../assets/svg/chv-back-black.svg" (click)="back()" alt=""></div>
-    <div class="header-teacher-image-78524" [style.background-image]="image ? 'url(' + image + ')' : 'assets/learn-piano.jpeg'"></div>
-    <div class="header-teacher-name-box-78525">
-      <div class="header-teacher-name-78526">{{user.name}}</div>
-      <div class="header-teacher-rating-78527" >
-        <app-rating-stars [rating]="rating"></app-rating-stars>
-        <div class="header-teacher-rating-number-78529">{{user.teacher.avg_rating}}</div>
-      </div>
-    </div>
-  </div>
+  <app-sd-header-top [showBack]="true" [title]="'Reviews'" [backUrl]=""></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-padding" [fullscreen]="true">

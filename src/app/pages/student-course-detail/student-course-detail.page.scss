@@ -396,7 +396,7 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    align-items: center;
+    align-items: flex-start;
 
     .discription-para {
       overflow: hidden;
@@ -625,7 +625,7 @@
   width: 100%;
   // border: 0.5px solid #000000;
   border-radius: 10px;
-  background: #E29F1B;
+  background: #F3BF59;
   color: #000000;
   box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.25);
 
@@ -1148,27 +1148,6 @@
     }
   }
 
-  .discription-text {
-    // height: 150px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: center;
-
-    .discription-para {
-      overflow: hidden;
-      display: -webkit-box;
-      line-height: 21px;
-
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
-    }
-
-    .discription-para.collapsed {
-      -webkit-line-clamp: unset;
-    }
-  }
 
   -webkit-line-clamp: unset;
 

@@ -41,8 +41,8 @@
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
         (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)" [ngModel]="emptyValue">
       </textarea>
-      <img src="../../assets/svg/sent.svg" class="send-btn" *ngIf="message" alt="" (click)="sendMessage()">
-      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="" class="send-btn">
+      <img src="../../assets/svg/sent.svg" class="send-btn" *ngIf="message" alt="" (click)="sendMessage()" >
+      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="" class="send-btn" style="opacity: 50%;">
     </div>
   </div>
 </ion-footer>

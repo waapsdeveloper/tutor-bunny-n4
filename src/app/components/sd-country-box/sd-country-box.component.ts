@@ -20,68 +20,70 @@ export class SdCountryBoxComponent implements OnInit {
   private _country;
 
   @Input()
-  public set country(value: any){
+  public set country(value: any) {
     this._country = value;
-    if(value && value.name){
+    if (value && value.name) {
       this.selectedCountry = value;
     }
-
   }
 
-  public get country(): any{
-    return this._country
+  public get country(): any {
+    return this._country;
   }
 
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   selectedCountry = {
-    "id": 0,
-    "iso": "",
-    "name": "",
+    id: 0,
+    iso: '',
+    name: '',
   };
 
-
-  constructor(private modals: ModalService, private utility: UtilityService, private events: EventsService) {
-
-  }
+  constructor(
+    private modals: ModalService,
+    private utility: UtilityService,
+    private events: EventsService
+  ) {}
 
   ngOnInit() {
-    this.events.subscribe('teacher-profile-first-screen-submit-call', (formData) => {
-      if(!formData.country){
-        this.isRequired = true;
-        setTimeout( () => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false)
-    this.events.subscribe('student-profile-first-screen-submit-call', (formData) => {
-      if(!formData.country){
-        this.isRequired = true;
-        setTimeout( () => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false)
-
+    this.events.subscribe(
+      'teacher-profile-first-screen-submit-call',
+      (formData) => {
+        if (!formData.country) {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+    this.events.subscribe(
+      'student-profile-first-screen-submit-call',
+      (formData) => {
+        if (!formData.country) {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
   }
 
-
   async openCountrySelection() {
-    const res = (await this.modals.present(
-      ListCountryComponent)) as any;
+    const res = await this.modals.present(ListCountryComponent, {});
     if (res.data) {
-
       const d = res.data;
       this.selectedCountry = d;
       this.onChange.emit(res.data);
-
     }
   }
 
-  returnFlagCode(item){
-    if(item && item.iso2){
+  returnFlagCode(item) {
+    if (item && item.iso2) {
       return item.iso2.toLowerCase();
     }
     return '';
   }
-
 }

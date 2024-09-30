@@ -113,8 +113,8 @@
 }
 
 .image-box-89657 {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   background: rgb(255, 255, 255);
@@ -130,7 +130,7 @@
 .top-dashboard-header-outer {
   background-color: #484848;
   border-radius: 0 0 20px 20px;
-  height: 120px;
+  height: 100px;
   display: flex;
   display: flex;
   align-items: center;
@@ -274,7 +274,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  align-items: center;
+  align-items: flex-start;
 
   .discription-para {
     overflow: hidden;
@@ -288,6 +288,7 @@
   .discription-para.collapsed {
     -webkit-line-clamp: unset;
   }
+  -webkit-line-clamp: unset;
 }
 
 .read-more {
@@ -340,16 +341,13 @@
   gap: 26px;
 }
 
-
 .qulification-box-edu-readmore-98525 {
-
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   .qulification-box-edu-button-98526 {
-
     padding: 8px 16px;
     display: flex;
     align-items: center;
@@ -359,44 +357,36 @@
     font-size: 16px;
     font-weight: 600;
     text-wrap: nowrap;
-
   }
 }
 
-
-
 .qulification-box-edu-readmore-98525 {
-
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   .qulification-box-edu-button-98526 {
-
     padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid  #808080;
+    border: 1px solid #808080;
     border-radius: 4px;
     background-color: #fff;
     font-size: 14px;
     font-weight: 600;
     text-wrap: nowrap;
-
   }
 }
 
 .education-box-edu-readmore-98525 {
-
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   .education-box-edu-button-98526 {
-
     padding: 8px 16px;
     display: flex;
     align-items: center;
@@ -408,4 +398,31 @@
     font-weight: 600;
     text-wrap: nowrap;
   }
+}
+
+.footer-buttons-78963 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #ffffff;
+  gap: 8px;
+  height: 90px;
+}
+.button-chat-78563 {
+  width: 100%;
+}
+.sd-clear-btn-967895 {
+  height: 57px;
+  width: 100%;
+  // border: 0.5px solid #000000;
+  border-radius: 10px;
+  background: #f3bf59;
+  box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }

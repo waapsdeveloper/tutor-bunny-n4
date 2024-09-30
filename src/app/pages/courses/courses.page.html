@@ -18,6 +18,8 @@
       (activeTab)="courseActive()" (inActiveTab)="courseInctive()" (detailsAction)="openDetails($event)"
       (courseEdit)="courseEdit()">
     </app-course-card>
+    <div style="height: 700px; display: flex; align-items: center; justify-content: center" class="ion-padding"
+      *ngIf="list.length == 0">No course to display</div>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>

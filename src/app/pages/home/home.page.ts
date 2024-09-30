@@ -74,7 +74,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   async gotoEmailDashboard() {
     let res = await this.modals.present(LoginPage, {
       role: this.params.role
-    }, "", 0.7);
+    }, "auto-height-modal", 1, [0,1], true);
 
     if (res.data) {
       let user = res.data;

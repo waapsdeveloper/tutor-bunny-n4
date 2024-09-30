@@ -61,7 +61,7 @@
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
-        <div class="detail-heading-left--78524"
+        <div class="detail-heading-left--78524" *ngIf="startDate && endDate"
           style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: #7A7A7A;">
           <img src="../../assets/svg/calander.svg" alt="" style="height: 16px;">{{startDate}} to {{endDate}}
         </div>
@@ -69,14 +69,12 @@
       <div class="fs-16 outfit discription-text">
         <div class="discription-para" [class.collapsed]="isExpanded" [innerHTML]="description">
         </div>
-        <div class="qulification-box-edu-readmore-98525">
-          <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+        <div class="qulification-box-edu-readmore-98525"  *ngIf="!isExpanded" >
+          <div class="qulification-box-edu-button-98526"(click)="toggleReadMore()">Read More</div>
         </div>
-        <div class="education-box-edu-readmore-98525">
-          <div class="education-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</div>
+        <div class="education-box-edu-readmore-98525" *ngIf="isExpanded" >
+          <div class="education-box-edu-button-98526" (click)="toggleReadMore()">Read less</div>
         </div>
-        <!-- <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read more</ion-button>
-        <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</ion-button> -->
       </div>
     </div>
     <div class="line"></div>
@@ -123,28 +121,28 @@
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
     <div class="button-chat-7856" *ngIf="data?.trial && data.trial.status === 'Accepted' ">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
     <div class="button-chat-7856" *ngIf="data?.trial && data.trial.status === 'Complete'">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
       </div>
     </div>
     <div class="button-trial-23654" *ngIf="!data?.trial && type !== 3">
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-medium fs-20 " style="font-size: 20px;"> Request Free Trial </span>
+        <span class="roboto-regular fs-20 " style="font-size: 20px;"> Request Free Trial </span>
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
@@ -152,7 +150,7 @@
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-medium fs-20 " style="font-size: 20px;">Join </span>
+        <span class="roboto-regular fs-20 " style="font-size: 20px;">Join </span>
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>

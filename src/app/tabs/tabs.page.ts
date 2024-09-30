@@ -41,7 +41,12 @@ export class TabsPage extends BasePage implements OnInit {
     // this.chatService.getchatList()
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+  }
+
+  updateChatsByMessageReceived(data: any) {
+  }
+
 
   ngOnInit() {
     this.initialize();
@@ -50,6 +55,7 @@ export class TabsPage extends BasePage implements OnInit {
       this.globalTrials.getPendingTrialsFromApi();
       this.globalCourses.getCoursesFromApi();
     });
+
     this.events.subscribe('clear-all-services-data', () => {
       this.selectedTab = null;
       this.loading = null;
@@ -133,13 +139,17 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, '', 0.75);
+    let res = await this.modals.present(CreateCoursePage, {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      true);
 
     if (res.data.title) {
       this.createCourseService.resetFormData();
       const params = {
         backUrl: '/tabs/teacher-dashboard',
-        title: res.data.title,
+        title: 'Create',
         type: res.data.type,
       };
 

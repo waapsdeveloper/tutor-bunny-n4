@@ -27,7 +27,7 @@ export class GalleryImagePage extends BasePage implements OnInit {
     }
   }
   back() {
-    this.nav.pop(this.backBtn);
+    this.nav.pop();
   }
 
   ngOnInit() {

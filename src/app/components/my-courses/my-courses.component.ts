@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -15,6 +15,8 @@ export class MyCoursesComponent extends BasePage implements OnInit {
   count;
   course;
   status;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+
   categoryId;
   constructor(injector: Injector) {
     super(injector)
@@ -49,6 +51,7 @@ export class MyCoursesComponent extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...result["data"]]
       }
+      this.onChange.emit(result);
 
       resolve(true)
     })

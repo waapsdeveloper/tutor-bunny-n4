@@ -15,16 +15,17 @@ export class TeacherProfileStatisticsComponent implements OnInit {
 
   public set experince(value: any) {
     this._experince = value;
-    this.calculateAge()
+    this.calculateAge();
   }
-  year
+  year;
 
-  constructor() {
-  }
+  @Input() totalCourse = 0;
+
+
+  constructor() {}
   calculateAge() {
     const currentYear = new Date().getFullYear();
     this.year = currentYear - this.experince;
-
   }
 
   ngOnInit() {}

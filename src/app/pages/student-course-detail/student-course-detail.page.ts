@@ -78,7 +78,6 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async callApi() {
-
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
     console.log(res);
 
@@ -116,11 +115,16 @@ export class StudentCourseDetailPage extends BasePage {
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
     this.showFavValue = this.data.is_liked_by_me;
-    const startDate = this.data.start_date;
+    if (this.data.start_date) {
+      const startDate = this.data.start_date;
+      this.startDate = moment(startDate).format('DD-MM-Y');
+    }
 
-    const endDate = this.data.end_date;
-    this.startDate = moment(startDate).format('DD-MM-Y');
-    this.endDate = moment(endDate).format('DD-MM-Y');
+    if (this.data.end_date) {
+      const endDate = this.data.end_date;
+      this.endDate = moment(endDate).format('DD-MM-Y');
+    }
+
   }
 
   async addToFav() {
