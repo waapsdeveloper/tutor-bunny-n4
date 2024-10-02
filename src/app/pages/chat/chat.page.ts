@@ -38,6 +38,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    this.messageReceivedViaPusher();
 
     this.events.subscribe('update-chat-list', (data) => {
       this.initialize();
@@ -45,7 +46,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
   }
   messageReceivedViaPusher() {
-    this.events.registerPusherEvent(this.user.id);
     this.events.subscribe(
       'message-received-via-pusher',
       this.updateChatsByMessageReceived.bind(this)
@@ -53,7 +53,10 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
   updateChatsByMessageReceived(data: any) {
-    this.initialize();
+    console.log(data);
+
+    this.chats.getchatList();
+    this.chats.getUnreadMsgCount();
   }
 
   ngOnDestroy() {
@@ -67,7 +70,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
   async ionViewWillEnter() {
-    this.messageReceivedViaPusher();
 
     this.params = this.nav.getQueryParams();
     if (this.params.user) {
@@ -91,10 +93,14 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
       let res = await this.nav.push('messages', params)
       this.initialize()
     }
+
   }
 
 
   async initialize() {
+
+    this.chats.getchatList();
+    this.chats.getUnreadMsgCount();
     this.chats.getchatList();
 
   }

@@ -1,7 +1,14 @@
 <div [class.chat-right-box]="user_id != chat.user_id" [class.chat-left-box]="user_id == chat.user_id">
   <div [class.chat-recive-85622]="user_id != chat.user_id" [class.chat-send-85625]="user_id == chat.user_id">
     <div [class.chat-recive-text-85623]="user_id != chat.user_id"
-      [class.chat-send-text-85626]="user_id == chat.user_id" [innerHTML]="message"></div>
+      [class.chat-send-text-85626]="user_id == chat.user_id">
+      <div [innerHTML]="message"></div>
+      <!-- <div class="review-btn" *ngIf="slug == 'teacher-ask-student-for-review' && status == 1" (click)="addReview(chat)"> <img
+          src="../../../../assets/svg//star.svg" alt="" >Write a review</div>
+      <div class="review-btn" *ngIf="slug == 'teacher-ask-student-for-review' && status == 0"> <img
+          src="../../../../assets/svg//star.svg" alt="">Already reviewed</div> -->
+    </div>
+
     <div class="chat-recive-time-85624">{{getTime(chat.created_at)}}</div>
   </div>
 </div>

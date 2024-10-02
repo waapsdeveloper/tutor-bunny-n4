@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-course-list',
@@ -14,15 +22,19 @@ export class CourseListComponent extends BasePage implements OnInit {
   flag;
   user;
   courseId;
-  rating
+  rating;
   status;
+  review_course = {
+    user_id: null,
+    course_id: null,
+  };
   blocked;
   reviewData;
   showReviewBtn = false;
   loading = false;
   trail = false;
+  params;
   languageName: any;
-
 
   @Input('item')
   public get item() {
@@ -36,29 +48,33 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.checkReview(value);
     this.status = value.trial ? value.trial.status : null;
   }
-  constructor(injector: Injector, private globalCourses: GlobalCoursesService) {
+  constructor(
+    injector: Injector,
+    private globalCourses: GlobalCoursesService,
+    public chats: ChatService
+  ) {
     super(injector);
   }
 
   initialize(data) {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
 
-    this.rating = data.user.teacher.avg_rating
+    this.rating = data.user.teacher.avg_rating;
 
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+
     setTimeout(() => {
       this.callApi();
     }, 200);
   }
 
   async checkReview(value) {
-    console.log(value);
-
     let user = this.users.getUser();
 
     let obj = {
@@ -67,12 +83,10 @@ export class CourseListComponent extends BasePage implements OnInit {
       course_id: value.id,
     };
     let res = await this.network.checkReview(obj);
-    console.log(res);
     if (res.message === 'Review Data') {
       this.showReviewBtn = true;
       this.reviewData = res.resolvel;
     }
-    console.log(this.showReviewBtn);
   }
 
   getFlag() {
@@ -114,16 +128,18 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addReview(item) {
-    let res = await this.modals.present(TeacherReviewsComponent, { item }, '', 0.7) as any ;
-    console.log(res);
-    if(res.data){
+    console.log(item);
+
+    let res = (await this.modals.present(
+      TeacherReviewsComponent,
+      { item },
+      '',
+      0.7
+    )) as any;
+    if (res.data) {
       this.showReviewBtn = true;
     }
-
-
   }
-
-
 
   async goToDeatil(item) {
     const params = {
@@ -132,7 +148,4 @@ export class CourseListComponent extends BasePage implements OnInit {
     };
     this.nav.push('student-course-detail', params);
   }
-
-
-
 }

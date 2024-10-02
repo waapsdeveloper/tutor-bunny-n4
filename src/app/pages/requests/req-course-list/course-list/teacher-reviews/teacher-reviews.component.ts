@@ -70,7 +70,6 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     const flag = await this.utility.presentConfirm(
       'OK',
       'Cancel',
-      'Submit Review',
       'Are you sure to submit the Review?'
     );
 

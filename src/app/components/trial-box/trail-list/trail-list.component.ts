@@ -17,7 +17,7 @@ import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 })
 export class TrailListComponent extends BasePage implements OnInit {
   private _item: any;
-
+  displayName
   @Input('item')
   public get item() {
     return this._item;
@@ -26,6 +26,7 @@ export class TrailListComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     console.log(value);
+    this.displayName = this.utility.getAmericanName(value.teacher.name);
   }
   flag;
   age;

@@ -67,7 +67,7 @@ export class CoursesPage extends BasePage implements OnInit {
       if(this.list.length == 0){
         this.pageTitle = `My Courses`;
       }else{
-        this.pageTitle = `My Courses (${this.list.length})`;
+        this.pageTitle = `My Courses (${result.total})`;
       }
       resolve(true)
     })

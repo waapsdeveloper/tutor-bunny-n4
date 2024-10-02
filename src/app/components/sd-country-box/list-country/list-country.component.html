@@ -7,6 +7,7 @@
       <img class="image" src="../../assets/svg/cancel.svg" alt="">
     </div>
   </div>
+  <ion-searchbar class="fs-16 roboto-regular" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>

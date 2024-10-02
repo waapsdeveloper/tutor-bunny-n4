@@ -21,6 +21,7 @@ export class StudentCourseDetailPage extends BasePage {
   displayName;
   course_Id;
   lessons;
+  btn_loading = false;
   teacher;
   currencySymbol;
   techerTitle;
@@ -70,7 +71,6 @@ export class StudentCourseDetailPage extends BasePage {
     this.spinner = true;
 
     this.callApi();
-    this.spinner = false;
 
     setTimeout(() => {
       this.isTrailReq();
@@ -78,6 +78,7 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async callApi() {
+
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
     console.log(res);
 
@@ -124,7 +125,7 @@ export class StudentCourseDetailPage extends BasePage {
       const endDate = this.data.end_date;
       this.endDate = moment(endDate).format('DD-MM-Y');
     }
-
+    this.spinner = false;
   }
 
   async addToFav() {
@@ -177,6 +178,8 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async requestTrail() {
+    this.btn_loading = true;
+
     let user = this.users.getUser();
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (v || v == true) {
@@ -197,12 +200,16 @@ export class StudentCourseDetailPage extends BasePage {
         showBack: true,
       });
     }
+    this.btn_loading = false
+
   }
 
   async cancelTrail() {
+    this.btn_loading = true;
     let user = this.users.getUser();
     await this.globalCourses.cancelTrail(this.data, user);
     this.callApi();
+    this.btn_loading = false;
   }
 
   async isTrailReq() {

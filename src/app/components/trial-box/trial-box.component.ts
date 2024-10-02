@@ -25,9 +25,8 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     super(injector)
   }
   ngOnInit() {
-   
-    this.user = this.users.getUser();
 
+    this.user = this.users.getUser();
   };
 
   async updateTrailsList(data: any) {

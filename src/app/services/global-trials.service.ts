@@ -26,16 +26,16 @@ export class GlobalTrialsService {
     private events: EventsService
   ) {
     this.events.subscribe('clear-all-services-data', () => {
-      this.user =null;
+      this.user = null;
       this.page = null;
-      this.last_page =null;
-      this.status = null
-      this.list =null;
-      this.courseId =null;
+      this.last_page = null;
+      this.status = null;
+      this.list = null;
+      this.courseId = null;
       this.pendingTrialPage = null;
-      this.pendingTrialLastPage = null
-      this.pendingTrials =null;
-      this.trialChannel =null;
+      this.pendingTrialLastPage = null;
+      this.pendingTrials = null;
+      this.trialChannel = null;
     });
     const options = {
       cluster: 'ap2',
@@ -56,15 +56,40 @@ export class GlobalTrialsService {
 
   async trialsChannelReceived($event: any) {
     console.log($event);
-    if($event){
-      let id = $event.trial_id
-      let res = await this.network.geTrailRequestsByPusher(id);
-      console.log(res);
-      this.updateTrailsList(res.trial);
+    if ($event) {
+      if ($event.slug) {
+        let trialId = $event.trial_id;
+
+        // Call the method to remove from both list and pendingTrials
+        this.removeFromListAndPendingTrials(trialId);
+
+        // Optionally, you can trigger an event to update the UI or other services
+        this.events.publish('get-dashboard-stats');
+      } else {
+        let id = $event.trial_id;
+        let res = await this.network.geTrailRequestsByPusher(id);
+        console.log(res);
+        this.updateTrailsList(res.trial);
+        this.events.publish('get-dashboard-stats');
+      }
+    }
+  }
+
+  removeFromListAndPendingTrials(trialId: any) {
+    // Remove from list
+    const listIndex = this.list.findIndex((x) => x.id == trialId);
+    if (listIndex > -1) {
+        this.list.splice(listIndex, 1);
+        console.log(`Removed trial with ID ${trialId} from list`);
     }
 
-    this.events.publish('get-dashboard-stats');
-  }
+    // Remove from pendingTrials
+    const pendingIndex = this.pendingTrials.findIndex((x) => x.id == trialId);
+    if (pendingIndex > -1) {
+        this.pendingTrials.splice(pendingIndex, 1);
+        console.log(`Removed trial with ID ${trialId} from pendingTrials`);
+    }
+}
 
   async updateTrailsList(data: any) {
     console.log(data);
@@ -122,14 +147,12 @@ export class GlobalTrialsService {
         resolve(this.pendingTrials);
         return;
       }
-
       this.user = this.users.getUser();
       let obj = {
         teacher_id: this.user.id,
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
       console.log(res);
-
       this.pendingTrials = res.trials;
     });
   }
@@ -143,9 +166,8 @@ export class GlobalTrialsService {
   }
 
   async getTrials(search = '', page = 1) {
-
     return new Promise(async (resolve) => {
-      console.log("dsfsd");
+      console.log('dsfsd');
 
       this.user = this.users.getUser();
 
@@ -184,7 +206,6 @@ export class GlobalTrialsService {
         this.events.publish('update-trail-list');
         this.list[findIndex] = res.trial;
         console.log(this.list);
-
       }
     }
   }

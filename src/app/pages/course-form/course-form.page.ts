@@ -153,6 +153,9 @@ export class CourseFormPage
     if (f.mode_type.length == 0) {
       return;
     }
+    if (f.description.length <= 250) {
+      return;
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;

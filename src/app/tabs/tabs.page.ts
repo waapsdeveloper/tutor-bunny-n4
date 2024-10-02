@@ -45,16 +45,25 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
   updateChatsByMessageReceived(data: any) {
+
+    this.chatService.getchatList();
+    this.chatService.getUnreadMsgCount();
+    this.chatService.getchatList();
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initialize();
     this.showUser = this.returnDashboardLink();
     this.events.subscribe('update-trail-list', () => {
       this.globalTrials.getPendingTrialsFromApi();
       this.globalCourses.getCoursesFromApi();
     });
+
+    this.events.subscribe(
+      'message-received-via-pusher',
+      this.updateChatsByMessageReceived.bind(this)
+    );
 
     this.events.subscribe('clear-all-services-data', () => {
       this.selectedTab = null;

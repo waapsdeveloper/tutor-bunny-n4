@@ -39,18 +39,18 @@ export class AppComponent {
 
   initializeApp() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-        this.zone.run(() => {
-            // Example url: https://beerswift.app/tabs/tab2
-            // slug = /tabs/tab2
-            const slug = event.url.split(".app").pop();
-            if (slug) {
-                this.router.navigateByUrl(slug);
-            }
-            // If no match, do nothing - let regular routing
-            // logic take over
-        });
+      this.zone.run(() => {
+        // Example url: https://beerswift.app/tabs/tab2
+        // slug = /tabs/tab2
+        const slug = event.url.split('.app').pop();
+        if (slug) {
+          this.router.navigateByUrl(slug);
+        }
+        // If no match, do nothing - let regular routing
+        // logic take over
+      });
     });
-}
+  }
 
   Initialize() {
     if (Capacitor.getPlatform() != 'web') {
@@ -71,10 +71,13 @@ export class AppComponent {
   }
 
   async createBackRoutingLogics(url) {
+    console.log(url);
+
     if (
       url.includes('splash') ||
       url.includes('role-base') ||
-      url.includes('home')
+      url.includes('tabs/teacher-dashbaord') ||
+      url.includes('tabs/student-dashboard')
     ) {
       this.utility.hideLoader();
 
@@ -91,6 +94,8 @@ export class AppComponent {
   }
 
   exitApp() {
+    console.log('dsfs');
+
     navigator['app'].exitApp();
   }
 }

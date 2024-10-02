@@ -15,6 +15,10 @@ export class ChatService {
   unreadCount= 0;
   requests;
   requestCount;
+  review_course ={
+    user_id: null,
+    course_id: null,
+  }
   days;
 
   constructor(
@@ -32,6 +36,12 @@ export class ChatService {
       this.requestCount = null;
       this.days = null;
     });
+  }
+
+  reviewCoursebyChat(data){
+    console.log(data);
+    this.review_course.course_id= data.course_id;
+    this.review_course.user_id= data.user_id;
   }
 
   getchatList(search = '', page = 1, liked = false) {
