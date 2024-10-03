@@ -3,6 +3,7 @@ import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -26,9 +27,13 @@ export class TeacherProfilePage
   city;
   email;
   language;
+  verified_on;
+  teacher;
   total_rating;
   rating;
   state;
+  student;
+  hourly_rate;
   travel_policy;
   subject;
   total_course;
@@ -51,35 +56,31 @@ export class TeacherProfilePage
       this.initialize.bind(this)
     );
     this.user = this.users.getUser();
+    console.log(this.user);
+
     this.params = this.nav.getQueryParams();
     if (this.params.email) {
       this.studentEmail = this.params.email;
     }
     this.initialize();
-
   }
 
-  getCourses(events){
+  getCourses(events) {
     console.log(events);
-
-
   }
 
   async ionViewWillEnter() {
     let obj = {
       search: 'search',
-      page: 1
-    }
+      page: 1,
+    };
 
-    const res = await this.network.getMyCourseList(obj) as any;
+    const res = (await this.network.getMyCourseList(obj)) as any;
     console.log(res);
-    this.total_course = res.result.total
-
+    this.total_course = res.result.total;
   }
 
   async initialize() {
-
-
     this.loading = true;
     this.roleId = localStorage.getItem('role');
 
@@ -104,7 +105,10 @@ export class TeacherProfilePage
         this.displayName = this.utility.getAmericanName(this.user.name);
         this.country = this.user.teacher.country.name;
         this.state = this.user.teacher.state.name;
+        this.hourly_rate = this.user.teacher.hourly_rate;
         this.city = this.user.teacher.city;
+        const verified_on = this.user.verified_on;
+        this.verified_on = moment(verified_on).format('DD/MM/YY');
         this.language = this.user.teacher.languages;
         this.total_rating = this.user.teacher.total_rating;
         this.rating = this.user.teacher.avg_rating;
@@ -123,12 +127,14 @@ export class TeacherProfilePage
       this.user = res.user;
       localStorage.setItem('teacher', JSON.stringify(this.user));
       this.flag = this.getFlag();
+      const verified_on = this.user.verified_on;
+      this.verified_on = moment(verified_on).format('DD/MM/YY');
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
       this.travel_policy = this.user.teacher.travel_policy.name;
-
+      this.verified_on = this.user.verified_on;
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
       this.rating = this.user.teacher.avg_rating;
@@ -177,5 +183,27 @@ export class TeacherProfilePage
     let user = this.user;
 
     this.modals.present(TeacherQualificationComponent, { user });
+  }
+
+  async goToChat() {
+    this.teacher = JSON.parse(localStorage.getItem('teacher'));
+    console.log(this.teacher);
+
+    this.student = this.users.getUser();
+    let id = this.user.id;
+    let obj = {
+      user_id_1: this.student.id,
+      user_id_2: this.teacher.id,
+    };
+    console.log(obj);
+    // return
+    let res = await this.network.getChadRoomId(obj);
+    let params = {
+      student_id: id,
+      other_user_id: this.teacher.id,
+      user: JSON.stringify(this.teacher),
+      chat_room_id: res.chat_room.id,
+    };
+    this.nav.push('/tabs/chat', params);
   }
 }

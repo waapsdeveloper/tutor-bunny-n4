@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-teacher-profile-statistics',
   templateUrl: './teacher-profile-statistics.component.html',
   styleUrls: ['./teacher-profile-statistics.component.scss'],
 })
-export class TeacherProfileStatisticsComponent implements OnInit {
+export class TeacherProfileStatisticsComponent extends BasePage implements OnInit {
   private _experince: any;
 
   @Input('experince')
@@ -18,15 +19,32 @@ export class TeacherProfileStatisticsComponent implements OnInit {
     this.calculateAge();
   }
   year;
+  trials;
+  courses;
+  event
+  credits;
+  views;
 
-  @Input() totalCourse = 0;
+  @Input() hourly_rate = 0;
 
 
-  constructor() {}
+  constructor(injector: Injector) {
+    super(injector)
+    this.initialize();
+  }
+
   calculateAge() {
     const currentYear = new Date().getFullYear();
     this.year = currentYear - this.experince;
   }
 
   ngOnInit() {}
+  async initialize() {
+    let res = await this.network.getdashboardcounts();
+    this.trials = res.trials;
+    this.courses = res.courses;
+    this.event = res.events;
+    this.credits = res.events;
+    this.views = res.events;
+  }
 }

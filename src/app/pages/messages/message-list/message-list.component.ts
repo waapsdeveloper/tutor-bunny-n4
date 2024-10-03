@@ -36,7 +36,6 @@ export class MessageListComponent extends BasePage implements OnInit {
   }
 
   initialize(value) {
-    console.log(value);
 
     this.slug = value.slug;
     this.status = value.status;
@@ -68,7 +67,6 @@ export class MessageListComponent extends BasePage implements OnInit {
   }
 
   addReview(data) {
-    console.log(data);
 
     this.chats.reviewCoursebyChat(data);
 

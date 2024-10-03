@@ -4,7 +4,7 @@
       <ion-refresher-content ></ion-refresher-content>
     </ion-refresher>
     <div style="display: flex;align-items: stretch; flex-direction: column; gap: 16px;">
-      <app-course-list *ngFor="let item of list" [item]="item"></app-course-list>
+      <app-course-list *ngFor="let item of list" [item]="item" (onChange)="updatesList()"></app-course-list>
     </div>
     <!-- <ion-infinite-scroll>
       <ion-infinite-scroll-content  (ionInfinite)="onIonInfinite($event)"></ion-infinite-scroll-content>

@@ -20,7 +20,7 @@
     </div>
     <div >
       <app-chat-list *ngFor="let item of chats.chats" [item]="item"></app-chat-list>
-      <div *ngIf="chats.chats.length == 0">No chat to display</div>
+      <div *ngIf="chats.chats == 0">No chat to display</div>
     </div>
   </div>
 </ion-content>

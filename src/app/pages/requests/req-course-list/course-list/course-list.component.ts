@@ -35,6 +35,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   trail = false;
   params;
   languageName: any;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Input('item')
   public get item() {
@@ -67,8 +68,6 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async ngOnInit() {
-
-
     setTimeout(() => {
       this.callApi();
     }, 200);
@@ -147,5 +146,42 @@ export class CourseListComponent extends BasePage implements OnInit {
       backUrl: '/tabs/student-dashboard',
     };
     this.nav.push('student-course-detail', params);
+  }
+  async goToChat(data) {
+    let user = this.users.getUser();
+
+    let id = user.id;
+    let obj = {
+      user_id_1: user.id,
+      user_id_2: data.user.id,
+    };
+    let res = await this.network.getChadRoomId(obj);
+    let params = {
+      student_id: id,
+      other_user_id: data.user.id,
+      user: JSON.stringify(data.user),
+      chat_room_id: res.chat_room.id,
+    };
+    this.nav.push('/tabs/chat', params);
+  }
+
+  async presentAlert() {
+    const flag = await this.utility.presentConfirm(
+      'OK',
+      'Cancel',
+      'Cancel Trial',
+      'Are you sure to cancel the Trial?'
+    );
+
+    if (flag) {
+      this.cancelTrail(this.item);
+    }
+  }
+
+  async cancelTrail(id) {
+    this.trail = false;
+    let user = this.users.getUser();
+    await this.globalCourses.cancelTrail(this.item, user);
+    this.onChange.emit();
   }
 }

@@ -53,6 +53,11 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
     }
   }
 
+  updatesList(){
+    this.callApi();
+
+  }
+
   async callApi() {
     let user = this.users.getUser();
 
