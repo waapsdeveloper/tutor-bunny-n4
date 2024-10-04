@@ -132,10 +132,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
   async gotoMessage(item) {
-    let params = {
-      item: JSON.stringify(item)
-    }
-    let res = await this.nav.push('messages', params)
+
     this.initialize()
   }
 

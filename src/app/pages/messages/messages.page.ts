@@ -79,6 +79,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       user_id: this.user.id,
       message: this.message,
     };
+
+    this.events.publish('update-chat-lists', obj)
+
     this.message = '';
     this.messageInput.nativeElement.value = '';
     this.adjustHeight(this.messageInput.nativeElement);

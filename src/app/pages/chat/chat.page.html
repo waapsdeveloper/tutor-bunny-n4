@@ -19,7 +19,7 @@
       <div class="chat-inbox-78523" (click)="showRequests()" *ngIf="activeUser.role_id === 3">({{chats.count}}) Requests </div>
     </div>
     <div >
-      <app-chat-list *ngFor="let item of chats.chats" [item]="item"></app-chat-list>
+      <app-chat-list *ngFor="let item of chats.chats" [item]="item" (onChange)="gotoMessage($event)"></app-chat-list>
       <div *ngIf="chats.chats == 0">No chat to display</div>
     </div>
   </div>
