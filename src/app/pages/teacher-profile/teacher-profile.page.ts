@@ -204,6 +204,6 @@ export class TeacherProfilePage
       user: JSON.stringify(this.teacher),
       chat_room_id: res.chat_room.id,
     };
-    this.nav.push('/tabs/chat', params);
+    this.nav.push('/chat', params);
   }
 }

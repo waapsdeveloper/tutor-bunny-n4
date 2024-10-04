@@ -88,7 +88,7 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
           let res = await this.network.getNotificationRead(obj);
           this.reloadList.emit(res.data);
         }
-        this.nav.push('/tabs/requests');
+        this.nav.push('/requests');
       }
     }
   }

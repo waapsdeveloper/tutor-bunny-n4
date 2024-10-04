@@ -162,7 +162,7 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   goToChat() {
-    this.nav.push('/tabs/chat');
+    this.nav.push('/chat');
   }
 
   async presentAlert() {

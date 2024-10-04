@@ -21,7 +21,11 @@
     </div>
   </div>
 </ion-header>
-<ion-content #content class="ion-content-bg ion-padding">
+
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+<ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <div class="body-content" *ngFor="let item of chats.days">
     <div class="chat-day-heading-85621" *ngIf="item.date">
       <div style="

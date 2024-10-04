@@ -28,6 +28,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   days = [];
   item: any;
   chat: any[] = [];
+  loading = false;
   user_id;
   flag;
   image;
@@ -39,7 +40,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.scrollToBottomOnInit();
-
   }
 
   adjustHeight(textArea: HTMLTextAreaElement): void {
@@ -80,7 +80,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       message: this.message,
     };
 
-    this.events.publish('update-chat-lists', obj)
+    this.events.publish('update-chat-lists', obj);
 
     this.message = '';
     this.messageInput.nativeElement.value = '';
@@ -107,15 +107,17 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   ngOnInit() {
     this.scrollToBottomOnInit();
-
   }
 
   async initialize() {
+    this.loading = true;
+
     let roomId = this.item.chat_room_id;
     this.chats.getChatMessages(roomId);
 
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
+    this.loading = false;
   }
 
   messageReceivedViaPusher() {
@@ -170,9 +172,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   back() {
-
     this.nav.pop();
-    this.events.publish('clear-chat-data')
+    this.events.publish('clear-chat-data');
   }
 
   openImage(image) {

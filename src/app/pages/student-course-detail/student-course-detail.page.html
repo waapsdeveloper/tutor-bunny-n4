@@ -152,7 +152,7 @@
         <img src="assets/svg/send.svg" />
         <span class="roboto-regular fs-20 " style="font-size: 20px;">Join </span>
       </div>
-      <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+      <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> -->
     </div>
     <div style="width: 100%;" *ngIf="data?.trial && data.trial.status === 'Pending' && !btn_loading">
       <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="presentAlert()"
