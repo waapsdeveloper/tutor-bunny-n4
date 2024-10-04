@@ -115,6 +115,9 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async addToFav() {
     let user = this.users.getUser();
+    let showFav = true;
+
+    this.events.publish('show-fav-dot', showFav);
 
     this.item.is_liked_by_me = true;
     this.globalCourses.addFavorites(this.item, user);

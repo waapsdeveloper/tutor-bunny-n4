@@ -99,8 +99,6 @@ export class CourseListComponent extends BasePage implements OnInit {
       backUrl: '/tabs/student-dashboard',
     };
     this.nav.push('student-course-detail', params);
-
-    // this.onChange.emit(res);
   }
 
   async requestTrail(id) {

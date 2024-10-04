@@ -57,7 +57,10 @@ export class ReqCourseListComponent extends BasePage implements OnInit {
     this.callApi();
 
   }
+  ionViewWillEnter() {
+    this.callApi();
 
+  }
   async callApi() {
     let user = this.users.getUser();
 

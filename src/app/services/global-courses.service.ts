@@ -193,7 +193,6 @@ export class GlobalCoursesService {
     return new Promise(async (resolve) => {
       let res = (await this.network.getcourseById(id)) as any;
       const c = res.course;
-      this.courses.push(c);
       resolve(c);
     });
   }
