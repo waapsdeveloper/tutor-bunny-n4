@@ -173,7 +173,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   openImage(image) {
-    this.modals.present(ImageViewComponent, image);
+    // this.modals.present(ImageViewComponent, image);
   }
 
   scrollToBottomOnInit() {

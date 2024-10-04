@@ -54,9 +54,9 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
   updateChatsByMessageReceived(data: any) {
     console.log(data);
-
-    this.chats.getchatList();
-    this.chats.getUnreadMsgCount();
+    this.events.publish('update-chat-lists', data)
+    // this.chats.updadteChatList(data);
+    // this.chats.getUnreadMsgCount();
   }
 
   ngOnDestroy() {
@@ -99,9 +99,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
   async initialize() {
 
-    this.chats.getchatList();
-    this.chats.getUnreadMsgCount();
-    this.chats.getchatList();
 
   }
 

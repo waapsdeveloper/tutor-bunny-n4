@@ -44,11 +44,13 @@ export class TabsPage extends BasePage implements OnInit {
   ionViewWillEnter() {
   }
 
-  updateChatsByMessageReceived(data: any) {
+  async updateChatsByMessageReceived(data: any) {
 
-    this.chatService.getchatList();
-    this.chatService.getUnreadMsgCount();
-    this.chatService.getchatList();
+    await this.chatService.getUnreadMsgCount();
+    // this.chatService.getchatList();
+    this.chatService.updadteChatList(data);
+    console.log("fdsf");
+
   }
 
 

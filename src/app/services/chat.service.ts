@@ -38,9 +38,7 @@ export class ChatService {
     });
     this.events.subscribe('clear-chat-data', () => {
       this.days = null;
-      console.log("sfsfsd", this.days);
-
-
+      console.log('sfsfsd', this.days);
     });
   }
 
@@ -116,4 +114,23 @@ export class ChatService {
       resolve;
     });
   }
+
+  updadteChatList(data) {
+    let id = data.chat_room_id;
+    console.log('Incoming user ID:', id, this.chats, data);
+    console.log(id, this.chats[0].chat_room_id);
+
+    let chatIndex = this.chats.findIndex(chat => chat.chat_room_id === id);
+    if (chatIndex !== -1) {
+      console.log('Chat found, updating...');
+      this.chats[chatIndex] = {
+        ...this.chats[chatIndex],
+        ...data,
+      };
+      console.log('Updated chat:', this.chats[chatIndex]);
+    } else {
+      console.log('No chat found for the given user ID');
+    }
+  }
+
 }
