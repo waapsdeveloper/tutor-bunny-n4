@@ -61,14 +61,14 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
     console.log(files);
-    
+
     for (const file of files) {
       let imageString: string;
-      if (file.size > 1048576) { 
+      if (file.size > 1048576) {
         console.log(file.size);
         imageString = await this.imageService.resizeImage(file, 800, 800);
         console.log(imageString);
-        
+
       } else {
         imageString = await this.fileToDataURL(file);
       }
@@ -109,39 +109,50 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    const pht = this.createCourseService.coursePhotos[index];
+
+    const coursePhotos = this.createCourseService.coursePhotos;
+    const courseId = this.createCourseService.courseId;
+    const pht = coursePhotos[index];
+
     if (!pht) {
       return;
     }
+
+    // Check if the photo being cleared is the feature image
     if (pht.feature) {
-      const phtPrev = this.createCourseService.coursePhotos[index - 1];
-      if (!phtPrev) {
-        return;
+      // First, remove the image from the array
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+        coursePhotos.splice(index, 1);
       }
-      this.createCourseService.coursePhotos[index - 1].feature = true;
-      this.createCourseService.formData.image = phtPrev.image;
-      const courseId = this.createCourseService.courseId;
-      if (courseId) {
-        let obj = {
-          course_id: courseId,
-          image: phtPrev.image,
-        };
-        await this.network.postCoursePhoto(obj);
+
+      // Check if there are still photos in the array
+      if (coursePhotos.length > 0) {
+        // Set the first photo in the array as the feature image
+        coursePhotos[0].feature = true;
+        this.createCourseService.formData.image = coursePhotos[0].image;
+
+        // Update the feature image on the server if courseId exists
+        if (courseId) {
+          let obj = {
+            course_id: courseId,
+            image: coursePhotos[0].image,
+          };
+          await this.network.postCoursePhoto(obj);
+        }
+      } else {
+        // If no photos remain, reset the feature image
+        this.createCourseService.formData.image = null;
+      }
+    } else {
+      // If the image being cleared is not the feature image, simply remove it
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+        coursePhotos.splice(index, 1);
       }
     }
-    let item = this.createCourseService.coursePhotos[index];
-
-    if (item && item.id) {
-      await this.network.deleteCourseImage(item.id);
-      this.createCourseService.formData.image = null;
-      this.createCourseService.coursePhotos.splice(index, 1);
-      let obj = {
-        course_id : this.createCourseService.courseId
-      } 
-
-      await this.network.deleteCouseImage(obj)
-    } 
   }
+
 
   openImage(image) {
     this.nav.push('/course-profile/course-photo/gallery-image', {
