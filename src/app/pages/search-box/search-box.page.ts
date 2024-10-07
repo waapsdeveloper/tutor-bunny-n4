@@ -42,15 +42,10 @@ export class SearchBoxPage extends BasePage implements OnInit {
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
     this.search = event.target.value;
-
-    // Clear the previous timer if user continues typing
     clearTimeout(this.debounceTimer);
-
-    // Set a new timer to delay the execution
     this.debounceTimer = setTimeout(async () => {
-      // Trigger the search logic after debounce delay
       let res = this.filter.onKeyUp(this.search);
-    }, 500); // 500ms delay (you can adjust this value)
+    }, 500);
   }
 
   async setRecentSeach(item) {

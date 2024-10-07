@@ -6,8 +6,7 @@
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" size-sm="6" size-md="6"
-          size-lg="4">
+        <ion-col *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" size-xs="4" size-sm="4" size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
             (click)="openImage(coursePhoto)" (click)="openImage(coursePhoto)">
             <ion-icon name="star" [class.set-feature-input-678956744]="coursePhoto.feature === true"

@@ -12,6 +12,8 @@ import { SubjectListComponent } from '../../sd-subject-box/subject-list/subject-
 export class KeywordListComponent implements OnInit {
   list = [];
   sub;
+  debounceTimer: any; // Debounce timer property
+
   myArray: any[] = [];
   search: '';
   page = 1;
@@ -103,9 +105,18 @@ export class KeywordListComponent implements OnInit {
       });
     }
   }
-  async checkSuggestions($event) {
+  async checkSuggestions(event) {
     this.noSugg = false;
-    let v = $event.target.value;
+    let v = event.target.value;
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(async () => {
+      let res = this.onKeyUp(v);
+    }, 500);
+  }
+
+  async onKeyUp(data) {
+    this.noSugg = false;
+    let v = data;
     if (!v || v == '') {
       this.suggestionsList = [];
       return;
@@ -125,6 +136,11 @@ export class KeywordListComponent implements OnInit {
       this.noSugg = false;
     }
   }
+
+  back() {
+    this.modals.dismiss();
+  }
+
   async addToSubjects(item) {
     let formtype = localStorage.getItem('formtype');
     console.log(formtype);
