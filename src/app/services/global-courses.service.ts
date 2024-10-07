@@ -278,6 +278,9 @@ export class GlobalCoursesService {
   }
 
   async addFavorites(obj: any, user) {
+    console.log('====================================');
+    console.log(obj);
+    console.log('====================================');
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);

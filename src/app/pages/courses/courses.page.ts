@@ -55,7 +55,7 @@ export class CoursesPage extends BasePage implements OnInit {
       if (this.categoryId) {
         obj['category_id'] = this.categoryId
       }
-      const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj) as any;
+      const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj, this.user.id) as any;
       const result = res.result;
       this.page = result.current_page;
       this.last_page = result.last_page;
@@ -64,9 +64,9 @@ export class CoursesPage extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...result["data"]]
       }
-      if(this.list.length == 0){
+      if (this.list.length == 0) {
         this.pageTitle = `My Courses`;
-      }else{
+      } else {
         this.pageTitle = `My Courses (${result.total})`;
       }
       resolve(true)
@@ -127,7 +127,7 @@ export class CoursesPage extends BasePage implements OnInit {
     this.nav.pop('/tabs/teacher-dashboard')
   }
 
-  ShowSearchBar(event){
+  ShowSearchBar(event) {
     this.isSearchBarShow = !this.isSearchBarShow;
   }
 }

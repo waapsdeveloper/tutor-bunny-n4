@@ -129,6 +129,9 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async addToFav() {
+    console.log('====================================');
+    console.log("DSa");
+    console.log('====================================');
     let user = this.users.getUser();
 
     this.data.is_liked_by_me = true;

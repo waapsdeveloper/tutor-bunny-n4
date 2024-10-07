@@ -75,7 +75,7 @@ export class TeacherProfilePage
       page: 1,
     };
 
-    const res = (await this.network.getMyCourseList(obj)) as any;
+    const res = (await this.network.getMyCourseList(obj, this.user.id)) as any;
     console.log(res);
     this.total_course = res.result.total;
   }
@@ -109,6 +109,9 @@ export class TeacherProfilePage
         this.city = this.user.teacher.city;
         const verified_on = this.user.verified_on;
         this.verified_on = moment(verified_on).format('DD/MM/YY');
+        console.log('====================================');
+        console.log(verified_on);
+        console.log('====================================');
         this.language = this.user.teacher.languages;
         this.total_rating = this.user.teacher.total_rating;
         this.rating = this.user.teacher.avg_rating;
@@ -128,13 +131,17 @@ export class TeacherProfilePage
       localStorage.setItem('teacher', JSON.stringify(this.user));
       this.flag = this.getFlag();
       const verified_on = this.user.verified_on;
-      this.verified_on = moment(verified_on).format('DD/MM/YY');
+      this.verified_on = moment(verified_on).format('DD/MMM/YY');
+      console.log('====================================');
+      console.log(verified_on);
+      console.log('====================================');
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
+      this.hourly_rate = this.user.teacher.hourly_rate;
+
       this.travel_policy = this.user.teacher.travel_policy.name;
-      this.verified_on = this.user.verified_on;
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
       this.rating = this.user.teacher.avg_rating;

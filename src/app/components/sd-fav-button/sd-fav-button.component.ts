@@ -22,7 +22,7 @@ export class SdFavButtonComponent implements OnInit {
       console.log(showFav);
       this.showFav = showFav;
 
-    });
+    }); 
    }
 
   async addtoFav() {

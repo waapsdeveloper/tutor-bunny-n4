@@ -3,5 +3,5 @@
   <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0 && showFav"></div>
 
   <ion-icon [name]="flag ? 'heart' : 'heart-outline'" [color]="flag ? 'danger' : ''"
-   ></ion-icon>
+  (click)="flag ? removeToFav() : addtoFav()"></ion-icon>
 </div>

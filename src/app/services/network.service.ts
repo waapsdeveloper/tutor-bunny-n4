@@ -235,9 +235,9 @@ export class NetworkService {
     return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
   }
 
-  getMyCourseList(data: any) {
+  getMyCourseList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/my-course-list' + '?' + str, null, false, false);
+    return this.httpGetResponse('courses/my-course-list/'+ id + '?' + str, null, false, false);
   }
 
   getOtherCourseList(data: any) {

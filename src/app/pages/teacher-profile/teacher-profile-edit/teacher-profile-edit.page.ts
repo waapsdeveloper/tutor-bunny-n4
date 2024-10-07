@@ -260,12 +260,13 @@ export class TeacherProfileEditPage
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id);
     if (res && res.message) {
-      this.utility.presentSuccessToast(res.message);
-    }
-    if(this.edit){
-      this.nav.pop('/tabs/teacher-dashboard')
-    }else{
-      this.nav.push('/teacher-profile-complete');
+      if(this.edit){
+        this.utility.presentSuccessToast("Profile updated Successfully");
+        this.nav.pop('/tabs/teacher-dashboard')
+      }else{
+        this.utility.presentSuccessToast("Profile Created Successfully ");
+        this.nav.push('/teacher-profile-complete');
+      }
     }
   }
   async onSlideChange2() {
