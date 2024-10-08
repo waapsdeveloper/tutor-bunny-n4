@@ -56,7 +56,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
     console.log(data);
     this.events.publish('update-chat-lists', data)
   }
-
+0
   ngOnDestroy() {
    this.user = null;
    this.other_user_id = null;
