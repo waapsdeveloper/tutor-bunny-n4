@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
+import { GlobalCoursesService } from './global-courses.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class GlobalTrialsService {
   constructor(
     private users: UsersService,
     private network: NetworkService,
-    private events: EventsService
+    private events: EventsService,
+    private GlobalCourses : GlobalCoursesService
   ) {
     this.events.subscribe('clear-all-services-data', () => {
       this.user = null;
@@ -59,11 +61,9 @@ export class GlobalTrialsService {
     if ($event) {
       if ($event.slug) {
         let trialId = $event.trial_id;
-
-        // Call the method to remove from both list and pendingTrials
         this.removeFromListAndPendingTrials(trialId);
+        this.GlobalCourses.getCoursesFromApi();
 
-        // Optionally, you can trigger an event to update the UI or other services
         this.events.publish('get-dashboard-stats');
       } else {
         let id = $event.trial_id;
@@ -79,17 +79,17 @@ export class GlobalTrialsService {
     // Remove from list
     const listIndex = this.list.findIndex((x) => x.id == trialId);
     if (listIndex > -1) {
-        this.list.splice(listIndex, 1);
-        console.log(`Removed trial with ID ${trialId} from list`);
+      this.list.splice(listIndex, 1);
+      console.log(`Removed trial with ID ${trialId} from list`);
     }
 
     // Remove from pendingTrials
     const pendingIndex = this.pendingTrials.findIndex((x) => x.id == trialId);
     if (pendingIndex > -1) {
-        this.pendingTrials.splice(pendingIndex, 1);
-        console.log(`Removed trial with ID ${trialId} from pendingTrials`);
+      this.pendingTrials.splice(pendingIndex, 1);
+      console.log(`Removed trial with ID ${trialId} from pendingTrials`);
     }
-}
+  }
 
   async updateTrailsList(data: any) {
     console.log(data);
