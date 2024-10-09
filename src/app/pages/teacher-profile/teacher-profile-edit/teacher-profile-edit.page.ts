@@ -60,7 +60,7 @@ export class TeacherProfileEditPage
   contryCode: any;
   countryId;
   stateId;
-  curruncy;
+  curruncy = '$';
   travel_policy_name;
   hideTerms = false;
   step = 1;
@@ -95,10 +95,7 @@ export class TeacherProfileEditPage
     this.user = this.users.getUser();
     console.log(this.user);
 
-    this.curruncy = '$';
-    if(this.user.teacher.country && this.user.teacher.country.currency_symbol){
-      this.curruncy = this.user.teacher.country.currency_symbol;
-    }
+
 
     let obj = {
       email: this.user.email,

@@ -1,5 +1,13 @@
 <ion-header>
-  <app-sd-header-top [showBack]="false" [title]="'States'"></app-sd-header-top>
+  <div class="top-header-78956">
+    <div class="header-left-items-78956">
+      <div class="header-title  roboto-regular ">States</div>
+    </div>
+    <div class="header-right-items-78956" (click)="back()">
+      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    </div>
+  </div>
+  <!-- <app-sd-header-top [showBack]="false" [title]="'States'"></app-sd-header-top> -->
   <ion-searchbar class="fs-16 outfit" [debounce]="500" (ionInput)="handleInput($event)"></ion-searchbar>
 </ion-header>
 

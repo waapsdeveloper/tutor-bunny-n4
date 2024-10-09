@@ -21,7 +21,7 @@ export class TeacherCourseListPage extends BasePage implements OnInit {
     this.params = this.nav.getQueryParams();
     if (this.params.user) {
       this.user = JSON.parse(this.params.user)
-      this.pageTitle = `My Courses ${this.user.name}`;
+      this.pageTitle = `Courses by ${this.user.name}`;
     }
   }
 

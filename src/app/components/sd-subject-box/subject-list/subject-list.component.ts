@@ -39,7 +39,7 @@ export class SubjectListComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   async initialize() {
-    
+
     this.search = "";
     this.page = 1;
     this.callApi();
@@ -135,7 +135,9 @@ export class SubjectListComponent implements OnInit, OnDestroy {
       this.noSugg = false;
     }
   }
-
+  back(){
+    this.modals.dismiss()
+  }
   async addToSubjects(item) {
     let user = JSON.parse(localStorage.getItem('user'));
 

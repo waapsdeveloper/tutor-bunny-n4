@@ -3,13 +3,14 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage extends BasePage implements OnInit, OnDestroy{
+export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
   chat;
   request;
@@ -32,17 +33,22 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
     super(injector);
     this.initialize();
 
-    this.activeUser =this.users.getUser();
+    this.activeUser = this.users.getUser();
     console.log(this.activeUser);
 
   }
 
   ngOnInit() {
-    this.messageReceivedViaPusher();
-
+    this.events.subscribe(
+      'message-received-via-pusher',
+      this.updateChatsByMessageReceived.bind(this)
+    );
     this.events.subscribe('update-chat-list', (data) => {
+      console.log(data);
+
       this.initialize();
     })
+
 
   }
   messageReceivedViaPusher() {
@@ -54,15 +60,19 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
   updateChatsByMessageReceived(data: any) {
     console.log(data);
+    this.chats.getchatList(this.search, 1)
+    console.log();
+
+
     this.events.publish('update-chat-lists', data)
   }
-0
+  0
   ngOnDestroy() {
-   this.user = null;
-   this.other_user_id = null;
+    this.user = null;
+    this.other_user_id = null;
   }
 
-  doSearch(event){
+  doSearch(event) {
 
     this.chats.getchatList(this.search, 1)
   }
@@ -96,6 +106,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
 
 
   async initialize() {
+    this.chats.getchatList(this.search, 1)
 
 
   }
@@ -145,7 +156,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy{
   }
 
 
-  ShowSearchBar(event){
+  ShowSearchBar(event) {
     this.isSearchBarShow = !this.isSearchBarShow;
   }
 

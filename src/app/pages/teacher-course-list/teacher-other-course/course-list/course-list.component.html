@@ -17,10 +17,9 @@
             align-items: center;
             justify-content: flex-start;
             gap: 8px;">
-              <div class="info-misc-68448 outfit ">
+              <div class="info-misc-68448 outfit " *ngIf="rating != 0">
                 <app-rating-stars [rating]="rating"></app-rating-stars>
-
-                <span class="fs-16">{{rating}} ({{total_rating}})</span>
+                {{rating}} ({{total_rating}})
               </div>
             </div>
           </div>
@@ -58,19 +57,14 @@
         </div>
         <!-- <div class="buy-now-btn-89675 outfit-medium">Subscribe</div> -->
         <div class="free-trial-btn-89675 outfit-medium"
-          *ngIf="trail == false && loading == false && status != 'Rejected' && type != 3"
+          *ngIf="trail == false && loading == false && status != 'Rejected' " (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
           (click)="requestTrail(item.id)">
           <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
         </div>
-        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false && type != 3"
-          (click)="requestTrail(item.id)">
-          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
-        </div>
-        <div class="free-trial-btn-89675 outfit-medium"
-          *ngIf="type == 3 && loading == false && trail == false && loading == false && status != 'Rejected' "
-          (click)="requestTrail(item.id)">
-          <img src="../../../../assets/svg/transfer.svg" alt="">Join
-        </div>
+
         <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
           *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
           (click)="presentAlert()">

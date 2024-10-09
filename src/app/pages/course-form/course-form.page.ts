@@ -234,7 +234,7 @@ export class CourseFormPage
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
-      this.edit = false;
+      this.edit = true;
       this.courseId = this.createCourseService.courseId;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }

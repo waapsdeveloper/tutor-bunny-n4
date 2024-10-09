@@ -66,6 +66,10 @@ export class StateListComponent  implements OnInit {
       resolve(true);
     })
   }
+
+  back(){
+    this.modals.dismiss()
+  }
   async loadMore($event) {
     this.page = this.state.current_page + 1;
     await this.callApi();

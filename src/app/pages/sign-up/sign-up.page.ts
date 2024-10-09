@@ -55,7 +55,8 @@ export class SignUpPage extends BasePage implements OnInit {
       this.utility.presentSuccessToast('the user account is registered.');
       localStorage.setItem('token', res.token);
       this.users.setUser(res.user);
-      this.formData.password = null;
+      this.modals.dismiss(res.user);
+
     }
 
   }

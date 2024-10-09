@@ -51,6 +51,7 @@ export class EventsService {
     console.log($event);
 
     this.publish('message-received-via-pusher', $event);
+
   }
 
   courseChannelReceived($event: any) {

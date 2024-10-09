@@ -17,6 +17,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   loading = false;
   googleauth;
   params: any;
+  user;
   role_Id;
   constructor(
     injector: Injector,
@@ -81,20 +82,26 @@ export class HomePage extends BasePage implements ViewWillEnter {
     console.log(res);
 
     if (res.data.step) {
-      console.log("dsfsf");
-
-      this.modals.present(SignUpPage, {
+      let res = await this.modals.present(SignUpPage, {
         role: this.params.role
-      }, "auto-height-modal", 1, [0, 1], true);
+      }, "", 0.75, [0, 0.5, 0.75, 1]);
+      if (res.data) {
 
+        let res = await this.modals.present(LoginPage, {
+          role: this.params.role
+        }, "auto-height-modal", 1, [0, 1], true);
+
+        let user = res.data;
+        this.users.setUser(user);
+        this.redirectDependsOnRole(user);
+      }
     }
-    if (res.data) {
-      let user = res.data;
+    this.user = this.users.getUser()
+    if (this.user) {
+      let user = this.user;
       this.users.setUser(user);
       this.redirectDependsOnRole(user)
     }
-
-
   }
 
   async redirectDependsOnRole(user) {
@@ -105,7 +112,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(TeacherWelcomePage, {}, "auto-height-modal", 1, [0, 1], false)
+          let res = await this.modals.present(TeacherWelcomePage, {}, "auto-height-modal", 1, [0, 1], true)
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home',
           });
