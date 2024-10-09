@@ -1,0 +1,66 @@
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
+
+@Component({
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.page.html',
+  styleUrls: ['./sign-up.page.scss'],
+})
+export class SignUpPage extends BasePage implements OnInit {
+
+  formData: any = {
+    email: null,
+    password: null,
+    name: null,
+    confirm_password: null
+  };
+
+  constructor(injector: Injector) {
+
+    super(injector)
+  }
+
+  ngOnInit() {
+  }
+
+
+  result(value, key) {
+    this.formData[key] = value;
+  }
+
+  async SignUpWithEmail() {
+    this.events.publish(
+      'teacher-profile-first-screen-submit-call',
+      this.formData
+    );
+    if (
+      !this.formData.email ||
+      !this.formData.password ||
+      !this.formData.name ||
+      !this.formData.confirm_password
+    ) {
+      return;
+    }
+    let key = localStorage.getItem('role');
+    let obj = {
+      email: this.formData.email,
+      password: this.formData.password,
+      name: this.formData.name,
+      confirm_password: this.formData.confirm_password,
+      login_type: 'email',
+      role_id: key,
+    };
+    let res = (await this.network.signUpviaEmail(obj)) as any;
+    if (res) {
+      this.utility.presentSuccessToast('the user account is registered.');
+      localStorage.setItem('token', res.token);
+      this.users.setUser(res.user);
+      this.formData.password = null;
+    }
+
+  }
+
+  back(){
+    this.modals.dismiss()
+  }
+}

@@ -225,11 +225,11 @@ export class TeacherProfileEditPage
     }
     const user = JSON.parse(localStorage.getItem('user'));
 
-    const res = await this.network.updateTeacherProfile(f, user.id);
-    if (res) {
+    // const res = await this.network.updateTeacherProfile(f, user.id);
+    // if (res) {
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
       this.step = 2;
-    }
+    // }
     this.scrollToTopOnInit();
   }
   async submit() {
@@ -295,15 +295,15 @@ export class TeacherProfileEditPage
     }
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const res = await this.network.updateTeacherProfile(f, user.id);
+    // const res = await this.network.updateTeacherProfile(f, user.id);
 
-    if (res) {
-      //   this.utility.presentSuccessToast(res.message)
-      // }
-      // this.nav.pop('/tabs/teacher-dashboard')
+    // if (res) {
+    //   //   this.utility.presentSuccessToast(res.message)
+    //   // }
+    //   // this.nav.pop('/tabs/teacher-dashboard')
       this.slides?.nativeElement.swiper.slideTo(2, false, false);
       this.step = 3;
-    }
+    // }
     this.scrollToTopOnInit();
   }
   disableIfIncomplete() {

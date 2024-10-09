@@ -56,7 +56,13 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   signUp() {
-    this.step = 'SignUp';
+
+    let obj = {
+      step : 2
+    }
+
+    this.modals.dismiss(obj);
+
   }
 
   async SignUpWithEmail() {

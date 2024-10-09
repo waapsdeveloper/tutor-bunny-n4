@@ -165,7 +165,11 @@ const routes: Routes = [
   {
     path: 'teacher-profile-complete',
     loadChildren: () => import('./pages/teacher-profile-complete/teacher-profile-complete.module').then( m => m.TeacherProfileCompletePageModule)
+  },  {
+    path: 'sign-up',
+    loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
+
 
 ];
 

@@ -5,6 +5,8 @@ import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
 import { BasePage } from '../../base-page/base-page';
 import { LoginPage } from '../login/login.page';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
+import { log } from 'node:console';
+import { SignUpPage } from '../sign-up/sign-up.page';
 
 @Component({
   selector: 'app-home',
@@ -74,13 +76,25 @@ export class HomePage extends BasePage implements ViewWillEnter {
   async gotoEmailDashboard() {
     let res = await this.modals.present(LoginPage, {
       role: this.params.role
-    }, "auto-height-modal", 1, [0,1], true);
+    }, "auto-height-modal", 1, [0, 1], true);
 
+    console.log(res);
+
+    if (res.data.step) {
+      console.log("dsfsf");
+
+      this.modals.present(SignUpPage, {
+        role: this.params.role
+      }, "auto-height-modal", 1, [0, 1], true);
+
+    }
     if (res.data) {
       let user = res.data;
       this.users.setUser(user);
       this.redirectDependsOnRole(user)
     }
+
+
   }
 
   async redirectDependsOnRole(user) {
@@ -91,7 +105,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(TeacherWelcomePage, {}, "auto-height-modal", 1, [0,1], false)
+          let res = await this.modals.present(TeacherWelcomePage, {}, "auto-height-modal", 1, [0, 1], false)
           this.nav.push('/teacher-profile/teacher-profile-edit', {
             backUrl: '/home',
           });
