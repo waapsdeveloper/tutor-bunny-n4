@@ -28,8 +28,8 @@
           </div>
           <div class="profile-line-789575">
             <img class="img1-789575" src="../../../assets/svg/p-tag.svg" />
-            <div class="label-789577 fs-20 outfit">{{item.course_user_currency_symbol}} {{item.price}}<span
-                style="font-size: 12px;">/month</span></div>
+            <div class="label-789577 fs-20 outfit">{{item.course_user_currency_symbol}}{{item.price}}<span
+                style="font-size: 12px;">/lesson</span></div>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
         <div class="ble-buttons-789576856">
           <div class="btn-alg-77">
             <img src="../../../assets/svg/student-hat.svg" />
-            <div class="label-789575 fs-16 outfit">9 Students</div>
+            <div class="label-789575 fs-16 outfit">{{item.trial_count}} Students</div>
           </div>
         </div>
         <div class="right-980676">
@@ -64,7 +64,6 @@
                     <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
                     <div class="label-789575 fs-16 outfit">Edit</div>
                   </div>
-
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="status == 'active'">
@@ -75,19 +74,19 @@
                   </div>
                 </ion-item>
               </ion-list>
-              <ion-list>
-                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
-                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
-                    <div class="label-789575 fs-16 outfit">Delete</div>
-                  </div>
-                </ion-item>
-              </ion-list>
               <ion-list *ngIf="status == 'inactive'">
                 <ion-item class="profile-line-789578" (click)="activeCourse(item)">
                   <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <img class="img1-789575" src="../../../assets/svg/active-eye.svg" />
                     <div class="label-789575 fs-16 outfit">Active</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                    <div class="label-789575 fs-16 outfit">Delete</div>
                   </div>
                 </ion-item>
               </ion-list>

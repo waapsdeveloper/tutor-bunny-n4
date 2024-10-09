@@ -16,7 +16,12 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
   }
 
   continue(){
-    this.modals.dismiss()
+
+    this.events.publish('reset-modal-dismiss', {  
+      canDismiss: true
+    })
+    this.modals.dismiss();
+    
   }
 
 }

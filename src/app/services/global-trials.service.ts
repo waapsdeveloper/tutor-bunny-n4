@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
+import { GlobalCoursesService } from './global-courses.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,21 @@ export class GlobalTrialsService {
   constructor(
     private users: UsersService,
     private network: NetworkService,
-    private events: EventsService
+    private events: EventsService,
+    private GlobalCourses : GlobalCoursesService
   ) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.user = null;
+      this.page = null;
+      this.last_page = null;
+      this.status = null;
+      this.list = null;
+      this.courseId = null;
+      this.pendingTrialPage = null;
+      this.pendingTrialLastPage = null;
+      this.pendingTrials = null;
+      this.trialChannel = null;
+    });
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -42,21 +56,57 @@ export class GlobalTrialsService {
     );
   }
 
-  trialsChannelReceived($event: any) {
-    this.events.publish('get-dashboard-stats');
+  async trialsChannelReceived($event: any) {
+    console.log($event);
+    if ($event) {
+      if ($event.slug) {
+        let trialId = $event.trial_id;
+        this.removeFromListAndPendingTrials(trialId);
+        this.GlobalCourses.getCoursesFromApi();
 
-    this.updateTrailsList($event);
+        this.events.publish('get-dashboard-stats');
+      } else {
+        let id = $event.trial_id;
+        let res = await this.network.geTrailRequestsByPusher(id);
+        console.log(res);
+        this.updateTrailsList(res.trial);
+        this.events.publish('get-dashboard-stats');
+      }
+    }
+  }
+
+  removeFromListAndPendingTrials(trialId: any) {
+    // Remove from list
+    const listIndex = this.list.findIndex((x) => x.id == trialId);
+    if (listIndex > -1) {
+      this.list.splice(listIndex, 1);
+      console.log(`Removed trial with ID ${trialId} from list`);
+    }
+
+    // Remove from pendingTrials
+    const pendingIndex = this.pendingTrials.findIndex((x) => x.id == trialId);
+    if (pendingIndex > -1) {
+      this.pendingTrials.splice(pendingIndex, 1);
+      console.log(`Removed trial with ID ${trialId} from pendingTrials`);
+    }
   }
 
   async updateTrailsList(data: any) {
+    console.log(data);
     const trialObj = Object.assign({}, data);
+    console.log(trialObj);
+
     const index = this.list.findIndex((x) => x.id == trialObj.id);
+    console.log(index);
+
     if (index != -1) {
       this.list[index] = trialObj;
     } else {
       this.list = [trialObj, ...this.list];
     }
     const indexp = this.pendingTrials.findIndex((x) => x.id == trialObj.id);
+    console.log(index);
+
     if (indexp != -1) {
       if (trialObj.status == 'Pending') {
         this.pendingTrials[indexp] = trialObj;
@@ -69,6 +119,7 @@ export class GlobalTrialsService {
       }
     }
   }
+
   getPendingTrialsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       this.user = this.users.getUser();
@@ -86,7 +137,6 @@ export class GlobalTrialsService {
       } else {
         this.pendingTrials = [...this.pendingTrials, ...data.data];
       }
-
       resolve(true);
     });
   }
@@ -97,14 +147,12 @@ export class GlobalTrialsService {
         resolve(this.pendingTrials);
         return;
       }
-
       this.user = this.users.getUser();
       let obj = {
         teacher_id: this.user.id,
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
       console.log(res);
-
       this.pendingTrials = res.trials;
     });
   }
@@ -119,6 +167,8 @@ export class GlobalTrialsService {
 
   async getTrials(search = '', page = 1) {
     return new Promise(async (resolve) => {
+      console.log('dsfsd');
+
       this.user = this.users.getUser();
 
       let obj = {
@@ -150,8 +200,12 @@ export class GlobalTrialsService {
     let res = await this.network.changeTrailStuts(obj, trialId);
     if (res.status === 200) {
       let findIndex = this.list.findIndex((x) => x.id == trialId);
+      console.log(findIndex);
+
       if (findIndex != -1) {
+        this.events.publish('update-trail-list');
         this.list[findIndex] = res.trial;
+        console.log(this.list);
       }
     }
   }

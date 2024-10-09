@@ -8,6 +8,7 @@
     <div>
       <app-request-list *ngFor="let item of chats.requests" [item]="item" [count]="count"
        ></app-request-list>
+       <div style="height: 700px; display: flex; align-items: center; justify-content: center" *ngIf="chats.requests">No requests to display</div>
     </div>
   </div>
 </ion-content>

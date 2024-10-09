@@ -18,11 +18,11 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   country;
   showWarning = false;
   utcTime
+  showFav= false;
   flag;
   isProfileComplete;
   showLiked = false;
   view = 'course';
-  // @ViewChild('content', { static: true }) content: IonContent;
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
     super(injector)
@@ -38,6 +38,11 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.getlists();
 
     });
+    this.events.subscribe('show-fav-dot', (showFav) => {
+      console.log(showFav);
+      this.showFav = showFav;
+
+    });
 
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize()
@@ -49,8 +54,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     this.globalCourses.getCoursesFromApi();
     this.globalCourses.setFavToApi();
-    this.globalTrials.registerPusherEvent()
-    this.globalCourses.registerPusherEvent()
+
   }
 
   ionViewWillEnter() {
@@ -64,7 +68,8 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async initialize() {
 
     this.user = this.users.getUser();
-    this.events.registerPusherEvent(this.user.id)
+    this.displayName = this.utility.splitName(this.user.name).first_name;
+
     let obj = {
       email: this.user.email,
     };
@@ -77,22 +82,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.flag = this.getFlag();
     }
 
-    const isProfileCompleted = await this.profiles.isProfileCompleted(this.user);
 
-    if(!isProfileCompleted){
-      let res = await this.modals.present(StudentWelcomeComponent, {} , "", 0.6)
-      console.log(res,"dfsfsdfdf");
-
-      let key = res.data.key;
-
-      if(key == 1){
-        this.nav.push('/student-profile/student-profile-edit', {
-          backUrl: '/tabs/student-dashboard',
-          showBack: true,
-        });
-      }
-
-    }
 
     this.utcTime = moment().utcOffset();
     let time = {
@@ -105,11 +95,12 @@ export class StudentDashboardPage extends BasePage implements OnInit {
       this.country = this.user.student.country.name;
     }
 
+    const isProfileCompleted = await this.profiles.isProfileCompleted(this.user) as any;
+    this.showWarning = isProfileCompleted;
 
-    this.showWarning = await this.profiles.isProfileCompleted(this.user) as any;
 
     this.events.publish('is-student-profile-completed', this.showWarning);
-    this.displayName = this.utility.splitName(this.user.name).first_name;
+
 
   }
   getFlag() {

@@ -9,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class RecTechersBoxComponent extends BasePage implements OnInit {
   list;
   teachers;
+  loading= false
 
   constructor(injector: Injector) {
     super(injector)
@@ -19,9 +20,12 @@ export class RecTechersBoxComponent extends BasePage implements OnInit {
   ngOnInit() { }
 
   async callApi() {
+    this.loading = true;
     const res = await this.network.getAllTeachers() as any [];
 
     this.list = res;
+    this.loading = false;
+
 
   }
 

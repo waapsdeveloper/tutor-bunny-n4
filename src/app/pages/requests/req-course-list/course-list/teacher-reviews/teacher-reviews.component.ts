@@ -55,14 +55,14 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
       message: this.review,
       user_id: this.user.id,
       course_id: this.item.id,
-      teacher_id: this.item.user.teacher.teacher_id,
+      teacher_id: this.item.user.id,
     };
     // return
     let res = await this.network.addReview(obj);
     if (res && res.message) {
       const message = 'Review submitted';
-      this.utility.presentSuccessToast(message);
-      this.modals.dismiss();
+      this.utility.presentSuccessToast(res.message);
+      this.modals.dismiss(res);
     }
   }
 
@@ -70,7 +70,6 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     const flag = await this.utility.presentConfirm(
       'OK',
       'Cancel',
-      'Submit Review',
       'Are you sure to submit the Review?'
     );
 

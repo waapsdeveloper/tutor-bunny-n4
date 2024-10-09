@@ -2,62 +2,91 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-teacher-profile',
   templateUrl: './teacher-profile.page.html',
   styleUrls: ['./teacher-profile.page.scss'],
 })
-export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnter {
+export class TeacherProfilePage
+  extends BasePage
+  implements OnInit, ViewWillEnter
+{
   user;
-  displayName = 'LL'
-  flag
+  displayName;
+  flag;
   showGellary = false;
   item;
   data;
   shield;
   isExpanded = false;
   country;
+  loading = false;
   city;
   email;
   language;
+  verified_on;
+  teacher;
   total_rating;
-  state
+  rating;
+  state;
+  student;
+  hourly_rate;
   travel_policy;
   subject;
+  total_course;
   images: any;
-  params
-  studentEmail
+  params;
+  studentEmail;
+  courses;
   roleId;
-  rating;
   experince;
+  updateRating;
+  updateTotalRating;
 
-  constructor(injector: Injector) {
-    super(injector)
-
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+    super(injector);
   }
 
-  ngOnInit() {
-    this.events.subscribe('get-user-after-submit-form', (data) => {
-    })
-  }
-
-  ionViewWillEnter() {
+  async ngOnInit() {
+    this.events.subscribe(
+      'rating-rec-update-by-id',
+      this.initialize.bind(this)
+    );
     this.user = this.users.getUser();
+    console.log(this.user);
+
     this.params = this.nav.getQueryParams();
     if (this.params.email) {
       this.studentEmail = this.params.email;
     }
-    this.initialize()
+    this.initialize();
+  }
+
+  getCourses(events) {
+    console.log(events);
+  }
+
+  async ionViewWillEnter() {
+    let obj = {
+      search: 'search',
+      page: 1,
+    };
+
+    const res = (await this.network.getMyCourseList(obj, this.user.id)) as any;
+    console.log(res);
+    this.total_course = res.result.total;
   }
 
   async initialize() {
+    this.loading = true;
     this.roleId = localStorage.getItem('role');
 
-    if (this.roleId == 3) {
+    if (this.roleId == '3') {
       this.email = this.user.email;
-    }
-    else {
+    } else {
       this.email = this.studentEmail;
     }
     let obj = {
@@ -66,41 +95,78 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
     let res = await this.network.getUserByEmail(obj);
     console.log(res);
 
-    if (res) {
-      this.users.setUser(res.user);
-      this.user = this.users.getUser();
-      this.flag = this.getFlag()
+    if (this.roleId == '3') {
+      console.log(this.roleId);
+
+      if (res) {
+        this.users.setUser(res.user);
+        this.user = this.users.getUser();
+        this.flag = this.getFlag();
+        this.displayName = this.utility.getAmericanName(this.user.name);
+        this.country = this.user.teacher.country.name;
+        this.state = this.user.teacher.state.name;
+        this.hourly_rate = this.user.teacher.hourly_rate;
+        this.city = this.user.teacher.city;
+        const verified_on = this.user.verified_on;
+        this.verified_on = moment(verified_on).format('DD/MM/YY');
+        console.log('====================================');
+        console.log(verified_on);
+        console.log('====================================');
+        this.language = this.user.teacher.languages;
+        this.total_rating = this.user.teacher.total_rating;
+        this.rating = this.user.teacher.avg_rating;
+        this.travel_policy = this.user.teacher.travel_policy.name;
+        this.subject = this.user.teacher.subjects;
+        this.experince = this.user.teacher.started_teaching;
+        const user = this.users.getUser();
+        const data = (await this.network.getImage(user.id)) as any;
+        this.images = data.result;
+        if (this.images.length != 0) {
+          this.showGellary = true;
+        }
+      }
+    } else {
+      console.log(this.roleId, 'dsffs');
+      this.user = res.user;
+      localStorage.setItem('teacher', JSON.stringify(this.user));
+      this.flag = this.getFlag();
+      const verified_on = this.user.verified_on;
+      this.verified_on = moment(verified_on).format('DD/MMM/YY');
+      console.log('====================================');
+      console.log(verified_on);
+      console.log('====================================');
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
-      this.travel_policy = this.user.teacher.travel_policy.name;
       this.city = this.user.teacher.city;
+      this.hourly_rate = this.user.teacher.hourly_rate;
+
+      this.travel_policy = this.user.teacher.travel_policy.name;
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
-      this.rating = this.user.teacher.avg_rating
+      this.rating = this.user.teacher.avg_rating;
       this.subject = this.user.teacher.subjects;
       this.experince = this.user.teacher.started_teaching;
       const user = this.users.getUser();
-      const data = await this.network.getImage(user.id) as any;
+      const data = (await this.network.getImage(user.id)) as any;
       this.images = data.result;
       if (this.images.length != 0) {
         this.showGellary = true;
       }
     }
-
-    // if (this.data.status == 'approved') {
-    //   this.shield = true;
-    // }
+    this.loading = false;
   }
-
 
   openEditProfile() {
     this.nav.push('/teacher-profile/teacher-profile-edit', {
-      backUrl: '/tabs/teacher-profile?user_id=' + this.user.id, showBack: true, title: 'Edit Profile'
-    })
+      backUrl: '/tabs/teacher-profile?user_id=' + this.user.id,
+      showBack: true,
+      title: 'Edit Profile',
+    });
   }
-  back(){
-    this.nav.pop()
+
+  back() {
+    this.nav.pop();
   }
 
   getFlag() {
@@ -109,22 +175,42 @@ export class TeacherProfilePage extends BasePage implements OnInit, ViewWillEnte
       if (flag) {
         return flag.toLowerCase();
       } else {
-        return ""
+        return '';
       }
     } else {
-      return ""
+      return '';
     }
   }
-
 
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
   }
 
   openQulification() {
-    let user = this.user
+    let user = this.user;
 
-    this.modals.present(TeacherQualificationComponent, {user})
+    this.modals.present(TeacherQualificationComponent, { user });
   }
 
+  async goToChat() {
+    this.teacher = JSON.parse(localStorage.getItem('teacher'));
+    console.log(this.teacher);
+
+    this.student = this.users.getUser();
+    let id = this.user.id;
+    let obj = {
+      user_id_1: this.student.id,
+      user_id_2: this.teacher.id,
+    };
+    console.log(obj);
+    // return
+    let res = await this.network.getChadRoomId(obj);
+    let params = {
+      student_id: id,
+      other_user_id: this.teacher.id,
+      user: JSON.stringify(this.teacher),
+      chat_room_id: res.chat_room.id,
+    };
+    this.nav.push('/chat', params);
+  }
 }

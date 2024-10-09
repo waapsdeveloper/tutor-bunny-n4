@@ -13,7 +13,7 @@
       <div class="content-box-outer">
         <div class="content-box-outer-heading-top">
           <div class="title-heading-789 outfit-semibold">
-            {{item.student.name| names}}
+            {{displayName| names}}
           </div>
           <div class="pnd-678956" *ngIf="item.status != 'Rejected'">
             <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />

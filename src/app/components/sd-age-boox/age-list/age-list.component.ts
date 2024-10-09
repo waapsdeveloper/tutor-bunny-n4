@@ -34,4 +34,9 @@ export class AgeListComponent  implements OnInit {
     this.modals.dismiss(item);
   }
 
+  back(){
+    this.modals.dismiss()
+  }
+
+
 }

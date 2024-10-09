@@ -153,6 +153,9 @@ export class CourseFormPage
     if (f.mode_type.length == 0) {
       return;
     }
+    if (f.description.length <= 250) {
+      return;
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
@@ -231,7 +234,7 @@ export class CourseFormPage
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
-      this.edit = true;
+      this.edit = false;
       this.courseId = this.createCourseService.courseId;
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
     }
@@ -241,7 +244,7 @@ export class CourseFormPage
   openCoursePhotos() {
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',
-      gallary: 'true',
+    gallary: 'true',
       title: 'Upload Course photos',
     });
   }

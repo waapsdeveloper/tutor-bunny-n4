@@ -9,7 +9,6 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['./course-detail.page.scss'],
 })
 export class CourseDetailPage extends BasePage implements OnInit {
-
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   data;
@@ -19,15 +18,19 @@ export class CourseDetailPage extends BasePage implements OnInit {
   capacity;
   description;
   currencySymbol;
+  loading = false;
   duration;
   isExpanded = false;
   title;
   type;
   serial_number;
   mode_type;
+  rating;
   created_at;
   price;
   startTime;
+  country;
+  state;
   flag;
   displayName;
   image;
@@ -36,6 +39,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   language;
   to_age;
   updated_at;
+  total_rating;
   lessons;
   schedules: any[] = [];
   startDate;
@@ -73,7 +77,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
         : this.courseImages.length - 1;
   }
 
-  // Method to show the next image
   nextImage() {
     this.currentIndex =
       this.currentIndex < this.courseImages.length - 1
@@ -82,6 +85,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   async callApi() {
+    this.loading = true;
     this.user = this.users.getUser();
     let res = (await this.network.getcourseById(this.course_Id)) as any;
 
@@ -98,7 +102,11 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
     this.lessons = this.data.lesson;
+    this.country = this.data.user.teacher.country.name;
+    this.state = this.data.user.teacher.state.name;
     this.image = this.data.image;
+    this.rating = this.data.user.teacher.avg_rating;
+    this.total_rating = this.data.user.teacher.total_rating;
     this.price = this.data.price;
     this.type = this.data.type;
     this.schedules = this.data.schedules;
@@ -106,6 +114,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.currencySymbol = this.data.auth_user_currency_symbol;
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
+    this.loading = false;
 
     const startDate = this.data.start_date;
     this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
@@ -123,6 +132,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
+
   }
 
   formatDescription(description: string): string {
@@ -178,7 +188,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.callApi();
 
     this.content.scrollToTop(500); // 500ms animation duration
-
 
     // console.log(event)
     // // this.callApi();

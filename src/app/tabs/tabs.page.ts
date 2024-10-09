@@ -9,6 +9,8 @@ import { GlobalTrialsService } from '../services/global-trials.service';
 import * as moment from 'moment';
 import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
+import { TeacherService } from '../services/teacher.service';
+import { StudentWelcomeComponent } from '../pages/student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-tabs',
@@ -16,64 +18,83 @@ import { NotificationsService } from '../services/notifications.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage extends BasePage implements OnInit {
-
   @ViewChild('tabs', { static: false }) tabs: IonTabs;
   selectedTab = '';
   loading = false;
   user: any;
-
+  showUser;
   showTabs = true;
   roleId;
-  showHome = true;
-  showChat = false;
-  showSearch = false;
-  showCourses = false;
-  showMore = false;
 
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     public createCourseService: CreateCourseService,
     public chatService: ChatService,
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public notificationService: NotificationsService
+    public notificationService: NotificationsService,
+    public teacher: TeacherService
   ) {
-    super(injector)
+    super(injector);
 
     // this.chatService.getchatList()
-
   }
 
   ionViewWillEnter() {
+  }
+
+  async updateChatsByMessageReceived(data: any) {
+
+    await this.chatService.getUnreadMsgCount();
+    // this.chatService.getchatList();
+    this.chatService.updadteChatList(data);
+    console.log("fdsf");
 
   }
 
-  ngOnInit() {
-    this.initialize()
 
-  //   // this.events.subscribe('page-scroll-event-end', this.pageScrollConditionEnd.bind(this))
+  async ngOnInit() {
+    this.initialize();
+    this.showUser = this.returnDashboardLink();
+    this.events.subscribe('update-trail-list', () => {
+      this.globalTrials.getPendingTrialsFromApi();
+      this.globalCourses.getCoursesFromApi();
+    });
+
+    this.events.subscribe(
+      'message-received-via-pusher',
+      this.updateChatsByMessageReceived.bind(this)
+    );
+
+    this.events.subscribe('clear-all-services-data', () => {
+      this.selectedTab = null;
+      this.loading = null;
+      this.user = null;
+      this.showUser = null;
+      this.showTabs = null;
+      this.roleId = null;
+    });
   }
 
   setCurrentTab() {
     this.selectedTab = this.tabs.getSelected();
-    console.log(this.selectedTab)
+    console.log(this.selectedTab);
   }
 
   async initialize() {
-
     this.loading = true;
 
     this.loadResolvers();
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
     this.events.registerPusherEvent(this.user.id);
+    this.teacher.registerPusherEvent(this.user.id);
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
     await this.chatService.getchatList();
     await this.notificationService.getNotificationsFromApi();
     this.fcm.setTokenToServer();
-
-
 
     const utcTime = moment().utcOffset();
     let time = {
@@ -85,37 +106,65 @@ export class TabsPage extends BasePage implements OnInit {
     this.globalTrials.getPendingTrialsFromApi();
     this.globalCourses.getCoursesFromApi();
 
-    this.loading = false;
-
+    setTimeout(async () => {
+      this.loading = false;
+    }, 3000);
+    if (this.user.role_id == 2) {
+      const isProfileCompleted = (await this.profiles.isProfileCompleted(
+        this.user
+      )) as any;
+      if (!isProfileCompleted) {
+        this.checkProfileCompleteOfStudent();
+      }
+    }
   }
 
+  async checkProfileCompleteOfStudent() {
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
+    let key = res.data.key;
+
+    if (key == 1) {
+      this.nav.push('/student-profile/student-profile-edit', {
+        showBack: true,
+      });
+    }
+  }
 
   goToChat() {
-
     let params = {
       student_id: null,
       other_user_id: null,
       user: null,
-      chat_room_id: null
+      chat_room_id: null,
     };
 
     // Navigate to the chat page without any parameters
     this.nav.push('/tabs/chat', params);
   }
 
-
   async createCourse() {
-    let res = await this.modals.present(CreateCoursePage, {}, "", 0.75)
+    let res = await this.modals.present(CreateCoursePage, {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      true);
 
     if (res.data.title) {
-      this.createCourseService.resetFormData()
+      this.createCourseService.resetFormData();
       const params = {
         backUrl: '/tabs/teacher-dashboard',
-        title: res.data.title,
+        title: 'Create',
         type: res.data.type,
       };
 
-      this.nav.push('/course-form', params)
+      this.nav.push('/course-form', params);
     }
   }
 
@@ -127,21 +176,18 @@ export class TabsPage extends BasePage implements OnInit {
     if (!this.user.role_id) {
       return '';
     }
+    // console.log(this.user);
 
     const roleId = parseInt(this.user.role_id);
 
     if (roleId == 2) {
-      return 'student-dashboard'
+      return 'student-dashboard';
     }
 
     if (roleId == 3) {
-      return 'teacher-dashboard'
+      return 'teacher-dashboard';
     }
 
-    return ''
-
+    return '';
   }
-
-
-
 }

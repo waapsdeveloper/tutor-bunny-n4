@@ -8,12 +8,13 @@
 
     display: flex;
     align-items: flex-start;
+
     justify-content: flex-start;
     gap: 16px;
     .teacher-review-image-78523 {
 
-      height: 70px;
-      width: 70px;
+      height: 100px;
+      width: 100px;
       border-radius: 8px;
       background-color: aliceblue;
       background-size: cover;
@@ -24,6 +25,7 @@
 
       display: flex;
       align-items: flex-start;
+      width: 70%;
       flex-direction: column;
       gap: 16px;
 
@@ -62,7 +64,7 @@
         .teacher-review-teacher-name-78529 {
 
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 400;
           color: black;
 
         }

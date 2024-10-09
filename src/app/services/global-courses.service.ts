@@ -25,6 +25,15 @@ export class GlobalCoursesService {
   otherExceptCourseId = 0;
 
   constructor(private network: NetworkService, private events: EventsService) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.otherCoursesPage = null;
+      this.otherCoursesLastPage = null;
+      this.otherCourses = null;
+      this.courses = null;
+      this.CourseChannel = null;
+      this.otherCourseUserId = null;
+      this.otherExceptCourseId = null;
+    });
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -66,29 +75,22 @@ export class GlobalCoursesService {
     }
   }
 
-  setFavCourseUpdateLogic(course){
-
+  setFavCourseUpdateLogic(course) {
     let courseId = course.id;
-    let findIndex = this.favorites.findIndex( x => x.id == courseId);
+    let findIndex = this.favorites.findIndex((x) => x.id == courseId);
 
     let isLikedByMe = course.is_liked_by_me;
-    if(findIndex != -1){
-
-      if(isLikedByMe){
+    if (findIndex != -1) {
+      if (isLikedByMe) {
         this.favorites[findIndex] = course;
       } else {
         this.favorites.splice(findIndex, 1);
       }
-
     } else {
-
-      if(isLikedByMe){
+      if (isLikedByMe) {
         this.favorites.push(course);
       }
-
     }
-
-
   }
 
   setOtherCourseUpdateLOgic(course: any) {
@@ -126,6 +128,8 @@ export class GlobalCoursesService {
       };
       const res = (await this.network.getAllCourses(obj)) as any;
       const data = res.result;
+      console.log(data);
+
       this.page = data.current_page;
       this.last_page = data.last_page;
       if (page === 1) {
@@ -133,6 +137,7 @@ export class GlobalCoursesService {
       } else {
         this.courses = [...this.courses, ...data.data];
       }
+      console.log(this.courses);
 
       resolve(this.courses);
     });
@@ -188,7 +193,6 @@ export class GlobalCoursesService {
     return new Promise(async (resolve) => {
       let res = (await this.network.getcourseById(id)) as any;
       const c = res.course;
-      this.courses.push(c);
       resolve(c);
     });
   }
@@ -274,6 +278,9 @@ export class GlobalCoursesService {
   }
 
   async addFavorites(obj: any, user) {
+    console.log('====================================');
+    console.log(obj);
+    console.log('====================================');
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);

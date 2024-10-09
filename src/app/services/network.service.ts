@@ -120,6 +120,11 @@ export class NetworkService {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
 
+  getTeacherCourses(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('courses/course-list-by-teacher-id' + '?' + str, null, false, false);
+  }
+
   searchFromKeywords(data: any) {
     return this.httpPostResponse('courses/special-filter', data, null, false, false);
   }
@@ -155,8 +160,12 @@ export class NetworkService {
   getAllFavCourses(data: any) {
     return this.httpPostResponse('courses/fav-list', data, null, false, false);
   }
-  getAllReqCourses(id: any) {
-    return this.httpPostResponse('get-requested/course/trials/' + id, null, false, false);
+  getAllReqCourses(id: any, ) {
+    return this.httpGetResponse('requested/course/trials/' + id, null, false, false);
+  }
+
+  deleteCouseImage(data: any) {
+    return this.httpPostResponse('course/image/null', data, false, false);
   }
 
   geTrailRequests(data, id) {
@@ -213,7 +222,7 @@ export class NetworkService {
   }
 
   deleteCourseImage(id){
-    return this.httpDeleteResponse('course/image/delete/' + id, true)
+    return this.httpDeleteResponse('course/image/delete/' + id, false)
 
   }
 
@@ -226,9 +235,9 @@ export class NetworkService {
     return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
   }
 
-  getMyCourseList(data: any) {
+  getMyCourseList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/my-course-list' + '?' + str, null, false, false);
+    return this.httpGetResponse('courses/my-course-list/'+ id + '?' + str, null, false, false);
   }
 
   getOtherCourseList(data: any) {
@@ -336,6 +345,12 @@ export class NetworkService {
   AddSchedule(data) {
     return this.httpPostResponse('schedule/add', data, null, false, true);
   }
+
+
+  checkReview(data) {
+    return this.httpPostResponse('check-review', data, null, false, true);
+  }
+
   inactiveCourse(data) {
     return this.httpPostResponse('courses/de-activate-course-by-id', data, null, false, false);
   }

@@ -17,7 +17,7 @@ import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 })
 export class TrailListComponent extends BasePage implements OnInit {
   private _item: any;
-
+  displayName
   @Input('item')
   public get item() {
     return this._item;
@@ -26,7 +26,7 @@ export class TrailListComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     console.log(value);
-
+    this.displayName = this.utility.getAmericanName(value.teacher.name);
   }
   flag;
   age;
@@ -53,22 +53,33 @@ export class TrailListComponent extends BasePage implements OnInit {
 
   async presentAlert(item: string) {
     let alertHeader: string;
+
+    let title = '';
     switch (item) {
       case 'Accepted':
         alertHeader =
-          'Accepting the Trial request will deduct 1 credit Are you sure to accept the request?';
+          'Accepting the request will deduct 1 credit from your account.';
+        title = 'Are you sure to Accept the request?';
         break;
       case 'Rejected':
-        alertHeader = 'Are you sure to Reject this trial?';
+
+        title = 'Are you sure to Reject the request?';
+
         break;
       case 'Blocked':
-        alertHeader = 'Are you sure to Block this trial?';
+
+        title = 'Are you sure to Block the request?';
+
         break;
       case 'Unblock':
-        alertHeader = 'Are you sure to Unblock this trial?';
+
+        title = 'Are you sure to Unblock the request?';
+
         break;
       case 'Complete':
-        alertHeader = 'Are you sure to Complete this trial?';
+
+        title = 'Are you sure to Complete the request?';
+
         break;
       default:
         return;
@@ -76,7 +87,7 @@ export class TrailListComponent extends BasePage implements OnInit {
     let flag = await this.utility.presentConfirm(
       'Yes',
       'Cancel',
-      item,
+      title,
       alertHeader
     );
     if (flag) {
@@ -92,6 +103,8 @@ export class TrailListComponent extends BasePage implements OnInit {
     this.age = currentYear - this.item.student.student.dob;
   }
   getFlag() {
+    console.log(this.item);
+
     if (
       this.item &&
       this.item.student &&

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController, Animation, AnimationController } from '@ionic/angular';
+import { EventsService } from '../events.service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,8 @@ import { ModalController, Animation, AnimationController } from '@ionic/angular'
 export class ModalService {
   constructor(
     public modal: ModalController,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private events: EventsService
   ) {}
 
   private enterFromLeftAnimation(baseEl: HTMLElement): Animation {
@@ -38,6 +40,9 @@ export class ModalService {
     data = {},
     cssClass = '',
     initialBreakpoint = 1,
+    breakpoints = [0, 0.25, 0.5, 0.75, 1],
+    canDismiss = true,
+    
     animationType?: string
   ): Promise<any> {
     return new Promise(async (resolve) => {
@@ -46,7 +51,9 @@ export class ModalService {
         cssClass,
         componentProps: data,
         initialBreakpoint: initialBreakpoint,
-        breakpoints: [0, 0.25, 0.5, 0.75, 1],
+        canDismiss: canDismiss,
+        breakpoints: breakpoints,
+        handle: false
       };
 
       if (animationType === 'right-to-left') {
@@ -54,6 +61,12 @@ export class ModalService {
       }
 
       const modal = await this.modal.create(modalOptions);
+      
+      this.events.subscribe('reset-modal-dismiss', (data) => {
+        modal.canDismiss = true;
+      }, true)
+
+
       modal.onDidDismiss().then((res) => {
         resolve(res);
       });

@@ -10,12 +10,19 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 export class TeacherCourseListPage extends BasePage implements OnInit {
 
   pageTitle = 'Courses by'
+  params
+  user
 
   constructor(injector:Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
    }
 
   ngOnInit() {
+    this.params = this.nav.getQueryParams();
+    if (this.params.user) {
+      this.user = JSON.parse(this.params.user)
+      this.pageTitle = `My Courses ${this.user.name}`;
+    }
   }
 
 

@@ -104,6 +104,8 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
 
     this.modals.dismiss(item);
   }
-
+  back(){
+    this.modals.dismiss()
+  }
 
 }

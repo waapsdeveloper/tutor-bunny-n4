@@ -17,20 +17,118 @@ export class SdInputBoxComponent implements OnInit {
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
   isRequired = false;
-  @Input() image = ''
+  @Input() image = '';
   showPassword = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('showTogglePassword') showTogglePassword = false;
   togglePassword = true;
 
-  constructor(private events: EventsService) { }
+  constructor(private events: EventsService) {}
 
   ngOnInit() {
-    this.events.subscribe('teacher-profile-second-screen-submit-call', (formData: any) => {
+    this.events.subscribe(
+      'teacher-profile-second-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        console.log(v);
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
 
+        if (v && v.length < 50 && this.key == 'title') {
+          this.isRequired = true;
+          this.errorText = 'The title field should have minimum 50 characters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
 
-      let v = formData[this.key];
-      if(v == 'title'){
+    this.events.subscribe(
+      'teacher-profile-first-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        console.log(v);
+
+        if(this.key == 'title' || this.key == 'hourly_rate'){
+          return;
+        }
+
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'student-profile-first-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'teacher-course-first-screen-submit-call',
+      (formData: any) => {
+        if (
+          this.key == 'price' ||
+          this.key == 'duration' ||
+          this.key == 'lesson'
+        ) {
+          return;
+        }
+
+        let v = formData[this.key];
+
+        if (v && this.key == 'title' && v.length > 50) {
+          this.isRequired = true;
+          this.errorText = 'The title field must be maximum 50 charecters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+
+          return;
+        }
+
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'teacher-course-second-screen-submit-call',
+      (formData: any) => {
+        if (
+          this.key != 'price' &&
+          this.key != 'duration' &&
+          this.key != 'lesson'
+        ) {
+          return;
+        }
+
+        let v = formData[this.key];
 
         if (!v || v == '') {
           this.isRequired = true;
@@ -39,95 +137,30 @@ export class SdInputBoxComponent implements OnInit {
           }, 5000);
         }
       }
-      if (v && v.length < 50) {
-        this.isRequired = true;
-        this.errorText = 'The title field should have minimum 50 characters'
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false);
+    );
 
-    this.events.subscribe('student-profile-first-screen-submit-call', (formData: any) => {
+    this.events.subscribe(
+      'teacher-profile-third-screen-submit-call',
+      (formData: any) => {
+        if (this.key != 'hourly_rate') {
+          return;
+        }
 
-      let v = formData[this.key];
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false);
+        let v = formData[this.key];
 
-    this.events.subscribe('teacher-course-first-screen-submit-call', (formData: any) => {
-
-      if (this.key == 'price' || this.key == 'duration' || this.key == 'lesson') {
-        return;
-      }
-
-      let v = formData[this.key];
-
-
-
-      if (v && this.key == 'title' && v.length > 50) {
-
-        this.isRequired = true;
-        this.errorText = 'The title field must be maximum 50 charecters'
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-
-        return;
-      }
-
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-
-    }, false);
-
-
-    this.events.subscribe('teacher-course-second-screen-submit-call', (formData: any) => {
-
-      if (this.key != 'price' && this.key != 'duration' && this.key != 'lesson') {
-        return;
-      }
-
-      let v = formData[this.key];
-
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    })
-
-    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
-
-      if (this.key != 'hourly_rate') {
-        return;
-      }
-
-      let v = formData[this.key];
-
-      if (!v || v == '') {
-        this.isRequired = true;
-        setTimeout(() => {
-          this.isRequired = false;
-        }, 5000);
-      }
-    }, false)
-
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
   }
 
   showPasword(key) {
-
     this.showPassword = key;
-
   }
   result($event) {
     let v = $event.target.value;
@@ -172,14 +205,12 @@ export class SdInputBoxComponent implements OnInit {
     // }
 
     // this.result(obj);
-
   }
 
   modelChange($event) {
     let v = $event;
-    this.onChange.emit(v)
+    this.onChange.emit(v);
   }
-
 
   clearInput() {
     this.inputText = '';
@@ -188,6 +219,6 @@ export class SdInputBoxComponent implements OnInit {
 
   toggleShowPasword(flag) {
     this.togglePassword = !this.togglePassword;
-    this.type = this.togglePassword ? 'password' : 'text'
+    this.type = this.togglePassword ? 'password' : 'text';
   }
 }

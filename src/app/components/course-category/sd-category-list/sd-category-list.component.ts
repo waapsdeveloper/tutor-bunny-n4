@@ -33,6 +33,10 @@ export class SdCategoryListComponent extends BasePage implements OnInit {
     return this.list.filter(x => x.checked == true).length > 0;
   }
 
+  back(){
+    this.modals.dismiss()
+  }
+
 
   selectedCategory() {
     let item = this.list.find(x => x.id === this.selectedItemId);

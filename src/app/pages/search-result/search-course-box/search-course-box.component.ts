@@ -27,6 +27,8 @@ export class SearchCourseBoxComponent extends BasePage implements OnInit {
   }
 
   async callApi(value) {
+    console.log(value);
+
     let obj = {
       search: value,
       page: 1,

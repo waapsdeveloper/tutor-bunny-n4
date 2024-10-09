@@ -12,16 +12,41 @@ export class ChatService {
   role_id: any;
   chats;
   count;
-  unreadCount: string = '';
+  unreadCount = 0;
   requests;
   requestCount;
+  review_course = {
+    user_id: null,
+    course_id: null,
+  };
   days;
 
   constructor(
     private users: UsersService,
     private network: NetworkService,
     private events: EventsService
-  ) {}
+  ) {
+    this.events.subscribe('clear-all-services-data', () => {
+      this.user = null;
+      this.role_id = null;
+      this.chats = null;
+      this.count = null;
+      this.unreadCount = 0;
+      this.requests = null;
+      this.requestCount = null;
+      this.days = null;
+    });
+    this.events.subscribe('clear-chat-data', () => {
+      this.days = null;
+      console.log('sfsfsd', this.days);
+    });
+  }
+
+  reviewCoursebyChat(data) {
+    console.log(data);
+    this.review_course.course_id = data.course_id;
+    this.review_course.user_id = data.user_id;
+  }
 
   getchatList(search = '', page = 1, liked = false) {
     return new Promise(async (resolve) => {
@@ -33,37 +58,29 @@ export class ChatService {
         liked: liked,
       };
       let res = await this.network.getMessagesRoom(this.user.id, obj);
-      this.chats = res.data;
-      console.log(this.chats);
-
-      this.unreadCount = this.getUnreadMsgCount()
-      console.log(this.unreadCount);
-
-
-
-
-      let data = await this.network.getRequsetCount(this.user.id);
-      this.count = data.message.pending_count;
-
-
-
-
+      if (res) {
+        this.chats = res.data;
+        console.log(this.chats);
+        this.unreadCount = this.getUnreadMsgCount() as number;
+        console.log(this.unreadCount);
+        let data = await this.network.getRequsetCount(this.user.id);
+        this.count = data.message.pending_count;
+      }
       resolve(this.chats);
       return;
     });
   }
 
-  getUnreadMsgCount(): string {
-
-    if(this.chats.length == 0){
-      return '';
+  getUnreadMsgCount(): number {
+    if (this.chats.length == 0) {
+      return 0;
     }
 
-    let count = this.chats.reduce( ( prev, next) => {
-      return prev + parseInt(next.unread_count)
+    let count = this.chats.reduce((prev, next) => {
+      return prev + parseInt(next.unread_count);
     }, 0);
 
-    return `${count}`;
+    return count;
   }
 
   getChatRequsts() {
@@ -97,4 +114,23 @@ export class ChatService {
       resolve;
     });
   }
+
+  updadteChatList(data) {
+    let id = data.chat_room_id;
+    console.log('Incoming user ID:', id, this.chats, data);
+    console.log(id, this.chats[0].chat_room_id);
+
+    let chatIndex = this.chats.findIndex(chat => chat.chat_room_id === id);
+    if (chatIndex !== -1) {
+      console.log('Chat found, updating...');
+      this.chats[chatIndex] = {
+        ...this.chats[chatIndex],
+        ...data,
+      };
+      console.log('Updated chat:', this.chats[chatIndex]);
+    } else {
+      console.log('No chat found for the given user ID');
+    }
+  }
+
 }

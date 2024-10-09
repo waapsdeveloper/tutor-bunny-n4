@@ -11,24 +11,39 @@ export class NotificationsPage extends BasePage implements OnInit {
   user;
   params: any;
   notifications;
+  loading = false;
 
-  constructor(injector: Injector, public notificationService: NotificationsService) {
-    super(injector)
-
-    this.events.subscribe('dashboard:notificationReceived', this.initialize())
+  constructor(
+    injector: Injector,
+    public notificationService: NotificationsService
+  ) {
+    super(injector);
   }
 
-
   ngOnInit() {
-    this.notificationService.getAllNotifications()
-    // this.user = this.users.getUser()
-    // this.initialize();
+    let shownoti = false;
+    this.events.publish('show-fav-dot', shownoti);
+    this.initialize();
+    this.notificationService.getAllNotifications();
   }
 
   async initialize() {
-    let userId = this.user.id;
-    let res = await this.network.getNotifications(userId);
-    this.notifications = res.result;
+    this.loadResolvers();
   }
 
+  async loadMore($event) {
+    if (this.loading == true) {
+      return;
+    }
+    this.loading = true;
+    await this.notificationService.loadMoreNotifications();
+    this.loading = false;
+    $event.target.complete();
+  }
+
+  reloadLIst(event) {
+    this.initialize();
+
+    this.notificationService.getNotificationsFromApi();
+  }
 }

@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-
+import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-course-list',
@@ -24,8 +24,10 @@ export class CourseListComponent extends BasePage implements OnInit {
   user;
   courseId;
   status;
+  rating;
   type;
   blocked;
+  total_rating;
   loading = false;
   trail = false;
   languageName: any;
@@ -37,7 +39,9 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-
+    console.log(value);
+    this.rating = value.user.teacher.avg_rating;
+    this.total_rating = value.user.teacher.total_rating;
     this.initialize(value);
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.flag = this.getFlag();
@@ -95,8 +99,6 @@ export class CourseListComponent extends BasePage implements OnInit {
       backUrl: '/tabs/student-dashboard',
     };
     this.nav.push('student-course-detail', params);
-
-    // this.onChange.emit(res);
   }
 
   async requestTrail(id) {
@@ -119,10 +121,21 @@ export class CourseListComponent extends BasePage implements OnInit {
         return;
       }
     } else {
-      this.nav.push('/student-profile/student-profile-edit', {
-        backUrl: '/tabs/student-dashboard',
-        showBack: true,
-      });
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
     }
   }
 
@@ -146,6 +159,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addToFav() {
+    let showFav = true;
+    this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
 
     this.item.is_liked_by_me = true;
@@ -166,23 +181,20 @@ export class CourseListComponent extends BasePage implements OnInit {
   handleOkClick() {
     this.trail = false;
   }
+
   async goToChat(data) {
     let id = this.user.id;
-
     let obj = {
       user_id_1: this.user.id,
       user_id_2: data.user.id,
     };
-
     let res = await this.network.getChadRoomId(obj);
-
     let params = {
       student_id: id,
       other_user_id: data.user.id,
       user: JSON.stringify(data.user),
       chat_room_id: res.chat_room.id,
     };
-
     this.nav.push('/tabs/chat', params);
   }
 }

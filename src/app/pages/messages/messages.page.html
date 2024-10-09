@@ -21,7 +21,11 @@
     </div>
   </div>
 </ion-header>
-<ion-content #content class="ion-content-bg ion-padding">
+
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+<ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <div class="body-content" *ngFor="let item of chats.days">
     <div class="chat-day-heading-85621" *ngIf="item.date">
       <div style="
@@ -41,15 +45,8 @@
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
         (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)" [ngModel]="emptyValue">
       </textarea>
-      <img src="../../assets/svg/sent.svg" *ngIf="message" alt="" (click)="sendMessage()">
-      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="">
-
+      <img src="../../assets/svg/sent.svg" class="send-btn" *ngIf="message" alt="" (click)="sendMessage()" >
+      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="" class="send-btn" style="opacity: 50%;">
     </div>
-    <!-- <div class="send-box-78522" *ngIf="message">
-      <img src="../../assets/svg/sent.svg" alt="" (click)="sendMessage()">
-    </div>
-    <div class="send-box-78522" *ngIf="!message">
-      <img src="../../assets/svg/sent-2.svg" alt="">
-    </div> -->
   </div>
 </ion-footer>

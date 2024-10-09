@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./requests.page.scss'],
 })
 export class RequestsPage implements OnInit {
+  pageTitle = 'My Requests'
 
   constructor() { }
 
@@ -13,5 +14,10 @@ export class RequestsPage implements OnInit {
   }
 
   // /get-requested/course/trials/{student_id}
+
+  getTotalNumver(event){
+    console.log(event);
+    this.pageTitle = `My Requests (${event})`;
+  }
 
 }

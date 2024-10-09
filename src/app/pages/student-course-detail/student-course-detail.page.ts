@@ -1,8 +1,9 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from '../../base-page/base-page';
 import { TrailMessageComponent } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { GlobalCoursesService } from '../../services/global-courses.service';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -11,16 +12,23 @@ import { GlobalCoursesService } from '../../services/global-courses.service';
 })
 export class StudentCourseDetailPage extends BasePage {
   // implements OnInit
+
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+
   data;
   params;
   backUrl;
   displayName;
   course_Id;
   lessons;
+  btn_loading = false;
+  teacher;
   currencySymbol;
   techerTitle;
   language;
+  spinner = false;
   capacity;
+  rating;
   techerImg;
   loading = false;
   description;
@@ -42,7 +50,8 @@ export class StudentCourseDetailPage extends BasePage {
   type;
   endTime;
   updated_at;
-  schedules;
+  schedules: any[] = [];
+  total_rating;
   acheduleTime;
   startDate;
   showFavValue = false;
@@ -59,16 +68,22 @@ export class StudentCourseDetailPage extends BasePage {
     if (this.params.id) {
       this.course_Id = this.params.id;
     }
+    this.spinner = true;
 
     this.callApi();
+
     setTimeout(() => {
       this.isTrailReq();
     }, 200);
   }
 
   async callApi() {
+
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
+    console.log(res);
+
     this.data = res;
+    this.teacher = res.user;
     this.events.publish('data-for-other-corses', this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
@@ -88,6 +103,8 @@ export class StudentCourseDetailPage extends BasePage {
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title;
     this.image = this.data.image;
+    this.rating = this.data.user.teacher.avg_rating;
+    this.total_rating = this.data.user.teacher.total_rating;
     this.techerImg = this.data.user.image;
     this.country = this.data.user.teacher.country.name;
     this.state = this.data.user.teacher.state.name;
@@ -99,14 +116,22 @@ export class StudentCourseDetailPage extends BasePage {
     this.startTime = moment(startTime).format('hh:mm a');
     this.endTime = moment(endTime).format('hh:mm a');
     this.showFavValue = this.data.is_liked_by_me;
-    const startDate = this.data.start_date;
+    if (this.data.start_date) {
+      const startDate = this.data.start_date;
+      this.startDate = moment(startDate).format('DD-MM-Y');
+    }
 
-    const endDate = this.data.end_date;
-    this.startDate = moment(startDate).format('DD-MM-Y');
-    this.endDate = moment(endDate).format('DD-MM-Y');
+    if (this.data.end_date) {
+      const endDate = this.data.end_date;
+      this.endDate = moment(endDate).format('DD-MM-Y');
+    }
+    this.spinner = false;
   }
 
   async addToFav() {
+    console.log('====================================');
+    console.log("DSa");
+    console.log('====================================');
     let user = this.users.getUser();
 
     this.data.is_liked_by_me = true;
@@ -140,7 +165,7 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   goToChat() {
-    this.nav.push('/tabs/chat');
+    this.nav.push('/chat');
   }
 
   async presentAlert() {
@@ -156,6 +181,8 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async requestTrail() {
+    this.btn_loading = true;
+
     let user = this.users.getUser();
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (v || v == true) {
@@ -176,12 +203,16 @@ export class StudentCourseDetailPage extends BasePage {
         showBack: true,
       });
     }
+    this.btn_loading = false
+
   }
 
   async cancelTrail() {
+    this.btn_loading = true;
     let user = this.users.getUser();
     await this.globalCourses.cancelTrail(this.data, user);
     this.callApi();
+    this.btn_loading = false;
   }
 
   async isTrailReq() {
@@ -212,5 +243,7 @@ export class StudentCourseDetailPage extends BasePage {
     console.log(event);
     this.course_Id = event.id;
     this.callApi();
+
+    this.content.scrollToTop(500); // 500ms animation duration
   }
 }

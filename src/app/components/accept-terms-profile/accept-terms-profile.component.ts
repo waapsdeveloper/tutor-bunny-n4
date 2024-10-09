@@ -7,7 +7,7 @@ import { EventsService } from 'src/app/services/events.service';
   styleUrls: ['./accept-terms-profile.component.scss'],
 })
 export class AcceptTermsProfileComponent implements OnInit {
-  @Input('terms') terms = false;
+  @Input('terms') terms = true;
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;

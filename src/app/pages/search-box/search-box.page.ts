@@ -13,11 +13,11 @@ export class SearchBoxPage extends BasePage implements OnInit {
   searchList;
   user;
   recentSearch;
+  debounceTimer: any; // Debounce timer property
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
     this.user = this.users.getUser();
-
     this.initialize();
   }
 
@@ -39,15 +39,16 @@ export class SearchBoxPage extends BasePage implements OnInit {
     this.nav.push('search-filter');
   }
 
+  // Debounced onKeyUp method
   async onKeyUp(event: any) {
     this.search = event.target.value;
-
-    let res = this.filter.onKeyUp(this.search);
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(async () => {
+      let res = this.filter.onKeyUp(this.search);
+    }, 500);
   }
 
   async setRecentSeach(item) {
-    console.log(item);
-
     let obj = {
       user_id: this.user.id,
       keyword_name: item.name,
@@ -60,8 +61,6 @@ export class SearchBoxPage extends BasePage implements OnInit {
     };
     this.nav.push('search-result', params);
   }
-
-
 
   async onSearch(event: Event) {
     const inputElement = event.target as HTMLInputElement;

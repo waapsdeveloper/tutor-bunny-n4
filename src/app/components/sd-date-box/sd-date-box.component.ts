@@ -29,6 +29,7 @@ export class SdDateBoxComponent implements OnInit {
   startDate;
   endDate;
   data;
+  showDateTime = false
   dateError = '';
 
   selectedDates = {
@@ -47,7 +48,9 @@ export class SdDateBoxComponent implements OnInit {
       this.startDate = formData.start_date;
       this.endDate = formData.end_date
     })
-
+    if(this.startDate){
+      this.showDateTime = true;
+    }
   }
 
 
@@ -75,5 +78,9 @@ export class SdDateBoxComponent implements OnInit {
     } else {
       this.dateError = '';
     }
+  }
+
+  showdateTime(){
+    this.showDateTime = true;
   }
 }

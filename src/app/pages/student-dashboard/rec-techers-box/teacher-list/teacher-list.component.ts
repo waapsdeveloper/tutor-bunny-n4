@@ -7,6 +7,8 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./teacher-list.component.scss'],
 })
 export class TeacherListComponent extends BasePage implements OnInit {
+  rating
+  total_rating
   private _item: any;
 
   @Input('item')
@@ -14,7 +16,11 @@ export class TeacherListComponent extends BasePage implements OnInit {
     return this._item;
   }
   public set item(value: any) {
+    console.log(value);
+
     this._item = value;
+    this.total_rating = value.teacher.total_rating;
+    this.rating = value.teacher.avg_rating
     this.displayName = this.utility.getAmericanName(this.item.name);
   }
   subjects;
@@ -58,5 +64,13 @@ export class TeacherListComponent extends BasePage implements OnInit {
     };
     console.log(params);
     this.nav.push('/tabs/chat', params);
+  }
+  seeAll(user) {
+    console.log(user);
+    let params ={
+      user : JSON.stringify(user)
+    }
+
+    this.nav.push('teacher-course-list', params)
   }
 }

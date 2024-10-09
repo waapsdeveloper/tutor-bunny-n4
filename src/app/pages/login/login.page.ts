@@ -83,6 +83,7 @@ export class LoginPage extends BasePage implements OnInit {
     };
     let res = (await this.network.signUpviaEmail(obj)) as any;
     if (res) {
+      this.utility.presentSuccessToast('the user account is registered.');
       localStorage.setItem('token', res.token);
       this.users.setUser(res.user);
       this.formData.password = null;

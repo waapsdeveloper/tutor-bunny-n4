@@ -5,35 +5,37 @@ import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationsService {
-
   user: any;
   page = 1;
+  unread_count;
   last_page = -1;
   list: any[] = [];
 
   private pusher: Pusher;
 
-  constructor(
-    private users: UsersService,
-    private network: NetworkService,
-    private events: EventsService) { }
+  constructor(private network: NetworkService) {}
 
-  getNotificationsFromApi(search = '', page = 1,) {
+  getNotificationsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       let obj = {
         page: page,
       };
-      const res = await this.network.getAllNotifications(obj) as any;
+      const res = (await this.network.getAllNotifications(obj)) as any;
+      console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
       if (page === 1) {
         this.list = data.data;
+        this.unread_count = this.list.filter((item) => !item.is_read).length;
+        console.log('Unread count:', this.unread_count);
       } else {
         this.list = [...this.list, ...data.data];
+        this.unread_count = this.list.filter((item) => !item.is_read).length;
+        console.log('Updated unread count:', this.unread_count);
       }
 
       resolve(this.list);
@@ -50,8 +52,14 @@ export class NotificationsService {
     });
   }
 
+  loadMoreNotifications() {
+    return new Promise((resolve) => {
+      if (this.page < this.last_page) {
+        this.page = this.page + 1;
+        this.getNotificationsFromApi('', this.page);
+      }
 
-
-
-
+      resolve(true);
+    });
+  }
 }

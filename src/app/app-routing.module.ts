@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'splash',
     pathMatch: 'full',
+
   },
   {
     path: 'splash',
@@ -159,7 +161,11 @@ const routes: Routes = [
   {
     path: 'upload-certificate',
     loadChildren: () => import('./pages/upload-certificate/upload-certificate.module').then( m => m.UploadCertificatePageModule)
-  }
+  },
+  {
+    path: 'teacher-profile-complete',
+    loadChildren: () => import('./pages/teacher-profile-complete/teacher-profile-complete.module').then( m => m.TeacherProfileCompletePageModule)
+  },
 
 ];
 

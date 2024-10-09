@@ -50,7 +50,7 @@ export class AlertsService {
     const toast = await this.toastCtrl.create({
       message: this.strings.capitalizeEachFirst(msg ? msg : 'ERROR'),
       duration: 5000,
-      position: 'top',
+      position: 'bottom',
       color: 'danger',
       cssClass: 'failureToast',
     });

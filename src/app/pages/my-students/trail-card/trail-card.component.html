@@ -21,6 +21,7 @@
         </div>
         <div class="pnd-678956" *ngIf="item?.status === 'Accepted'">
           <img src="../../../assets/svg/accepted.svg" />
+
           <div class="pnd-inner-7895">Accepted</div>
         </div>
         <div class="pnd-678956" *ngIf="item?.status === 'Rejected'">
@@ -40,7 +41,8 @@
           <div class="title-heading-789 outfit-semibold" *ngIf=" item?.status == 'Complete'">
             {{item?.student?.name}}
           </div>
-          <div class="title-heading-789 outfit-semibold" *ngIf="item?.status != 'Accepted' &&  item?.status != 'Complete'">
+          <div class="title-heading-789 outfit-semibold"
+            *ngIf="item?.status != 'Accepted' &&  item?.status != 'Complete'">
             {{item?.student?.name| names}}
           </div>
           <div class="pnd-678956" *ngIf="item?.status !== 'Rejected'" (click)="presentPopover($event)">

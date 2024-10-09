@@ -1,11 +1,12 @@
 <div class="top-header-78956">
   <div class="header-left-items-78956">
-    <!-- <app-sd-bback-btn *ngIf="showBack" (click)="back()"></app-sd-bback-btn> -->
-    <ion-back-button [text]="''" *ngIf="showBack"></ion-back-button>
+    <app-sd-bback-btn (click)="back($event)"></app-sd-bback-btn>
+    <!-- <ion-button [text]="''" (click)="back($event)"></ion-button>     -->
+    <!-- <ion-back-button [text]="''" *ngIf="!parentHandleBack" ></ion-back-button>     -->
     <div class="header-title ">{{title}}</div>
   </div>
   <div class="header-right-items-78956">
-    <app-sd-bsearch-btn *ngIf="showSearch"></app-sd-bsearch-btn>
+    <app-sd-bsearch-btn *ngIf="showSearch" (click)="showSearchBar()"></app-sd-bsearch-btn>
     <app-sd-bonti-btn *ngIf="showNotification" (click)="goToNotificatioon()"></app-sd-bonti-btn>
     <app-sd-edit-button *ngIf="showEdit" (click)="editCourse()"></app-sd-edit-button>
     <app-sd-fav-button *ngIf="showFav" [flag]="showFavValue" (addToFav)="addtoFav()"

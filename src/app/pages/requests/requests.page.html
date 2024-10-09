@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'My Requests'" [backUrl]="" [showFav]="true"
+  <app-sd-header-top [showBack]="true" [title]="pageTitle" [backUrl]="" [showFav]="true"
     [showSearch]="true" [showNotification]="true"></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true">
-  <div class="body-scroll">
-    <app-req-course-list></app-req-course-list>
+  <div class="body-scroll" >
+    <app-req-course-list (number)="getTotalNumver($event)"></app-req-course-list>
   </div>
 </ion-content>

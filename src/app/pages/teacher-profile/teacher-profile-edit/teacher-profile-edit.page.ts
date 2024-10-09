@@ -30,6 +30,7 @@ export class TeacherProfileEditPage
   sub;
   params: any;
   backUrl;
+  edit = false;
   btn: any;
   showBack;
   title = 'Create profile';
@@ -46,7 +47,7 @@ export class TeacherProfileEditPage
     subjects: null,
     title: null,
     description: null,
-    terms: false,
+    terms: true,
     image: null,
     hourly_rate: null,
     photo_id: null,
@@ -93,7 +94,12 @@ export class TeacherProfileEditPage
   async initialize() {
     this.user = this.users.getUser();
     console.log(this.user);
-    this.curruncy = this.user.teacher.country.currency_symbol;
+
+    this.curruncy = '$';
+    if(this.user.teacher.country && this.user.teacher.country.currency_symbol){
+      this.curruncy = this.user.teacher.country.currency_symbol;
+    }
+
     let obj = {
       email: this.user.email,
     };
@@ -130,13 +136,16 @@ export class TeacherProfileEditPage
 
   scrollToTopOnInit() {
     setTimeout(() => {
-      this.myContent.scrollToTop(100);
+      this.myContent.scrollToTop(300);
     }, 500);
   }
   setFormDta(data) {
+    console.log(data);
+
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
     if (cnty) {
+      this.edit = true;
       this.countryId = cnty.id;
       this.formData['country_id'] = cnty.id;
       this.formData['country'] = cnty;
@@ -203,6 +212,7 @@ export class TeacherProfileEditPage
       !f.state ||
       !f.dial_code ||
       !f.phone_number ||
+      !f.travel_policy ||
       !f.city ||
       !f.zip_code ||
       !f.languages ||
@@ -236,8 +246,6 @@ export class TeacherProfileEditPage
       !f.qualification_description ||
       !f.started_teaching ||
       !f.experience_description ||
-      !f.hourly_rate ||
-      !f.travel_policy ||
       f.qualification_description.length < 250 ||
       f.experience_description.length < 250
     ) {
@@ -252,9 +260,14 @@ export class TeacherProfileEditPage
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id);
     if (res && res.message) {
-      this.utility.presentSuccessToast(res.message);
+      if(this.edit){
+        this.utility.presentSuccessToast("Profile updated Successfully");
+        this.nav.pop('/tabs/teacher-dashboard')
+      }else{
+        this.utility.presentSuccessToast("Profile Created Successfully ");
+        this.nav.push('/teacher-profile-complete');
+      }
     }
-    this.nav.pop('/tabs/teacher-dashboard');
   }
   async onSlideChange2() {
     const data = this.formData;
@@ -266,6 +279,7 @@ export class TeacherProfileEditPage
     );
     if (
       !f.title ||
+      !f.hourly_rate ||
       !f.description ||
       f.title.length < 50 ||
       f.title.length > 100 ||
@@ -312,11 +326,13 @@ export class TeacherProfileEditPage
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
       this.step = 1;
+
       this.slides?.nativeElement.swiper.slideTo(0, false, false);
-    }
-    else if (this.step == 3) {
+      this.scrollToTopOnInit();
+    } else if (this.step == 3) {
       this.step = 2;
       this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.scrollToTopOnInit();
     } else {
       this.nav.pop();
     }

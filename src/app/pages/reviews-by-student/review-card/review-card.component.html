@@ -5,8 +5,16 @@
     <div class="review-card-name-box-78524">
       <div class="review-card-name-78525">{{item.user.name}}</div>
       <div class="review-card-location-78526"> <img src="../../../assets/svg/locations.svg" alt="">
-        {{item.user.student.state.name}}, {{item.user.student.country.name}} <span *ngIf="flag"
-        slot="start" class="fi fi-{{flag}}"></span> </div>
+        <div style="
+        max-width: 220px;
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;">
+          {{item.user.student.state.name}}, {{item.user.student.country.name}}
+        </div>
+
+        <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+      </div>
       <div class="review-card-rating-78527">
         <div class="review-card-stars-78528">
           <app-rating-stars [rating]="rating"></app-rating-stars>

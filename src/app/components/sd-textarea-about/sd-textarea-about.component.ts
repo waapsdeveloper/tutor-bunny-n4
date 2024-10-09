@@ -92,15 +92,13 @@ export class SdTextareaAboutComponent implements OnInit {
       (formData: any) => {
         let v = formData[this.key];
 
-        if (
-          this.key == 'experience_description'
-        ) {
+        if (this.key == 'experience_description') {
           if (!v || v == '') {
             this.isRequired = true;
             setTimeout(() => {
               this.isRequired = false;
             }, 5000);
-            return
+            return;
           }
           if (v && v.length < 250) {
             this.isRequired = true;
@@ -111,7 +109,6 @@ export class SdTextareaAboutComponent implements OnInit {
             }, 5000);
           }
         }
-
       },
       false
     );
@@ -120,9 +117,7 @@ export class SdTextareaAboutComponent implements OnInit {
       (formData: any) => {
         let v = formData[this.key];
 
-        if (
-         this.key == 'qualification_description'
-        ) {
+        if (this.key == 'qualification_description') {
           if (!v || v == '') {
             this.isRequired = true;
             setTimeout(() => {

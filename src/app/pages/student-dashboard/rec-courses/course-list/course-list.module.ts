@@ -4,6 +4,8 @@ import { CourseListComponent } from './course-list.component';
 import { IonicModule } from '@ionic/angular';
 import { NamesPipe } from 'src/app/pipes/names.pipe';
 import { TrailMessageModule } from './trail-message/trail-message.module';
+import { RatingStarsModule } from '../../../reviews-by-student/review-card/rating-stars/rating-stars.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +14,9 @@ import { TrailMessageModule } from './trail-message/trail-message.module';
   imports: [
     CommonModule,
     IonicModule,
-    TrailMessageModule
+    TrailMessageModule,
+    RatingStarsModule,
+    FormsModule
   ],
   exports: [CourseListComponent]
 })

@@ -10,7 +10,7 @@
   </div>
 </ion-header>
 
-<ion-content class="ion-padding ion-content-medium-background">
+<div class="ion-padding ion-content-medium-background">
   <div class="body-content-68448" *ngIf="step === 'login'">
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Email</div>
@@ -23,10 +23,9 @@
         <div class="input-title fs-12 roboto-medium">Password</div>
         <div class="input-title-2 fs-12 roboto-medium" (click)="forgetPassword()">Forgot?</div>
       </div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
-        (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
-        [errorText]="'Password is required'" [type]="'password'"
-        ></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Enter your password" (onChange)="result($event, 'password')" [inputText]="formData.password"
+        [key]="'password'" [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
     </div>
 
 
@@ -59,16 +58,17 @@
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
-        (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
-        [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Enter your password" (onChange)="result($event, 'password')" [inputText]="formData.password"
+        [key]="'password'" [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
     </div>
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-12 roboto-medium">Confirm Password </div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Re-enter your password"
-        (onChange)="result($event, 'confirm_password')" [inputText]="formData.confirm_password"
-        [key]="'confirm_password'" [errorText]="'Confirm Password is required'" [type]="'password'"></app-sd-input-box>
+      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+        placeholder="Re-enter your password" (onChange)="result($event, 'confirm_password')"
+        [inputText]="formData.confirm_password" [key]="'confirm_password'" [errorText]="'Confirm Password is required'"
+        [type]="'password'"></app-sd-input-box>
     </div>
     <div class="d-flex flex-column gap-16">
       <div class="input-box-lines">
@@ -79,4 +79,4 @@
       </div>
     </div>
   </div>
-</ion-content>
+</div>

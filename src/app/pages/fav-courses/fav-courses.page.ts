@@ -8,17 +8,20 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './fav-courses.page.html',
   styleUrls: ['./fav-courses.page.scss'],
 })
-export class FavCoursesPage extends BasePage { //  implements OnInit
-
-
-  constructor(injector: Injector, public authService: AuthenticationService, public globalCourses: GlobalCoursesService) {
-    super(injector)
-    this.initialize()
+export class FavCoursesPage extends BasePage implements OnInit {
+  constructor(
+    injector: Injector,
+    public authService: AuthenticationService,
+    public globalCourses: GlobalCoursesService
+  ) {
+    super(injector);
+    this.initialize();
   }
 
-  // ngOnInit() {
-
-  // }
+  ngOnInit() {
+    let showFav = false;
+    this.events.publish('show-fav-dot', showFav);
+  }
 
   // ionViewWillEnter() {
   //   this.initialize()
@@ -37,9 +40,6 @@ export class FavCoursesPage extends BasePage { //  implements OnInit
 
   shouldHandleBackToPrevScreen() {
     // this.modals.dismiss();
-    this.nav.pop()
+    this.nav.pop();
   }
-
 }
-
-

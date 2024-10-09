@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
-
 @Component({
   selector: 'app-upload-certificate',
   templateUrl: './upload-certificate.page.html',
@@ -9,14 +8,13 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class UploadCertificatePage extends BasePage implements OnInit {
   certificates = [];
-
+  loading = false;
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
     this.initialize();
-
   }
 
   setBackgroundImage(item) {
@@ -24,6 +22,7 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   }
 
   async addImageInArray(imageString) {
+    this.loading = true;
     let firstIndex = this.certificates.findIndex((x) => x.image == null);
 
     if (firstIndex != -1) {
@@ -36,7 +35,10 @@ export class UploadCertificatePage extends BasePage implements OnInit {
       image: imageString,
     };
 
-    await this.network.postCertificate(obj);
+    let res = await this.network.postCertificate(obj);
+    let image = res.result.image;
+    this.events.publish('change-sample-certificate-to-this', image);
+    this.loading = false;
     this.initialize();
   }
 
@@ -54,6 +56,9 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   async clearImage(id: string, event: Event) {
     event.stopPropagation();
     await this.network.deleteCertificates(id);
+    let image  = null;
+    this.events.publish('change-sample-certificate-to-this', image);
+
     this.initialize();
   }
 

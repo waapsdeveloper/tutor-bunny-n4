@@ -13,15 +13,15 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   constructor(
     injector: Injector,
-    public createCourseService: CreateCourseService
+    public createCourseService: CreateCourseService,
   ) {
     super(injector);
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  async initialize() {}
+  async initialize() { }
 
   setBackgroundImage(item) {
     return `url('${item.image}')`;
@@ -60,19 +60,35 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
+    console.log(files);
+
     for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = async () => {
-        await this.addImageInArray(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      let imageString: string;
+      if (file.size > 1048576) {
+        console.log(file.size);
+        imageString = await this.imageService.resizeImage(file, 800, 800);
+        console.log(imageString);
+
+      } else {
+        imageString = await this.fileToDataURL(file);
+      }
+      await this.addImageInArray(imageString);
     }
+  }
+
+  fileToDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   async updateFeatureImage(item: any, index, event: Event) {
     event.stopPropagation();
 
-    for(var i = 0; i < this.createCourseService.coursePhotos.length; i++){
+    for (let i = 0; i < this.createCourseService.coursePhotos.length; i++) {
       this.createCourseService.coursePhotos[i].feature = false;
     }
 
@@ -89,52 +105,54 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       };
       await this.network.postCoursePhoto(obj);
     }
-
-    //this.initialize();
   }
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
 
-    // check for feature image flag
-    const pht = this.createCourseService.coursePhotos[index];
-    if(!pht){
+    const coursePhotos = this.createCourseService.coursePhotos;
+    const courseId = this.createCourseService.courseId;
+    const pht = coursePhotos[index];
+
+    if (!pht) {
       return;
     }
 
-    if(pht.feature == true){
-      // check if a item behind the index exist
-      const phtPrev = this.createCourseService.coursePhotos[index - 1];
-      if(!phtPrev){
-        return;
+    // Check if the photo being cleared is the feature image
+    if (pht.feature) {
+      // First, remove the image from the array
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+        coursePhotos.splice(index, 1);
       }
 
-      this.createCourseService.coursePhotos[index - 1].feature = true;
-      this.createCourseService.formData.image = phtPrev.image;
+      // Check if there are still photos in the array
+      if (coursePhotos.length > 0) {
+        // Set the first photo in the array as the feature image
+        coursePhotos[0].feature = true;
+        this.createCourseService.formData.image = coursePhotos[0].image;
 
-      const courseId = this.createCourseService.courseId;
-      
-      if (courseId) {
-        let obj = {
-          course_id: courseId,
-          image: phtPrev.image,
-        };
-        await this.network.postCoursePhoto(obj);
+        // Update the feature image on the server if courseId exists
+        if (courseId) {
+          let obj = {
+            course_id: courseId,
+            image: coursePhotos[0].image,
+          };
+          await this.network.postCoursePhoto(obj);
+        }
+      } else {
+        // If no photos remain, reset the feature image
+        this.createCourseService.formData.image = null;
       }
-
-      
+    } else {
+      // If the image being cleared is not the feature image, simply remove it
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+        coursePhotos.splice(index, 1);
+      }
     }
-
-
-    this.createCourseService.coursePhotos.splice(index, 1);
-
-    let item = this.createCourseService.coursePhotos[index];
-    if (item.id) {
-      await this.network.deleteCourseImage(item.id);
-    }
-
-    // this.initialize();
   }
+
 
   openImage(image) {
     this.nav.push('/course-profile/course-photo/gallery-image', {

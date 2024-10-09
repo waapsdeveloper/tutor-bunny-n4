@@ -1,6 +1,6 @@
 <div class="image-upload-box-st-78955674">
   <div class="icno-text-88666">
-    <div class="image-box-89657"
+    <div class="image-box-89657" *ngIf="samplecertificateImage !== '/assets/gallary.png'"
     [ngStyle]="{ 'background-image': samplecertificateImage !== '/assets/gallary.png'  ? 'url(' + samplecertificateImage + ')' : 'none' }"></div>
     <img *ngIf="samplecertificateImage === '/assets/gallary.png'" [src]="samplecertificateImage" alt="" style="height: 33px;" />
     <div class="roboto-regular fs-14">Upload photos of the certificates</div>

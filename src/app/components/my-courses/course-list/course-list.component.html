@@ -1,6 +1,6 @@
 <div class="vedio-content-89658">
   <div class="card-container">
-    <div class="vedio-box-inner card" *ngFor="let item of list" (click)="oepnDeatils(item)">
+    <div class="vedio-box-inner card"  style="width: 50%;" *ngFor="let item of list" (click)="oepnDeatils(item)">
       <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
       <div class="video-para">{{item.title}}</div>
       <div class="price-tag">{{item.auth_user_currency_symbol}} {{item.price}} /lesson</div>

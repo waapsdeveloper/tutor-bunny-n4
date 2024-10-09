@@ -6,18 +6,23 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage {
-  // implements OnInit
+export class TeacherDashboardPage extends BasePage implements OnInit{
   user;
   displayName = '';
   flag;
+  shownoti = true;
   status;
+  total_rating;
+  state
+  travel_policy;
+  rating;
 
   footerlist = [
     {
@@ -51,43 +56,45 @@ export class TeacherDashboardPage extends BasePage {
 
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public chats: ChatService
+    public chats: ChatService,
+    public notification: NotificationsService
   ) {
     super(injector);
-
-
-
   }
 
-  // ngOnInit() {
+  ngOnInit() {
+    this.events.subscribe('show-fav-dot', (shownoti) => {
+      console.log(shownoti);
+      this.shownoti = shownoti;
 
-  // }
+    });
+    this.events.subscribe('user-update-via-pusher', () => {
+      this.initialize();
+
+    });
+  }
+
+
 
   ionViewWillEnter() {
     this.initialize();
   }
 
   async initialize() {
-
     this.loadResolvers();
     this.user = this.dataR.user;
-
     let obj = {
       email: this.user.email,
     };
-
     let res = await this.network.getUserByEmail(obj);
-
-
-
-
-
     if (res) {
       this.users.setUser(res.user);
       this.user = this.users.getUser();
       this.flag = this.getFlag();
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.status = res.user.teacher.status;
+      this.total_rating = this.user.teacher.total_rating;
+      this.rating = this.user.teacher.avg_rating
     }
   }
 

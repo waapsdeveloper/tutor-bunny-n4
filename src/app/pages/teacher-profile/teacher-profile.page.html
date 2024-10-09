@@ -1,4 +1,8 @@
-<ion-content class="ion-content-medium-background">
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+
+<ion-content [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
       <div style="padding: 0 16px 0 0;" (click)="back()">
@@ -18,7 +22,7 @@
           </div>
           <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/verified-profile-sheild.svg" />Verified
             on
-            23-Jul-2024
+            {{verified_on}}
           </div>
           <div class="header-info-misc-68448 outfit">
             <app-rating-stars [rating]="rating"></app-rating-stars>
@@ -69,10 +73,13 @@
         </div>
       </div>
     </div>
-    <div>
-      <app-teacher-profile-statistics [experince]="experince"></app-teacher-profile-statistics>
-    </div>
     <div class="line"></div>
+
+    <div>
+      <app-teacher-profile-statistics [experince]="experince" [hourly_rate]="hourly_rate"
+        ></app-teacher-profile-statistics>
+    </div>
+    <!-- <div class="line"></div> -->
     <div class="fs-16 outfit"
       style="display: flex;    align-items: flex-start;    flex-direction: column;    gap: 16px;">
       <div class="about-heading">About</div>
@@ -84,19 +91,35 @@
       <div class="discription-para" [class.collapsed]="isExpanded">
         {{ user?.teacher?.description }}
       </div>
-      <div class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
-      <div class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read Less</div>
+      <div class="qulification-box-edu-readmore-98525" *ngIf="!isExpanded">
+        <div class="qulification-box-edu-button-98526" (click)="toggleReadMore()">Read More</div>
+      </div>
+      <div class="education-box-edu-readmore-98525" *ngIf="isExpanded">
+        <div class="education-box-edu-button-98526" (click)="toggleReadMore()">Read less</div>
+      </div>
     </div>
     <div class="read-more" fill="clear" style="padding: 24px;" (click)="openQulification()">
       <img src="../../assets/svg/qulification.svg" alt="">
       <div>View qualifications and experiences</div>
     </div>
     <div class="line"></div>
-    <app-my-courses></app-my-courses>
-    <div class="line"></div>
+    <app-my-courses (onChange)="getCourses($event)"></app-my-courses>
+    <div class="line" *ngIf="showGellary === true"></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
     <div class="line" *ngIf="showGellary === true"></div>
-    <app-rating-review [rating]="total_rating"></app-rating-review>
+    <app-rating-review [rating]="total_rating" *ngIf="rating != 0"></app-rating-review>
     <!-- <div class="line"></div> -->
   </div>
 </ion-content>
+
+<ion-footer *ngIf="roleId == 2">
+  <div class="footer-buttons-78963">
+    <div class="button-chat-78563" *ngIf="!data?.trial " (click)="goToChat()">
+      <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle">
+        <ion-ripple-effect></ion-ripple-effect>
+        <img src="assets/svg/chat.svg" />
+        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Message</span>
+      </div>
+    </div>
+  </div>
+</ion-footer>

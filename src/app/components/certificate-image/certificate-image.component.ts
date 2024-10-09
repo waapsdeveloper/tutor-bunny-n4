@@ -25,7 +25,24 @@ export class CertificateImageComponent extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.events.subscribe('change-sample-certificate-to-this', (image: any) => {
+      console.log(image);
+
+
+      if (image) {
+        this.samplecertificateImage = image;
+      }
+      else{
+        this.samplecertificateImage = '/assets/gallary.png';
+      }
+
+    }, false)
+
+
+
+  }
 
   onFilesSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
@@ -49,6 +66,7 @@ export class CertificateImageComponent extends BasePage implements OnInit {
 
       if (file.size > 1048576) {
         pmi = await this.imageService.resizeImage(file, 800, 800);
+        // return
       }
 
       let user = JSON.parse(localStorage.getItem('user'));

@@ -25,6 +25,7 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     super(injector)
   }
   ngOnInit() {
+
     this.user = this.users.getUser();
   };
 

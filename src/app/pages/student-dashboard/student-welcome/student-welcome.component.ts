@@ -7,24 +7,23 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./student-welcome.component.scss'],
 })
 export class StudentWelcomeComponent extends BasePage implements OnInit {
-
-
-  constructor(injector:Injector) {
-    super(injector)
-   }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {}
 
-  studentContinue(key){
+  studentContinue(key) {
+    this.events.publish('reset-modal-dismiss', {  
+      canDismiss: true
+    })
+    console.log(key);
+
     let obj = {
-      key: key
-    }
+      key: key,
+    };
+
     this.modals.dismiss(obj);
-
   }
-  back(){
-    this.modals.dismiss();
-
-  }
-
+    
 }

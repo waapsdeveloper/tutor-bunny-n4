@@ -1,3 +1,6 @@
-<div style="display: flex; align-items: stretch;  flex-direction: column; gap: 16px; padding: 16px;">
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+<div [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"  style="display: flex; align-items: stretch;  flex-direction: column; gap: 16px; padding: 16px;">
   <app-teacher-list *ngFor="let item of list" [item]="item"></app-teacher-list>
 </div>
