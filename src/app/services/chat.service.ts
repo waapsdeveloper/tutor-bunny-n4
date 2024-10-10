@@ -34,8 +34,6 @@ export class ChatService {
     private events: EventsService,
     public pubsubSvc: NgxPubSubService
   ) {
-    pubsubSvc.registerEventWithHistory(this.historicalEvent, 6);
-    pubsubSvc.registerEventWithLastValue(this.latestEvent, undefined);
     const options = {
       cluster: 'ap2',
       forceTLS: true
