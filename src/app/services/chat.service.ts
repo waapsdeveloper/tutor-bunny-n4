@@ -109,6 +109,7 @@ export class ChatService {
       return prev + parseInt(next.unread_count);
     }, 0);
 
+    this.unreadCount = count;
     return count;
   }
 
