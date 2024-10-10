@@ -3,6 +3,8 @@ import { EventsService } from './events.service';
 import { NetworkService } from './network.service';
 import { UsersService } from './users.service';
 import { resolve } from 'path';
+import { NgxPubSubService } from "@pscoped/ngx-pub-sub";
+import Pusher from 'pusher-js';
 
 @Injectable({
   providedIn: 'root',
@@ -12,20 +14,35 @@ export class ChatService {
   role_id: any;
   chats;
   count;
+  latestEvent = "randomLast";
+  historicalEvent = "randomHistory";
   unreadCount = 0;
   requests;
   requestCount;
+  private pusher: Pusher;
+
   review_course = {
     user_id: null,
     course_id: null,
   };
   days;
+  chatChannel: any;
 
   constructor(
     private users: UsersService,
     private network: NetworkService,
-    private events: EventsService
+    private events: EventsService,
+    public pubsubSvc: NgxPubSubService
   ) {
+    pubsubSvc.registerEventWithHistory(this.historicalEvent, 6);
+    pubsubSvc.registerEventWithLastValue(this.latestEvent, undefined);
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true
+    };
+
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.chatChannel = this.pusher.subscribe("chats-channel");
     this.events.subscribe('clear-all-services-data', () => {
       this.user = null;
       this.role_id = null;
@@ -40,6 +57,18 @@ export class ChatService {
       this.days = null;
       console.log('sfsfsd', this.days);
     });
+  }
+
+  registerPusherEvent(id: any) {
+    this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
+  }
+
+  chatChannelReceived($event: any) {
+    console.log($event);
+
+    this.events.publish('message-received-via-pusher', $event);
+    this.getUnreadMsgCount()
+
   }
 
   reviewCoursebyChat(data) {

@@ -34,7 +34,8 @@ export class TabsPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notificationService: NotificationsService,
-    public teacher: TeacherService
+    public teacher: TeacherService,
+    public chats: ChatService
   ) {
     super(injector);
 
@@ -90,6 +91,7 @@ export class TabsPage extends BasePage implements OnInit {
     this.roleId = this.user.role_id;
     this.events.registerPusherEvent(this.user.id);
     this.teacher.registerPusherEvent(this.user.id);
+    this.chats.registerPusherEvent(this.user.id)
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
     await this.chatService.getchatList();
