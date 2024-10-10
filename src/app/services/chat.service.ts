@@ -64,7 +64,7 @@ export class ChatService {
   chatChannelReceived($event: any) {
     console.log($event);
 
-    this.updadteChatList($event)
+    this.getchatList()
 
     this.events.publish('message-received-via-pusher', $event);
     this.getUnreadMsgCount()
@@ -76,6 +76,43 @@ export class ChatService {
     this.review_course.course_id = data.course_id;
     this.review_course.user_id = data.user_id;
   }
+  async updadteChatListById(data) {
+    // Fetch the chat by its ID
+    this.user = this.users.getUser();
+      this.role_id = this.user.role_id;
+      let obj = {
+        search: 'search',
+        page: 1,
+        liked: '',
+        chat_room_id: data.chat_room_id
+      };
+      let res = await this.network.getMessagesRoom(this.user.id, obj);
+    console.log('API response:', res);
+
+    if (res && res.bool && res.chat_room) {
+      const chatRoom = res.chat_room;
+
+      // Find the chat index in the existing chat list
+      let chatIndex = this.chats.findIndex(chat => chat.id === chatRoom.id);
+
+      if (chatIndex !== -1) {
+        console.log('Chat found, replacing...');
+        this.chats[chatIndex] = {
+          ...this.chats[chatIndex],
+          ...chatRoom,
+          last_message: chatRoom.last_message
+        };
+        console.log('Replaced chat:', this.chats[chatIndex]);
+      } else {
+        console.log('No chat found with the given ID, nothing to replace.');
+      }
+
+      console.log('Updated chat list:', this.chats);
+    } else {
+      console.log('Invalid API response or chat room not found.');
+    }
+  }
+
 
   getchatList(search = '', page = 1, liked = false) {
     return new Promise(async (resolve) => {

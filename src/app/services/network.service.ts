@@ -115,6 +115,9 @@ export class NetworkService {
   getTravelPolicy() {
     return this.httpGetResponse('teachers/travelpolicy/list', null, false, false);
   }
+  getchatById(id: any) {
+    return this.httpGetResponse('chat-by-id/' + id, null, false, false);
+  }
 
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);
