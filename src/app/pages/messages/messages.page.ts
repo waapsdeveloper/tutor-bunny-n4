@@ -81,6 +81,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     };
 
     this.events.publish('update-chat-lists', obj);
+    this.chats.getchatList()
 
     this.message = '';
     this.messageInput.nativeElement.value = '';
@@ -172,8 +173,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   back() {
-    this.nav.pop();
     this.events.publish('clear-chat-data');
+
+    this.nav.pop();
   }
 
   openImage(image) {

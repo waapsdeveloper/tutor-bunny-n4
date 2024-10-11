@@ -164,7 +164,9 @@ export class StudentProfileEditPage
       let profile_complete = res.user.student.profile_complete;
       console.log(profile_complete);
       if(profile_complete == 0){
-        let res2 = await this.modals.present(CompleteProfileComponent, {}, "", 0.6)
+        let res2 = await this.modals.present(CompleteProfileComponent, {
+          role: this.params.role
+        }, "auto-height-modal", 1, [0, 1], true)
         console.log(res2);
       }
       this.nav.push('/tabs/student-dashboard');

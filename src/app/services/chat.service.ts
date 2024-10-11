@@ -55,6 +55,13 @@ export class ChatService {
       this.days = null;
       console.log('sfsfsd', this.days);
     });
+    this.events.subscribe('update-chat-lists', () => {
+      console.log("Fsdfsfsdfdsfsdfs");
+
+     this.getchatList()
+    });
+
+
   }
 
   registerPusherEvent(id: any) {

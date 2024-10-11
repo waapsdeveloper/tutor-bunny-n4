@@ -78,10 +78,8 @@ export class HomePage extends BasePage implements ViewWillEnter {
     let res = await this.modals.present(LoginPage, {
       role: this.params.role
     }, "auto-height-modal", 1, [0, 1], true);
-
     console.log(res);
-
-    if (res.data.step) {
+    if (res && res.data.step) {
       let res = await this.modals.present(SignUpPage, {
         role: this.params.role
       }, "", 0.75, [0, 0.5, 0.75, 1]);

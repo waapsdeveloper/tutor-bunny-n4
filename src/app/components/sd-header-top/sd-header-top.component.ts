@@ -47,7 +47,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
       $event.stopPropagation();
       this.parentBack.emit();
     } else {
-      this.nav.pop();
+      this.nav.pop(this.backUrl);
 
     }
 

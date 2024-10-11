@@ -39,15 +39,16 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.events.subscribe('update-chat-lists', (data) => {
+      console.log(data);
+
+      this.handleRefresh(data);
+    })
     this.events.subscribe(
       'message-received-via-pusher',
       this.updateChatsByMessageReceived.bind(this)
     );
-    this.events.subscribe('update-chat-list', (data) => {
-      console.log(data);
 
-      this.initialize();
-    })
 
 
   }
@@ -101,12 +102,14 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       let res = await this.nav.push('messages', params)
       this.initialize()
     }
+    this.initialize()
+
 
   }
 
 
   async initialize() {
-    this.chats.getchatList(this.search, 1)
+   await this.chats.getchatList(this.search, 1)
 
 
   }

@@ -47,6 +47,7 @@ export class LoginPage extends BasePage implements OnInit {
       role_id: this._role,
     };
     const res = (await this.network.loginViaEmail(obj)) as any;
+
     this.showLoader = false;
     if (res) {
       localStorage.setItem('token', res.token);

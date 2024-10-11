@@ -45,6 +45,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     this.initialize(value);
+    console.log(value);
+
     this.flag = this.getFlag();
     this.checkReview(value);
     this.status = value.trial ? value.trial.status : null;
@@ -140,6 +142,8 @@ export class CourseListComponent extends BasePage implements OnInit {
     )) as any;
     if (res.data) {
       this.showReviewBtn = true;
+    this.onChange.emit();
+
     }
   }
 
