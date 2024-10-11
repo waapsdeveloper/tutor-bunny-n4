@@ -109,5 +109,9 @@ export class LanguageListComponent extends BasePage implements OnInit {
     return this.utility.capitalizeEachFirst(string)
   }
 
+  back(){
+    this.modals.dismiss()
+  }
+
 
 }
