@@ -36,32 +36,41 @@ export class LanguageListComponent extends BasePage implements OnInit {
   constructor(injector: Injector) {
     super(injector)
   }
+
   ngOnInit() {
     this.initialize()
   }
 
   async initialize() {
-
-
     this.search = "";
     this.page = 1;
     this.callApi();
   }
+
+
   selection(item: any) {
     this.modals.dismiss(item);
   }
+
+
   isListItemSelected() {
     return this.list.filter(x => x.checked == true).length > 0;
   }
+
+
   selectedLanguage() {
     let list = this.list.filter(x => x.checked == true);
     this.modals.dismiss(list);
   }
+
+
   async loadMore($event) {
     this.page = this.lang.current_page + 1;
     await this.callApi();
     $event.target.complete();
   }
+
+
   callApi() {
     return new Promise(async resolve => {
       let obj = {
@@ -69,26 +78,29 @@ export class LanguageListComponent extends BasePage implements OnInit {
         page: this.page
       }
       this.lang = await this.network.getLanguage(obj) as any[];
-
-
-
-
-
-
       this.page = this.lang.current_page;
+
+      // If it's the first page, replace the list, otherwise append to the list
       if (this.page == 1) {
         this.list = this.lang["data"];
       } else {
         this.list = [...this.list, ...this.lang["data"]]
       }
 
-      // // set selected languages
-      this.list = this.list.map( (item) => {
+      // Preserve selected languages
+      this.list = this.list.map((item) => {
         const fi = this.preSelectedLanguages.find(x => x.id == item.id);
-        if(fi){
+        if(fi) {
           item.checked = true;
         }
         return item;
+      });
+
+      // Also check if any previously selected items are not in the current list, add them
+      this.preSelectedLanguages.forEach(selectedItem => {
+        if (!this.list.some(item => item.id === selectedItem.id)) {
+          this.list.push(selectedItem);
+        }
       });
 
       resolve(true);
@@ -96,18 +108,20 @@ export class LanguageListComponent extends BasePage implements OnInit {
   }
 
 
+
   handleInput(event) {
     const query = event.target.value.toLowerCase();
     this.search = query;
     this.page = 1;
     this.callApi();
-
     // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }
+
 
   capitalizeFirst(string) {
     return this.utility.capitalizeEachFirst(string)
   }
+
 
   back(){
     this.modals.dismiss()

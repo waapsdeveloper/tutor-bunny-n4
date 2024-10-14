@@ -48,7 +48,12 @@ export class CourseFormPage
     super(injector);
     this.initialize();
     this.user = this.users.getUser();
-    this.currency = this.user.teacher.country.currency_symbol;
+    if(this.user.teacher.country.currency_symbol){
+      this.currency = this.user.teacher.country.currency_symbol;
+    }
+    else{
+      this.currency = '$'
+    }
   }
 
   ngOnInit() {}

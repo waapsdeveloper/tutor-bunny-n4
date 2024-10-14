@@ -103,7 +103,7 @@
       <div>View qualifications and experiences</div>
     </div>
     <div class="line"></div>
-    <app-my-courses (onChange)="getCourses($event)"></app-my-courses>
+    <app-my-courses (onChange)="getCourses($event)" *ngIf="total_course >= 0"></app-my-courses>
     <div class="line" *ngIf="showGellary === true"></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
     <div class="line" *ngIf="showGellary === true"></div>

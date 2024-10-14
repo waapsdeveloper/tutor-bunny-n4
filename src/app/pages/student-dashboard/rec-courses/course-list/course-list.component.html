@@ -32,12 +32,16 @@
             </div>
           </div>
           <div class="group-96589">
-            <div class="techer-img-98523"
-              [style.background-image]=" item.user.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'">
+            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;">
+              <div class="techer-img-98523"
+                [style.background-image]=" item.user.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'">
+              </div>
+              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
             </div>
-            <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
-            <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-            <div>{{this.item.user.teacher.country.name}}</div>
+            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;">
+              <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+              <div>{{this.item.user.teacher.country.name}}</div>
+            </div>
           </div>
         </div>
         <ion-icon style="  position: absolute; right: -2px;"

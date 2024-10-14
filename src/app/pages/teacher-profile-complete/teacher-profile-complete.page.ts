@@ -8,6 +8,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class TeacherProfileCompletePage extends BasePage implements OnInit {
 user
+email = "admin@tutorbunny.app"
   constructor(injector:Injector) {
     super(injector)
     this.user =this.users.getUser()

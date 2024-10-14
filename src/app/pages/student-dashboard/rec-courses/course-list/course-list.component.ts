@@ -183,18 +183,42 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async goToChat(data) {
-    let id = this.user.id;
-    let obj = {
-      user_id_1: this.user.id,
-      user_id_2: data.user.id,
-    };
-    let res = await this.network.getChadRoomId(obj);
-    let params = {
-      student_id: id,
-      other_user_id: data.user.id,
-      user: JSON.stringify(data.user),
-      chat_room_id: res.chat_room.id,
-    };
-    this.nav.push('/tabs/chat', params);
+    this.user = this.users.getUser();
+
+    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+
+    if (v || v == true) {
+      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
+      let id = this.user.id;
+      let obj = {
+        user_id_1: this.user.id,
+        user_id_2: data.user.id,
+      };
+      let res = await this.network.getChadRoomId(obj);
+      let params = {
+        student_id: id,
+        other_user_id: data.user.id,
+        user: JSON.stringify(data.user),
+        chat_room_id: res.chat_room.id,
+      };
+      this.nav.push('/tabs/chat', params);
+    }
+    else {
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
+    }
   }
 }

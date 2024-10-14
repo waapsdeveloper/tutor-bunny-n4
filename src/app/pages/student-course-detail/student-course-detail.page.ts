@@ -52,6 +52,7 @@ export class StudentCourseDetailPage extends BasePage {
   updated_at;
   schedules: any[] = [];
   total_rating;
+  course_user;
   acheduleTime;
   startDate;
   showFavValue = false;
@@ -102,6 +103,7 @@ export class StudentCourseDetailPage extends BasePage {
     this.lessons = this.data.lesson;
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title;
+    this.course_user = this.data.user;
     this.image = this.data.image;
     this.rating = this.data.user.teacher.avg_rating;
     this.total_rating = this.data.user.teacher.total_rating;
@@ -164,8 +166,22 @@ export class StudentCourseDetailPage extends BasePage {
     this.isExpanded = !this.isExpanded;
   }
 
-  goToChat() {
-    this.nav.push('/chat');
+  async goToChat() {
+    let user = this.users.getUser();
+
+    let id = user.id;
+    let obj = {
+      user_id_1: user.id,
+      user_id_2:this.course_user.id,
+    };
+    let res = await this.network.getChadRoomId(obj);
+    let params = {
+      student_id: id,
+      other_user_id: this.course_user.id,
+      user: JSON.stringify(this.course_user),
+      chat_room_id: res.chat_room.id,
+    };
+    this.nav.push('/tabs/chat', params);
   }
 
   async presentAlert() {
