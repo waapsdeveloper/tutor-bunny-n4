@@ -248,4 +248,6 @@ export class CourseFormPage
       title: 'Upload Course photos',
     });
   }
+
+
 }
