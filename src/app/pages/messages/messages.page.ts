@@ -40,6 +40,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.scrollToBottomOnInit();
+    this.chats.getchatList();
+
   }
 
   adjustHeight(textArea: HTMLTextAreaElement): void {
@@ -80,7 +82,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       message: this.message,
     };
 
-    this.events.publish('update-chat-lists', obj);
     this.chats.getchatList()
 
     this.message = '';
@@ -89,6 +90,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     let res = await this.network.sendMessage(obj);
     this.initialize();
+
   }
 
   async ionViewWillEnter() {
@@ -111,6 +113,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async initialize() {
+    this.chats.getchatList();
+
     this.loading = true;
 
     let roomId = this.item.chat_room_id;

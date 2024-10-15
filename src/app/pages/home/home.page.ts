@@ -91,7 +91,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
         let user = res.data;
         this.users.setUser(user);
-        this.redirectDependsOnRole(user);
       }
     }
     this.user = this.users.getUser()

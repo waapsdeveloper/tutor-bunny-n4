@@ -66,6 +66,10 @@ const routes: Routes = [
         path: 'requests',
         loadChildren: () => import('../pages/requests/requests.module').then( m => m.RequestsPageModule)
       },
+      {
+        path: 'search-box',
+        loadChildren: () => import('../pages/search-box/search-box.module').then( m => m.SearchBoxPageModule)
+      },
 
     ]
   }

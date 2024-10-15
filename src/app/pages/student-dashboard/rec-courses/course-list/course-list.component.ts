@@ -11,6 +11,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.component';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-course-list',
@@ -51,6 +52,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
     this.user = this.users.getUser();
+    console.log(this.user);
+
   }
 
   initialize(data) {
@@ -188,7 +191,6 @@ export class CourseListComponent extends BasePage implements OnInit {
     let v = (await this.profiles.isProfileCompleted(this.user)) as any;
 
     if (v || v == true) {
-      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
       let id = this.user.id;
       let obj = {
         user_id_1: this.user.id,

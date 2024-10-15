@@ -24,9 +24,9 @@
       <div class="footer-tab-label">Create</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="search-box">
-      <div class="tab-back-78523" *ngIf="selectedTab === 'my-teachers'"></div>
-      <img [src]="selectedTab === 'my-teachers' ? 'assets/svg/search-fill.svg' : 'assets/svg/search.svg'" />
-      <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'my-teachers'">Search</div>
+      <div class="tab-back-78523" *ngIf="selectedTab === 'search-box'"></div>
+      <img [src]="selectedTab === 'search-box' ? 'assets/svg/search-fill.svg' : 'assets/svg/search.svg'" />
+      <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'search-box'">Search</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" tab="courses">
       <div class="tab-back-78523" *ngIf="selectedTab === 'courses'"></div>
@@ -68,7 +68,7 @@
       <div class="footer-tab-label">Create</div>
     </ion-tab-button>
 
-    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="my-teachers" (click)="goToSearch()">
+    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="search-box" (click)="goToSearch()">
       <img *ngIf="showSearch" src="../../assets/svg/search-fill.svg" />
       <img *ngIf="!showSearch" src="../../assets/svg/search.svg" />
       <div class="footer-tab-label">Search</div>

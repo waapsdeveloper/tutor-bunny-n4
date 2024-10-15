@@ -40,7 +40,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.events.subscribe('update-chat-lists', (data) => {
-      console.log(data);
+      console.log(data, 'history');
 
       this.handleRefresh(data);
     })
