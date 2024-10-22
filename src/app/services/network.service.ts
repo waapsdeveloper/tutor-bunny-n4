@@ -349,6 +349,10 @@ export class NetworkService {
     return this.httpPostResponse('schedule/add', data, null, false, true);
   }
 
+  notificationRead(data) {
+    return this.httpPostResponse('notifications/is-open', data, null, false, true);
+  }
+
 
   checkReview(data) {
     return this.httpPostResponse('check-review', data, null, false, true);

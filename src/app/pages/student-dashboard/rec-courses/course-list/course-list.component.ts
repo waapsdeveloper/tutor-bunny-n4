@@ -187,9 +187,7 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   async goToChat(data) {
     this.user = this.users.getUser();
-
     let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-
     if (v || v == true) {
       let id = this.user.id;
       let obj = {
@@ -215,7 +213,6 @@ export class CourseListComponent extends BasePage implements OnInit {
         false
       );
       let key = res.data.key;
-
       if (key == 1) {
         this.nav.push('/student-profile/student-profile-edit', {
           showBack: true,

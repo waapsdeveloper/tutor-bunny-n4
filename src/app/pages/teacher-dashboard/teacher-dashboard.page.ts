@@ -13,7 +13,7 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage implements OnInit{
+export class TeacherDashboardPage extends BasePage implements OnInit {
   user;
   displayName = '';
   flag;
@@ -63,18 +63,15 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
   }
 
   ngOnInit() {
-    this.events.subscribe('show-fav-dot', (shownoti) => {
-      console.log(shownoti);
-      this.shownoti = shownoti;
-
+    this.events.subscribe('update-notifications', () => {
+      console.log("yayay");
+      this.notification.getNotificationsFromApi()
     });
+
     this.events.subscribe('user-update-via-pusher', () => {
       this.initialize();
-
     });
   }
-
-
 
   ionViewWillEnter() {
     this.initialize();
@@ -130,6 +127,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit{
     }
   }
   gotoNotification() {
+
     this.nav.push('notifications', {
       backUrl: '/tabs/teacher-dashboard',
       showBack: true,

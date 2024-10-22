@@ -34,6 +34,23 @@
   padding: 20px;
 }
 
+.language-chips {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lang-chips-7895545 {
+  margin-top: 8px;
+}
+
+.lang-chips-7895545 ion-chip {
+  margin: 0;
+
+}
+
 .top-header-78956 {
   background: #ffffff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

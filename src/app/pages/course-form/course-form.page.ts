@@ -17,8 +17,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 })
 export class CourseFormPage
   extends BasePage
-  implements OnInit, ViewWillEnter
-{
+  implements OnInit, ViewWillEnter {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -35,6 +34,7 @@ export class CourseFormPage
   age;
   loading = false;
   language_id;
+  sameCourseEdit = false;
   courseId;
   edit = false;
   step = 1;
@@ -48,18 +48,18 @@ export class CourseFormPage
     super(injector);
     this.initialize();
     this.user = this.users.getUser();
-    if(this.user.teacher.country.currency_symbol){
+    if (this.user.teacher.country.currency_symbol) {
       this.currency = this.user.teacher.country.currency_symbol;
     }
-    else{
+    else {
       this.currency = '$'
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 
-  async initialize() {}
+  async initialize() { }
 
   async ionViewWillEnter() {
 
@@ -107,6 +107,8 @@ export class CourseFormPage
   result(value, key) {
     this.createCourseService.formData[key] = value;
     if (key == 'category') {
+      this.edit = true;
+      this.sameCourseEdit = true;
       this.category = value.id;
       this.createCourseService.formData['category_id'] = value.id;
       this.createCourseService.formData['category'] = value;
@@ -222,21 +224,30 @@ export class CourseFormPage
     this.loading = true;
 
     const res = await this.network.SubmitSecondCourse(f, course_id);
-
     if (res && res.message) {
-      this.loading = false;
-
-      const message = !this.edit
-        ? 'Course created successfully'
-        : 'Course Updated Successfully';
-      this.utility.presentSuccessToast(message);
+      if (this.edit && this.sameCourseEdit) {
+        this.utility.presentSuccessToast("Course Created Successfully ");
+      } else {
+        this.utility.presentSuccessToast("Course Updated Successfully");
+      }
     }
+
+    // if (res && res.message) {
+    //   this.loading = false;
+
+    //   const message = !this.edit
+    //     ? 'Course created successfully'
+    //     : 'Course Updated Successfully';
+    //   this.utility.presentSuccessToast(message);
+    // }
     this.createCourseService.resetFormData()
     this.nav.pop('/tabs/courses');
     this.events.publish('initilize-the-list', res);
   }
 
-  shouldHandleBackToPrevScreen() {
+  shouldHandleBackToPrevScreen(event) {
+    console.log(event);
+    this.sameCourseEdit = event;
     if (this.step == 2) {
       this.step = 1;
       this.edit = true;
@@ -249,7 +260,7 @@ export class CourseFormPage
   openCoursePhotos() {
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',
-    gallary: 'true',
+      gallary: 'true',
       title: 'Upload Course photos',
     });
   }

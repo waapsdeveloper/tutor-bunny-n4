@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output, output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -10,7 +11,25 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class CourseCardComponent extends BasePage implements OnInit {
   list;
   trials;
-  @Input() item;
+
+  created_at;
+  updated_at;
+  private _item: any;
+
+  @Input('item')
+  public get item() {
+    return this._item;
+  }
+
+  public set item(value: any) {
+    this._item = value;
+    console.log(value);
+    const created_at = value.created_at;
+    this.created_at = created_at ? moment(created_at).format('DD-MMM-Y') : '';
+
+    const updated_at = value.updated_at;
+    this.updated_at = updated_at ? moment(updated_at).format('DD-MMM-Y') : '';
+  }
   course;
   status;
   @Output() courseDeleted = new EventEmitter<number>();

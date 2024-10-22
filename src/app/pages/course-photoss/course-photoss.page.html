@@ -23,7 +23,7 @@
   <div class="d-flex flex-column gap-16" style="width: 100%;">
     <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
       [text]="'Upload course photos'"></app-sd-button-gray>
-    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
+    <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'" [disabled]="disabled"
       [text]="'Done'"></app-sd-button-gray>
   </div>
 </ion-footer>

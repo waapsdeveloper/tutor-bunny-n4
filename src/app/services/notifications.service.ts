@@ -11,12 +11,16 @@ export class NotificationsService {
   user: any;
   page = 1;
   unread_count;
+  ids: any[] = []
+  shownoti;
   last_page = -1;
   list: any[] = [];
 
   private pusher: Pusher;
 
-  constructor(private network: NetworkService) {}
+  constructor(private network: NetworkService, private events: EventsService) {
+
+  }
 
   getNotificationsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
@@ -30,14 +34,20 @@ export class NotificationsService {
       this.last_page = data.last_page;
       if (page === 1) {
         this.list = data.data;
-        this.unread_count = this.list.filter((item) => !item.is_read).length;
+        this.unread_count = this.list.filter((item) => !item.is_open).length;
+
+
         console.log('Unread count:', this.unread_count);
       } else {
         this.list = [...this.list, ...data.data];
-        this.unread_count = this.list.filter((item) => !item.is_read).length;
+        this.unread_count = this.list.filter((item) => !item.is_open).length;
+        this.ids = this.list.filter((item) => !item.id);
+        console.log(this.ids);
+
         console.log('Updated unread count:', this.unread_count);
       }
-
+      this.ids = this.list.map((item) => item.id);
+      console.log(this.ids);
       resolve(this.list);
     });
   }

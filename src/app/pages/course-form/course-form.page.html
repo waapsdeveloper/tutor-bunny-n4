@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step === 2"
-    (parentBack)="shouldHandleBackToPrevScreen()"></app-sd-header-top>
+    (parentBack)="shouldHandleBackToPrevScreen($event)"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding " #content>
   <form>
@@ -100,22 +100,19 @@
             </div>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Price / Lesson ({{currency}})<img src="../../assets/svg/question.svg"
-                alt="" id="click-price"></div>
+            <div class="input-title fs-14 roboto-medium">Price / Lesson ({{currency}})</div>
 
             <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="createCourseService.formData.price" [key]="'price'"
               [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Duration of each lesson (in Hours)<img
-                src="../../assets/svg/question.svg" alt="" id="click-duration"></div>
+            <div class="input-title fs-14 roboto-medium">Duration of each lesson (in Hours)</div>
 
             <app-sd-input-box (onChange)="result($event, 'duration')" [inputText]="createCourseService.formData.duration" [key]="'duration'"
               [errorText]="'Duration is Required'" [type]="'number'"> </app-sd-input-box>
           </div>
           <div class="input-box-lines d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Total number of lessons for the entire course <img src="../../assets/svg/question.svg"
-                alt="" id="click-lesson"></div>
+            <div class="input-title fs-14 roboto-medium">Total number of lessons for the entire course </div>
 
             <app-sd-input-box (onChange)="result($event, 'lesson')" [inputText]="createCourseService.formData.lesson" [key]="'lesson'"
               [errorText]="'lesson is Required'" [type]="'number'"> </app-sd-input-box>

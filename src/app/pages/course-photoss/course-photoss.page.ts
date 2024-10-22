@@ -10,6 +10,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   params;
+  disabled = false;
 
   constructor(
     injector: Injector,
@@ -60,21 +61,34 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
-    console.log(files);
 
-    for (const file of files) {
+    // Calculate how many more images can be added
+    const remainingSlots = 8 - this.createCourseService.coursePhotos.length;
+
+    // If there are no remaining slots, stop the process
+    if (remainingSlots <= 0) {
+      alert('You have already uploaded the maximum of 15 images.');
+      return;
+    }
+
+    // Slice the file array to only take the first 'remainingSlots' images
+    const filesToUpload = files.slice(0, remainingSlots);
+
+    console.log(filesToUpload);
+
+    for (const file of filesToUpload) {
       let imageString: string;
       if (file.size > 1048576) {
         console.log(file.size);
         imageString = await this.imageService.resizeImage(file, 800, 800);
         console.log(imageString);
-
       } else {
         imageString = await this.fileToDataURL(file);
       }
       await this.addImageInArray(imageString);
     }
   }
+
 
   fileToDataURL(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -109,6 +123,8 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
+    console.log(event);
+
 
     const coursePhotos = this.createCourseService.coursePhotos;
     const courseId = this.createCourseService.courseId;

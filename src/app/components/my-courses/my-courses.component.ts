@@ -47,14 +47,14 @@ export class MyCoursesComponent extends BasePage implements OnInit {
           page: page,
           user_id: this.user.id
         }
-  
+
         if (this.categoryId) {
           obj['category_id'] = this.categoryId
         }
         const res =  await this.network.getMyCourseList(obj, this.user.id) as any;
         // await this.network.getOtherCourseList(obj) as any;
         console.log(res);
-        
+
         const result = res.result;
         this.count = res.result.total
         this.page = result.current_page;
@@ -67,22 +67,20 @@ export class MyCoursesComponent extends BasePage implements OnInit {
         this.onChange.emit(result);
       }
       else{
-        this.teacher = JSON.parse(localStorage.getItem('teacher')); 
-        console.log('====================================');
+        this.teacher = JSON.parse(localStorage.getItem('teacher'));
         console.log(this.teacher);
-        console.log('====================================');
         let obj = {
           search: search,
           page: page,
         }
-  
+
         if (this.categoryId) {
           obj['category_id'] = this.categoryId
         }
         const res =  await this.network.getMyCourseList(obj, this.teacher.id) as any;
         // await this.network.getOtherCourseList(obj) as any;
         console.log(res);
-        
+
         const result = res.result;
         this.count = res.result.total
         this.page = result.current_page;

@@ -26,7 +26,7 @@ export class TrailListComponent extends BasePage implements OnInit {
   public set item(value: any) {
     this._item = value;
     console.log(value);
-    this.displayName = this.utility.getAmericanName(value.teacher.name);
+    this.displayName = this.utility.getAmericanName(value.student.name);
   }
   flag;
   age;

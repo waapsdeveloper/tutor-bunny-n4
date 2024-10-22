@@ -59,7 +59,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     }
 
     let newMesg = {
-      date: '',
+      date: 'Sending...',
       messages: [
         {
           chat_room_id: this.item.chat_room_id,

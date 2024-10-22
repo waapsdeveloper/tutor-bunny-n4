@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-notification-box',
@@ -25,18 +26,19 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     console.log(value);
-
     this._item = value;
     this.is_read = value.is_read;
-  }
+    this.collectIds.emit(value.id);
 
+  }
   @Input('index') index = -1;
   time;
   user;
   user_id;
   @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>();
+  @Output('collectIds') collectIds: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private notification: NotificationsService) {
     super(injector);
     setTimeout(() => {
       this.loading = false;
@@ -48,7 +50,15 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
     this.getNotificationRead(item);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    let ids = this.notification.ids
+    let object = {
+      ids: ids
+    }
+
+    let response = await this.network.notificationRead(object)
+    console.log(response);
     moment.updateLocale('en', {
       relativeTime: {
         future: ' %s ago',

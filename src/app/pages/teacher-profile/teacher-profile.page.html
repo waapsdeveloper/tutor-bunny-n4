@@ -1,7 +1,6 @@
 <div *ngIf="loading" class="loading-syn ">
   <ion-spinner></ion-spinner>
 </div>
-
 <ion-content [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
     <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
@@ -74,9 +73,8 @@
       </div>
     </div>
     <div class="line"></div>
-
     <div>
-      <app-teacher-profile-statistics [experince]="experince" [hourly_rate]="hourly_rate"
+      <app-teacher-profile-statistics [course]="course" [experince]="experince" [hourly_rate]="hourly_rate"
         ></app-teacher-profile-statistics>
     </div>
     <!-- <div class="line"></div> -->
@@ -103,7 +101,7 @@
       <div>View qualifications and experiences</div>
     </div>
     <div class="line"></div>
-    <app-my-courses (onChange)="getCourses($event)" *ngIf="total_course >= 0"></app-my-courses>
+    <app-my-courses (onChange)="getCourses($event)" *ngIf="course != 0"></app-my-courses>
     <div class="line" *ngIf="showGellary === true"></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
     <div class="line" *ngIf="showGellary === true"></div>

@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { log } from 'node:console';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -8,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class UploadCertificatePage extends BasePage implements OnInit {
   certificates = [];
+  firstImage;
   loading = false;
   constructor(injector: Injector) {
     super(injector);
@@ -22,12 +24,16 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   }
 
   async addImageInArray(imageString) {
+    console.log(imageString);
+
     this.loading = true;
     let firstIndex = this.certificates.findIndex((x) => x.image == null);
 
     if (firstIndex != -1) {
       this.certificates[firstIndex]['image'] = imageString;
     }
+    this.firstImage = imageString;
+
 
     const user = JSON.parse(localStorage.getItem('user'));
     let obj = {
@@ -56,10 +62,15 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   async clearImage(id: string, event: Event) {
     event.stopPropagation();
     await this.network.deleteCertificates(id);
-    let image  = null;
-    this.events.publish('change-sample-certificate-to-this', image);
+    let firstIndex = this.certificates.findIndex((x) => x.image == null);
+    console.log(this.certificates);
 
-    this.initialize();
+
+    if (firstIndex == -1) {
+      let image = this.certificates[0]['image']
+      this.events.publish('change-sample-certificate-to-this', image);
+      this.initialize();
+    }
   }
 
   openImage(image) {

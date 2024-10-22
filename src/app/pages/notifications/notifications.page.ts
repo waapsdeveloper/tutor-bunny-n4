@@ -20,15 +20,22 @@ export class NotificationsPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     let shownoti = false;
-    this.events.publish('show-fav-dot', shownoti);
+    this.events.publish('show-noti-dot', shownoti);
     this.initialize();
-    this.notificationService.getAllNotifications();
+    let res = await this.notificationService.getNotificationsFromApi();
+    console.log(res);
+
   }
 
   async initialize() {
     this.loadResolvers();
+  }
+
+  collectIds(ids){
+    console.log(ids);
+
   }
 
   async loadMore($event) {

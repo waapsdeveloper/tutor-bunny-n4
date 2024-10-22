@@ -85,6 +85,8 @@ export class StudentCourseDetailPage extends BasePage {
 
     this.data = res;
     this.teacher = res.user;
+    localStorage.setItem('teacher', JSON.stringify(this.teacher));
+
     this.events.publish('data-for-other-corses', this.data);
     this.title = this.data.title;
     this.capacity = this.data.capacity;
@@ -120,12 +122,12 @@ export class StudentCourseDetailPage extends BasePage {
     this.showFavValue = this.data.is_liked_by_me;
     if (this.data.start_date) {
       const startDate = this.data.start_date;
-      this.startDate = moment(startDate).format('DD-MM-Y');
+      this.startDate = moment(startDate).format('DD-MMM-YYYY');
     }
 
     if (this.data.end_date) {
       const endDate = this.data.end_date;
-      this.endDate = moment(endDate).format('DD-MM-Y');
+      this.endDate = moment(endDate).format('DD-MMM-YYYY');
     }
     this.spinner = false;
   }

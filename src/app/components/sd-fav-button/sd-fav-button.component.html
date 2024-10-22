@@ -2,6 +2,6 @@
   <!-- <ion-ripple-effect></ion-ripple-effect> -->
   <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0 && showFav"></div>
 
-  <ion-icon [name]="flag ? 'heart' : 'heart-outline'" [color]="flag ? 'danger' : ''"
+  <ion-icon [name]="flag ? 'heart' : 'heart-outline'" [class]="flag ? 'loved-icon' : 'loved-icon2'"
   (click)="flag ? removeToFav() : addtoFav()"></ion-icon>
 </div>

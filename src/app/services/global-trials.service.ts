@@ -63,13 +63,16 @@ export class GlobalTrialsService {
         let trialId = $event.trial_id;
         this.removeFromListAndPendingTrials(trialId);
         this.GlobalCourses.getCoursesFromApi();
-
         this.events.publish('get-dashboard-stats');
+
+        this.events.publish('update-notifications');
       } else {
         let id = $event.trial_id;
         let res = await this.network.geTrailRequestsByPusher(id);
         console.log(res);
         this.updateTrailsList(res.trial);
+        this.events.publish('update-notifications');
+
         this.events.publish('get-dashboard-stats');
       }
     }

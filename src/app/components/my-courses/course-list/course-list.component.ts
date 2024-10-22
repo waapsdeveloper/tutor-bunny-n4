@@ -19,10 +19,21 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   oepnDeatils(item) {
 
-    const params = {
-      id: item.id,
+    let role = localStorage.getItem('role');
+    console.log(role);
+    // return
+    if(role =='2'){
+      const params = {
+        id: item.id,
+      }
+      this.nav.push('/student-course-detail', params)
+    }else{
+
+      const params = {
+        id: item.id,
+      }
+      this.nav.push('/course-detail', params)
     }
-    this.nav.push('/course-detail', params)
 
   }
 

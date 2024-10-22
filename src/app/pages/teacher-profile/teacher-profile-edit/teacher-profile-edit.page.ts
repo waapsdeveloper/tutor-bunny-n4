@@ -60,7 +60,7 @@ export class TeacherProfileEditPage
   contryCode: any;
   countryId;
   stateId;
-  curruncy = '$';
+  curruncy = 'Local Currency';
   travel_policy_name;
   hideTerms = false;
   step = 1;

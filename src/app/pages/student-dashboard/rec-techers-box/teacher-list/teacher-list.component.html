@@ -1,11 +1,11 @@
 <div class="tecahers-box-outer-38521" >
-  <div class="tecahers-box-img-name-box-38522" (click)="gototecher(item.email)">
+  <div class="tecahers-box-img-name-box-38522" (click)="gototecher(item)">
     <div class="tecahers-box-image-38523"
       [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
     <div class="tecahers-box-name-box-38524">
       <div class="tecahers-box-name-38525">
         {{displayName}}
-        <div class="tecahers-box-rate-38526"> {{item.teacher.country.currency_symbol}}{{item.teacher.hourly_rate}}</div>
+        <div class="tecahers-box-rate-38526"> {{item.teacher.converted_currency}} {{item.teacher.converted_hourly_rate}}</div>
       </div>
       <div class="tecahers-box-rating-box-38527" >
         <div style="display: flex; align-items: center; justify-content: flex-start; gap: 2px;">

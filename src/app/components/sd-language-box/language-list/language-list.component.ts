@@ -18,7 +18,7 @@ export class LanguageListComponent extends BasePage implements OnInit {
 
   private _preSelectedLanguages: any[] = [];
   @Input('preSelectedLanguages')
-  public get preSelectedLanguages(){
+  public get preSelectedLanguages() {
     return this._preSelectedLanguages;
   };
 
@@ -80,23 +80,27 @@ export class LanguageListComponent extends BasePage implements OnInit {
       this.lang = await this.network.getLanguage(obj) as any[];
       this.page = this.lang.current_page;
 
-      // If it's the first page, replace the list, otherwise append to the list
       if (this.page == 1) {
-        this.list = this.lang["data"];
-      } else {
-        this.list = [...this.list, ...this.lang["data"]]
+        // Reset list on new search
+        this.list = [];
       }
 
-      // Preserve selected languages
+      // Collect the current search results
+      let newList = this.lang["data"];
+
+      // Merge new list with previously selected items
+      this.list = [...new Set([...this.list, ...newList])];
+
+      // Update the list to check pre-selected items
       this.list = this.list.map((item) => {
         const fi = this.preSelectedLanguages.find(x => x.id == item.id);
-        if(fi) {
+        if (fi) {
           item.checked = true;
         }
         return item;
       });
 
-      // Also check if any previously selected items are not in the current list, add them
+      // Ensure all pre-selected items are still in the list
       this.preSelectedLanguages.forEach(selectedItem => {
         if (!this.list.some(item => item.id === selectedItem.id)) {
           this.list.push(selectedItem);
@@ -106,6 +110,8 @@ export class LanguageListComponent extends BasePage implements OnInit {
       resolve(true);
     })
   }
+
+
 
 
 
@@ -123,7 +129,7 @@ export class LanguageListComponent extends BasePage implements OnInit {
   }
 
 
-  back(){
+  back() {
     this.modals.dismiss()
   }
 
