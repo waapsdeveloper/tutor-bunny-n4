@@ -50,7 +50,6 @@ export class TabsPage extends BasePage implements OnInit {
     await this.chatService.getUnreadMsgCount();
     // this.chatService.getchatList();
     this.chatService.updadteChatList(data);
-    console.log("fdsf");
 
   }
 
@@ -80,7 +79,6 @@ export class TabsPage extends BasePage implements OnInit {
 
   setCurrentTab() {
     this.selectedTab = this.tabs.getSelected();
-    console.log(this.selectedTab);
   }
 
   async initialize() {
@@ -178,7 +176,6 @@ export class TabsPage extends BasePage implements OnInit {
     if (!this.user.role_id) {
       return '';
     }
-    // console.log(this.user);
 
     const roleId = parseInt(this.user.role_id);
 
@@ -191,5 +188,8 @@ export class TabsPage extends BasePage implements OnInit {
     }
 
     return '';
+  }
+  clearChat() {
+    this.events.publish('clear-chat-page');
   }
 }

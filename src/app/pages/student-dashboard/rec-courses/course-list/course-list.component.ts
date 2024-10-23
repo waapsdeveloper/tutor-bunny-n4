@@ -40,7 +40,6 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
     this.rating = value.user.teacher.avg_rating;
     this.total_rating = value.user.teacher.total_rating;
     this.initialize(value);
@@ -52,7 +51,6 @@ export class CourseListComponent extends BasePage implements OnInit {
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
     this.user = this.users.getUser();
-    console.log(this.user);
 
   }
 
@@ -200,6 +198,7 @@ export class CourseListComponent extends BasePage implements OnInit {
         other_user_id: data.user.id,
         user: JSON.stringify(data.user),
         chat_room_id: res.chat_room.id,
+        goToMessage: true
       };
       this.nav.push('/tabs/chat', params);
     }

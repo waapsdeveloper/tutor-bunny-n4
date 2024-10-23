@@ -92,7 +92,6 @@ export class CreateCourseService {
 
       const res = (await this.network.getCourseImages(obj)) as any;
       this.coursePhotos = res.result;
-      console.log(res);
     }
   }
 

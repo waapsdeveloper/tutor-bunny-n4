@@ -11,15 +11,12 @@ export class ImageService {
   resizeImage(file: File, maxWidth: number, maxHeight: number, quality: number = 0.8): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      console.log(reader);
 
       reader.onload = () => {
         const img = new Image();
-        console.log(img);
 
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          console.log(canvas);
 
           const ctx = canvas.getContext('2d');
           let width = img.width;
@@ -41,8 +38,7 @@ export class ImageService {
           resolve(canvas.toDataURL('image/jpeg', quality));
         }
         img.src = reader.result as string;
-        console.log(img);
-        
+
       };
       reader.onerror = reject;
       reader.readAsDataURL(file);

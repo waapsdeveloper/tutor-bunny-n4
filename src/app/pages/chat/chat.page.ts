@@ -3,7 +3,6 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
-import { log } from 'node:console';
 
 @Component({
   selector: 'app-chat',
@@ -34,13 +33,11 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     this.initialize();
 
     this.activeUser = this.users.getUser();
-    console.log(this.activeUser);
 
   }
 
   ngOnInit() {
     this.events.subscribe('update-chat-lists', (data) => {
-      console.log(data, 'history');
 
       this.handleRefresh(data);
     })
@@ -48,6 +45,9 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       'message-received-via-pusher',
       this.updateChatsByMessageReceived.bind(this)
     );
+
+    
+
 
 
 
@@ -60,19 +60,22 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   updateChatsByMessageReceived(data: any) {
-    console.log(data);
     this.chats.getchatList(this.search, 1)
-    console.log();
 
 
     this.events.publish('update-chat-lists', data)
   }
-  0
+
   ngOnDestroy() {
     this.user = null;
     this.other_user_id = null;
   }
 
+
+  ionViewDidLeave() {
+    this.user = null;
+    this.other_user_id = null;
+  }
   doSearch(event) {
 
     this.chats.getchatList(this.search, 1)
@@ -81,16 +84,23 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   async ionViewWillEnter() {
 
     this.params = this.nav.getQueryParams();
+    console.log(this.params);
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);
-      console.log(this.user);
 
     }
     if (this.params.other_user_id) {
       this.other_user_id = JSON.parse(this.params.other_user_id);
     }
-    if (this.params.chat_room_id) {
-      this.chat_room_id = this.params.chat_room_id;
+    this.chat_room_id = this.params.chat_room_id;
+    this.events.subscribe('clear-chat-page', () => {
+      this.user = null;
+      this.other_user_id = null;
+      this.chat_room_id= null
+      
+    });
+    console.log(this.chat_room_id);
+    if (this.chat_room_id) {
       let item = {
         chat_room_id: this.chat_room_id,
         other_user_id: this.other_user_id,
@@ -99,6 +109,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       let params = {
         item: JSON.stringify(item)
       }
+      
       let res = await this.nav.push('messages', params)
       this.initialize()
     }
@@ -109,7 +120,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
 
   async initialize() {
-   await this.chats.getchatList(this.search, 1)
+    await this.chats.getchatList(this.search, 1)
 
 
   }

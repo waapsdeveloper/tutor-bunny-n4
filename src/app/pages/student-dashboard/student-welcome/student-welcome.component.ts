@@ -11,13 +11,12 @@ export class StudentWelcomeComponent extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   studentContinue(key) {
-    this.events.publish('reset-modal-dismiss', {  
+    this.events.publish('reset-modal-dismiss', {
       canDismiss: true
     })
-    console.log(key);
 
     let obj = {
       key: key,
@@ -25,5 +24,5 @@ export class StudentWelcomeComponent extends BasePage implements OnInit {
 
     this.modals.dismiss(obj);
   }
-    
+
 }

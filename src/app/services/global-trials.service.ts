@@ -25,7 +25,7 @@ export class GlobalTrialsService {
     private users: UsersService,
     private network: NetworkService,
     private events: EventsService,
-    private GlobalCourses : GlobalCoursesService
+    private GlobalCourses: GlobalCoursesService
   ) {
     this.events.subscribe('clear-all-services-data', () => {
       this.user = null;
@@ -57,7 +57,6 @@ export class GlobalTrialsService {
   }
 
   async trialsChannelReceived($event: any) {
-    console.log($event);
     if ($event) {
       if ($event.slug) {
         let trialId = $event.trial_id;
@@ -69,7 +68,6 @@ export class GlobalTrialsService {
       } else {
         let id = $event.trial_id;
         let res = await this.network.geTrailRequestsByPusher(id);
-        console.log(res);
         this.updateTrailsList(res.trial);
         this.events.publish('update-notifications');
 
@@ -83,24 +81,19 @@ export class GlobalTrialsService {
     const listIndex = this.list.findIndex((x) => x.id == trialId);
     if (listIndex > -1) {
       this.list.splice(listIndex, 1);
-      console.log(`Removed trial with ID ${trialId} from list`);
     }
 
     // Remove from pendingTrials
     const pendingIndex = this.pendingTrials.findIndex((x) => x.id == trialId);
     if (pendingIndex > -1) {
       this.pendingTrials.splice(pendingIndex, 1);
-      console.log(`Removed trial with ID ${trialId} from pendingTrials`);
     }
   }
 
   async updateTrailsList(data: any) {
-    console.log(data);
     const trialObj = Object.assign({}, data);
-    console.log(trialObj);
 
     const index = this.list.findIndex((x) => x.id == trialObj.id);
-    console.log(index);
 
     if (index != -1) {
       this.list[index] = trialObj;
@@ -108,7 +101,6 @@ export class GlobalTrialsService {
       this.list = [trialObj, ...this.list];
     }
     const indexp = this.pendingTrials.findIndex((x) => x.id == trialObj.id);
-    console.log(index);
 
     if (indexp != -1) {
       if (trialObj.status == 'Pending') {
@@ -155,7 +147,6 @@ export class GlobalTrialsService {
         teacher_id: this.user.id,
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
-      console.log(res);
       this.pendingTrials = res.trials;
     });
   }
@@ -170,7 +161,6 @@ export class GlobalTrialsService {
 
   async getTrials(search = '', page = 1) {
     return new Promise(async (resolve) => {
-      console.log('dsfsd');
 
       this.user = this.users.getUser();
 
@@ -203,12 +193,10 @@ export class GlobalTrialsService {
     let res = await this.network.changeTrailStuts(obj, trialId);
     if (res.status === 200) {
       let findIndex = this.list.findIndex((x) => x.id == trialId);
-      console.log(findIndex);
 
       if (findIndex != -1) {
         this.events.publish('update-trail-list');
         this.list[findIndex] = res.trial;
-        console.log(this.list);
       }
     }
   }

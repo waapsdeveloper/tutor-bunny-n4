@@ -24,7 +24,6 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   }
 
   async addImageInArray(imageString) {
-    console.log(imageString);
 
     this.loading = true;
     let firstIndex = this.certificates.findIndex((x) => x.image == null);
@@ -56,15 +55,12 @@ export class UploadCertificatePage extends BasePage implements OnInit {
     };
     const res = (await this.network.getCertificates(obj)) as any;
     this.certificates = res.result;
-    console.log(res);
   }
 
   async clearImage(id: string, event: Event) {
     event.stopPropagation();
     await this.network.deleteCertificates(id);
     let firstIndex = this.certificates.findIndex((x) => x.image == null);
-    console.log(this.certificates);
-
 
     if (firstIndex == -1) {
       let image = this.certificates[0]['image']

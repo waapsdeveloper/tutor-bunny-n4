@@ -81,7 +81,6 @@ export class StudentCourseDetailPage extends BasePage {
   async callApi() {
 
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
-    console.log(res);
 
     this.data = res;
     this.teacher = res.user;
@@ -133,9 +132,6 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async addToFav() {
-    console.log('====================================');
-    console.log("DSa");
-    console.log('====================================');
     let user = this.users.getUser();
 
     this.data.is_liked_by_me = true;
@@ -174,7 +170,7 @@ export class StudentCourseDetailPage extends BasePage {
     let id = user.id;
     let obj = {
       user_id_1: user.id,
-      user_id_2:this.course_user.id,
+      user_id_2: this.course_user.id,
     };
     let res = await this.network.getChadRoomId(obj);
     let params = {
@@ -258,7 +254,6 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   getOtherCourse(event) {
-    console.log(event);
     this.course_Id = event.id;
     this.callApi();
 

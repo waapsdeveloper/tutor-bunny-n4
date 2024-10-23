@@ -17,7 +17,6 @@ export class TeacherListComponent extends BasePage implements OnInit {
     return this._item;
   }
   public set item(value: any) {
-    console.log(value);
 
     this._item = value;
     this.total_rating = value.teacher.total_rating;
@@ -32,7 +31,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
     this.user = this.users.getUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getFlag() {
     if (this.item && this.item.teacher && this.item.teacher.country) {
@@ -86,9 +85,8 @@ export class TeacherListComponent extends BasePage implements OnInit {
     }
   }
   seeAll(user) {
-    console.log(user);
-    let params ={
-      user : JSON.stringify(user)
+    let params = {
+      user: JSON.stringify(user)
     }
 
     this.nav.push('teacher-course-list', params)

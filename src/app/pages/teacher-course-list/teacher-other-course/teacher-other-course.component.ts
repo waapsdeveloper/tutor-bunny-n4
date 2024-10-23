@@ -21,7 +21,6 @@ export class TeacherOtherCourseComponent extends BasePage implements OnInit {
     this.params = this.nav.getQueryParams();
     if (this.params.user) {
       this.teacher = JSON.parse(this.params.user);
-      console.log(this.teacher);
     }
     this.callApi();
   }
@@ -32,6 +31,5 @@ export class TeacherOtherCourseComponent extends BasePage implements OnInit {
     };
     let res = await this.network.getTeacherCourses(obj);
     this.list = res.result.data;
-    console.log(res);
   }
 }

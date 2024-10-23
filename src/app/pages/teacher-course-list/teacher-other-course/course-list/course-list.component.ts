@@ -31,7 +31,6 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
     this.rating = value.user.teacher.avg_rating;
     this.total_rating = value.user.teacher.total_rating;
     this.initialize(value);

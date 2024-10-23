@@ -32,8 +32,6 @@ export class GalleryImagePage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('change-sample-gallery-to-this', (image) => {
-      console.log(image);
-
       this.image = '/assets/gallary.png';
     });
   }

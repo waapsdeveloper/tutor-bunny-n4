@@ -128,7 +128,6 @@ export class GlobalCoursesService {
       };
       const res = (await this.network.getAllCourses(obj)) as any;
       const data = res.result;
-      console.log(data);
 
       this.page = data.current_page;
       this.last_page = data.last_page;
@@ -137,7 +136,6 @@ export class GlobalCoursesService {
       } else {
         this.courses = [...this.courses, ...data.data];
       }
-      console.log(this.courses);
 
       resolve(this.courses);
     });
@@ -278,9 +276,6 @@ export class GlobalCoursesService {
   }
 
   async addFavorites(obj: any, user) {
-    console.log('====================================');
-    console.log(obj);
-    console.log('====================================');
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);

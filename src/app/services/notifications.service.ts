@@ -28,7 +28,6 @@ export class NotificationsService {
         page: page,
       };
       const res = (await this.network.getAllNotifications(obj)) as any;
-      console.log(res);
       const data = res.result;
       this.page = data.current_page;
       this.last_page = data.last_page;
@@ -37,17 +36,13 @@ export class NotificationsService {
         this.unread_count = this.list.filter((item) => !item.is_open).length;
 
 
-        console.log('Unread count:', this.unread_count);
       } else {
         this.list = [...this.list, ...data.data];
         this.unread_count = this.list.filter((item) => !item.is_open).length;
         this.ids = this.list.filter((item) => !item.id);
-        console.log(this.ids);
 
-        console.log('Updated unread count:', this.unread_count);
       }
       this.ids = this.list.map((item) => item.id);
-      console.log(this.ids);
       resolve(this.list);
     });
   }

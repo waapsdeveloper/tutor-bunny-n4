@@ -30,7 +30,6 @@ export class FirebaseService {
 
   async setTokenToServer() {
 
-    console.log("fcm called")
     if (Capacitor.getPlatform() != 'web') {
 
       const token = await this.getFCMToken();

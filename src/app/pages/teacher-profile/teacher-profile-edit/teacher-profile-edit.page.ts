@@ -20,8 +20,7 @@ import { NetworkService } from 'src/app/services/network.service';
 })
 export class TeacherProfileEditPage
   extends BasePage
-  implements OnInit, ViewWillEnter
-{
+  implements OnInit, ViewWillEnter {
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   user;
@@ -73,7 +72,7 @@ export class TeacherProfileEditPage
     this.scrollToTopOnInit();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -93,7 +92,6 @@ export class TeacherProfileEditPage
 
   async initialize() {
     this.user = this.users.getUser();
-    console.log(this.user);
 
 
 
@@ -137,7 +135,6 @@ export class TeacherProfileEditPage
     }, 500);
   }
   setFormDta(data) {
-    console.log(data);
 
     this.formData['name'] = data['name'];
     const cnty = data['teacher']['country'];
@@ -224,8 +221,8 @@ export class TeacherProfileEditPage
 
     // const res = await this.network.updateTeacherProfile(f, user.id);
     // if (res) {
-      this.slides?.nativeElement.swiper.slideTo(1, false, false);
-      this.step = 2;
+    this.slides?.nativeElement.swiper.slideTo(1, false, false);
+    this.step = 2;
     // }
     this.scrollToTopOnInit();
   }
@@ -257,10 +254,10 @@ export class TeacherProfileEditPage
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id);
     if (res && res.message) {
-      if(this.edit){
+      if (this.edit) {
         this.utility.presentSuccessToast("Profile updated Successfully");
         this.nav.pop('/tabs/teacher-dashboard')
-      }else{
+      } else {
         this.utility.presentSuccessToast("Profile Created Successfully ");
         this.nav.push('/teacher-profile-complete');
       }
@@ -298,8 +295,8 @@ export class TeacherProfileEditPage
     //   //   this.utility.presentSuccessToast(res.message)
     //   // }
     //   // this.nav.pop('/tabs/teacher-dashboard')
-      this.slides?.nativeElement.swiper.slideTo(2, false, false);
-      this.step = 3;
+    this.slides?.nativeElement.swiper.slideTo(2, false, false);
+    this.step = 3;
     // }
     this.scrollToTopOnInit();
   }
