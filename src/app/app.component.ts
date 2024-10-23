@@ -70,6 +70,10 @@ export class AppComponent {
 
     await this.iap.initializeApp();
 
+    await this.iap.initializeApp
+
+
+
     this.nav.push('/splash')
 
 

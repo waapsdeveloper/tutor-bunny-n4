@@ -22,9 +22,10 @@ export class UsersService {
     return this._user;
   }
 
-  setUser(user) {
+  async setUser(user) {
 
-    this.userSq.setUserInDatabase(user)
+    const aww = await this.userSq.setUserInDatabase(user)
+    console.log(aww)
     // if(!user.image){
     //   user.image = '/assets//svg/signup.svg'
     // }

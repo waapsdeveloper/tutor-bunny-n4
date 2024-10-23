@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NetworkService } from '../network.service';
 import { SQLiteService } from './sqlite.service';
 
 
@@ -12,6 +13,7 @@ export class InitializeAppService {
   constructor(
     private sqliteService: SQLiteService,
     private storageService: StorageService,
+    private network: NetworkService
     ) {
 
   }
@@ -44,6 +46,18 @@ export class InitializeAppService {
         // });
       }
     });
+  }
+
+  async initializeGenericTables(): Promise<any>{
+
+    let obj = {
+      page: 1
+    }
+
+    const countryData = await this.network.getCountries()
+
+
+
   }
 
 }

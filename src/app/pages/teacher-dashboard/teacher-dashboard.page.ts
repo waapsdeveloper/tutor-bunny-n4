@@ -7,6 +7,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { UserSqService } from 'src/app/services/sqlite/user-sq.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -57,9 +58,14 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public chats: ChatService,
-    public notification: NotificationsService
+    public notification: NotificationsService,
+    private userSq: UserSqService
   ) {
     super(injector);
+
+    this.userSq.loadUsers().then( res => {
+      console.log(res)
+    });
   }
 
   ngOnInit() {
