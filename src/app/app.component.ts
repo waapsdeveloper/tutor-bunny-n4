@@ -9,6 +9,9 @@ import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UtilityService } from './services/utility.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { SQLiteService } from './services/sqlite/sqlite.service';
+import { InitializeAppService } from './services/sqlite/initialize.app.service';
+import { NavService } from './services/nav.service';
 // register Swiper custom elements
 register();
 
@@ -18,6 +21,8 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  public isWeb: boolean = false;
+
   isModalOpen: any;
   constructor(
     private fcm: FirebaseService,
@@ -25,7 +30,9 @@ export class AppComponent {
     private router: Router,
     public utility: UtilityService,
     private modalController: ModalController,
-    private zone: NgZone
+    private zone: NgZone,
+    private iap: InitializeAppService,
+    private nav: NavService
   ) {
     this.initializeApp();
 
@@ -52,10 +59,20 @@ export class AppComponent {
     });
   }
 
-  Initialize() {
+  async Initialize() {
     if (Capacitor.getPlatform() != 'web') {
       this.fcm.setupFMC();
     }
+
+    if( Capacitor.getPlatform() === "web") {
+      this.isWeb = true;
+    }
+
+    await this.iap.initializeApp();
+
+    this.nav.push('/splash')
+
+
   }
   async beInitialize() {
     document.addEventListener(

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { InterceptorService } from './services/interceptor.service';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
+import { SharedSqliteModule } from './services/sqlite/shared-sqlite/shared-sqlite.module';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -22,11 +23,15 @@ firebase.initializeApp(environment.firebaseConfig);
     mode: 'ios'
   }), AppRoutingModule,
     HttpClientModule,
-    NgxPubSubModule
+    NgxPubSubModule,
+    SharedSqliteModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

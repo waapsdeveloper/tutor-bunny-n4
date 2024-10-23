@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "copysqlwasm": "copyfiles -u 3 node_modules/sql.js/dist/sql-wasm.wasm src/assets"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@capacitor-community/sqlite": "^6.0.2",
     "@capacitor-firebase/authentication": "^6.0.0",
     "@capacitor/android": "6.0.0",
     "@capacitor/app": "6.0.0",
@@ -34,10 +36,12 @@
     "@ionic/angular": "^7.0.0",
     "@pscoped/ngx-pub-sub": "^6.0.1",
     "capacitor-resources": "^2.0.5",
+    "crypto": "^1.0.1",
     "firebase": "^10.11.0",
     "flag-icons": "^7.2.1",
     "font-awesome": "^4.7.0",
     "ionicons": "^7.0.0",
+    "jeep-sqlite": "^2.8.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
@@ -66,6 +70,7 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",

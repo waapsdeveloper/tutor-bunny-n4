@@ -4,12 +4,12 @@ import { authGuard } from './guards/auth.guard';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'splash',
-    pathMatch: 'full',
+  // {
+  //   path: '',
+  //   redirectTo: 'splash',
+  //   pathMatch: 'full',
 
-  },
+  // },
   {
     path: 'splash',
     loadChildren: () =>
@@ -165,7 +165,8 @@ const routes: Routes = [
   {
     path: 'teacher-profile-complete',
     loadChildren: () => import('./pages/teacher-profile-complete/teacher-profile-complete.module').then( m => m.TeacherProfileCompletePageModule)
-  },  {
+  },
+  {
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
