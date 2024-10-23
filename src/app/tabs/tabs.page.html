@@ -13,7 +13,7 @@
         [class.footer-tab-label-active]="(selectedTab === 'teacher-dashboard' || selectedTab === 'student-dashboard')">
         Home</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" tab="chat">
+    <ion-tab-button class="ion-tab-button-67895675" tab="chat?time=5">
       <div class="tab-back-78523" *ngIf="selectedTab === 'chat'"></div>
       <div class="unread-count" *ngIf="chatService.unreadCount !== 0"></div>
       <img [src]="selectedTab === 'chat' ? 'assets/icon/home/chat-icon-fill.svg' : 'assets/icon/home/chat-icon.svg'" />
