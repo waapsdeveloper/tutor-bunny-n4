@@ -76,6 +76,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     this.user = null;
     this.other_user_id = null;
   }
+
   doSearch(event) {
 
     this.chats.getchatList(this.search, 1)
@@ -93,12 +94,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       this.other_user_id = JSON.parse(this.params.other_user_id);
     }
     this.chat_room_id = this.params.chat_room_id;
-    this.events.subscribe('clear-chat-page', () => {
-      this.user = null;
-      this.other_user_id = null;
-      this.chat_room_id= null
-      
-    });
+
     console.log(this.chat_room_id);
     if (this.chat_room_id) {
       let item = {
