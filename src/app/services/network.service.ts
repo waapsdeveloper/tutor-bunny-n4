@@ -95,14 +95,26 @@ export class NetworkService {
 
   }
 
+  getAllCountries() {
+    return this.httpGetResponse('countries/all', null, false, false);
+  }
+
   getStates(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('states/by-country' + '?' + str, null, false, false);
   }
 
+  getAllStates() {
+    return this.httpGetResponse('states/all', null, false, false);
+  }
+
   getLanguage(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('languages/list' + '?' + str, null, false, false);
+  }
+
+  getAllLanguages() {
+    return this.httpGetResponse('languages/all', null, false, false);
   }
 
   addLanguage(data) {

@@ -69,10 +69,7 @@ export class AppComponent {
     }
 
     await this.iap.initializeApp();
-
-    await this.iap.initializeApp
-
-
+    await this.iap.initializeGenericTables();
 
     this.nav.push('/splash')
 

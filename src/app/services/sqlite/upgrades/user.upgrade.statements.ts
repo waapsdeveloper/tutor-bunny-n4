@@ -41,7 +41,7 @@ export class UpgradeStatements {
         );`,
         `CREATE TABLE IF NOT EXISTS countries(
           id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
+          name TEXT,
           iso3 TEXT,
           numeric_code TEXT,
           iso2 TEXT,
@@ -53,17 +53,36 @@ export class UpgradeStatements {
           tld TEXT,
           native TEXT,
           region TEXT,
+          region_id INTEGER,
           subregion TEXT,
+          subregion_id INTEGER,
+          nationality TEXT,
+          timezones TEXT,
+          translations TEXT,
           latitude TEXT,
-          longitude TEXT
+          longitude TEXT,
+          emoji TEXT,
+          emojiU TEXT,
+          status INTEGER,
+          created_at TEXT,
+          updated_at TEXT,
+          flag INTEGER,
+          wikiDataId TEXT
         );`,
         `CREATE TABLE IF NOT EXISTS states(
           id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
+          name TEXT,
           country_id INTEGER,
+          country_code TEXT,
+          fips_code TEXT,
+          iso2 TEXT,
+          type TEXT,
           latitude TEXT,
           longitude TEXT,
-          FOREIGN KEY(country_id) REFERENCES countries(id)
+          created_at TEXT,
+          updated_at TEXT,
+          flag INTEGER,
+          wikiDataId TEXT
         );`,
         `CREATE TABLE IF NOT EXISTS languages(
           id INTEGER PRIMARY KEY,
@@ -84,9 +103,22 @@ export class UpgradeStatements {
           subject_id INTEGER,
           FOREIGN KEY(teacher_id) REFERENCES teachers(teacher_id),
           FOREIGN KEY(subject_id) REFERENCES subjects(id)
+        );`,
+        `CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY,
+            dob TEXT,
+            country_id INTEGER,
+            state_id INTEGER,
+            city TEXT,
+            zip_code TEXT,
+            dial_code INTEGER,
+            phone_number TEXT,
+            status INTEGER,
+            terms INTEGER,
+            profile_complete INTEGER
         );`
-      ]
-    }
+      ],
+    },
 
     /* add new statements below for next database version when required*/
     /*
@@ -97,5 +129,5 @@ export class UpgradeStatements {
       ]
     }
     */
-  ]
+  ];
 }
