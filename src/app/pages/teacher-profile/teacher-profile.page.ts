@@ -120,7 +120,7 @@ export class TeacherProfilePage
         this.hourly_rate = this.user.teacher.hourly_rate;
         this.city = this.user.teacher.city;
         const verified_on = this.user.verified_on;
-        this.verified_on = moment(verified_on).format('DD-MM-YYYY');
+        this.verified_on = moment(verified_on).format('DD-MMM-YYYY');
         this.language = this.user.teacher.languages;
         this.total_rating = this.user.teacher.total_rating;
         this.rating = this.user.teacher.avg_rating;
@@ -144,7 +144,7 @@ export class TeacherProfilePage
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
-      this.hourly_rate = this.user.teacher.hourly_rate;
+      this.hourly_rate = this.user.teacher.converted_hourly_rate;
 
       this.travel_policy = this.user.teacher.travel_policy.name;
       this.language = this.user.teacher.languages;
@@ -201,15 +201,12 @@ export class TeacherProfilePage
 
   async goToChat() {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
-
-
     this.student = this.users.getUser();
     let id = this.user.id;
     let obj = {
       user_id_1: this.student.id,
       user_id_2: this.teacher.id,
     };
-    // return
     let res = await this.network.getChadRoomId(obj);
     let params = {
       student_id: id,

@@ -27,6 +27,7 @@ export class ChatService {
   };
   days;
   chatChannel: any;
+  noRoute = false;
 
   constructor(
     private users: UsersService,
@@ -189,5 +190,7 @@ export class ChatService {
     } else {
     }
   }
+
+  
 
 }

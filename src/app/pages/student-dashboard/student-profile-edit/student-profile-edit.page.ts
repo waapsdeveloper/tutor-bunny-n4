@@ -165,7 +165,8 @@ export class StudentProfileEditPage
           role: this.params.role
         }, "auto-height-modal", 1, [0, 1], true)
       }
-      this.nav.push('/tabs/student-dashboard');
+      this.events.publish('update-course-list-after-profile');
+      this.nav.pop();
     }
   }
 

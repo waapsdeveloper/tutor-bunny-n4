@@ -11,6 +11,7 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
   @Input() showSearch: boolean = false;
   @Input() showFav: boolean = false;
   @Input() showFavValue: boolean = false;
+  @Input() goToFav: boolean = false;
 
   @Input() showNotification: boolean = false;
   @Input() showBack: boolean = false;
@@ -73,4 +74,8 @@ export class SdHeaderTopComponent extends BasePage implements OnInit {
     this.toggleSearchBar.emit()
 
   }
+  async showFavCourse() {
+    this.nav.push('/fav-courses')
+  }
+
 }
