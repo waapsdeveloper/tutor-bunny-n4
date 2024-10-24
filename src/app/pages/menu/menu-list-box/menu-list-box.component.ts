@@ -30,12 +30,13 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   }
 
   async logout() {
-    await FirebaseAuthentication.signOut();
+
     this.events.publish('clear-all-services-data');
     localStorage.clear();
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     this.nav.pop('splash');
+    await FirebaseAuthentication.signOut();
   }
 }

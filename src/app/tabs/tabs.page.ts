@@ -74,7 +74,7 @@ export class TabsPage extends BasePage implements OnInit {
       this.showUser = null;
       this.showTabs = null;
       this.roleId = null;
-    });
+    }, false);
   }
 
   setCurrentTab() {
@@ -87,6 +87,7 @@ export class TabsPage extends BasePage implements OnInit {
     this.loadResolvers();
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
+
     this.events.registerPusherEvent(this.user.id);
     this.teacher.registerPusherEvent(this.user.id);
     this.chats.registerPusherEvent(this.user.id)

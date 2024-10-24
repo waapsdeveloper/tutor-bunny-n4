@@ -50,7 +50,7 @@ export class ChatService {
       this.requests = null;
       this.requestCount = null;
       this.days = null;
-    });
+    }, false);
     this.events.subscribe('clear-chat-data', () => {
       this.days = null;
     });

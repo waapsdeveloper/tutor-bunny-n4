@@ -37,8 +37,7 @@ export class GlobalTrialsService {
       this.pendingTrialPage = null;
       this.pendingTrialLastPage = null;
       this.pendingTrials = null;
-      this.trialChannel = null;
-    });
+    }, false);
     const options = {
       cluster: 'ap2',
       forceTLS: true,

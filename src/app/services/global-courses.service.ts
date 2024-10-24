@@ -26,11 +26,11 @@ export class GlobalCoursesService {
 
   constructor(private network: NetworkService, private events: EventsService) {
     this.events.subscribe('clear-all-services-data', () => {
+      console.log(this.favorites)
       this.otherCoursesPage = null;
       this.otherCoursesLastPage = null;
       this.otherCourses = [];
       this.courses = [];
-      this.CourseChannel = null;
       this.otherCourseUserId = null;
       this.otherExceptCourseId = null;
       this.favorites = []
