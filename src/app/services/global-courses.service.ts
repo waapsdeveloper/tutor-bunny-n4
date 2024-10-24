@@ -34,7 +34,7 @@ export class GlobalCoursesService {
       this.otherCourseUserId = null;
       this.otherExceptCourseId = null;
       this.favorites = []
-    });
+    }, false);
     const options = {
       cluster: 'ap2',
       forceTLS: true,
