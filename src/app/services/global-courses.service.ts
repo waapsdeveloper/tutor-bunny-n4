@@ -31,7 +31,6 @@ export class GlobalCoursesService {
       this.otherCoursesLastPage = null;
       this.otherCourses = [];
       this.courses = [];
-      this.CourseChannel = null;
       this.otherCourseUserId = null;
       this.otherExceptCourseId = null;
       this.favorites = []

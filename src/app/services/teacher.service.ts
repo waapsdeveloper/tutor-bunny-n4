@@ -12,10 +12,6 @@ export class TeacherService {
   userChannel: any;
 
   constructor(private network: NetworkService, private events: EventsService) {
-    this.events.subscribe('clear-all-services-data', () => {
-      this.ratingChannel = null;
-      this.userChannel = null
-    }, false);
     const options = {
       cluster: 'ap2',
       forceTLS: true,
