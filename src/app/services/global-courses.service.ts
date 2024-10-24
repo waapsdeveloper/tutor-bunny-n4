@@ -28,11 +28,12 @@ export class GlobalCoursesService {
     this.events.subscribe('clear-all-services-data', () => {
       this.otherCoursesPage = null;
       this.otherCoursesLastPage = null;
-      this.otherCourses = null;
-      this.courses = null;
+      this.otherCourses = [];
+      this.courses = [];
       this.CourseChannel = null;
       this.otherCourseUserId = null;
       this.otherExceptCourseId = null;
+      this.favorites = []
     });
     const options = {
       cluster: 'ap2',
