@@ -26,6 +26,7 @@ export class GlobalCoursesService {
 
   constructor(private network: NetworkService, private events: EventsService) {
     this.events.subscribe('clear-all-services-data', () => {
+      console.log(this.favorites)
       this.otherCoursesPage = null;
       this.otherCoursesLastPage = null;
       this.otherCourses = [];
@@ -34,7 +35,7 @@ export class GlobalCoursesService {
       this.otherCourseUserId = null;
       this.otherExceptCourseId = null;
       this.favorites = []
-    });
+    }, false);
     const options = {
       cluster: 'ap2',
       forceTLS: true,
