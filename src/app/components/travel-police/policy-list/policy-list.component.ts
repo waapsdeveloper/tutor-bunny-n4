@@ -42,4 +42,8 @@ export class PolicyListComponent extends BasePage implements OnInit {
       item: item
     });
   }
+  
+  back(){
+    this.modals.dismiss()
+  }
 }

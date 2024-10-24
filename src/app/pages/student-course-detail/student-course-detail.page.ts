@@ -4,6 +4,7 @@ import { BasePage } from '../../base-page/base-page';
 import { TrailMessageComponent } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { GlobalCoursesService } from '../../services/global-courses.service';
 import { IonContent } from '@ionic/angular';
+import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -23,6 +24,7 @@ export class StudentCourseDetailPage extends BasePage {
   lessons;
   btn_loading = false;
   teacher;
+  user
   currencySymbol;
   techerTitle;
   language;
@@ -165,21 +167,40 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   async goToChat() {
-    let user = this.users.getUser();
+    this.user = this.users.getUser();
+    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+    if (v || v == true) {
 
-    let id = user.id;
-    let obj = {
-      user_id_1: user.id,
-      user_id_2: this.course_user.id,
-    };
-    let res = await this.network.getChadRoomId(obj);
-    let params = {
-      student_id: id,
-      other_user_id: this.course_user.id,
-      user: JSON.stringify(this.course_user),
-      chat_room_id: res.chat_room.id,
-    };
-    this.nav.push('/tabs/chat', params);
+
+      let id = this.user.id;
+      let obj = {
+        user_id_1: this.user.id,
+        user_id_2: this.course_user.id,
+      };
+      let res = await this.network.getChadRoomId(obj);
+      let params = {
+        student_id: id,
+        other_user_id: this.course_user.id,
+        user: JSON.stringify(this.course_user),
+        chat_room_id: res.chat_room.id,
+      };
+      this.nav.push('/tabs/chat', params);
+    } else {
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
+    }
   }
 
   async presentAlert() {
