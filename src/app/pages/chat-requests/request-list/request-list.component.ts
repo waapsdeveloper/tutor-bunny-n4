@@ -28,7 +28,7 @@ export class RequestListComponent extends BasePage implements OnInit {
     const date = this.item.updated_at;
 
     this.calculateAge()
-    this.date = moment(date).format('L');
+    this.date = moment(date).format('DD-MMM-YYYY');
   }
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);

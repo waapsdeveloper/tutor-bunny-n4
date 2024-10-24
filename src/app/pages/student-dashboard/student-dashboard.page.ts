@@ -18,7 +18,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   country;
   showWarning = false;
   utcTime
-  showFav= false;
+  showFav = false;
   flag;
   isProfileComplete;
   showLiked = false;
@@ -39,7 +39,6 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
     });
     this.events.subscribe('show-fav-dot', (showFav) => {
-      console.log(showFav);
       this.showFav = showFav;
 
     });
@@ -149,11 +148,11 @@ export class StudentDashboardPage extends BasePage implements OnInit {
 
   toogleView(view) {
     this.view = view;
-    if(view == 'course'){
+    if (view == 'course') {
       this.nav.push('/tabs/student-dashboard/student-dashborad-courses')
     }
 
-    if(view == 'teacher'){
+    if (view == 'teacher') {
       this.nav.push('/tabs/student-dashboard/student-dashborad-teachers')
     }
 

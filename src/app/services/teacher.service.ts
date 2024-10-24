@@ -12,10 +12,6 @@ export class TeacherService {
   userChannel: any;
 
   constructor(private network: NetworkService, private events: EventsService) {
-    this.events.subscribe('clear-all-services-data', () => {
-      this.ratingChannel =null;
-      this.userChannel = null
-    });
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -26,7 +22,6 @@ export class TeacherService {
   }
 
   registerPusherEvent(id: any) {
-    console.log(id);
 
     this.ratingChannel.bind(
       'rating-rec-' + id,
@@ -43,7 +38,6 @@ export class TeacherService {
   }
 
   userChannelReceived($event: any) {
-    console.log($event);
     this.events.publish('user-update-via-pusher', $event);
   }
 }

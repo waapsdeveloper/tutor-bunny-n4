@@ -33,7 +33,7 @@ export class CreateCourseService {
   constructor(private network: NetworkService, private events: EventsService) {
     this.events.subscribe('clear-all-services-data', () => {
       this.resetFormData();
-    });
+    }, false);
   }
 
   resetFormData() {
@@ -92,7 +92,6 @@ export class CreateCourseService {
 
       const res = (await this.network.getCourseImages(obj)) as any;
       this.coursePhotos = res.result;
-      console.log(res);
     }
   }
 

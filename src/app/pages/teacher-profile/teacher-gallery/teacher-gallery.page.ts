@@ -22,7 +22,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -86,7 +86,6 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   async clearImage(id: string, event: Event, image) {
     event.stopPropagation();
-    console.log(image);
     this.events.publish('change-sample-gallery-to-this', this.images);
 
     await this.network.deleteImage(id);

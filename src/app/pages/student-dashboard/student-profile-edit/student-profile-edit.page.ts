@@ -13,8 +13,7 @@ import { CompleteProfileComponent } from './complete-profile/complete-profile.co
 })
 export class StudentProfileEditPage
   extends BasePage
-  implements OnInit, ViewWillEnter
-{
+  implements OnInit, ViewWillEnter {
   params: any;
   backUrl = '/student-profile';
   showBack = false;
@@ -41,7 +40,7 @@ export class StudentProfileEditPage
     this.initialize();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -157,17 +156,14 @@ export class StudentProfileEditPage
       this.events.publish('get-user-after-submit-form', user);
       let data = {
         user_id: user.id,
-        profile_complete : 1
+        profile_complete: 1
       }
       let res3 = await this.network.getIsProfileComplete(user.id, data)
-      console.log(res3);
       let profile_complete = res.user.student.profile_complete;
-      console.log(profile_complete);
-      if(profile_complete == 0){
+      if (profile_complete == 0) {
         let res2 = await this.modals.present(CompleteProfileComponent, {
           role: this.params.role
         }, "auto-height-modal", 1, [0, 1], true)
-        console.log(res2);
       }
       this.nav.push('/tabs/student-dashboard');
     }

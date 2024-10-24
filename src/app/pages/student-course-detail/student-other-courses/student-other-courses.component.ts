@@ -31,15 +31,14 @@ export class StudentOtherCoursesComponent extends BasePage {
 
 
   seeAll() {
-    let params ={
-      user : JSON.stringify(this.teacher)
+    let params = {
+      user: JSON.stringify(this.teacher)
     }
 
     this.nav.push('teacher-course-list', params)
   }
 
-  getOtherCourse(events){
-    console.log(events);
+  getOtherCourse(events) {
     this.onChange.emit(events);
 
 

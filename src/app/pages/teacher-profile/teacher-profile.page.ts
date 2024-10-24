@@ -13,8 +13,7 @@ import { log } from 'node:console';
 })
 export class TeacherProfilePage
   extends BasePage
-  implements OnInit, ViewWillEnter
-{
+  implements OnInit, ViewWillEnter {
   user;
   displayName;
   flag;
@@ -58,7 +57,6 @@ export class TeacherProfilePage
       this.initialize.bind(this)
     );
     this.user = this.users.getUser();
-    console.log(this.user);
 
     this.params = this.nav.getQueryParams();
     if (this.params.email) {
@@ -68,29 +66,25 @@ export class TeacherProfilePage
   }
 
   getCourses(events) {
-    console.log(events);
     this.course = events.total
   }
 
   async ionViewWillEnter() {
 
-    // console.log(this.teacher);
 
     let obj = {
       search: 'search',
       page: 1,
     };
     this.roleId = localStorage.getItem('role');
-    if(this.teacher){
+    if (this.teacher) {
       if (this.roleId == '3') {
         let id = this.user.id;
         const res = (await this.network.getMyCourseList(obj, id)) as any;
-        console.log(res);
 
       } else {
         let id = this.teacher.id;
         const res = (await this.network.getMyCourseList(obj, id)) as any;
-        console.log(res);
       }
 
     }
@@ -110,10 +104,8 @@ export class TeacherProfilePage
       email: this.email,
     };
     let res = await this.network.getUserByEmail(obj);
-    console.log(res);
 
     if (this.roleId == '3') {
-      console.log(this.roleId);
 
       if (res) {
         this.users.setUser(res.user);
@@ -140,15 +132,11 @@ export class TeacherProfilePage
         }
       }
     } else {
-      console.log(this.roleId, 'dsffs');
       this.user = res.user;
 
       this.flag = this.getFlag();
       const verified_on = this.user.verified_on;
       this.verified_on = moment(verified_on).format('DD-MMM-YYYY');
-      console.log('====================================');
-      console.log(verified_on);
-      console.log('====================================');
       this.displayName = this.utility.getAmericanName(this.user.name);
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
@@ -218,7 +206,6 @@ export class TeacherProfilePage
       user_id_1: this.student.id,
       user_id_2: this.teacher.id,
     };
-    console.log(obj);
     // return
     let res = await this.network.getChadRoomId(obj);
     let params = {
