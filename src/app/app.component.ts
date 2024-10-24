@@ -31,7 +31,6 @@ export class AppComponent {
     public utility: UtilityService,
     private modalController: ModalController,
     private zone: NgZone,
-    private iap: InitializeAppService,
     private nav: NavService
   ) {
     this.initializeApp();
@@ -67,12 +66,6 @@ export class AppComponent {
     if( Capacitor.getPlatform() === "web") {
       this.isWeb = true;
     }
-
-    await this.iap.initializeApp();
-    await this.iap.initializeGenericTables();
-
-    this.nav.push('/splash')
-
 
   }
   async beInitialize() {
@@ -112,8 +105,6 @@ export class AppComponent {
   }
 
   exitApp() {
-    console.log('dsfs');
-
     navigator['app'].exitApp();
   }
 }

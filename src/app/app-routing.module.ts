@@ -4,17 +4,17 @@ import { authGuard } from './guards/auth.guard';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'splash',
-  //   pathMatch: 'full',
+  {
+    path: '',
+    redirectTo: 'splash',
+    pathMatch: 'full',
 
-  // },
+  },
   {
     path: 'splash',
     loadChildren: () =>
       import('./pages/splash/splash.module').then((m) => m.SplashPageModule),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'home',

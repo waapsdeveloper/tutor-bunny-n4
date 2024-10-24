@@ -69,7 +69,6 @@ export class ChatService {
   chatChannelReceived($event: any) {
 
     this.getchatList()
-
     this.events.publish('message-received-via-pusher', $event);
     this.getUnreadMsgCount()
 
