@@ -110,11 +110,14 @@ export class TeacherProfilePage
       if (res) {
         this.users.setUser(res.user);
         this.user = this.users.getUser();
+        console.log('====================================');
+        console.log(this.user);
+        console.log('====================================');
         this.flag = this.getFlag();
         this.displayName = this.utility.getAmericanName(this.user.name);
         this.country = this.user.teacher.country.name;
         this.state = this.user.teacher.state.name;
-        this.hourly_rate = this.user.teacher.converted_hourly_rate;
+        this.hourly_rate = this.user.teacher.hourly_rate;
         this.city = this.user.teacher.city;
         const verified_on = this.user.verified_on;
         this.verified_on = moment(verified_on).format('DD-MM-YYYY');
@@ -141,7 +144,7 @@ export class TeacherProfilePage
       this.country = this.user.teacher.country.name;
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
-      this.hourly_rate = this.user.teacher.converted_hourly_rate;
+      this.hourly_rate = this.user.teacher.hourly_rate;
 
       this.travel_policy = this.user.teacher.travel_policy.name;
       this.language = this.user.teacher.languages;

@@ -1,9 +1,11 @@
 <div>
-  <ion-range aria-label="Range with pin" [pin]="true" [pinFormatter]="pinFormatter" class="range-78522" [min]="minValue"
-    [max]="maxValue" [(ngModel)]="currentValue" (ionChange)="onRangeChange($event)">
-  </ion-range>
   <div class="price-range-text-78521">
-    <div class="text">{{currency_symbol}}{{ minValue }}</div>
+    <div class="text">{{currency_symbol}} {{ minValue }}</div>
+    <div style="width: 65%;">
+      <ion-range aria-label="Range with pin" [pin]="true" [pinFormatter]="pinFormatter" class="range-78522" [min]="minValue"
+      [max]="maxValue" [(ngModel)]="currentValue" (ionChange)="onRangeChange($event)">
+    </ion-range>
+  </div>
     <div class="text">Max: {{currency_symbol}}{{ maxValue }}</div>
   </div>
 </div>
