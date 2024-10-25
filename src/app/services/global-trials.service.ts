@@ -32,11 +32,11 @@ export class GlobalTrialsService {
       this.page = null;
       this.last_page = null;
       this.status = null;
-      this.list = null;
+      this.list = [];
       this.courseId = null;
       this.pendingTrialPage = null;
       this.pendingTrialLastPage = null;
-      this.pendingTrials = null;
+      this.pendingTrials = [];
     }, false);
     const options = {
       cluster: 'ap2',

@@ -233,10 +233,20 @@ export class StudentCourseDetailPage extends BasePage {
         this.events.publish('update-course-list');
       }
     } else {
-      this.nav.push('/student-profile/student-profile-edit', {
-        backUrl: '/tabs/student-dashboard',
-        showBack: true,
-      });
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
     }
     this.btn_loading = false
 

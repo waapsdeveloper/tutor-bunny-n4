@@ -30,6 +30,13 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   showChat = 'inbox';
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
+    this.events.subscribe('clear-params-chat', () =>{
+      this.chat_room_id = null;
+      this.params=  null;
+    })
+
+    this.chats.noRoute = false;
+
     this.initialize();
 
     this.activeUser = this.users.getUser();
@@ -45,12 +52,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       'message-received-via-pusher',
       this.updateChatsByMessageReceived.bind(this)
     );
-
-    
-
-
-
-
   }
   messageReceivedViaPusher() {
     this.events.subscribe(
@@ -88,13 +89,11 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     console.log(this.params);
     if (this.params.user) {
       this.user = JSON.parse(this.params.user);
-
     }
     if (this.params.other_user_id) {
       this.other_user_id = JSON.parse(this.params.other_user_id);
     }
     this.chat_room_id = this.params.chat_room_id;
-
     console.log(this.chat_room_id);
     if (this.chat_room_id) {
       let item = {
@@ -105,20 +104,18 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       let params = {
         item: JSON.stringify(item)
       }
-      
-      let res = await this.nav.push('messages', params)
-      this.initialize()
+      if(this.chats.noRoute  == false){
+
+        let res = await this.nav.push('messages', params)
+      }
+      // this.initialize()
     }
     this.initialize()
-
-
   }
 
 
   async initialize() {
-    await this.chats.getchatList(this.search, 1)
-
-
+    await this.chats.getchatList(this.search, 1);
   }
 
   async handleRefresh(event) {

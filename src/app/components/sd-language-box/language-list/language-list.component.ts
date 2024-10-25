@@ -77,6 +77,9 @@ export class LanguageListComponent extends BasePage implements OnInit {
         search: this.search,
         page: this.page
       }
+
+      let listw = this.list.filter(x => x.checked == true);
+
       this.lang = await this.network.getLanguage(obj) as any[];
       this.page = this.lang.current_page;
 
@@ -89,7 +92,7 @@ export class LanguageListComponent extends BasePage implements OnInit {
       let newList = this.lang["data"];
 
       // Merge new list with previously selected items
-      this.list = [...new Set([...this.list, ...newList])];
+      this.list = [...new Set([...this.list, ...newList, ...listw])];
 
       // Update the list to check pre-selected items
       this.list = this.list.map((item) => {

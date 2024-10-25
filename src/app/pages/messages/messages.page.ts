@@ -176,10 +176,16 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     return moment(time).format('hh:mm a');
   }
 
+
   back() {
     this.events.publish('clear-chat-data');
-
     this.nav.pop();
+  }
+
+  ngOnDestroy() {
+    this.chats.noRoute = true;
+    this.events.publish('clear-params-chat')
+
   }
 
   openImage(image) {

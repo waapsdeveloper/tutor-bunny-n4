@@ -11,6 +11,7 @@
     <app-sd-edit-button *ngIf="showEdit" (click)="editCourse()"></app-sd-edit-button>
     <app-sd-fav-button *ngIf="showFav" [flag]="showFavValue" (addToFav)="addtoFav()"
       (removetoFav)="removeToFav()"></app-sd-fav-button>
+    <app-sd-fav-button *ngIf="goToFav" [flag]="showFavValue" (click)="showFavCourse()"></app-sd-fav-button>
     <app-sd-share-button *ngIf="showShare"></app-sd-share-button>
   </div>
 </div>

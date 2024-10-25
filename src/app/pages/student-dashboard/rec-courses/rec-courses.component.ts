@@ -8,7 +8,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './rec-courses.component.html',
   styleUrls: ['./rec-courses.component.scss'],
 })
-export class RecCoursesComponent extends BasePage {
+export class RecCoursesComponent extends BasePage implements OnInit {
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
   }
@@ -18,6 +18,13 @@ export class RecCoursesComponent extends BasePage {
     await this.globalCourses.getCoursesFromApi('', 1);
     event.target.complete();
   }
+  ngOnInit() {
+    this.events.subscribe('update-course-list-after-profile', async () =>{
+    await this.globalCourses.getCoursesFromApi('', 1);
+
+    });
+
+   }
 
   async onIonInfinite(ev) {
     if (this.globalCourses.page <= this.globalCourses.last_page) {
