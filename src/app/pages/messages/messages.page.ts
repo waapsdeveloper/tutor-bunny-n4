@@ -2,14 +2,12 @@ import {
   Component,
   ElementRef,
   Injector,
-  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
-import { ImageViewComponent } from './image-view/image-view.component';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -183,9 +181,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   ngOnDestroy() {
-    this.chats.noRoute = true;
     this.events.publish('clear-params-chat')
-
   }
 
   openImage(image) {

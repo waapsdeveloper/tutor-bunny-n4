@@ -28,17 +28,15 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   chat_;
   other_user_id;
   showChat = 'inbox';
+
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.events.subscribe('clear-params-chat', () =>{
       this.chat_room_id = null;
       this.params=  null;
-    })
-
-    this.chats.noRoute = false;
+    });
 
     this.initialize();
-
     this.activeUser = this.users.getUser();
 
   }
@@ -104,10 +102,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       let params = {
         item: JSON.stringify(item)
       }
-      if(this.chats.noRoute  == false){
-
-        let res = await this.nav.push('messages', params)
-      }
+      let res = await this.nav.push('messages', params)
       // this.initialize()
     }
     this.initialize()
