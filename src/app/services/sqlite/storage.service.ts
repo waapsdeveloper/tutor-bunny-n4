@@ -5,46 +5,59 @@ import { SQLiteService } from './sqlite.service';
 import { UpgradeStatements } from './upgrades/user.upgrade.statements';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
   // public userList: BehaviorSubject<User[]> =
   // new BehaviorSubject<User[]>([]);
-  private databaseName: string = "";
+  private databaseName: string = '';
   private uUpdStmts: UpgradeStatements = new UpgradeStatements();
   private versionUpgrades;
   private loadToVersion;
   private db!: SQLiteDBConnection;
   // private isUserReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private sqliteService: SQLiteService,
-  private dbVerService: DbnameVersionService) {
+  constructor(
+    private sqliteService: SQLiteService,
+    private dbVerService: DbnameVersionService
+  ) {
     this.versionUpgrades = this.uUpdStmts.userUpgrades;
-    this.loadToVersion = this.versionUpgrades[this.versionUpgrades.length-1].toVersion;
+    this.loadToVersion =
+      this.versionUpgrades[this.versionUpgrades.length - 1].toVersion;
   }
   async initializeDatabase(dbName: string) {
     this.databaseName = dbName;
     // create upgrade statements
-    await this.sqliteService
-      .addUpgradeStatement({  database: this.databaseName,
-                              upgrade: this.versionUpgrades});
+    await this.sqliteService.addUpgradeStatement({
+      database: this.databaseName,
+      upgrade: this.versionUpgrades,
+    });
     // create and/or open the database
-    this.db = await this.sqliteService.openDatabase(this.databaseName,
-                                          false,
-                                          'no-encryption',
-                                          this.loadToVersion,
-                                          false
+    this.db = await this.sqliteService.openDatabase(
+      this.databaseName,
+      false,
+      'no-encryption',
+      this.loadToVersion,
+      false
     );
-    this.dbVerService.set(this.databaseName,this.loadToVersion);
+    this.dbVerService.set(this.databaseName, this.loadToVersion);
 
     // await this.getUsers();
   }
 
-  async executeQuery(query, params?): Promise<any>{
+  async executeQuery(query, params?): Promise<any> {
+    if (!this.db) {
+      this.db = await this.sqliteService.openDatabase(
+        this.databaseName,
+        false,
+        'no-encryption',
+        this.loadToVersion,
+        false
+      );
+    }
 
-    const res = (await this.db.query(query, params));
+    const res = await this.db.query(query, params);
     return res.values;
-
   }
   // userState() {
   //   return this.isUserReady.asObservable();
@@ -52,7 +65,4 @@ export class StorageService {
   // fetchUsers(): Observable<User[]> {
   //   return this.userList.asObservable();
   // }
-
-
 }
-

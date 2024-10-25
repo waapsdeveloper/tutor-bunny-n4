@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { initializeApp } from 'firebase/app';
 
 // import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
@@ -9,9 +8,8 @@ import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UtilityService } from './services/utility.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
-import { SQLiteService } from './services/sqlite/sqlite.service';
-import { InitializeAppService } from './services/sqlite/initialize.app.service';
 import { NavService } from './services/nav.service';
+import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // register Swiper custom elements
 register();
 
@@ -31,8 +29,10 @@ export class AppComponent {
     public utility: UtilityService,
     private modalController: ModalController,
     private zone: NgZone,
-    private nav: NavService
+    private iap: InitializeAppService,
   ) {
+
+
     this.initializeApp();
 
     this.Initialize();
@@ -67,6 +67,8 @@ export class AppComponent {
       this.isWeb = true;
     }
 
+    await this.iap.initializeApp();
+
   }
   async beInitialize() {
     document.addEventListener(
@@ -82,7 +84,6 @@ export class AppComponent {
   }
 
   async createBackRoutingLogics(url) {
-    console.log(url);
 
     if (
       url.includes('splash') ||

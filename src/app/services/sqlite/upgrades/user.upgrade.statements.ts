@@ -34,10 +34,7 @@ export class UpgradeStatements {
           converted_hourly_rate REAL,
           converted_currency TEXT,
           total_rating INTEGER,
-          avg_rating REAL,
-          FOREIGN KEY(user_id) REFERENCES users(id),
-          FOREIGN KEY(country_id) REFERENCES countries(id),
-          FOREIGN KEY(state_id) REFERENCES states(id)
+          avg_rating REAL
         );`,
         `CREATE TABLE IF NOT EXISTS countries(
           id INTEGER PRIMARY KEY,
@@ -94,15 +91,11 @@ export class UpgradeStatements {
         );`,
         `CREATE TABLE IF NOT EXISTS teacher_languages(
           teacher_id INTEGER,
-          language_id INTEGER,
-          FOREIGN KEY(teacher_id) REFERENCES teachers(teacher_id),
-          FOREIGN KEY(language_id) REFERENCES languages(id)
+          language_id INTEGER
         );`,
         `CREATE TABLE IF NOT EXISTS teacher_subjects(
           teacher_id INTEGER,
-          subject_id INTEGER,
-          FOREIGN KEY(teacher_id) REFERENCES teachers(teacher_id),
-          FOREIGN KEY(subject_id) REFERENCES subjects(id)
+          subject_id INTEGER
         );`,
         `CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
