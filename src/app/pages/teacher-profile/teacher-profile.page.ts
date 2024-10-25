@@ -202,14 +202,14 @@ export class TeacherProfilePage
   async goToChat() {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.student = this.users.getUser();
-    let id = this.user.id;
+
     let obj = {
       user_id_1: this.student.id,
       user_id_2: this.teacher.id,
     };
     let res = await this.network.getChadRoomId(obj);
     let params = {
-      student_id: id,
+      student_id: this.student.id,
       other_user_id: this.teacher.id,
       user: JSON.stringify(this.teacher),
       chat_room_id: res.chat_room.id,
