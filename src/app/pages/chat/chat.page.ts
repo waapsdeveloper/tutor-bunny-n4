@@ -33,8 +33,8 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     super(injector);
     this.events.subscribe('clear-params-chat', () =>{
       this.chat_room_id = null;
-      this.params=  null;
-    });
+      this.params =  null;
+    }, false);
 
     this.initialize();
     this.activeUser = this.users.getUser();
@@ -83,6 +83,11 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
   async ionViewWillEnter() {
 
+    let previousUrl = this.nav.getPreviousUrl();
+    const url = new URL(previousUrl, window.location.origin);
+    const prevUrl = url.pathname.split('/')[1];
+    console.log('Previous URL:', prevUrl);
+
     this.params = this.nav.getQueryParams();
     console.log(this.params);
     if (this.params.user) {
@@ -102,7 +107,10 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       let params = {
         item: JSON.stringify(item)
       }
-      let res = await this.nav.push('messages', params)
+
+      if(prevUrl != 'messages'){
+        let res = await this.nav.push('messages', params)
+      }
       // this.initialize()
     }
     this.initialize()

@@ -1,12 +1,15 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NavService {
+
+  private previousUrl: string | null = null;
+  private currentUrl: string | null = null;
   //
   constructor(
     public location: Location,
@@ -14,7 +17,21 @@ export class NavService {
     private navc: NavController,
     //  private nativePageTransitions: NativePageTransitions
     public activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+
+    this.currentUrl = this.router.url;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+      }
+    });
+
+  }
+
+  public getPreviousUrl(): string | null {
+    return this.previousUrl;
+  }
 
   async setRoot(page: any, param = {}) {
     // await this.nativePageTransitions.fade(null);
