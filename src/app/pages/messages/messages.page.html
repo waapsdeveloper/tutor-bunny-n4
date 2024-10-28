@@ -1,4 +1,7 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div>
+<ion-header  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow">
   <div class="top-header-78956">
     <div class="header-left-items-78956">
       <app-sd-bback-btn style="margin-left: -12px;" (click)="back()"></app-sd-bback-btn>
@@ -22,7 +25,7 @@
   </div>
 </ion-header>
 
-<div *ngIf="loading" class="loading-syn ">
+<div *ngIf="loading" class="loading-syn "  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <ion-spinner></ion-spinner>
 </div>
 <ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
