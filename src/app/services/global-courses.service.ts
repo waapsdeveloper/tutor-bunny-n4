@@ -280,16 +280,13 @@ export class GlobalCoursesService {
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);
-    } else {
+      this.addFavorite(obj, user);
+      let ite = {
+        user_id: user.id,
+        course_id: obj.id,
+      };
+      const res = await this.network.addCourseFav(ite);
     }
-
-    this.addFavorite(obj, user);
-
-    let ite = {
-      user_id: user.id,
-      course_id: obj.id,
-    };
-    const res = await this.network.addCourseFav(ite);
   }
 
   getAllFavorites(): any[] {
