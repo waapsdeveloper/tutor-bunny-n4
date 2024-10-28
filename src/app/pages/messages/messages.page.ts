@@ -92,6 +92,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async ionViewWillEnter() {
+    this.loading =true;
     this.scrollToBottomOnInit();
     this.params = this.nav.getQueryParams();
 
@@ -104,6 +105,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.flag = this.getFlag();
       this.messageReceivedViaPusher();
     }
+    this.loading =false
   }
 
   ngOnInit() {

@@ -3,7 +3,7 @@ import { EventsService } from './events.service';
 import { NetworkService } from './network.service';
 import { UsersService } from './users.service';
 import { resolve } from 'path';
-import { NgxPubSubService } from "@pscoped/ngx-pub-sub";
+import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 import Pusher from 'pusher-js';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class ChatService {
   role_id: any;
   chats;
   count;
-  latestEvent = "randomLast";
-  historicalEvent = "randomHistory";
+  latestEvent = 'randomLast';
+  historicalEvent = 'randomHistory';
   unreadCount = 0;
   requests;
   requestCount;
@@ -36,43 +36,45 @@ export class ChatService {
   ) {
     const options = {
       cluster: 'ap2',
-      forceTLS: true
+      forceTLS: true,
     };
 
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
-    this.chatChannel = this.pusher.subscribe("chats-channel");
-    this.events.subscribe('clear-all-services-data', () => {
-      this.user = null;
-      this.role_id = null;
-      this.chats = null;
-      this.count = null;
-      this.unreadCount = 0;
-      this.requests = null;
-      this.requestCount = null;
-      this.days = null;
-    }, false);
+    this.chatChannel = this.pusher.subscribe('chats-channel');
+    this.events.subscribe(
+      'clear-all-services-data',
+      () => {
+        this.user = null;
+        this.role_id = null;
+        this.chats = null;
+        this.count = null;
+        this.unreadCount = 0;
+        this.requests = null;
+        this.requestCount = null;
+        this.days = null;
+      },
+      false
+    );
     this.events.subscribe('clear-chat-data', () => {
       this.days = null;
     });
     this.events.subscribe('update-chat-lists', () => {
-
-      this.getchatList()
+      this.getchatList();
     });
-
-
   }
 
   registerPusherEvent(id: any) {
-    this.chatChannel.bind("message-rec-" + id, this.chatChannelReceived.bind(this))
+    this.chatChannel.bind(
+      'message-rec-' + id,
+      this.chatChannelReceived.bind(this)
+    );
   }
 
   chatChannelReceived($event: any) {
-
-    this.getchatList()
+    this.getchatList();
 
     this.events.publish('message-received-via-pusher', $event);
-    this.getUnreadMsgCount()
-
+    this.getUnreadMsgCount();
   }
 
   reviewCoursebyChat(data) {
@@ -87,7 +89,7 @@ export class ChatService {
       search: 'search',
       page: 1,
       liked: '',
-      chat_room_id: data.chat_room_id
+      chat_room_id: data.chat_room_id,
     };
     let res = await this.network.getMessagesRoom(this.user.id, obj);
 
@@ -95,21 +97,19 @@ export class ChatService {
       const chatRoom = res.chat_room;
 
       // Find the chat index in the existing chat list
-      let chatIndex = this.chats.findIndex(chat => chat.id === chatRoom.id);
+      let chatIndex = this.chats.findIndex((chat) => chat.id === chatRoom.id);
 
       if (chatIndex !== -1) {
         this.chats[chatIndex] = {
           ...this.chats[chatIndex],
           ...chatRoom,
-          last_message: chatRoom.last_message
+          last_message: chatRoom.last_message,
         };
       } else {
       }
-
     } else {
     }
   }
-
 
   getchatList(search = '', page = 1, liked = false) {
     return new Promise(async (resolve) => {
@@ -123,6 +123,7 @@ export class ChatService {
       let res = await this.network.getMessagesRoom(this.user.id, obj);
       if (res) {
         this.chats = res.data;
+        console.log(this.chats);
         this.unreadCount = this.getUnreadMsgCount() as number;
         let data = await this.network.getRequsetCount(this.user.id);
         this.count = data.message.pending_count;
@@ -180,7 +181,7 @@ export class ChatService {
   updadteChatList(data) {
     let id = data.chat_room_id;
 
-    let chatIndex = this.chats.findIndex(chat => chat.chat_room_id === id);
+    let chatIndex = this.chats.findIndex((chat) => chat.chat_room_id === id);
     if (chatIndex !== -1) {
       this.chats[chatIndex] = {
         ...this.chats[chatIndex],
@@ -189,7 +190,4 @@ export class ChatService {
     } else {
     }
   }
-
-
-
 }
