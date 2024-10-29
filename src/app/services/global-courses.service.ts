@@ -3,6 +3,7 @@ import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
 import { UsersService } from './users.service';
+import { NavService } from './nav.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class GlobalCoursesService {
   otherCourseUserId = 0;
   otherExceptCourseId = 0;
 
-  constructor(private network: NetworkService, private events: EventsService) {
+  constructor(private network: NetworkService, private events: EventsService, private nav: NavService) {
     this.events.subscribe('clear-all-services-data', () => {
       console.log(this.favorites)
       this.otherCoursesPage = null;
@@ -237,20 +238,18 @@ export class GlobalCoursesService {
     });
   }
 
-  async setFavToApi(search = '', fav_page = 1, liked = true) {
+  async getFavToApi(search = '', fav_page = 1, liked = true) {
     return new Promise(async (resolve) => {
       let obj = {
         search: search,
         fav_page: fav_page,
         liked: true,
       };
-
       const res = (await this.network.getAllFavCourses(obj)) as any;
       const result = res.result;
       // this.favorites = data.data;
       this.fav_page = result.current_fav_page;
       this.fav_last_page = result.fav_last_page;
-
       if (this.fav_page == 1) {
         this.favorites = result['data'];
       } else {
@@ -277,9 +276,13 @@ export class GlobalCoursesService {
   }
 
   async addFavorites(obj: any, user) {
+    const n = this.nav.getPreviousUrl()
+    console.log(n, "test");
+
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {
       this.favorites.unshift(obj);
+
       this.addFavorite(obj, user);
       let ite = {
         user_id: user.id,

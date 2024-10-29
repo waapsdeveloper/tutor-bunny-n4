@@ -67,7 +67,7 @@ export class FavRecCoursesComponent extends BasePage { // implements OnInit, Vie
     this.loading = true;
     if (this.globalCourses.page <= this.globalCourses.fav_last_page) {
       const np = this.globalCourses.fav_page + 1;
-      await this.globalCourses.setFavToApi('', np)
+      await this.globalCourses.getFavToApi('', np)
     }
     this.loading = false;
   }
