@@ -174,6 +174,9 @@ export class ChatService {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
+      console.log(this.days);
+      this.events.publish('scroll-to-bottom')
+
       resolve;
     });
   }

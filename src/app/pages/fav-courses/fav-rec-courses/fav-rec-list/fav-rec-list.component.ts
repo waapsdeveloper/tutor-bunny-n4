@@ -136,7 +136,7 @@ export class FavRecListComponent extends BasePage implements OnInit {
 
     let user = this.users.getUser()
     this.fav = true;
-    this.globalCourses.addFavorite(this.item, user)
+    this.globalCourses.addFavorites(this.item, user)
 
   }
 

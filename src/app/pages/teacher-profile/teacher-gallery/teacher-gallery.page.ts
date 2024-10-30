@@ -69,6 +69,13 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
+
+    // Check if the total images (existing + new) exceed 8
+    if (this.images.length + files.length > 8) {
+      // Limit the number of files to fit within the 8-image limit
+      files.length = 8 - this.images.length;
+    }
+
     for (const file of files) {
       const reader = new FileReader();
       reader.onload = async () => {
@@ -77,6 +84,7 @@ export class TeacherGalleryPage extends BasePage implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+
 
   Back() {
     this.events.publish('change-sample-gallery-to-this', this.images);
