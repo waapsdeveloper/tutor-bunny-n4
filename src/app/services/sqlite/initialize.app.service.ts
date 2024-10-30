@@ -26,14 +26,14 @@ export class InitializeAppService {
           await this.sqliteService.initWebStore();
         }
         // Initialize the myuserdb database
-        const DB_USERS = 'tutorbunny'
-        await this.storageService.initializeDatabase(DB_USERS);
+        const DB_TUTORBUNNY = 'tutorbunny11'
+        await this.storageService.initializeDatabase(DB_TUTORBUNNY);
         // Here Initialize MOCK_DATA if required
 
         // Initialize whatever database and/or MOCK_DATA you like
 
         if( this.sqliteService.platform === 'web') {
-          await this.sqliteService.saveToStore(DB_USERS);
+          await this.sqliteService.saveToStore(DB_TUTORBUNNY);
         }
 
         this.isAppInit = true;

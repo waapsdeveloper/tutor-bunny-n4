@@ -32,9 +32,7 @@ export class SplashPage extends BasePage implements OnInit {
 
   async initialize() {
     this.loading = true;
-
     await this.iap.initializeGenericTables();
-
     let res = await this.usersService.getLoginUser();
 
     if (res) {
