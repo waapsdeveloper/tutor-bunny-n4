@@ -35,6 +35,12 @@ export class ChatListComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.events.subscribe('update-chat-count', () =>{
+
+
+    })
+
     this.events.subscribe('update-chat-lists', (data) => {
       console.log(data);
       this.user = this.users.getUser()
@@ -53,8 +59,10 @@ export class ChatListComponent extends BasePage implements OnInit {
     let params = {
       item: JSON.stringify(item),
     };
-
+    this.unread_count = 0
+      console.log(this.unread_count);
     let res = await this.nav.push('messages', params);
+
     this.onChange.emit();
   }
   // getTime(time) {

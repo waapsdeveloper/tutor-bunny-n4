@@ -52,7 +52,9 @@ export class LoginPage extends BasePage implements OnInit {
     if (res) {
       localStorage.setItem('token', res.token);
       this.users.setUser(res.user);
+
       this.modals.dismiss(res.user);
+
     }
   }
 
@@ -99,7 +101,10 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   back() {
-    this.modals.dismiss();
+    let obj ={
+      back : true
+    }
+    this.modals.dismiss(obj);
   }
   forgetPassword() {
     this.modals.dismiss();

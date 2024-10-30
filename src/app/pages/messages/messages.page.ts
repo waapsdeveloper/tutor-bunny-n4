@@ -36,7 +36,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
-    // this.scrollToBottomOnInit();
     this.chats.getchatList();
   }
 
@@ -48,6 +47,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async ionViewWillEnter() {
+    this.events.publish('update-chat-count')
+
     this.loading = true;
     this.params = this.nav.getQueryParams();
 
@@ -79,8 +80,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
-
     this.loading = false;
+
+
   }
 
   messageReceivedViaPusher() {

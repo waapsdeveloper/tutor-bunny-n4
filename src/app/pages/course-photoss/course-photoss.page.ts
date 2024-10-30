@@ -14,21 +14,21 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   constructor(
     injector: Injector,
-    public createCourseService: CreateCourseService,
+    public createCourseService: CreateCourseService
   ) {
     super(injector);
     this.initialize();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  async initialize() { }
+  async initialize() {}
 
   setBackgroundImage(item) {
     return `url('${item.image}')`;
   }
 
-  async addImageInArray(imageString) {
+  async   addImageInArray(imageString) {
     const user = JSON.parse(localStorage.getItem('user'));
     const courseId = this.createCourseService.courseId;
 
@@ -61,11 +61,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
-
-    // Calculate how many more images can be added
     const remainingSlots = 8 - this.createCourseService.coursePhotos.length;
-
-    // If there are no remaining slots, stop the process
     if (remainingSlots <= 0) {
       alert('You have already uploaded the maximum of 15 images.');
       return;
@@ -88,7 +84,6 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       await this.addImageInArray(imageString);
     }
   }
-
 
   fileToDataURL(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -125,10 +120,11 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     event.stopPropagation();
     console.log(event);
 
-
     const coursePhotos = this.createCourseService.coursePhotos;
     const courseId = this.createCourseService.courseId;
     const pht = coursePhotos[index];
+    let image = coursePhotos[0].image;
+    this.events.publish('change-sample-course-to-this', image);
 
     if (!pht) {
       return;
@@ -147,6 +143,8 @@ export class CoursePhotossPage extends BasePage implements OnInit {
         // Set the first photo in the array as the feature image
         coursePhotos[0].feature = true;
         this.createCourseService.formData.image = coursePhotos[0].image;
+        let image = coursePhotos[0].image;
+        this.events.publish('change-sample-course-to-this', image);
 
         // Update the feature image on the server if courseId exists
         if (courseId) {
@@ -168,7 +166,6 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       }
     }
   }
-
 
   openImage(image) {
     this.nav.push('/course-profile/course-photo/gallery-image', {
