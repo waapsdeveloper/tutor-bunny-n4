@@ -39,6 +39,7 @@ export class StateListComponent {
   }
   callApi() {
     return new Promise(async resolve => {
+      console.log(this.countryId);
 
 
       let rows = await this.statesService.list(this.countryId, this.search, this.offset, this.limit) as any[];
@@ -48,6 +49,16 @@ export class StateListComponent {
       } else {
         this.list = [...this.list, ...rows]
       }
+      resolve(true);
+
+      // this.state = await this.network.getStates(obj) as any[];
+      // this.offset = this.state["current_page"];
+      // if (this.offset == 1) {
+      //   this.list = this.state["data"];
+
+      // } else {
+      //   this.list = [...this.list, ...this.state["data"]]
+      // }
       resolve(true);
     })
   }

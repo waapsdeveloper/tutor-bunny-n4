@@ -52,7 +52,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   getlists() {
 
     this.globalCourses.getCoursesFromApi();
-    // this.globalCourses.setFavToApi();
+    this.globalCourses.getFavToApi();
 
   }
 
