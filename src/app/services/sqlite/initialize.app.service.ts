@@ -114,55 +114,62 @@ export class InitializeAppService {
 
   async insertStates(stateArray) {
     const sanitizeValue = (value) => (value === undefined ? null : value);
-
-    // Start a transaction to ensure atomicity
-    await this.storageService.executeQuery('BEGIN TRANSACTION;');
+    const batchSize = 250;
 
     try {
-      // Prepare the base SQL insert statement
-      const baseStateSql = `INSERT INTO states
-        (id, name, country_id, country_code, fips_code, iso2, type, latitude, longitude, created_at, updated_at, flag, wikiDataId)
-        VALUES `;
+        // Start a transaction to ensure atomicity
+        await this.storageService.executeQuery('BEGIN TRANSACTION;');
 
-      // Accumulate placeholders and values for bulk insert
-      const placeholders = [];
-      const values = [];
+        for (let i = 0; i < stateArray.length; i += batchSize) {
+            // Get the current batch from the stateArray
+            const batch = stateArray.slice(i, i + batchSize);
 
-      // Loop through the state array to construct the placeholders and values arrays
-      for (const state of stateArray) {
-        placeholders.push('(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        values.push(
-          sanitizeValue(state.id),
-          sanitizeValue(state.name),
-          sanitizeValue(state.country_id),
-          sanitizeValue(state.country_code),
-          sanitizeValue(state.fips_code),
-          sanitizeValue(state.iso2),
-          sanitizeValue(state.type),
-          sanitizeValue(state.latitude),
-          sanitizeValue(state.longitude),
-          sanitizeValue(state.created_at),
-          sanitizeValue(state.updated_at),
-          sanitizeValue(state.flag),
-          sanitizeValue(state.wikiDataId)
-        );
-      }
+            // Prepare the base SQL insert statement
+            const baseStateSql = `INSERT INTO states
+                (id, name, country_id, country_code, fips_code, iso2, type, latitude, longitude, created_at, updated_at, flag, wikiDataId)
+                VALUES `;
 
-      // Join the base SQL with all placeholders, separated by commas
-      const fullStateSql = baseStateSql + placeholders.join(', ');
+            // Accumulate placeholders and values for bulk insert in this batch
+            const placeholders = [];
+            const values = [];
 
-      // Execute the single combined query with all values
-      await this.storageService.executeQuery(fullStateSql, values);
+            // Loop through the current batch to construct the placeholders and values arrays
+            for (const state of batch) {
+                placeholders.push('(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+                values.push(
+                    sanitizeValue(state.id),
+                    sanitizeValue(state.name),
+                    sanitizeValue(state.country_id),
+                    sanitizeValue(state.country_code),
+                    sanitizeValue(state.fips_code),
+                    sanitizeValue(state.iso2),
+                    sanitizeValue(state.type),
+                    sanitizeValue(state.latitude),
+                    sanitizeValue(state.longitude),
+                    sanitizeValue(state.created_at),
+                    sanitizeValue(state.updated_at),
+                    sanitizeValue(state.flag),
+                    sanitizeValue(state.wikiDataId)
+                );
+            }
 
-      // Commit the transaction
-      await this.storageService.executeQuery('COMMIT;');
-      return { success: true };
+            // Join the base SQL with all placeholders, separated by commas
+            const fullStateSql = baseStateSql + placeholders.join(', ');
+
+            // Execute the single combined query for the current batch with all values
+            await this.storageService.executeQuery(fullStateSql, values);
+        }
+
+        // Commit the transaction after all batches are inserted
+        await this.storageService.executeQuery('COMMIT;');
+        return { success: true };
     } catch (error) {
-      // Rollback in case of error
-      await this.storageService.executeQuery('ROLLBACK;');
-      return { success: false, error: error.message };
+        // Rollback in case of error
+        await this.storageService.executeQuery('ROLLBACK;');
+        return { success: false, error: error.message };
     }
-  }
+}
+
 
   async insertLanguages(languageArray) {
     const sanitizeValue = (value) => (value === undefined ? null : value);
@@ -204,6 +211,7 @@ export class InitializeAppService {
     const countryArray = await this.network.getAllCountries();
     const res = await this.insertCountries(countryArray);
 
+    // too long data to handle, leave it for the sake of bravity
     const stateArray = await this.network.getAllStates();
     const res2 = await this.insertStates(stateArray);
 

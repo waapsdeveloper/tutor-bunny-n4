@@ -4,24 +4,29 @@ import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CountrySqService {
+export class StatesSqService {
   countries = [];
 
   constructor(private storageService: StorageService) {}
 
-  async list(search = '', offset = 0, limit = 10) {
-    let sql = `SELECT * FROM countries`;
+  async list(country_id, search = '', offset = 0, limit = 10) {
+    let sql = `SELECT * FROM states`;
+    const params = [];
 
-    // Add a WHERE clause if a search term is provided
-    if (search) {
-      sql += ` WHERE name LIKE ?`;
+    // Add WHERE clause if a country_id or search term is provided
+    if (country_id) {
+      sql += ` WHERE country_id = ?`;
+      params.push(country_id);
     }
 
-    // Add ORDER BY, OFFSET, and LIMIT clauses
-    sql += ` ORDER BY name ASC LIMIT ? OFFSET ?`;
+    if (search) {
+      sql += country_id ? ` AND name LIKE ?` : ` WHERE name LIKE ?`;
+      params.push(`%${search}%`);
+    }
 
-    // Prepare the parameters for the query
-    const params = search ? [`%${search}%`, limit, offset] : [limit, offset];
+    // Add ORDER BY, LIMIT, and OFFSET clauses
+    sql += ` ORDER BY name ASC LIMIT ? OFFSET ?`;
+    params.push(limit, offset);
 
     // Execute the query and get results
     try {
@@ -32,7 +37,4 @@ export class CountrySqService {
       return [];
     }
   }
-
-
-
 }
