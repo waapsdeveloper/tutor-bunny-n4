@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { StatesSqService } from 'src/app/services/sqlite/states-sq.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -8,11 +9,11 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './state-list.component.html',
   styleUrls: ['./state-list.component.scss'],
 })
-export class StateListComponent  implements OnInit {
+export class StateListComponent {
   list = [];
   search: "";
-  page = 1;
-  state;
+  offset = 0;
+  limit = 30;
 
   private _countryId;
   // @Input('countryId') countryId: string;
@@ -27,51 +28,33 @@ export class StateListComponent  implements OnInit {
 
   }
 
+  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService, private statesService: StatesSqService) {
 
-
-
-
-  constructor(private modals: ModalService, private network: NetworkService, private utility: UtilityService) {
-
-  }
-
-  ngOnInit() {
-    // this.initialize();
   }
 
   async initialize() {
     this.search = "";
-    this.page = 1;
+    this.offset = 0;
     this.callApi();
   }
   callApi() {
     return new Promise(async resolve => {
 
 
-      let obj = {
-        search: this.search,
-        page: this.page,
-        countryId: this.countryId
-      }
-
-
-      this.state = await this.network.getStates(obj) as any[];
-      this.page = this.state["current_page"];
-      if (this.page == 1) {
-        this.list = this.state["data"];
-
+      let rows = await this.statesService.list(this.countryId, this.search, this.offset, this.limit) as any[];
+      console.log(rows);
+      if (this.offset == 0) {
+        this.list = rows;
       } else {
-        this.list = [...this.list, ...this.state["data"]]
+        this.list = [...this.list, ...rows]
       }
       resolve(true);
     })
   }
 
-  back(){
-    this.modals.dismiss()
-  }
+
   async loadMore($event) {
-    this.page = this.state.current_page + 1;
+    this.offset = this.list.length;
     await this.callApi();
     $event.target.complete();
   }
@@ -83,7 +66,7 @@ export class StateListComponent  implements OnInit {
   handleInput(event) {
     const query = event.target.value.toLowerCase();
     this.search = query;
-    this.page = 1;
+    this.offset = 0;
     this.callApi();
 
     // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
@@ -91,5 +74,9 @@ export class StateListComponent  implements OnInit {
 
   capitalizeFirst(string){
     return this.utility.capitalizeEachFirst(string)
+  }
+
+  back(){
+    this.modals.dismiss()
   }
 }
