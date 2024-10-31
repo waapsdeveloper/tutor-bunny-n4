@@ -141,7 +141,6 @@ export class TeacherProfilePage
       this.state = this.user.teacher.state.name;
       this.city = this.user.teacher.city;
       this.hourly_rate = this.user.teacher.converted_hourly_rate;
-
       this.travel_policy = this.user.teacher.travel_policy.name;
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
@@ -195,12 +194,12 @@ export class TeacherProfilePage
   }
 
   async goToChat() {
-    this.user = this.users.getUser();
-    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+    let user = this.users.getUser();
+    console.log(user);
+    let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (v || v == true) {
       this.teacher = JSON.parse(localStorage.getItem('teacher'));
       this.student = this.users.getUser();
-
       let obj = {
         user_id_1: this.student.id,
         user_id_2: this.teacher.id,
