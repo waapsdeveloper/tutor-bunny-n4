@@ -117,59 +117,58 @@ export class InitializeAppService {
     const batchSize = 250;
 
     try {
-        // Start a transaction to ensure atomicity
-        await this.storageService.executeQuery('BEGIN TRANSACTION;');
+      // Start a transaction to ensure atomicity
+      await this.storageService.executeQuery('BEGIN TRANSACTION;');
 
-        for (let i = 0; i < stateArray.length; i += batchSize) {
-            // Get the current batch from the stateArray
-            const batch = stateArray.slice(i, i + batchSize);
+      for (let i = 0; i < stateArray.length; i += batchSize) {
+        // Get the current batch from the stateArray
+        const batch = stateArray.slice(i, i + batchSize);
 
-            // Prepare the base SQL insert statement
-            const baseStateSql = `INSERT INTO states
+        // Prepare the base SQL insert statement
+        const baseStateSql = `INSERT INTO states
                 (id, name, country_id, country_code, fips_code, iso2, type, latitude, longitude, created_at, updated_at, flag, wikiDataId)
                 VALUES `;
 
-            // Accumulate placeholders and values for bulk insert in this batch
-            const placeholders = [];
-            const values = [];
+        // Accumulate placeholders and values for bulk insert in this batch
+        const placeholders = [];
+        const values = [];
 
-            // Loop through the current batch to construct the placeholders and values arrays
-            for (const state of batch) {
-                placeholders.push('(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-                values.push(
-                    sanitizeValue(state.id),
-                    sanitizeValue(state.name),
-                    sanitizeValue(state.country_id),
-                    sanitizeValue(state.country_code),
-                    sanitizeValue(state.fips_code),
-                    sanitizeValue(state.iso2),
-                    sanitizeValue(state.type),
-                    sanitizeValue(state.latitude),
-                    sanitizeValue(state.longitude),
-                    sanitizeValue(state.created_at),
-                    sanitizeValue(state.updated_at),
-                    sanitizeValue(state.flag),
-                    sanitizeValue(state.wikiDataId)
-                );
-            }
-
-            // Join the base SQL with all placeholders, separated by commas
-            const fullStateSql = baseStateSql + placeholders.join(', ');
-
-            // Execute the single combined query for the current batch with all values
-            await this.storageService.executeQuery(fullStateSql, values);
+        // Loop through the current batch to construct the placeholders and values arrays
+        for (const state of batch) {
+          placeholders.push('(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+          values.push(
+            sanitizeValue(state.id),
+            sanitizeValue(state.name),
+            sanitizeValue(state.country_id),
+            sanitizeValue(state.country_code),
+            sanitizeValue(state.fips_code),
+            sanitizeValue(state.iso2),
+            sanitizeValue(state.type),
+            sanitizeValue(state.latitude),
+            sanitizeValue(state.longitude),
+            sanitizeValue(state.created_at),
+            sanitizeValue(state.updated_at),
+            sanitizeValue(state.flag),
+            sanitizeValue(state.wikiDataId)
+          );
         }
 
-        // Commit the transaction after all batches are inserted
-        await this.storageService.executeQuery('COMMIT;');
-        return { success: true };
-    } catch (error) {
-        // Rollback in case of error
-        await this.storageService.executeQuery('ROLLBACK;');
-        return { success: false, error: error.message };
-    }
-}
+        // Join the base SQL with all placeholders, separated by commas
+        const fullStateSql = baseStateSql + placeholders.join(', ');
 
+        // Execute the single combined query for the current batch with all values
+        await this.storageService.executeQuery(fullStateSql, values);
+      }
+
+      // Commit the transaction after all batches are inserted
+      await this.storageService.executeQuery('COMMIT;');
+      return { success: true };
+    } catch (error) {
+      // Rollback in case of error
+      await this.storageService.executeQuery('ROLLBACK;');
+      return { success: false, error: error.message };
+    }
+  }
 
   async insertLanguages(languageArray) {
     const sanitizeValue = (value) => (value === undefined ? null : value);
@@ -207,6 +206,55 @@ export class InitializeAppService {
     }
   }
 
+  async insertCourseFav(user_id, favArray) {
+    const sanitizeValue = (value) => (value === undefined ? null : value);
+
+    // Start a transaction to ensure atomicity
+    await this.storageService.executeQuery('BEGIN TRANSACTION;');
+
+    try {
+
+        const deleteSql = `DELETE FROM favorite_courses WHERE user_id = ?`;
+        await this.storageService.executeQuery(deleteSql, [user_id]);
+
+        // Prepare the base SQL insert statement
+        const baseSql = `INSERT INTO favorite_courses (user_id, course_id) VALUES `;
+
+        // Accumulate placeholders and values for bulk insert
+        const placeholders = [];
+        const values = [];
+
+        // Loop through the favArray to construct the placeholders and values arrays
+        for (const favorite of favArray) {
+            placeholders.push('(?, ?)');
+            values.push(sanitizeValue(favorite.user_id), sanitizeValue(favorite.course_id));
+        }
+
+        // Join the base SQL with all placeholders, separated by commas
+        const fullSql = baseSql + placeholders.join(', ');
+
+        // Execute the single combined query with all values
+        await this.storageService.executeQuery(fullSql, values);
+
+        // Commit the transaction
+        await this.storageService.executeQuery('COMMIT;');
+        return { success: true };
+    } catch (error) {
+        // Check if the error is due to a UNIQUE constraint violation
+        if (error.message.includes('UNIQUE constraint failed')) {
+            console.warn('One or more entries already exist, skipping duplicates.');
+            // Proceed with commit since the entries already exist (do not rollback)
+            await this.storageService.executeQuery('COMMIT;');
+            return { success: true, message: 'Duplicates skipped' };
+        } else {
+            // Rollback in case of other errors
+            await this.storageService.executeQuery('ROLLBACK;');
+            return { success: false, error: error.message };
+        }
+    }
+}
+
+
   async initializeGenericTables(): Promise<any> {
     const countryArray = await this.network.getAllCountries();
     const res = await this.insertCountries(countryArray);
@@ -220,5 +268,16 @@ export class InitializeAppService {
 
     console.log(res3);
     //const res3 = await this.insertStates(languagesArray)
+  }
+
+  initializeUserTables(user: any) {
+
+    return new Promise(async (resolve) => {
+      const favIds = await this.network.getAllFavCoursesIds();
+      await this.insertCourseFav(user.id, favIds);
+
+      let data = {};
+      resolve(data);
+    });
   }
 }

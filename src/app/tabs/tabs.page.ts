@@ -11,6 +11,7 @@ import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
 import { TeacherService } from '../services/teacher.service';
 import { StudentWelcomeComponent } from '../pages/student-dashboard/student-welcome/student-welcome.component';
+import { InitializeAppService } from '../services/sqlite/initialize.app.service';
 
 @Component({
   selector: 'app-tabs',
@@ -28,6 +29,10 @@ export class TabsPage extends BasePage implements OnInit {
 
   constructor(
     injector: Injector,
+    private iap: InitializeAppService,
+
+
+
     public createCourseService: CreateCourseService,
     public chatService: ChatService,
     private fcm: FirebaseService,
@@ -54,8 +59,20 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
 
-  async ngOnInit() {
+  ngOnInit() {
     this.initialize();
+
+
+
+
+
+
+
+
+
+
+
+
     this.showUser = this.returnDashboardLink();
     this.events.subscribe('update-trail-list', () => {
       this.globalTrials.getPendingTrialsFromApi();
@@ -87,6 +104,21 @@ export class TabsPage extends BasePage implements OnInit {
     this.loadResolvers();
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
+    // set data with sqlite
+    await this.iap.initializeUserTables(this.user)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     this.events.registerPusherEvent(this.user.id);
     this.teacher.registerPusherEvent(this.user.id);
@@ -109,15 +141,18 @@ export class TabsPage extends BasePage implements OnInit {
 
     setTimeout(async () => {
       this.loading = false;
-    }, 3000);
-    if (this.user.role_id == 2) {
-      const isProfileCompleted = (await this.profiles.isProfileCompleted(
-        this.user
-      )) as any;
-      if (!isProfileCompleted) {
-        this.checkProfileCompleteOfStudent();
+
+      if (this.user.role_id == 2) {
+        const isProfileCompleted = (await this.profiles.isProfileCompleted(
+          this.user
+        )) as any;
+        if (!isProfileCompleted) {
+          this.checkProfileCompleteOfStudent();
+        }
       }
-    }
+
+    }, 3000);
+
   }
 
   async checkProfileCompleteOfStudent() {
@@ -136,18 +171,6 @@ export class TabsPage extends BasePage implements OnInit {
         showBack: true,
       });
     }
-  }
-
-  goToChat() {
-    let params = {
-      student_id: null,
-      other_user_id: null,
-      user: null,
-      chat_room_id: null,
-    };
-
-    // Navigate to the chat page without any parameters
-    this.nav.push('/tabs/chat', params);
   }
 
   async createCourse() {
