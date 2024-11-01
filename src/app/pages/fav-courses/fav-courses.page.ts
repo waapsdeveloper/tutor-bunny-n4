@@ -16,6 +16,7 @@ export class FavCoursesPage extends BasePage implements OnInit {
   page = 1;
   last_page = -1;
   courseids: any[] = [];
+  loading= false;
 
   constructor(
     injector: Injector,
@@ -38,7 +39,11 @@ export class FavCoursesPage extends BasePage implements OnInit {
     const data = await this.favCourseSqService.list(this.user.id);
     this.courseids = data.map((item) => item.course_id);
     console.log(this.courseids);
-    this.callApi(this.page)
+    this.loading = true;
+
+    await this.callApi(this.page)
+    this.loading = false;
+
   }
 
   callApi(page) {

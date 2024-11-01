@@ -28,9 +28,13 @@
   }
 }
 
-.sb-content-7895 {
-
-  gap: 16px;
+.centered-text {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
 }
+
+
+

@@ -52,7 +52,7 @@ export class FavoriteCoursesSqService {
     // Execute the query and get results
     try {
       const res = await this.storageService.executeQuery(sql, params);
-      return res; // Assuming res.rows returns the list of rows
+      return res;
     } catch (error) {
       console.error('Error executing list query:', error);
       return [];

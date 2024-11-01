@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { StudentWelcomeComponent } from './student-welcome/student-welcome.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
+import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -23,8 +24,10 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   isProfileComplete;
   showLiked = false;
   view = 'course';
+  favCourses;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService, public globalTrials: GlobalTrialsService,
+    private favCourseSqService: FavoriteCoursesSqService) {
     super(injector)
     this.initialize();
     this.getlists();
@@ -67,6 +70,7 @@ export class StudentDashboardPage extends BasePage implements OnInit {
   async initialize() {
 
     this.user = this.users.getUser();
+
     this.displayName = this.utility.splitName(this.user.name).first_name;
 
     let obj = {
