@@ -9,24 +9,45 @@ export class FavoriteCoursesSqService {
 
   constructor(private storageService: StorageService) {}
 
-  async list(country_id, search = '', offset = 0, limit = 10) {
-    let sql = `SELECT * FROM states`;
-    const params = [];
+  async addFavorite(user_id: number, course_id: number) {
+    const sql = `INSERT INTO favorite_courses (user_id, course_id) VALUES (?, ?)`;
+    const params = [user_id, course_id];
 
-    // Add WHERE clause if a country_id or search term is provided
-    if (country_id) {
-      sql += ` WHERE country_id = ?`;
-      params.push(country_id);
+    try {
+      // Attempt to insert into the table
+      await this.storageService.executeQuery(sql, params);
+      console.log('Favorite added successfully');
+      return true;
+    } catch (error) {
+      // Handle constraint violation for unique constraint
+      if (error.message.includes('UNIQUE constraint failed')) {
+        console.warn('Favorite already exists, skipping duplicate.');
+        return false;
+      } else {
+        console.error('Error adding favorite:', error);
+        throw error;
+      }
     }
+  }
 
-    if (search) {
-      sql += country_id ? ` AND name LIKE ?` : ` WHERE name LIKE ?`;
-      params.push(`%${search}%`);
+  async removeFavorite(user_id: number, course_id: number) {
+    const sql = `DELETE FROM favorite_courses WHERE user_id = ? AND course_id = ?`;
+    const params = [user_id, course_id];
+
+    try {
+      // Attempt to delete the record
+      await this.storageService.executeQuery(sql, params);
+      console.log('Favorite removed successfully');
+      return true;
+    } catch (error) {
+      console.error('Error removing favorite:', error);
+      return false;
     }
+  }
 
-    // Add ORDER BY, LIMIT, and OFFSET clauses
-    sql += ` ORDER BY name ASC LIMIT ? OFFSET ?`;
-    params.push(limit, offset);
+  async list(user_id: number) {
+    let sql = `SELECT * FROM favorite_courses where user_id = ?`;
+    const params = [user_id];
 
     // Execute the query and get results
     try {

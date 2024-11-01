@@ -4,6 +4,7 @@ import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
 import { UsersService } from './users.service';
 import { NavService } from './nav.service';
+import { FavoriteCoursesSqService } from './sqlite/favorite-courses-sq.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class GlobalCoursesService {
   otherCourseUserId = 0;
   otherExceptCourseId = 0;
 
-  constructor(private network: NetworkService, private events: EventsService, private nav: NavService) {
+  constructor(private network: NetworkService, private events: EventsService, private favCoursesSqService: FavoriteCoursesSqService) {
     this.events.subscribe('clear-all-services-data', () => {
       console.log(this.favorites)
       this.otherCoursesPage = null;
@@ -259,14 +260,27 @@ export class GlobalCoursesService {
     });
   }
 
-  async removeFavorites(obj: any, user) {
-    const index = this.favorites.findIndex((x) => x.id == obj.id);
-    if (index > -1) {
-      this.favorites.splice(index, 1);
-    } else {
-    }
 
-    this.removeFavorite(obj, user);
+
+
+  async getAllFavorites(user: any) {
+    const list = await this.favCoursesSqService.list(user.id);
+    console.log(list);
+  }
+
+  async removeFavorites(obj: any, user: any) {
+
+
+    const flag = await this.favCoursesSqService.removeFavorite(user.id, obj.id);
+    console.log(flag);
+
+    // const index = this.favorites.findIndex((x) => x.id == obj.id);
+    // if (index > -1) {
+    //   this.favorites.splice(index, 1);
+    // } else {
+    // }
+
+    // this.removeFavorite(obj, user);
 
     let ite = {
       user_id: user.id,
@@ -276,27 +290,28 @@ export class GlobalCoursesService {
   }
 
   async addFavorites(obj: any, user) {
-    const n = this.nav.getPreviousUrl()
+
+
+    const flag = await this.favCoursesSqService.addFavorite(user.id, obj.id);
+    console.log(flag);
 
 
 
 
+    // const index = this.favorites.findIndex((x) => x.id == obj.id);
+    // if (index == -1) {
+    //   this.favorites.unshift(obj);
 
+    //   this.addFavorite(obj, user);
 
-    const index = this.favorites.findIndex((x) => x.id == obj.id);
-    if (index == -1) {
-      this.favorites.unshift(obj);
+    // }
 
-      this.addFavorite(obj, user);
-      let ite = {
-        user_id: user.id,
-        course_id: obj.id,
-      };
-      const res = await this.network.addCourseFav(ite);
-    }
+    let ite = {
+      user_id: user.id,
+      course_id: obj.id,
+    };
+    const res = await this.network.addCourseFav(ite);
   }
 
-  getAllFavorites(): any[] {
-    return this.favorites;
-  }
+
 }
