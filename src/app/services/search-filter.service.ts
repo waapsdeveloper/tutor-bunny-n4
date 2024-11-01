@@ -30,7 +30,7 @@ export class SearchFilterService {
 
   updateFormData(value: any, key: string): void {
     this.formData[key] = value;
-    if (key == 'keyword') {
+    if (key == 'keyword' && value && value.length > 0) {
       this.formData['keyword_id'] = value[0].id;
       this.formData['keywords'] = value;
     }
