@@ -47,18 +47,8 @@ export class StateListComponent {
       if (this.offset == 0) {
         this.list = rows;
       } else {
-        this.list = [...this.list, ...rows]
+        this.list = [...this.list, ...this.state["data"]]
       }
-      resolve(true);
-
-      // this.state = await this.network.getStates(obj) as any[];
-      // this.offset = this.state["current_page"];
-      // if (this.offset == 1) {
-      //   this.list = this.state["data"];
-
-      // } else {
-      //   this.list = [...this.list, ...this.state["data"]]
-      // }
       resolve(true);
     })
   }
