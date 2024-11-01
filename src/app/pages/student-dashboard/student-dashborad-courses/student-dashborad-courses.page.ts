@@ -6,13 +6,10 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './student-dashborad-courses.page.html',
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
-export class StudentDashboradCoursesPage implements OnInit {
+export class StudentDashboradCoursesPage {
 
   constructor( public globalCourses: GlobalCoursesService) {
 
-  }
-
-  ngOnInit() {
   }
   async handleRefresh(event) {
 

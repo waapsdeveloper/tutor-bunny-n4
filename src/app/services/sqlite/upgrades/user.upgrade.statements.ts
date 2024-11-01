@@ -109,7 +109,12 @@ export class UpgradeStatements {
             status INTEGER,
             terms INTEGER,
             profile_complete INTEGER
+        );`,
+        `CREATE TABLE IF NOT EXISTS favorite_courses (
+            user_id INTEGER,
+            course_id INTEGER,
         );`
+
       ],
     },
 

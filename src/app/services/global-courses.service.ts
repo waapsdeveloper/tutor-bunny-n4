@@ -277,7 +277,11 @@ export class GlobalCoursesService {
 
   async addFavorites(obj: any, user) {
     const n = this.nav.getPreviousUrl()
-    console.log(n, "test");
+
+
+
+
+
 
     const index = this.favorites.findIndex((x) => x.id == obj.id);
     if (index == -1) {

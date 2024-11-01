@@ -40,12 +40,8 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    this.rating = value.user.teacher.avg_rating;
-    this.total_rating = value.user.teacher.total_rating;
     this.initialize(value);
-    this.displayName = this.utility.getAmericanName(this.item.user.name);
-    this.flag = this.getFlag();
-    this.status = value.trial ? value.trial.status : null;
+
   }
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
@@ -55,6 +51,13 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   initialize(data) {
+
+    this.rating = data.user.teacher.avg_rating;
+    this.total_rating = data.user.teacher.total_rating;
+    this.displayName = this.utility.getAmericanName(this.item.user.name);
+    this.flag = this.getFlag();
+    this.status = data.trial ? data.trial.status : null;
+
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
@@ -169,6 +172,8 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async removeToFav() {
+    let showFav = false;
+    this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
 
     this.item.is_liked_by_me = false;
