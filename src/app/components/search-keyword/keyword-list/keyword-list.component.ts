@@ -128,7 +128,21 @@ export class KeywordListComponent implements OnInit {
     this.suggestionsList = [];
     const res = await this.network.getKeywords(obj);
     if (res.data) {
-      this.suggestionsList = res.data;
+
+      if(this.subs && this.subs.length > 0){
+        const result = res.data.filter(item2 =>
+          !this.subs.some(item1 => item1.id === item2.id)
+        );
+        this.suggestionsList = result;
+      } else {
+        this.suggestionsList = res.data;
+      }
+
+
+
+
+
+
     }
     if (res.data.length == 0) {
       this.noSugg = true;
@@ -165,15 +179,29 @@ export class KeywordListComponent implements OnInit {
       this.inputText = '';
       this.subs = res2.result;
 
-      this.suggestionsList = [];
+
 
       this.onChange.emit({
         subs: this.subs,
       });
     } else {
       this.inputText = '';
+
       this.myArray.push(item);
+
+      if(this.myArray && this.myArray.length > 0){
+        const result = this.suggestionsList.filter(item2 =>
+          !this.myArray.some(item1 => item1.id === item2.id)
+        );
+        this.suggestionsList = result;
+      } else {
+        this.suggestionsList = [];
+      }
+
       this.subs = this.myArray;
+
+
+
       this.onChange.emit({
         subs: this.subs,
       });
