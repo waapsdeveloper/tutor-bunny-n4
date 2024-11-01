@@ -47,7 +47,7 @@ export class StateListComponent {
       if (this.offset == 0) {
         this.list = rows;
       } else {
-        this.list = [...this.list, ...this.state["data"]]
+        this.list = [...this.list, ...rows]
       }
       resolve(true);
     })
