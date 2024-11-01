@@ -4,10 +4,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-content-bg ion-padding">
-  <div class="ion-padding" *ngIf="globalCourses.favorites.length === 0">
+  <div class="ion-padding" *ngIf="list.length === 0">
     <div class="label fs-16 outfit">No Favorite Courses Found</div>
   </div>
   <div class="body-content-68448" style="margin-top: 16px;">
-    <app-fav-rec-courses style="max-width: 100%;"></app-fav-rec-courses>
+    <div class="student-box-outer-689567">
+      <div class="sb-content-7895">
+        <!-- *ngFor="let item of list"  [item]="item" -->
+        <div *ngFor="let item of list">
+          <app-course-list [item]="item"></app-course-list>
+        </div>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
   </div>
 </ion-content>

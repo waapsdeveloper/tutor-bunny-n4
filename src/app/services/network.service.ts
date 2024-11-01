@@ -99,6 +99,10 @@ export class NetworkService {
     return this.httpGetResponse('countries/all', null, false, false);
   }
 
+  FavCourseByIds(data) {
+    return this.httpPostResponse('courses/list-By-ids', data, false, false);
+  }
+
   getStates(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('states/by-country' + '?' + str, null, false, false);
