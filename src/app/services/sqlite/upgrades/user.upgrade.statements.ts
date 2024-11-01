@@ -112,7 +112,7 @@ export class UpgradeStatements {
         );`,
         `CREATE TABLE IF NOT EXISTS favorite_courses (
             user_id INTEGER,
-            course_id INTEGER,
+            course_id INTEGER
         );`
 
       ],
