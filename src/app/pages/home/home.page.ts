@@ -60,22 +60,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
     }
   }
 
-  async continueWithFake() {
-    const res = await this.modals.present(
-      FakeAccountsComponent,
-      {
-        role: this.params.role,
-      },
-      '',
-      0.5
-    );
-    if (res.data) {
-      const user = res.data;
-      this.users.setUser(user);
-      this.redirectDependsOnRole(user);
-    }
-  }
-
   async gotoEmailDashboard() {
     let res = await this.modals.present(
       LoginPage,
