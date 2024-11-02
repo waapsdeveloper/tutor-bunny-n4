@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -6,7 +6,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './sign-up.page.html',
   styleUrls: ['./sign-up.page.scss'],
 })
-export class SignUpPage extends BasePage implements OnInit {
+export class SignUpPage extends BasePage {
 
   formData: any = {
     email: null,
@@ -18,9 +18,6 @@ export class SignUpPage extends BasePage implements OnInit {
   constructor(injector: Injector) {
 
     super(injector)
-  }
-
-  ngOnInit() {
   }
 
 
