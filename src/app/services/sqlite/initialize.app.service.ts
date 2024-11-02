@@ -213,49 +213,65 @@ export class InitializeAppService {
     await this.storageService.executeQuery('BEGIN TRANSACTION;');
 
     try {
+      const deleteSql = `DELETE FROM favorite_courses WHERE user_id = ?`;
+      await this.storageService.executeQuery(deleteSql, [user_id]);
 
-        const deleteSql = `DELETE FROM favorite_courses WHERE user_id = ?`;
-        await this.storageService.executeQuery(deleteSql, [user_id]);
+      // Prepare the base SQL insert statement
+      const baseSql = `INSERT INTO favorite_courses (user_id, course_id) VALUES `;
 
-        // Prepare the base SQL insert statement
-        const baseSql = `INSERT INTO favorite_courses (user_id, course_id) VALUES `;
+      // Accumulate placeholders and values for bulk insert
+      const placeholders = [];
+      const values = [];
 
-        // Accumulate placeholders and values for bulk insert
-        const placeholders = [];
-        const values = [];
+      // Loop through the favArray to construct the placeholders and values arrays
+      for (const favorite of favArray) {
+        placeholders.push('(?, ?)');
+        values.push(
+          sanitizeValue(favorite.user_id),
+          sanitizeValue(favorite.course_id)
+        );
+      }
 
-        // Loop through the favArray to construct the placeholders and values arrays
-        for (const favorite of favArray) {
-            placeholders.push('(?, ?)');
-            values.push(sanitizeValue(favorite.user_id), sanitizeValue(favorite.course_id));
-        }
+      // Join the base SQL with all placeholders, separated by commas
+      const fullSql = baseSql + placeholders.join(', ');
 
-        // Join the base SQL with all placeholders, separated by commas
-        const fullSql = baseSql + placeholders.join(', ');
+      // Execute the single combined query with all values
+      await this.storageService.executeQuery(fullSql, values);
 
-        // Execute the single combined query with all values
-        await this.storageService.executeQuery(fullSql, values);
-
-        // Commit the transaction
-        await this.storageService.executeQuery('COMMIT;');
-        return { success: true };
+      // Commit the transaction
+      await this.storageService.executeQuery('COMMIT;');
+      return { success: true };
     } catch (error) {
-        // Check if the error is due to a UNIQUE constraint violation
-        if (error.message.includes('UNIQUE constraint failed')) {
-            console.warn('One or more entries already exist, skipping duplicates.');
-            // Proceed with commit since the entries already exist (do not rollback)
-            await this.storageService.executeQuery('COMMIT;');
-            return { success: true, message: 'Duplicates skipped' };
-        } else {
-            // Rollback in case of other errors
-            await this.storageService.executeQuery('ROLLBACK;');
-            return { success: false, error: error.message };
-        }
+      // Check if the error is due to a UNIQUE constraint violation
+      if (error.message.includes('UNIQUE constraint failed')) {
+        console.warn('One or more entries already exist, skipping duplicates.');
+        // Proceed with commit since the entries already exist (do not rollback)
+        await this.storageService.executeQuery('COMMIT;');
+        return { success: true, message: 'Duplicates skipped' };
+      } else {
+        // Rollback in case of other errors
+        await this.storageService.executeQuery('ROLLBACK;');
+        return { success: false, error: error.message };
+      }
     }
-}
+  }
 
+  async getCount(tableName: string): Promise<number> {
+
+    try {
+      const sql = `SELECT COUNT(*) as count FROM ${tableName}`;
+      const res = await this.storageService.executeQuery(sql, []);
+
+      return res;
+    } catch (error) {
+      console.error('Error executing count query:', error);
+      return 0;
+    }
+  }
 
   async initializeGenericTables(): Promise<any> {
+    // check if country table already has data then don't call api
+
     const countryArray = await this.network.getAllCountries();
     const res = await this.insertCountries(countryArray);
 
@@ -271,7 +287,6 @@ export class InitializeAppService {
   }
 
   initializeUserTables(user: any) {
-
     return new Promise(async (resolve) => {
       const favIds = await this.network.getAllFavCoursesIds();
       await this.insertCourseFav(user.id, favIds);

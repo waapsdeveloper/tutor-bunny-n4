@@ -1,14 +1,11 @@
 import { Component, NgZone } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-
-// import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
 import { FirebaseService } from './services/firebase.service';
 import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UtilityService } from './services/utility.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
-import { NavService } from './services/nav.service';
 import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // register Swiper custom elements
 register();
@@ -53,6 +50,8 @@ export class AppComponent {
 
     this.deepLinkRegister();
     this.registerBackButtonEvent();
+
+    this.router.navigate(['/splash']);
 
   }
 

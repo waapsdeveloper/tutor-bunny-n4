@@ -4,12 +4,12 @@ import { authGuard } from './guards/auth.guard';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'splash',
-    pathMatch: 'full',
+  // {
+  //   path: '',
+  //   redirectTo: 'splash',
+  //   pathMatch: 'full',
 
-  },
+  // },
   {
     path: 'splash',
     loadChildren: () =>

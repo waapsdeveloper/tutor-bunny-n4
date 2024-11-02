@@ -1,8 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { ChatService } from 'src/app/services/chat.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -13,17 +11,16 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './splash.page.html',
   styleUrls: ['./splash.page.scss'],
 })
-export class SplashPage extends BasePage implements OnInit {
+export class SplashPage implements OnInit {
   loading = false;
   constructor(
-    injector: Injector,
     private usersService: UsersService,
     private iap: InitializeAppService,
     private router: Router,
     private profilesService: ProfileService,
     private utilityService: UtilityService
   ) {
-    super(injector);
+
   }
 
   ngOnInit() {
@@ -31,6 +28,7 @@ export class SplashPage extends BasePage implements OnInit {
   }
 
   async initialize() {
+
     this.loading = true;
     await this.iap.initializeGenericTables();
     let res = await this.usersService.getLoginUserFromApi();
