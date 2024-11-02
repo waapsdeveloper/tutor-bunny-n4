@@ -162,20 +162,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   onKeyUp(event: any) {
     this.message = event.target.value;
   }
-
-  // Debounce wrapper function to limit sendMessage frequency
-  debounce(func: Function, delay: number) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  }
-
-  // Wrapper for the debounced sendMessage function
-  debounceSendMessage = this.debounce(this.sendMessage.bind(this), 1000);
-
-  // Send a message function with API call
   async sendMessage() {
     if (!this.message) return;
 
