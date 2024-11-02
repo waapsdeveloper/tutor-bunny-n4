@@ -167,9 +167,28 @@ export class UserSqService {
     await this.storageService.executeQuery(sql);
     await this.getUsers();
   }
-  async deleteUserById(id: string) {
+  async deleteUserById(id: string): Promise<boolean> {
+
     const sql = `DELETE FROM users WHERE id=${id}`;
     await this.storageService.executeQuery(sql);
-    await this.getUsers();
+
+    const sql2 = `DELETE FROM techers WHERE user_id=${id}`;
+    await this.storageService.executeQuery(sql2);
+
+    const sql3 = `DELETE FROM teacher_languages WHERE teacher_id=${id}`;
+    await this.storageService.executeQuery(sql3);
+
+    const sql4 = `DELETE FROM teacher_subjects WHERE teacher_id=${id}`;
+    await this.storageService.executeQuery(sql4);
+
+    const sql5 = `DELETE FROM students WHERE user_id=${id}`;
+    await this.storageService.executeQuery(sql5);
+
+
+    return true;
+
   }
+
+
+
 }

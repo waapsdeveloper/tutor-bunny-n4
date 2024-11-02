@@ -25,7 +25,6 @@ export class UsersService {
   async setUser(user) {
 
     const aww = await this.userSq.setUserInDatabase(user)
-    console.log(aww)
     // if(!user.image){
     //   user.image = '/assets//svg/signup.svg'
     // }
@@ -61,6 +60,37 @@ export class UsersService {
 
   setStudent(user) {
 
+  }
+
+  async getLoginUserFromApi(){
+
+
+    // const res = await this.userSq.loadUsers();
+    // console.log("user-sq", res)
+
+    // await this.userSq.addUser("Peter");
+
+
+    // const res2 = await this.userSq.loadUsers();
+    // console.log("user-sq", res2)
+
+
+
+
+    return new Promise(async (resolve) => {
+      let token = localStorage.getItem('token');
+      if(!token){
+        resolve(false)
+        return
+      }
+      try {
+        let res = await this.network.getUserByToken()
+        this.setUser(res.user)
+        resolve(res.user)
+      } catch (err) {
+       resolve(false)
+      }
+    })
   }
 
   async getLoginUser(){

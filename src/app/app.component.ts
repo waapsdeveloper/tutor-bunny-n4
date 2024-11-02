@@ -32,18 +32,44 @@ export class AppComponent {
     private iap: InitializeAppService,
   ) {
 
-
-    this.initializeApp();
-
-    this.Initialize();
     platform.ready().then(async () => {
-      // menuCtrl.enable(false, 'main'
-      // set default url from app side
-      this.beInitialize();
+      this.Initialize();
     });
   }
 
-  initializeApp() {
+
+
+  async Initialize() {
+
+    if( Capacitor.getPlatform() === "web") {
+      this.isWeb = true;
+    }
+
+    await this.iap.initializeApp();
+
+    if (Capacitor.getPlatform() != 'web') {
+      this.fcm.setupFMC();
+    }
+
+    this.deepLinkRegister();
+    this.registerBackButtonEvent();
+
+  }
+
+  registerBackButtonEvent() {
+    document.addEventListener(
+      'backbutton',
+      (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const url = this.router.url;
+        this.createBackRoutingLogics(url);
+      },
+      false
+    );
+  }
+
+  deepLinkRegister() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       this.zone.run(() => {
         // Example url: https://beerswift.app/tabs/tab2
@@ -58,30 +84,6 @@ export class AppComponent {
     });
   }
 
-  async Initialize() {
-    if (Capacitor.getPlatform() != 'web') {
-      this.fcm.setupFMC();
-    }
-
-    if( Capacitor.getPlatform() === "web") {
-      this.isWeb = true;
-    }
-
-    await this.iap.initializeApp();
-
-  }
-  async beInitialize() {
-    document.addEventListener(
-      'backbutton',
-      (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const url = this.router.url;
-        this.createBackRoutingLogics(url);
-      },
-      false
-    );
-  }
 
   async createBackRoutingLogics(url) {
 

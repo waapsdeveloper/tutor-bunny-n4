@@ -34,6 +34,14 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   params;
   emptyValue;
 
+  combineMessages = [];
+
+
+
+
+
+
+
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.chats.getchatList();
@@ -212,4 +220,19 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     let res = await this.network.sendMessage(obj);
     this.initialize();
   }
+
+
+  // customized logic for instance
+
+  // when we hit send message - it should immedietly add to array  without debounce
+  // add that message to say combineMessages = [];
+  // and start a timer of 1 sec,
+  // if before one sec another message added, then add the message to combineMessage and restart timer
+
+  // if one second passes and no message send - then send the combine messages to array in a sngle api call
+  // api will be provided
+
+
+
+
 }
