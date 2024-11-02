@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 import { BasePage } from '../../base-page/base-page';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
@@ -7,13 +7,15 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage extends BasePage implements OnInit {
+export class LoginPage extends BasePage {
   step = 'login';
+  showLoader = false;
+
   formData: any = {
     email: null,
     password: null,
   };
-  showLoader = false;
+
   private _role: any[] = [];
   @Input('preSelectedLanguages')
   public get role() {
@@ -27,11 +29,10 @@ export class LoginPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {}
-
   result(value, key) {
     this.formData[key] = value;
   }
+
   async submit() {
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
@@ -54,18 +55,15 @@ export class LoginPage extends BasePage implements OnInit {
       this.users.setUser(res.user);
 
       this.modals.dismiss(res.user);
-
     }
   }
 
   signUp() {
-
     let obj = {
-      step : 2
-    }
+      step: 2,
+    };
 
     this.modals.dismiss(obj);
-
   }
 
   async SignUpWithEmail() {
@@ -101,9 +99,9 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   back() {
-    let obj ={
-      back : true
-    }
+    let obj = {
+      back: true,
+    };
     this.modals.dismiss(obj);
   }
   forgetPassword() {
