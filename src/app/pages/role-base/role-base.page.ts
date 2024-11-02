@@ -6,11 +6,9 @@ import { NavService } from '../../services/nav.service';
   templateUrl: './role-base.page.html',
   styleUrls: ['./role-base.page.scss'],
 })
-export class RoleBasePage implements OnInit {
+export class RoleBasePage {
   images = [];
   constructor(private nav: NavService) {}
-
-  ngOnInit() {}
 
   setCurrentRole(key) {
     localStorage.setItem('role', key);
