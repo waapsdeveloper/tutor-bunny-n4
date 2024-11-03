@@ -282,13 +282,17 @@ export class InitializeAppService {
     const languagesArray = await this.network.getAllLanguages();
     const res3 = await this.insertLanguages(languagesArray);
 
-    console.log(res3);
+
+    return true;
     //const res3 = await this.insertStates(languagesArray)
   }
 
   initializeUserTables(user: any) {
+
     return new Promise(async (resolve) => {
+
       const favIds = await this.network.getAllFavCoursesIds();
+      console.log(favIds);
       await this.insertCourseFav(user.id, favIds);
 
       let data = {};

@@ -14,7 +14,7 @@
       <div class="icon-box">
         <div class="icon-box-outer">
           <div class="icon-box-77" (click)="showFavCourse()">
-            <div class="red-dot-4432432532" *ngIf="globalCourses.favorites.length > 0"></div>
+            <div class="red-dot-4432432532" *ngIf="courseFavCount"></div>
             <img class="icon-box-77" [src]="'../../assets/icon/heart.svg'" />
           </div>
           <div class="icon-box-77">
@@ -28,15 +28,12 @@
 <div class="dashboard-top-fixed-98563">
   <div class="header-chips">
     <div class="header-chip">
-      <div class="ion-chip" [class.active-class]="view === 'course'" [class.inactive-class]="view !== 'course'" (click)="toogleView('course')"><img
-          src="assets/icon/home/my-corces.svg" alt="">Courses
-      </div>
-      <div class="ion-chip" [class.active-class]="view === 'teacher'" [class.inactive-class]="view !== 'teacher'"  (click)="toogleView('teacher')"><img src="../../assets/svg/top-teacher.svg"
-          alt="">Teachers
-      </div>
-      <div class="ion-chip" [class.active-class]="view === 'notes'" [class.inactive-class]="view !== 'notes'"  (click)="toogleView('notes')"><img src="../../assets/svg/studey-notes.svg"
-          alt="">Study
-        Notes</div>
+      <div class="ion-chip" [class.active-class]="view === 'course'" [class.inactive-class]="view !== 'course'"
+        (click)="toogleView('course')"><img src="assets/icon/home/my-corces.svg" alt="">Courses</div>
+      <div class="ion-chip" [class.active-class]="view === 'teacher'" [class.inactive-class]="view !== 'teacher'"
+        (click)="toogleView('teacher')"><img src="../../assets/svg/top-teacher.svg" alt="">Teachers</div>
+      <div class="ion-chip" [class.active-class]="view === 'notes'" [class.inactive-class]="view !== 'notes'"
+        (click)="toogleView('notes')"><img src="../../assets/svg/studey-notes.svg" alt="">Study Notes</div>
     </div>
   </div>
 </div>

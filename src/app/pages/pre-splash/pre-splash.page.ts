@@ -55,7 +55,7 @@ export class PreSplashPage extends BasePage implements OnInit {
 
     this.loadResolvers();
     this.user = this.dataR.user;
-    console.log(this.user);
+    // console.log(this.user);
 
     // set data with sqlite
     await this.iap.initializeUserTables(this.user);

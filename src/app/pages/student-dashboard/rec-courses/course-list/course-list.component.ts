@@ -1,17 +1,14 @@
 import {
   Component,
-  EventEmitter,
   Injector,
   Input,
   OnInit,
-  Output,
 } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { TrailMessageComponent } from './trail-message/trail-message.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.component';
-import { log } from 'node:console';
+import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 
 @Component({
   selector: 'app-course-list',
@@ -44,7 +41,13 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   }
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector,
+    private courseFavoriteService: CourseFavoriteService,
+
+
+    public globalCourses: GlobalCoursesService
+
+  ) {
     super(injector);
     this.user = this.users.getUser();
 
@@ -163,21 +166,19 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
 
   async addToFav() {
-    let showFav = true;
-    this.events.publish('show-fav-dot', showFav);
+    // let showFav = true;
+    // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
-
     this.item.is_liked_by_me = true;
-    this.globalCourses.addFavorites(this.item, user);
+    this.courseFavoriteService.addFavorites(this.item, user);
   }
 
   async removeToFav() {
-    let showFav = false;
-    this.events.publish('show-fav-dot', showFav);
+    // let showFav = false;
+    // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
-
     this.item.is_liked_by_me = false;
-    this.globalCourses.removeFavorites(this.item, user);
+    this.courseFavoriteService.removeFavorites(this.item, user);
   }
 
   setResult() {

@@ -58,4 +58,22 @@ export class FavoriteCoursesSqService {
       return [];
     }
   }
+
+  async getFavoriteCount(user_id: number): Promise<number> {
+
+    try {
+      const sql = `SELECT COUNT(*) as count FROM favorite_courses where user_id = ?`;
+      const res = await this.storageService.executeQuery(sql, [user_id]);
+
+      if(res && res.length > 0){
+        return res[0].count;
+      }
+      return 0;
+    } catch (error) {
+      console.error('Error executing count query:', error);
+      return 0;
+    }
+  }
+
+
 }

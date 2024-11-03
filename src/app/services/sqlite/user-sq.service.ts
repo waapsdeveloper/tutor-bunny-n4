@@ -18,8 +18,8 @@ export class UserSqService {
     await this.storageService.executeQuery(teacherSql, [
       sanitizeValue(user.teacher.teacher_id),
       sanitizeValue(user.id),
-      sanitizeValue(user.teacher.country.id),
-      sanitizeValue(user.teacher.state.id),
+      sanitizeValue(user.teacher.country?.id),
+      sanitizeValue(user.teacher.state?.id),
       sanitizeValue(user.teacher.phone_number),
       sanitizeValue(user.teacher.city),
       sanitizeValue(user.teacher.zip_code),
@@ -86,8 +86,8 @@ export class UserSqService {
       await this.storageService.executeQuery(studentSql, [
         sanitizeValue(user.id),
         sanitizeValue(student.dob),
-        sanitizeValue(student.country.id), // Only country_id used
-        sanitizeValue(student.state.id),   // Only state_id used
+        sanitizeValue(student.country?.id), // Only country_id used
+        sanitizeValue(student.state?.id),   // Only state_id used
         sanitizeValue(student.city),
         sanitizeValue(student.zip_code),
         sanitizeValue(student.dial_code),
@@ -107,7 +107,7 @@ export class UserSqService {
 
 
   async setUserInDatabase(user) {
-    console.log(user);
+    // console.log(user);
 
     await this.deleteUserById(user.id);
 

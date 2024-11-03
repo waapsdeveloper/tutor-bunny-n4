@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 
 @Component({
   selector: 'app-course-list',
@@ -53,6 +54,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   }
   constructor(
     injector: Injector,
+    private courseFavoriteService: CourseFavoriteService,
     private globalCourses: GlobalCoursesService,
     public chats: ChatService
   ) {
@@ -122,13 +124,13 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.events.publish('show-fav-dot', showFav);
 
     this.item.is_liked_by_me = true;
-    this.globalCourses.addFavorites(this.item, user);
+    this.courseFavoriteService.addFavorites(this.item, user);
   }
 
   async removeToFav() {
     let user = this.users.getUser();
     this.item.is_liked_by_me = false;
-    this.globalCourses.removeFavorites(this.item, user);
+    this.courseFavoriteService.removeFavorites(this.item, user);
   }
 
   async addReview(item) {

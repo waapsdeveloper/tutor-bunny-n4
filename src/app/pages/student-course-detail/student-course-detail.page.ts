@@ -5,6 +5,7 @@ import { TrailMessageComponent } from '../../pages/student-dashboard/rec-courses
 import { GlobalCoursesService } from '../../services/global-courses.service';
 import { IonContent } from '@ionic/angular';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
+import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -59,7 +60,10 @@ export class StudentCourseDetailPage extends BasePage {
   startDate;
   showFavValue = false;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector,
+    private courseFavoriteService: CourseFavoriteService,
+
+    public globalCourses: GlobalCoursesService) {
     super(injector);
   }
 
@@ -138,7 +142,7 @@ export class StudentCourseDetailPage extends BasePage {
 
     this.data.is_liked_by_me = true;
     this.showFavValue = true;
-    this.globalCourses.addFavorites(this.data, user);
+    this.courseFavoriteService.addFavorites(this.data, user);
   }
 
   async removeToFav() {
@@ -146,7 +150,7 @@ export class StudentCourseDetailPage extends BasePage {
 
     this.data.is_liked_by_me = false;
     this.showFavValue = false;
-    this.globalCourses.removeFavorites(this.data, user);
+    this.courseFavoriteService.removeFavorites(this.data, user);
   }
 
   getFlag() {

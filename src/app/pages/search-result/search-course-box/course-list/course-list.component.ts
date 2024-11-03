@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TrailMessageComponent } from 'src/app/pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
+import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 
 @Component({
   selector: 'app-course-list',
@@ -40,7 +41,10 @@ export class CourseListComponent extends BasePage implements OnInit {
     this.status = value.trial ? value.trial.status : null;
   }
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector,
+    private courseFavoriteService: CourseFavoriteService,
+
+    public globalCourses: GlobalCoursesService) {
     super(injector)
     this.user = this.users.getUser()
   }
@@ -144,7 +148,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     let user = this.users.getUser();
 
     this.item.is_liked_by_me = true;
-    this.globalCourses.addFavorites(this.item, user);
+    this.courseFavoriteService.addFavorites(this.item, user);
 
   }
 
@@ -152,7 +156,7 @@ export class CourseListComponent extends BasePage implements OnInit {
     let user = this.users.getUser()
 
     this.item.is_liked_by_me = false;
-    this.globalCourses.removeFavorites(this.item, user);
+    this.courseFavoriteService.removeFavorites(this.item, user);
 
 
   }

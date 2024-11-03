@@ -174,16 +174,6 @@ export class TabsPage extends BasePage implements OnInit {
       this.updateChatsByMessageReceived.bind(this)
     );
 
-    this.events.subscribe('clear-all-services-data', () => {
-      this.selectedTab = null;
-
-      this.loading = null;
-      this.user = null;
-      this.homeTab = null;
-      this.showTabs = null;
-      this.roleId = null;
-    }, false);
-
   }
 
   clearChat() {

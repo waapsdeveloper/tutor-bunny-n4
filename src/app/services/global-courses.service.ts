@@ -5,6 +5,8 @@ import Pusher from 'pusher-js';
 import { UsersService } from './users.service';
 import { NavService } from './nav.service';
 import { FavoriteCoursesSqService } from './sqlite/favorite-courses-sq.service';
+import { Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +28,8 @@ export class GlobalCoursesService {
   otherCourseUserId = 0;
   otherExceptCourseId = 0;
 
-  constructor(private network: NetworkService, private events: EventsService, private favCoursesSqService: FavoriteCoursesSqService) {
+  constructor(private network: NetworkService, private events: EventsService, ) {
+
     this.events.subscribe('clear-all-services-data', () => {
       console.log(this.favorites)
       this.otherCoursesPage = null;
@@ -37,6 +40,7 @@ export class GlobalCoursesService {
       this.otherExceptCourseId = null;
       this.favorites = []
     }, false);
+
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -44,6 +48,13 @@ export class GlobalCoursesService {
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.CourseChannel = this.pusher.subscribe('course-channel');
   }
+
+
+
+
+
+
+
   registerPusherEvent() {
     this.CourseChannel.bind(
       'course-rec-update-by-list',
@@ -263,55 +274,6 @@ export class GlobalCoursesService {
 
 
 
-  async getAllFavorites(user: any) {
-    const list = await this.favCoursesSqService.list(user.id);
-    console.log(list);
-  }
-
-  async removeFavorites(obj: any, user: any) {
-
-
-    const flag = await this.favCoursesSqService.removeFavorite(user.id, obj.id);
-    console.log(flag);
-
-    // const index = this.favorites.findIndex((x) => x.id == obj.id);
-    // if (index > -1) {
-    //   this.favorites.splice(index, 1);
-    // } else {
-    // }
-
-    // this.removeFavorite(obj, user);
-
-    let ite = {
-      user_id: user.id,
-      course_id: obj.id,
-    };
-    const res = await this.network.removeCourseFav(ite);
-  }
-
-  async addFavorites(obj: any, user) {
-
-
-    const flag = await this.favCoursesSqService.addFavorite(user.id, obj.id);
-    console.log(flag);
-
-
-
-
-    // const index = this.favorites.findIndex((x) => x.id == obj.id);
-    // if (index == -1) {
-    //   this.favorites.unshift(obj);
-
-    //   this.addFavorite(obj, user);
-
-    // }
-
-    let ite = {
-      user_id: user.id,
-      course_id: obj.id,
-    };
-    const res = await this.network.addCourseFav(ite);
-  }
 
 
 }

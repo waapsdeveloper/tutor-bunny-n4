@@ -20,6 +20,10 @@ export class SplashPage implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter(){
     this.initialize();
   }
 

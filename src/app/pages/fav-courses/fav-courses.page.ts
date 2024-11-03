@@ -28,8 +28,6 @@ export class FavCoursesPage extends BasePage implements OnInit {
 
   ngOnInit() {
     this.initialize();
-    // let showFav = false;
-    // this.events.publish('show-fav-dot', showFav);
   }
 
   async initialize() {
