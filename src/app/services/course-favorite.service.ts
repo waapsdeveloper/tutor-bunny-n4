@@ -18,6 +18,12 @@ export class CourseFavoriteService {
 
     const count = await this.favCoursesSqService.getFavoriteCount(user.id);
     this.events.publish('update-course-fav-count', {count})
+    this.events.publish('update-course-item-like', {
+      user_id: user.id,
+      course_id: obj.id,
+      liked: true
+    })
+
 
     let ite = {
       user_id: user.id,
@@ -28,12 +34,17 @@ export class CourseFavoriteService {
 
   async removeFavorites(obj: any, user: any) {
 
-
     const flag = await this.favCoursesSqService.removeFavorite(user.id, obj.id);
     console.log(flag);
 
     const count = await this.favCoursesSqService.getFavoriteCount(user.id);
     this.events.publish('update-course-fav-count', {count})
+
+    this.events.publish('update-course-item-like', {
+      user_id: user.id,
+      course_id: obj.id,
+      liked: false
+    })
 
     let ite = {
       user_id: user.id,

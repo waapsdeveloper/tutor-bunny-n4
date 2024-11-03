@@ -46,6 +46,21 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
 
     this.user = this.users.getUser();
 
+    this.events.subscribe('update-course-item-like', (data) => {
+
+      // user_id: user.id,
+      // course_id: obj.id,
+      // liked: true
+
+      console.log(data)
+
+      if(this.item.id == data.course_id){
+        this.item.is_liked_by_me = data.liked;
+      }
+
+
+    }, false)
+
   }
 
   initialize(data) {
