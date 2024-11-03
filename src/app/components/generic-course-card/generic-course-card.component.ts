@@ -1,21 +1,17 @@
-import {
-  Component,
-  Injector,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
-import { TrailMessageComponent } from './trail-message/trail-message.component';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.component';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { BasePage } from 'src/app/base-page/base-page';
+import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student-welcome/student-welcome.component';
+import { TrailMessageComponent } from '../trail-message/trail-message.component';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss'],
+  selector: 'app-generic-course-card',
+  templateUrl: './generic-course-card.component.html',
+  styleUrls: ['./generic-course-card.component.scss'],
 })
-export class CourseListComponent extends BasePage implements OnInit {
+export class GenericCourseCardComponent extends BasePage implements OnInit {
+
   private _item: any;
   displayName;
   flag;
@@ -41,14 +37,13 @@ export class CourseListComponent extends BasePage implements OnInit {
 
   }
 
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
-
-
     public globalCourses: GlobalCoursesService
-
   ) {
     super(injector);
+
     this.user = this.users.getUser();
 
   }
@@ -225,4 +220,5 @@ export class CourseListComponent extends BasePage implements OnInit {
       }
     }
   }
+
 }

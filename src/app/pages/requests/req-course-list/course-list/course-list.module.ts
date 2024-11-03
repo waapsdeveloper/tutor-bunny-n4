@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CourseListComponent } from './course-list.component';
 import { IonicModule } from '@ionic/angular';
 import { TeacherReviewsModule } from './teacher-reviews/teacher-reviews.module';
-import { RatingStarsModule } from 'src/app/pages/reviews-by-student/review-card/rating-stars/rating-stars.module';
+import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
 
 

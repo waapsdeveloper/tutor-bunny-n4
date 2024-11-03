@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 })
 export class StudentDashboradCoursesPage {
 
+
+
   constructor( public globalCourses: GlobalCoursesService) {
 
   }
@@ -15,5 +18,13 @@ export class StudentDashboradCoursesPage {
 
     await this.globalCourses.getCoursesFromApi('', 1);
     event.target.complete();
+  }
+
+  async onIonInfinite(ev) {
+    if (this.globalCourses.page <= this.globalCourses.last_page) {
+      const np = this.globalCourses.page + 1;
+      await this.globalCourses.getCoursesFromApi('', np);
+    }
+    (ev as InfiniteScrollCustomEvent).target.complete();
   }
 }

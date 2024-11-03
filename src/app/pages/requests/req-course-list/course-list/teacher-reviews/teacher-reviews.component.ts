@@ -1,5 +1,4 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { flush } from '@angular/core/testing';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -7,7 +6,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './teacher-reviews.component.html',
   styleUrls: ['./teacher-reviews.component.scss'],
 })
-export class TeacherReviewsComponent extends BasePage implements OnInit {
+export class TeacherReviewsComponent extends BasePage {
   private _item: any;
 
   @Input('item')
@@ -32,9 +31,7 @@ export class TeacherReviewsComponent extends BasePage implements OnInit {
     this.user = this.users.getUser();
   }
 
-  ngOnInit() {}
-
-  onRatingChange(newRating: number) {
+  onRatingChange(newRating: any) {
     this.userRating = newRating;
   }
 

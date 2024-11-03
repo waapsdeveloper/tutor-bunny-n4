@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { FavRecCoursesComponent } from './fav-rec-courses.component';
+import { GenericCourseCardComponent } from './generic-course-card.component';
 
-describe('FavRecCoursesComponent', () => {
-  let component: FavRecCoursesComponent;
-  let fixture: ComponentFixture<FavRecCoursesComponent>;
+describe('GenericCourseCardComponent', () => {
+  let component: GenericCourseCardComponent;
+  let fixture: ComponentFixture<GenericCourseCardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FavRecCoursesComponent ],
+      declarations: [ GenericCourseCardComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FavRecCoursesComponent);
+    fixture = TestBed.createComponent(GenericCourseCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

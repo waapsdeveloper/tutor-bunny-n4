@@ -4,7 +4,6 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import * as moment from 'moment';
-import { log } from 'node:console';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 
 @Component({

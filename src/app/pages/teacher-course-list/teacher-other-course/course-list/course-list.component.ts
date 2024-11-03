@@ -1,9 +1,9 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { TrailMessageComponent } from 'src/app/pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student-welcome/student-welcome.component';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
 
 @Component({
   selector: 'app-course-list',

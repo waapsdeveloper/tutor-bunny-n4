@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
 

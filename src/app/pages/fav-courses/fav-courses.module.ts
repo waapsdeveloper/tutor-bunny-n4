@@ -8,8 +8,7 @@ import { FavCoursesPageRoutingModule } from './fav-courses-routing.module';
 
 import { FavCoursesPage } from './fav-courses.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
-import { FavRecCoursesModule } from './fav-rec-courses/fav-rec-courses.module';
-import { CourseListModule } from '../student-dashboard/rec-courses/course-list/course-list.module';
+import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 
 @NgModule({
   imports: [
@@ -18,8 +17,8 @@ import { CourseListModule } from '../student-dashboard/rec-courses/course-list/c
     IonicModule,
     FavCoursesPageRoutingModule,
     SdHeaderTopModule,
-    FavRecCoursesModule,
-    CourseListModule
+    GenericCourseCardModule
+
   ],
   declarations: [FavCoursesPage]
 })

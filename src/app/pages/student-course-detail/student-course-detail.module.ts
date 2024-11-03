@@ -13,9 +13,9 @@ import { OtherCoursesModule } from '../../components/other-courses/other-courses
 import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
 import { CourseSchedulesModule } from '../../components/course-schedules/course-schedules.module';
 import { StudentOtherCoursesModule } from './student-other-courses/student-other-courses.module';
-import { TrailMessageModule } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.module';
 import { CoursePhotosModule } from '../../components/course-photos/course-photos.module';
-import { RatingStarsModule } from '../reviews-by-student/review-card/rating-stars/rating-stars.module';
+import { TrailMessageModule } from 'src/app/components/trail-message/trail-message.module';
+import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
 
 @NgModule({

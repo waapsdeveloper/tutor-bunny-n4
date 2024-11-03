@@ -1,11 +1,11 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from '../../base-page/base-page';
-import { TrailMessageComponent } from '../../pages/student-dashboard/rec-courses/course-list/trail-message/trail-message.component';
 import { GlobalCoursesService } from '../../services/global-courses.service';
 import { IonContent } from '@ionic/angular';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
 
 @Component({
   selector: 'app-student-course-detail',
