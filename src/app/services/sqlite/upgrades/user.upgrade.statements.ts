@@ -99,6 +99,7 @@ export class UpgradeStatements {
         );`,
         `CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
+            user_id,
             dob TEXT,
             country_id INTEGER,
             state_id INTEGER,

@@ -42,19 +42,24 @@ export class LoginPage extends BasePage {
       return;
     }
     this.showLoader = true;
-    let obj = {
+    let d = {
       email: this.formData.email,
       password: this.formData.password,
       role_id: this._role,
     };
-    const res = (await this.network.loginViaEmail(obj)) as any;
+    const res = (await this.network.loginViaEmail(d)) as any;
 
     this.showLoader = false;
-    if (res) {
-      localStorage.setItem('token', res.token);
-      this.users.setUser(res.user);
 
-      this.modals.dismiss(res.user);
+
+
+    if (res) {
+      let obj = {
+        step: 1,
+        user: res.user,
+        token: res.token
+      };
+      this.modals.dismiss(obj);
     }
   }
 
@@ -66,46 +71,18 @@ export class LoginPage extends BasePage {
     this.modals.dismiss(obj);
   }
 
-  async SignUpWithEmail() {
-    this.events.publish(
-      'teacher-profile-first-screen-submit-call',
-      this.formData
-    );
-    if (
-      !this.formData.email ||
-      !this.formData.password ||
-      !this.formData.name ||
-      !this.formData.confirm_password
-    ) {
-      return;
-    }
-    let key = localStorage.getItem('role');
-    let obj = {
-      email: this.formData.email,
-      password: this.formData.password,
-      name: this.formData.name,
-      confirm_password: this.formData.confirm_password,
-      login_type: 'email',
-      role_id: key,
-    };
-    let res = (await this.network.signUpviaEmail(obj)) as any;
-    if (res) {
-      this.utility.presentSuccessToast('the user account is registered.');
-      localStorage.setItem('token', res.token);
-      this.users.setUser(res.user);
-      this.formData.password = null;
-      this.step = 'login';
-    }
-  }
-
   back() {
     let obj = {
-      back: true,
+      step: 1
     };
     this.modals.dismiss(obj);
   }
   forgetPassword() {
-    this.modals.dismiss();
-    this.modals.present(ForgetPasswordComponent, {}, '', 0.7);
+
+    let obj = {
+      step: 3,
+    };
+
+    this.modals.dismiss(obj);
   }
 }

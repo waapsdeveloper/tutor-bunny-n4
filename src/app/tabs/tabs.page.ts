@@ -19,17 +19,18 @@ import { InitializeAppService } from '../services/sqlite/initialize.app.service'
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage extends BasePage implements OnInit {
+
   @ViewChild('tabs', { static: false }) tabs: IonTabs;
+
   selectedTab = '';
   loading = false;
   user: any;
-  showUser;
+  homeTab;
   showTabs = true;
   roleId;
 
   constructor(
     injector: Injector,
-    private iap: InitializeAppService,
 
 
 
@@ -60,38 +61,10 @@ export class TabsPage extends BasePage implements OnInit {
 
 
   ngOnInit() {
-    this.initialize();
+    this.initialize()
 
 
 
-
-
-
-
-
-
-
-
-
-    this.showUser = this.returnDashboardLink();
-    this.events.subscribe('update-trail-list', () => {
-      this.globalTrials.getPendingTrialsFromApi();
-      this.globalCourses.getCoursesFromApi();
-    });
-
-    this.events.subscribe(
-      'message-received-via-pusher',
-      this.updateChatsByMessageReceived.bind(this)
-    );
-
-    this.events.subscribe('clear-all-services-data', () => {
-      this.selectedTab = null;
-      this.loading = null;
-      this.user = null;
-      this.showUser = null;
-      this.showTabs = null;
-      this.roleId = null;
-    }, false);
   }
 
   setCurrentTab() {
@@ -99,48 +72,19 @@ export class TabsPage extends BasePage implements OnInit {
   }
 
   async initialize() {
+
     this.loading = true;
 
     this.loadResolvers();
     this.user = this.dataR.user;
     this.roleId = this.user.role_id;
-    // set data with sqlite
-    await this.iap.initializeUserTables(this.user)
 
+    this.homeTab = this.returnDashboardLink();
+    this.setupEvents();
 
-
-
-
-
-
-
-
-
-
-
-
-
-    this.events.registerPusherEvent(this.user.id);
-    this.teacher.registerPusherEvent(this.user.id);
-    this.chats.registerPusherEvent(this.user.id)
-    this.globalTrials.registerPusherEvent();
-    this.globalCourses.registerPusherEvent();
-    await this.chatService.getchatList();
-    await this.notificationService.getNotificationsFromApi();
-    this.fcm.setTokenToServer();
-
-    const utcTime = moment().utcOffset();
-    let time = {
-      timezone_offset: utcTime,
-    };
-
-    await this.network.getTimeZone(time, this.user.id);
-
-    this.globalTrials.getPendingTrialsFromApi();
-    this.globalCourses.getCoursesFromApi();
+    this.loading = false;
 
     setTimeout(async () => {
-      this.loading = false;
 
       if (this.user.role_id == 2) {
         const isProfileCompleted = (await this.profiles.isProfileCompleted(
@@ -152,6 +96,10 @@ export class TabsPage extends BasePage implements OnInit {
       }
 
     }, 3000);
+
+
+
+
 
   }
 
@@ -213,6 +161,31 @@ export class TabsPage extends BasePage implements OnInit {
 
     return '';
   }
+
+  setupEvents(){
+
+    this.events.subscribe('update-trail-list', () => {
+      this.globalTrials.getPendingTrialsFromApi();
+      this.globalCourses.getCoursesFromApi();
+    });
+
+    this.events.subscribe(
+      'message-received-via-pusher',
+      this.updateChatsByMessageReceived.bind(this)
+    );
+
+    this.events.subscribe('clear-all-services-data', () => {
+      this.selectedTab = null;
+
+      this.loading = null;
+      this.user = null;
+      this.homeTab = null;
+      this.showTabs = null;
+      this.roleId = null;
+    }, false);
+
+  }
+
   clearChat() {
     this.events.publish('clear-chat-page');
   }

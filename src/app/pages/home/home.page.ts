@@ -1,12 +1,11 @@
 import { Component, Injector } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
-import { FakeAccountsComponent } from './fake-accounts/fake-accounts.component';
 import { BasePage } from '../../base-page/base-page';
 import { LoginPage } from '../login/login.page';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
-import { log } from 'node:console';
 import { SignUpPage } from '../sign-up/sign-up.page';
+import { ForgetPasswordComponent } from '../login/forget-password/forget-password.component';
 
 @Component({
   selector: 'app-home',
@@ -19,20 +18,22 @@ export class HomePage extends BasePage implements ViewWillEnter {
   params: any;
   user;
   role_Id;
+
+  step = 1;
+
   constructor(injector: Injector, public authService: AuthenticationService) {
     super(injector);
   }
 
   ionViewWillEnter(): void {
+
+    this.step = 1;
     this.params = this.nav.getQueryParams();
     if (this.params.role) {
       this.role_Id = this.params.role;
     }
   }
 
-  gotoDashboard() {
-    this.nav.push('tabs');
-  }
   async continueWithGoogle() {
     this.googleauth = await this.authService.googleAuth();
     if (
@@ -53,14 +54,65 @@ export class HomePage extends BasePage implements ViewWillEnter {
       const res = (await this.network.login(data)) as any;
       if (res.user) {
         localStorage.setItem('token', res.token);
-        let user = res.user;
-        this.users.setUser(user);
-        this.redirectDependsOnRole(user);
+        await this.users.setUser(res.user);
+        this.nav.push('pre-splash')
       }
     }
   }
 
   async gotoEmailDashboard() {
+    this.initiateLogin();
+  }
+
+  async initiateLogin(){
+
+    const res = await this.showUpLogin();
+    console.log(res);
+
+    if (res && res.data) {
+
+      if(res.data.step == 2){
+        const res2 = await this.showUpSignup();
+
+        if (res2.data) {
+          this.initiateLogin();
+        }
+
+        return;
+      }
+
+      if(res.data.step == 3){
+        const res3 = await this.showUpForgetPassword();
+
+        if(res3.data){
+          this.initiateLogin()
+        }
+
+        return;
+      }
+
+      if(res.data.step == 1 && res.data.user){
+
+        let d = res.data;
+
+        localStorage.setItem('token', d.token);
+        await this.users.setUser(d.user);
+        this.nav.push('pre-splash')
+
+        return;
+      }
+
+
+    }
+
+
+
+  }
+
+
+
+
+  async showUpLogin(): Promise<any> {
     let res = await this.modals.present(
       LoginPage,
       {
@@ -71,94 +123,36 @@ export class HomePage extends BasePage implements ViewWillEnter {
       [0, 1],
       true
     );
-    console.log(res);
-    if(res && res.data &&res.data.back == true){
-      return
-    }
-    if (res && res.data.step) {
-      let res = await this.modals.present(
-        SignUpPage,
-        {
-          role: this.params.role,
-        },
-        '',
-        0.75,
-        [0, 0.5, 0.75, 1]
-      );
-      if (res.data) {
-        let res = await this.modals.present(
-          LoginPage,
-          {
-            role: this.params.role,
-          },
-          'auto-height-modal',
-          1,
-          [0, 1],
-          true
-        );
 
-      }
-    }
-
-    this.user = this.users.getUser();
-    if (this.user) {
-      let user = this.user;
-      this.users.setUser(user);
-      this.redirectDependsOnRole(user);
-    }
+    return res;
   }
 
-  async redirectDependsOnRole(user) {
-    const isProfileCompleted = await this.profiles.isProfileCompleted(user);
-    const roleId = parseInt(user.role_id);
-    let role_Id = localStorage.getItem('role');
-    if (parseInt(role_Id) === roleId) {
-      if (roleId === 3) {
-        if (!isProfileCompleted) {
-          let res = await this.modals.present(
-            TeacherWelcomePage,
-            {},
-            'auto-height-modal',
-            1,
-            [0, 1],
-            true
-          );
-          this.nav.push('/teacher-profile/teacher-profile-edit', {
-            backUrl: '/home',
-          });
-        } else {
-          this.nav.push('/tabs/teacher-dashboard', {
-            backUrl: '/home',
-          });
-        }
-      }
-      if (roleId === 2) {
-        if (!isProfileCompleted) {
-          this.nav.push('/tabs/student-dashboard', {
-            backUrl: '/home',
-          });
-        } else {
-          this.nav.push('/tabs/student-dashboard', {
-            backUrl: '/home',
-          });
-        }
-      }
-    } else {
-      if (roleId === 3) {
-        const message = 'This account is alredy login as a teacher';
-        this.utility.presentFailureToast(message);
-        this.nav.pop();
+  async showUpSignup(): Promise<any> {
+    let res = await this.modals.present(
+      SignUpPage,
+      {
+        role: this.params.role,
+      },
+      '',
+      0.75,
+      [0, 0.5, 0.75, 1]
+    );
 
-        return;
-      }
-      if (roleId === 2) {
-        const message = 'This account is alredy login as a Student';
-        this.utility.presentFailureToast(message);
-        this.nav.pop();
+    return res;
+  }
 
-        return;
-      }
-    }
+  async showUpForgetPassword(): Promise<any> {
+    let res = await this.modals.present(
+      ForgetPasswordComponent,
+      {
+        role: this.params.role,
+      },
+      '',
+      0.75,
+      [0, 0.5, 0.75, 1]
+    );
+
+    return res;
   }
 
   back() {

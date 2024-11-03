@@ -66,6 +66,7 @@ export class UserSqService {
     // SQL Insert Query with only country_id and state_id retained
     const studentSql = `
       INSERT INTO students (
+        user_id,
         dob,
         country_id,
         state_id,
@@ -76,13 +77,14 @@ export class UserSqService {
         status,
         terms,
         profile_complete
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
 
     // Execute the SQL query to insert student data
     let student = user.student;
     try {
       await this.storageService.executeQuery(studentSql, [
+        sanitizeValue(user.id),
         sanitizeValue(student.dob),
         sanitizeValue(student.country.id), // Only country_id used
         sanitizeValue(student.state.id),   // Only state_id used
@@ -106,6 +108,8 @@ export class UserSqService {
 
   async setUserInDatabase(user) {
     console.log(user);
+
+    await this.deleteUserById(user.id);
 
     const sanitizeValue = (value) => (value === undefined ? null : value);
     // Start a transaction to ensure atomicity
@@ -169,20 +173,32 @@ export class UserSqService {
   }
   async deleteUserById(id: string): Promise<boolean> {
 
-    const sql = `DELETE FROM users WHERE id=${id}`;
-    await this.storageService.executeQuery(sql);
+    try {
 
-    const sql2 = `DELETE FROM techers WHERE user_id=${id}`;
-    await this.storageService.executeQuery(sql2);
+      const sql = `DELETE FROM users WHERE id=${id}`;
+      await this.storageService.executeQuery(sql);
 
-    const sql3 = `DELETE FROM teacher_languages WHERE teacher_id=${id}`;
-    await this.storageService.executeQuery(sql3);
+      const sql2 = `DELETE FROM teachers WHERE user_id=${id}`;
+      await this.storageService.executeQuery(sql2);
 
-    const sql4 = `DELETE FROM teacher_subjects WHERE teacher_id=${id}`;
-    await this.storageService.executeQuery(sql4);
+      const sql3 = `DELETE FROM teacher_languages WHERE teacher_id=${id}`;
+      await this.storageService.executeQuery(sql3);
 
-    const sql5 = `DELETE FROM students WHERE user_id=${id}`;
-    await this.storageService.executeQuery(sql5);
+      const sql4 = `DELETE FROM teacher_subjects WHERE teacher_id=${id}`;
+      await this.storageService.executeQuery(sql4);
+
+      const sql5 = `DELETE FROM students WHERE user_id=${id}`;
+      await this.storageService.executeQuery(sql5);
+
+
+    } catch (error) {
+
+      console.log(error.message);
+      return false;
+
+    }
+
+
 
 
     return true;

@@ -48,17 +48,27 @@ export class SignUpPage extends BasePage {
       role_id: key,
     };
     let res = (await this.network.signUpviaEmail(obj)) as any;
+
     if (res) {
       this.utility.presentSuccessToast('the user account is registered.');
-      localStorage.setItem('token', res.token);
-      this.users.setUser(res.user);
-      this.modals.dismiss(res.user);
+
+      if (res) {
+        let obj = {
+          step: 2,
+          user: res.user,
+          token: res.token
+        };
+        this.modals.dismiss(obj);
+      }
 
     }
 
   }
 
   back(){
-    this.modals.dismiss()
+    let obj = {
+      step: 1
+    };
+    this.modals.dismiss(obj);
   }
 }

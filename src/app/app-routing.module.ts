@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
@@ -14,13 +13,23 @@ const routes: Routes = [
     path: 'splash',
     loadChildren: () =>
       import('./pages/splash/splash.module').then((m) => m.SplashPageModule),
-    // canActivate: [authGuard],
   },
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
+  {
+    path: 'pre-splash',
+    loadChildren: () => import('./pages/pre-splash/pre-splash.module').then( m => m.PreSplashPageModule),
+    resolve: {
+      user: userResolver
+    },
+  },
+
+
+
+
   // {
   //   path: 'dashboard',
   //   loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
@@ -173,6 +182,8 @@ const routes: Routes = [
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
+
+
 
 
 ];

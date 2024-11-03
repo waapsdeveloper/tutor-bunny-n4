@@ -22,17 +22,13 @@ export class UsersService {
     return this._user;
   }
 
-  async setUser(user) {
+  async setUser(user): Promise<any> {
 
     const aww = await this.userSq.setUserInDatabase(user)
-    // if(!user.image){
-    //   user.image = '/assets//svg/signup.svg'
-    // }
-
-
-
     localStorage.setItem("user", JSON.stringify(user));
     this._user = user;
+
+    return user;
   }
 
   getUserRole() {

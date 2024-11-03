@@ -16,7 +16,6 @@ import { ForgetPasswordModule } from './forget-password/forget-password.module';
 @NgModule({
   imports: [
     CommonModule,
-    ForgetPasswordModule,
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,

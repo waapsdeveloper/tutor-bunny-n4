@@ -6,7 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SdBbackBtnModule } from '../../components/sd-bback-btn/sd-bback-btn.module';
-import { FakeAccountsModule } from './fake-accounts/fake-accounts.module';
+import { ForgetPasswordModule } from '../login/forget-password/forget-password.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { FakeAccountsModule } from './fake-accounts/fake-accounts.module';
     IonicModule,
     HomePageRoutingModule,
     SdBbackBtnModule,
-    FakeAccountsModule,
+    ForgetPasswordModule,
   ],
   declarations: [HomePage],
 })

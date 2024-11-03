@@ -19,7 +19,6 @@ import { CourseListModule } from '../student-dashboard/rec-courses/course-list/c
     FavCoursesPageRoutingModule,
     SdHeaderTopModule,
     FavRecCoursesModule,
-    // FavRecListModule,
     CourseListModule
   ],
   declarations: [FavCoursesPage]
