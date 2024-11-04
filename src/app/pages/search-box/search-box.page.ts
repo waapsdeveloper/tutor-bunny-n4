@@ -8,7 +8,7 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
   templateUrl: './search-box.page.html',
   styleUrls: ['./search-box.page.scss'],
 })
-export class SearchBoxPage extends BasePage implements OnInit {
+export class SearchBoxPage extends BasePage {
   search;
   searchList;
   user;
@@ -21,7 +21,6 @@ export class SearchBoxPage extends BasePage implements OnInit {
     this.initialize();
   }
 
-  ngOnInit() {}
 
   async initialize() {
     let obj = {
