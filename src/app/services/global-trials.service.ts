@@ -121,6 +121,7 @@ export class GlobalTrialsService {
         search: search,
         page: page,
         teacher_id: this.user.id,
+
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
       const data = res.result;

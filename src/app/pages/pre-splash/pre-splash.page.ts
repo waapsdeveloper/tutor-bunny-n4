@@ -67,8 +67,11 @@ export class PreSplashPage extends BasePage implements OnInit {
 
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
+
+
     await this.chatService.getchatList();
     await this.notificationService.getNotificationsFromApi();
+
     this.fcm.setTokenToServer();
 
     const utcTime = moment().utcOffset();
