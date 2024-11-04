@@ -86,7 +86,8 @@ export class TeacherListComponent extends BasePage implements OnInit {
   }
   seeAll(user) {
     let params = {
-      user: JSON.stringify(user)
+      user_name: user.name,
+      user_id: user.id
     }
 
     this.nav.push('teacher-course-list', params)
