@@ -11,7 +11,6 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { TeacherService } from 'src/app/services/teacher.service';
-import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-pre-splash',

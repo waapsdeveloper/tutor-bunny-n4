@@ -9,6 +9,7 @@ import { SearchResultPageRoutingModule } from './search-result-routing.module';
 import { SearchResultPage } from './search-result.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { SearchCourseBoxModule } from './search-course-box/search-course-box.module';
+import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SearchCourseBoxModule } from './search-course-box/search-course-box.mod
     IonicModule,
     SearchResultPageRoutingModule,
     SdHeaderTopModule,
-    SearchCourseBoxModule
+    SearchCourseBoxModule,
+    GenericCourseCardModule
   ],
   declarations: [SearchResultPage]
 })

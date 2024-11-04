@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './review-card.component.html',
   styleUrls: ['./review-card.component.scss'],
 })
-export class ReviewCardComponent  implements OnInit {
+export class ReviewCardComponent {
   rating;
   flag;
 
@@ -24,7 +24,6 @@ export class ReviewCardComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
 
 
   getFlag() {

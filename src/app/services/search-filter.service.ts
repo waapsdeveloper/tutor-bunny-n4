@@ -21,12 +21,14 @@ export class SearchFilterService {
     travel_policy_id: null,
   };
   searchList: any[] = [];
-  searchTitals: any[] = []
+  searchTitals: any[] = [];
   countryId = null;
   stateId = null;
   keywords;
   searchCourses;
-  constructor(private network: NetworkService) { }
+  page = 0;
+  last_page = -1;
+  constructor(private network: NetworkService) {}
 
   updateFormData(value: any, key: string): void {
     this.formData[key] = value;
@@ -40,12 +42,11 @@ export class SearchFilterService {
     return this.formData;
   }
 
-  async submitFormData(): Promise<void> {
+  async submitFormData(page): Promise<void> {
     return new Promise(async (resolve) => {
-
       let obj = {
         search: '',
-        page: 1,
+        page: page,
         liked: false,
         language_id: this.formData.language,
         price: this.formData.price,
@@ -61,7 +62,15 @@ export class SearchFilterService {
         keyword: this.formData.keywords,
       };
       const res = (await this.network.getAllCourses(obj)) as any;
-      this.searchList = res.result.data;
+      const data = res.result;
+
+      this.page = data.current_page;
+      this.last_page = data.last_page;
+      if (page === 1) {
+        this.searchList = data.data;
+      } else {
+        this.searchList = [...this.searchList, ...data.data];
+      }
       resolve(res);
     });
     // Add additional logic for submission if needed.
@@ -92,7 +101,7 @@ export class SearchFilterService {
       };
       let res = (await this.network.searchFromKeywords(obj)) as any;
       this.searchList = res.keywords;
-      this.searchCourses = res.result.data
+      this.searchCourses = res.result.data;
 
       resolve;
     });

@@ -16,7 +16,7 @@ export class SearchFilterPage extends BasePage implements OnInit {
   constructor(public searchFilterService: SearchFilterService, injector: Injector) {
     super(injector)
     localStorage.setItem('formtype', this.formType)
-    
+
   }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class SearchFilterPage extends BasePage implements OnInit {
 
     if(this.user && this.user.student && this.user.student.country && this.user.student.country.currency_symbol){
       this.curruncy = this.user.student.country.currency_symbol;
-    }    
+    }
 
     this.countryId = this.searchFilterService.getCountryId();
   }
@@ -35,7 +35,7 @@ export class SearchFilterPage extends BasePage implements OnInit {
   }
 
   async submit(): Promise<void> {
-    let res = await this.searchFilterService.submitFormData() as any;
+    let res = await this.searchFilterService.submitFormData(0) as any;
     console.log(res);
     const params = {
       backUrl: '/tabs/student-dashboard',
