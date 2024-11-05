@@ -9,7 +9,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 })
 export class TeacherOtherCourseComponent extends BasePage implements OnInit {
   params;
-  teacher;
+  teacher_id;
   list;
   total_rating;
   rating;
@@ -19,15 +19,15 @@ export class TeacherOtherCourseComponent extends BasePage implements OnInit {
 
   ngOnInit() {
     this.params = this.nav.getQueryParams();
-    if (this.params.user) {
-      this.teacher = JSON.parse(this.params.user);
+    if (this.params.user_id) {
+      this.teacher_id = this.params.user_id;
     }
     this.callApi();
   }
 
   async callApi() {
     let obj = {
-      user_id: this.teacher.id,
+      user_id: this.teacher_id,
     };
     let res = await this.network.getTeacherCourses(obj);
     this.list = res.result.data;

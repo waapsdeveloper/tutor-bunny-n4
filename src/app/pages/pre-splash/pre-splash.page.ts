@@ -79,14 +79,14 @@ export class PreSplashPage extends BasePage implements OnInit {
     };
 
     await this.network.getTimeZone(time, this.user.id);
-
-    this.globalTrials.getPendingTrialsFromApi();
-    this.globalCourses.getCoursesFromApi();
-
+    if(this.user.role == 2 ){
+      this.globalTrials.getPendingTrialsFromApi();
+    }
+    else{
+      this.globalCourses.getCoursesFromApi();
+    }
     this.redirectDependsOnRole(this.user);
-
     this.loading = false;
-
   }
 
   async redirectDependsOnRole(user: any): Promise<void> {
