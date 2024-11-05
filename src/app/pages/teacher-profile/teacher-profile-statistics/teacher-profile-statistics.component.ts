@@ -44,12 +44,9 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
   ngOnInit() {}
   async initialize() {
     this.user = this.users.getUser()
-    let role = localStorage.getItem('role')
-    if(role == '2'){
-      this.currency = this.user.student.country.currency_symbol
-    }else{
-      this.currency = this.user.teacher.country.currency_symbol
-    }
+
+    this.getCurrencySymbol(this.user)
+
     let res = await this.network.getdashboardcounts();
     this.trials = res.trials;
     this.courses = res.courses;
@@ -57,4 +54,11 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
     this.credits = res.events;
     this.views = res.events;
   }
+
+  getCurrencySymbol(user) {
+    this.currency = user?.role === '2'
+      ? user?.student?.country?.currency_symbol ?? '$'
+      : user?.teacher?.country?.currency_symbol ?? '$';
+  }
+
 }

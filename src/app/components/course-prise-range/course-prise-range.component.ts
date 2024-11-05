@@ -25,12 +25,16 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
     try {
       let res = await this.network.getpriceRange(this.user.id);
 
-      this.minValue = res.min_price;
-      this.maxValue = res.max_price;
-      this.currency_symbol =res.currency_symbol
+      if(res){
 
 
-      this.currentValue = this.minValue;
+        this.minValue = res.min_price;
+        this.maxValue = res.max_price;
+        this.currency_symbol = res.currency_symbol
+
+
+        this.currentValue = this.minValue;
+      }
     } catch (error) {
       console.error('Error fetching price range:', error);
     }

@@ -119,7 +119,7 @@ export class StudentCourseDetailPage extends BasePage {
     this.state = this.data.user.teacher.state.name;
     this.updated_at = this.data.updated_at;
     this.type = this.data.type;
-    this.currencySymbol = this.data.auth_user_currency_symbol;
+    this.currencySymbol = this.data?.auth_user_currency_symbol;
     const startTime = this.acheduleTime.start_date;
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');

@@ -103,7 +103,7 @@ export class MyCoursesComponent extends BasePage implements OnInit {
     let role = localStorage.getItem("role")
     if(role == '2'){
     let params ={
-      user : JSON.stringify(this.teacher)
+      user: JSON.stringify(this.teacher)
     }
 
     this.nav.push('teacher-course-list', params)

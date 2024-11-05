@@ -88,10 +88,8 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.loading = true;
     this.user = this.users.getUser();
     let res = (await this.network.getcourseById(this.course_Id)) as any;
-
     this.data = res.course;
     this.title = this.data.title;
-
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
@@ -111,7 +109,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.type = this.data.type;
     this.schedules = this.data.schedules;
     this.flag = this.getFlag();
-    this.currencySymbol = this.data.auth_user_currency_symbol;
+    this.currencySymbol = this.data?.auth_user_currency_symbol;
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     this.loading = false;

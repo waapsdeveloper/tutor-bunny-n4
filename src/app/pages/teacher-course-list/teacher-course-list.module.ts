@@ -8,7 +8,7 @@ import { TeacherCourseListPageRoutingModule } from './teacher-course-list-routin
 
 import { TeacherCourseListPage } from './teacher-course-list.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
-import { TeacherOtherCourseModule } from './teacher-other-course/teacher-other-course.module';
+import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { TeacherOtherCourseModule } from './teacher-other-course/teacher-other-c
     IonicModule,
     TeacherCourseListPageRoutingModule,
     SdHeaderTopModule,
-    TeacherOtherCourseModule
+    GenericCourseCardModule
   ],
   declarations: [TeacherCourseListPage]
 })

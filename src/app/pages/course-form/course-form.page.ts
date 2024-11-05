@@ -49,7 +49,7 @@ export class CourseFormPage
     this.initialize();
     this.user = this.users.getUser();
     if (this.user.teacher.country.currency_symbol) {
-      this.currency = this.user.teacher.country.currency_symbol;
+      this.currency = this.user?.teacher?.country?.currency_symbol;
     }
     else {
       this.currency = '$'

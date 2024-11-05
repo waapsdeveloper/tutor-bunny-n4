@@ -3,5 +3,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-teacher-other-course></app-teacher-other-course>
+  <div *ngFor="let item of list">
+    <!-- (onChange)="reloadList()" -->
+    <app-generic-course-card [item]="item"></app-generic-course-card>
+  </div>
+  <!-- <app-teacher-other-course></app-teacher-other-course> -->
 </ion-content>
