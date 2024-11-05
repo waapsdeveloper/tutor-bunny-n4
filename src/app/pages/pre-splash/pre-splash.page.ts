@@ -68,8 +68,8 @@ export class PreSplashPage extends BasePage implements OnInit {
     this.globalCourses.registerPusherEvent();
 
 
-    await this.chatService.getchatList();
-    await this.notificationService.getNotificationsFromApi();
+    this.chatService.getchatList();
+    this.notificationService.getNotificationsFromApi();
 
     this.fcm.setTokenToServer();
 
@@ -78,7 +78,8 @@ export class PreSplashPage extends BasePage implements OnInit {
       timezone_offset: utcTime,
     };
 
-    await this.network.getTimeZone(time, this.user.id);
+    this.network.getTimeZone(time, this.user.id);
+
     if(this.user.role == 2 ){
       this.globalTrials.getPendingTrialsFromApi();
     }
