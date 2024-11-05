@@ -2,6 +2,7 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
+import { LanguagesSqService } from 'src/app/services/sqlite/languages-sq.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -9,12 +10,16 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './language-list.component.html',
   styleUrls: ['./language-list.component.scss'],
 })
-export class LanguageListComponent extends BasePage implements OnInit {
+export class LanguageListComponent extends BasePage {
+
   list = [];
-  lang;
   search: "";
-  param;
-  page = 1;
+  offset = 0;
+  limit = 30;
+
+  selection: any[] = [];
+
+  @Input() user: any = null;
 
   private _preSelectedLanguages: any[] = [];
   @Input('preSelectedLanguages')
@@ -24,32 +29,25 @@ export class LanguageListComponent extends BasePage implements OnInit {
 
   public set preSelectedLanguages(value: any[]) {
     this._preSelectedLanguages = value;
-
-  }
-
-
-
-
-
-  searchTerm: string = '';
-  selectedContactId: any = null;
-  constructor(injector: Injector) {
-    super(injector)
-  }
-
-  ngOnInit() {
+    this.selection = Object.assign([], value);
     this.initialize()
   }
 
-  async initialize() {
-    this.search = "";
-    this.page = 1;
-    this.callApi();
+
+
+  constructor(injector: Injector, private languagesSqService: LanguagesSqService) {
+    super(injector)
   }
 
+  // ngOnInit() {
 
-  selection(item: any) {
-    this.modals.dismiss(item);
+  // }
+
+  async initialize() {
+    this.user = this.users.getUser()
+    this.search = "";
+    this.offset = 0;
+    this.callApi();
   }
 
 
@@ -58,60 +56,108 @@ export class LanguageListComponent extends BasePage implements OnInit {
   }
 
 
-  selectedLanguage() {
-    let list = this.list.filter(x => x.checked == true);
-    this.modals.dismiss(list);
+  async selectedLanguage() {
+    console.log(this.selection)
+
+    this.modals.dismiss({'selection': this.selection});
   }
 
 
   async loadMore($event) {
-    this.page = this.lang.current_page + 1;
+    this.offset = this.list.length;
     await this.callApi();
     $event.target.complete();
   }
 
 
-  callApi() {
-    return new Promise(async resolve => {
-      let obj = {
-        search: this.search,
-        page: this.page
+  async callApi(): Promise<any> {
+
+    const res = await this.languagesSqService.list(this.search, this.offset, this.limit)
+    console.log(res);
+
+    if(this.offset == 0){
+      this.list = res;
+    } else {
+      this.list = [...this.list, ...res];
+    }
+
+    this.list = this.list.map((item) => {
+      const fi = this.selection.find(x => x.id == item.id);
+      if (fi) {
+        item.checked = true;
       }
+      return item;
+    });
 
-      let listw = this.list.filter(x => x.checked == true);
+    return true
 
-      this.lang = await this.network.getLanguage(obj) as any[];
-      this.page = this.lang.current_page;
 
-      if (this.page == 1) {
-        // Reset list on new search
-        this.list = [];
+
+    // return new Promise(async resolve => {
+    //   let obj = {
+    //     search: this.search,
+    //     page: this.page
+    //   }
+
+    //   let listw = this.list.filter(x => x.checked == true);
+
+    //   this.lang = await this.network.getLanguage(obj) as any[];
+    //   this.page = this.lang.current_page;
+
+    //   if (this.page == 1) {
+    //     // Reset list on new search
+    //     this.list = [];
+    //   }
+
+    //   // Collect the current search results
+    //   let newList = this.lang["data"];
+
+    //   // Merge new list with previously selected items
+    //   this.list = [...new Set([...this.list, ...newList, ...listw])];
+
+    //   // Update the list to check pre-selected items
+    //   this.list = this.list.map((item) => {
+    //     const fi = this.preSelectedLanguages.find(x => x.id == item.id);
+    //     if (fi) {
+    //       item.checked = true;
+    //     }
+    //     return item;
+    //   });
+
+    //   // Ensure all pre-selected items are still in the list
+    //   this.preSelectedLanguages.forEach(selectedItem => {
+
+    //     console.log("repeat", selectedItem)
+
+    //     let findIndex = this.list.findIndex(item => item.name == selectedItem.name)
+    //     if(findIndex == -1){
+    //       this.list = [...new Set([...this.list, ...[selectedItem]])];
+    //     }
+    //     // if (!this.list.some(item => item.name === selectedItem.name)) {
+    //     //   this.list.push(selectedItem);
+    //     // }
+    //   });
+
+    //   resolve(true);
+    // })
+  }
+
+  addtoselection(item){
+    console.log(item);
+
+    if(item.checked == true){
+      const fi = this.selection.findIndex(x => x.id == item.id)
+      if(fi == -1){
+        this.selection.push(item)
       }
+    }
 
-      // Collect the current search results
-      let newList = this.lang["data"];
-
-      // Merge new list with previously selected items
-      this.list = [...new Set([...this.list, ...newList, ...listw])];
-
-      // Update the list to check pre-selected items
-      this.list = this.list.map((item) => {
-        const fi = this.preSelectedLanguages.find(x => x.id == item.id);
-        if (fi) {
-          item.checked = true;
-        }
-        return item;
-      });
-
-      // Ensure all pre-selected items are still in the list
-      this.preSelectedLanguages.forEach(selectedItem => {
-        if (!this.list.some(item => item.id === selectedItem.id)) {
-          this.list.push(selectedItem);
-        }
-      });
-
-      resolve(true);
-    })
+    if(item.checked == false){
+      const fi = this.selection.findIndex(x => x.id == item.id)
+      if(fi > -1){
+        this.selection.splice(fi, 1)
+      }
+    }
   }
 
 
@@ -121,7 +167,7 @@ export class LanguageListComponent extends BasePage implements OnInit {
   handleInput(event) {
     const query = event.target.value.toLowerCase();
     this.search = query;
-    this.page = 1;
+    this.offset = 0;
     this.callApi();
     // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }
@@ -131,9 +177,8 @@ export class LanguageListComponent extends BasePage implements OnInit {
     return this.utility.capitalizeEachFirst(string)
   }
 
-
   back() {
-    this.modals.dismiss()
+    this.modals.dismiss({'selection': this.preSelectedLanguages});
   }
 
 

@@ -115,6 +115,11 @@ export class UpgradeStatements {
             user_id INTEGER,
             course_id INTEGER,
             UNIQUE(user_id, course_id)
+        );`,
+        `CREATE TABLE IF NOT EXISTS user_languages(
+          user_id INTEGER,
+          language_id INTEGER,
+          UNIQUE(user_id, language_id)
         );`
 
       ],

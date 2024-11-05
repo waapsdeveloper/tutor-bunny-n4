@@ -60,7 +60,7 @@ export class SdLanguageBoxComponent implements OnInit {
     )) as any;
 
     if (res.data) {
-      this.language = res.data;
+      this.language = res.data.selection;
 
       let user = JSON.parse(localStorage.getItem('user'));
       let obj = {
@@ -69,7 +69,7 @@ export class SdLanguageBoxComponent implements OnInit {
       }
 
       const res2 = await this.network.addLanguage(obj)
-      this.onChange.emit(res.data);
+      this.onChange.emit(this.language);
     }
   }
 
