@@ -10,7 +10,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 export class TeacherCourseListPage extends BasePage implements OnInit {
   pageTitle = 'Courses by';
   params;
-  teacher;
+  teacher_id;
   user;
   list: any[] = [];
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
@@ -20,19 +20,19 @@ export class TeacherCourseListPage extends BasePage implements OnInit {
   ngOnInit() {
     this.params = this.nav.getQueryParams();
 
-    if (this.params.user) {
+    if (this.params.user_name) {
 
-      this.user = JSON.parse(this.params.user);
-      console.log(this.user);
-      this.pageTitle = `Courses by ${this.user.name}`;
-      this.teacher = this.user.id;
+      this.pageTitle = `Courses by ${this.params.user_name}`;
+    }
+    if(this.params.user_id){
+      this.teacher_id = this.params.user_id;
     }
     this.callApi();
   }
 
   async callApi() {
     let obj = {
-      user_id: this.teacher.id,
+      user_id: this.teacher_id,
     };
     console.log(obj);
 
