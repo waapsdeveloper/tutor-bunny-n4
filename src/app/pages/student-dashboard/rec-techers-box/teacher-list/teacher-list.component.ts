@@ -8,8 +8,8 @@ import { StudentWelcomeComponent } from '../../student-welcome/student-welcome.c
   styleUrls: ['./teacher-list.component.scss'],
 })
 export class TeacherListComponent extends BasePage implements OnInit {
-  rating
-  total_rating
+  rating;
+  total_rating;
   private _item: any;
 
   @Input('item')
@@ -17,10 +17,9 @@ export class TeacherListComponent extends BasePage implements OnInit {
     return this._item;
   }
   public set item(value: any) {
-
     this._item = value;
     this.total_rating = value.teacher.total_rating;
-    this.rating = value.teacher.avg_rating
+    this.rating = value.teacher.avg_rating;
     this.displayName = this.utility.getAmericanName(this.item.name);
   }
   subjects;
@@ -31,7 +30,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
     this.user = this.users.getUser();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   getFlag() {
     if (this.item && this.item.teacher && this.item.teacher.country) {
@@ -66,8 +65,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
         chat_room_id: res.chat_room.id,
       };
       this.nav.push('/tabs/chat', params);
-    }
-    else {
+    } else {
       let res = await this.modals.present(
         StudentWelcomeComponent,
         {},
@@ -86,10 +84,9 @@ export class TeacherListComponent extends BasePage implements OnInit {
   }
   seeAll(user) {
     let params = {
-      user_name: user.name,
-      user_id: user.id
-    }
+      user: JSON.stringify(this.user),
+    };
 
-    this.nav.push('teacher-course-list', params)
+    this.nav.push('teacher-course-list', params);
   }
 }
