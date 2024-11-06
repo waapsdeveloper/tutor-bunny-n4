@@ -257,7 +257,6 @@ export class InitializeAppService {
   }
 
   async getCount(tableName: string): Promise<number> {
-
     try {
       const sql = `SELECT COUNT(*) as count FROM ${tableName}`;
       const res = await this.storageService.executeQuery(sql, []);
@@ -272,39 +271,28 @@ export class InitializeAppService {
   async initializeGenericTables(): Promise<any> {
     // check if country table already has data then don't call api
 
-    const countryCount = await this.getCount('countries')
+    const countryCount = await this.getCount('countries');
 
-    if(countryCount <= 0){
-      const countryArray = await this.network.getAllCountries();
-      const res = await this.insertCountries(countryArray);
-    }
+    const countryArray = await this.network.getAllCountries();
+    const res = await this.insertCountries(countryArray);
 
     const statesCount = await this.getCount('states');
 
-    if(statesCount <= 0){
-      // too long data to handle, leave it for the sake of bravity
-      const stateArray = await this.network.getAllStates();
-      const res2 = await this.insertStates(stateArray);
-    }
+    // too long data to handle, leave it for the sake of bravity
+    const stateArray = await this.network.getAllStates();
+    const res2 = await this.insertStates(stateArray);
 
     const languagesCount = await this.getCount('languages');
 
-    if(languagesCount <= 0){
-      const languagesArray = await this.network.getAllLanguages();
-      const res3 = await this.insertLanguages(languagesArray);
-    }
-
-
-
+    const languagesArray = await this.network.getAllLanguages();
+    const res3 = await this.insertLanguages(languagesArray);
 
     return true;
     //const res3 = await this.insertStates(languagesArray)
   }
 
   initializeUserTables(user: any) {
-
     return new Promise(async (resolve) => {
-
       const favIds = await this.network.getAllFavCoursesIds();
       console.log(favIds);
       await this.insertCourseFav(user.id, favIds);

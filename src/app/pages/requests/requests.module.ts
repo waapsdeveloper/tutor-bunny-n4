@@ -8,7 +8,8 @@ import { RequestsPageRoutingModule } from './requests-routing.module';
 
 import { RequestsPage } from './requests.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
-import { ReqCourseListModule } from './req-course-list/req-course-list.module';
+import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
+import { RequestItemModule } from './request-item/request-item.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ReqCourseListModule } from './req-course-list/req-course-list.module';
     IonicModule,
     RequestsPageRoutingModule,
     SdHeaderTopModule,
-    ReqCourseListModule
+    GenericCourseCardModule,
+    RequestItemModule
   ],
   declarations: [RequestsPage]
 })

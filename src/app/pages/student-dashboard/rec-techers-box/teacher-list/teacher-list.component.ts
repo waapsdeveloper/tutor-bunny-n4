@@ -84,7 +84,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
   }
   seeAll(user) {
     let params = {
-      user_name: this.user.name,
+      user_name: user.name,
       user_id : user.id
     };
     console.log(params);

@@ -8,7 +8,6 @@ import { ChatRequestsPageRoutingModule } from './chat-requests-routing.module';
 
 import { ChatRequestsPage } from './chat-requests.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
-import { ReqCourseListModule } from '../requests/req-course-list/req-course-list.module';
 import { RequestListModule } from "./request-list/request-list.module";
 
 @NgModule({
@@ -18,7 +17,6 @@ import { RequestListModule } from "./request-list/request-list.module";
     IonicModule,
     ChatRequestsPageRoutingModule,
     SdHeaderTopModule,
-    ReqCourseListModule,
     RequestListModule
 ],
   declarations: [ChatRequestsPage]

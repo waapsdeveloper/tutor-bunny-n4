@@ -1,10 +1,13 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="pageTitle" [backUrl]="" [showFav]="false"
-    [showSearch]="true" [showNotification]="true" [goToFav]="true"></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="pageTitle" [backUrl]="" [showFav]="false" [showSearch]="true"
+    [showNotification]="true" [goToFav]="true"></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true">
-  <div class="body-scroll" >
-    <app-req-course-list (number)="getTotalNumver($event)"></app-req-course-list>
+  <div class="body-scroll">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <app-request-item *ngFor="let item of list" [item]="item"></app-request-item>
   </div>
 </ion-content>

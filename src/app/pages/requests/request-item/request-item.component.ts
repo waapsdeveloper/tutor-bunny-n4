@@ -1,23 +1,16 @@
-import {
-  Component,
-  EventEmitter,
-  Injector,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss'],
+  selector: 'app-request-item',
+  templateUrl: './request-item.component.html',
+  styleUrls: ['./request-item.component.scss'],
 })
-export class CourseListComponent extends BasePage implements OnInit {
+export class RequestItemComponent extends BasePage  implements OnInit {
   private _item: any;
   displayName;
   flag;

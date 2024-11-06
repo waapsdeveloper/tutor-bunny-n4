@@ -32,9 +32,9 @@ export class StudentOtherCoursesComponent extends BasePage {
 
   seeAll() {
     let params = {
-      user: JSON.stringify(this.teacher)
-    }
-
+      user_name: this.teacher.name,
+      user_id : this.teacher.id
+    };
     this.nav.push('teacher-course-list', params)
   }
 

@@ -10,7 +10,7 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
 export class SearchFilterPage extends BasePage implements OnInit {
   countryId = null;
   formType = 'filter';
-  curruncy;
+  currency = "$"
   user;
 
   constructor(public searchFilterService: SearchFilterService, injector: Injector) {
@@ -23,9 +23,8 @@ export class SearchFilterPage extends BasePage implements OnInit {
     this.loadResolvers();
     this.user = this.dataR.user;
 
-    if(this.user && this.user.student && this.user.student.country && this.user.student.country.currency_symbol){
-      this.curruncy = this.user.student.country.currency_symbol;
-    }
+    this.currency = this.user?.student?.country?.currency_symbol ?? "$";
+
 
     this.countryId = this.searchFilterService.getCountryId();
   }

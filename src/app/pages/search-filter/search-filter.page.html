@@ -25,7 +25,7 @@
         [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-14 roboto-medium">Hourly rate {{curruncy}}</div>
+      <div class="input-title fs-14 roboto-medium">Hourly rate {{currency}}</div>
       <app-sd-input-box (onChange)="result($event, 'hourly_rate')"
         [inputText]="searchFilterService.formData.hourly_rate" [key]="'hourly_rate'" [errorText]="'price is required'"
         [type]="'number'"></app-sd-input-box>

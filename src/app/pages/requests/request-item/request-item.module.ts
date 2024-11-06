@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseListComponent } from './course-list.component';
+import { RequestItemComponent } from './request-item.component';
 import { IonicModule } from '@ionic/angular';
-import { TeacherReviewsModule } from './teacher-reviews/teacher-reviews.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { TeacherReviewsModule } from './teacher-reviews/teacher-reviews.module';
 
 
 
 @NgModule({
-  declarations: [CourseListComponent],
+  declarations: [RequestItemComponent],
   imports: [
     CommonModule,
     IonicModule,
     RatingStarsModule,
     TeacherReviewsModule
   ],
-  exports: [CourseListComponent]
+  exports:[RequestItemComponent]
 })
-export class CourseListModule { }
+export class RequestItemModule { }

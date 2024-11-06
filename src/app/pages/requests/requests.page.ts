@@ -1,23 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.page.html',
   styleUrls: ['./requests.page.scss'],
 })
-export class RequestsPage implements OnInit {
-  pageTitle = 'My Requests'
-
-  constructor() { }
-
-  ngOnInit() {
+export class RequestsPage extends BasePage {
+  pageTitle = 'My Requests';
+  user;
+  list: any[] = [];
+  constructor(injector: Injector) {
+    super(injector);
+    this.callApi();
   }
 
-  // /get-requested/course/trials/{student_id}
+  async callApi() {
+    let user = this.users.getUser();
+    let res = await this.network.getAllReqCourses(user.id);
+    this.list = res.result.data;
+    console.log(this.list, "hgjsaefhgkjdfghkjcgjkfdjghkfdsjghfsdhgkjfdsjghksdfhgjkfds");
 
-  getTotalNumver(event){
-    console.log(event);
-    this.pageTitle = `My Requests (${event})`;
+    this.pageTitle = `My Requests (${res.result.total})`;
   }
 
+  async refreshPage(event) {
+    setTimeout(() => {
+      event.target.complete();
+    }, 500);
+  }
 }
