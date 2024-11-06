@@ -22,12 +22,14 @@ export class SearchBoxPage extends BasePage {
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
-    this.user = this.users.getUser();
     this.initialize();
   }
 
 
   async initialize() {
+
+    this.loadResolvers();
+    this.user = this.dataR.user;
     let obj = {
       user_id: this.user.id,
     };
