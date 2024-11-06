@@ -142,14 +142,6 @@ export class SearchBoxPage extends BasePage {
     this.nav.push('search-result', params);
   }
 
-
-
-
-
-
-
-
-
   back() {
     this.nav.pop();
   }

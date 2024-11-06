@@ -8,20 +8,55 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
   templateUrl: './search-result.page.html',
   styleUrls: ['./search-result.page.scss'],
 })
-export class SearchResultPage extends BasePage {
+export class SearchResultPage extends BasePage implements OnInit {
+  params;
+  search;
+  searchCourses: any[] = [];
+  page = 1;
+  last_page = -1;
 
-  constructor(injector:Injector, public filter: SearchFilterService) {
-    super(injector)
-   }
+  debounceTimer: any; // Debounce timer property
 
+  constructor(injector: Injector, public filter: SearchFilterService) {
+    super(injector);
+  }
 
+  ngOnInit() {
+    this.params = this.nav.getQueryParams();
+    if (this.params.search) {
+      this.search = this.params.search;
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = setTimeout(async () => {
+        let res = this.callAPiOnSerch(this.search, this.page);
+      }, 500);
+    }
+  }
+
+  callAPiOnSerch(search, page) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        search: search,
+        page: page,
+        liked: false,
+      };
+      let res = (await this.network.searchFromKeywords(obj)) as any;
+      let d = res.result;
+      this.page = d.current_page;
+      if (this.page == 1) {
+        this.searchCourses = d['data'];
+      } else {
+        this.searchCourses = [...this.searchCourses, ...d['data']];
+      }
+
+      resolve(true);
+    });
+  }
 
   async onIonInfinite(ev) {
-    if (this.filter.page <= this.filter.last_page) {
-      const np = this.filter.page + 1;
-      await this.filter.submitFormData(np);
+    if (this.page <= this.last_page) {
+      this.page = this.page + 1;
+      await this.callAPiOnSerch(this.search, this.page);
     }
     (ev as InfiniteScrollCustomEvent).target.complete();
   }
-
 }
