@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SearchBoxPage } from './search-box.page';
+import { userResolver } from 'src/app/resolvers/user.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchBoxPage
+    component: SearchBoxPage,
+    resolve: {
+      user: userResolver
+    },
   }
 ];
 
