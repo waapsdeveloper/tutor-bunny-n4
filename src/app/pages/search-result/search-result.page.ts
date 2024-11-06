@@ -47,7 +47,6 @@ export class SearchResultPage extends BasePage implements OnInit {
       } else {
         this.searchCourses = [...this.searchCourses, ...d['data']];
       }
-
       resolve(true);
     });
   }
