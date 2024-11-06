@@ -5,7 +5,7 @@ import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-t
 import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
 import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
 import { FormsModule } from '@angular/forms';
-import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { RatingStartModule } from './rating-start/rating-start.module';
 
 
 
@@ -19,7 +19,7 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
     SdButtonGrayModule,
     SdButtonClearModule,
     FormsModule,
-    RatingStarsModule
+    RatingStartModule
   ],
   exports:[TeacherReviewsComponent]
 })

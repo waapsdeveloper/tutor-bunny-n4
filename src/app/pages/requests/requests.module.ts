@@ -10,6 +10,7 @@ import { RequestsPage } from './requests.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 import { RequestItemModule } from './request-item/request-item.module';
+import { NoDataModule } from 'src/app/components/no-data/no-data.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { RequestItemModule } from './request-item/request-item.module';
     RequestsPageRoutingModule,
     SdHeaderTopModule,
     GenericCourseCardModule,
-    RequestItemModule
+    RequestItemModule,
+    NoDataModule
   ],
   declarations: [RequestsPage]
 })

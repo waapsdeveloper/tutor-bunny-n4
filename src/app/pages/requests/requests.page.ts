@@ -10,23 +10,60 @@ export class RequestsPage extends BasePage {
   pageTitle = 'My Requests';
   user;
   list: any[] = [];
+  search=  '';
+  last_page = -1;
+  page = 1;
   constructor(injector: Injector) {
     super(injector);
+  }
+
+  ionViewWillEnter() {
+    this.initialize();
+  }
+  initialize(){
+    this.loadResolvers();
+    this.user = this.dataR.user;
     this.callApi();
+
   }
 
   async callApi() {
-    let user = this.users.getUser();
-    let res = await this.network.getAllReqCourses(user.id);
-    this.list = res.result.data;
-    console.log(this.list, "hgjsaefhgkjdfghkjcgjkfdjghkfdsjghfsdhgkjfdsjghksdfhgjkfds");
+    return new Promise(async (resolve) => {
+      let obj = {
+        search: this.search,
+        page: this.page,
+      };
+      let res = await this.network.getAllReqCourses(this.user.id, obj);
+      let d = res.result;
+      this.pageTitle = `My Requests (${res.result.total})`;
+      this.page = d.current_page;
+      if (this.page == 1) {
+        this.list = d['data'];
+      } else {
+        this.list = [...this.list, ...d['data']];
+      }
 
-    this.pageTitle = `My Requests (${res.result.total})`;
+      resolve(true);
+    });
   }
 
   async refreshPage(event) {
+    this.search = '';
+    this.page = 1;
+    await this.callApi();
     setTimeout(() => {
       event.target.complete();
     }, 500);
+  }
+
+  async loadMore($event) {
+    return new Promise(async (resolve) => {
+      if (this.page < this.last_page) {
+        this.page = this.page + 1;
+        await this.callApi();
+      }
+      $event.target.complete();
+      resolve(true);
+    });
   }
 }

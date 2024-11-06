@@ -3,11 +3,23 @@
     [showNotification]="true" [goToFav]="true"></app-sd-header-top>
 </ion-header>
 
-<ion-content class="ion-content-bg ion-padding" #content [scrollEvents]="true">
+<ion-content class="ion-content-bg ion-padding no-scroll-content" #content [scrollEvents]="true">
   <div class="body-scroll">
     <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+
     <app-request-item *ngFor="let item of list" [item]="item"></app-request-item>
+
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <!-- Centered message container, only shows if list is empty -->
+  <div *ngIf="list.length === 0" class="centered-message">
+    No chat to display
   </div>
 </ion-content>
+
+
