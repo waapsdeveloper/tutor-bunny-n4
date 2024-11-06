@@ -23,7 +23,7 @@
 
             </div>
 
-            <ion-icon style="  position: absolute; right: -2px;"
+            <ion-icon style="position: absolute; right: -2px;"
               [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
               (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
               [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
