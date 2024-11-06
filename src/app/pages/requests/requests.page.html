@@ -8,17 +8,13 @@
     <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-
     <app-request-item *ngFor="let item of list" [item]="item"></app-request-item>
-
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-
-  <!-- Centered message container, only shows if list is empty -->
   <div *ngIf="list.length === 0" class="centered-message">
-    No chat to display
+    No request to display
   </div>
 </ion-content>
 
