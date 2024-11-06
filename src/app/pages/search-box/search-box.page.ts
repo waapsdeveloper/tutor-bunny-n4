@@ -10,21 +10,24 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
 })
 export class SearchBoxPage extends BasePage {
 
-
-
-
-  search;
-  searchList: any[] = [];;
+  searchList: any[] = [];
   recentSearch: any[] = [];
+  searchCourses: any[] = [];
+
+  search = '';
   user;
 
   debounceTimer: any; // Debounce timer property
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
-    this.initialize();
+
+
   }
 
+  ionViewWillEnter(){
+    this.initialize();
+  }
 
   async initialize() {
 
@@ -34,12 +37,54 @@ export class SearchBoxPage extends BasePage {
       user_id: this.user.id,
     };
     let res = await this.network.getRecentSearchs(obj);
-    this.recentSearch = res.result;
+
+    if(res && res.result){
+      this.recentSearch = res.result;
+    }
+
   }
 
-  back() {
-    this.nav.pop();
+  async getSearchFromKeywordName(item){
+
+    this.search = item.keyword_name;
+
+    if(!this.search){
+      return;
+    }
+    let obj = {
+      search: this.search,
+      page: 1,
+      liked: false,
+    };
+    const res = (await this.network.getAllCourses(obj)) as any;
+    const data = res.result;
+    this.searchCourses = data.data;
+
+    // console.log(this.searchCourses)
+
   }
+
+  // click on recent search
+  async openFromRecentSearch(item) {
+
+    console.log(item);
+
+    if (!item.course_id) {
+
+    } else {
+      const params = {
+        id: item.id,
+        backUrl: '/tabs/student-dashboard',
+      };
+      this.nav.push('student-course-detail', params);
+    }
+  }
+
+
+
+
+
+
 
   gotoFilter() {
     this.nav.push('search-filter');
@@ -50,22 +95,23 @@ export class SearchBoxPage extends BasePage {
     this.search = event.target.value;
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(async () => {
-      let res = this.filter.onKeyUp(this.search);
+      let res = this.callAPiOnSerch(this.search);
     }, 500);
   }
 
-  async setRecentSeach(item) {
-    let obj = {
-      user_id: this.user.id,
-      keyword_name: item.name,
-      keyword_id: item.id,
-    };
-    let res = await this.network.setRecentSeach(obj);
-    const params = {
-      id: item.id,
-      backUrl: '/tabs/student-dashboard',
-    };
-    this.nav.push('search-result', params);
+  callAPiOnSerch(search) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        search: search,
+        page: 1,
+        liked: false,
+      };
+      let res = (await this.network.searchFromKeywords(obj)) as any;
+      this.searchList = res.keywords;
+      this.searchCourses = res.result.data;
+
+      resolve(true);
+    });
   }
 
   async onSearch(event: Event) {
@@ -83,23 +129,29 @@ export class SearchBoxPage extends BasePage {
     this.nav.push('search-result', params);
   }
 
-  async openFromRecentSearch(item) {
-    if (!item.course_id) {
-      this.search = item.course_title;
-      let obj = {
-        search: this.search,
-        page: 1,
-        liked: false,
-      };
-      const res = (await this.network.getAllCourses(obj)) as any;
-      const data = res.result;
-      this.searchList = data.data;
-    } else {
-      const params = {
-        id: item.id,
-        backUrl: '/tabs/student-dashboard',
-      };
-      this.nav.push('student-course-detail', params);
-    }
+  async setRecentSeach(item) {
+    let obj = {
+      user_id: this.user.id,
+      keyword_name: item.name,
+      keyword_id: item.id,
+    };
+    let res = await this.network.setRecentSeach(obj);
+    const params = {
+      id: item.id,
+      backUrl: '/tabs/student-dashboard',
+    };
+    this.nav.push('search-result', params);
+  }
+
+
+
+
+
+
+
+
+
+  back() {
+    this.nav.pop();
   }
 }

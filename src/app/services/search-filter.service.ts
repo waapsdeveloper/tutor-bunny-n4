@@ -5,6 +5,7 @@ import { NetworkService } from './network.service';
   providedIn: 'root',
 })
 export class SearchFilterService {
+
   formData = {
     keywords: null,
     language: null,
@@ -92,18 +93,5 @@ export class SearchFilterService {
     return this.stateId;
   }
 
-  onKeyUp(search) {
-    return new Promise(async (resolve) => {
-      let obj = {
-        search: search,
-        page: 1,
-        liked: false,
-      };
-      let res = (await this.network.searchFromKeywords(obj)) as any;
-      this.searchList = res.keywords;
-      this.searchCourses = res.result.data;
 
-      resolve;
-    });
-  }
 }

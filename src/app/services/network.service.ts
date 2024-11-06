@@ -548,7 +548,10 @@ export class NetworkService {
         },
         error: (err: any) => {
           this.utility.hideLoader();
-          this.utility.presentFailureToast(err.error.message);
+
+          if(showError == true){
+            this.utility.presentFailureToast(err.error.message);
+          }
           if (err.status == 401) {
             this.modals.dismiss(false);
             localStorage.removeItem('token');
