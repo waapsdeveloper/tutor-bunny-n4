@@ -129,16 +129,15 @@ export class SearchBoxPage extends BasePage {
     this.nav.push('search-result', params);
   }
 
-  async setRecentSeach(item) {
-    let obj = {
-      user_id: this.user.id,
-      keyword_name: item.name,
-      keyword_id: item.id,
-    };
-    let res = await this.network.setRecentSeach(obj);
+  async setRecentSeach(item, type) {
+    // let obj = {
+    //   user_id: this.user.id,
+    //   keyword_name: item.name,
+    //   keyword_id: item.id,
+    // };
+    // let res = await this.network.setRecentSeach(obj);
     const params = {
-      id: item.id,
-      backUrl: '/tabs/student-dashboard',
+      search: type == 'keyword' ? (item.keyword_name ?? '') : (item.title ?? ''),
     };
     this.nav.push('search-result', params);
   }
