@@ -9,10 +9,15 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
   styleUrls: ['./search-box.page.scss'],
 })
 export class SearchBoxPage extends BasePage {
+
+
+
+
   search;
-  searchList;
+  searchList: any[] = [];;
+  recentSearch: any[] = [];
   user;
-  recentSearch;
+
   debounceTimer: any; // Debounce timer property
 
   constructor(injector: Injector, public filter: SearchFilterService) {
