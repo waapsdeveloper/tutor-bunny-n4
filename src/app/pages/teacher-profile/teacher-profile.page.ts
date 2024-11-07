@@ -208,25 +208,13 @@ export class TeacherProfilePage
   async openChatWithData() {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.student = this.users.getUser();
-    let obj = {
-      user_id_1: this.student.id,
-      user_id_2: this.teacher.id,
-    };
-    let res = await this.network.getChadRoomId(obj);
+    const chatRoomId = await this.chats.openChatWithData(this.teacher.id, this.student.id) as number;
 
-    console.log(res);
-
-    const chatroom = res.chat_room;
-    if(chatroom){
-      if(chatroom.request_status == "pending"){
-        // kahan jana he ?
-      }
+    if(chatRoomId != -1){
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
     }
-
-
-
-
-
 
 
     // if(res && res.chat_room){

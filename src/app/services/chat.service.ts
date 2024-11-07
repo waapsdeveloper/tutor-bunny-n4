@@ -10,7 +10,6 @@ import Pusher from 'pusher-js';
   providedIn: 'root',
 })
 export class ChatService {
-
   user: any;
   role_id: any;
   chats;
@@ -176,7 +175,7 @@ export class ChatService {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
       console.log(this.days);
-      this.events.publish('scroll-to-bottom')
+      this.events.publish('scroll-to-bottom');
 
       resolve(true);
     });
@@ -195,9 +194,48 @@ export class ChatService {
     }
   }
 
+  async openChatWithData(user1, user2): Promise<number> {
+    let obj = {
+      user_id_1: user1,
+      user_id_2: user2,
+    };
+    let res = await this.network.getChadRoomId(obj);
+
+    console.log(res);
+    const chatroom = res.chat_room;
+
+    if (chatroom) {
+      console.log(chatroom, this.chats);
+      const findObj = this.chats.find((x) => x.chat_room_id == chatroom);
+      if (!findObj) {
+        const currectUser = this.users.getUser();
+        const otherUserId = user1 == currectUser.id ? user2 : user1;
+        const otherUser =
+          chatroom['user1'].id == otherUserId
+            ? chatroom['user1']
+            : chatroom['user2'];
+
+        let customObj = {
+          chat_room_id: chatroom.id,
+          last_message: '',
+          other_user_id: otherUserId,
+          unread_count: 0,
+          user: otherUser,
+        };
+
+        this.chats.push(customObj);
+        return chatroom.id;
+      }
+
+      return chatroom.id;
+    }
+
+    return -1;
+  }
+
   getChatRoomInfo(roomId) {
     console.log(this.chats, roomId);
-    const ch = this.chats.find(x => x.id == roomId)
+    const ch = this.chats.find((x) => x.id == roomId);
     return ch;
   }
 }
