@@ -90,6 +90,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize(roomId) {
 
     this.loading = true;
+
+    this.loadResolvers();
+    this.user = this.dataR.user;
     await this.chats.getChatMessages(roomId);
 
     this.displayName = this.utility.getAmericanName(this.item.user.name);
