@@ -27,6 +27,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   loading = false;
   user_id;
   flag;
+  newMesg = {};
   image;
   user;
   displayName;
@@ -201,7 +202,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async sendMessage() {
     if (!this.message) return;
 
-    let newMesg = {
+    this.newMesg = {
       date: 'Sending...',
       messages: [
         {
@@ -215,7 +216,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         },
       ],
     };
-    this.chats.days.push(newMesg);
+    this.chats.days.push(this.newMesg);
 
     this.scrollToBottomOnInit();
 
@@ -232,7 +233,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.adjustHeight(this.messageInput.nativeElement);
 
     let res = await this.network.sendMessage(obj);
-    // this.initialize();
+    console.log(res);
+    if(res && res.message){
+      this.newMesg.date = null
+
+    }
+    // this.initialize(this.item.chat_room_id);
   }
 
 
