@@ -36,7 +36,6 @@ export class GlobalTrialsService {
       this.courseId = null;
       this.pendingTrialPage = null;
       this.pendingTrialLastPage = null;
-      this.pendingTrials = [];
     }, false);
     const options = {
       cluster: 'ap2',

@@ -85,6 +85,8 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   async initialize() {
     this.loadResolvers();
     this.user = this.dataR.user;
+    console.log(this.globalTrials.pendingTrials, "ye raha");
+
     let obj = {
       email: this.user.email,
     };
