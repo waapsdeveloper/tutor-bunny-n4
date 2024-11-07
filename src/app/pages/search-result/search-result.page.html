@@ -2,17 +2,14 @@
   <app-sd-header-top [showBack]="true" [title]="'Search Result'" [backUrl]=""></app-sd-header-top>
 </ion-header>
 
-<ion-content class="student-back ion-content-medium-background" >
+<ion-content class="ion-content-medium-background" >
   <div class="student-box-outer-689567 ">
     <div class="sb-content-7895">
-      <div  *ngFor="let item of searchCourses">
-        <!-- (onChange)="reloadList()" -->
-        <app-generic-course-card [item]="item"></app-generic-course-card>
-      </div>
-      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+        <app-generic-course-card *ngFor="let item of searchCourses" [item]="item"></app-generic-course-card>
     </div>
   </div>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   <!-- <app-search-course-box> </app-search-course-box> -->
 </ion-content>

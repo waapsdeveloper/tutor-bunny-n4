@@ -34,10 +34,10 @@ export class SearchFilterPage extends BasePage implements OnInit {
   }
 
   async submit(): Promise<void> {
-    let res = await this.searchFilterService.submitFormData(0) as any;
+    let res = await this.searchFilterService.submitFormData(1) as any;
     console.log(res);
     const params = {
-      backUrl: '/tabs/student-dashboard',
+      filter: JSON.stringify(res),
     };
     this.nav.push('search-result', params);
 
