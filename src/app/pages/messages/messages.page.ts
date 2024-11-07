@@ -55,33 +55,41 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async ionViewWillEnter() {
-    this.events.publish('update-chat-count')
+
 
     this.loading = true;
     this.params = this.nav.getQueryParams();
 
-    if (this.params.item) {
-      this.item = JSON.parse(this.params.item);
-      this.initialize();
-      this.user = this.users.getUser();
-      this.role_id = this.user.role_id;
-      this.user_id = this.user.id;
-      this.flag = this.getFlag();
-      this.messageReceivedViaPusher();
+    if(!this.params.chat_room_id){
+      this.nav.pop();
+      return
     }
+
+    const roomId = this.params.chat_room_id;
+    this.initialize(roomId);
+
+    this.events.publish('update-chat-count')
+
+    // if (this.params.item) {
+    //   this.item = JSON.parse(this.params.item);
+    //
+    //   this.user = this.users.getUser();
+    //   this.role_id = this.user.role_id;
+    //   this.user_id = this.user.id;
+    //   this.flag = this.getFlag();
+    this.messageReceivedViaPusher();
+    // }
     this.loading = false;
 
-    setTimeout(() => {
-      this.myContent.scrollToBottom(100);
-      console.log("scroll");
 
-    }, 500);
+
+
+    this.events.publish('update-chat-count')
   }
 
-  async initialize() {
-    this.chats.getchatList();
+  async initialize(roomId) {
+
     this.loading = true;
-    let roomId = this.item.chat_room_id;
     this.chats.getChatMessages(roomId);
     let days = this.chats.days
     console.log(days);
@@ -89,6 +97,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
     this.loading = false;
+
+    setTimeout(() => {
+      this.myContent.scrollToBottom(100);
+      console.log("scroll");
+
+    }, 500);
 
 
   }
