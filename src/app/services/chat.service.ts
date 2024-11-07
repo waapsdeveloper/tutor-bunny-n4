@@ -178,7 +178,7 @@ export class ChatService {
       console.log(this.days);
       this.events.publish('scroll-to-bottom')
 
-      resolve;
+      resolve(true);
     });
   }
 

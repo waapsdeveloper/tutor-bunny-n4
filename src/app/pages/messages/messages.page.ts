@@ -90,9 +90,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async initialize(roomId) {
 
     this.loading = true;
-    this.chats.getChatMessages(roomId);
-    let days = this.chats.days
-    console.log(days);
+    await this.chats.getChatMessages(roomId);
 
     this.displayName = this.utility.getAmericanName(this.item.user.name);
     this.image = this.item.user.image;
@@ -116,7 +114,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   updateChatsByMessageReceived(data: any) {
-    this.initialize();
+
 
     const dm = data;
     if (dm.chat_room_id == this.item.chat_room_id) {
@@ -218,7 +216,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.adjustHeight(this.messageInput.nativeElement);
 
     let res = await this.network.sendMessage(obj);
-    this.initialize();
+    // this.initialize();
   }
 
 
