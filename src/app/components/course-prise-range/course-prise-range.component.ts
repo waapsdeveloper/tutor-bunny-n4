@@ -10,7 +10,7 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
   user: any;
   minValue: number = 0;
   maxValue: number = 100;
-  currentValue;
+  @Input('currentValue') currentValue = 0;
   currency_symbol;
   @Input('key') key = '';
 
