@@ -214,13 +214,27 @@ export class TeacherProfilePage
     };
     let res = await this.network.getChadRoomId(obj);
 
-    console.log(res)
-    if(res && res.chat_room){
-      this.nav.push('messages',{
-        chat_room_id: res.chat_room.id
-      })
-      // const prm = await this.chats.openChat(res.chat_room);
+    console.log(res);
+
+    const chatroom = res.chat_room;
+    if(chatroom){
+      if(chatroom.request_status == "pending"){
+        // kahan jana he ?
+      }
     }
+
+
+
+
+
+
+
+    // if(res && res.chat_room){
+    //   this.nav.push('messages',{
+    //     chat_room_id: res.chat_room.id
+    //   })
+    //   // const prm = await this.chats.openChat(res.chat_room);
+    // }
 
 
 

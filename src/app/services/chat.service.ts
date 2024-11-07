@@ -195,7 +195,9 @@ export class ChatService {
     }
   }
 
-  openChat(res: any) {
-    console.log(res)
+  getChatRoomInfo(roomId) {
+    console.log(this.chats, roomId);
+    const ch = this.chats.find(x => x.id == roomId)
+    return ch;
   }
 }
