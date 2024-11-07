@@ -102,7 +102,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
 
 
-    this.displayName = this.utility.getAmericanName(this.item.user.name);
+    this.displayName = this.utility.getAmericanName(ch.user.name);
     this.image = this.item.user.image;
     this.loading = false;
 

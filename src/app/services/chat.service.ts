@@ -238,4 +238,5 @@ export class ChatService {
     const ch = this.chats.find((x) => x.id == roomId);
     return ch;
   }
+
 }
