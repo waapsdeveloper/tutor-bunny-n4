@@ -14,48 +14,84 @@ export class SearchResultPage extends BasePage implements OnInit {
   searchCourses: any[] = [];
   page = 1;
   last_page = -1;
+  filterObj = null;
+  loading = false;
+
 
   debounceTimer: any; // Debounce timer property
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
   }
+  ngOnInit(): void {
+    console.log("run once")
+  }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     if (this.params.search) {
       this.search = this.params.search;
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(async () => {
-        let res = this.callAPiOnSerch(this.search, this.page);
-      }, 500);
+      this.callAPiOnSerch(this.search, this.page);
+    }
+
+    if(this.params.filter){
+      this.filterObj = JSON.parse(this.params.filter);
+      this.callAPiOnSerch(this.search, this.page);
     }
   }
 
-  callAPiOnSerch(search, page) {
-    return new Promise(async (resolve) => {
+  async callAPiOnSerch(search, page): Promise<any> {
       let obj = {
         search: search,
         page: page,
         liked: false,
       };
-      let res = (await this.network.searchFromKeywords(obj)) as any;
-      let d = res.result;
+
+      if(this.filterObj){
+        obj = this.filterObj;
+        obj['page'] = page;
+        obj['search'] = search;
+        obj['liked'] = false
+      }
+
+      let res = (await this.network.getAllCourses(obj)) as any;
+      console.log(res)
+      let d = Object.assign({}, res.result);
+
       this.page = d.current_page;
+      this.last_page = d.last_page;
+
+      console.log(this.page);
+
+
       if (this.page == 1) {
         this.searchCourses = d['data'];
       } else {
         this.searchCourses = [...this.searchCourses, ...d['data']];
       }
-      resolve(true);
-    });
+
+
+      return true;
   }
 
-  async onIonInfinite(ev) {
-    if (this.page <= this.last_page) {
-      this.page = this.page + 1;
-      await this.callAPiOnSerch(this.search, this.page);
+  async onIonInfinite($event) {
+
+    if(this.loading == true){
+      $event.target.complete();
+      return;
     }
-    (ev as InfiniteScrollCustomEvent).target.complete();
+
+    if (this.page >= this.last_page) {
+      $event.target.disabled = true;
+    }
+
+    this.loading = true;
+    if (this.page < this.last_page) {
+      const n = this.page + 1;
+      await this.callAPiOnSerch(this.search, n);
+    }
+    this.loading = false;
+    $event.target.complete();
+
   }
 }

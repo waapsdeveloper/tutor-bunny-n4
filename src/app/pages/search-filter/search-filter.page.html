@@ -16,7 +16,7 @@
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Course Price</div>
-      <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'"> </app-course-prise-range>
+      <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'" [currentValue]="searchFilterService.formData.price"> </app-course-prise-range>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"

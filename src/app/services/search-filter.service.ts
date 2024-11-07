@@ -43,8 +43,8 @@ export class SearchFilterService {
     return this.formData;
   }
 
-  async submitFormData(page): Promise<void> {
-    return new Promise(async (resolve) => {
+  async submitFormData(page): Promise<any> {
+
       let obj = {
         search: '',
         page: page,
@@ -62,18 +62,20 @@ export class SearchFilterService {
         keyword_id: this.formData.keyword_id,
         keyword: this.formData.keywords,
       };
-      const res = (await this.network.getAllCourses(obj)) as any;
-      const data = res.result;
+      return obj;
 
-      this.page = data.current_page;
-      this.last_page = data.last_page;
-      if (page === 1) {
-        this.searchList = data.data;
-      } else {
-        this.searchList = [...this.searchList, ...data.data];
-      }
-      resolve(res);
-    });
+      // const res = (await this.network.getAllCourses(obj)) as any;
+      // const data = res.result;
+
+      // this.page = data.current_page;
+      // this.last_page = data.last_page;
+      // if (page === 1) {
+      //   this.searchList = data.data;
+      // } else {
+      //   this.searchList = [...this.searchList, ...data.data];
+      // }
+
+    // });
     // Add additional logic for submission if needed.
   }
 
