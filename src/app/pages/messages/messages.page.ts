@@ -93,17 +93,23 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     this.loadResolvers();
     this.user = this.dataR.user;
-    await this.chats.getChatMessages(roomId);
 
     // get next user information
-    const ch = this.chats.getChatRoomInfo(roomId);
+    const ch = await this.chats.getChatRoomInfo(roomId);
     console.log(ch);
 
+    if(!ch){
+      this.nav.pop();
+      return
+    }
+
+    await this.chats.getChatMessages(roomId);
+    this.item = ch;
 
 
 
     this.displayName = this.utility.getAmericanName(ch.user.name);
-    this.image = this.item.user.image;
+    this.image = ch.user.image;
     this.loading = false;
 
     setTimeout(() => {

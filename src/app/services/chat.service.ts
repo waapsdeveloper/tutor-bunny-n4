@@ -172,6 +172,7 @@ export class ChatService {
 
   getChatMessages(id) {
     return new Promise(async (resolve) => {
+
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
       console.log(this.days);
@@ -194,7 +195,7 @@ export class ChatService {
     }
   }
 
-  async openChatWithData(user1, user2): Promise<number> {
+  async getChadRoomId(user1, user2): Promise<number> {
     let obj = {
       user_id_1: user1,
       user_id_2: user2,
@@ -205,38 +206,58 @@ export class ChatService {
     const chatroom = res.chat_room;
 
     if (chatroom) {
-      console.log(chatroom, this.chats);
-      const findObj = this.chats.find((x) => x.chat_room_id == chatroom);
-      if (!findObj) {
-        const currectUser = this.users.getUser();
-        const otherUserId = user1 == currectUser.id ? user2 : user1;
-        const otherUser =
-          chatroom['user1'].id == otherUserId
-            ? chatroom['user1']
-            : chatroom['user2'];
-
-        let customObj = {
-          chat_room_id: chatroom.id,
-          last_message: '',
-          other_user_id: otherUserId,
-          unread_count: 0,
-          user: otherUser,
-        };
-
-        this.chats.push(customObj);
-        return chatroom.id;
-      }
-
       return chatroom.id;
     }
-
     return -1;
   }
 
-  getChatRoomInfo(roomId) {
+  async getChatRoomInfo(roomId): Promise<any> {
     console.log(this.chats, roomId);
-    const ch = this.chats.find((x) => x.id == roomId);
-    return ch;
+
+    const findObj = this.chats.find((x) => x.chat_room_id == roomId);
+    if (!findObj) {
+
+      const res = await this.network.getChatRoomById(roomId);
+      console.log(res);
+
+      if(res.length > 0){
+        this.chats = [...this.chats, ...res];
+        return res[0]
+      }
+
+    }
+
+
+
+    return findObj;
+
+      //   const currectUser = this.users.getUser();
+      //   const otherUserId = user1 == currectUser.id ? user2 : user1;
+      //   const otherUser =
+      //     chatroom['user1'].id == otherUserId
+      //       ? chatroom['user1']
+      //       : chatroom['user2'];
+
+      //   let customObj = {
+      //     chat_room_id: chatroom.id,
+      //     last_message: '',
+      //     other_user_id: otherUserId,
+      //     unread_count: 0,
+      //     user: otherUser,
+      //   };
+
+      //   this.chats.push(customObj);
+      //   return chatroom.id;
+      // }
+
+      // return chatroom.id;
+    // }
+
+
+
+    // */
+    // const ch = this.chats.find((x) => x.id == roomId);
+    // return ch;
   }
 
 }

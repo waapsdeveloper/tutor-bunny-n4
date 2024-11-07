@@ -208,7 +208,7 @@ export class TeacherProfilePage
   async openChatWithData() {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.student = this.users.getUser();
-    const chatRoomId = await this.chats.openChatWithData(this.teacher.id, this.student.id) as number;
+    const chatRoomId = await this.chats.getChadRoomId(this.teacher.id, this.student.id) as number;
 
     if(chatRoomId != -1){
       this.nav.push('messages', {

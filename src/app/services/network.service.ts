@@ -135,6 +135,10 @@ export class NetworkService {
     return this.httpGetResponse('chat-by-id/' + id, null, false, false);
   }
 
+  getChatRoomById(id: any) {
+    return this.httpGetResponse('chat-rooms-single/' + id, null, false, false);
+  }
+
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);
   }
