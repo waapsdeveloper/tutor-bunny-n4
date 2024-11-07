@@ -10,6 +10,7 @@ import Pusher from 'pusher-js';
   providedIn: 'root',
 })
 export class ChatService {
+
   user: any;
   role_id: any;
   chats;
@@ -192,5 +193,9 @@ export class ChatService {
       };
     } else {
     }
+  }
+
+  openChat(res: any) {
+    console.log(res)
   }
 }

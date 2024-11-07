@@ -5,6 +5,7 @@ import { TeacherQualificationComponent } from './teacher-qualification/teacher-q
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import * as moment from 'moment';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -48,7 +49,7 @@ export class TeacherProfilePage
   updateRating;
   updateTotalRating;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService, private chats: ChatService) {
     super(injector);
   }
 
@@ -196,36 +197,58 @@ export class TeacherProfilePage
     let user = this.users.getUser();
     console.log(user);
     let v = (await this.profiles.isProfileCompleted(user)) as any;
-    if (v || v == true) {
-      this.teacher = JSON.parse(localStorage.getItem('teacher'));
-      this.student = this.users.getUser();
-      let obj = {
-        user_id_1: this.student.id,
-        user_id_2: this.teacher.id,
-      };
-      let res = await this.network.getChadRoomId(obj);
-      let params = {
-        student_id: this.student.id,
-        other_user_id: this.teacher.id,
-        user: JSON.stringify(this.teacher),
-        chat_room_id: res.chat_room.id,
-      };
-      this.nav.push('/chat', params);
-    } else {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
+    if (!v) {
+      await this.openWelcomeComponent();
+      return;
+    }
+
+    this.openChatWithData();
+  }
+
+  async openChatWithData() {
+    this.teacher = JSON.parse(localStorage.getItem('teacher'));
+    this.student = this.users.getUser();
+    let obj = {
+      user_id_1: this.student.id,
+      user_id_2: this.teacher.id,
+    };
+    let res = await this.network.getChadRoomId(obj);
+
+    console.log(res)
+    if(res && res.chat_room){
+      this.nav.push('messages',{
+        chat_room_id: res.chat_room.id
+      })
+      // const prm = await this.chats.openChat(res.chat_room);
+    }
+
+
+
+    // let params = {
+    //   student_id: this.student.id,
+    //   other_user_id: this.teacher.id,
+    //   user: JSON.stringify(this.teacher),
+    //   chat_room_id: res.chat_room.id,
+    // };
+    // this.nav.push('/chat', params);
+  }
+
+  async openWelcomeComponent() {
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
+    let key = res.data.key;
+    if (key == 1) {
+      this.nav.push('/student-profile/student-profile-edit', {
+        showBack: true,
+      });
     }
   }
+
+
 }
