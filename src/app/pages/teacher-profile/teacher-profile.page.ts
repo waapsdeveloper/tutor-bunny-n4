@@ -215,24 +215,6 @@ export class TeacherProfilePage
         chat_room_id: chatRoomId
       })
     }
-
-
-    // if(res && res.chat_room){
-    //   this.nav.push('messages',{
-    //     chat_room_id: res.chat_room.id
-    //   })
-    //   // const prm = await this.chats.openChat(res.chat_room);
-    // }
-
-
-
-    // let params = {
-    //   student_id: this.student.id,
-    //   other_user_id: this.teacher.id,
-    //   user: JSON.stringify(this.teacher),
-    //   chat_room_id: res.chat_room.id,
-    // };
-    // this.nav.push('/chat', params);
   }
 
   async openWelcomeComponent() {

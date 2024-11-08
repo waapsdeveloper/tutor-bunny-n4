@@ -6,6 +6,7 @@ import { IonContent } from '@ionic/angular';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -62,7 +63,7 @@ export class StudentCourseDetailPage extends BasePage {
 
   constructor(injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
-
+    private chats: ChatService,
     public globalCourses: GlobalCoursesService) {
     super(injector);
   }
@@ -170,42 +171,83 @@ export class StudentCourseDetailPage extends BasePage {
     this.isExpanded = !this.isExpanded;
   }
 
+  // async goToChat() {
+  //   this.user = this.users.getUser();
+  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+  //   if (v || v == true) {
+
+
+  //     let id = this.user.id;
+  //     let obj = {
+  //       user_id_1: this.user.id,
+  //       user_id_2: this.course_user.id,
+  //     };
+  //     let res = await this.network.getChadRoomId(obj);
+  //     let params = {
+  //       student_id: id,
+  //       other_user_id: this.course_user.id,
+  //       user: JSON.stringify(this.course_user),
+  //       chat_room_id: res.chat_room.id,
+  //     };
+  //     this.nav.push('/tabs/chat', params);
+  //   } else {
+  //     let res = await this.modals.present(
+  //       StudentWelcomeComponent,
+  //       {},
+  //       'auto-height-modal',
+  //       1,
+  //       [0, 1],
+  //       false
+  //     );
+  //     let key = res.data.key;
+  //     if (key == 1) {
+  //       this.nav.push('/student-profile/student-profile-edit', {
+  //         showBack: true,
+  //       });
+  //     }
+  //   }
+  // }
   async goToChat() {
+    let user = this.users.getUser();
+    console.log(user);
+    let v = (await this.profiles.isProfileCompleted(user)) as any;
+    if (!v) {
+      await this.openWelcomeComponent();
+      return;
+    }
+
+    this.openChatWithData();
+  }
+
+  async openChatWithData() {
+    this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.user = this.users.getUser();
-    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-    if (v || v == true) {
+    const chatRoomId = await this.chats.getChadRoomId(this.course_user.id, this.user.id) as number;
 
-
-      let id = this.user.id;
-      let obj = {
-        user_id_1: this.user.id,
-        user_id_2: this.course_user.id,
-      };
-      let res = await this.network.getChadRoomId(obj);
-      let params = {
-        student_id: id,
-        other_user_id: this.course_user.id,
-        user: JSON.stringify(this.course_user),
-        chat_room_id: res.chat_room.id,
-      };
-      this.nav.push('/tabs/chat', params);
-    } else {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
+    if(chatRoomId != -1){
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
     }
   }
+
+  async openWelcomeComponent() {
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
+    let key = res.data.key;
+    if (key == 1) {
+      this.nav.push('/student-profile/student-profile-edit', {
+        showBack: true,
+      });
+    }
+  }
+
 
   async presentAlert() {
     const flag = await this.utility.presentConfirm(
