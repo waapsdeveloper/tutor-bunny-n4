@@ -16,9 +16,11 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./messages.page.scss'],
 })
 export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
-  @ViewChild('scroll', { read: ElementRef }) public scrollableDiv!: ElementRef<any>;
+  @ViewChild('scroll', { read: ElementRef })
+  public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
-  @ViewChild(IonContent, { read: IonContent, static: false }) myContent: IonContent;
+  @ViewChild(IonContent, { read: IonContent, static: false })
+  myContent: IonContent;
 
   message = '';
   days = [];
@@ -37,59 +39,39 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   combineMessages = [];
 
-
-
-
-
-
-
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
     this.chats.getchatList();
   }
 
   ngOnInit() {
-    this.events.subscribe('scroll-to-bottom', () =>{
+    this.events.subscribe('scroll-to-bottom', () => {
       this.scrollToBottomOnInit();
-    })
-
+    });
   }
 
   async ionViewWillEnter() {
-
-
     this.loading = true;
     this.params = this.nav.getQueryParams();
 
-    if(!this.params.chat_room_id){
+    if (!this.params.chat_room_id) {
       this.nav.pop();
-      return
+      return;
     }
 
     const roomId = this.params.chat_room_id;
     this.initialize(roomId);
 
-    this.events.publish('update-chat-count')
+    this.events.publish('update-chat-count');
 
-    // if (this.params.item) {
-    //   this.item = JSON.parse(this.params.item);
-    //
-    //   this.user = this.users.getUser();
-    //   this.role_id = this.user.role_id;
-    //   this.user_id = this.user.id;
-    //   this.flag = this.getFlag();
     this.messageReceivedViaPusher();
     // }
     this.loading = false;
 
-
-
-
-    this.events.publish('update-chat-count')
+    this.events.publish('update-chat-count');
   }
 
   async initialize(roomId) {
-
     this.loading = true;
 
     this.loadResolvers();
@@ -99,15 +81,13 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     const ch = await this.chats.getChatRoomInfo(roomId);
     console.log(ch);
 
-    if(!ch){
+    if (!ch) {
       this.nav.pop();
-      return
+      return;
     }
 
     await this.chats.getChatMessages(roomId);
     this.item = ch;
-
-
 
     this.displayName = this.utility.getAmericanName(ch.user.name);
     this.image = ch.user.image;
@@ -115,11 +95,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
-      console.log("scroll");
-
+      console.log('scroll');
     }, 500);
-
-
   }
 
   messageReceivedViaPusher() {
@@ -131,8 +108,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   updateChatsByMessageReceived(data: any) {
-
-
     const dm = data;
     if (dm.chat_room_id == this.item.chat_room_id) {
       this.chat.push(dm);
@@ -145,7 +120,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   scrollToBottom(): void {
     try {
       if (this.scrollableDiv) {
-        this.scrollableDiv.nativeElement.scrollTop = this.scrollableDiv.nativeElement.scrollHeight;
+        this.scrollableDiv.nativeElement.scrollTop =
+          this.scrollableDiv.nativeElement.scrollHeight;
       }
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
@@ -156,7 +132,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     if (this.item && this.item.user.student && this.item.user.student.country) {
       const flag = this.item.user.student.country.iso2;
       return flag ? flag.toLowerCase() : '';
-    } else if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
+    } else if (
+      this.item &&
+      this.item.user.teacher &&
+      this.item.user.teacher.country
+    ) {
       const flag = this.item.user.teacher.country.iso2;
       return flag ? flag.toLowerCase() : '';
     } else {
@@ -178,24 +158,18 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   openImage(image) {
-    // this.modals.present(ImageViewComponent, image);
   }
 
   scrollToBottomOnInit() {
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
-      console.log("scroll");
-
+      console.log('scroll');
     }, 500);
   }
-
-  // Adjust the textarea height as you type
   adjustHeight(textArea: HTMLTextAreaElement): void {
     textArea.style.height = '50px';
     textArea.style.height = `${textArea.scrollHeight}px`;
   }
-
-  // Capture the input and set the message value
   onKeyUp(event: any) {
     this.message = event.target.value;
   }
@@ -235,21 +209,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     let res = await this.network.sendMessage(obj);
     console.log(res);
 
-    // this.initialize(this.item.chat_room_id);
+    await this.chats.getChatMessages(this.item.chat_room_id);
   }
-
-
-  // customized logic for instance
-
-  // when we hit send message - it should immedietly add to array  without debounce
-  // add that message to say combineMessages = [];
-  // and start a timer of 1 sec,
-  // if before one sec another message added, then add the message to combineMessage and restart timer
-
-  // if one second passes and no message send - then send the combine messages to array in a sngle api call
-  // api will be provided
-
-
-
-
 }
