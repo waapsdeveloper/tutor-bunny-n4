@@ -234,10 +234,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     let res = await this.network.sendMessage(obj);
     console.log(res);
-    if(res && res.message){
-      this.newMesg.date = null
 
-    }
     // this.initialize(this.item.chat_room_id);
   }
 
