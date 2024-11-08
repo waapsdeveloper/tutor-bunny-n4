@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
@@ -28,63 +35,41 @@ export class ChatListComponent extends BasePage implements OnInit {
 
   time;
 
-  user
+  user;
 
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
+    this.events.subscribe('update-chat-count', () => {});
 
-    this.events.subscribe('update-chat-count', () =>{
-
-
-    })
-
-    this.events.subscribe('update-chat-lists', (data) => {
-      console.log(data);
-      this.user = this.users.getUser()
-      if(data.chat_room_id == this.item.chat_room_id  ){
-        this.last_message = data.message;
-        if( this.user.id != data.user_id){
-          this.unread_count = parseInt(this.item.unread_count) + 1
-          console.log(this.unread_count);
+    this.events.subscribe(
+      'update-chat-lists',
+      (data) => {
+        console.log(data);
+        this.user = this.users.getUser();
+        if (data.chat_room_id == this.item.chat_room_id) {
+          this.last_message = data.message;
+          if (this.user.id != data.user_id) {
+            this.unread_count = parseInt(this.item.unread_count) + 1;
+            console.log(this.unread_count);
+          }
         }
-
-      }
-    }, true);
+      },
+      true
+    );
   }
 
   async gotoMessage(item) {
-    let params = {
-      item: JSON.stringify(item),
-    };
-    this.unread_count = 0
+    console.log(item);
+    // return
+    if(item && item.chat_room_id){
+      const chat_room_id = item.chat_room_id;
+      this.unread_count = 0;
       console.log(this.unread_count);
-    let res = await this.nav.push('messages', params);
-
-    this.onChange.emit();
+      let res = await this.nav.push('messages', { chat_room_id: chat_room_id});
+      this.onChange.emit();
+    }
   }
-  // getTime(time) {
-  //   moment.updateLocale('en', {
-  //     relativeTime: {
-  //       future: "in %s",
-  //       past: "%s ago",
-  //       // s: 'few seconds',
-  //       ss: '%d s',
-  //       m: "a minute",
-  //       mm: "%d m",
-  //       h: "an hour",
-  //       hh: "%d h",
-  //       d: "a day",
-  //       dd: "%d d",
-  //       M: "a month",
-  //       MM: "%d M",
-  //       y: "a year",
-  //       yy: "%d y"
-  //     }
-  //   });
-  //   this.time = moment(time).fromNow();
-  //   return this.time
-  // }
 }
