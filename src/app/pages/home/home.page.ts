@@ -26,7 +26,6 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   ionViewWillEnter(): void {
-
     this.step = 1;
     this.params = this.nav.getQueryParams();
     if (this.params.role) {
@@ -55,7 +54,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
       if (res.user) {
         localStorage.setItem('token', res.token);
         await this.users.setUser(res.user);
-        this.nav.push('pre-splash')
+        this.nav.push('pre-splash');
       }
     }
   }
@@ -64,53 +63,34 @@ export class HomePage extends BasePage implements ViewWillEnter {
     this.initiateLogin();
   }
 
-  async initiateLogin(){
-
+  async initiateLogin() {
     const res = await this.showUpLogin();
     console.log(res);
 
     if (res && res.data) {
-
-      if(res.data.step == 2){
+      if (res.data.step == 2) {
         const res2 = await this.showUpSignup();
-
         if (res2.data) {
           this.initiateLogin();
         }
-
         return;
       }
-
-      if(res.data.step == 3){
+      if (res.data.step == 3) {
         const res3 = await this.showUpForgetPassword();
-
-        if(res3.data){
-          this.initiateLogin()
+        if (res3.data) {
+          this.initiateLogin();
         }
-
         return;
       }
-
-      if(res.data.step == 1 && res.data.user){
-
+      if (res.data.step == 1 && res.data.user) {
         let d = res.data;
-
         localStorage.setItem('token', d.token);
         await this.users.setUser(d.user);
-        this.nav.push('pre-splash')
-
+        this.nav.push('pre-splash');
         return;
       }
-
-
     }
-
-
-
   }
-
-
-
 
   async showUpLogin(): Promise<any> {
     let res = await this.modals.present(

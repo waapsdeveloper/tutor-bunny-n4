@@ -73,26 +73,19 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   async initialize(roomId) {
     this.loading = true;
-
     this.loadResolvers();
     this.user = this.dataR.user;
-
-    // get next user information
     const ch = await this.chats.getChatRoomInfo(roomId);
     console.log(ch);
-
     if (!ch) {
       this.nav.pop();
       return;
     }
-
     await this.chats.getChatMessages(roomId);
     this.item = ch;
-
     this.displayName = this.utility.getAmericanName(ch.user.name);
     this.image = ch.user.image;
     this.loading = false;
-
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
       console.log('scroll');
@@ -109,8 +102,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   updateChatsByMessageReceived(data: any) {
     const dm = data;
+    console.log(dm);
+
     if (dm.chat_room_id == this.item.chat_room_id) {
-      this.chat.push(dm);
+      this.chats.days.push(dm);
       setTimeout(() => {
         this.scrollToBottom();
       }, 200);

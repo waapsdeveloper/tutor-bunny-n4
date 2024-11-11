@@ -48,6 +48,7 @@ export class EventsService {
   }
 
   chatChannelReceived($event: any) {
+    console.log($event);
 
     this.publish('message-received-via-pusher', $event);
 

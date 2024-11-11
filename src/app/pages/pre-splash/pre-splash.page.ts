@@ -11,6 +11,7 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { TeacherService } from 'src/app/services/teacher.service';
+import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 
 @Component({
   selector: 'app-pre-splash',
@@ -96,12 +97,20 @@ export class PreSplashPage extends BasePage implements OnInit {
       // Handle Teacher (roleId = 3)
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          this.router.navigate(['/teacher-profile/teacher-profile-edit'], {
-            queryParams: { backUrl: '/home' },
+          let res = await this.modals.present(
+            TeacherWelcomePage,
+            {},
+            'auto-height-modal',
+            1,
+            [0, 1],
+            true
+          );
+          this.nav.push('/teacher-profile/teacher-profile-edit', {
+            backUrl: '/home',
           });
         } else {
-          this.router.navigate(['/tabs/teacher-dashboard'], {
-            queryParams: { backUrl: '/home' },
+          this.nav.push('/tabs/teacher-dashboard', {
+            backUrl: '/home',
           });
         }
       }
