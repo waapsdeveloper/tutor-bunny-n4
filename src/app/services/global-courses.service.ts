@@ -49,12 +49,6 @@ export class GlobalCoursesService {
     this.CourseChannel = this.pusher.subscribe('course-channel');
   }
 
-
-
-
-
-
-
   registerPusherEvent() {
     this.CourseChannel.bind(
       'course-rec-update-by-list',

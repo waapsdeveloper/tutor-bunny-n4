@@ -11,16 +11,14 @@ export class NotificationsService {
   user: any;
   page = 1;
   unread_count;
-  ids: any[] = []
+  ids: any[] = [];
   shownoti;
   last_page = -1;
   list: any[] = [];
 
   private pusher: Pusher;
 
-  constructor(private network: NetworkService, private events: EventsService) {
-
-  }
+  constructor(private network: NetworkService, private events: EventsService) {}
 
   getNotificationsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
@@ -33,14 +31,14 @@ export class NotificationsService {
       this.last_page = data.last_page;
       if (page === 1) {
         this.list = data.data;
-        this.unread_count = this.list.filter((item) => !item.is_open).length;
-
-
+        const openItemsArray = this.list.filter((item) => item.is_read === 0);
+        console.log(openItemsArray," a gaya");
+        this.unread_count = openItemsArray.length;
       } else {
         this.list = [...this.list, ...data.data];
-        this.unread_count = this.list.filter((item) => !item.is_open).length;
-        this.ids = this.list.filter((item) => !item.id);
-
+        const openItemsArray = this.list.filter((item) => item.is_read === 0);
+        console.log(openItemsArray," a gaya");
+        this.unread_count = openItemsArray.length;
       }
       this.ids = this.list.map((item) => item.id);
       resolve(this.list);

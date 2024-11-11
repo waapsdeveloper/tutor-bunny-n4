@@ -37,10 +37,8 @@ export class FavCoursesPage extends BasePage implements OnInit {
     this.courseids = data.map((item) => item.course_id);
     console.log(this.courseids);
     this.loading = true;
-
     await this.callApi(this.page)
     this.loading = false;
-
   }
 
   callApi(page) {

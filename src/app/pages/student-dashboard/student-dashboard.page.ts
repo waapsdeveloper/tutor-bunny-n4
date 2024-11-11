@@ -9,6 +9,7 @@ import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-cours
 
 import { Subscription } from 'rxjs';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -24,6 +25,7 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
   flag;
   isProfileComplete;
   showLiked = false;
+  showNoti = true;
   view = 'course';
   favCourses;
 
@@ -34,12 +36,16 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
     private courseFavoriteService: CourseFavoriteService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
+    public notification: NotificationsService
   ) {
     super(injector);
   }
 
   ngOnInit() {
     this.initialize();
+    this.events.subscribe('show-noti-dot', (shownoti) =>{
+      this.showNoti  = shownoti;
+    });
   }
 
   async initialize() {
@@ -127,7 +133,7 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
   toogleView(view) {
     this.view = view;
     if (view == 'course') {
-      this.nav.push('/tabs/student-dashboard/student-dashborad-courses');
+      this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
     }
 
     if (view == 'teacher') {

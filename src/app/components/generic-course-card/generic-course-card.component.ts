@@ -5,6 +5,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student-welcome/student-welcome.component';
 import { TrailMessageComponent } from '../trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-generic-course-card',
@@ -237,6 +238,8 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   //   }
   // }
   async goToChat(data) {
+    console.log(data);
+
     let user = this.users.getUser();
     console.log(user);
     let v = (await this.profiles.isProfileCompleted(user)) as any;

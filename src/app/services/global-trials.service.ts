@@ -32,7 +32,6 @@ export class GlobalTrialsService {
       this.page = null;
       this.last_page = null;
       this.status = null;
-      this.list = [];
       this.courseId = null;
       this.pendingTrialPage = null;
       this.pendingTrialLastPage = null;
@@ -61,14 +60,17 @@ export class GlobalTrialsService {
         this.removeFromListAndPendingTrials(trialId);
         this.GlobalCourses.getCoursesFromApi();
         this.events.publish('get-dashboard-stats');
-
         this.events.publish('update-notifications');
+
+        let shownoti = true;
+        this.events.publish('show-noti-dot', shownoti);
       } else {
         let id = $event.trial_id;
         let res = await this.network.geTrailRequestsByPusher(id);
         this.updateTrailsList(res.trial);
         this.events.publish('update-notifications');
-
+        let shownoti = true;
+        this.events.publish('show-noti-dot', shownoti);
         this.events.publish('get-dashboard-stats');
       }
     }
@@ -123,6 +125,8 @@ export class GlobalTrialsService {
 
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
+      console.log(res, "trials");
+
       const data = res.result;
       this.pendingTrialPage = data.current_page;
       this.pendingTrialLastPage = data.last_page;

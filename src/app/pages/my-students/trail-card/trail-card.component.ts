@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { ChatService } from 'src/app/services/chat.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 @Component({
   selector: 'app-trail-card',
@@ -26,10 +27,9 @@ export class TrailCardComponent extends BasePage implements OnInit {
 
   isOpen = false;
   @Output() removeFromList = new EventEmitter<number>();
-  constructor(injector: Injector, private globalTrials: GlobalTrialsService) {
+  constructor(injector: Injector, private globalTrials: GlobalTrialsService, private chats: ChatService) {
     super(injector);
     this.user = this.users.getUser();
-
   }
   ngOnInit() {
     this.flag = this.getFlag();
@@ -76,22 +76,18 @@ export class TrailCardComponent extends BasePage implements OnInit {
         title = 'Are you sure to Accept the request?';
         break;
       case 'Rejected':
-
         title = 'Are you sure to Reject the request?';
 
         break;
       case 'Blocked':
-
         title = 'Are you sure to Block the request?';
 
         break;
       case 'Unblock':
-
         title = 'Are you sure to Unblock the request?';
 
         break;
       case 'Complete':
-
         title = 'Are you sure to Complete the request?';
 
         break;
@@ -110,26 +106,47 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
 
   async goToChat(data) {
-    console.log(data);
+    console.log(data, "here");
 
-    let id = this.user.id;
-
-    let obj = {
-      user_id_1: this.user.id,
-      user_id_2: data.student.id,
-    };
-
-    let res = await this.network.getChadRoomId(obj);
-
-    let params = {
-      student_id: id,
-      other_user_id: data.student.id,
-      user: JSON.stringify(data.student),
-      chat_room_id: res.chat_room.id,
-    };
-
-    this.nav.push('/tabs/chat', params);
+    let user = this.users.getUser();
+    console.log(user);
+    this.openChatWithData(data);
   }
+
+  async openChatWithData(data) {
+    this.user = this.users.getUser();
+    const chatRoomId = await this.chats.getChadRoomId(data.student.id, data.teacher.id) as number;
+
+    if(chatRoomId != -1){
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
+    }
+  }
+
+
+  // async goToChat(data) {
+  //   console.log(data);
+
+  //   let id = this.user.id;
+
+  //   let obj = {
+  //     user_id_1: this.user.id,
+  //     user_id_2: data.student.id,
+  //   };
+
+  //   let res = await this.network.getChadRoomId(obj);
+
+  //   let params = {
+  //     student_id: id,
+  //     other_user_id: data.student.id,
+  //     user: JSON.stringify(data.student),
+  //     chat_room_id: res.chat_room.id,
+  //   };
+
+  //   this.nav.push('/tabs/chat', params);
+  // }
+
   calculateAge() {
     const currentYear = new Date().getFullYear();
 

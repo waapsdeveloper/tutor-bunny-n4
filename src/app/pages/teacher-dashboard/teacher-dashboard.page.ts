@@ -22,6 +22,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   status;
   total_rating;
   state
+  showNoti =true;
   travel_policy;
   rating;
 
@@ -76,6 +77,10 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     this.events.subscribe('user-update-via-pusher', () => {
       this.initialize();
     });
+    this.events.subscribe('show-noti-dot', (shownoti) =>{
+      this.showNoti  = shownoti;
+    });
+
   }
 
   ionViewWillEnter() {

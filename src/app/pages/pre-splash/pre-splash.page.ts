@@ -18,13 +18,13 @@ import { TeacherService } from 'src/app/services/teacher.service';
   styleUrls: ['./pre-splash.page.scss'],
 })
 export class PreSplashPage extends BasePage implements OnInit {
-
   user;
-  loading= false;
+  loading = false;
 
   processNote = '';
 
-  constructor( injector: Injector,
+  constructor(
+    injector: Injector,
     private profilesService: ProfileService,
     private router: Router,
     private iap: InitializeAppService,
@@ -35,21 +35,18 @@ export class PreSplashPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notificationService: NotificationsService,
-    private fcm: FirebaseService,
-
+    private fcm: FirebaseService
   ) {
     super(injector);
   }
 
   ngOnInit() {
-
     this.initialize();
 
     //
   }
 
-  async initialize(){
-
+  async initialize() {
     this.loading = true;
 
     this.loadResolvers();
@@ -63,10 +60,8 @@ export class PreSplashPage extends BasePage implements OnInit {
     this.teacher.registerPusherEvent(this.user.id);
     this.chats.registerPusherEvent(this.user.id);
 
-
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
-
 
     this.chatService.getchatList();
     this.notificationService.getNotificationsFromApi();
@@ -80,12 +75,11 @@ export class PreSplashPage extends BasePage implements OnInit {
 
     this.network.getTimeZone(time, this.user.id);
 
-    if(this.user.role == 2 ){
-      this.globalTrials.getPendingTrialsFromApi();
-    }
-    else{
-      this.globalCourses.getCoursesFromApi();
-    }
+    console.log('datataa');
+
+    this.globalTrials.getPendingTrialsFromApi();
+
+    this.globalCourses.getCoursesFromApi();
     this.redirectDependsOnRole(this.user);
     this.loading = false;
   }
@@ -127,7 +121,4 @@ export class PreSplashPage extends BasePage implements OnInit {
       }
     }
   }
-
-
-
 }
