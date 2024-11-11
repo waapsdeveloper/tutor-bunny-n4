@@ -54,6 +54,8 @@ export class GlobalTrialsService {
   }
 
   async trialsChannelReceived($event: any) {
+    console.log($event);
+
     if ($event) {
       if ($event.slug) {
         let trialId = $event.trial_id;
@@ -62,8 +64,7 @@ export class GlobalTrialsService {
         this.events.publish('get-dashboard-stats');
         this.events.publish('update-notifications');
 
-        let shownoti = true;
-        this.events.publish('show-noti-dot', shownoti);
+
       } else {
         let id = $event.trial_id;
         let res = await this.network.geTrailRequestsByPusher(id);

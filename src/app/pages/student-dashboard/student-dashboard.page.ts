@@ -44,6 +44,8 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
   ngOnInit() {
     this.initialize();
     this.events.subscribe('show-noti-dot', (shownoti) =>{
+      console.log(shownoti);
+
       this.showNoti  = shownoti;
     });
   }

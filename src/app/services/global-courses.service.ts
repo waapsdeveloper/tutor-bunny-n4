@@ -62,9 +62,15 @@ export class GlobalCoursesService {
   }
 
   async updateCourseList(data: any) {
+    console.log(data);
+
     let course_Id = data.course_id;
     if (course_Id) {
       let res = (await this.network.getcourseById(course_Id)) as any;
+      let shownoti = true;
+      console.log(shownoti, "sdfsfsfsdfsfsdfdffs");
+
+      this.events.publish('show-noti-dot', shownoti);
       const course = res.course;
       if (course) {
         const index = this.courses.findIndex((c) => c.id == course.id);
