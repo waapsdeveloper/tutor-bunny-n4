@@ -57,7 +57,6 @@ export class PreSplashPage extends BasePage implements OnInit {
     // set data with sqlite
     await this.iap.initializeUserTables(this.user);
 
-    this.events.registerPusherEvent(this.user.id);
     this.teacher.registerPusherEvent(this.user.id);
     this.chats.registerPusherEvent(this.user.id);
 

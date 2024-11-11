@@ -41,7 +41,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
-    this.chats.getchatList();
+    // this.chats.getchatList();
   }
 
   ngOnInit() {
@@ -61,14 +61,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     const roomId = this.params.chat_room_id;
     this.initialize(roomId);
-
-    this.events.publish('update-chat-count');
-
     this.messageReceivedViaPusher();
-    // }
-    this.loading = false;
-
-    this.events.publish('update-chat-count');
   }
 
   async initialize(roomId) {
@@ -86,6 +79,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.displayName = this.utility.getAmericanName(ch.user.name);
     this.image = ch.user.image;
     this.loading = false;
+
+    this.events.publish('update-chat-count');
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
       console.log('scroll');
@@ -93,7 +88,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   messageReceivedViaPusher() {
-    this.events.registerPusherEvent(this.user.id);
     this.events.subscribe(
       'message-received-via-pusher',
       this.updateChatsByMessageReceived.bind(this)
@@ -107,21 +101,30 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     if (dm.chat_room_id == this.item.chat_room_id) {
       console.log(this.chats.days);
 
-      let newMesg = {
-        date: 'new message',
-        messages: [
-          {
-            chat_room_id: dm.chat_room_id,
-            created_at: new Date(),
-            id: dm.id,
-            is_read: 0,
-            message: dm.message,
-            updated_at: new Date(),
-            user_id: dm.user_id,
-          },
-        ],
+      let newMessage = {
+        chat_room_id: dm.chat_room_id,
+        created_at: new Date(),
+        id: dm.id,
+        is_read: 0,
+        message: dm.message,
+        updated_at: new Date(),
+        user_id: dm.user_id,
       };
-      this.chats.days.push(newMesg);
+
+      // Find the index of an entry with date === 'just now'
+      let existingEntry = this.chats.days.find((entry) => entry.date === 'just now');
+
+      if (existingEntry) {
+        // If an entry exists, push only the new message to its messages array
+        existingEntry.messages.push(newMessage);
+      } else {
+        // If no such entry exists, create a new one and push it to days
+        let newMesg = {
+          date: 'just now',
+          messages: [newMessage],
+        };
+        this.chats.days.push(newMesg);
+      }
       setTimeout(() => {
         this.scrollToBottomOnInit();
       }, 200);
