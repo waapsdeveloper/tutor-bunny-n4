@@ -10,7 +10,6 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   params;
-  disabled = false;
   remainingSlots;
 
   constructor(
@@ -63,10 +62,6 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
     this.remainingSlots = 8 - this.createCourseService.coursePhotos.length;
-    if(this.remainingSlots == 8){
-
-      this.disabled = true;
-    }
 
     if (this.remainingSlots <= 0) {
       alert('You have already uploaded the maximum of 8 images.');
