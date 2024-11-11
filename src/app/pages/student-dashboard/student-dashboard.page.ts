@@ -1,4 +1,10 @@
-import { Component, Injector, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  Injector,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 import * as moment from 'moment';
@@ -16,7 +22,10 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './student-dashboard.page.html',
   styleUrls: ['./student-dashboard.page.scss'],
 })
-export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy {
+export class StudentDashboardPage
+  extends BasePage
+  implements OnInit, OnDestroy
+{
   user;
   displayName: string = '';
   country;
@@ -25,6 +34,7 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
   flag;
   isProfileComplete;
   showLiked = false;
+  profileImage= '';
   showNoti = true;
   view = 'course';
   favCourses;
@@ -39,20 +49,30 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
     public notification: NotificationsService
   ) {
     super(injector);
+    this.initialize();
+
   }
 
   ngOnInit() {
-    this.initialize();
-    this.events.subscribe('show-noti-dot', (shownoti) =>{
+    this.events.subscribe('update-profile-image', (user) => {
+      this.profileImage = user.image;
+      console.log(this.profileImage, 'images');
+
+      this.initialize();
+    });
+
+    this.events.subscribe('show-noti-dot', (shownoti) => {
       console.log(shownoti);
 
-      this.showNoti  = shownoti;
+      this.showNoti = shownoti;
     });
   }
 
   async initialize() {
-    this.loadResolvers();
-    this.user = this.dataR.user;
+    this.user = this.users.getUser();
+    console.log(this.user);
+    this.profileImage = this.user.image;
+
     this.setupEvents();
     // console.log(this.user);
 
@@ -68,7 +88,9 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
     this.displayName = this.utility.splitName(this.user.name).first_name;
     this.flag = this.getFlag();
 
-    const fav_count = await this.courseFavoriteService.getFavCount(this.user.id);
+    const fav_count = await this.courseFavoriteService.getFavCount(
+      this.user.id
+    );
     this.courseFavCount = fav_count;
 
     const isProfileCompleted = (await this.profiles.isProfileCompleted(
@@ -90,7 +112,6 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
       showBack: true,
     });
   }
-
 
   getFlag() {
     if (this.user && this.user.student && this.user.student.country) {
@@ -143,16 +164,15 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
     }
   }
 
-
-
-  setupEvents(){
-
-    this.events.subscribe('update-course-fav-count', (data) => {
-      console.log(data)
-      this.courseFavCount = data.count;
-    }, true)
-
-
+  setupEvents() {
+    this.events.subscribe(
+      'update-course-fav-count',
+      (data) => {
+        console.log(data);
+        this.courseFavCount = data.count;
+      },
+      true
+    );
 
     this.events.subscribe('update-course-list', () => {
       this.getlists();
@@ -164,11 +184,10 @@ export class StudentDashboardPage extends BasePage implements OnInit, OnDestroy 
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize();
     });
-
   }
 
   ngOnDestroy() {
     // Unsubscribe to avoid memory leaks
-    this.events.unsubscribe('update-course-fav-count')
+    this.events.unsubscribe('update-course-fav-count');
   }
 }
