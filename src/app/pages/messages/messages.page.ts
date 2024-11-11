@@ -105,9 +105,25 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(dm);
 
     if (dm.chat_room_id == this.item.chat_room_id) {
-      this.chats.days.push(dm);
+      console.log(this.chats.days);
+
+      let newMesg = {
+        date: 'new message',
+        messages: [
+          {
+            chat_room_id: dm.chat_room_id,
+            created_at: new Date(),
+            id: dm.id,
+            is_read: 0,
+            message: dm.message,
+            updated_at: new Date(),
+            user_id: dm.user_id,
+          },
+        ],
+      };
+      this.chats.days.push(newMesg);
       setTimeout(() => {
-        this.scrollToBottom();
+        this.scrollToBottomOnInit();
       }, 200);
     }
   }
