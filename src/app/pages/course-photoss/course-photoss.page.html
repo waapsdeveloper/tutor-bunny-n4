@@ -21,7 +21,7 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'" [disabled]="createCourseService.coursePhotos.length >= 8"
+    <app-sd-button-gray style="width: 100%;" (click)="createCourseService.coursePhotos.length < 8 ? photoInput.click() : ''" [image]="'assets/svg/upload.svg'" [disabled]="createCourseService.coursePhotos.length >= 8"
       [text]="'Upload course photos'"></app-sd-button-gray>
     <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
       [text]="'Done'"></app-sd-button-gray>

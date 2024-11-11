@@ -41,7 +41,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
-    // this.chats.getchatList();
+
   }
 
   ngOnInit() {
@@ -65,6 +65,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async initialize(roomId) {
+    // this.chats.getchatList();
+
     this.loading = true;
     this.loadResolvers();
     this.user = this.dataR.user;
@@ -75,12 +77,14 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       return;
     }
     await this.chats.getChatMessages(roomId);
+
+    this.chats.updateChatCount(roomId, 0)
+
     this.item = ch;
     this.displayName = this.utility.getAmericanName(ch.user.name);
     this.image = ch.user.image;
     this.loading = false;
 
-    this.events.publish('update-chat-count');
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
       console.log('scroll');
@@ -112,7 +116,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       };
 
       // Find the index of an entry with date === 'just now'
-      let existingEntry = this.chats.days.find((entry) => entry.date === 'just now');
+      let existingEntry = this.chats.days.find((entry) => entry.date === '');
 
       if (existingEntry) {
         // If an entry exists, push only the new message to its messages array
@@ -120,7 +124,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       } else {
         // If no such entry exists, create a new one and push it to days
         let newMesg = {
-          date: 'just now',
+          date: '',
           messages: [newMessage],
         };
         this.chats.days.push(newMesg);

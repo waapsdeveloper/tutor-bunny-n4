@@ -182,6 +182,21 @@ export class ChatService {
     });
   }
 
+
+  updateChatCount(roomId, count){
+
+    console.log(roomId);
+    console.log(this.chats);
+    let chatIndex = this.chats.findIndex((chat) => chat.chat_room_id == roomId);
+    console.log(chatIndex);
+    if(chatIndex != -1){
+      this.chats[chatIndex].unread_count = 0;
+      // chatIndex.unread_count = 0;
+    }
+
+
+  }
+
   updadteChatList(data) {
     let id = data.chat_room_id;
 
