@@ -153,6 +153,7 @@ export class StudentProfileEditPage
     if (res) {
       let user = res.user;
       this.users.setUser(user);
+      this.events.publish('update-course-price')
       this.events.publish('get-user-after-submit-form', user);
       let data = {
         user_id: user.id,

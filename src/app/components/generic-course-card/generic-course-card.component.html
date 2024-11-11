@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: flex-start;
             gap: 8px;">
-              <div class="info-misc-68448 outfit " *ngIf="rating !== 0">
+              <div class="info-misc-68448 outfit ">
                 <app-rating-stars [rating]="rating"></app-rating-stars>
                 {{rating}} ({{total_rating}})
               </div>
@@ -27,7 +27,7 @@
             <div class="us-status-btn">
               <div class="us-status-btn-label outfit-medium">
                 <!-- <img src="../../../../assets/svg/p-tag.svg" alt=""> -->
-                {{item.auth_user_currency_symbol}} {{item.updated_price}}<span style="font-size: 12px;">/lesson</span>
+                {{item.auth_user_currency_symbol}}{{item.updated_price}}<span style="font-size: 12px;">/lesson</span>
               </div>
             </div>
           </div>

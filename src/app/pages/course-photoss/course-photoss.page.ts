@@ -11,6 +11,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   params;
   disabled = false;
+  remainingSlots;
 
   constructor(
     injector: Injector,
@@ -61,14 +62,18 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
-    const remainingSlots = 8 - this.createCourseService.coursePhotos.length;
-    if (remainingSlots <= 0) {
-      alert('You have already uploaded the maximum of 15 images.');
+    this.remainingSlots = 8 - this.createCourseService.coursePhotos.length;
+    if(this.remainingSlots == 8){
+
+      this.disabled = true;
+    }
+
+    if (this.remainingSlots <= 0) {
+      alert('You have already uploaded the maximum of 8 images.');
       return;
     }
 
-    // Slice the file array to only take the first 'remainingSlots' images
-    const filesToUpload = files.slice(0, remainingSlots);
+    const filesToUpload = files.slice(0, this.remainingSlots);
 
     console.log(filesToUpload);
 

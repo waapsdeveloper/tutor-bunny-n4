@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
@@ -7,15 +8,17 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './student-dashborad-courses.page.html',
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
-export class StudentDashboradCoursesPage {
+export class StudentDashboradCoursesPage extends BasePage implements OnInit {
+  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+    super(injector);
+  }
 
-
-
-  constructor( public globalCourses: GlobalCoursesService) {
-
+  ngOnInit() {
+    this.events.subscribe('update-course-price', async () => {
+      await this.globalCourses.getCoursesFromApi('', 1);
+    });
   }
   async handleRefresh(event) {
-
     await this.globalCourses.getCoursesFromApi('', 1);
     event.target.complete();
   }
