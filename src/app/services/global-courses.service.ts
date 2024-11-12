@@ -68,8 +68,6 @@ export class GlobalCoursesService {
     if (course_Id) {
       let res = (await this.network.getcourseById(course_Id)) as any;
       let shownoti = true;
-      console.log(shownoti, "sdfsfsfsdfsfsdfdffs");
-
       this.events.publish('show-noti-dot', shownoti);
       const course = res.course;
       if (course) {

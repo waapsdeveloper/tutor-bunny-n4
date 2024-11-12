@@ -42,7 +42,7 @@ export class TeacherReviewsComponent extends BasePage {
   }
 
   async addReview() {
-    if (this.userRating <= 1) {
+    if (this.userRating < 1) {
       this.showError = true;
       setTimeout(() => {
         this.showError = false;

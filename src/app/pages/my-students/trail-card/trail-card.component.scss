@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;   
+  padding: 8px;
 
   .trail-card-header-date-12347 {
     display: flex;
@@ -87,6 +87,7 @@
         border-radius: 50px;
         background-size: contain;
         background-position: center center;
+        background-repeat: no-repeat;
       }
       .country-flag-i-7685{
         position: absolute;
@@ -162,7 +163,7 @@
           }
         }
 
-        
+
       }
 
     }
@@ -240,7 +241,7 @@
   .img1-789575 {
     width: 18px;
     height: 18px;
-   
+
   }
 }
 

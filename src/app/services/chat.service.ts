@@ -191,7 +191,6 @@ export class ChatService {
     console.log(chatIndex);
     if(chatIndex != -1){
       this.chats[chatIndex].unread_count = 0;
-      // chatIndex.unread_count = 0;
     }
 
 
