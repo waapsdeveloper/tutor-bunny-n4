@@ -22,7 +22,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   status;
   total_rating;
   state
-  showNoti =true;
+  showNoti =false;
   travel_policy;
   rating;
 

@@ -1,19 +1,7 @@
-import {
-  Component,
-  Injector,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { Component, Injector, OnInit, OnDestroy } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-
-import * as moment from 'moment';
-import { StudentWelcomeComponent } from './student-welcome/student-welcome.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
-import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
-
-import { Subscription } from 'rxjs';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -34,8 +22,8 @@ export class StudentDashboardPage
   flag;
   isProfileComplete;
   showLiked = false;
-  profileImage= '';
-  showNoti = true;
+  profileImage;
+  showNoti = false;
   view = 'course';
   favCourses;
 
@@ -49,16 +37,16 @@ export class StudentDashboardPage
     public notification: NotificationsService
   ) {
     super(injector);
-    this.initialize();
-
   }
 
   ngOnInit() {
-    this.events.subscribe('update-profile-image', (user) => {
-      this.profileImage = user.image;
-      console.log(this.profileImage, 'images');
+    this.events.subscribe('update-profile-image', (data) => {
+      localStorage.removeItem('user');
+      this.user = data;
+      this.users.setUser(data);
       this.initialize();
     });
+    this.initialize();
 
     this.events.subscribe('show-noti-dot', (shownoti) => {
       console.log(shownoti);
@@ -67,13 +55,10 @@ export class StudentDashboardPage
   }
 
   async initialize() {
+    // In your update event subscription
+
     this.user = this.users.getUser();
-    console.log(this.user);
-    this.profileImage = this.user.image;
-
     this.setupEvents();
-    // console.log(this.user);
-
     if (
       this.user &&
       this.user.student &&
@@ -82,26 +67,21 @@ export class StudentDashboardPage
     ) {
       this.country = this.user.student.country.name;
     }
-
     this.displayName = this.utility.splitName(this.user.name).first_name;
     this.flag = this.getFlag();
-
     const fav_count = await this.courseFavoriteService.getFavCount(
       this.user.id
     );
     this.courseFavCount = fav_count;
-
     const isProfileCompleted = (await this.profiles.isProfileCompleted(
       this.user
     )) as any;
     this.showWarning = isProfileCompleted;
-
     this.events.publish('is-student-profile-completed', this.showWarning);
   }
 
   getlists() {
     this.globalCourses.getCoursesFromApi();
-    // this.globalCourses.getFavToApi();
   }
 
   gotoNotification() {

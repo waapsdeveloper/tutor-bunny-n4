@@ -2,8 +2,7 @@
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
       <div class="image-box-89656" *ngIf="user.image" (click)="updateProfile()"
-        [style.background-image]="'url(' + profileImage + ')' ">
-        <!-- <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning == false" class="image-98563"> -->
+        [style.background-image]="'url(' + user.image + ')' ">
       </div>
       <div class="image-box-89657" *ngIf="!user.image" (click)="updateProfile()">
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
