@@ -57,13 +57,11 @@ export class StudentDashboardPage
     this.events.subscribe('update-profile-image', (user) => {
       this.profileImage = user.image;
       console.log(this.profileImage, 'images');
-
       this.initialize();
     });
 
     this.events.subscribe('show-noti-dot', (shownoti) => {
       console.log(shownoti);
-
       this.showNoti = shownoti;
     });
   }
