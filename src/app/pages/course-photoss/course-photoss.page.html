@@ -6,7 +6,8 @@
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" size-xs="4" size-sm="4" size-md="4" size-lg="4">
+        <ion-col *ngFor="let coursePhoto of createCourseService.coursePhotos; let i = index" size-xs="4" size-sm="4"
+          size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(coursePhoto)"
             (click)="openImage(coursePhoto)" (click)="openImage(coursePhoto)">
             <!-- <ion-icon name="star" [class.set-feature-input-678956744]="coursePhoto.feature === true"
@@ -21,8 +22,9 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;" (click)="createCourseService.coursePhotos.length < 8 ? photoInput.click() : ''" [image]="'assets/svg/upload.svg'" [disabled]="createCourseService.coursePhotos.length >= 8"
-      [text]="'Upload course photos'"></app-sd-button-gray>
+    <app-sd-button-gray style="width: 100%;"
+      (click)="createCourseService.coursePhotos.length < 8 ? photoInput.click() : ''" [image]="'assets/svg/upload.svg'"
+      [disabled]="createCourseService.coursePhotos.length >= 8" [text]="'Upload course photos'"></app-sd-button-gray>
     <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
       [text]="'Done'"></app-sd-button-gray>
   </div>

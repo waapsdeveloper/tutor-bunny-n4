@@ -22,8 +22,9 @@
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;" (click)="photoInput.click()" [image]="'assets/svg/upload.svg'"
-      [disabled]="loading" [text]="'Upload Certificates'"></app-sd-button-gray>
+    <app-sd-button-gray style="width: 100%;"
+      (click)="certificates.length < 8 ? photoInput.click() : ''" [image]="'assets/svg/upload.svg'"
+      [disabled]="certificates.length >= 8" [text]="'Upload Certificates'"></app-sd-button-gray>
     <app-sd-button-gray style="width: 100%;" (click)="backToProfile()" [image]="'assets/svg/done.svg'"
       [disabled]="loading" [text]="'Done'"></app-sd-button-gray>
   </div>

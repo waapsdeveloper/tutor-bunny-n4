@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
     <div class="pl-box-785">
-      <div class="image-box-89656" *ngIf="user.image" (click)="updateProfile()"
-        [style.background-image]="'url(' + user.image + ')' ">
+      <div class="image-box-89656" *ngIf="users.image" (click)="updateProfile()"
+        [style.background-image]="'url(' + users.image + ')' ">
       </div>
-      <div class="image-box-89657" *ngIf="!user.image" (click)="updateProfile()">
+      <div class="image-box-89657" *ngIf="!users.image" (click)="updateProfile()">
         <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
       </div>
     </div>
@@ -17,7 +17,6 @@
             <img class="icon-box-77" [src]="'../../assets/icon/heart.svg'" />
           </div>
           <div class="icon-box-77">
-
             <div class="red-dot-4432432532"  *ngIf="notification.unread_count != 0 && showNoti"></div>
             <img class="icon-box-77" src="assets/icon/notification-bell.svg" (click)="gotoNotification()" />
           </div>

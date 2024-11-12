@@ -235,7 +235,6 @@ export class TeacherProfileEditPage
       'teacher-profile-third-screen-submit-call',
       this.formData
     );
-
     if (
       !f.qualification_description ||
       !f.started_teaching ||
@@ -253,6 +252,10 @@ export class TeacherProfileEditPage
     }
     const user = JSON.parse(localStorage.getItem('user'));
     const res = await this.network.updateTeacherProfile(f, user.id);
+    if(res){
+      let user = res.user;
+      this.users.setUser(user);
+    }
     if (res && res.message) {
       if (this.edit) {
         this.utility.presentSuccessToast("Profile updated Successfully");

@@ -11,6 +11,7 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   certificates = [];
   firstImage;
   loading = false;
+  remainingSlots
   constructor(injector: Injector) {
     super(injector);
   }
@@ -81,13 +82,36 @@ export class UploadCertificatePage extends BasePage implements OnInit {
   }
 
   async onFileSelected(event: any) {
-    const files: File[] = Array.from(event.target.files);
-    for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = async () => {
-        await this.addImageInArray(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+   const files: File[] = Array.from(event.target.files);
+    this.remainingSlots = 8 - this.certificates.length;
+
+    if (this.remainingSlots <= 0) {
+      alert('You have already uploaded the maximum of 8 images.');
+      return;
     }
+
+    const filesToUpload = files.slice(0, this.remainingSlots);
+
+    console.log(filesToUpload);
+
+    for (const file of filesToUpload) {
+      let imageString: string;
+      if (file.size > 1048576) {
+        console.log(file.size);
+        imageString = await this.imageService.resizeImage(file, 800, 800);
+        console.log(imageString);
+      } else {
+        imageString = await this.fileToDataURL(file);
+      }
+      await this.addImageInArray(imageString);
+    }
+  }
+  fileToDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 }
