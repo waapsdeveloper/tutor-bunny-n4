@@ -57,9 +57,9 @@ export class MessageListComponent extends BasePage implements OnInit {
   async getChatRead(item) {
     if (item.user_id != this.user_id) {
       if (item.is_read == 0) {
+        this.events.publish('update-chat-list');
         let obj = { ids: [item.id] };
         await this.network.getChatRead(obj);
-        this.events.publish('update-chat-list');
       } else {
       }
     } else {

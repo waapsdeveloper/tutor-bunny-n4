@@ -195,7 +195,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     if (!this.message) return;
 
     this.newMesg = {
-      date: 'Sending...',
+      date: 'now',
       messages: [
         {
           chat_room_id: this.item.chat_room_id,
@@ -218,7 +218,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       message: this.message,
     };
 
-    this.chats.getchatList();
+    // this.chats.getchatList();
 
     this.message = '';
     this.messageInput.nativeElement.value = '';
@@ -227,6 +227,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     let res = await this.network.sendMessage(obj);
     console.log(res);
 
-    await this.chats.getChatMessages(this.item.chat_room_id);
+    // await this.chats.getChatMessages(this.item.chat_room_id);
   }
 }
