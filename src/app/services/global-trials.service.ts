@@ -27,15 +27,19 @@ export class GlobalTrialsService {
     private events: EventsService,
     private GlobalCourses: GlobalCoursesService
   ) {
-    this.events.subscribe('clear-all-services-data', () => {
-      this.user = null;
-      this.page = null;
-      this.last_page = null;
-      this.status = null;
-      this.courseId = null;
-      this.pendingTrialPage = null;
-      this.pendingTrialLastPage = null;
-    }, false);
+    this.events.subscribe(
+      'clear-all-services-data',
+      () => {
+        this.user = null;
+        this.page = null;
+        this.last_page = null;
+        this.status = null;
+        this.courseId = null;
+        this.pendingTrialPage = null;
+        this.pendingTrialLastPage = null;
+      },
+      false
+    );
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -63,15 +67,18 @@ export class GlobalTrialsService {
         this.GlobalCourses.getCoursesFromApi();
         this.events.publish('get-dashboard-stats');
         this.events.publish('update-notifications');
-
-
       } else {
         let id = $event.trial_id;
         let res = await this.network.geTrailRequestsByPusher(id);
         this.updateTrailsList(res.trial);
         this.events.publish('update-notifications');
-        let shownoti = true;
-        this.events.publish('show-noti-dot', shownoti);
+        if (this.user.role_id == 3) {
+          let shownoti = true;
+          this.user = this.users.getUser();
+          console.log(this.user);
+
+          this.events.publish('show-noti-dot', shownoti);
+        }
         this.events.publish('get-dashboard-stats');
       }
     }
@@ -123,10 +130,9 @@ export class GlobalTrialsService {
         search: search,
         page: page,
         teacher_id: this.user.id,
-
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
-      console.log(res, "trials");
+      console.log(res, 'trials');
 
       const data = res.result;
       this.pendingTrialPage = data.current_page;
@@ -165,7 +171,6 @@ export class GlobalTrialsService {
 
   async getTrials(search = '', page = 1) {
     return new Promise(async (resolve) => {
-
       this.user = this.users.getUser();
 
       let obj = {

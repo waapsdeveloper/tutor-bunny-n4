@@ -36,7 +36,6 @@ export class MessageListComponent extends BasePage implements OnInit {
   }
 
   initialize(value) {
-
     this.slug = value.slug;
     this.status = value.status;
 
@@ -60,14 +59,11 @@ export class MessageListComponent extends BasePage implements OnInit {
         this.events.publish('update-chat-list');
         let obj = { ids: [item.id] };
         await this.network.getChatRead(obj);
-      } else {
       }
-    } else {
     }
   }
 
   addReview(data) {
-
     this.chats.reviewCoursebyChat(data);
 
     // return;

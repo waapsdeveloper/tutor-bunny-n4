@@ -3,10 +3,6 @@ import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
 import { UsersService } from './users.service';
-import { NavService } from './nav.service';
-import { FavoriteCoursesSqService } from './sqlite/favorite-courses-sq.service';
-import { Subscription } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,18 +24,21 @@ export class GlobalCoursesService {
   otherCourseUserId = 0;
   otherExceptCourseId = 0;
 
-  constructor(private network: NetworkService, private events: EventsService, ) {
-
-    this.events.subscribe('clear-all-services-data', () => {
-      console.log(this.favorites)
-      this.otherCoursesPage = null;
-      this.otherCoursesLastPage = null;
-      this.otherCourses = [];
-      this.courses = [];
-      this.otherCourseUserId = null;
-      this.otherExceptCourseId = null;
-      this.favorites = []
-    }, false);
+  constructor(private network: NetworkService, private events: EventsService, private users :UsersService) {
+    this.events.subscribe(
+      'clear-all-services-data',
+      () => {
+        console.log(this.favorites);
+        this.otherCoursesPage = null;
+        this.otherCoursesLastPage = null;
+        this.otherCourses = [];
+        this.courses = [];
+        this.otherCourseUserId = null;
+        this.otherExceptCourseId = null;
+        this.favorites = [];
+      },
+      false
+    );
 
     const options = {
       cluster: 'ap2',
@@ -67,8 +66,14 @@ export class GlobalCoursesService {
     let course_Id = data.course_id;
     if (course_Id) {
       let res = (await this.network.getcourseById(course_Id)) as any;
+      let user = this.users.getUser();
       let shownoti = true;
-      this.events.publish('show-noti-dot', shownoti);
+      if (user.role_id == 3) {
+        let shownoti = true;
+        console.log(user);
+
+        this.events.publish('show-noti-dot', shownoti);
+      }
       const course = res.course;
       if (course) {
         const index = this.courses.findIndex((c) => c.id == course.id);
@@ -268,10 +273,4 @@ export class GlobalCoursesService {
       resolve(true);
     });
   }
-
-
-
-
-
-
 }
