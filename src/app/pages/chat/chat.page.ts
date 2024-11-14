@@ -83,6 +83,8 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
   async ionViewWillEnter() {
 
+    this.chats.getUnreadMsgCount()
+
     let previousUrl = this.nav.getPreviousUrl();
     const url = new URL(previousUrl, window.location.origin);
     const prevUrl = url.pathname.split('/')[1];

@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -7,7 +8,7 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
-export class NotificationsPage extends BasePage implements OnInit {
+export class NotificationsPage extends BasePage implements ViewWillEnter {
   user;
   params: any;
   notifications;
@@ -20,21 +21,18 @@ export class NotificationsPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  async ngOnInit() {
-    let shownoti = false;
-    this.events.publish('show-noti-dot', shownoti);
+  ionViewWillEnter(): void {
     this.initialize();
-    let res = await this.notificationService.getNotificationsFromApi();
-    console.log(res);
-
   }
+
+
 
   async initialize() {
     this.loadResolvers();
-  }
+    // this.notificationService.unread_count = 0;
+    console.log(this.notificationService.unread_count);
 
-  collectIds(ids){
-    console.log(ids);
+    this.notificationService.sendIsOpenToApis()
 
   }
 

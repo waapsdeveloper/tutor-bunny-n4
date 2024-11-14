@@ -25,7 +25,7 @@ export class ChatService {
     user_id: null,
     course_id: null,
   };
-  days;
+  days: any [] = [];
   chatChannel: any;
 
   constructor(
@@ -51,7 +51,6 @@ export class ChatService {
         this.unreadCount = 0;
         this.requests = null;
         this.requestCount = null;
-        this.days = null;
       },
       false
     );
@@ -125,6 +124,7 @@ export class ChatService {
         this.chats = res.data;
         console.log(this.chats);
         this.unreadCount = this.getUnreadMsgCount() as number;
+        console.log(this.unreadCount);
         let data = await this.network.getRequsetCount(this.user.id);
         this.count = data.message.pending_count;
       }
@@ -143,6 +143,8 @@ export class ChatService {
     }, 0);
 
     this.unreadCount = count;
+    console.log(this.unreadCount, "unread");
+
     return count;
   }
 

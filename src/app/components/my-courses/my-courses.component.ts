@@ -119,7 +119,14 @@ export class MyCoursesComponent extends BasePage implements OnInit {
 
       this.nav.push('teacher-course-list', params);
     } else {
-      this.nav.push('courses');
+      let params = {
+        user_name: this.user.name,
+        user_id : this.user.id
+      };
+      console.log(params);
+      // return
+
+      this.nav.push('teacher-course-list', params);
     }
   }
 }

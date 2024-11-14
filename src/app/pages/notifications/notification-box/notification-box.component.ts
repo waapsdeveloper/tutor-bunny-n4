@@ -25,7 +25,6 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
   }
 
   public set item(value: any) {
-    console.log(value);
     this._item = value;
     this.is_read = value.is_read;
     this.collectIds.emit(value.id);
@@ -52,13 +51,6 @@ export class NotificationBoxComponent extends BasePage implements OnInit {
 
   async ngOnInit() {
 
-    let ids = this.notification.ids
-    let object = {
-      ids: ids
-    }
-
-    let response = await this.network.notificationRead(object)
-    console.log(response);
     moment.updateLocale('en', {
       relativeTime: {
         future: ' %s ago',

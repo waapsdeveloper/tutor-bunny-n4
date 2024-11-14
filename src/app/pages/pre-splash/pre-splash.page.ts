@@ -12,13 +12,14 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
+import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-pre-splash',
   templateUrl: './pre-splash.page.html',
   styleUrls: ['./pre-splash.page.scss'],
 })
-export class PreSplashPage extends BasePage implements OnInit {
+export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
   user;
   loading = false;
 
@@ -42,19 +43,20 @@ export class PreSplashPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.initialize();
 
-    //
   }
 
   async initialize() {
+    console.log("init");
+
     this.loading = true;
 
     this.loadResolvers();
     this.user = this.dataR.user;
-    // console.log(this.user);
-
-    // set data with sqlite
     await this.iap.initializeUserTables(this.user);
 
     this.teacher.registerPusherEvent(this.user.id);
@@ -62,6 +64,7 @@ export class PreSplashPage extends BasePage implements OnInit {
 
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
+    await this.notificationService.registerPusherEvent()
 
     this.chatService.getchatList();
     this.notificationService.getNotificationsFromApi();
@@ -75,7 +78,6 @@ export class PreSplashPage extends BasePage implements OnInit {
 
     this.network.getTimeZone(time, this.user.id);
 
-    console.log('datataa');
 
     this.globalTrials.getPendingTrialsFromApi();
 

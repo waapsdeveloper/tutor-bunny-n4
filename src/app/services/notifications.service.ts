@@ -10,15 +10,50 @@ import { EventsService } from './events.service';
 export class NotificationsService {
   user: any;
   page = 1;
-  unread_count;
+  unread_count = 0;
   ids: any[] = [];
   shownoti;
   last_page = -1;
   list: any[] = [];
-
+  notificationChannel: any;
   private pusher: Pusher;
 
-  constructor(private network: NetworkService, private events: EventsService) {}
+  constructor(private network: NetworkService, private users: UsersService) {
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true,
+    };
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.notificationChannel = this.pusher.subscribe('notification-channel');
+  }
+
+  registerPusherEvent() {
+    let user = this.users.getUser() as any;
+    console.log(user.id, 'users');
+
+    this.notificationChannel.bind(
+      'notification-rec-' + user.id,
+
+      this.notificationChannelReceived.bind(this)
+    );
+  }
+
+  async notificationChannelReceived($event: any) {
+    let id = $event.notification_id;
+
+    let res = await this.network.getNotificationById(id);
+    console.log(res);
+
+    this.list.unshift(res.data);
+    // if (res.data.is_open === 0) {
+    //   console.log(res.data.is_open);
+
+      this.unread_count = this.unread_count + 1;
+    // }
+
+    console.log(this.list);
+    console.log('Updated unread count:', this.unread_count);
+  }
 
   getNotificationsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
@@ -31,18 +66,27 @@ export class NotificationsService {
       this.last_page = data.last_page;
       if (page === 1) {
         this.list = data.data;
-        const openItemsArray = this.list.filter((item) => item.is_read === 0);
-        console.log(openItemsArray," a gaya");
+        const openItemsArray = this.list.filter((item) => item.is_open === 0);
+        console.log(openItemsArray, ' a gaya');
         this.unread_count = openItemsArray.length;
       } else {
         this.list = [...this.list, ...data.data];
-        const openItemsArray = this.list.filter((item) => item.is_read === 0);
-        console.log(openItemsArray," a gaya");
+        const openItemsArray = this.list.filter((item) => item.is_open === 0);
+        console.log(openItemsArray, ' a gaya');
         this.unread_count = openItemsArray.length;
       }
-      this.ids = this.list.map((item) => item.id);
       resolve(this.list);
     });
+  }
+
+  async sendIsOpenToApis(){
+    let ids = this.list.map((item) => item.id);
+    let object = {
+      ids: ids
+    }
+    let response = await this.network.notificationRead(object)
+    console.log(response);
+    this.unread_count = 0
   }
 
   getAllNotifications() {

@@ -70,16 +70,16 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('update-notifications', () => {
-      this.notification.getNotificationsFromApi()
-    });
+    // this.events.subscribe('update-notifications', () => {
+    //   this.notification.getNotificationsFromApi()
+    // });
 
     this.events.subscribe('user-update-via-pusher', () => {
       this.initialize();
     });
-    this.events.subscribe('show-noti-dot', (shownoti) =>{
-      this.showNoti  = shownoti;
-    });
+    // this.events.subscribe('show-noti-dot', (shownoti) =>{
+    //   this.showNoti  = shownoti;
+    // });
 
   }
 

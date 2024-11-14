@@ -65,7 +65,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async initialize(roomId) {
-    // this.chats.getchatList();
+    this.chats.getchatList();
 
     this.loading = true;
     this.loadResolvers();
@@ -114,15 +114,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         updated_at: new Date(),
         user_id: dm.user_id,
       };
-
-      // Find the index of an entry with date === 'just now'
       let existingEntry = this.chats.days.find((entry) => entry.date === '');
 
       if (existingEntry) {
-        // If an entry exists, push only the new message to its messages array
         existingEntry.messages.push(newMessage);
       } else {
-        // If no such entry exists, create a new one and push it to days
         let newMesg = {
           date: '',
           messages: [newMessage],

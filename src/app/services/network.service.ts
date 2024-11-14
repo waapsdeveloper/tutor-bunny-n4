@@ -112,6 +112,10 @@ export class NetworkService {
     return this.httpGetResponse('states/all', null, false, false);
   }
 
+  getNotificationById(id) {
+    return this.httpGetResponse('notifications/by/' + id, null, false, false);
+  }
+
   getLanguage(data) {
     const str = this.serialize(data);
     return this.httpGetResponse('languages/list' + '?' + str, null, false, false);

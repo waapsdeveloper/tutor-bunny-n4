@@ -59,10 +59,7 @@ export class StudentDashboardPage
       console.log(this.profileImage, 'images');
     });
 
-    this.events.subscribe('show-noti-dot', (shownoti) => {
-      console.log(shownoti);
-      this.showNoti = shownoti;
-    });
+
   }
 
   async initialize() {
