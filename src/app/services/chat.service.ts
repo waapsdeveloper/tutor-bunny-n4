@@ -48,7 +48,6 @@ export class ChatService {
         this.role_id = null;
         this.chats = null;
         this.count = null;
-        this.unreadCount = 0;
         this.requests = null;
         this.requestCount = null;
       },
@@ -123,7 +122,7 @@ export class ChatService {
       if (res) {
         this.chats = res.data;
         console.log(this.chats);
-        this.unreadCount = this.getUnreadMsgCount() as number;
+        this.unreadCount = await this.getUnreadMsgCount() as number;
         console.log(this.unreadCount);
         let data = await this.network.getRequsetCount(this.user.id);
         this.count = data.message.pending_count;
@@ -133,19 +132,27 @@ export class ChatService {
     });
   }
 
-  getUnreadMsgCount(): number {
+  async getUnreadMsgCount(): Promise<number> {
     if (this.chats.length == 0) {
       return 0;
     }
+    console.log(this.chats);
+    let ids = this.chats.map((item) => item.chat_room_id);
+    console.log(ids);
+    // return
 
-    let count = this.chats.reduce((prev, next) => {
-      return prev + parseInt(next.unread_count);
-    }, 0);
+    let object = {
+      ids: ids,
+      user_id: this.user.id
+    };
 
-    this.unreadCount = count;
-    console.log(this.unreadCount, "unread");
+    let res = await this.network.getUnreadChat(object);
+    console.log(res);
 
-    return count;
+    this.unreadCount = res.unread_count;
+    console.log(this.unreadCount, 'unread');
+
+    return this.unreadCount;
   }
 
   getChatRequsts() {

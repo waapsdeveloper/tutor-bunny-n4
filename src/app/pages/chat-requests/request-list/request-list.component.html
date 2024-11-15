@@ -1,7 +1,9 @@
 <div class="chat-list-98521">
   <div class="chat-box-98522">
     <div class="chat-image-box-98523">
-      <div class="chat-image-98523">
+      <div class="chat-image-98523"
+        [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'">
+
       </div>
     </div>
     <div class="chat-deatil-98524">
@@ -13,13 +15,17 @@
         <div class="chat-online-98529">
           <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><img
               src="../../assets/svg/cake.svg" alt="">Age {{age}}</div>
-          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><span *ngIf="flag"
-              slot="start" class="fi fi-{{flag}}"></span>{{item.user.student.country.name}}</div>
         </div>
         <div class="chat-message-98531">
           <img src="../../assets/svg/accept-green.svg" alt="" (click)="updaeStatus('accept', item)">
           <img src="../../assets/svg/reject-red.svg" alt="" (click)="updaeStatus('reject', item)">
         </div>
+      </div>
+      <div style="display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      width: 100%;"><span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>{{item.user.student.country.name}}
       </div>
     </div>
   </div>

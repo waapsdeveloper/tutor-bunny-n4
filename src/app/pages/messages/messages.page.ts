@@ -65,7 +65,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async initialize(roomId) {
-    this.chats.getchatList();
+    // await this.chats.getchatList();
 
     this.loading = true;
     this.loadResolvers();

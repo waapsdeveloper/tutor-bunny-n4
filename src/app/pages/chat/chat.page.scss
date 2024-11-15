@@ -19,6 +19,7 @@
       align-items: center;
       font-size: 18px;
       gap: 8px;
+      border-bottom: 1px solid #666;
       justify-content: center;
     }
 
@@ -177,4 +178,19 @@
       }
     }
   }
+}
+
+
+.centered-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height to vertically center within ion-content */
+  font-size: 1.2em;
+  text-align: center;
+  color: #666; /* Optional: adjust color */
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }

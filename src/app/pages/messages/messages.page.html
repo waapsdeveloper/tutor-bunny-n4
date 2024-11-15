@@ -24,8 +24,8 @@
 </div>
 <ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <div class="body-content" *ngFor="let item of chats.days">
-    <div class="chat-day-heading-85621" *ngIf="item.date">
-      <div *ngIf="item.date != 'now'" style="
+    <div class="chat-day-heading-85621" *ngIf="item.date && item.date != 'now'">
+      <div *ngIf="item.date && item.date != 'now'" style="
             padding: 8px;
             background: antiquewhite;
             border-radius: 8px;

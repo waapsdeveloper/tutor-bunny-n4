@@ -139,6 +139,12 @@ export class NetworkService {
     return this.httpGetResponse('chat-by-id/' + id, null, false, false);
   }
 
+  getUnreadChat(data: any) {
+
+    // const str = this.serialize(data);
+    return this.httpPostResponse('get-unread-chats/count', data, false, false);
+  }
+
   getChatRoomById(id: any) {
     return this.httpGetResponse('chat-rooms-single/' + id, null, false, false);
   }

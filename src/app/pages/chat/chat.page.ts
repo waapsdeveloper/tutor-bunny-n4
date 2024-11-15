@@ -82,6 +82,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   async ionViewWillEnter() {
+    this.chats.getUnreadMsgCount()
 
     this.chats.getUnreadMsgCount()
 

@@ -22,7 +22,6 @@ export class MessageListComponent extends BasePage implements OnInit {
 
   public set chat(value: any) {
     this._chat = value;
-    this.getChatRead(value);
     this.initialize(value);
   }
 
@@ -35,7 +34,11 @@ export class MessageListComponent extends BasePage implements OnInit {
     this.user_id = this.user.id;
   }
 
-  initialize(value) {
+  async initialize(value) {
+    await this.getChatRead(value);
+
+    this.chats.getUnreadMsgCount()
+
     this.slug = value.slug;
     this.status = value.status;
 
