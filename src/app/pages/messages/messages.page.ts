@@ -103,6 +103,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(dm);
 
     if (dm.chat_room_id == this.item.chat_room_id) {
+
+      if(!this.chats || !this.chats.days){
+        return;
+      }
       console.log(this.chats.days);
 
       let newMessage = {

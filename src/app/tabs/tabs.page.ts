@@ -51,14 +51,6 @@ export class TabsPage extends BasePage implements OnInit {
   ionViewWillEnter() {
   }
 
-  async updateChatsByMessageReceived(data: any) {
-
-    await this.chatService.getUnreadMsgCount();
-    // this.chatService.getchatList();
-    this.chatService.updadteChatList(data);
-
-  }
-
 
   ngOnInit() {
     this.initialize()
@@ -168,11 +160,6 @@ export class TabsPage extends BasePage implements OnInit {
       this.globalTrials.getPendingTrialsFromApi();
       this.globalCourses.getCoursesFromApi();
     });
-
-    this.events.subscribe(
-      'message-received-via-pusher',
-      this.updateChatsByMessageReceived.bind(this)
-    );
 
   }
 
