@@ -121,28 +121,28 @@
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848; ">Chat</span>
       </div>
     </div>
     <div class="button-chat-7856" *ngIf="data?.trial && data.trial.status === 'Accepted' && !btn_loading">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848; ">Chat</span>
       </div>
     </div>
     <div class="button-chat-7856" *ngIf="data?.trial && data.trial.status === 'Complete' && !btn_loading">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-regular fs-16 " style="color: #484848; font-size: 20px;">Chat</span>
+        <span class="roboto-regular fs-16 " style="color: #484848;">Chat</span>
       </div>
     </div>
     <div class="button-trial-23654" *ngIf="!data?.trial && type !== 3 && !btn_loading">
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-regular fs-20 " style="font-size: 20px;"> Request Free Trial </span>
+        <span class="roboto-regular fs-16 " > Request Free Trial </span>
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
@@ -150,7 +150,7 @@
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-regular fs-20 " style="font-size: 20px;">Join </span>
+        <span class="roboto-regular fs-16 " >Join </span>
       </div>
       <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> -->
     </div>

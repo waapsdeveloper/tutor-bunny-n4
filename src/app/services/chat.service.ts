@@ -18,7 +18,7 @@ export class ChatService {
   historicalEvent = 'randomHistory';
   unreadCount = 0;
   requests;
-  requestCount;
+  requestCount= 0;
   private pusher: Pusher;
 
   review_course = {
@@ -125,6 +125,9 @@ export class ChatService {
         this.unreadCount = await this.getUnreadMsgCount() as number;
         console.log(this.unreadCount);
         let data = await this.network.getRequsetCount(this.user.id);
+        if(this.user.role_id == 3){
+          this.getChatRequsts();
+        }
         this.count = data.message.pending_count;
       }
       resolve(this.chats);
@@ -157,9 +160,16 @@ export class ChatService {
 
   getChatRequsts() {
     return new Promise(async (resolve) => {
+      this.user = this.users.getUser();
+
       let res = await this.network.getRequestMessagesRoom(this.user.id);
+      console.log(res,"dsffdsfsfsdfs");
+
       this.requestCount = res.total;
+      console.log(this.requestCount);
+
       this.requests = res.data;
+
       resolve;
     });
   }
@@ -173,7 +183,9 @@ export class ChatService {
         obj,
         item.chat_room_id
       );
-      this.getChatRequsts();
+      if(this.user.role_id == 3){
+        this.getChatRequsts();
+      }
       this.getchatList();
       resolve;
     });

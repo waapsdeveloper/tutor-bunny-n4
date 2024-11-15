@@ -19,9 +19,13 @@
           <div class="header-info-user-68448">
             <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
           </div>
-          <div class="header-info-misc-68448 outfit"><img src="../../assets/svg/verified-profile-sheild.svg" />Verified
+          <div class="header-info-misc-68448 outfit" *ngIf="verified_on == ''"><img
+              src="../../assets/svg/verified-profile-sheild.svg" />Verified
             on
             {{verified_on}}
+          </div>
+          <div class="header-info-misc-68448 outfit" *ngIf="verified_on != ''"><img
+              src="../../assets/svg/verified-profile-sheild.svg" />Verification panding
           </div>
           <div class="header-info-misc-68448 outfit">
             <app-rating-stars [rating]="rating"></app-rating-stars>
@@ -72,12 +76,12 @@
         </div>
       </div>
     </div>
-    <div class="line"></div>
+    <!-- <div class="line"></div> -->
     <div>
       <app-teacher-profile-statistics [course]="course" [experince]="experince"
         [hourly_rate]="hourly_rate"></app-teacher-profile-statistics>
     </div>
-    <div class="line"></div>
+    <!-- <div class="line"></div> -->
     <div class="fs-16 outfit"
       style="display: flex;    align-items: flex-start;    flex-direction: column;    gap: 16px;">
       <div class="about-heading">About</div>
@@ -115,7 +119,7 @@
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/chat.svg" />
-        <span class="roboto-medium fs-16 " style="color: #484848; font-size: 20px;">Message</span>
+        <span class="roboto-medium fs-16 " style="color: #484848;">Message</span>
       </div>
     </div>
   </div>

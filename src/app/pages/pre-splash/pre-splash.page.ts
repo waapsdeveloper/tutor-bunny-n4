@@ -66,6 +66,12 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     this.globalCourses.registerPusherEvent();
     await this.notificationService.registerPusherEvent()
 
+
+     if(this.user.role_id == 3){
+        this.chatService.getChatRequsts();
+      }
+
+
     this.chatService.getchatList();
     this.notificationService.getNotificationsFromApi();
 
