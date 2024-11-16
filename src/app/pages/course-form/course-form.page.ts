@@ -226,9 +226,9 @@ export class CourseFormPage
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       if (this.edit && this.sameCourseEdit) {
-        this.utility.presentSuccessToast("Course Created Successfully ");
+        this.utility.presentSuccessToast("Course Saved Successfully ");
       } else {
-        this.utility.presentSuccessToast("Course Updated Successfully");
+        this.utility.presentSuccessToast("Course Saved Successfully");
       }
     }
 

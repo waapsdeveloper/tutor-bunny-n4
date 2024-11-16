@@ -18,7 +18,7 @@ export class ChatService {
   historicalEvent = 'randomHistory';
   unreadCount = 0;
   requests;
-  requestCount= 0;
+  requestCount = 0;
   private pusher: Pusher;
 
   review_course = {
@@ -47,9 +47,9 @@ export class ChatService {
         this.user = null;
         this.role_id = null;
         this.chats = null;
-        this.count = null;
+        this.count = 0;
         this.requests = null;
-        this.requestCount = null;
+        this.requestCount = 0;
       },
       false
     );

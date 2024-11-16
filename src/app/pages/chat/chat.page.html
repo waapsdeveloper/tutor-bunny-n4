@@ -21,13 +21,7 @@
     </div>
     <div style="height: 100%; position: relative;">
       <app-chat-list *ngFor="let item of chats.chats" [item]="item" (onChange)="gotoMessage($event)"></app-chat-list>
-      <div style="display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 300px;
-      left: 120px;
-  " class="ion-padding" *ngIf="chats.chats == 0">No chat to display</div>
+      <div class="centered-message" *ngIf="chats.chats == 0">No chat to display</div>
     </div>
   </div>
 </ion-content>

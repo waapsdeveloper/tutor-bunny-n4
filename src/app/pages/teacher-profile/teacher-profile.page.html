@@ -19,13 +19,13 @@
           <div class="header-info-user-68448">
             <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
           </div>
-          <div class="header-info-misc-68448 outfit" *ngIf="verified_on == ''"><img
+          <div class="header-info-misc-68448 outfit" *ngIf="status != 'In Review'"><img
               src="../../assets/svg/verified-profile-sheild.svg" />Verified
             on
             {{verified_on}}
           </div>
-          <div class="header-info-misc-68448 outfit" *ngIf="verified_on != ''"><img
-              src="../../assets/svg/verified-profile-sheild.svg" />Verification panding
+          <div class="header-info-misc-68448 outfit" *ngIf="status == 'In Review'"><img
+              src="../../assets/svg/verified-profile-sheild.svg" />Verification pending
           </div>
           <div class="header-info-misc-68448 outfit">
             <app-rating-stars [rating]="rating"></app-rating-stars>
@@ -104,11 +104,11 @@
       <img src="../../assets/svg/qulification.svg" alt="">
       <div>Qualifications and experiences</div>
     </div>
-    <div class="line"></div>
+    <div class="line" *ngIf="course != 0"></div>
     <app-my-courses (onChange)="getCourses($event)" *ngIf="course != 0"></app-my-courses>
     <div class="line" *ngIf="showGellary === true"></div>
     <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
-    <div class="line" *ngIf="showGellary === true"></div>
+    <div class="line" *ngIf="rating != 0"></div>
     <app-rating-review [rating]="total_rating" *ngIf="rating != 0"></app-rating-review>
   </div>
 </ion-content>

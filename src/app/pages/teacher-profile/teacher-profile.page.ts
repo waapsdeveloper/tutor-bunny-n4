@@ -34,6 +34,7 @@ export class TeacherProfilePage
   total_rating;
   rating;
   state;
+  status;
   student;
   hourly_rate;
   travel_policy;
@@ -119,6 +120,7 @@ export class TeacherProfilePage
         this.verified_on = moment(verified_on).format('DD-MMM-YYYY');
         this.language = this.user.teacher.languages;
         this.total_rating = this.user.teacher.total_rating;
+        this.status = this.user.teacher.status;
         this.rating = this.user.teacher.avg_rating;
         this.travel_policy = this.user.teacher.travel_policy.name;
         this.subject = this.user.teacher.subjects;
@@ -145,6 +147,8 @@ export class TeacherProfilePage
       this.language = this.user.teacher.languages;
       this.total_rating = this.user.teacher.total_rating;
       this.rating = this.user.teacher.avg_rating;
+      this.status = this.user.teacher.status;
+
       this.subject = this.user.teacher.subjects;
       this.experince = this.user.teacher.started_teaching;
       const user = this.users.getUser();
