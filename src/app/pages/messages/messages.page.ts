@@ -41,7 +41,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   constructor(injector: Injector, public chats: ChatService) {
     super(injector);
-
   }
 
   ngOnInit() {
@@ -78,7 +77,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     }
     await this.chats.getChatMessages(roomId);
 
-    this.chats.updateChatCount(roomId, 0)
+    this.chats.updateChatCount(roomId, 0);
 
     this.item = ch;
     this.displayName = this.utility.getAmericanName(ch.user.name);
@@ -103,8 +102,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(dm);
 
     if (dm.chat_room_id == this.item.chat_room_id) {
-
-      if(!this.chats || !this.chats.days){
+      if (!this.chats || !this.chats.days) {
         return;
       }
       console.log(this.chats.days);
@@ -175,8 +173,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('clear-params-chat');
   }
 
-  openImage(image) {
-  }
+  openImage(image) {}
 
   scrollToBottomOnInit() {
     setTimeout(() => {
@@ -193,7 +190,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
   async sendMessage() {
     if (!this.message) return;
-
     this.newMesg = {
       date: 'now',
       messages: [
@@ -209,24 +205,16 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       ],
     };
     this.chats.days.push(this.newMesg);
-
     this.scrollToBottomOnInit();
-
     let obj = {
       chat_room_id: this.item.chat_room_id,
       user_id: this.user.id,
       message: this.message,
     };
-
-    // this.chats.getchatList();
-
     this.message = '';
     this.messageInput.nativeElement.value = '';
     this.adjustHeight(this.messageInput.nativeElement);
-
     let res = await this.network.sendMessage(obj);
     console.log(res);
-
-    // await this.chats.getChatMessages(this.item.chat_room_id);
   }
 }
