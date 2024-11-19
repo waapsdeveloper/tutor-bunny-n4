@@ -25,7 +25,7 @@ export class ChatService {
     user_id: null,
     course_id: null,
   };
-  days: any [] = [];
+  days: any[] = [];
   chatChannel: any;
 
   constructor(
@@ -50,6 +50,11 @@ export class ChatService {
         this.count = 0;
         this.requests = null;
         this.requestCount = 0;
+        if (this.pusher) {
+          this.pusher.unsubscribe('chats-channel');
+          this.pusher.disconnect();
+        }
+        this.events.unsubscribe('message-received-via-pusher');
       },
       false
     );
@@ -122,10 +127,10 @@ export class ChatService {
       if (res) {
         this.chats = res.data;
         // console.log(this.chats);
-        this.unreadCount = await this.getUnreadMsgCount() as number;
+        this.unreadCount = (await this.getUnreadMsgCount()) as number;
         // console.log(this.unreadCount);
         let data = await this.network.getRequsetCount(this.user.id);
-        if(this.user.role_id == 3){
+        if (this.user.role_id == 3) {
           this.getChatRequsts();
         }
         this.count = data.message.pending_count;
@@ -146,7 +151,7 @@ export class ChatService {
 
     let object = {
       ids: ids,
-      user_id: this.user.id
+      user_id: this.user.id,
     };
 
     let res = await this.network.getUnreadChat(object);
@@ -183,7 +188,7 @@ export class ChatService {
         obj,
         item.chat_room_id
       );
-      if(this.user.role_id == 3){
+      if (this.user.role_id == 3) {
         this.getChatRequsts();
       }
       this.getchatList();
@@ -193,7 +198,6 @@ export class ChatService {
 
   getChatMessages(id) {
     return new Promise(async (resolve) => {
-
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
       // console.log(this.days);
@@ -203,18 +207,14 @@ export class ChatService {
     });
   }
 
-
-  updateChatCount(roomId, count){
-
+  updateChatCount(roomId, count) {
     // console.log(roomId);
     // console.log(this.chats);
     let chatIndex = this.chats.findIndex((chat) => chat.chat_room_id == roomId);
     // console.log(chatIndex);
-    if(chatIndex != -1){
+    if (chatIndex != -1) {
       this.chats[chatIndex].unread_count = 0;
     }
-
-
   }
 
   updadteChatList(data) {
@@ -251,48 +251,41 @@ export class ChatService {
 
     const findObj = this.chats.find((x) => x.chat_room_id == roomId);
     if (!findObj) {
-
       const res = await this.network.getChatRoomById(roomId);
       // console.log(res);
 
-      if(res.length > 0){
+      if (res.length > 0) {
         this.chats = [...this.chats, ...res];
-        return res[0]
+        return res[0];
       }
-
     }
-
-
 
     return findObj;
 
-      //   const currectUser = this.users.getUser();
-      //   const otherUserId = user1 == currectUser.id ? user2 : user1;
-      //   const otherUser =
-      //     chatroom['user1'].id == otherUserId
-      //       ? chatroom['user1']
-      //       : chatroom['user2'];
+    //   const currectUser = this.users.getUser();
+    //   const otherUserId = user1 == currectUser.id ? user2 : user1;
+    //   const otherUser =
+    //     chatroom['user1'].id == otherUserId
+    //       ? chatroom['user1']
+    //       : chatroom['user2'];
 
-      //   let customObj = {
-      //     chat_room_id: chatroom.id,
-      //     last_message: '',
-      //     other_user_id: otherUserId,
-      //     unread_count: 0,
-      //     user: otherUser,
-      //   };
+    //   let customObj = {
+    //     chat_room_id: chatroom.id,
+    //     last_message: '',
+    //     other_user_id: otherUserId,
+    //     unread_count: 0,
+    //     user: otherUser,
+    //   };
 
-      //   this.chats.push(customObj);
-      //   return chatroom.id;
-      // }
-
-      // return chatroom.id;
+    //   this.chats.push(customObj);
+    //   return chatroom.id;
     // }
 
-
+    // return chatroom.id;
+    // }
 
     // */
     // const ch = this.chats.find((x) => x.id == roomId);
     // return ch;
   }
-
 }

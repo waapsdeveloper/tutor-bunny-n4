@@ -37,6 +37,11 @@ export class GlobalTrialsService {
         this.courseId = null;
         this.pendingTrialPage = null;
         this.pendingTrialLastPage = null;
+        if (this.pusher) {
+          this.pusher.unsubscribe('trials-channel');
+          this.pusher.disconnect();
+        }
+        this.events.unsubscribe('course-rec-update-by-list');
       },
       false
     );

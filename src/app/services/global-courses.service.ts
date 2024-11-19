@@ -36,6 +36,11 @@ export class GlobalCoursesService {
         this.otherCourseUserId = null;
         this.otherExceptCourseId = null;
         this.favorites = [];
+        if (this.pusher) {
+          this.pusher.unsubscribe('course-channel');
+          this.pusher.disconnect();
+        }
+        this.events.unsubscribe('course-rec-update-by-list');
       },
       false
     );
