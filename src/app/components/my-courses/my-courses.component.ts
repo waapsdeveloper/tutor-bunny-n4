@@ -77,18 +77,11 @@ export class MyCoursesComponent extends BasePage implements OnInit {
         this.teacher = JSON.parse(localStorage.getItem('teacher'));
         console.log(this.teacher);
         let obj = {
-          search: search,
-          page: page,
+          user_id: this.teacher.id,
         };
+        console.log(obj);
 
-        if (this.categoryId) {
-          obj['category_id'] = this.categoryId;
-        }
-        const res = (await this.network.getMyCourseList(
-          obj,
-          this.teacher.id
-        )) as any;
-        // await this.network.getOtherCourseList(obj) as any;
+        let res = await this.network.getTeacherCourses(obj);
         console.log(res);
 
         const result = res.result;
