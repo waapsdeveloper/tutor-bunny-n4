@@ -1,6 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { GlobalTrialsService } from 'src/app/services/global-trials.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { ChatService } from 'src/app/services/chat.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 @Component({
   selector: 'app-menu-list-box',
   templateUrl: './menu-list-box.component.html',
@@ -9,7 +13,13 @@ import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 export class MenuListBoxComponent extends BasePage implements OnInit {
   role;
   user;
-  constructor(injector: Injector) {
+  constructor(injector: Injector,
+    private trails: GlobalTrialsService,
+    private courses: GlobalCoursesService,
+    private chats: ChatService,
+    private notification: NotificationsService,
+
+  ) {
     super(injector);
     this.initialize();
   }
@@ -32,6 +42,10 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   async logout() {
 
     this.events.publish('clear-all-services-data');
+    this.chats.unRegisterPusherEvent();
+    this.trails.unRegisterPusherEvent();
+    this.courses.unRegisterPusherEvent();
+    this.notification.unRegisterPusherEvent();
     localStorage.clear();
     localStorage.removeItem("user");
     localStorage.removeItem("token");

@@ -66,6 +66,19 @@ export class ChatService {
     });
   }
 
+
+  unRegisterPusherEvent(){
+    let user = this.users.getUser() as any;
+
+    if (this.pusher) {
+      this.pusher.unsubscribe('chats-channel');
+      this.pusher.disconnect();
+    }
+    this.chatChannel.unbind('message-rec-' + user.id);
+
+    this.events.unsubscribe('message-received-via-pusher');
+  }
+
   registerPusherEvent(id: any) {
     this.chatChannel.bind(
       'message-rec-' + id,

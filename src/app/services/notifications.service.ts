@@ -18,13 +18,29 @@ export class NotificationsService {
   notificationChannel: any;
   private pusher: Pusher;
 
-  constructor(private network: NetworkService, private users: UsersService) {
+  constructor(
+    private network: NetworkService,
+    private users: UsersService,
+    private events: EventsService
+  ) {
     const options = {
       cluster: 'ap2',
       forceTLS: true,
     };
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.notificationChannel = this.pusher.subscribe('notification-channel');
+    this.events.subscribe(
+      'clear-all-services-data',
+      () => {
+        this.user = null;
+        if (this.pusher) {
+          this.pusher.unsubscribe('notification-channel');
+          this.pusher.disconnect();
+        }
+        this.events.unsubscribe('notification-received-via-pusher');
+      },
+      false
+    );
   }
 
   registerPusherEvent() {
@@ -37,8 +53,20 @@ export class NotificationsService {
       this.notificationChannelReceived.bind(this)
     );
   }
+  unRegisterPusherEvent() {
+    let user = this.users.getUser() as any;
+
+    if (this.pusher) {
+      this.pusher.unsubscribe('notification-channel');
+      this.pusher.disconnect();
+    }
+    this.notificationChannel.unbind('notification-rec-' + user.id);
+    this.events.unsubscribe('notification-received-via-pusher');
+  }
 
   async notificationChannelReceived($event: any) {
+    this.events.publish('notification-received-via-pusher', $event);
+
     let id = $event.notification_id;
 
     let res = await this.network.getNotificationById(id);
@@ -48,7 +76,7 @@ export class NotificationsService {
     // if (res.data.is_open === 0) {
     //   console.log(res.data.is_open);
 
-      this.unread_count = this.unread_count + 1;
+    this.unread_count = this.unread_count + 1;
     // }
 
     console.log(this.list);
@@ -79,14 +107,14 @@ export class NotificationsService {
     });
   }
 
-  async sendIsOpenToApis(){
+  async sendIsOpenToApis() {
     let ids = this.list.map((item) => item.id);
     let object = {
-      ids: ids
-    }
-    let response = await this.network.notificationRead(object)
+      ids: ids,
+    };
+    let response = await this.network.notificationRead(object);
     console.log(response);
-    this.unread_count = 0
+    this.unread_count = 0;
   }
 
   getAllNotifications() {

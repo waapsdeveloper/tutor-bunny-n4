@@ -3,6 +3,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
+import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-chat',
@@ -28,13 +29,18 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   chat_;
   other_user_id;
   showChat = 'inbox';
+  private pusher: Pusher;
 
   constructor(injector: Injector, public chats: ChatService) {
-    super(injector);
+    super(injector); const options = {
+      cluster: 'ap2',
+      forceTLS: true,
+    };
     this.events.subscribe('clear-params-chat', () =>{
       this.chat_room_id = null;
       this.params =  null;
     }, false);
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
 
     this.initialize();
     this.activeUser = this.users.getUser();
@@ -42,6 +48,17 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.events.subscribe(
+      'clear-all-services-data',
+      () => {
+        if (this.pusher) {
+          this.pusher.unsubscribe('chats-channel');
+          this.pusher.disconnect();
+        }
+        this.events.unsubscribe('message-received-via-pusher');
+      },
+      false
+    );
     this.events.subscribe('update-chat-lists', (data) => {
 
       this.handleRefresh(data);

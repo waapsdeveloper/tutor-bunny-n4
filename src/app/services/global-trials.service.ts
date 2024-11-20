@@ -37,20 +37,29 @@ export class GlobalTrialsService {
         this.courseId = null;
         this.pendingTrialPage = null;
         this.pendingTrialLastPage = null;
-        if (this.pusher) {
-          this.pusher.unsubscribe('trials-channel');
-          this.pusher.disconnect();
-        }
-        this.events.unsubscribe('course-rec-update-by-list');
+
       },
       false
     );
+
     const options = {
       cluster: 'ap2',
       forceTLS: true,
     };
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.trialChannel = this.pusher.subscribe('trials-channel');
+  }
+
+  unRegisterPusherEvent(){
+    let user = this.users.getUser() as any;
+
+    if (this.pusher) {
+      this.pusher.unsubscribe('trials-channel');
+      this.pusher.disconnect();
+    }
+    this.trialChannel.unbind('trials-rec-' + user.id);
+
+    this.events.unsubscribe('trail-received-via-pusher');
   }
 
   registerPusherEvent() {
@@ -64,6 +73,7 @@ export class GlobalTrialsService {
 
   async trialsChannelReceived($event: any) {
     console.log($event);
+    this.events.publish('trail-received-via-pusher', $event);
 
     if ($event) {
       if ($event.slug) {

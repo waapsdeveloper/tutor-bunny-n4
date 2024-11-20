@@ -53,6 +53,17 @@ export class GlobalCoursesService {
     this.CourseChannel = this.pusher.subscribe('course-channel');
   }
 
+
+
+  unRegisterPusherEvent(){
+    if (this.pusher) {
+      this.pusher.unsubscribe('course-channel');
+      this.pusher.disconnect();
+    }
+
+    this.events.unsubscribe('course-rec-update-by-list');
+  }
+
   registerPusherEvent() {
     this.CourseChannel.bind(
       'course-rec-update-by-list',
