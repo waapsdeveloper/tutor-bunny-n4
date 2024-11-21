@@ -152,19 +152,27 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   async goToChat(data) {
     let user = this.users.getUser();
 
-    let id = user.id;
-    let obj = {
-      user_id_1: user.id,
-      user_id_2: data.user.id,
-    };
-    let res = await this.network.getChadRoomId(obj);
-    let params = {
-      student_id: id,
-      other_user_id: data.user.id,
-      user: JSON.stringify(data.user),
-      chat_room_id: res.chat_room.id,
-    };
-    this.nav.push('/tabs/chat', params);
+    const chatRoomId = await this.chats.getChadRoomId(data.user.id, user.id) as number;
+
+    if(chatRoomId != -1){
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
+    }
+
+    // let id = user.id;
+    // let obj = {
+    //   user_id_1: user.id,
+    //   user_id_2: data.user.id,
+    // };
+    // let res = await this.network.getChadRoomId(obj);
+    // let params = {
+    //   student_id: id,
+    //   other_user_id: data.user.id,
+    //   user: JSON.stringify(data.user),
+    //   chat_room_id: res.chat_room.id,
+    // };
+    // this.nav.push('/tabs/chat', params);
   }
 
   async presentAlert() {
