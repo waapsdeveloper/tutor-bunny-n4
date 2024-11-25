@@ -50,6 +50,7 @@ export class TeacherProfilePage
   updateRating;
   updateTotalRating;
 
+
   constructor(injector: Injector, public globalCourses: GlobalCoursesService, private chats: ChatService) {
     super(injector);
   }
@@ -105,8 +106,8 @@ export class TeacherProfilePage
 
     if (this.roleId == '3') {
       if (res) {
-        this.users.setUser(res.user);
-        this.user = this.users.getUser();
+        // this.users.setUser(res.user);
+        // this.user = this.users.getUser();
         console.log('====================================');
         console.log(this.user);
         console.log('====================================');
