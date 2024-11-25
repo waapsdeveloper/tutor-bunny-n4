@@ -1,6 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'My Students'"
-    [backUrl]=""></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'My Students'" [backUrl]=""></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
@@ -11,7 +10,8 @@
       </div>
       <div class="header-chips">
         <div class="header-chip">
-          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{globalTrials.status ? globalTrials.status : 'Status' }} <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
+          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{globalTrials.status ? globalTrials.status
+            : 'Status' }} <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
           <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
@@ -58,7 +58,9 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <app-trail-card *ngFor="let item of globalTrials.list" [item]="item"></app-trail-card>
+    <div *ngFor="let item of globalTrials.list">
+      <app-trail-card  [item]="item" *ngIf="item?.status != 'canceled' "></app-trail-card>
+    </div>
     <div class="fs-14 outfit" *ngIf="globalTrials.list.length === 0">No results Found</div>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
