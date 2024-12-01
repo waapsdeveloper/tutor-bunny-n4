@@ -101,6 +101,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     const dm = data;
     console.log(dm);
 
+    if(!this.item){
+      return;
+    }
+
     if (dm.chat_room_id == this.item.chat_room_id) {
       if (!this.chats || !this.chats.days) {
         return;
@@ -116,10 +120,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         updated_at: new Date(),
         user_id: dm.user_id,
       };
-      let existingEntry = this.chats.days.find((entry) => entry.date === '');
+      let lastEntry = this.chats.days[this.chats.days.length - 1]; // Get the last item
 
-      if (existingEntry) {
-        existingEntry.messages.push(newMessage);
+      if (lastEntry?.date === '') {
+        lastEntry.messages.push(newMessage);
       } else {
         let newMesg = {
           date: '',

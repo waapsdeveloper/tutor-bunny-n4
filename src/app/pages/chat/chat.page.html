@@ -20,7 +20,8 @@
       </div>
     </div>
     <div style="height: 100%; position: relative;">
-      <app-chat-list *ngFor="let item of chats.chats" [item]="item" (onChange)="gotoMessage($event)"></app-chat-list>
+      <!-- (onChange)="gotoMessage($event)" -->
+      <app-chat-list *ngFor="let item of chats.chats" [item]="item" ></app-chat-list>
       <div class="centered-message" *ngIf="chats.chats == 0">No chat to display</div>
     </div>
   </div>

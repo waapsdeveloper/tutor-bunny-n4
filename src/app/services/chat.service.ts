@@ -66,8 +66,7 @@ export class ChatService {
     });
   }
 
-
-  unRegisterPusherEvent(){
+  unRegisterPusherEvent() {
     let user = this.users.getUser() as any;
 
     if (this.pusher) {
@@ -87,10 +86,18 @@ export class ChatService {
   }
 
   chatChannelReceived($event: any) {
-    this.getchatList();
-
     this.events.publish('message-received-via-pusher', $event);
+    console.log($event);
+
+    let data = $event;
+    if (data.chat_room_id) {
+      this.setChatRoomListItemInfo(data.chat_room_id);
+    }
+
     this.getUnreadMsgCount();
+
+    // this.getchatList();
+    // this.getUnreadMsgCount();
   }
 
   reviewCoursebyChat(data) {
@@ -300,5 +307,25 @@ export class ChatService {
     // */
     // const ch = this.chats.find((x) => x.id == roomId);
     // return ch;
+  }
+
+  async setChatRoomListItemInfo(roomId): Promise<any> {
+    // console.log(this.chats, roomId);
+
+    const res = await this.network.getChatRoomById(roomId);
+    // console.log(res);
+
+    const findIndex = this.chats.findIndex((x) => x.chat_room_id == roomId);
+    if (findIndex != -1 && res.length > 0) {
+      this.chats[findIndex] = res[0];
+    } else {
+      await this.getChatRequsts();
+    }
+
+    this.getUnreadMsgCount();
+
+
+
+
   }
 }

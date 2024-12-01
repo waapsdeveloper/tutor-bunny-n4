@@ -63,24 +63,23 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
 
       this.handleRefresh(data);
     })
-    this.events.subscribe(
-      'message-received-via-pusher',
-      this.updateChatsByMessageReceived.bind(this)
-    );
+    // this.events.subscribe(
+    //   'message-received-via-pusher',
+    //   this.updateChatsByMessageReceived.bind(this)
+    // );
   }
-  messageReceivedViaPusher() {
-    this.events.subscribe(
-      'message-received-via-pusher',
-      this.updateChatsByMessageReceived.bind(this)
-    );
-  }
+  // messageReceivedViaPusher() {
+  //   this.events.subscribe(
+  //     'message-received-via-pusher',
+  //     this.updateChatsByMessageReceived.bind(this)
+  //   );
+  // }
 
-  updateChatsByMessageReceived(data: any) {
-    this.chats.getchatList(this.search, 1)
-
-
-    this.events.publish('update-chat-lists', data)
-  }
+  // updateChatsByMessageReceived(data: any) {
+  //   console.log(data)
+  //   // this.chats.getchatList(this.search, 1)
+  //   // this.events.publish('update-chat-lists', data)
+  // }
 
   ngOnDestroy() {
     this.user = null;
@@ -99,41 +98,39 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   async ionViewWillEnter() {
-    this.chats.getUnreadMsgCount()
+    // this.chats.getUnreadMsgCount()
 
-    this.chats.getUnreadMsgCount()
+    // let previousUrl = this.nav.getPreviousUrl();
+    // const url = new URL(previousUrl, window.location.origin);
+    // const prevUrl = url.pathname.split('/')[1];
+    // console.log('Previous URL:', prevUrl);
 
-    let previousUrl = this.nav.getPreviousUrl();
-    const url = new URL(previousUrl, window.location.origin);
-    const prevUrl = url.pathname.split('/')[1];
-    console.log('Previous URL:', prevUrl);
+    // this.params = this.nav.getQueryParams();
+    // console.log(this.params);
+    // if (this.params.user) {
+    //   this.user = JSON.parse(this.params.user);
+    // }
+    // if (this.params.other_user_id) {
+    //   this.other_user_id = JSON.parse(this.params.other_user_id);
+    // }
+    // this.chat_room_id = this.params.chat_room_id;
+    // console.log(this.chat_room_id);
+    // if (this.chat_room_id) {
+    //   let item = {
+    //     chat_room_id: this.chat_room_id,
+    //     other_user_id: this.other_user_id,
+    //     user: this.user
+    //   }
+    //   let params = {
+    //     item: JSON.stringify(item)
+    //   }
 
-    this.params = this.nav.getQueryParams();
-    console.log(this.params);
-    if (this.params.user) {
-      this.user = JSON.parse(this.params.user);
-    }
-    if (this.params.other_user_id) {
-      this.other_user_id = JSON.parse(this.params.other_user_id);
-    }
-    this.chat_room_id = this.params.chat_room_id;
-    console.log(this.chat_room_id);
-    if (this.chat_room_id) {
-      let item = {
-        chat_room_id: this.chat_room_id,
-        other_user_id: this.other_user_id,
-        user: this.user
-      }
-      let params = {
-        item: JSON.stringify(item)
-      }
-
-      if(prevUrl != 'messages'){
-        let res = await this.nav.push('messages', params)
-      }
-      // this.initialize()
-    }
-    this.initialize()
+    //   if(prevUrl != 'messages'){
+    //     let res = await this.nav.push('messages', params)
+    //   }
+    //   // this.initialize()
+    // }
+    // this.initialize()
   }
 
 
