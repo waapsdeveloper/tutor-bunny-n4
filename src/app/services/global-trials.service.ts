@@ -123,6 +123,8 @@ export class GlobalTrialsService {
     } else {
       this.list = [trialObj, ...this.list];
     }
+    console.log(this.list, "bdfgdgfdgdfgdfgfdg");
+
     const indexp = this.pendingTrials.findIndex((x) => x.id == trialObj.id);
 
     if (indexp != -1) {
@@ -206,6 +208,8 @@ export class GlobalTrialsService {
       } else {
         this.list = [...this.list, ...result['data']];
       }
+    console.log(this.list, "bdfgdgfdgdfgdfgfdg");
+
 
       resolve(true);
     });

@@ -28,7 +28,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     return `url('${item.image}')`;
   }
 
-  async   addImageInArray(imageString) {
+  async addImageInArray(imageString) {
     const user = JSON.parse(localStorage.getItem('user'));
     const courseId = this.createCourseService.courseId;
 
@@ -58,6 +58,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       }
     }
   }
+
 
   async onFileSelected(event: any) {
     const files: File[] = Array.from(event.target.files);
@@ -130,13 +131,17 @@ export class CoursePhotossPage extends BasePage implements OnInit {
       return;
     }
 
+
+
+
     // Check if the photo being cleared is the feature image
     if (pht.feature) {
       // First, remove the image from the array
       if (pht.id) {
-        await this.network.deleteCourseImage(pht.id);
-        coursePhotos.splice(index, 1);
+        await this.network.deleteCourseImage(pht.id);        
       }
+
+      coursePhotos.splice(index, 1);
 
       // Check if there are still photos in the array
       if (coursePhotos.length > 0) {
@@ -161,9 +166,9 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     } else {
       // If the image being cleared is not the feature image, simply remove it
       if (pht.id) {
-        await this.network.deleteCourseImage(pht.id);
-        coursePhotos.splice(index, 1);
+        await this.network.deleteCourseImage(pht.id);        
       }
+      coursePhotos.splice(index, 1);
     }
   }
 

@@ -57,14 +57,14 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
     this.loadResolvers();
     this.user = this.dataR.user;
-    await this.iap.initializeUserTables(this.user);
+    this.iap.initializeUserTables(this.user);
 
     this.teacher.registerPusherEvent(this.user.id);
     this.chats.registerPusherEvent(this.user.id);
 
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
-    await this.notificationService.registerPusherEvent()
+    this.notificationService.registerPusherEvent()
 
 
      if(this.user.role_id == 3){

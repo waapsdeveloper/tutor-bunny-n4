@@ -7,7 +7,7 @@
       <div style="padding: 0 16px 0 0;" (click)="back()">
         <img src="../../assets/svg/white-back.svg" alt="">
       </div>
-      <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + users.image + ')'">
+      <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
       </div>
       <div class="header-oblique-double-675">
         <div class="header-line-678576" (click)="openEditProfile()" *ngIf="roleId == 3">
