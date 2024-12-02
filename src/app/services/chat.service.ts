@@ -90,7 +90,7 @@ export class ChatService {
     this.getchatList();
 
     this.events.publish('message-received-via-pusher', $event);
-    this.getUnreadMsgCount();
+    // this.getUnreadMsgCount();
   }
 
   reviewCoursebyChat(data) {

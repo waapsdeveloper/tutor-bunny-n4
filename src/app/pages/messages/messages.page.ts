@@ -116,7 +116,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         updated_at: new Date(),
         user_id: dm.user_id,
       };
-      let existingEntry = this.chats.days.find((entry) => entry.date === '');
+
+
+      let chats = this.chats;
+      let existingEntry = chats.days.length > 0 && chats.days[chats.days.length - 1].date === ''
+        ? chats.days[chats.days.length - 1]
+        : undefined;
 
       if (existingEntry) {
         existingEntry.messages.push(newMessage);
@@ -173,7 +178,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('clear-params-chat');
   }
 
-  openImage(image) {}
+  openImage(image) { }
 
   scrollToBottomOnInit() {
     setTimeout(() => {
