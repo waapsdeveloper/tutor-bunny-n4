@@ -17,6 +17,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   user;
   courseId;
   rating;
+  total_rating;
   status;
   review_course = {
     user_id: null,
@@ -58,6 +59,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
     this.displayName = this.utility.getAmericanName(this.item.user.name);
 
     this.rating = data.user.teacher.avg_rating;
+    this.total_rating = data.user.teacher.total_rating;
 
     if (data && data.trial) {
       this.blocked = data.trial.status;

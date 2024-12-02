@@ -22,13 +22,13 @@
     <div class="tecahers-box-icon-38531"></div>
   </div>
   <div class="tecahers-box-teches-box-38532" (click)="gototecher(item.email)">
-    <div class="tecahers-box-teaches-heading-38533">Teaches:</div>
+    <div class="tecahers-box-teaches-heading-38533" style="min-width: 70px;">Teaches:</div>
     <div class="tecahers-box-teaches-chips-38534">
       <div class="tecahers-box-chip-38535" *ngFor="let item of item.teacher.subjects">{{item.name}}</div>
     </div>
   </div>
   <div class="tecahers-box-speakes-box-38536" (click)="gototecher(item.email)">
-    <div class="tecahers-box-speakes-heading-38537">Speaks:</div>
+    <div class="tecahers-box-speakes-heading-38537" style="min-width: 70px;">Speaks:</div>
     <div class="tecahers-box-speakes-chips-38538">
       <div class="tecahers-box-chip-38539" *ngFor="let item of item.teacher.languages">{{item.name}}</div>
     </div>
