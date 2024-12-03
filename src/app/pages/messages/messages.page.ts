@@ -177,7 +177,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('clear-params-chat');
   }
 
-  openImage(image) {}
+  openImage(image) { }
 
   scrollToBottomOnInit() {
     setTimeout(() => {
