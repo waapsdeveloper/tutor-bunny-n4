@@ -84,9 +84,14 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.image = ch.user.image;
     this.loading = false;
 
-    setTimeout(() => {
+    setTimeout( async () => {
       this.myContent.scrollToBottom(100);
       console.log('scroll');
+
+
+      this.chats.unreadCount = (await this.chats.getUnreadMsgCount()) as number;
+      console.log(this.chats.unreadCount)
+
     }, 500);
   }
 
@@ -177,7 +182,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('clear-params-chat');
   }
 
-  openImage(image) {}
+  openImage(image) { }
 
   scrollToBottomOnInit() {
     setTimeout(() => {

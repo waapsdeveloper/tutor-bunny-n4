@@ -60,7 +60,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
       false
     );
     this.events.subscribe('update-chat-lists', (data) => {
-
       this.handleRefresh(data);
     })
     // this.events.subscribe(
@@ -168,13 +167,12 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   async gotoMessage(item) {
-
     this.initialize()
   }
 
   async showRequests() {
     let res = this.nav.push('chat-requests');
-    this.initialize()
+    // this.initialize()
   }
 
   async getRequstList() {

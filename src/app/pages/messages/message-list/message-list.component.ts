@@ -36,7 +36,6 @@ export class MessageListComponent extends BasePage implements OnInit {
 
   async initialize(value) {
 
-
     // this.chats.getUnreadMsgCount()
 
     this.slug = value.slug;
