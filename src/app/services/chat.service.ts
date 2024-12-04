@@ -46,9 +46,9 @@ export class ChatService {
       () => {
         this.user = null;
         this.role_id = null;
-        this.chats = null;
+        this.chats = [];
         this.count = 0;
-        this.requests = null;
+        this.requests = [];
         this.requestCount = 0;
         if (this.pusher) {
           this.pusher.unsubscribe('chats-channel');
