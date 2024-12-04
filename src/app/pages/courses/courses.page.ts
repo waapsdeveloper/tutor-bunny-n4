@@ -46,7 +46,8 @@ export class CoursesPage extends BasePage implements OnInit {
   }
 
   back(){
-    this.nav.pop('/tabs/teacher-dashboard')
+    //this.nav.pop('/tabs/teacher-dashboard')
+    this.nav.pop()
   }
 
   async getCourses(search = '', page = 1) {
