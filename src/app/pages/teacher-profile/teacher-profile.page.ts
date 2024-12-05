@@ -152,8 +152,8 @@ export class TeacherProfilePage
 
       this.subject = this.user.teacher.subjects;
       this.experince = this.user.teacher.started_teaching;
-      const user = this.users.getUser();
-      const data = (await this.network.getImage(user.id)) as any;
+      // const user = this.users.getUser();
+      const data = (await this.network.getImage(res.user.id)) as any;
       this.images = data.result;
       if (this.images.length != 0) {
         this.showGellary = true;

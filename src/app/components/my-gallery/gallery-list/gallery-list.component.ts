@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, Input } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -9,26 +9,39 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./gallery-list.component.scss'],
 })
 export class GalleryListComponent extends BasePage implements OnInit {
-  user;
+  _user;
   images = []
   list;
   params: any;
   userId;
-  constructor( injector:Injector) {
-    super(injector)
+
+  @Input()
+  public get user(){
+    return this._user;
+  }
+
+  public set user(value){
+    this._user = value;
     this.initialize();
   }
 
+
+  constructor( injector:Injector) {
+    super(injector)
+
+  }
+
   ngOnInit() {
-    this.params = this.nav.getQueryParams();
-    if (this.params.id) {
-      this.userId = this.params.id;
-    }
+    console.log("gallery-page initialized");
+    // this.params = this.nav.getQueryParams();
+    // if (this.params.id) {
+    //   this.userId = this.params.id;
+    // }
   }
 
   async initialize() {
-    const user = this.users.getUser();
-    const res = await this.network.getImage(user.id) as any;
+    // const user = this.users.getUser();
+    const res = await this.network.getImage(this.user.id) as any;
     this.images = res.result;
   }
 

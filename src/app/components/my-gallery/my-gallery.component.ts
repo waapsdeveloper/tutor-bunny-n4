@@ -8,9 +8,24 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class MyGalleryComponent extends BasePage implements OnInit {
 
-  @Input() user;
-
   user_Id;
+  _user;
+  @Input()
+  public get user(){
+    return this._user;
+  }
+
+  public set user(value){
+    this._user = value;
+    this.user_Id = value?.id;
+
+    console.log("gallery-user", this.user);
+    this.user_Id = this.user.id
+  }
+
+
+
+
 
   constructor(injector: Injector) {
 
@@ -18,8 +33,7 @@ export class MyGalleryComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.user_Id = this.user.id
-
+    console.log("gallery component initiated")
    }
 
   goToGallery() {
