@@ -78,14 +78,11 @@ export class StudentCourseDetailPage extends BasePage {
     }
     this.spinner = true;
 
-    this.callApi();
-
-    setTimeout(() => {
-      this.isTrailReq();
-    }, 200);
+    await this.callApi();
+    this.isTrailReq();
   }
 
-  async callApi() {
+  async callApi(): Promise<boolean> {
 
     let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
@@ -136,6 +133,8 @@ export class StudentCourseDetailPage extends BasePage {
       this.endDate = moment(endDate).format('DD-MMM-YYYY');
     }
     this.spinner = false;
+
+    return true;
   }
 
   async addToFav() {
@@ -275,8 +274,8 @@ export class StudentCourseDetailPage extends BasePage {
           user,
           data.data.message
         );
-        this.callApi();
-        this.events.publish('update-course-list');
+        await this.callApi();
+        // this.events.publish('update-course-list');
       }
     } else {
       let res = await this.modals.present(
@@ -302,11 +301,11 @@ export class StudentCourseDetailPage extends BasePage {
     this.btn_loading = true;
     let user = this.users.getUser();
     await this.globalCourses.cancelTrail(this.data, user);
-    this.callApi();
+    await this.callApi();
     this.btn_loading = false;
   }
 
-  async isTrailReq() {
+  async isTrailReq(): Promise<boolean> {
     this.loading = true;
 
     let user = this.users.getUser();
@@ -322,6 +321,8 @@ export class StudentCourseDetailPage extends BasePage {
     if (res && res.trial) {
       this.loading = false;
     }
+
+    return true;
   }
   goToTeacher() {
     const params = {
@@ -330,10 +331,9 @@ export class StudentCourseDetailPage extends BasePage {
     this.nav.push('/teacher-profile', params);
   }
 
-  getOtherCourse(event) {
+  async getOtherCourse(event) {
     this.course_Id = event.id;
-    this.callApi();
-
+    await this.callApi();
     this.content.scrollToTop(500); // 500ms animation duration
   }
 }

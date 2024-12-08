@@ -76,7 +76,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       return;
     }
     await this.chats.getChatMessages(roomId);
-
     this.chats.updateChatCount(roomId, 0);
 
     this.item = ch;
@@ -227,6 +226,27 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     console.log(res);
 
 
-    this.chats.getchatList()
+    // this.chats.getchatList()
+  }
+
+  loadingMore = false; // Control loading more messages
+
+  offset = 0; // Offset for fetching messages
+  limit = 20; // Number of messages per fetch
+
+  async onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+
+    if (scrollTop < 50 && !this.loadingMore) { // Trigger when near the top
+      this.loadingMore = true;
+
+      console.log("ER")
+
+      // const newMessages = await this.chatService.getMessages(this.offset, this.limit);
+      // this.chats.days = this.groupMessagesByDate([...newMessages, ...this.chats.days]);
+
+      this.offset += this.limit; // Update offset
+      this.loadingMore = false;
+    }
   }
 }

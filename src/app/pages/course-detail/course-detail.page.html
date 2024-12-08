@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="line"></div>
+    <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
     <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
       [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"
       (onChange)="getOtherCourse($event)"></app-other-courses>

@@ -145,8 +145,10 @@ export class NetworkService {
     return this.httpPostResponse('get-unread-chats/count', data, false, false);
   }
 
-  getChatRoomById(id: any) {
-    return this.httpGetResponse('chat-rooms-single/' + id, null, false, false);
+  getChatRoomById(id: any, params: any) {
+
+    const str = this.serialize(params);
+    return this.httpGetResponse('chat-rooms-single/' + id + '?' + str, null, false, false);
   }
 
   getAllCourses(data: any) {

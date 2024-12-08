@@ -271,7 +271,12 @@ export class ChatService {
 
     const findObj = this.chats.find((x) => x.chat_room_id == roomId);
     if (!findObj) {
-      const res = await this.network.getChatRoomById(roomId);
+
+      let obj = {
+        limit: 20,
+        offset: this.chats.length
+      }
+      const res = await this.network.getChatRoomById(roomId,obj);
       // console.log(res);
 
       if (res.length > 0) {
@@ -312,7 +317,11 @@ export class ChatService {
   async setChatRoomListItemInfo(roomId): Promise<any> {
     // console.log(this.chats, roomId);
 
-    const res = await this.network.getChatRoomById(roomId);
+    let obj = {
+      limit: 10,
+      offset: 0
+    }
+    const res = await this.network.getChatRoomById(roomId, obj);
     // console.log(res);
 
     const findIndex = this.chats.findIndex((x) => x.chat_room_id == roomId);
@@ -322,7 +331,7 @@ export class ChatService {
       await this.getChatRequsts();
     }
 
-    this.getUnreadMsgCount();
+    // this.getUnreadMsgCount();
 
 
 

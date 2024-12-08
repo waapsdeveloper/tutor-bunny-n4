@@ -40,7 +40,6 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
 
       } else {
         this.list = [this.newTrial, ...this.trial];
-
       }
     }
   }
