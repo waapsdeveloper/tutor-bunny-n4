@@ -266,4 +266,7 @@
     font-weight: 400;
     font-size: 16px;
   }
-  
+  .input-box-lines .sd-textarea-about {
+    height: 40px; /* Adjust the height as needed */
+    overflow-y: scroll;
+  }

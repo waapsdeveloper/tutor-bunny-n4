@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { CreateMaterialService } from 'src/app/services/create-material.service';
-
+import { MaterialPhotoComponent } from 'src/app/components/material-photo/material-photo.component';
 @Component({
   selector: 'app-create-material',
   templateUrl: './create-material.page.html',
@@ -27,6 +27,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   currency;
   sameMaterialEdit=false;
   loading = false;
+  
 
   constructor(
     injector: Injector,

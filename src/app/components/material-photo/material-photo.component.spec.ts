@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MaterialCoursePhotoComponent } from './material-course-photo.component';
+import { MaterialPhotoComponent } from './material-photo.component';
 
-describe('MaterialCoursePhotoComponent', () => {
-  let component: MaterialCoursePhotoComponent;
-  let fixture: ComponentFixture<MaterialCoursePhotoComponent>;
+describe('MaterialPhotoComponent', () => {
+  let component: MaterialPhotoComponent;
+  let fixture: ComponentFixture<MaterialPhotoComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MaterialCoursePhotoComponent ],
+      declarations: [ MaterialPhotoComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MaterialCoursePhotoComponent);
+    fixture = TestBed.createComponent(MaterialPhotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

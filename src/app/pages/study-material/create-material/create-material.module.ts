@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SdErrorInputInfoModule } from 'src/app/components/sd-error-input-info/sd-error-input-info.module';
 import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-textarea-about.module';
 import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-textarea-box.module';
 import { IonicModule } from '@ionic/angular';
@@ -10,7 +11,7 @@ import { ModeOfTeachingModule } from 'src/app/components/mode-of-teaching/mode-o
 import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profile/accept-terms-profile.module';
 import { CourseCategoryModule } from 'src/app/components/course-category/course-category.module';
 import { CourseDatesModule } from 'src/app/components/course-dates/course-dates.module';
-import { CoursePhotoModule } from 'src/app/components/course-photo/course-photo.module';
+import { MaterialPhotoModule } from 'src/app/components/material-photo/material-photo.module';
 import { CreateMaterialPage } from './create-material.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
@@ -32,12 +33,13 @@ import { SearchKeywordModule } from 'src/app/components/search-keyword/search-ke
     SdTextareaAboutModule,
     MaterialLanguageModule,
     ModeOfTeachingModule,
-    CoursePhotoModule,
+    MaterialPhotoModule,
     AcceptTermsProfileModule,
     CourseCategoryModule,
     CourseDatesModule,
     SdAgeBooxModule,
-    SearchKeywordModule    
+    SearchKeywordModule,
+    SdErrorInputInfoModule    
 
 
   ],

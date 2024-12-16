@@ -21,9 +21,9 @@
             </div>
           </ng-template>
         </ion-popover>
-        <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
+        <app-sd-input-box placeholder="Material title (Maximum 50 characters)" (onChange)="result($event, 'title')"
           [inputText]="createMaterialService.formData.title" [key]="'title'" [errorText]="'title is required'"
-          [maxlength]="50"></app-sd-input-box>
+          [maxlength]="40"></app-sd-input-box>
       </div>
       <div class="input-box-lines d-flex flex-column gap-8">
         <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -55,11 +55,12 @@
         </ion-popover>
         <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
           (onChange)="result($event, 'description')" [inputText]="createMaterialService.formData.description"
-          [key]="'description'" [errorText]="'Detail is required'" [minlength]="300"></app-sd-textarea-about>
+          [key]="'description'" [errorText]="'Detail is required'" [minlength]="300"
+          maxlength="500"></app-sd-textarea-about>
       </div>
       <div class="subject-sec d-flex flex-column gap-8">
         <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""
-            id="click-keyword "></div>
+            id="click-keyword "><i class="ti ti-help-hexagon"></i></div>
         <ion-popover trigger="click-keyword " triggerAction="click">
           <ng-template>
             <div class="ion-padding popover-title">Add multiple search keywords so that the course will come up in
@@ -73,10 +74,11 @@
         </div>
       </div>
       <div class="input-box-lines d-flex flex-column gap-8">
-        <div class="input-title fs-14 roboto-medium">Price / Lesson ({{currency}})</div>
+        <div class="input-title fs-14 roboto-medium">Price {{currency}}<img src="../../assets/svg/question.svg" alt=""
+            id="click-keyword "></div>
 
         <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="createMaterialService.formData.price"
-          [key]="'price'" [errorText]="'price is required'" [type]="'number'"></app-sd-input-box>
+          [key]="'price'" [errorText]="'price is required'" aria-placeholder="$" [type]="'number'"></app-sd-input-box>
       </div>
 
       <div class="input-box-lines d-flex flex-column gap-8">
@@ -87,12 +89,16 @@
       </div>
 
       <div class="input-box-lines d-flex flex-column gap-8">
-        <app-course-photo [coursePhoto]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
-          [key]="'image'" [errorText]="'Course photo is required'" (click)="openMaterialPhotos()"></app-course-photo>
+        <app-material-photo [materialPhoto]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
+          [key]="'image'" [errorText]="'Material photo is required'"
+          (click)="openMaterialPhotos()"></app-material-photo>
       </div>
+      <div class="input-title fs-14 roboto-medium">Upload Study Material/Notes/lecture<img
+          src="../../assets/svg/question.svg" alt="" id="click-keyword "></div>
       <div class="input-box-lines d-flex flex-column gap-8">
-        <app-course-photo [coursePhoto]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
-          [key]="'image'" [errorText]="'Course photo is required'" (click)="openMaterialPhotos()"></app-course-photo>
+        <app-material-photo [materialPhoto]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
+          [key]="'image'" [errorText]="'Material photo is required'"
+          (click)="openMaterialPhotos()"></app-material-photo>
       </div>
 
     </div>
