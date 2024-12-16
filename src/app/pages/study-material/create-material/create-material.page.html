@@ -96,9 +96,9 @@
       <div class="input-title fs-14 roboto-medium">Upload Study Material/Notes/lecture<img
           src="../../assets/svg/question.svg" alt="" id="click-keyword "></div>
       <div class="input-box-lines d-flex flex-column gap-8">
-        <app-material-photo [materialPhoto]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
-          [key]="'image'" [errorText]="'Material photo is required'"
-          (click)="openMaterialPhotos()"></app-material-photo>
+        <app-material-upload [materialDoc]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
+          [key]="'image'" [errorText]="'Material Document  is required'"
+          (click)="openMaterialPhotos()"></app-material-upload>
       </div>
 
     </div>

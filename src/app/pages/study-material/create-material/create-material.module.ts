@@ -19,9 +19,12 @@ import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-
 import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.module';
 import { SdAgeBooxModule } from 'src/app/components/sd-age-boox/sd-age-boox.module';
 import { SearchKeywordModule } from 'src/app/components/search-keyword/search-keyword.module';
+import { MaterialUploadModule } from 'src/app/components/material-upload/material-upload.module';
 @NgModule({
+
   imports: [
     CommonModule,
+    MaterialUploadModule,
     FormsModule,
     IonicModule,
     CreateMaterialPageRoutingModule,
