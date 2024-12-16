@@ -63,35 +63,35 @@ export class CreateMaterialService {
       };
 
       const res = (await this.network.getCourseImages(obj)) as any;
-      this.coursePhotos = res.result;
-      console.log(this.coursePhotos);
+      this.materialPhotos = res.result;
+      console.log(this.materialPhotos);
 
-      this.formData.image = this.coursePhotos[0].image
+      this.formData.image = this.materialPhotos[0].image
 
     }
   }
 
   async sendPendingImages(materialId) {
-    for (var i = 0; i < this.coursePhotos.length; i++) {
-      const item = Object.assign({}, this.coursePhotos[i]);
+    for (var i = 0; i < this.materialPhotos.length; i++) {
+      const item = Object.assign({}, this.materialPhotos[i]);
       const user = JSON.parse(localStorage.getItem('user'));
 
-      if (!item.course_id && courseId) {
+      if (!item.course_id && materialId) {
         if (!item.image.includes('https')) {
           let obj = {
             user_id: user.id,
-            course_id: courseId,
+            course_id: materialId,
             image: item['image'],
           };
 
-          if (courseId) {
-            obj.course_id = courseId;
+          if (materialId) {
+            obj.course_id = materialId;
             await this.network.postCourseImage(obj);
           }
         }
       }
     }
 
-    this.getCourseImages();
+    this.getMaterialImages();
   }
 }

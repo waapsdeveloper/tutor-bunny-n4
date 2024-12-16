@@ -42,7 +42,6 @@ export class CourseFormPage
 
   constructor(
     injector: Injector,
-    private el: ElementRef,
     public createCourseService: CreateCourseService
   ) {
     super(injector);

@@ -9,7 +9,7 @@
           <div class="label-with-word-count-left">
             <span>Title</span> <img src="../../assets/svg/question.svg" alt="" id="click-trigger">
           </div>
-          <div class="label-with-word-count-right roboto-light"> {{ createCourseService.formData?.title?.length || 0 }} / 50 </div>
+          <div class="label-with-word-count-right roboto-light"> {{ createMaterialService.formData?.title?.length || 0 }} / 50 </div>
         </div>
         <ion-popover trigger="click-trigger" triggerAction="click">
           <ng-template style="width: 100%;">
@@ -20,7 +20,7 @@
           </ng-template>
         </ion-popover>
         <app-sd-input-box placeholder="Course title (Maximum 50 characters)" (onChange)="result($event, 'title')"
-          [inputText]="createCourseService.formData.title" [key]="'title'" [errorText]="'title is required'"
+          [inputText]="createMaterialService.formData.title" [key]="'title'" [errorText]="'title is required'"
           [maxlength]="50"></app-sd-input-box>
       </div>
     </div>

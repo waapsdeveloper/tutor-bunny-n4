@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { CreateMaterialService } from 'src/app/services/create-material.service';
 @Component({
   selector: 'app-create-material',
   templateUrl: './create-material.page.html',
@@ -23,11 +24,16 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   currency;
   loading = false;
 
-  constructor(injector: Injector,) {
+  constructor(
+    injector: Injector,
+    public createMaterialService: CreateMaterialService
+  ) {
     super(injector);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log("material init")
+  }
 
   async initialize() { }
 
@@ -57,6 +63,18 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       // // course images patch
       // this.createCourseService.courseId = this.courseId;
       // this.createCourseService.getCourseImages();
+    }
+  }
+
+  result(value, key) {
+    this.createMaterialService.formData[key] = value;
+    if (key == 'image') {
+      this.createMaterialService.formData['image'] = value.image;
+    } else if (key == 'language') {
+      this.lang = value;
+
+      this.createMaterialService.formData['language'] = value;
+      this.createMaterialService.formData['language_id'] = this.lang.id;
     }
   }
 
