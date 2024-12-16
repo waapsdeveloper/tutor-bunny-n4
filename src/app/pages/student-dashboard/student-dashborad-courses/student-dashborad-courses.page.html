@@ -7,7 +7,8 @@
     <div class="sb-content-7895">
       <div *ngFor="let item of globalCourses.courses">
         <!-- (onChange)="reloadList()" -->
-        <app-generic-course-card [item]="item"></app-generic-course-card>
+        <!-- <app-generic-course-card [item]="item"></app-generic-course-card> -->
+         <app-course-teacher-study-card></app-course-teacher-study-card>
       </div>
       <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
