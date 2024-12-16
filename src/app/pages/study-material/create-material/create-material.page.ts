@@ -21,6 +21,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   edit = false;
   step = 1;
   currency;
+  loading = false;
 
   constructor(injector: Injector,) {
     super(injector);
