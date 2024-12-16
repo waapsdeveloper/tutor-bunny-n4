@@ -59,7 +59,7 @@ export class LanguageListComponent extends BasePage {
   async selectedLanguage() {
     console.log(this.selection)
 
-    this.modals.dismiss({'selection': this.selection});
+    this.modals.dismiss({ 'selection': this.selection });
   }
 
 
@@ -75,7 +75,7 @@ export class LanguageListComponent extends BasePage {
     const res = await this.languagesSqService.list(this.search, this.offset, this.limit)
     console.log(res);
 
-    if(this.offset == 0){
+    if (this.offset == 0) {
       this.list = res;
     } else {
       this.list = [...this.list, ...res];
@@ -142,19 +142,19 @@ export class LanguageListComponent extends BasePage {
     // })
   }
 
-  addtoselection(item){
+  addtoselection(item) {
     console.log(item);
 
-    if(item.checked == true){
+    if (item.checked == true) {
       const fi = this.selection.findIndex(x => x.id == item.id)
-      if(fi == -1){
+      if (fi == -1) {
         this.selection.push(item)
       }
     }
 
-    if(item.checked == false){
+    if (item.checked == false) {
       const fi = this.selection.findIndex(x => x.id == item.id)
-      if(fi > -1){
+      if (fi > -1) {
         this.selection.splice(fi, 1)
       }
     }
@@ -178,7 +178,7 @@ export class LanguageListComponent extends BasePage {
   }
 
   back() {
-    this.modals.dismiss({'selection': this.preSelectedLanguages});
+    this.modals.dismiss({ 'selection': this.preSelectedLanguages });
   }
 
 

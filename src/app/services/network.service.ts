@@ -444,8 +444,6 @@ export class NetworkService {
     return this.httpPostResponse('courses/list/is-fav', data, null, false, false);
   }
 
-
-
   updateStudentProfile(data, id) {
     return this.httpPostResponse('students/update-info/' + id, data);
   }

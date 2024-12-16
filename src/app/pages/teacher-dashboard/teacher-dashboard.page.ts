@@ -129,6 +129,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     let res = await this.modals.present(CreateCoursePage, {}, '', 0.7);
 
     if (res.data.title) {
+
       const params = {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,

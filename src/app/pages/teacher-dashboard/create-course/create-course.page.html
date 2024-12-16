@@ -43,8 +43,8 @@
         </div>
         <div class="create-course-button">
           <div style="width: 80%;">
-            <app-sd-button-clear [image]="'assets/svg/notes.svg'"
-              [text]="'Sell Study Materials/Notes'"></app-sd-button-clear>
+            <app-sd-button-clear [image]="'assets/svg/notes.svg'" [text]="'Sell Study Materials/Notes'"
+              (click)="setcourseType('2', 'Create Study Material ')"></app-sd-button-clear>
           </div>
           <img src="../../assets/svg/question.svg" alt="" id="click-event">
           <ion-popover [dismissOnSelect]="true" id="top-center" trigger="click-event" triggerAction="click">

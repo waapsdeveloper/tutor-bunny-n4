@@ -115,20 +115,33 @@ export class TabsPage extends BasePage implements OnInit {
 
   async createCourse() {
     let res = await this.modals.present(CreateCoursePage, {},
-      'auto-height-modal',
-      1,
-      [0, 1],
+      'auto-height-modal', 1, [0, 1],
       true);
 
     if (res.data.title) {
-      this.createCourseService.resetFormData();
-      const params = {
-        backUrl: '/tabs/teacher-dashboard',
-        title: 'Create',
-        type: res.data.type,
-      };
 
-      this.nav.push('/course-form', params);
+      console.log(res)
+
+      if(res.data.type == '2'){
+        const params = {
+          backUrl: '/tabs/teacher-dashboard',
+          title: 'Create',
+          type: res.data.type,
+        };
+
+        this.nav.push('/study-form', params);
+      } else {
+        this.createCourseService.resetFormData();
+        const params = {
+          backUrl: '/tabs/teacher-dashboard',
+          title: 'Create',
+          type: res.data.type,
+        };
+
+        this.nav.push('/course-form', params);
+      }
+
+
     }
   }
 

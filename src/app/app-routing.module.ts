@@ -79,6 +79,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/course-form/course-form.module').then( m => m.CourseFormPageModule),
   },
   {
+    path: 'study-form',
+    loadChildren: () => import('./pages/study-material/create-material/create-material.module').then( m => m.CreateMaterialPageModule),
+  },
+  {
     path: 'add-dates',
     loadChildren: () => import('./pages/add-dates/add-dates.module').then( m => m.AddDatesPageModule)
   },
@@ -182,6 +186,19 @@ const routes: Routes = [
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
+  {
+    path: 'create-material',
+    loadChildren: () => import('./pages/study-material/create-material/create-material.module').then( m => m.CreateMaterialPageModule)
+  },
+  {
+    path: 'list-material',
+    loadChildren: () => import('./pages/study-material/list-material/list-material.module').then( m => m.ListMaterialPageModule)
+  },
+  {
+    path: 'detail-material',
+    loadChildren: () => import('./pages/study-material/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
+  },
+
 
 
 
