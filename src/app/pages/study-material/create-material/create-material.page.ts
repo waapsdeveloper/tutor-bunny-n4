@@ -1,7 +1,9 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { CreateMaterialService } from 'src/app/services/create-material.service';
+
 @Component({
   selector: 'app-create-material',
   templateUrl: './create-material.page.html',
@@ -20,8 +22,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   params;
   studyMaterialId;
   edit = false;
+  languageId
   step = 1;
   currency;
+  sameMaterialEdit=false;
   loading = false;
 
   constructor(
@@ -61,8 +65,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       // this.setFormDta(res.course);
 
       // // course images patch
-      // this.createCourseService.courseId = this.courseId;
-      // this.createCourseService.getCourseImages();
+      // this.createMaterialService.courseId = this.courseId;
+      // this.createMaterialService.getCourseImages();
     }
   }
 
@@ -79,7 +83,82 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   }
 
   async submit() {
+    this.events.publish(
+      'teacher-course-second-screen-submit-call',
+      this.createMaterialService.formData
+    );
+    let f = this.createMaterialService.formData;
+    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
+      return;
+    }
+    if (f.keyword.length == 0) {
+      return;
+    }
+    const course_id = this.createMaterialService.materialId;
+    if (f.category && f.category.id) {
+      f.category_id = f.category.id;
+    }
+    this.loading = true;
+
+    const res = await this.network.SubmitSecondCourse(f, course_id);
+    if (res && res.message) {
+      if (this.edit && this.sameMaterialEdit) {
+        this.utility.presentSuccessToast("Course Saved Successfully ");
+      } else {
+        this.utility.presentSuccessToast("Course Saved Successfully");
+      }
+    }
+
+    // if (res && res.message) {
+    //   this.loading = false;
+
+    //   const message = !this.edit
+    //     ? 'Course created successfully'
+    //     : 'Course Updated Successfully';
+    //   this.utility.presentSuccessToast(message);
+    // }
+    this.createMaterialService.resetFormData()
+    this.nav.pop('/tabs/courses');
+    this.events.publish('initilize-the-list', res);
+  }
+
+
+  shouldHandleBackToPrevScreen(event) {
+    console.log(event);
+    this.sameMaterialEdit = event;
+    if (this.step == 2) {
+      this.step = 1;
+      this.edit = true;
+      this.studyMaterialId = this.createMaterialService.materialId;
+      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+    }
 
   }
+  async onSlideChange() {
+    this.events.publish(
+      'teacher-course-first-screen-submit-call',
+      this.createMaterialService.formData
+    );
+
+
+  }
+  setFormDta(data) {
+    this.createMaterialService.setFormData(data);
+    const lang = data['language'];
+    if (lang) {
+      this.languageId = lang.id;
+    }
+    this.events.publish('set-mode-and-capacity', data);
+    this.events.publish('set-from-and-to-age', data);
+    this.events.publish('set-form-course-image', data);
+  }
+  openMaterialPhotos(){
+    this.nav.push('/material-photoss', {
+      backUrl: '/material-form',
+      gallary: 'true',
+      title: 'Upload material photos',
+    });
+  }
+
 
 }
