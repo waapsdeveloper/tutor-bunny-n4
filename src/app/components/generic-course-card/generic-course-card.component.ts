@@ -113,7 +113,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     }
   }
 
-  async goToDeatil(item) {
+  async goToDetail(item) {
     const params = {
       id: item.id,
       backUrl: '/tabs/student-dashboard',
