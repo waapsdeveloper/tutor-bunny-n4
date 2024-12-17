@@ -18,7 +18,7 @@
   <ion-list>
     <ion-item *ngFor="let item of list" >
       <div class="fs-16 outfit">{{ item.name}}</div>
-      <ion-checkbox slot="start" [(ngModel)]="item.checked" (ngModelChange)="addtoselection(item)"></ion-checkbox>
+      <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
