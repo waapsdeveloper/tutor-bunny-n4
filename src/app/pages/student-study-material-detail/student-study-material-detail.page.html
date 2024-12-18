@@ -3,7 +3,7 @@
 </div>
 
 <ion-header [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
+  <app-sd-header-top [showBack]="true" [title]="'Study Material Details'" [showShare]="true" [showFav]="true"
     [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
 </ion-header>
 
@@ -25,39 +25,7 @@
       </div>
     </div>
     <div class="line"></div>
-    <div class="cource-details-box-78561">
-      <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
-          hour each lesson</div>
-        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total
-          {{lessons}} lessons
-        </div>
-      </div>
-      <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/online.svg" />{{mode_type}}
-        </div>
-        <div class="cource-lesson-box-78564"> <img class="i-7685" src="assets/icon/smgroup-icon.svg" />{{capacity}}
-        </div>
-      </div>
-      <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"> <img class="img1-789575" src="../../../assets/svg/cake.svg" />Student age
-          {{from_age}}-{{to_age}}</div>
-        <div class="cource-lesson-box-78564"> <img src="../../assets/svg/speaks.svg" alt=""
-            style="height: 16px;">{{language}}</div>
-      </div>
-      <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
-          <div style="width: 136px; text-wrap: wrap;">
-            {{state}},
-            {{country}}
-          </div>
-        </div>
-        <div class="cource-lesson-box-78564"> <img class="i-7685"
-            src="../../../assets/svg/course-type.svg" />Workshop/Event
-        </div>
-      </div>
-    </div>
-    <div class="line"></div>
+
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
@@ -78,42 +46,52 @@
       </div>
     </div>
     <div class="line"></div>
+    <!-- Attachments Section -->
+    <div class="attachments-section">
+      <div class="attachment-header">
+        <div class="attachment-title">Attachments (5)</div>
+        <div class="download-link">
+          <img src="../../assets/svg/download.svg" alt="download" class="download-icon" />
+          <span>Download</span>
+        </div>
+      </div>
+      <div class="attachment-files">
+        <div class="doc"><img src="../../assets/svg/doc.svg" alt="doc"></div>
+        <div class="doc"><img src="../../assets/svg/doc.svg" alt="doc"></div>
+        <div class="doc"><img src="../../assets/svg/doc.svg" alt="doc"></div>
+        <div class="doc"><img src="../../assets/svg/doc.svg" alt="doc"></div>
+      </div>
+    </div>
+    <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-785234">
-        <div class="detail-heading-78524 outfit-medium">Instructor</div>
+        <div class="detail-heading-78524 outfit-medium">Created By</div>
         <div class="instructor-box-content-78561">
           <div class="instructor-head-78562">
             <div class="instructor-image-78563" (click)="goToTeacher()"
               [style.background-image]="techerImg ? 'url(' + techerImg + ')' : 'assets/learn-piano.jpeg'"></div>
             <div class="instructor-info-78564" (click)="goToTeacher()">
-              <div class="instructor-name-78565"> {{displayName}}
-              </div>
+              <div class="instructor-name-78565">{{displayName}}</div>
               <div class="instructor-country-78567">
                 <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span> {{country}}
               </div>
             </div>
-            <img (click)="goToTeacher()" src="../../assets/svg/arrow-right.svg"
-              style="position: absolute; right: 0; top: 9px;" alt="">
+            <img (click)="goToTeacher()" src="../../assets/svg/arrow-right.svg" class="arrow-icon" alt="">
           </div>
           <div class="instructor-title-78568">{{techerTitle}}</div>
         </div>
       </div>
     </div>
-    <div class="line" *ngIf="schedules.length !== 0"></div>
-    <div class="detail-box-outer-78522" *ngIf="schedules.length !== 0">
-      <div class="detail-head-785234">
-        <div class="detail-heading-78524 outfit-medium">
-          Weekly Schedule
-        </div>
-        <div class="days-box">
-          <app-course-schedules *ngFor="let item of schedules; let i = index" [item]="item"
-            [last]="i === (schedules.length - 1)"></app-course-schedules>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="line" *ngIf="schedules.length !== 0"></div> -->
-    <app-student-other-study-material (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-study-material>
+
+
+
+
   </div>
+  <div class="line" *ngIf="schedules.length !== 0"></div>
+  <!-- <div class="line" *ngIf="schedules.length !== 0"></div> -->
+  <app-student-other-study-material (onChange)="getOtherCourse($event)"
+    [teacher]="teacher"></app-student-other-study-material>
+
 </ion-content>
 <ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
@@ -142,7 +120,7 @@
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-regular fs-16 " > Request Free Trial </span>
+        <span class="roboto-regular fs-16 "> Request Free Trial </span>
       </div>
       <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
     </div>
@@ -150,7 +128,7 @@
       <div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" (click)="requestTrail()">
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
-        <span class="roboto-regular fs-16 " >Join </span>
+        <span class="roboto-regular fs-16 ">Join </span>
       </div>
       <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> -->
     </div>

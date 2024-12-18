@@ -8,7 +8,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-other-study-material.component.scss'],
 })
 export class StudentOtherStudyMaterialComponent extends BasePage   {
-
+  
   private _teacher;
 
 
@@ -23,9 +23,12 @@ export class StudentOtherStudyMaterialComponent extends BasePage   {
 
   }
 
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  onChange = new EventEmitter<any>();
+//  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-
+  selectCourse(course: any) {
+    this.onChange.emit(course);
+  }
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)
   }

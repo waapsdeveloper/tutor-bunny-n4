@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
+import { Component, Input, Output, EventEmitter,Injector ,OnInit} from '@angular/core';import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
@@ -8,10 +7,15 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./study-material-list.component.scss'],
 })
 export class StudyMaterialListComponent extends BasePage implements OnInit {
+  @Input() courses: any[] = []; // Input property for courses
+  @Output() onChange = new EventEmitter<any>();
 
-
+  selectCourse(course: any) {
+    this.onChange.emit(course);
+  }
+  
   user;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+//  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector)

@@ -11,7 +11,7 @@ import { StudyMaterialListComponent } from './study-material-list.component';
     FormsModule,
   ],
   exports:[StudyMaterialListComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   
 })
 export class StudyMaterialListModule { }
