@@ -103,6 +103,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
   {
+    path: 'student-study-material-detail',
+    loadChildren: () => import('./pages/student-study-material-detail/student-study-material-detail.module').then( m => m.StudentStudyMaterialDetailPageModule)
+  },
+  
+  {
     path: 'my-teachers',
     loadChildren: () => import('./pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
   },
@@ -198,6 +203,11 @@ const routes: Routes = [
     path: 'detail-material',
     loadChildren: () => import('./pages/study-material/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
   },
+  // {
+  //   path: 'student-study-material-detail',
+  //   loadChildren: () => import('./components/student-study-material-detail/student-study-material-detail.module').then( m => m.StudentStudyMaterialDetailPageModule)
+  // },
+
 
 
 

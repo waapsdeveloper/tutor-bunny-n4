@@ -118,7 +118,7 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
       id: item.id,
       backUrl: '/tabs/student-dashboard',
     };
-    this.nav.push('student-course-detail', params);
+    this.nav.push('student-study-material-detail', params);
   }
 
   async requestTrail(id) {
