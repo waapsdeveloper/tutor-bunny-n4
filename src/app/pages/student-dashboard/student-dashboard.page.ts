@@ -156,6 +156,9 @@ export class StudentDashboardPage
     if (view == 'teacher') {
       this.nav.push('/tabs/student-dashboard/student-dashborad-teachers');
     }
+    if (view == 'notes'){
+      this.nav.push('/tabs/student-dashboard/student-dashboard-study-material');
+    }
   }
 
   setupEvents() {

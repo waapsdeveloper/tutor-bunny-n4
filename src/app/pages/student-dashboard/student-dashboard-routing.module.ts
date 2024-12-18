@@ -21,6 +21,11 @@ const routes: Routes = [
         path: 'student-dashborad-teachers',
         loadChildren: () => import('./student-dashborad-teachers/student-dashborad-teachers.module').then(m => m.StudentDashboradTeachersPageModule)
       },
+      
+      {
+        path: 'student-dashboard-study-material',
+        loadChildren: () => import('./student-dashboard-study-material/student-dashboard-study-material.module').then( m => m.StudentDashboardStudyMaterialPageModule)
+      },
     ]
   },
   {
@@ -31,6 +36,8 @@ const routes: Routes = [
     path: 'student-profile-edit',
     loadChildren: () => import('./student-profile-edit/student-profile-edit.module').then(m => m.StudentProfileEditPageModule)
   },
+  
+
 
 
 
