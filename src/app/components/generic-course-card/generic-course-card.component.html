@@ -1,5 +1,5 @@
 <div class="g1" *ngIf="blocked != 'Blocked'">
-  <div class="image">
+  <div class="image" (click)="goToDetail(item)">
     <img [src]="item.image ? item.image : 'assets/learn-piano.jpeg'" alt="Course Image" />
     <div class="price-tag">{{ item.auth_user_currency_symbol }}{{ item.updated_price }}/lesson</div>
   </div>
