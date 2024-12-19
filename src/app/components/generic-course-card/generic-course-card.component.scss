@@ -2,8 +2,10 @@
   display: flex;
   justify-content: center;
   width: 95%;
-  gap: 16px;
-  align-items: center;
+  gap: 12px;
+  height: 10em;
+  // align-items: center;
+  overflow: hidden;
 
 }
 .mid{
@@ -11,7 +13,7 @@
   // font-size: 16px;
   // justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 3%;
 }
 .mid .tutor_img{
   border: 1px black solid;
@@ -37,11 +39,11 @@
 }
 .profile-item-image-block {
   width: 40%;
-  height: 150px;
+  height: 100%;
   background-size: cover;
   border-radius: 10px;
   position: relative; 
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 /* Lesson Price Block */
@@ -58,6 +60,7 @@
   border-radius: 8px;
   font-size: 12px;
   white-space: nowrap;
+  
 
 }
 .endbutton{
@@ -69,15 +72,21 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1; }
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  }
+
 .content_footer{
   display:flex;
   width: 100%;
+  height: 100%;
   justify-content: space-between;
-  align-items: center;
+  // align-items: end;
+  margin-top: auto;
   // position: absolute;
 
-  top: 115px;
+  // top: 50%;
 }
 .free-trial-btn-89675{
   display: flex;
@@ -85,7 +94,7 @@
 }
 .free-trial-btn-89675 img{
   width: 14px;
-  height: 14px;
+  height: 100%;
   margin-right: 5px;
 }
 
@@ -113,7 +122,8 @@
   height: 2px;
   background-color: #232222 ;
   width: 100%; 
-  margin: 16px 0;
+  margin-top: 10px;
+  
 }
 
 // .block-item-header-title{

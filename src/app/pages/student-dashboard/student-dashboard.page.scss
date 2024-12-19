@@ -76,7 +76,9 @@
   padding: 10px 24px;
   overflow-x: scroll;
   margin-top: 16px;
-  background-color: #e4e3e380;
+  // background-color: #e4e3e380;
+  // background-color: rgba(228,225,225,1);
+  // background: transparent;
 
   .header-chip {
     display: flex;
@@ -84,7 +86,10 @@
     justify-content: space-between;
     width: 100%;
     border-bottom: 0.1px solid gray;
-
+    // background: transparent;
+    
+    // background-color: rgba(228,225,225,1);
+    
     .ion-chip {
       display: flex;
       align-items: center;
@@ -179,7 +184,9 @@
 
 .dashboard-top-fixed-98563 {
   // position: fixed;
-  background-color: #e4e3e380;
+  // background-color: #e4e3e380;
+  // background-color: rgba(228, 225, 225, 1);
+  background: transparent;
 }
 
 .country-box {
