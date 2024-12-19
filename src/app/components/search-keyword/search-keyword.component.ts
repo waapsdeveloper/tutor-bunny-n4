@@ -9,6 +9,7 @@ import {
 import { BasePage } from 'src/app/base-page/base-page';
 import { SubjectListComponent } from '../sd-subject-box/subject-list/subject-list.component';
 import { KeywordListComponent } from './keyword-list/keyword-list.component';
+import { log } from 'console';
 
 @Component({
   selector: 'app-search-keyword',
@@ -36,6 +37,22 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     this.events.subscribe(
       'teacher-course-second-screen-submit-call',
       async (formData: any) => {
+        
+        let v = formData[this.key];
+        
+        if (this.subs && this.subs.length == 0) {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+    this.events.subscribe(
+      'teacher-study-material-first-screen-submit-call',
+      async (formData: any) => {
+        console.log(formData)
         let v = formData[this.key];
 
         if (this.subs && this.subs.length == 0) {

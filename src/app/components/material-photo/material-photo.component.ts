@@ -8,7 +8,7 @@ import { CreateMaterialService } from 'src/app/services/create-material.service'
   templateUrl: './material-photo.component.html',
   styleUrls: ['./material-photo.component.scss'],
 })
-export class MaterialPhotoComponent extends BasePage  implements OnInit {
+export class MaterialPhotoComponent extends BasePage implements OnInit {
 
   @Input('key') key = '';
   @Input('materialPhoto') materialPhoto: SafeUrl[] = [];
@@ -31,13 +31,22 @@ export class MaterialPhotoComponent extends BasePage  implements OnInit {
       if (image) {
         this.materialForm.formData.image = image;
       }
-      else{
+      else {
         return
       }
 
     }, false)
 
     this.events.subscribe('teacher-material-first-screen-submit-call', (formData) => {
+      let v = formData[this.key];
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false);
+    this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {
       let v = formData[this.key];
       if (!v || v == '') {
         this.isRequired = true;

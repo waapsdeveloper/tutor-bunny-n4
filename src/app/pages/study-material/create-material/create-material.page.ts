@@ -1,9 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { NgModule } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { CreateMaterialService } from 'src/app/services/create-material.service';
-import { MaterialPhotoComponent } from 'src/app/components/material-photo/material-photo.component';
 @Component({
   selector: 'app-create-material',
   templateUrl: './create-material.page.html',
@@ -11,8 +9,6 @@ import { MaterialPhotoComponent } from 'src/app/components/material-photo/materi
 })
 export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnter {
 
-  swiperModules = [IonicSlides];
-  @ViewChild('slides', { static: false }) slides: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   hideTerms = false;
   backUrl;
@@ -146,20 +142,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   }
 
 
-  shouldHandleBackToPrevScreen(event) {
-    console.log(event);
-    this.sameMaterialEdit = event;
-    if (this.step == 2) {
-      this.step = 1;
-      this.edit = true;
-      this.studyMaterialId = this.createMaterialService.materialId;
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
-    }
-
-  }
+  
   async onSlideChange() {
     this.events.publish(
-      'teacher-course-first-screen-submit-call',
+      'teacher-study-material-first-screen-submit-call',
       this.createMaterialService.formData
     );
 

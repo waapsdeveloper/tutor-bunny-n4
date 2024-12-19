@@ -15,9 +15,9 @@ export class CreateMaterialService {
     description: null,
     language: null,
     image: null,
-    price: null,
+    price: 0,
     type: null,
-    keyword: null,
+    keyword: [],
   };
 
   constructor(private network: NetworkService, private events: EventsService) {
@@ -36,7 +36,7 @@ export class CreateMaterialService {
       image: null,
       price: null,
       type: null,
-      keyword: null,
+      keyword: [],
     };
   }
 

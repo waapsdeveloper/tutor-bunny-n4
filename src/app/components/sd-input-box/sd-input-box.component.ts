@@ -23,7 +23,7 @@ export class SdInputBoxComponent implements OnInit {
   @Input('showTogglePassword') showTogglePassword = false;
   togglePassword = true;
 
-  constructor(private events: EventsService) {}
+  constructor(private events: EventsService) { }
 
   ngOnInit() {
     this.events.subscribe(
@@ -53,7 +53,7 @@ export class SdInputBoxComponent implements OnInit {
       (formData: any) => {
         let v = formData[this.key];
 
-        if(this.key == 'title' || this.key == 'hourly_rate'){
+        if (this.key == 'title' || this.key == 'hourly_rate') {
           return;
         }
 
@@ -81,6 +81,39 @@ export class SdInputBoxComponent implements OnInit {
       },
       false
     );
+    this.events.subscribe(
+      'teacher-study-material-first-screen-submit-call',
+      (formData: any) => {
+       
+
+        let v = formData[this.key];
+
+        if (v && this.key == 'title' && v.length > 50) {
+          this.isRequired = true;
+          this.errorText = 'The title field must be maximum 50 charecters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+
+          return;
+        }
+        if (v && this.key == 'price') {
+          this.isRequired = true;
+          this.errorText = 'The title field must be maximum 50 charecters';
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+
 
     this.events.subscribe(
       'teacher-course-first-screen-submit-call',

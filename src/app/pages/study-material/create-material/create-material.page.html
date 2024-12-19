@@ -1,6 +1,5 @@
-<ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step === 2"
-    (parentBack)="shouldHandleBackToPrevScreen($event)"></app-sd-header-top>
+<ion-header class="ion-no-border ion-no-shadow" >
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" ></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding " #content>
   <form>
@@ -23,7 +22,7 @@
         </ion-popover>
         <app-sd-input-box placeholder="Material title (Maximum 50 characters)" (onChange)="result($event, 'title')"
           [inputText]="createMaterialService.formData.title" [key]="'title'" [errorText]="'title is required'"
-          [maxlength]="40"></app-sd-input-box>
+          [maxlength]="50"></app-sd-input-box>
       </div>
       <div class="input-box-lines d-flex flex-column gap-8">
         <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -55,7 +54,7 @@
         </ion-popover>
         <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
           (onChange)="result($event, 'description')" [inputText]="createMaterialService.formData.description"
-          [key]="'description'" [errorText]="'Detail is required'" [minlength]="300"
+          [key]="'description'" [errorText]="'Detail is required'" [minlength]="250"
           maxlength="500"></app-sd-textarea-about>
       </div>
       <div class="subject-sec d-flex flex-column gap-8">
@@ -69,7 +68,7 @@
           </ng-template>
         </ion-popover>
         <div class="input-box-lines" style="width: 100%;">
-          <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="createMaterialService.formData.keywords"
+          <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="createMaterialService.formData.keyword"
             placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
         </div>
       </div>

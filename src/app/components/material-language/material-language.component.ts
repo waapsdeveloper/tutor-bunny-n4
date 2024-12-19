@@ -52,6 +52,14 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
         }, 5000);
       }
     }, false)
+    this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {
+      if (!formData.language) {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+      }
+    }, false)
 
   }
 
