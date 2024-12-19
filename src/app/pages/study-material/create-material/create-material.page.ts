@@ -162,7 +162,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     this.events.publish('set-form-course-image', data);
   }
   openMaterialPhotos(){
-    this.nav.push('/material-photoss', {
+    this.nav.push('/course-photoss', {
       backUrl: '/material-form',
       gallary: 'true',
       title: 'Upload material photos',

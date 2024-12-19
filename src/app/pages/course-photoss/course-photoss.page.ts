@@ -9,6 +9,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 })
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
+  title = 'Course Photos';
   params;
   remainingSlots;
 
@@ -17,12 +18,22 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     public createCourseService: CreateCourseService
   ) {
     super(injector);
+    
+  }
+
+  ngOnInit() {
     this.initialize();
   }
 
-  ngOnInit() {}
+  async initialize() {
+    this.params = this.nav.getQueryParams();
+    if(this.params && this.params['title']){
+      this.title = this.params['title'];
+    }
 
-  async initialize() {}
+
+    
+  }
 
   setBackgroundImage(item) {
     return `url('${item.image}')`;
