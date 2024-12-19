@@ -100,7 +100,10 @@
           [key]="'image'" [errorText]="'Material Document  is required'"
           (click)="openMaterialPhotos()"></app-material-upload>
       </div>
-
+      <div class="terms-agree" *ngIf="!hideTerms">
+        <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"
+          (onChange)="result($event, 'terms')" [needed]="step === 3"></app-accept-terms-profile>
+      </div>
     </div>
   </form>
 </ion-content>

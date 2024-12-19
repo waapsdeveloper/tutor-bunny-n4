@@ -14,7 +14,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   swiperModules = [IonicSlides];
   @ViewChild('slides', { static: false }) slides: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
-
+  hideTerms = false;
   backUrl;
   lang;
   showBack;
@@ -27,6 +27,28 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   currency;
   sameMaterialEdit=false;
   loading = false;
+  formData: any = {
+    name: null,
+    country: null,
+    state: null,
+    dial_code: null,
+    phone_number: null,
+    city: null,
+    zip_code: null,
+    languages: null,
+    subjects: null,
+    title: null,
+    description: null,
+    terms: true,
+    image: null,
+    hourly_rate: null,
+    photo_id: null,
+    qualification_description: null,
+    certificate: null,
+    started_teaching: null,
+    experience_description: null,
+    travel_policy: null,
+  };
   
 
   constructor(
