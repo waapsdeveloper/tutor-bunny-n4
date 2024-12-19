@@ -2,7 +2,7 @@
   <div class="courses-block-outer-789565">
     <div
       class="profile-item-image-block"
-      (click)="goToDeatil(item)"
+      (click)="goToDetail(item)"
       [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"
     >
       <!-- Lesson Price Block -->
@@ -169,7 +169,7 @@
         <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
       </div>
     </div>
-    <!-- Icons Section -->
+    Icons Section 
     <div class="actions">
       <button (click)="requestTrail(item.id)">
         <img src="../../../../assets/svg/transfer.svg" alt="" /> Free Trial
