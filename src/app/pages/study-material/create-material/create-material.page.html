@@ -97,7 +97,7 @@
       <div class="input-box-lines d-flex flex-column gap-8">
         <app-material-upload [materialDoc]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
           [key]="'image'" [errorText]="'Material Document  is required'"
-          (click)="openMaterialPhotos()"></app-material-upload>
+          (click)="openMaterialDoc()"></app-material-upload>
       </div>
       <div class="terms-agree" *ngIf="!hideTerms">
         <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"

@@ -10,6 +10,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   title = 'Course Photos';
+  doc:null
   params;
   remainingSlots;
 
@@ -25,10 +26,14 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     this.initialize();
   }
 
+
   async initialize() {
     this.params = this.nav.getQueryParams();
-    if(this.params && this.params['title']){
+    console.log(this.params)
+    if(this.params && this.params['title'] ){
       this.title = this.params['title'];
+      
+
     }
 
 

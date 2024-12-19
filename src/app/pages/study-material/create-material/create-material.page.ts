@@ -27,6 +27,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     name: null,
     country: null,
     state: null,
+    doc:null,
     dial_code: null,
     phone_number: null,
     city: null,
@@ -165,9 +166,17 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     this.nav.push('/course-photoss', {
       backUrl: '/material-form',
       gallary: 'true',
-      title: 'Upload material photos',
+      title: 'Upload materials Photo',
+      
     });
   }
-
+  openMaterialDoc(){
+    this.nav.push('/course-photoss', {
+      backUrl: '/material-form',
+      gallary: 'true',
+      title: 'Upload materials Document',
+      
+    });
+  }
 
 }
