@@ -1,22 +1,175 @@
-<div class="g1" *ngIf="blocked != 'Blocked'">
-  <div class="image" (click)="goToDetail(item)">
-    <img [src]="item.image ? item.image : 'assets/learn-piano.jpeg'" alt="Course Image" />
-    <div class="price-tag">{{ item.auth_user_currency_symbol }}{{ item.updated_price }}/lesson</div>
-  </div>
-
-  <div class="detail">
-    <div>{{ item?.title }}</div>
-    <div class="rating">
-      <app-rating-stars [rating]="rating"></app-rating-stars>
-      <span class="rating-value">{{ rating }} ({{ total_rating }})</span>
-    </div>
-    <div class="teacher">
-      <img [src]="item.user.image ? item.user.image : 'assets/learn-piano.jpeg'" alt="Teacher" class="teacher-image" />
-      <div class="teacher-name">
-        {{ displayName }}
+<div class="card">
+  <div class="courses-block-outer-789565">
+    <div
+      class="profile-item-image-block"
+      (click)="goToDetail(item)"
+      [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"
+    >
+      <!-- Lesson Price Block -->
+      <div class="us-status-btn-label outfit-medium">
+        {{item.auth_user_currency_symbol}}{{item.updated_price}}
+        <span style="font-size: 12px;">/lesson</span>
       </div>
     </div>
-    <!-- Icons Section -->
+
+    <div class="content">
+      <div class="block-item-header-title outfit-medium">{{item?.title}}</div>
+      <div class="info-misc-68448 outfit">
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        {{rating}} ({{total_rating}})
+      </div>
+
+<!-- Mid content -->
+      <div class="mid">
+        <div class="tutor_img">
+
+          <img width="24" height="24" src="https://img.icons8.com/ios-filled/50/guest-male.png" alt="guest-male"/>
+        </div>
+        <span>Tutor name </span>
+        <img width="20" height="20" src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-flag-4th-july-vitaliy-gorbachev-flat-vitaly-gorbachev.png" alt="external-flag-4th-july-vitaliy-gorbachev-flat-vitaly-gorbachev"/>
+      </div>
+      <!-- Buttons(trail,heart,share) -->
+      <div class="content_footer">
+        
+      <button class="trail_button">      
+        <div class="free-trial-btn-89675 outfit-medium"
+          *ngIf="trail == false && loading == false && status != 'Rejected' " (click)="requestTrail(item.id)">
+          <!-- <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial -->
+          <div>
+            <img src="../../../../assets/svg/transfer.svg" alt="">
+          </div>
+          <div>
+            Free Trial
+          </div>
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
+          (click)="requestTrail(item.id)">
+          <div>
+            <img src="../../../../assets/svg/transfer.svg" alt="">
+          </div>
+          <div>
+            Free Trial
+          </div>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
+          (click)="presentAlert()">
+          <img src="../../../../assets/svg/trail.svg" alt=""><button
+            style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Accepted'">
+          <button style="background-color: transparent; color:#000000 ; font-size:16px;">Trial Accepted</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Complete'">
+          <img src="../../../../assets/svg/complete.svg" alt="">Trial Completed
+        </div>
+      </button>
+      <div class="endbutton">
+
+        <button class="heart_button">
+          <img width="30" height="30" src="https://img.icons8.com/ios/50/like--v1.png" alt="like--v1"/>
+        </button>
+        <button class="share_button">
+          <!-- <img src="../../../assets/svg/share.svg" /> -->
+          <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/50/share--v1.png" alt="share--v1"/>
+      </button>
+      </div>
+ 
+    </div>
+    </div>
+  </div>
+</div>
+<div class="line"></div>
+
+
+
+<!-- <div class="courses-block-outer-789565" *ngIf="blocked != 'Blocked'">
+  <div class="courses-block-item-789565">
+    <div class="block-item-header" (click)="goToDeatil(item)">
+      <div class="block-item-header-title outfit-medium"> {{item?.title}}</div>
+      <img src="../../../../assets/svg/left-arrow.svg" alt="">
+    </div>
+    <div class="block-item-body">
+      <div class="profile-item-block">
+        <div>
+          <div class="profile-item-image-block" (click)="goToDeatil(item)"
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+          </div>
+        </div>
+        <div class="profile-content-78678564">
+          <div class="profile-line-789575">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;">
+              <div class="info-misc-68448 outfit ">
+                <app-rating-stars [rating]="rating"></app-rating-stars>
+                {{rating}} ({{total_rating}})
+              </div>
+            </div>
+          </div>
+          <div class="profile-above-footer-986985">
+            <div class="us-status-btn">
+              <div class="us-status-btn-label outfit-medium">
+                {{item.auth_user_currency_symbol}}{{item.updated_price}}<span style="font-size: 12px;">/lesson</span>
+              </div>
+            </div>
+          </div>
+          <div class="group-96589">
+            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;">
+              <div class="techer-img-98523"
+                [style.background-image]=" item.user.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'">
+              </div>
+              <div class="label-789575 fs-16 outfit-medium">{{displayName}}</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 8px;"><span *ngIf="flag"
+                slot="start" class="fi fi-{{flag}}"></span>{{this.item.user.teacher.country.name}}</div>
+          </div>
+        </div>
+        <ion-icon style="  position: absolute; right: -2px;"
+          [name]="item.is_liked_by_me === true ? 'heart' : 'heart-outline'"
+          (click)="item.is_liked_by_me === true ? removeToFav() : addToFav()"
+          [class]="item.is_liked_by_me === true ? 'loved-icon' : 'loved-icon2'"></ion-icon>
+
+      </div>
+      <div class="profile-below-footer-986985">
+        <div class="ble-buttons-789576856">
+          <img src="../../../assets/svg/share.svg" />
+          <div class="outfit fs-16">Share</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;gap: 8px;" (click)="goToChat(item)">
+          <img src="../../../../assets/svg/chat-dark.svg" alt="">
+          <div>Chat</div>
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium"
+          *ngIf="trail == false && loading == false && status != 'Rejected' " (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+        <div class="free-trial-btn-89675 outfit-medium" *ngIf="status == 'Rejected' && loading == false "
+          (click)="requestTrail(item.id)">
+          <img src="../../../../assets/svg/transfer.svg" alt="">Free Trial
+        </div>
+
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status != 'Accepted' && status != 'Rejected'&& status != 'Complete'"
+          (click)="presentAlert()">
+          <img src="../../../../assets/svg/trail.svg" alt=""><button
+            style="background-color: transparent; color:#000000 ; font-size:16px;">Cancel trial</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Accepted'">
+          <button style="background-color: transparent; color:#000000 ; font-size:16px;">Trial Accepted</button>
+        </div>
+        <div id="present-alert" class="free-trial-btn-89676 outfit-medium"
+          *ngIf="trail == true && loading == false && status == 'Complete'">
+          <img src="../../../../assets/svg/complete.svg" alt="">Trial Completed
+        </div>
+        <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+      </div>
+    </div>
+    Icons Section 
     <div class="actions">
       <button (click)="requestTrail(item.id)">
         <img src="../../../../assets/svg/transfer.svg" alt="" /> Free Trial
@@ -27,4 +180,4 @@
       <img src="../../../assets/svg/share.svg" alt="Share" class="share-icon" />
     </div>
   </div>
-</div>
+</div>  -->
