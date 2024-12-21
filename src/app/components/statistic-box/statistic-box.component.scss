@@ -45,76 +45,108 @@ body {
   margin: 0;
   padding: 20px;
   /* Ensures proper gap from the border */
-  background-color: #f5f5f5;
-  /* Light background for better contrast */
+  background-color: #fff
+    /* Light background for better contrast */
 }
 
 /* Heading */
 .heading {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-family: Roboto;
   font-size: 18px;
-  color: #181c32;
-  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #000;
+  margin-bottom: 9px;
+}
+
+.dash {
+  width: 363px;
+  height: 219px;
+  top: 171px;
+  left: 12px;
+  gap: 0px;
+  opacity: 0px;
+
 }
 
 /* Dashboard Wrapper */
-.dashboard {
+.dashboard-cards-top-outer {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
-  /* Controls spacing between the cards */
-  padding: 10px;
-  /* Adds gap from the border */
 }
 
 /* Card Container */
-.card {
+.card-34567 {
   position: relative;
-  width: 173px;
+  min-width: 173px;
   /* Matches Figma */
-  height: 120px;
+  height: 100px;
   /* Matches Figma */
-  background: #ffffff;
   border-radius: 6px;
-  box-shadow: 6px 6px 12px rgba(188, 188, 188, 0.11);
+  box-shadow: 6px 6px 12px 0px #BCBCBC1C;
+  border: 0.5px solid #00000080;
   /* Figma shadow */
-  padding: 5px;
+  padding: 4.2%;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: left;
+  text-align: left;
+  padding-left: 2%;
 }
 
 
 /* Icon/Image Styling */
 .dimg img {
-  width: 32px;
   /* Matches Figma icon size */
   height: 32px;
-  margin-bottom: 10px;
-}
+  width: 25.32px;
+  height: 24px;
+  top: 184px;
+  left: 33.04px;
+  opacity: 0px;
 
-/* Main Text (e.g., ₹ 51,858 or 12) */
+}
 .txt {
-  font-family: 'Roboto', sans-serif;
+  width: 94.94px;
+  height: 27px;
+  top: 212px;
+  left: 33.04px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 23.04px;
   font-weight: 700;
-  font-size: 16px;
-  /* Matches Figma */
-  color: #181c32;
-  margin: 5px 0;
-}
+  line-height: 27px;
+  letter-spacing: 0.4000000059604645px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 
-/* Sub Text (e.g., "Earnings Till Date") */
+
+}
 .earn {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  /* Matches Figma */
-  color: rgba(0, 0, 0, 0.5);
-  text-transform: capitalize;
-  margin-top: -4px;
+  width: 121.31px;
+  height: 13px;
+  top: 246px;
+  left: 33.04px;
+  gap: 0px;
+  opacity: 50%;
+  font-family: DM Sans;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13.02px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
 }
 
-/* Arrow Button Styling */
 .arrow-btn {
   position: absolute;
   bottom: 10px;
@@ -126,37 +158,47 @@ body {
   height: 16px;
 }
 
-/* Icon Box Styling */
 .icon-box {
   display: flex;
   justify-content: space-between;
-  /* Ensures equal spacing between items */
-  border: 1px solid #e5e5e5; /* Very thin, light gray border */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-  /* Space between icons */
-  background: #ffffff;
-  border-radius: 8px;
-  /* Subtle rounded corners */
+  border-radius: 6px;
+  box-shadow: 6px 6px 12px 0px #BCBCBC1C;
+  border: 0.5px solid #00000080;
   padding: 15px;
   margin-top: 8px;
-  /* Adds spacing below the dashboard */
- // box-shadow: 6px 6px 12px rgba(188, 188, 188, 0.11);
+  width: 363px;
+  height: 104px;
+  top: 286px;
+  left: 12px;
+  gap: 0px;
+  opacity: 0px;
 }
 
-/* Icon Item Styling */
 .icon-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 5px;
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.12px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
 }
 
 /* Placeholder for Icon Images */
 .icon img {
-  width: 40px;
-  height: 40px;
-  
+  width: 24px;
+  height: 24px;
+  top: 302px;
+  left: 43px;
+  padding: 2.5px;
+  gap: 0px;
+  opacity: 0px;
+
 }
 
 /* Number Above Each Icon */
@@ -167,25 +209,24 @@ body {
   color: #181c32;
   margin-bottom: 5px;
   position: relative;
+
 }
 
-/* Divider Line Between Number and Text */
-.line {
-  height: 1px;
-  width: 50%;
-  background-color: #d1d1d1;
-  margin: 5px 0;
-}
 
 
 /* Label Below Each Icon */
 .icon-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
-  color: rgba(0, 0, 0, 0.5);
-  text-transform: capitalize;
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15.62px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
 }
+
 .vl {
-  border-left: 3px solid #d1d1d1;
-  height: 85px;
+  height: 75px;
+  border-left: 0.25px solid #00000080
 }
