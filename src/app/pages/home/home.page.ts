@@ -62,7 +62,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
       return;
 
     }else if(type == 'forget'){
-      this.step = 3;
+      this.step = 1;
       console.log($event);
     }
 
