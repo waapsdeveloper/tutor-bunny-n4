@@ -18,6 +18,7 @@ export class LoginPage extends BasePage {
 
   @Input() role_id: any = '';
   @Output() stepChange = new EventEmitter<any>();
+  @Output() formAction = new EventEmitter<any>();
 
   constructor(injector: Injector) {
     super(injector);
@@ -53,7 +54,8 @@ export class LoginPage extends BasePage {
         user: res.user,
         token: res.token
       };
-      this.modals.dismiss(obj);
+      // this.modals.dismiss(obj);
+      this.formAction.emit(obj);
     }
   }
 

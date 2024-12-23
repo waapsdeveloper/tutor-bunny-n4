@@ -42,6 +42,21 @@ export class HomePage extends BasePage implements ViewWillEnter {
     this.step = $event.step;
   }
 
+  formAction(type, $event){
+
+    if(type == 'login'){
+      this.step = 1;
+      console.log($event);
+    }else if(type == 'signup'){
+      this.step = 2;
+      console.log($event);
+    }else if(type == 'forget'){
+      this.step = 3;
+      console.log($event);
+    }
+
+  }
+
   async continueWithGoogle() {
     this.googleauth = await this.authService.googleAuth();
     if (

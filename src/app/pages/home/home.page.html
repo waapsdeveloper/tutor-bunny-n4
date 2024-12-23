@@ -25,7 +25,7 @@
 
 
     <div class="forms-section-toggle-outer ion-padding">
-      <app-login [hidden]="step !== 1" [role_id]="role_Id" (stepChange)="stepChange($event)"></app-login>
+      <app-login [hidden]="step !== 1" [role_id]="role_Id" (stepChange)="stepChange($event)" (formAction)="formAction('login', $event)"></app-login>
       <app-sign-up [hidden]="step !== 2" [role_id]="role_Id"></app-sign-up>
       <app-forget-password [hidden]="step !== 3"></app-forget-password>
 
