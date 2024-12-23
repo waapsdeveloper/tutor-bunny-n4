@@ -5,7 +5,7 @@ import { BasePage } from '../../base-page/base-page';
 import { LoginPage } from '../login/login.page';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 import { SignUpPage } from '../sign-up/sign-up.page';
-import { ForgetPasswordComponent } from '../login/forget-password/forget-password.component';
+import { ForgetPasswordComponent } from '../forget-password/forget-password.component';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +35,11 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   setStep(step) {
     this.step = step;
+  }
+
+  stepChange($event){
+    console.log($event);
+    this.step = $event.step;
   }
 
   async continueWithGoogle() {
