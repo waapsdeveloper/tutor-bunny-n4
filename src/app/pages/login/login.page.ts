@@ -29,10 +29,7 @@ export class LoginPage extends BasePage {
   }
 
   async submit() {
-    this.events.publish(
-      'teacher-profile-first-screen-submit-call',
-      this.formData
-    );
+
     if (!this.formData.email || !this.formData.password) {
       return;
     }

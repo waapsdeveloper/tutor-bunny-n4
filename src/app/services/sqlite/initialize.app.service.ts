@@ -271,16 +271,16 @@ export class InitializeAppService {
   async initializeGenericTables(): Promise<any> {
     // check if country table already has data then don't call api
 
-    const countryCount = await this.getCount('countries');
+    // const countryCount = await this.getCount('countries');
 
-    const countryArray = await this.network.getAllCountries();
-    const res = await this.insertCountries(countryArray);
+    // const countryArray = await this.network.getAllCountries();
+    // const res = await this.insertCountries(countryArray);
 
-    const statesCount = await this.getCount('states');
+    // const statesCount = await this.getCount('states');
 
-    // too long data to handle, leave it for the sake of bravity
-    const stateArray = await this.network.getAllStates();
-    const res2 = await this.insertStates(stateArray);
+    // // too long data to handle, leave it for the sake of bravity
+    // const stateArray = await this.network.getAllStates();
+    // const res2 = await this.insertStates(stateArray);
 
     const languagesCount = await this.getCount('languages');
 
