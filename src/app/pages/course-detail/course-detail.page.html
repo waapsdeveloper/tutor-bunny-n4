@@ -1,14 +1,15 @@
-<div *ngIf="loading" class="loading-syn ">
+<!-- <div *ngIf="loading" class="loading-syn ">
   <ion-spinner></ion-spinner>
-</div>
+</div> -->
 
-<ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow" >
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
-    (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top>
-</ion-header>
 
-<ion-content [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading"
-  class="remove-pd-top-323243243" #content>
+<!-- [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" -->
+<ion-content
+  class="remove-pd-top-323243243" #content [fullscreen]="true">
+  <!-- <ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow" > -->
+    <!-- <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
+      (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top> -->
+  <!-- </ion-header> -->
   <app-course-photos [course_Id]="course_Id"></app-course-photos>
   <div class="body-content ion-padding">
     <div class="course-heading-78521">

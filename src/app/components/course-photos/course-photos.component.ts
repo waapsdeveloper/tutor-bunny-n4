@@ -1,14 +1,16 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-course-photos',
   templateUrl: './course-photos.component.html',
   styleUrls: ['./course-photos.component.scss'],
 })
-export class CoursePhotosComponent extends BasePage implements OnInit {
+export class CoursePhotosComponent implements OnInit {
 
   private _course_Id: any;
+  courseImages: any[] = [];
 
   @Input('course_Id')
   public get course_Id() {
@@ -22,12 +24,10 @@ export class CoursePhotosComponent extends BasePage implements OnInit {
     }
 
   }
-  courseImages
 
-  constructor(injector:Injector) {
-    super(injector)
 
-   }
+  constructor(public network: NetworkService) {
+  }
 
   ngOnInit() {}
 
