@@ -32,7 +32,6 @@ export class SignUpPage extends BasePage {
     this.formData[key] = value;
   }
 
-
   async SignUpWithEmail() {
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
@@ -89,13 +88,11 @@ export class SignUpPage extends BasePage {
 
     this.showLoader = false;
 
-
-
     if (res) {
       let obj = {
         step: 1,
         user: res.user,
-        token: res.token
+        token: res.token,
       };
       // this.modals.dismiss(obj);
       this.formAction.emit(obj);
@@ -106,6 +103,7 @@ export class SignUpPage extends BasePage {
     let obj = {
       step: 1,
     };
-    this.modals.dismiss(obj);
+    //this.modals.dismiss(obj);
+    this.formAction.emit(obj);
   }
 }
