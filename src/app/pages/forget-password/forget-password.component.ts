@@ -20,7 +20,9 @@ wrongOtp= false;
     super(injector)
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log("uiy");
+  }
 
   getCodeBoxElement(index: number): HTMLInputElement {
     return <HTMLInputElement>document.getElementById('codeBox' + index);
@@ -52,7 +54,7 @@ wrongOtp= false;
     const enteredCode = parseInt(this.getEnteredCode(), 10);
     const receivedCode = parseInt(this.receivedCode, 10);
 
-    
+
     if (enteredCode === receivedCode) {
       this.step = "reset";
     } else {
@@ -72,12 +74,12 @@ wrongOtp= false;
   onKeyUpEvent(index: number, event: KeyboardEvent): void {
     const eventCode = event.which || event.keyCode;
     const currentElement = this.getCodeBoxElement(index);
-  
+
     // Ensure the input value length does not exceed 1
     if (currentElement.value.length > 1) {
       currentElement.value = currentElement.value.slice(0, 1);
     }
-  
+
     if (currentElement.value.length === 1) {
       if (index !== 4) {
         this.getCodeBoxElement(index + 1).focus();
@@ -85,14 +87,14 @@ wrongOtp= false;
         currentElement.blur();
       }
     }
-  
+
     if (eventCode === 8 && index !== 1) {
       this.getCodeBoxElement(index - 1).focus();
     }
-  
+
     this.checkIfAllInputsFilled();
   }
-  
+
 
   onFocusEvent(index: number): void {
     for (let item = 1; item < index; item++) {

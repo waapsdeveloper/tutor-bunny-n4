@@ -1,6 +1,6 @@
-import { Component, Injector, Input } from '@angular/core';
+import { Component, Injector, Input, Output, EventEmitter } from '@angular/core';
 import { BasePage } from '../../base-page/base-page';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ForgetPasswordComponent } from '../forget-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,7 @@ export class LoginPage extends BasePage {
   };
 
   @Input() role_id: any = '';
+  @Output() stepChange = new EventEmitter<any>();
 
   constructor(injector: Injector) {
     super(injector);
@@ -62,6 +63,6 @@ export class LoginPage extends BasePage {
       step: 3,
     };
 
-    this.modals.dismiss(obj);
+    this.stepChange.emit(obj);
   }
 }

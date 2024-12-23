@@ -11,7 +11,7 @@ import { SdButtonGrayModule } from '../../components/sd-button-gray/sd-button-gr
 import { SdInputBoxModule } from '../../components/sd-input-box/sd-input-box.module';
 import { SdHeaderTopModule } from '../../components/sd-header-top/sd-header-top.module';
 import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
-import { ForgetPasswordModule } from './forget-password/forget-password.module';
+import { ForgetPasswordModule } from '../forget-password/forget-password.module';
 
 @NgModule({
   imports: [

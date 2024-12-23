@@ -6,7 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SdBbackBtnModule } from '../../components/sd-bback-btn/sd-bback-btn.module';
-import { ForgetPasswordModule } from '../login/forget-password/forget-password.module';
+import { ForgetPasswordModule } from '../forget-password/forget-password.module';
 import { LoginPageModule } from '../login/login.module';
 import { SignUpPageModule } from '../sign-up/sign-up.module';
 
