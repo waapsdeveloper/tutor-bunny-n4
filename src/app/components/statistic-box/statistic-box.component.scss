@@ -41,34 +41,41 @@
 
 // }/* General Heading Style */
 /* General Layout Adjustments */
-body {
-  margin: 0;
-  padding: 20px;
-  /* Ensures proper gap from the border */
-  background-color: #fff
-    /* Light background for better contrast */
-}
 
 /* Heading */
-.heading {
-  font-family: Roboto;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 18px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: #000;
-  margin-bottom: 9px;
+
+.trial-box-outer-689567 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .sb-heading-7895 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+
+    .sb-heading-title-7895 {
+      font-size: 20px;
+      text-wrap: nowrap;
+      width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sb-heading-sl-7895 {
+      font-size: 13px;
+      text-wrap: nowrap;
+    }
+  }
 }
 
-.dash {
-  width: 363px;
-  height: 219px;
-  top: 171px;
-  left: 12px;
-  gap: 0px;
-  opacity: 0px;
+.dashboard-stats-outer{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
 }
 
@@ -82,7 +89,7 @@ body {
 /* Card Container */
 .card-34567 {
   position: relative;
-  min-width: 173px;
+  // min-width: 173px;
   /* Matches Figma */
   height: 100px;
   /* Matches Figma */
@@ -90,14 +97,14 @@ body {
   box-shadow: 6px 6px 12px 0px #BCBCBC1C;
   border: 0.5px solid #00000080;
   /* Figma shadow */
-  padding: 4.2%;
+  padding: 16px;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: left;
   text-align: left;
-  padding-left: 2%;
+  // padding-left: 2%;
 }
 
 
