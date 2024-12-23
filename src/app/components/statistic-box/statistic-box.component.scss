@@ -76,6 +76,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 0;
+
+  ion-col {
+    padding: 0;
+  }
 
 }
 
@@ -83,7 +88,8 @@
 .dashboard-cards-top-outer {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 16px;
+  padding: 0;
 }
 
 /* Card Container */
@@ -172,13 +178,6 @@
   box-shadow: 6px 6px 12px 0px #BCBCBC1C;
   border: 0.5px solid #00000080;
   padding: 15px;
-  margin-top: 8px;
-  width: 363px;
-  height: 104px;
-  top: 286px;
-  left: 12px;
-  gap: 0px;
-  opacity: 0px;
 }
 
 .icon-item {
