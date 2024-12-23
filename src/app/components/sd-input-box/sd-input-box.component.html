@@ -1,4 +1,4 @@
-<div class="sd-input-box-outer-675315">
+<div class="sd-input-box-outer-675315" [class.modern-input]="modernInput">
   <img *ngIf="image" [src]="image" alt="" class="input-image">
   <input class="fs-16 roboto-regular sd-input-box-input-675315" [class.low-padding-87678]="!image"
     [minlength]="minlength" [maxlength]="maxlength" [type]="type" [placeholder]="placeholder" [(ngModel)]="inputText"

@@ -24,6 +24,7 @@ import { ForgetPasswordModule } from './forget-password/forget-password.module';
     SdButtonGrayModule,
     SdButtonClearModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  exports: [LoginPage]
 })
 export class LoginPageModule {}

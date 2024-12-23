@@ -23,6 +23,7 @@ import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.m
     SdButtonGrayModule,
     SdButtonClearModule
   ],
-  declarations: [SignUpPage]
+  declarations: [SignUpPage],
+  exports: [SignUpPage]
 })
 export class SignUpPageModule { }

@@ -23,6 +23,8 @@ export class SdInputBoxComponent implements OnInit {
   @Input('showTogglePassword') showTogglePassword = false;
   togglePassword = true;
 
+  @Input('modernInput') modernInput = false;
+
   constructor(private events: EventsService) { }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class SdInputBoxComponent implements OnInit {
     this.events.subscribe(
       'teacher-study-material-first-screen-submit-call',
       (formData: any) => {
-       
+
 
         let v = formData[this.key];
 
