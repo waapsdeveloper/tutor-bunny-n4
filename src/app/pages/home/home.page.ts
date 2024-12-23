@@ -33,6 +33,10 @@ export class HomePage extends BasePage implements ViewWillEnter {
     }
   }
 
+  setStep(step) {
+    this.step = step;
+  }
+
   async continueWithGoogle() {
     this.googleauth = await this.authService.googleAuth();
     if (

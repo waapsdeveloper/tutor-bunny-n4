@@ -12,15 +12,13 @@
       </ion-note>
     </div>
 
-    <div class="selection-sagment-outer-877584">
-      <ion-segment value="default">
-        <ion-segment-button value="default">
-          <ion-label>Default</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="segment">
-          <ion-label>Segment</ion-label>
-        </ion-segment-button>
-      </ion-segment>
+    <div class="selection-sagment-outer-877584 d-flex justify-content-center flex-row align-center gap-16">
+      <div class="form-selection-button-outer" (click)="setStep(1)">
+        <div class="roboto-regular fs-16 selection-btn" [class.selected]="step === 1">Login</div>
+      </div>
+      <div class="form-selection-button-outer" (click)="setStep(2)">
+        <div class="roboto-regular fs-16 selection-btn" [class.selected]="step === 2">Register</div>
+      </div>
     </div>
 
 
