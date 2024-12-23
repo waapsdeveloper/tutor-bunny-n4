@@ -1,4 +1,4 @@
-<div class="trial-box-item-outer-689567">
+<!-- <div class="trial-box-item-outer-689567">
   <div class="trial-box-item-689567">
     <div class="profile-line-content">
       <div class="image-box-outer">
@@ -79,6 +79,44 @@
     <div class="er-title-789 outfit" style="font-weight: 500;">
       <span class="discription-para" (click)="goToDeatil()">{{item.course.title}}</span>
       <img src="../../../../assets/svg/arrow-title.svg" (click)="goToDeatil()" />
+    </div>
+  </div>
+</div>
+ -->
+
+<div class="trial-box-item-outer-689567">
+  <div class="card-header d-flex justify-content-between align-center">
+    <div class="header-left gap-8 d-flex align-center">
+      <img src="../../../../assets/svg/trial-icon.svg" />
+      <span class="header-text roboto-medium fs-18">Trial request</span>
+    </div>
+    <div class="header-right gap-8 d-flex align-center">
+      <img src="../../../../assets/svg/bookmark.svg" />
+      <button class="accept roboto-medium fs-14">Accept</button>
+      <button class="reject roboto-medium fs-14">Reject</button>
+    </div>
+  </div>
+  <hr class="divider" />
+  <div class="card-container">
+    <div class="card-body d-flex align-center">
+      <div class="profile-image">
+        <img
+          [src]="item?.student.image ? item?.student.image : 'assets/profileimg.png'"
+          alt="Profile"
+        />
+      </div>
+
+      <div class="profile-details d-flex flex-column gap-12">
+        <h3 class="profile-name roboto-medium-2 fs-18">{{ displayName | names }}</h3>
+        <div class="profile-info d-flex align-center gap-8">
+          <img src="../../../../assets/svg/cake.svg" alt="Age Icon" class="icon" />
+          <span class="roboto-regular fs-14">Age 6</span>
+        </div>
+        <div class="profile-location d-flex align-center gap-8">
+          <img src="../../../../assets/svg/Flag1.svg" class="flag" alt="Country Flag" />
+          <span class="country-name roboto-regular fs-16">United States</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
