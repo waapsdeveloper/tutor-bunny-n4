@@ -46,7 +46,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     experience_description: null,
     travel_policy: null,
   };
-  
+
 
   constructor(
     injector: Injector,
@@ -104,28 +104,49 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   async submit() {
     this.events.publish(
-      'teacher-course-second-screen-submit-call',
+      'teacher-study-material-first-screen-submit-call',
       this.createMaterialService.formData
     );
     let f = this.createMaterialService.formData;
-    if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
-      return;
-    }
-    if (f.keyword.length == 0) {
-      return;
-    }
-    const course_id = this.createMaterialService.materialId;
-    if (f.category && f.category.id) {
-      f.category_id = f.category.id;
-    }
-    this.loading = true;
+    console.log(f);
 
-    const res = await this.network.SubmitSecondCourse(f, course_id);
+    f.language_id = 1;
+    f.terms = true;
+
+    /*
+    {
+    "title": null,
+    "description": null,
+    "language": null,
+    "image": null,
+    "price": 0,
+    "type": null,
+    "keyword": []
+    } */
+
+    // || !f.language
+    // || !f.image
+    if (!f.title || !f.description  || !f.price || !f.terms) {
+      return;
+    }
+    // if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
+    //   return;
+    // }
+    // if (f.keyword.length == 0) {
+    //   return;
+    // }
+    // const course_id = this.createMaterialService.materialId;
+    // if (f.category && f.category.id) {
+    //   f.category_id = f.category.id;
+    // }
+    // this.loading = true;
+
+    const res = await this.network.storeStudyMaterial(f);
     if (res && res.message) {
       if (this.edit && this.sameMaterialEdit) {
-        this.utility.presentSuccessToast("Course Saved Successfully ");
+        this.utility.presentSuccessToast("Material Saved Successfully");
       } else {
-        this.utility.presentSuccessToast("Course Saved Successfully");
+        this.utility.presentSuccessToast("Material Saved Successfully");
       }
     }
 
@@ -137,18 +158,20 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     //     : 'Course Updated Successfully';
     //   this.utility.presentSuccessToast(message);
     // }
-    this.createMaterialService.resetFormData()
-    this.nav.pop('/tabs/courses');
-    this.events.publish('initilize-the-list', res);
+    this.createMaterialService.resetFormData();
+    // this.nav.pop('/tabs/courses');
+    // this.events.publish('initilize-the-list', res);
   }
 
 
-  
+
   async onSlideChange() {
     this.events.publish(
       'teacher-study-material-first-screen-submit-call',
       this.createMaterialService.formData
     );
+
+
 
 
   }
@@ -167,7 +190,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       backUrl: '/material-form',
       gallary: 'true',
       title: 'Upload materials Photo',
-      
+
     });
   }
   openMaterialDoc(){
@@ -175,7 +198,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       backUrl: '/material-form',
       gallary: 'true',
       title: 'Upload materials Document',
-      
+
     });
   }
 

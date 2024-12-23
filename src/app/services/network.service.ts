@@ -364,7 +364,6 @@ export class NetworkService {
     return this.httpPostResponse('courses/add', data, null,false , true);
   }
 
-
   setRecentSeach(data) {
     return this.httpPostResponse('search/course/add', data, null, true, true);
   }
@@ -450,6 +449,11 @@ export class NetworkService {
 
   signupViaEmail(data) {
     return this.httpPostResponse('signup-via-email', data);
+  }
+
+
+  storeStudyMaterial(data) {
+    return this.httpPostResponse('study-material', data, null, false, true);
   }
 
   serialize = (obj: any) => {

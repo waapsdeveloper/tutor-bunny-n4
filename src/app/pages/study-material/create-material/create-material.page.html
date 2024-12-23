@@ -109,9 +109,8 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
-      <app-sd-button-gray [text]="'Next'" [disabled]="loading" *ngIf="step === 1"
-        (click)="onSlideChange()"></app-sd-button-gray>
-      <app-sd-button-gray [text]="'Save'" *ngIf="step === 2" (click)="submit()"></app-sd-button-gray>
+      <app-sd-button-gray [text]="'Save'" [disabled]="loading" (click)="submit()"></app-sd-button-gray>
+      <!-- <app-sd-button-gray [text]="'Save'" *ngIf="step === 2" (click)="submit()"></app-sd-button-gray> -->
     </div>
   </div>
 

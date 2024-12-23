@@ -11,6 +11,7 @@ export class LanguagesSqService {
   constructor(private storageService: StorageService) {}
 
   async list(search = '', offset = 0, limit = 10) {
+
     let sql = `SELECT * FROM languages`;
 
     // Add a WHERE clause if a search term is provided

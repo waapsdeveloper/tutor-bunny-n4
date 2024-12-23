@@ -282,10 +282,10 @@ export class InitializeAppService {
     // const stateArray = await this.network.getAllStates();
     // const res2 = await this.insertStates(stateArray);
 
-    const languagesCount = await this.getCount('languages');
+    // const languagesCount = await this.getCount('languages');
 
-    const languagesArray = await this.network.getAllLanguages();
-    const res3 = await this.insertLanguages(languagesArray);
+    // const languagesArray = await this.network.getAllLanguages();
+    // const res3 = await this.insertLanguages(languagesArray);
 
     return true;
     //const res3 = await this.insertStates(languagesArray)

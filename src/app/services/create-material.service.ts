@@ -16,7 +16,7 @@ export class CreateMaterialService {
     language: null,
     image: null,
     price: 0,
-    type: null,
+    terms: null,
     keyword: [],
   };
 

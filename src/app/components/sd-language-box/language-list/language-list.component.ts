@@ -16,6 +16,8 @@ export class LanguageListComponent extends BasePage {
   search: "";
   offset = 0;
   limit = 30;
+  page = 1;
+  lang;
 
   selection: any[] = [];
 
@@ -72,74 +74,74 @@ export class LanguageListComponent extends BasePage {
 
   async callApi(): Promise<any> {
 
-    const res = await this.languagesSqService.list(this.search, this.offset, this.limit)
-    console.log(res);
+    // const res = await this.languagesSqService.list(this.search, this.offset, this.limit)
+    // console.log(res);
 
-    if (this.offset == 0) {
-      this.list = res;
-    } else {
-      this.list = [...this.list, ...res];
-    }
+    // if (this.offset == 0) {
+    //   this.list = res;
+    // } else {
+    //   this.list = [...this.list, ...res];
+    // }
 
-    this.list = this.list.map((item) => {
-      const fi = this.selection.find(x => x.id == item.id);
-      if (fi) {
-        item.checked = true;
+    // this.list = this.list.map((item) => {
+    //   const fi = this.selection.find(x => x.id == item.id);
+    //   if (fi) {
+    //     item.checked = true;
+    //   }
+    //   return item;
+    // });
+
+    // return true
+
+
+
+    return new Promise(async resolve => {
+      let obj = {
+        search: this.search,
+        page: this.page
       }
-      return item;
-    });
 
-    return true
+      let listw = this.list.filter(x => x.checked == true);
 
+      this.lang = await this.network.getLanguage(obj) as any[];
+      this.page = this.lang.current_page;
 
+      if (this.page == 1) {
+        // Reset list on new search
+        this.list = [];
+      }
 
-    // return new Promise(async resolve => {
-    //   let obj = {
-    //     search: this.search,
-    //     page: this.page
-    //   }
+      // Collect the current search results
+      let newList = this.lang["data"];
 
-    //   let listw = this.list.filter(x => x.checked == true);
+      // Merge new list with previously selected items
+      this.list = [...new Set([...this.list, ...newList, ...listw])];
 
-    //   this.lang = await this.network.getLanguage(obj) as any[];
-    //   this.page = this.lang.current_page;
+      // Update the list to check pre-selected items
+      this.list = this.list.map((item) => {
+        const fi = this.preSelectedLanguages.find(x => x.id == item.id);
+        if (fi) {
+          item.checked = true;
+        }
+        return item;
+      });
 
-    //   if (this.page == 1) {
-    //     // Reset list on new search
-    //     this.list = [];
-    //   }
+      // Ensure all pre-selected items are still in the list
+      this.preSelectedLanguages.forEach(selectedItem => {
 
-    //   // Collect the current search results
-    //   let newList = this.lang["data"];
+        console.log("repeat", selectedItem)
 
-    //   // Merge new list with previously selected items
-    //   this.list = [...new Set([...this.list, ...newList, ...listw])];
+        let findIndex = this.list.findIndex(item => item.name == selectedItem.name)
+        if(findIndex == -1){
+          this.list = [...new Set([...this.list, ...[selectedItem]])];
+        }
+        // if (!this.list.some(item => item.name === selectedItem.name)) {
+        //   this.list.push(selectedItem);
+        // }
+      });
 
-    //   // Update the list to check pre-selected items
-    //   this.list = this.list.map((item) => {
-    //     const fi = this.preSelectedLanguages.find(x => x.id == item.id);
-    //     if (fi) {
-    //       item.checked = true;
-    //     }
-    //     return item;
-    //   });
-
-    //   // Ensure all pre-selected items are still in the list
-    //   this.preSelectedLanguages.forEach(selectedItem => {
-
-    //     console.log("repeat", selectedItem)
-
-    //     let findIndex = this.list.findIndex(item => item.name == selectedItem.name)
-    //     if(findIndex == -1){
-    //       this.list = [...new Set([...this.list, ...[selectedItem]])];
-    //     }
-    //     // if (!this.list.some(item => item.name === selectedItem.name)) {
-    //     //   this.list.push(selectedItem);
-    //     // }
-    //   });
-
-    //   resolve(true);
-    // })
+      resolve(true);
+    })
   }
 
   addtoselection(item) {
