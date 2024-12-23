@@ -1,4 +1,10 @@
-import { Component, Injector, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  Output,
+} from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -7,25 +13,25 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage extends BasePage {
-
   @Input() role_id: any = '';
+  @Output() formAction = new EventEmitter<any>();
 
   formData: any = {
     email: null,
     password: null,
     name: null,
-    confirm_password: null
+    confirm_password: null,
   };
+  showLoader = false;
 
   constructor(injector: Injector) {
-
-    super(injector)
+    super(injector);
   }
-
 
   result(value, key) {
     this.formData[key] = value;
   }
+
 
   async SignUpWithEmail() {
     this.events.publish(
@@ -58,18 +64,46 @@ export class SignUpPage extends BasePage {
         let obj = {
           step: 2,
           user: res.user,
-          token: res.token
+          token: res.token,
         };
         this.modals.dismiss(obj);
       }
-
     }
+  }
+  async submit() {
+    this.events.publish(
+      'teacher-profile-first-screen-submit-call',
+      this.formData
+    );
+    if (!this.formData.email || !this.formData.password) {
+      return;
+    }
+    this.showLoader = true;
+    let d = {
+      email: this.formData.email,
+      password: this.formData.password,
+      role_id: this.role_id,
+    };
+    const res = (await this.network.loginViaEmail(d)) as any;
 
+    this.showLoader = false;
+
+
+
+    if (res) {
+      let obj = {
+        step: 1,
+        user: res.user,
+        token: res.token
+      };
+      // this.modals.dismiss(obj);
+      this.formAction.emit(obj);
+    }
   }
 
-  back(){
+  back() {
     let obj = {
-      step: 1
+      step: 1,
     };
     this.modals.dismiss(obj);
   }
