@@ -56,8 +56,8 @@
         <div class="dimg">
           <img src="../../../assets/svg/dashboard-icon.svg" alt="dashboard" />
         </div>
-        <div class="txt">₹ 51,858</div>
-        <span class="earn">Earnings Till Date</span>
+        <div class="txt roboto-bold">₹ 51,858</div>
+        <span class="earn roboto-regular">Earnings Till Date</span>
         <div class="arrow-btn">
           <img src="../../../assets/svg/tarrow.svg" alt="Arrow Button" />
         </div>
@@ -69,8 +69,8 @@
         <div class="dimg">
           <img src="../../../assets/svg/coin.svg" alt="coin" />
         </div>
-        <div class="txt">32</div>
-        <span class="earn">Credit Balance</span>
+        <div class="txt roboto-bold">32</div>
+        <span class="earn roboto-regular">Credit Balance</span>
         <div class="arrow-btn">
           <img src="../../../assets/svg/tarrow.svg" alt="Arrow Button" />
         </div>
@@ -80,54 +80,55 @@
 
   </ion-row>
 
-  <div class="icon-box">
-    <!-- Icon 1: New Trial Requests -->
-    <div class="icon-item">
-      <div class="icon">
-        <img src="../../../assets/svg/new-trial.svg" alt="New Trial" />
+  <ion-row class="icon-box">
+    <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+      <div class="icon-item">
+        <div class="icon">
+          <img src="../../../assets/svg/new-trial.svg" alt="New Trial" />
+        </div>
+        <div class="icon-info">
+          <div class="icon-number roboto-medium-2">{{trials}}</div>
+          <span class="icon-label roboto-regular">New Trial <br> Requests</span>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+      <div class="icon-item">
+        <div class="icon">
+          <img src="../../../assets/svg/message.svg" alt="Message" />
+        </div>
+        <div class="icon-info">
+          <div class="icon-number roboto-medium-2">2</div>
+
+          <span class="icon-label roboto-regular">Message <br>Requests</span>
+        </div>
       </div>
 
-      <div class="icon-info">
-        <div class="icon-number">{{trials}}</div>
-        <span class="icon-label">New Trial <br> Requests</span>
-      </div>
-    </div>
+    </ion-col>
+    <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
 
-    <div class="vl"></div>
-    <!-- Icon 2: Message Requests -->
-    <div class="icon-item">
-      <div class="icon">
-        <img src="../../../assets/svg/message.svg" alt="Message" />
+      <div class="icon-item">
+        <div class="icon">
+          <img src="../../../assets/svg/in-progress.svg" alt="In Progress" />
+        </div>
+        <div class="icon-info">
+          <div class="icon-number roboto-medium-2">3</div>
+          <span class="icon-label roboto-regular">Trials <br>In Progress</span>
+        </div>
       </div>
-      <div class="icon-info">
-        <div class="icon-number">2</div>
 
-        <span class="icon-label">Message <br>Requests</span>
+    </ion-col>
+    <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+      <div class="icon-item">
+        <div class="icon">
+          <img src="../../../assets/svg/trial-completed.svg" alt="Completed" />
+        </div>
+        <div class="icon-info">
+          <div class="icon-number roboto-medium-2">16</div>
+          <span class="icon-label roboto-regular">Trials<br> Completed</span>
+        </div>
       </div>
-    </div>
+    </ion-col>
+  </ion-row>
 
-    <div class="vl"></div>
-    <!-- Icon 3: Trials in Progress -->
-    <div class="icon-item">
-      <div class="icon">
-        <img src="../../../assets/svg/in-progress.svg" alt="In Progress" />
-      </div>
-      <div class="icon-info">
-        <div class="icon-number">3</div>
-        <span class="icon-label">Trials <br>In Progress</span>
-      </div>
-    </div>
-    <div class="vl"></div>
-
-    <!-- Icon 4: Trials Completed -->
-    <div class="icon-item">
-      <div class="icon">
-        <img src="../../../assets/svg/trial-completed.svg" alt="Completed" />
-      </div>
-      <div class="icon-info">
-        <div class="icon-number">16</div>
-        <span class="icon-label">Trials<br> Completed</span>
-      </div>
-    </div>
-  </div>
 </ion-grid>

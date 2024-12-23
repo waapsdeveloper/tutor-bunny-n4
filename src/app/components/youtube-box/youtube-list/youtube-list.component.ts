@@ -7,7 +7,16 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./youtube-list.component.scss'],
 })
 export class YoutubeListComponent  implements OnInit {
+
   @ViewChild('slides', { static: false }) slides: any;
+
+  videos: any[] = [
+
+  ]
+
+
+
+
   constructor(private _sanitizer: DomSanitizer) {
     this.initialize();
   }
@@ -15,7 +24,7 @@ export class YoutubeListComponent  implements OnInit {
   ngOnInit() {}
 
   async initialize() {
-  
+
   }
 
   getLink(item) {
@@ -23,7 +32,7 @@ export class YoutubeListComponent  implements OnInit {
     return safeURL;
   }
   async onSlideChange() {
-   
+
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
 }

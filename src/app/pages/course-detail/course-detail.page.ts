@@ -57,7 +57,9 @@ export class CourseDetailPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('CourseDetailPage');
+  }
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();

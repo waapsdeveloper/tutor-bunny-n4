@@ -13,13 +13,14 @@ import { CourseSchedulesModule } from 'src/app/components/course-schedules/cours
 import { OtherCoursesModule } from 'src/app/components/other-courses/other-courses.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
-
+import { SwiperModule } from 'swiper/angular';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CourseDetailPageRoutingModule,
+    SwiperModule,
     SdHeaderTopModule,
     CourseSchedulesModule,
     OtherCoursesModule,

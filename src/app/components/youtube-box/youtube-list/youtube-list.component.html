@@ -1,56 +1,57 @@
 <div class="vedio-content-89658">
-  <swiper-container #slides
-    style="width: calc(100vw - 32px); display: flex; border-bottom:  0.25px solid rgba(103, 113, 105, 0.15);"
-    slides-per-view="2">
-    <swiper-slide style="width: 100%; gap: 100px;">
+
+  <swiper [slidesPerView]="2" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89651">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">How to create Course, Manage Trial requests</div>
       </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
+    </ng-template>
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89652">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">Manage Trial requests</div>
       </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
+    </ng-template>
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89653">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">View your earnings</div>
       </div>
-    </swiper-slide>
-  </swiper-container>
-  <swiper-container #slides style="width: calc(100vw - 32px); display: flex;" slides-per-view="2">
-    <swiper-slide style="width: 100%; gap: 10px;">
+    </ng-template>
+  </swiper>
+
+  <swiper [slidesPerView]="2" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89654">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">Get more students </div>
       </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
+    </ng-template>
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89655">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">Manage your students</div>
       </div>
-    </swiper-slide>
-    <swiper-slide style="width: 100%; gap: 10px;">
+    </ng-template>
+    <ng-template swiperSlide>
       <div class="vedio-box-inner">
         <div class="video-89656">
           <img src="../../../../assets/youtube.png" alt="" class="you-img">
         </div>
         <div class="video-para">Manage your schedule</div>
       </div>
-    </swiper-slide>
-  </swiper-container>
+    </ng-template>
+  </swiper>
+
 </div>

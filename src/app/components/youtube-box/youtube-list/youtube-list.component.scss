@@ -1,3 +1,7 @@
+.swiper-container-7895 {
+  width: calc(100vw - 32px);
+}
+
 .vedio-box-outer {
   display: flex;
   gap: 16px;
@@ -5,11 +9,11 @@
   justify-content: center;
 }
 
-swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
+// swiper-slide {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-evenly;
+// }
 
 .vedio-box-inner {
   border-radius: 6px;
@@ -118,7 +122,7 @@ swiper-slide {
 
 .video-para {
   color: rgb(0, 0, 0);
-  padding: 8px 0; 
+  padding: 8px 0;
   // margin-left: 10px;
   font-size: 16px;
   font-weight: 400;
