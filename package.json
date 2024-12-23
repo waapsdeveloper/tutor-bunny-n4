@@ -48,7 +48,7 @@
     "ngx-star-rating": "^2.1.0",
     "pusher-js": "^8.4.0-rc2",
     "rxjs": "~7.8.0",
-    "swiper": "^11.1.12",
+    "swiper": "^8.4.7",
     "tslib": "^2.3.0",
     "tutor-bunny": "file:",
     "zone.js": "~0.14.2"

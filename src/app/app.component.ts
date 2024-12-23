@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { register } from 'swiper/element/bundle';
 import { FirebaseService } from './services/firebase.service';
 import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -8,7 +7,6 @@ import { UtilityService } from './services/utility.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // register Swiper custom elements
-register();
 
 @Component({
   selector: 'app-root',

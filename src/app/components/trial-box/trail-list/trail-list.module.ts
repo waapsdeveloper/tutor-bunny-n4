@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { NamesPipeModule } from 'src/app/pipes/name.pipe.module';
 
 
-
 @NgModule({
   declarations: [TrailListComponent],
   imports: [

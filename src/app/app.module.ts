@@ -13,18 +13,22 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
 import { SharedSqliteModule } from './services/sqlite/shared-sqlite/shared-sqlite.module';
-
+import { SwiperModule } from 'swiper/angular';
 
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot({
-    mode: 'ios'
-  }), AppRoutingModule,
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot({
+      mode: 'ios'
+    }),
+    AppRoutingModule,
     HttpClientModule,
     NgxPubSubModule,
-    SharedSqliteModule
+    SharedSqliteModule,
+    SwiperModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
