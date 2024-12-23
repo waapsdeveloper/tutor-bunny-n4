@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
@@ -7,6 +7,8 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage extends BasePage {
+
+  @Input() role_id: any = '';
 
   formData: any = {
     email: null,
@@ -38,14 +40,14 @@ export class SignUpPage extends BasePage {
     ) {
       return;
     }
-    let key = localStorage.getItem('role');
+
     let obj = {
       email: this.formData.email,
       password: this.formData.password,
       name: this.formData.name,
       confirm_password: this.formData.confirm_password,
       login_type: 'email',
-      role_id: key,
+      role_id: this.role_id,
     };
     let res = (await this.network.signUpviaEmail(obj)) as any;
 

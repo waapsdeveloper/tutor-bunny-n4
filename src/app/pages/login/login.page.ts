@@ -16,15 +16,8 @@ export class LoginPage extends BasePage {
     password: null,
   };
 
-  private _role: any[] = [];
-  @Input('preSelectedLanguages')
-  public get role() {
-    return this._role;
-  }
+  @Input() role_id: any = '';
 
-  public set role(value: any[]) {
-    this._role = value;
-  }
   constructor(injector: Injector) {
     super(injector);
   }
@@ -45,7 +38,7 @@ export class LoginPage extends BasePage {
     let d = {
       email: this.formData.email,
       password: this.formData.password,
-      role_id: this._role,
+      role_id: this.role_id,
     };
     const res = (await this.network.loginViaEmail(d)) as any;
 
@@ -63,20 +56,6 @@ export class LoginPage extends BasePage {
     }
   }
 
-  signUp() {
-    let obj = {
-      step: 2,
-    };
-
-    this.modals.dismiss(obj);
-  }
-
-  back() {
-    let obj = {
-      step: 1
-    };
-    this.modals.dismiss(obj);
-  }
   forgetPassword() {
 
     let obj = {

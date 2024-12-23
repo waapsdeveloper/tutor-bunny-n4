@@ -1,49 +1,35 @@
-<ion-header>
-  <div class="top-header-78956">
-    <div class="header-left-items-78956">
-      <div class="header-title  roboto-regular ">Register your account</div>
+<div class="body-content-68448">
+  <div class="input-box-lines d-flex flex-column gap-8">
+    <div class="input-title fs-12 roboto-medium">Name </div>
+    <app-sd-input-box [image]="'assets/svg/name.svg'" placeholder="Enter your Name" (onChange)="result($event, 'name')"
+      [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
+  </div>
+  <div class="input-box-lines d-flex flex-column gap-8">
+    <div class="input-title fs-12 roboto-medium">Email</div>
+    <app-sd-input-box [image]="'assets/svg/email.svg'" placeholder="Enter your email"
+      (onChange)="result($event, 'email')" [inputText]="formData.email" [key]="'email'"
+      [errorText]="'Email is required'" [type]="'email'"></app-sd-input-box>
+  </div>
+  <div class="input-box-lines d-flex flex-column gap-8">
+    <div class="input-title fs-12 roboto-medium">Password</div>
+    <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'" placeholder="Enter your password"
+      (onChange)="result($event, 'password')" [inputText]="formData.password" [key]="'password'"
+      [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
+  </div>
+
+  <div class="input-box-lines d-flex flex-column gap-8">
+    <div class="input-title fs-12 roboto-medium">Confirm Password </div>
+    <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
+      placeholder="Re-enter your password" (onChange)="result($event, 'confirm_password')"
+      [inputText]="formData.confirm_password" [key]="'confirm_password'" [errorText]="'Confirm Password is required'"
+      [type]="'password'"></app-sd-input-box>
+  </div>
+  <div class="d-flex flex-column gap-16">
+    <div class="input-box-lines">
+      <app-sd-button-gray [text]="'Register'" (click)="SignUpWithEmail()"></app-sd-button-gray>
     </div>
-    <div class="header-right-items-78956" (click)="back()">
-      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    <div class="input-box-lines">
+      <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>
     </div>
   </div>
-</ion-header>
-
-<ion-content class="ion-padding ion-content-medium-background">
-  <div class="body-content-68448">
-    <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Name </div>
-      <app-sd-input-box [image]="'assets/svg/name.svg'" placeholder="Enter your Name"
-        (onChange)="result($event, 'name')" [inputText]="formData.name" [key]="'name'"
-        [errorText]="'Name is required'"></app-sd-input-box>
-    </div>
-    <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Email</div>
-      <app-sd-input-box [image]="'assets/svg/email.svg'" placeholder="Enter your email"
-        (onChange)="result($event, 'email')" [inputText]="formData.email" [key]="'email'"
-        [errorText]="'Email is required'" [type]="'email'"></app-sd-input-box>
-    </div>
-    <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Password</div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
-        placeholder="Enter your password" (onChange)="result($event, 'password')" [inputText]="formData.password"
-        [key]="'password'" [errorText]="'Password is required'" [type]="'password'"></app-sd-input-box>
-    </div>
-
-    <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-12 roboto-medium">Confirm Password </div>
-      <app-sd-input-box [showTogglePassword]="true" [image]="'assets/svg/password.svg'"
-        placeholder="Re-enter your password" (onChange)="result($event, 'confirm_password')"
-        [inputText]="formData.confirm_password" [key]="'confirm_password'" [errorText]="'Confirm Password is required'"
-        [type]="'password'"></app-sd-input-box>
-    </div>
-    <div class="d-flex flex-column gap-16">
-      <div class="input-box-lines">
-        <app-sd-button-gray [text]="'Register'" (click)="SignUpWithEmail()"></app-sd-button-gray>
-      </div>
-      <div class="input-box-lines">
-        <app-sd-button-clear [text]="'Cancel'" (click)="back()"></app-sd-button-clear>
-      </div>
-    </div>
-  </div>
-</ion-content>
+</div>

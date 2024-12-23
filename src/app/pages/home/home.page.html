@@ -24,9 +24,9 @@
     </div>
 
 
-    <div class="forms-section-toggle-outer">
-      <app-login [hidden]="step !== 1"></app-login>
-      <app-sign-up [hidden]="step !== 2"></app-sign-up>
+    <div class="forms-section-toggle-outer ion-padding">
+      <app-login [hidden]="step !== 1" [role_id]="role_Id"></app-login>
+      <app-sign-up [hidden]="step !== 2" [role_id]="role_Id"></app-sign-up>
 
     </div>
     <div class="d-flex flex-column align-items-center">
