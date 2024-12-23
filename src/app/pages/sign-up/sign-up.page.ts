@@ -66,7 +66,8 @@ export class SignUpPage extends BasePage {
           user: res.user,
           token: res.token,
         };
-        this.modals.dismiss(obj);
+        // this.modals.dismiss(obj);
+        this.formAction.emit(obj);
       }
     }
   }

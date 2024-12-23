@@ -55,6 +55,11 @@ export class HomePage extends BasePage implements ViewWillEnter {
     }else if(type == 'signup'){
       this.step = 2;
       console.log($event);
+      let d = Object.assign({}, $event);
+      localStorage.setItem('token', d.token);
+      await this.users.setUser(d.user);
+      this.nav.push('pre-splash');
+      return;
 
     }else if(type == 'forget'){
       this.step = 3;
