@@ -6,9 +6,9 @@
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
     <div>
-      <app-request-list *ngFor="let item of chats.requests" [item]="item" [count]="count"
+      <app-request-list *ngFor="let item of chats.requests" [item]="item"
        ></app-request-list>
-       <div style="height: 700px; display: flex; align-items: center; justify-content: center" *ngIf="chats.requestCount == 0">No requests to display</div>
+       <div style="height: 700px; display: flex; align-items: center; justify-content: center" *ngIf="chats.requestCount === 0">No requests to display</div>
     </div>
   </div>
 </ion-content>

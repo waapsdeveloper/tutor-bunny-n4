@@ -8,12 +8,10 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.scss'],
 })
-export class RequestListComponent extends BasePage implements OnInit {
+export class RequestListComponent extends BasePage {
   flag;
   date
   age
-  @Input() count;
-  @Output('reloadList') reloadList: EventEmitter<any> = new EventEmitter<any>()
 
   private _item: any;
 
@@ -39,8 +37,6 @@ export class RequestListComponent extends BasePage implements OnInit {
     const currentYear = new Date().getFullYear();
     this.age = currentYear - this.item.user.student.dob;
   }
-
-  ngOnInit() { }
 
   getFlag() {
 

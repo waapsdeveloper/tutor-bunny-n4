@@ -171,8 +171,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   }
 
   async showRequests() {
-    let res = this.nav.push('chat-requests');
-    // this.initialize()
+    this.nav.push('chat-requests');
   }
 
   async getRequstList() {

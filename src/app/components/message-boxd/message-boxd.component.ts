@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-message-boxd',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageBoxdComponent  implements OnInit {
 
-  constructor() { }
+  constructor(public nav: NavService, public chats: ChatService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.chats.requestCount);
+  }
+
+  async showRequests() {
+    this.nav.push('chat-requests');
+  }
 
 }

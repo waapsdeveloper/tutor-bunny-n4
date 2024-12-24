@@ -1,13 +1,13 @@
 <div class="trial-box-outer-689567">
   <div class="sb-heading-7895">
-    <!-- <div class="sb-heading-title-7895 outfit-semibold">Pending requests ({{globalTrials.pendingTrials.length}}) </div>
-    <div class="sb-heading-sl-7895 outfit" (click)="goToTrialReq()">See all trials</div> -->
+    <div class="sb-heading-title-7895 outfit-semibold">Inbox ({{chats.requestCount}}) </div>
+    <div class="sb-heading-sl-7895 outfit" (click)="showRequests()">See all requests</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
 <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
-  <!-- <ng-template swiperSlide *ngFor="let item of globalTrials.pendingTrials | filterPending: 'Pending'">
-    <app-message-boxd-item [item]="item"></app-message-boxd-item>
-  </ng-template> -->
+  <ng-template swiperSlide *ngFor="let item of chats.requests">
+    <app-request-list [item]="item"></app-request-list>
+  </ng-template>
 </swiper>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MessageBoxdComponent } from './message-boxd.component';
 import { SwiperModule } from 'swiper/angular';
 import { MessageBoxdItemModule } from './message-boxd-item/message-boxd-item.module';
+import { RequestListModule } from 'src/app/pages/chat-requests/request-list/request-list.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { MessageBoxdItemModule } from './message-boxd-item/message-boxd-item.mod
   imports: [
     CommonModule,
     SwiperModule,
-    MessageBoxdItemModule
+    MessageBoxdItemModule,
+    RequestListModule
   ],
   exports: [MessageBoxdComponent]
 })
