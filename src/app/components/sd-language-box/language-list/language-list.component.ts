@@ -14,14 +14,11 @@ export class LanguageListComponent extends BasePage {
 
   list = [];
   search: "";
-  offset = 0;
   limit = 30;
   page = 1;
   lang;
 
   selection: any[] = [];
-
-  @Input() user: any = null;
 
   private _preSelectedLanguages: any[] = [];
   @Input('preSelectedLanguages')
@@ -46,9 +43,8 @@ export class LanguageListComponent extends BasePage {
   // }
 
   async initialize() {
-    this.user = this.users.getUser()
     this.search = "";
-    this.offset = 0;
+    this.page = 1;
     this.callApi();
   }
 
@@ -66,7 +62,7 @@ export class LanguageListComponent extends BasePage {
 
 
   async loadMore($event) {
-    this.offset = this.list.length;
+    this.page = this.page + 1;
     await this.callApi();
     $event.target.complete();
   }
@@ -104,6 +100,7 @@ export class LanguageListComponent extends BasePage {
       let listw = this.list.filter(x => x.checked == true);
 
       this.lang = await this.network.getLanguage(obj) as any[];
+      console.log(this.lang);
       this.page = this.lang.current_page;
 
       if (this.page == 1) {
@@ -169,7 +166,7 @@ export class LanguageListComponent extends BasePage {
   handleInput(event) {
     const query = event.target.value.toLowerCase();
     this.search = query;
-    this.offset = 0;
+    this.page = 1;
     this.callApi();
     // this.results = this.data.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }

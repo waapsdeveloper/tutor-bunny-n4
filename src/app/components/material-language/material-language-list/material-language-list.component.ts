@@ -14,7 +14,7 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
   param;
   page = 1;
   private _preSelectedLanguages: any[] = [];
-  
+
    @Input('preSelectedLanguages')
   public get preSelectedLanguages() {
     return this._preSelectedLanguages;
@@ -60,6 +60,12 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
 
 
   async loadMore($event) {
+
+    if(this.lang.current_page == this.lang.last_page){
+      $event.target.disabled = true;
+      return;
+    }
+
     this.page = this.lang.current_page + 1;
     await this.callApi();
     $event.target.complete();

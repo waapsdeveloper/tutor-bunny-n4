@@ -59,6 +59,12 @@ export class CourseLanguageListComponent extends BasePage implements OnInit {
 
 
   async loadMore($event) {
+
+    if(this.lang.current_page == this.lang.last_page){
+      $event.target.disabled = true;
+      return;
+    }
+
     this.page = this.lang.current_page + 1;
     await this.callApi();
     $event.target.complete();

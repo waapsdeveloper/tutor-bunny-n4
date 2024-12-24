@@ -71,7 +71,7 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
     }
 
     const res = (await this.modals.present(
-      MaterialLanguageComponent,
+      MaterialLanguageListComponent,
       obj
     )) as any;
 
@@ -79,6 +79,7 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
 
       this.selectedLanguage = res.data.item;
       this.onChange.emit(this.selectedLanguage);
+
     }
   }
 
