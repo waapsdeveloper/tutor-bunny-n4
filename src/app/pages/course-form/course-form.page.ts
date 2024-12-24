@@ -1,12 +1,10 @@
 import {
   Component,
-  ElementRef,
   Injector,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
+import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCourseService } from 'src/app/services/create-course.service';
 
@@ -18,7 +16,7 @@ import { CreateCourseService } from 'src/app/services/create-course.service';
 export class CourseFormPage
   extends BasePage
   implements OnInit, ViewWillEnter {
-  swiperModules = [IonicSlides];
+
   @ViewChild('slides', { static: false }) slides: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   params;

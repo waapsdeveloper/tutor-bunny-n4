@@ -4,8 +4,8 @@
 </ion-header>
 <ion-content class="ion-padding " #content>
   <form>
-    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides>
-      <swiper-slide>
+    <swiper [slidesPerView]="1" [spaceBetween]="40" [pagination]="{ clickable: false }" #slides class="swiper-container-7895">
+      <ng-template swiperSlide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -76,8 +76,8 @@
           <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')" [from_age]="createCourseService.formData.from_age"
             [to_age]="createCourseService.formData.to_age" [key]="'age'" [errorText]="'Age Range is required'"></app-sd-age-boox>
         </div>
-      </swiper-slide>
-      <swiper-slide>
+      </ng-template>
+      <ng-template swiperSlide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Category</div>
@@ -126,8 +126,8 @@
               [courseId]="courseId" [key]="'schedules'"></app-course-dates>
           </div>
         </div>
-      </swiper-slide>
-    </swiper-container>
+      </ng-template>
+    </swiper>
   </form>
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">

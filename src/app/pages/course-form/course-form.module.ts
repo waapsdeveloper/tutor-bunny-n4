@@ -28,13 +28,14 @@ import { SdSubjectBoxModule } from 'src/app/components/sd-subject-box/sd-subject
 import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-textarea-about.module';
 import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-textarea-box.module';
 import { SearchKeywordModule } from 'src/app/components/search-keyword/search-keyword.module';
-
+import { SwiperModule } from 'swiper/angular';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CourseFormPageRoutingModule,
+    SwiperModule,
     SdHeaderTopModule,
     SdInputBoxModule,
     SdCountryBoxModule,
