@@ -9,39 +9,85 @@
       </div>
       <div class="trial-box-heading-outer-sl-7895">
         <img src="assets/svg/bookmark.svg" style="height: 20px" />
-        <div class="trial-box-heading-accept-2156 roboto-medium fs-12">
-         <span>Accept</span>
+        <div class="trial-box-heading-accept-2156 roboto-medium fs-12" *ngIf="item.status === 'Pending'" (click)="presentAlert('Accepted')">
+          <span>Accept</span>
         </div>
-        <div class="trial-box-heading-reject-2156 roboto-medium fs-12">
+        <div class="trial-box-heading-reject-2156 roboto-medium fs-12" *ngIf="item.status === 'Pending'" (click)="presentAlert('Rejected')">
           <span>Reject</span>
         </div>
       </div>
     </div>
     <div class="trial-box-content-outer">
-      <div
-        class="image-container-23432"
-        [style.background-image]="
+      <div class="image-container-23432" [style.background-image]="
           item?.student.image
             ? 'url(' + item?.student.image + ')'
             : 'assets/profileimg.png'
-        "
-      ></div>
+        "></div>
       <div class="content-container-23432">
         <div class="profile-name-outer-8973 roboto-medium fs-16">
-          {{ displayName | names }}
+          {{item.course.title}}
         </div>
+        <div class="profile-line-content">
+          <div class="profile-name-outer-8973 roboto-medium fs-16">
+            {{ displayName | names }}
+          </div>
+          <div class="pnd-678956" *ngIf="item.status !== 'Rejected'">
+            <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
+          </div>
+          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
+            <ng-template>
+              <ion-list *ngIf="item.status === 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Accepted')">
+                  <img class="img1-789575" src="assets/icon/check-circle.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Accept</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status === 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Rejected')">
+                  <img class="img1-789575" src="assets/icon/reject-circle.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Reject</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status === 'Pending'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Blocked')">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Block</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status === 'Complete' || item.status === 'Accepted'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578" (click)="goToChat()">
+                  <img class="img1-789575" src="../../../assets/svg/chat-fill.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Chat</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status === 'Accepted'">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Complete')">
+                  <img class="img1-789575" src="../../../assets/svg/complete.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Complete</div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="item.status === 'Blocked'" style="border: none;">
+                <ion-item [button]="true" [detail]="false" class="profile-line-789578"
+                  (click)="presentAlert('Unblock')">
+                  <img class="img1-789575" src="assets/icon/block-circle.svg" />
+                  <div class="nbl-687 outfit-semibold" style="margin-left: 16px;">Unblock</div>
+                </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
+        </div>
+
         <div class="profile-age-2154">
           <img src="assets/svg/cake.svg" alt="Age Icon" class="icon" />
-          <span class="roboto-regular fs-14">Age 6</span>
+          <span class="roboto-regular fs-14">Age {{age}}</span>
         </div>
-        <div class="profile-location-31543">
-          <img
-            src="../../../../assets/svg/Flag1.svg"
-            class="flag"
-            alt="Country Flag"
-          />
-
-          <span class="country-name roboto-regular fs-16">United States</span>
+        <div class="flag-box-98875">
+          <span slot="start" class="fi fi-{{getFlag()}}"></span>
+          <div class="fs-16 outfit">{{item.student.student.country?.name}}</div>
         </div>
       </div>
     </div>
