@@ -13,6 +13,7 @@ import { StudentsBoxModule } from 'src/app/components/students-box/students-box.
 import { TrialBoxModule } from 'src/app/components/trial-box/trial-box.module';
 import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { MessageBoxdModule } from 'src/app/components/message-boxd/message-boxd.module';
 
 
 
@@ -27,7 +28,8 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
     TrialBoxModule,
     TeacherDashboardPageRoutingModule,
     YoutubeBoxModule,
-    RatingStarsModule
+    RatingStarsModule,
+    MessageBoxdModule
 
   ],
   declarations: [TeacherDashboardPage]
