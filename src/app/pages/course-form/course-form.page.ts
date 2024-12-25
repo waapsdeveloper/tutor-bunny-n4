@@ -7,7 +7,7 @@ import {
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCourseService } from 'src/app/services/create-course.service';
-
+import { SwiperComponent } from 'swiper/angular';
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.page.html',
@@ -17,7 +17,7 @@ export class CourseFormPage
   extends BasePage
   implements OnInit, ViewWillEnter {
 
-  @ViewChild('slides', { static: false }) slides: any;
+  @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   params;
   backUrl;
@@ -43,6 +43,7 @@ export class CourseFormPage
     public createCourseService: CreateCourseService
   ) {
     super(injector);
+
     this.initialize();
     this.user = this.users.getUser();
     if (this.user.teacher.country.currency_symbol) {
@@ -184,7 +185,7 @@ export class CourseFormPage
     localStorage.setItem('course_Id', courseId);
     this.loading = false;
     if (res) {
-      this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.slides?.swiperRef?.slideTo(1, 300, false);
       this.step = 2;
       this.events.publish(
         'set-form-course-category',
@@ -198,7 +199,7 @@ export class CourseFormPage
   async changeToPrev() {
     if (this.step == 2) {
       this.step = 1;
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+      this.slides?.swiperRef?.slideTo(0, 300, false);
     }
   }
 
@@ -249,7 +250,7 @@ export class CourseFormPage
       this.step = 1;
       this.edit = true;
       this.courseId = this.createCourseService.courseId;
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+      this.slides?.swiperRef?.slideTo(0, 300, false);
     }
 
   }

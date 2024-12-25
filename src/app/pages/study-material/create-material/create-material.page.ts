@@ -2,6 +2,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { CreateMaterialService } from 'src/app/services/create-material.service';
+import { SwiperComponent } from 'swiper/angular';
 @Component({
   selector: 'app-create-material',
   templateUrl: './create-material.page.html',
@@ -9,6 +10,7 @@ import { CreateMaterialService } from 'src/app/services/create-material.service'
 })
 export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnter {
 
+  @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   hideTerms = false;
   backUrl;
