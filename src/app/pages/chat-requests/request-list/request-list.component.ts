@@ -24,6 +24,7 @@ export class RequestListComponent extends BasePage {
     this._item = value;
     this.flag = this.getFlag();
     const date = this.item.updated_at;
+    console.log(value);
 
     this.calculateAge()
     this.date = moment(date).format('DD-MMM-YYYY');
