@@ -49,7 +49,7 @@ export class AppComponent {
     this.deepLinkRegister();
     this.registerBackButtonEvent();
 
-    this.router.navigate(['/splash']);
+    // this.router.navigate(['/splash']);
 
   }
 
@@ -69,7 +69,7 @@ export class AppComponent {
   deepLinkRegister() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       this.zone.run(() => {
-        // Example url: https://beerswift.app/tabs/tab2
+        // Example url: https://tutorbunny.app/tabs/tab2
         // slug = /tabs/tab2
         const slug = event.url.split('.app').pop();
         if (slug) {

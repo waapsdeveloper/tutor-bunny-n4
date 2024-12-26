@@ -3,12 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'splash',
-  //   pathMatch: 'full',
+  {
+    path: '',
+    redirectTo: 'splash',
+    pathMatch: 'full',
 
-  // },
+  },
   {
     path: 'splash',
     loadChildren: () =>
@@ -106,7 +106,7 @@ const routes: Routes = [
     path: 'student-study-material-detail',
     loadChildren: () => import('./pages/student-study-material-detail/student-study-material-detail.module').then( m => m.StudentStudyMaterialDetailPageModule)
   },
-  
+
   {
     path: 'my-teachers',
     loadChildren: () => import('./pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
