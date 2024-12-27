@@ -191,10 +191,18 @@ const routes: Routes = [
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
+
+
   {
     path: 'create-material',
     loadChildren: () => import('./pages/study-material/pages/create-material/create-material.module').then( m => m.CreateMaterialPageModule)
   },
+  {
+    path: 'material-photoss',
+    redirectTo: 'course-photoss'
+  },
+
+
   // {
   //   path: 'list-material',
   //   loadChildren: () => import('./pages/study-material/list-material/list-material.module').then( m => m.ListMaterialPageModule)

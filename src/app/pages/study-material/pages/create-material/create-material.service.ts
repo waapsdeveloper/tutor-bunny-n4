@@ -13,6 +13,7 @@ export interface StudyMaterialModel {
   images: any[];
   price: number;
   language_id: number;
+  language: any;
   keyword: string[];
   terms: boolean;
 }
@@ -37,6 +38,7 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
       images: [],
       price: 0,
       language_id: -1,
+      language: null,
       keyword: [],
       terms: false
     };
@@ -90,6 +92,13 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
     }));
   }
 
+  setLanguage(language: number) {
+    this.setState( state => ({
+      ...state,
+      language
+    }));
+  }
+
   setKeyword(keyword: string[]) {
     this.setState( state => ({
       ...state,
@@ -114,27 +123,18 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
       images: [],
       price: 0,
       language_id: -1,
+      language: null,
       keyword: [],
       terms: false
     }));
   }
 
   getTitle() {
-
-    return new Promise((resolve, reject) => {
-      this.selectState(state => state.title).subscribe((data) => {
-        resolve(data);
-      });
-    });
-
+    return this.selectState(state => state.title);
   }
 
   getDescription() {
-    return new Promise((resolve, reject) => {
-      this.selectState(state => state.description).subscribe((data) => {
-        resolve(data);
-      });
-    });
+    return this.selectState(state => state.description);
   }
 
   getImage() {
@@ -146,15 +146,15 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
   }
 
   getPrice() {
-    return new Promise((resolve, reject) => {
-      this.selectState(state => state.price).subscribe((data) => {
-        resolve(data);
-      });
-    });
+    return this.selectState(state => state.price);
   }
 
   getLanguageId() {
     return this.selectState(state => state.language_id);
+  }
+
+  getLanguage() {
+    return this.selectState(state => state.language);
   }
 
   getKeyword() {

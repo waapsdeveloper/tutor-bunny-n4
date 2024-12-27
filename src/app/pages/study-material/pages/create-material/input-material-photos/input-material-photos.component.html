@@ -1,0 +1,4 @@
+<div class="input-box-lines d-flex flex-column gap-8">
+  <app-material-photo [image]="image$" (click)="openMaterialPhotos()"></app-material-photo>
+</div>
+<app-sd-error-input-info  *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>

@@ -37,29 +37,7 @@ export class SdTextareaAboutComponent implements OnInit {
       false
     );
 
-    this.events.subscribe(
-      'teacher-study-material-first-screen-submit-call',
-      (formData: any) => {
-        let v = formData[this.key];
-        if (this.key == 'description') {
-          if (!v || v == '') {
-            this.isRequired = true;
-            setTimeout(() => {
-              this.isRequired = false;
-            }, 5000);
-          }
-          if (v && v.length < 250) {
-            this.isRequired = true;
-            this.errorText =
-              'The Detail field should have minimum 250 characters';
-            setTimeout(() => {
-              this.isRequired = false;
-            }, 5000);
-          }
-        }
-      },
-      false
-    );
+    
     this.events.subscribe(
       'teacher-course-first-screen-submit-call',
       (formData: any) => {

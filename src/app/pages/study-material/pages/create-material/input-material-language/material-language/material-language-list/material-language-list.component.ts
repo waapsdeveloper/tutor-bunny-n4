@@ -21,8 +21,9 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
   };
   public set preSelectedLanguages(value: any[]) {
     this._preSelectedLanguages = value;
-
+    console.log(this._preSelectedLanguages);
   }
+
   searchTerm: string = '';
   selectedContactId: any = null;
   constructor(injector: Injector) {
@@ -83,10 +84,13 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...this.lang["data"]]
       }
+
+      console.log("ewr", this.preSelectedLanguages);
       this.list = this.list.map((item) => {
         const fi = this.preSelectedLanguages.find(x => x.id == item.id);
         if (fi) {
           item.checked = true;
+          this.selectedItemId = item.id;
         }
         return item;
       });

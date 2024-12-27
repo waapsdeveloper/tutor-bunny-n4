@@ -10,7 +10,6 @@ import { ModeOfTeachingModule } from 'src/app/components/mode-of-teaching/mode-o
 import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profile/accept-terms-profile.module';
 import { CourseCategoryModule } from 'src/app/components/course-category/course-category.module';
 import { CourseDatesModule } from 'src/app/components/course-dates/course-dates.module';
-// import { MaterialPhotoModule } from 'src/app/components/material-photo/material-photo.module';
 import { CreateMaterialPage } from './create-material.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
@@ -25,6 +24,9 @@ import { InputMaterialDescriptionComponent } from './input-material-description/
 import { InputMaterialPriceComponent } from './input-material-price/input-material-price.component';
 import { InputMaterialLanguageComponent } from './input-material-language/input-material-language.component';
 import { MaterialLanguageModule } from './input-material-language/material-language/material-language.module';
+import { InputMaterialTermsComponent } from './input-material-terms/input-material-terms.component';
+import { InputMaterialPhotosComponent } from './input-material-photos/input-material-photos.component';
+import { MaterialPhotoModule } from './input-material-photos/material-photo/material-photo.module';
 
 
 @NgModule({
@@ -44,7 +46,6 @@ import { MaterialLanguageModule } from './input-material-language/material-langu
     SdTextareaAboutModule,
 
     ModeOfTeachingModule,
-    // MaterialPhotoModule,
     AcceptTermsProfileModule,
     CourseCategoryModule,
     CourseDatesModule,
@@ -54,6 +55,7 @@ import { MaterialLanguageModule } from './input-material-language/material-langu
 
     //
     MaterialLanguageModule,
+    MaterialPhotoModule
 
   ],
   declarations: [
@@ -61,7 +63,9 @@ import { MaterialLanguageModule } from './input-material-language/material-langu
     InputMaterialTitleComponent,
     InputMaterialDescriptionComponent,
     InputMaterialPriceComponent,
-    InputMaterialLanguageComponent
+    InputMaterialLanguageComponent,
+    InputMaterialTermsComponent,
+    InputMaterialPhotosComponent
   ]
 })
 export class CreateMaterialPageModule {}

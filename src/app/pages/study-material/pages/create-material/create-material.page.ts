@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { CreateMaterialService } from 'src/app/pages/study-material/pages/create-material/create-material.service';
@@ -8,7 +8,7 @@ import { SwiperComponent } from 'swiper/angular';
   templateUrl: './create-material.page.html',
   styleUrls: ['./create-material.page.scss'],
 })
-export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnter {
+export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnter, OnDestroy {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -29,6 +29,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     console.log("material init")
   }
 
+  ngOnDestroy(): void {
+    this.createMaterialService.reset();
+  }
+
   async initialize() { }
 
   async ionViewWillEnter() {
@@ -36,8 +40,17 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   }
 
   async onSlideChange() {
+
+
     const data = await this.createMaterialService.getFormData();
-    console.log("slide change", data);
+    this.events.publish('teacher-study-material-first-screen-submit-call', data)
+
+    if (!data.title || !data.description || !data.language || !data.price || !data.terms) {
+      return;
+    }
+
+    this.step = 2;
+    this.slides?.swiperRef?.slideTo(1, 500, false);
 
 
 

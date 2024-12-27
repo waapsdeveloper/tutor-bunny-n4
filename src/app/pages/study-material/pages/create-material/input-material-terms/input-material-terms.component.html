@@ -1,0 +1,4 @@
+<div class="terms-agree" *ngIf="!hideTerms">
+  <app-accept-terms-profile [terms]="terms$" [key]="'terms'" [errorText]="'Please accept terms'"
+    (onChange)="result($event, 'terms')" [needed]="needed"></app-accept-terms-profile>
+</div>

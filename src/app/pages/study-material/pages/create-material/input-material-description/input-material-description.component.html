@@ -3,7 +3,7 @@
     <div class="label-with-word-count-left">
       <span>Details</span> <img src="../../assets/svg/question.svg" alt="" id="click-description">
     </div>
-    <div class="label-with-word-count-right roboto-light"> {{ description.length || 0 }} Characters</div>
+    <div class="label-with-word-count-right roboto-light"> {{ description$.length || 0 }} Characters</div>
   </div>
   <ion-popover trigger="click-description" triggerAction="click">
     <ng-template>
@@ -24,7 +24,7 @@
     </ng-template>
   </ion-popover>
   <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
-    (onChange)="result($event, 'description')" [inputText]="description"
+    (onChange)="result($event, 'description')" [inputText]="description$"
     [key]="'description'" [errorText]="'Detail is required'" [minlength]="250"
     maxlength="500"></app-sd-textarea-about>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CreateMaterialService } from '../create-material.service';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-input-material-description',
@@ -8,16 +9,45 @@ import { CreateMaterialService } from '../create-material.service';
 })
 export class InputMaterialDescriptionComponent  implements OnInit {
 
-  description: string = '';
-  constructor(public createMaterialService: CreateMaterialService) { }
+  description$: string = '';
+  @Input() isRequired = false;
+  @Input() needed = true;
+  @Input() errorText = 'title is required';
+  key = 'description';
+
+  constructor(public createMaterialService: CreateMaterialService, public events: EventsService) {
+    this.createMaterialService.getDescription().subscribe((value) => {
+      this.description$ = value;
+    });
+  }
 
   async ngOnInit() {
     console.log("material description init");
-    this.description = await this.createMaterialService.getDescription() as string;
+    this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData: any) => {
+        let v = formData[this.key];
+        if (this.key == 'description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The Detail field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+
   }
 
   result(value, key) {
-    this.description = value;
     this.createMaterialService.setDescription(value);
   }
 

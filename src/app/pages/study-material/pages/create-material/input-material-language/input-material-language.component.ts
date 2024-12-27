@@ -12,15 +12,24 @@ export class InputMaterialLanguageComponent  implements OnInit {
   language_id: number = null;
   language_name: string = null;
 
-  constructor(public createMaterialService: CreateMaterialService) { }
+  constructor(public createMaterialService: CreateMaterialService) {
+    this.createMaterialService.getLanguageId().subscribe((value) => {
+      this.language_id = value;
+    });
 
-  ngOnInit() {
+    this.createMaterialService.getLanguage().subscribe((value) => {
+      this.language = value;
+    });
+
+  }
+
+  async ngOnInit() {
     console.log("material language init")
   }
 
   result(value, key) {
-    this.language_id = value;
-    this.createMaterialService.setLanguageId(value);
+    this.createMaterialService.setLanguage(value);
+    this.createMaterialService.setLanguageId(value.id);
   }
 
 }
