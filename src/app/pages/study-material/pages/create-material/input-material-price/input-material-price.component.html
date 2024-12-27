@@ -1,0 +1,7 @@
+<div class="input-box-lines d-flex flex-column gap-8">
+  <div class="input-title fs-14 roboto-medium">Price {{currency}}<img src="../../assets/svg/question.svg" alt=""
+      id="click-keyword "></div>
+  <app-sd-input-box (onChange)="result($event, 'price')" [inputText]="price"
+    [key]="'price'" [errorText]="'price is required'" aria-placeholder="$" [type]="'number'"></app-sd-input-box>
+</div>
+

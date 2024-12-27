@@ -1,0 +1,31 @@
+.input-title {
+  font-size: 14px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.label-with-word-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  align-items: center;
+
+  .label-with-word-count-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .label-with-word-count-right {
+
+  }
+
+
+
+}

@@ -1,0 +1,6 @@
+<div class="input-box-lines d-flex flex-column gap-8">
+  <div class="input-title fs-14 roboto-medium">Language of communication</div>
+  <app-material-language placeholder="Select" (onChange)="result($event, 'language')"
+    [language]="language_id" [key]="'language'"
+    [errorText]="'language is required'"></app-material-language>
+</div>

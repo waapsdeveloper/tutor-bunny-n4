@@ -129,7 +129,7 @@ export class TabsPage extends BasePage implements OnInit {
           type: res.data.type,
         };
 
-        this.nav.push('/study-form', params);
+        this.nav.push('/create-material', params);
       } else {
         this.createCourseService.resetFormData();
         const params = {

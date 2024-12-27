@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SdButtonGrayModule } from '../../sd-button-gray/sd-button-gray.module';
-import { SdHeaderTopModule } from '../../sd-header-top/sd-header-top.module';
 import { MaterialLanguageListComponent } from './material-language-list.component';
+import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 
 
 @NgModule({

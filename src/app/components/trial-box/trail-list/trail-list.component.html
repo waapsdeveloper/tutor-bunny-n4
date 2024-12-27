@@ -31,7 +31,7 @@
           <div class="profile-name-outer-8973 roboto-medium fs-16">
             {{ displayName | names }}
           </div>
-          <div class="pnd-678956" *ngIf="item.status !== 'Rejected'">
+          <div class="pnd-678956" *ngIf="item.status !== 'Rejected' && showMoreOptions === true">
             <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
           </div>
           <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">

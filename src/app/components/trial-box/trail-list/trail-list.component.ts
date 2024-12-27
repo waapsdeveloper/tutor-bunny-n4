@@ -18,6 +18,10 @@ import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 export class TrailListComponent extends BasePage implements OnInit {
   private _item: any;
   displayName
+
+  @Input() showMoreOptions: boolean = true;
+
+
   @Input('item')
   public get item() {
     return this._item;

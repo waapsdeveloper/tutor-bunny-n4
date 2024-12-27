@@ -1,0 +1,30 @@
+<div class="input-box-lines d-flex flex-column gap-8">
+  <div class="input-title fs-14 roboto-medium label-with-word-count">
+    <div class="label-with-word-count-left">
+      <span>Details</span> <img src="../../assets/svg/question.svg" alt="" id="click-description">
+    </div>
+    <div class="label-with-word-count-right roboto-light"> {{ description.length || 0 }} Characters</div>
+  </div>
+  <ion-popover trigger="click-description" triggerAction="click">
+    <ng-template>
+      <div class="ion-padding popover-title">
+        Include the following details for this field.
+        <br>
+        <br>
+        1. What students will learn <br>
+        <br>
+        2. Requirements for this course<br>
+        <br>
+        3. Notes Syllabus (if any)<br>
+        <br>
+        4. Brief description of the course<br>
+        <br>
+        5. Who should take this course<br>
+      </div>
+    </ng-template>
+  </ion-popover>
+  <app-sd-textarea-about placeholder="Mention the details (Minimum 250 characters)"
+    (onChange)="result($event, 'description')" [inputText]="description"
+    [key]="'description'" [errorText]="'Detail is required'" [minlength]="250"
+    maxlength="500"></app-sd-textarea-about>
+</div>

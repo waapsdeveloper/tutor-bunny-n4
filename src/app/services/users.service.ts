@@ -1,16 +1,43 @@
 import { Injectable } from '@angular/core';
-import { resolve } from 'path';
 import { NetworkService } from './network.service';
-import { UserSqService } from './sqlite/user-sq.service';
+
+import {
+  NgSimpleStateBaseRxjsStore,
+  NgSimpleStateStoreConfig,
+} from 'ng-simple-state';
+
+export interface UserModel {
+  id: number;
+  name: string;
+  currency: string;
+
+}
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
+
   private _user;
   image = null;
 
-  constructor(private network: NetworkService, private userSq: UserSqService) {}
+  constructor(private network: NetworkService) {
+    super();
+  }
+
+  storeConfig(): NgSimpleStateStoreConfig {
+    return {
+      storeName: 'userStore',
+    };
+  }
+
+  protected initialState(): UserModel {
+    return {
+      id: -1,
+      name: '',
+      currency: '$',
+    };
+  }
 
   getUser() {
     if (!this._user) {
@@ -31,7 +58,51 @@ export class UsersService {
     this.image = user.image;
     console.log(this.image);
 
+    this.setState( state => ({
+      ...state,
+      id: user.id,
+      name: user.name,
+    }));
+
+    if(user.role_id == 2){
+      this.setStudent(user);
+    }
+
+    if(user.role_id == 3){
+      this.setTeacher(user);
+    }
+
     return user;
+  }
+
+
+
+  setTeacher(user) {
+
+    let v = user?.teacher?.country?.currency_symbol;
+    this.setCurrency(v ?? '$');
+
+  }
+
+  setStudent(user) {
+
+  }
+
+  setCurrency(currency: string) {
+    this.setState( state => ({
+      ...state,
+      currency
+    }));
+  }
+
+  getCurrency() {
+
+    return new Promise((resolve, reject) => {
+      this.selectState(state => state.currency).subscribe((data) => {
+        resolve(data);
+      });
+    });
+
   }
 
   getUserRole() {
@@ -51,9 +122,7 @@ export class UsersService {
     return this._user.role_id;
   }
 
-  setTeacher(user) {}
 
-  setStudent(user) {}
 
   async getLoginUserFromApi() {
     // const res = await this.userSq.loadUsers();

@@ -15,10 +15,10 @@ export class SdLanguageBoxComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputText = '';
   language = [];
-  @Input('key') key = '';
-  @Input('errorText') errorText = '';
+  @Input() key = '';
+  @Input() errorText = '';
   isRequired = false;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>()
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>()
 
   constructor(private modals: ModalService, private network: NetworkService, private events: EventsService, private users: UsersService) { }
 

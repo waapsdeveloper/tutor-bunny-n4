@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,7 +14,7 @@ import 'firebase/auth';
 import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
 import { SharedSqliteModule } from './services/sqlite/shared-sqlite/shared-sqlite.module';
 import { SwiperModule } from 'swiper/angular';
-
+import { provideNgSimpleState } from 'ng-simple-state';
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
@@ -33,6 +33,11 @@ firebase.initializeApp(environment.firebaseConfig);
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    provideNgSimpleState({
+      enableDevTool: isDevMode(),
+      enableLocalStorage: true,
+      persistentStorage: 'local'
+    })
 
   ],
   bootstrap: [AppComponent],

@@ -8,6 +8,6 @@
 
 <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
   <ng-template swiperSlide *ngFor="let item of globalTrials.pendingTrials | filterPending: 'Pending'">
-    <app-trail-list [item]="item"></app-trail-list>
+    <app-trail-list [item]="item" [showMoreOptions]="false"></app-trail-list>
   </ng-template>
 </swiper>

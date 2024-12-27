@@ -15,7 +15,7 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
   page = 1;
   private _preSelectedLanguages: any[] = [];
 
-   @Input('preSelectedLanguages')
+  @Input('preSelectedLanguages')
   public get preSelectedLanguages() {
     return this._preSelectedLanguages;
   };
