@@ -26,7 +26,6 @@ import { InputMaterialLanguageComponent } from './input-material-language/input-
 import { MaterialLanguageModule } from './input-material-language/material-language/material-language.module';
 import { InputMaterialTermsComponent } from './input-material-terms/input-material-terms.component';
 import { InputMaterialPhotosComponent } from './input-material-photos/input-material-photos.component';
-import { MaterialPhotoModule } from './input-material-photos/material-photo/material-photo.module';
 
 
 @NgModule({
@@ -55,7 +54,6 @@ import { MaterialPhotoModule } from './input-material-photos/material-photo/mate
 
     //
     MaterialLanguageModule,
-    MaterialPhotoModule
 
   ],
   declarations: [

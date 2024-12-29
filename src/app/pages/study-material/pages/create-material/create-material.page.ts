@@ -45,6 +45,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     const data = await this.createMaterialService.getFormData();
     this.events.publish('teacher-study-material-first-screen-submit-call', data)
 
+    console.log(data)
+
     if (!data.title || !data.description || !data.language || !data.price || !data.terms) {
       return;
     }
@@ -54,6 +56,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
 
 
+  }
+
+  openPhotosView(){
+    this.nav.push('/create-material-photos');
   }
 
 

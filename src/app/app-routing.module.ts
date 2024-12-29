@@ -198,9 +198,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/study-material/pages/create-material/create-material.module').then( m => m.CreateMaterialPageModule)
   },
   {
-    path: 'material-photoss',
-    redirectTo: 'course-photoss'
+    path: 'create-material-photos',
+    loadChildren: () => import('./pages/study-material/pages/create-material-photos/create-material-photos.module').then( m => m.CreateMaterialPhotosPageModule)
   },
+
+  // {
+  //   path: 'material-photoss',
+  //   loadChildren: () => import('./pages/study-material/pages/material-photos/material-photos.module').then( m => m.MaterialPhotosPageModule)
+  // },
 
 
   // {

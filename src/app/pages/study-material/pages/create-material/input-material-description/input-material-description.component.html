@@ -28,3 +28,4 @@
     [key]="'description'" [errorText]="'Detail is required'" [minlength]="250"
     maxlength="500"></app-sd-textarea-about>
 </div>
+<app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>

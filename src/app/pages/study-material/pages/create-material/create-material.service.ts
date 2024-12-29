@@ -78,6 +78,26 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
     }));
   }
 
+  addImageInImages(image: any) {
+    this.setState( state => ({
+      ...state,
+      images: [...state.images, image]
+    }));
+  }
+
+  removeImageInImagesIndex(index){
+    this.setState( state => {
+      const images = [...state.images];
+      images.splice(index, 1);
+      return {
+        ...state,
+        images
+      }
+    })
+  }
+
+
+
   setPrice(price: number) {
     this.setState( state => ({
       ...state,
