@@ -42,7 +42,7 @@ export class InputMaterialPhotosComponent implements OnInit {
 
         if (!v || v == '' || v.length == 0) {
           this.isRequired = true;
-          setTimeout(() => {o sea
+          setTimeout(() => {
             this.isRequired = false;
           }, 5000);
         }
