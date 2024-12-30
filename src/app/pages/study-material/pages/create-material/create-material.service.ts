@@ -9,7 +9,7 @@ export interface StudyMaterialModel {
   id: number;
   title: string;
   description: string;
-  image: string;
+  image: any;
   images: any[];
   price: number;
   language_id: number;
@@ -35,7 +35,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       id: -1,
       title: '',
       description: '',
-      image: '',
+      image: null,
       images: [],
       price: 0,
       language_id: -1,
@@ -49,7 +49,12 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     super();
   }
 
-
+  setId(id: number) {
+    this.setState( state => ({
+      ...state,
+      id
+    }));
+  }
 
   setTitle(title: string) {
     this.setState( state => ({
@@ -65,10 +70,12 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     }));
   }
 
-  setImage(image: string) {
+  setImage(image: any) {
+
+    console.log(image)
     this.setState( state => ({
       ...state,
-      image
+      image: image
     }));
   }
 
@@ -84,6 +91,22 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       ...state,
       images: [...state.images, image]
     }));
+  }
+
+  async updateImageInImagesIndex(index, image){
+
+    const res = await this.getImagesPromise() as any[];
+    let images = [...res];
+    images[index] = image;
+
+    console.log(res, images)
+
+    this.setState( state => {
+      return {
+        ...state,
+        images: images
+      }
+    })
   }
 
   removeImageInImagesIndex(index){
@@ -113,10 +136,10 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     }));
   }
 
-  setLanguage(language: number) {
+  setLanguage(language: any) {
     this.setState( state => ({
       ...state,
-      language
+      language: language
     }));
   }
 
@@ -175,6 +198,18 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     }));
   }
 
+  getId() {
+    return this.selectState(state => state.id);
+  }
+
+  getIdPromise() {
+    return new Promise((resolve, reject) => {
+      this.selectState(state => state.id).subscribe((data) => {
+        resolve(data);
+      });
+    });
+  }
+
   getTitle() {
     return this.selectState(state => state.title);
   }
@@ -189,6 +224,14 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
   getImages() {
     return this.selectState(state => state.images);
+  }
+
+  getImagesPromise() {
+    return new Promise((resolve, reject) => {
+      this.selectState(state => state.images).subscribe((data) => {
+        resolve(data);
+      });
+    });
   }
 
   getPrice() {
@@ -211,8 +254,11 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     return this.selectState(state => state.terms);
   }
 
-  async getFormData(): Promise<StudyMaterialModel> {
+  async getFormData(){
+    return this.selectState(state => state)
+  }
 
+  async getFormDataAsync(){
     return new Promise((resolve, reject) => {
       this.selectState(state => state).subscribe((data) => {
         resolve(data);
@@ -220,6 +266,8 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     });
 
   }
+
+
 
 
 
