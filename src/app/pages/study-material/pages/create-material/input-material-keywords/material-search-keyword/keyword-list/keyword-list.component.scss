@@ -1,0 +1,133 @@
+.sd-input-box-outer-675315 {
+  height: 50px;
+  border-radius: 8px;
+  background: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  border: 0.15px solid rgba(0, 0, 0, 0.75);
+  padding-right: 8px;
+  gap: 8px;
+  width: 100% !important;
+}
+
+.sd-input-box-input-675315 {
+  background: none;
+  border: none;
+  outline: none;
+  /* Remove default focus outline */
+  flex-grow: 1;
+}
+
+.sd-input-box-input-675315:focus {
+  /* Additional styles when input is focused */
+  /* You can customize this block based on your requirements */
+  box-shadow: none;
+  /* Remove any focus box-shadow */
+}
+
+.subjects {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+
+  .add-sub {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+
+    ion-icon {
+      font-size: 45px;
+    }
+  }
+
+  .subject {
+    width: 100%;
+  }
+}
+
+.suggestions-list-outer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.suggestions-list-678564 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+
+}
+
+.sub-chips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  ion-chip {
+    background-color: rgba(69, 69, 69, 1);
+    color: white;
+
+    ion-icon {
+      color: white;
+    }
+  }
+}
+
+.sub-chips-76544 {
+  margin: 0;
+}
+
+.chips-type-sm-7895 {
+  margin: 0;
+}
+
+.low-opac-6644 {
+  opacity: 0.5;
+}
+
+.top-header-78956 {
+  background: #ffffff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+
+  .header-left-items-78956 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+
+    .header-title {
+      color: #393939;
+      font-size: 20px;
+    }
+  }
+
+  .header-right-items-78956 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.image {
+  height: 18px;
+}

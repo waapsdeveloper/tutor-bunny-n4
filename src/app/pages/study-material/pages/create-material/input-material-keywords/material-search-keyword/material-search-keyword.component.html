@@ -1,0 +1,14 @@
+<div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openSubjectSelection()">
+  <ion-ripple-effect></ion-ripple-effect>
+  <input class="fs-16 outfit sd-input-box-input-675315" [type]="type" [placeholder]="placeholder" readonly />
+  <ion-icon name="chevron-down-outline"></ion-icon>
+</div>
+<div class="suggestions-list-outer">
+  <div class="suggestions-list-678564">
+    <div class="sub-chips" *ngFor="let item of subs">
+      <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item?.name}}
+      </ion-chip>
+    </div>
+  </div>
+</div>
+

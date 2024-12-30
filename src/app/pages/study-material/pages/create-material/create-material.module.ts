@@ -26,6 +26,8 @@ import { InputMaterialLanguageComponent } from './input-material-language/input-
 import { MaterialLanguageModule } from './input-material-language/material-language/material-language.module';
 import { InputMaterialTermsComponent } from './input-material-terms/input-material-terms.component';
 import { InputMaterialPhotosComponent } from './input-material-photos/input-material-photos.component';
+import { InputMaterialKeywordsComponent } from './input-material-keywords/input-material-keywords.component';
+import { MaterialSearchKeywordModule } from './input-material-keywords/material-search-keyword/material-search-keyword.module';
 
 
 @NgModule({
@@ -54,6 +56,7 @@ import { InputMaterialPhotosComponent } from './input-material-photos/input-mate
 
     //
     MaterialLanguageModule,
+    MaterialSearchKeywordModule
 
   ],
   declarations: [
@@ -63,7 +66,8 @@ import { InputMaterialPhotosComponent } from './input-material-photos/input-mate
     InputMaterialPriceComponent,
     InputMaterialLanguageComponent,
     InputMaterialTermsComponent,
-    InputMaterialPhotosComponent
+    InputMaterialPhotosComponent,
+    InputMaterialKeywordsComponent
   ]
 })
 export class CreateMaterialPageModule {}

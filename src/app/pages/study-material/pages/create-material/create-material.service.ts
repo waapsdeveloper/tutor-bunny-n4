@@ -14,14 +14,15 @@ export interface StudyMaterialModel {
   price: number;
   language_id: number;
   language: any;
-  keyword: string[];
+  keywords: string[];
   terms: boolean;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
+export class
+CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
   storeConfig(): NgSimpleStateStoreConfig {
     return {
@@ -39,7 +40,7 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
       price: 0,
       language_id: -1,
       language: null,
-      keyword: [],
+      keywords: [],
       terms: false
     };
   }
@@ -119,11 +120,36 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
     }));
   }
 
-  setKeyword(keyword: string[]) {
+  // setKeyword(keyword: string[]) {
+  //   this.setState( state => ({
+  //     ...state,
+  //     keyword
+  //   }));
+  // }
+
+  setKeywords(keywords: any[]) {
     this.setState( state => ({
       ...state,
-      keyword
+      keywords
     }));
+  }
+
+  addKeywordInKeywords(keyword: any) {
+    this.setState( state => ({
+      ...state,
+      keywords: [...state.keywords, keyword]
+    }));
+  }
+
+  removeKeywordInKeywordsIndex(index){
+    this.setState( state => {
+      const keywords = [...state.keywords];
+      keywords.splice(index, 1);
+      return {
+        ...state,
+        keywords
+      }
+    })
   }
 
   setTerms(terms: boolean) {
@@ -177,8 +203,8 @@ export class CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMater
     return this.selectState(state => state.language);
   }
 
-  getKeyword() {
-    return this.selectState(state => state.keyword);
+  getKeywords() {
+    return this.selectState(state => state.keywords);
   }
 
   getTerms() {
