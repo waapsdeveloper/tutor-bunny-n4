@@ -39,6 +39,18 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   }
 
+  shouldHandleBackToPrevScreen(event) {
+    console.log(event);
+    // this.sameCourseEdit = event;
+    if (this.step == 2) {
+      this.step = 1;
+      // this.edit = true;
+      // this.courseId = this.createCourseService.courseId;
+      this.slides?.swiperRef?.slideTo(0, 500, false);
+    }
+
+  }
+
   async onSlideChange() {
 
 
@@ -47,14 +59,39 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     console.log(data)
 
-    if (!data.title || !data.description || !data.language || !data.price) {
+    if (!data.title || !data.description || !data.language_id || !data.price) {
       return;
     }
 
-    this.step = 2;
-    this.slides?.swiperRef?.slideTo(1, 500, false);
+    if(!data.images || data.images.length == 0){
+      return;
+    }
+
+    // submit study matreial form
+    const user = this.users.getUser();
+
+    let formData = {
+      "user_id": user.id,
+      "title": data.title,
+      "description": data.description,
+      "language_id": data.language_id,
+      "price": data.price,
+    }
+
+     const res = await this.network.storeStudyMaterial(formData);
 
 
+
+    // this.step = 2;
+    // this.slides?.swiperRef?.slideTo(1, 500, false);
+
+
+
+  }
+
+
+
+  submit() {
 
   }
 
@@ -63,7 +100,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   }
 
   openDocssView(){
-    this.nav.push('/create-material-photos');
+    this.nav.push('/create-material-docs');
   }
 
 

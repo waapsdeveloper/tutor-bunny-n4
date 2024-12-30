@@ -453,7 +453,7 @@ export class NetworkService {
 
 
   storeStudyMaterial(data) {
-    return this.httpPostResponse('study-material', data, null, false, true);
+    return this.httpPostResponse('material/add', data, null, false, true);
   }
 
   getAllMaterial(data: any) {

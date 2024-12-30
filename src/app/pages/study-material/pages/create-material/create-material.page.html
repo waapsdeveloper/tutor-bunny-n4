@@ -1,5 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title"></app-sd-header-top>
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step === 2"
+  (parentBack)="shouldHandleBackToPrevScreen($event)"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding " #content>
   <form>
@@ -21,7 +22,7 @@
 
         <div class="body-content-68448">
           <app-input-material-keywords></app-input-material-keywords>
-          <app-input-material-docs></app-input-material-docs>
+          <app-input-material-docs (click)="openDocssView()"></app-input-material-docs>
           <app-input-material-terms></app-input-material-terms>
 
         </div>
@@ -35,7 +36,7 @@
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
       <app-sd-button-gray [text]="'Next'" [disabled]="loading" *ngIf="step === 1" (click)="onSlideChange()"></app-sd-button-gray>
-      <!-- <app-sd-button-gray [text]="'Save'" *ngIf="step === 2" (click)="submit()"></app-sd-button-gray> -->
+      <app-sd-button-gray [text]="'Save'" *ngIf="step === 2" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
 
