@@ -17,12 +17,19 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   loading = false;
   step = 1;
 
+  material$;
+
 
   constructor(
     injector: Injector,
     public createMaterialService: CreateMaterialService
   ) {
     super(injector);
+
+    this.createMaterialService.getFormData().then(data => {
+      this.material$ = data;
+    });
+
   }
 
   ngOnInit() {
@@ -53,11 +60,9 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   async onSlideChange() {
 
+    const data = await this.createMaterialService.getFormDataAsync() as any;
 
-    const data = await this.createMaterialService.getFormData();
     this.events.publish('teacher-study-material-first-screen-submit-call', data)
-
-    console.log(data)
 
     if (!data.title || !data.description || !data.language_id || !data.price) {
       return;
@@ -78,7 +83,52 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       "price": data.price,
     }
 
-    // const res = await this.network.storeStudyMaterial(formData);
+    const res = await this.network.storeStudyMaterial(formData);
+
+    console.log(res)
+    let studyMaterialId = res.studyMaterial.id;
+
+    if (studyMaterialId) {
+
+      this.createMaterialService.setId(studyMaterialId);
+
+      if(data.image['image']) {
+
+        let obj = {
+          study_material_id: studyMaterialId,
+          image: data.image['image'],
+        };
+
+        let simage = await this.network.postStudyMaterialPhoto(obj);
+
+        // if(simage.result.image){
+        //   console.log(simage.result.image);
+        //   let obj = {
+        //     "feature": false,
+        //     "image": simage.result.image
+        //   }
+        //   this.createMaterialService.setImage(obj);
+        // }
+
+      }
+
+
+
+      this.sendPendingImages(studyMaterialId);
+
+    }
+    // this.createCourseService.courseId = courseId;
+    // if (courseId) {
+    //   let obj = {
+    //     course_id: courseId,
+    //     image: this.createCourseService.formData.image,
+    //   };
+    //   if (!this.createCourseService.formData.image.includes('https')) {
+    //     let image = await this.network.postCoursePhoto(obj);
+    //   }
+
+    //   this.createCourseService.sendPendingImages(courseId);
+    // }
 
 
 
@@ -86,6 +136,48 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     // this.slides?.swiperRef?.slideTo(1, 500, false);
 
 
+
+  }
+
+  async sendPendingImages(studyMaterialId) {
+
+    const images = await this.createMaterialService.getImagesPromise() as any[];
+    const id = await this.createMaterialService.getIdPromise();
+
+    if(id == -1){
+      return;
+    }
+
+    if(!images || images.length == 0){
+      return;
+    }
+
+    for (var i = 0; i < images.length; i++) {
+
+      let item = Object.assign({}, images[i]);
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (id) {
+        if (!item.id) {
+          let obj = {
+            user_id: user.id,
+            study_material_id: id,
+            image: item['image'],
+          };
+
+          const res = await this.network.postMaterialImage(obj);
+          console.log(res);
+
+          if(res.result.id){
+            console.log(res.result.id);
+            item.id = res.result.id;
+            // item.image = res.result.image;
+            this.createMaterialService.updateImageInImagesIndex(i, item);
+          }
+
+        }
+      }
+    }
 
   }
 

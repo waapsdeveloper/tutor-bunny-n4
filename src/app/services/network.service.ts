@@ -8,6 +8,7 @@ import { ModalService } from './basic/modal.service';
   providedIn: 'root',
 })
 export class NetworkService {
+
   constructor(
     public api: ApiService,
     public router: Router,
@@ -454,6 +455,14 @@ export class NetworkService {
 
   storeStudyMaterial(data) {
     return this.httpPostResponse('material/add', data, null, false, true);
+  }
+
+  postStudyMaterialPhoto(data: any) {
+    return this.httpPostResponse('material/update-material-image', data, null, false, true);
+  }
+
+  postMaterialImage(data){
+    return this.httpPostResponse('material/image/add', data, null, false, true);
   }
 
   getAllMaterial(data: any) {
