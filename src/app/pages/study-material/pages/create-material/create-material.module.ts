@@ -28,6 +28,7 @@ import { InputMaterialTermsComponent } from './input-material-terms/input-materi
 import { InputMaterialPhotosComponent } from './input-material-photos/input-material-photos.component';
 import { InputMaterialKeywordsComponent } from './input-material-keywords/input-material-keywords.component';
 import { MaterialSearchKeywordModule } from './input-material-keywords/material-search-keyword/material-search-keyword.module';
+import { InputMaterialDocsComponent } from './input-material-docs/input-material-docs.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { MaterialSearchKeywordModule } from './input-material-keywords/material-
     InputMaterialLanguageComponent,
     InputMaterialTermsComponent,
     InputMaterialPhotosComponent,
-    InputMaterialKeywordsComponent
+    InputMaterialKeywordsComponent,
+    InputMaterialDocsComponent
   ]
 })
 export class CreateMaterialPageModule {}

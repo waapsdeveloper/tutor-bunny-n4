@@ -202,6 +202,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/study-material/pages/create-material-photos/create-material-photos.module').then( m => m.CreateMaterialPhotosPageModule)
   },
 
+  {
+    path: 'create-material-docs',
+    loadChildren: () => import('./pages/study-material/pages/create-material-docs/create-material-docs.module').then( m => m.CreateMaterialDocsPageModule)
+  },
+
   // {
   //   path: 'material-photoss',
   //   loadChildren: () => import('./pages/study-material/pages/material-photos/material-photos.module').then( m => m.MaterialPhotosPageModule)

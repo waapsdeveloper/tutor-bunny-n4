@@ -12,7 +12,7 @@
           <app-input-material-price></app-input-material-price>
           <app-input-material-language></app-input-material-language>
           <app-input-material-photos (openPhotosView)="openPhotosView()"></app-input-material-photos>
-          <app-input-material-terms></app-input-material-terms>
+
 
 
         </div>
@@ -21,31 +21,8 @@
 
         <div class="body-content-68448">
           <app-input-material-keywords></app-input-material-keywords>
-          <!-- <div class="subject-sec d-flex flex-column gap-8">
-            <div class="input-title fs-14 roboto-medium">Search Keyword <img src="../../assets/svg/question.svg" alt=""
-                id="click-keyword "><i class="ti ti-help-hexagon"></i></div>
-            <ion-popover trigger="click-keyword " triggerAction="click">
-              <ng-template>
-                <div class="ion-padding popover-title">Add multiple search keywords so that the course will come up in
-                  the search result.
-                </div>
-              </ng-template>
-            </ion-popover>
-            <div class="input-box-lines" style="width: 100%;">
-              <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="createMaterialService.formData.keyword"
-                placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
-            </div>
-          </div> -->
-
-
-
-          <!-- <div class="input-title fs-14 roboto-medium">Upload Study Material/Notes/lecture<img
-              src="../../assets/svg/question.svg" alt="" id="click-keyword "></div>
-          <div class="input-box-lines d-flex flex-column gap-8">
-            <app-material-upload [materialDoc]="createMaterialService.formData.image" (onChange)="result($event, 'image')"
-              [key]="'image'" [errorText]="'Material Document  is required'"
-              (click)="openMaterialDoc()"></app-material-upload>
-          </div> -->
+          <app-input-material-docs></app-input-material-docs>
+          <app-input-material-terms></app-input-material-terms>
 
         </div>
 

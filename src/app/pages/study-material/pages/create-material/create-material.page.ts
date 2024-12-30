@@ -47,7 +47,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     console.log(data)
 
-    if (!data.title || !data.description || !data.language || !data.price || !data.terms) {
+    if (!data.title || !data.description || !data.language || !data.price) {
       return;
     }
 
@@ -61,6 +61,12 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   openPhotosView(){
     this.nav.push('/create-material-photos');
   }
+
+  openDocssView(){
+    this.nav.push('/create-material-photos');
+  }
+
+
 
 
 

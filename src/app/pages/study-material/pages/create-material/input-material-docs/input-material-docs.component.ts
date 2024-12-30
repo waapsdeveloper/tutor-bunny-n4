@@ -1,0 +1,80 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { EventsService } from 'src/app/services/events.service';
+import { CreateMaterialService } from '../create-material.service';
+
+@Component({
+  selector: 'app-input-material-docs',
+  templateUrl: './input-material-docs.component.html',
+  styleUrls: ['./input-material-docs.component.scss'],
+})
+export class InputMaterialDocsComponent implements OnInit {
+  image$;
+
+  @Input() isRequired = false;
+  @Input() needed = true;
+  @Input() errorText = 'price is required';
+  key = 'images';
+
+  @Output() openPhotosView = new EventEmitter<any>();
+
+  constructor(
+    public createMaterialService: CreateMaterialService,
+    public events: EventsService
+  ) {
+    this.createMaterialService.getImage().subscribe((value) => {
+      this.image$ = value;
+      console.log(value);
+    });
+
+    this.createMaterialService.getImages().subscribe((value) => {
+      let images = value;
+      if (images.length > 0) {
+        this.createMaterialService.setImage(images[0]);
+      } else {
+        this.createMaterialService.setImage(null);
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {
+        let v = formData[this.key];
+
+        if (!v || v == '' || v.length == 0) {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
+  }
+
+  openMaterialPhotos() {
+    this.openPhotosView.emit();
+
+    // this.nav.push('/material-photoss', {
+    //   backUrl: '',
+    //   gallary: 'true',
+    //   title: 'Upload Material Photos',
+    // });
+  }
+
+  setBackgroundImage(imageObj: { image: string }): string {
+    const img = imageObj?.image;
+
+    if (img) {
+      // If base64, directly return it
+      if (img.startsWith('data:')) {
+        return `url('${img}')`;
+      } else {
+        // If it's a URL, wrap it with `url()`
+        return `url('${img}')`;
+      }
+    }
+
+    // Return a fallback, like an empty string or a default background
+    return '';
+  }
+}
