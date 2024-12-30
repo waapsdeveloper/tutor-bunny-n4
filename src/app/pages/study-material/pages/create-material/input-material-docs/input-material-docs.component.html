@@ -1,10 +1,18 @@
 <div class="input-box-lines d-flex flex-column gap-8">
+  <div class="input-title fs-14 roboto-medium">Upload study materials/ notes/ Lectures<img src="../../assets/svg/question.svg" alt="" style="height: 16px; width: 16px; padding-left: 1px;"
+    id="click-doc"></div>
+    <ion-popover trigger="click-doc" triggerAction="click">
+      <ng-template>
+        <div class="ion-padding popover-title">Upload the document of the course</div>
+      </ng-template>
+    </ion-popover>
   <div class="image-upload-box-st-78955674" >
     <div class="icno-text-88666" >
       <div *ngIf="image$" class="image-box-78559" [style.backgroundImage]="setBackgroundImage(image$)" >
       </div>
-      <img *ngIf="!image$" src="../../../assets/svg/course-photo.svg" alt="Selected Image" class="img-67855" />
-      <div class="roboto-regular fs-14">Upload course Photo (max 8 photos)</div>
+
+      <img *ngIf="!image$" src="../../../assets/svg/material-photo.svg" alt="Selected Image" class="img-67855" />
+      <div class="roboto-regular fs-14">Upload &#40;PDF, DOC, XL, JPEG, PNG, BMP &#41;</div>
     </div>
     <ion-icon name="chevron-forward-outline"></ion-icon>
   </div>
