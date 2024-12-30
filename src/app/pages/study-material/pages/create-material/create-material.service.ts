@@ -130,7 +130,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
   setKeywords(keywords: any[]) {
     this.setState( state => ({
       ...state,
-      keywords
+      keywords: keywords
     }));
   }
 
@@ -170,7 +170,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       price: 0,
       language_id: -1,
       language: null,
-      keyword: [],
+      keywords: [],
       terms: false
     }));
   }

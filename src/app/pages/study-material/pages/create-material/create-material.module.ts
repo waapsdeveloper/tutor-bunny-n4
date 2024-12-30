@@ -56,7 +56,7 @@ import { MaterialSearchKeywordModule } from './input-material-keywords/material-
 
     //
     MaterialLanguageModule,
-    MaterialSearchKeywordModule
+    MaterialSearchKeywordModule,
 
   ],
   declarations: [

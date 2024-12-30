@@ -9,7 +9,7 @@ import { CreateMaterialService } from '../create-material/create-material.servic
 })
 export class CreateMaterialPhotosPage extends BasePage implements OnInit {
 
-  title = 'Course Photos';
+  title = 'Study Material Photos';
   doc:null
   params;
   remainingSlots;

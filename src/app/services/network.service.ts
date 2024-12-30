@@ -456,6 +456,10 @@ export class NetworkService {
     return this.httpPostResponse('study-material', data, null, false, true);
   }
 
+  getAllMaterial(data: any) {
+    return this.httpPostResponse('material/list', data, null, false, false);
+  }
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {

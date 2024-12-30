@@ -14,9 +14,7 @@ export class StudentDashboardStudyMaterialPage extends BasePage implements OnIni
   }
 
   ngOnInit() {
-    this.events.subscribe('update-study-material-price', async () => {
-      await this.globalCourses.getCoursesFromApi('', 1);
-    });
+    console.log('student-dashboard-study-material');
   }
   async handleRefresh(event) {
     await this.globalCourses.getCoursesFromApi('', 1);
