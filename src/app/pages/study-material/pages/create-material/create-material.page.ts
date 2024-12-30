@@ -78,7 +78,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       "price": data.price,
     }
 
-     const res = await this.network.storeStudyMaterial(formData);
+    // const res = await this.network.storeStudyMaterial(formData);
 
 
 
