@@ -164,16 +164,8 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
   }
   async removeMySubject(item) {
     let index = this.subs.findIndex((x) => x.id == item.id);
-    this.subs.splice(index, 1);
-    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-    let obj = {
-      course_id: course_Id,
-      keyword_id: item.id,
-    };
-    const res2 = await this.network.removeMyKeyword(obj);
-    this.actionChange.emit({
-      subs: this.subs,
-    });
+    this.createMaterialService.removeKeywordInKeywordsIndex(index);
+
   }
   showAddSuggestionsButton() {
     if (!this.inputText) {
