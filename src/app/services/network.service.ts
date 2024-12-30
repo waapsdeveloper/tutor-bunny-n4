@@ -466,7 +466,7 @@ export class NetworkService {
   }
 
   getAllMaterial(data: any) {
-    return this.httpPostResponse('material/list', data, null, false, false);
+    return this.httpGetResponse('material/list', null, false, false);
   }
 
   serialize = (obj: any) => {

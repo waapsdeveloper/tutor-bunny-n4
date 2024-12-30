@@ -1,15 +1,47 @@
-<div class="card-outer-3432" *ngIf="blocked !== 'Blocked'">
-  <div class="image-container-4848 d-flex flex-row">
-    <img
-      [src]="item.image ? item.image : 'assets/learn-piano.jpeg'"
-      alt="Course Image"
-    />
-    <div class="d-flex ">
-    <div class="price-tag d-flex justify-content-center">{{ item.auth_user_currency_symbol }}{{ item.updated_price }}</div>
+<div class="nd-card-outer-748">
+  <div class="image-outer">
+    <div class="label-bar-bottom"></div>
   </div>
-  </div>
-<div class="content-container-12345">
-  <div>{{ item?.title }}</div>
-</div>
+  <div class="content-outer">
+    <div class="content-inner">
+      <div class="content-title roboto-medium fs-16">
+        Yoga Class for the kids in onlid and offl for adults and teens as
+      </div>
+      <div class="rating">
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        <span class="rating-value fs-12 roboto-medium"
+          >{{ rating }} ({{ total_rating }})</span
+        >
+      </div>
 
+      <div class="teacher">
+        <img
+          class="teacher-image"
+          [src]="'assets/learn-piano.jpeg'"
+          alt="Teacher"
+        />
+        <div class="teacher-name roboto-regular fs-14">Rajshekaraney</div>
+      </div>
+
+      <div class="actions">
+        <div class="big-action-button-8574">
+          <img src="assets/svg/cart.svg" alt="" /> Buy Now
+        </div>
+
+        <div class="action-items">
+          <img src="assets/svg/heart-77.svg" />
+          <!-- <ion-icon
+            [name]="item.is_liked_by_me ? 'heart' : 'heart-outline'"
+            (click)="item.is_liked_by_me ? removeToFav() : addToFav()"
+          >
+          </ion-icon> -->
+          <img
+            src="assets/svg/share-77.svg"
+            alt="Share"
+            class="share-icon"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

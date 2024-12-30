@@ -1,34 +1,110 @@
-.card-outer-3432 {
-  width: 100%;
+.nd-card-outer-748 {
   height: 150px;
-  border: 1px solid black;
+
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
 
-  .image-container-4848 {
+  .image-outer {
+    width: 150px;
     height: 150px;
-    width: 150px;
-    img {
-      object-fit: cover;
-      border-radius: 9px;
+    background: lightblue;
+    border-radius: 8px;
+
+    position: relative;
+
+    flex-grow: 0;
+
+    .label-bar-bottom {
+
+      position: absolute;
+      height: 25px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(69, 69, 69, 1);
+      border-radius: 0px 0px 8px 8px;
+
     }
+
   }
 
-  .price-tag {
-    position: absolute;
-    width: 150px;
-    height: 25px;
-    background: #454545;
-    color: #FFFFFF;
-    top: 125px;
-    right: 0;
-    border-radius: 0px 0px 9px 9px;
-    display: flex;
-    justify-content: center;
+  .content-outer {
+    height: 150px;
+    width: calc(100% - 158px);
+
+    .content-inner {
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 8px;
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .teacher {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 8px;
+        align-items: center;
+
+        .teacher-image {
+          width: 24px;
+          height: 24px;
+
+          background-color: black;
+          border-radius: 25px;
+
+        }
+
+
+
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .big-action-button-8574 {
+          height: 34px;
+          width: 143px;
+          border-radius: 8px;
+          background-color: rgba(243, 191, 89, 1);
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .action-items {
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 8px;
+
+        }
+      }
+
+
+
+    }
+
   }
 
-  .content-container-12345 {
-    flex-grow: 1; /* This is the key for responsiveness */
-    border: 10px solid yellow;
-    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
-  }
+
+
+
 }

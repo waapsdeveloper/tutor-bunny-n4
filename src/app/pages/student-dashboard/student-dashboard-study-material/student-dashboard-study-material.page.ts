@@ -9,13 +9,36 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-dashboard-study-material.page.scss'],
 })
 export class StudentDashboardStudyMaterialPage extends BasePage implements OnInit {
+
+
+  list: any[] = [];
+  page: 1;
+  search: ''
+
+
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
+    this.initialize();
   }
 
   ngOnInit() {
     console.log('student-dashboard-study-material');
+
+
   }
+
+  async initialize(){
+    let obj = {}
+    const res = await this.network.getAllMaterial(obj)
+    console.log(res);
+    if(res && res.bool == true){
+      console.log(res.result.data)
+      this.list = res.result.data;
+    }
+
+  }
+
+
   async handleRefresh(event) {
     await this.globalCourses.getCoursesFromApi('', 1);
     event.target.complete();
