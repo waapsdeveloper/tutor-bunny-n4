@@ -22,6 +22,7 @@
       height: 25px;
       display: flex;
       justify-content: center;
+      align-items: center;
       color: #ffffffff;
       bottom: 0;
       left: 0;
@@ -38,8 +39,17 @@
     .content-inner {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
+      align-items: flex-start;
       gap: 8px;
+      height: 100%;
+
+      .other-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
 
       .rating {
         display: flex;
@@ -87,7 +97,7 @@
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
-          gap: 8px;
+          gap: 16px;
         }
       }
     }

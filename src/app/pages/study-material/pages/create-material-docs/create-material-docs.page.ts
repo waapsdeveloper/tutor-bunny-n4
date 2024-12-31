@@ -52,7 +52,20 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     let path = "assets/svg/filetypes/";
     if (item.type.includes("pdf")) {
       path += "pdf.svg";
+    } else
+
+    if (item.type.includes("sheet") ) {
+      path += "xls.svg";
+    } else
+
+    if (item.type.includes("document")) {
+      path += "doc.svg";
     }
+
+    if (item.type.includes("image")) {
+      path += "png.svg";
+    }
+
 
     return `url(${path})`;
   }
@@ -72,7 +85,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   async onFileSelected(event: any) {
 
     const files: File[] = Array.from(event.target.files);
-    this.remainingSlots = 8 - this.docs$.length;
+    this.remainingSlots = 50 - this.docs$.length;
 
     if (this.remainingSlots <= 0) {
       alert('You have already uploaded the maximum of 8 images.');
@@ -86,8 +99,8 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     for (const file of filesToUpload) {
       const fileType = file.type; // Get the MIME type of the file
       let docString: string;
-      if (file.size > 1048576) {
-        this.utility.presentFailureToast("File size must be less then 10 mb")
+      if (file.size >  25 * 1048576) {
+        this.utility.presentFailureToast("File size must be less then 25 mb")
       } else {
         docString = await this.fileToDataURL(file);
       }
@@ -118,9 +131,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    console.log(event);
-
-    this.createMaterialService.removeImageInImagesIndex(index)
+    this.createMaterialService.removeDocInDocsIndex(index)
 
   }
 

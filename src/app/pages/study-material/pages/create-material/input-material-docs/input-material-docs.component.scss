@@ -50,13 +50,13 @@
   align-items: center;
   position: relative;
   justify-content: center;
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
   border-radius: 8px;
-  border: 0.25px solid #484848;
+  // border: 0.25px solid #484848;
 }
 
 .input-title{
   padding: 5px;
-  
+
 }

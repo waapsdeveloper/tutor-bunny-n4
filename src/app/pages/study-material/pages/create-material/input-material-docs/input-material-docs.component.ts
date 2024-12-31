@@ -8,36 +8,33 @@ import { CreateMaterialService } from '../create-material.service';
   styleUrls: ['./input-material-docs.component.scss'],
 })
 export class InputMaterialDocsComponent implements OnInit {
-  image$;
+
+  doc$;
 
   @Input() isRequired = false;
   @Input() needed = true;
-  @Input() errorText = 'price is required';
-  key = 'images';
+  @Input() errorText = 'At least 1 document required';
+  key = 'docs';
 
-  @Output() openPhotosView = new EventEmitter<any>();
+  @Output() openDocsView = new EventEmitter<any>();
 
   constructor(
     public createMaterialService: CreateMaterialService,
     public events: EventsService
   ) {
-    this.createMaterialService.getImage().subscribe((value) => {
-      this.image$ = value;
-      console.log(value);
-    });
 
-    this.createMaterialService.getImages().subscribe((value) => {
-      let images = value;
-      if (images.length > 0) {
-        this.createMaterialService.setImage(images[0]);
+    this.createMaterialService.getDocs().subscribe((value) => {
+      let docs = value;
+      if (docs.length > 0) {
+        this.doc$ = docs[0];
       } else {
-        this.createMaterialService.setImage(null);
+        this.doc$ = null;
       }
     });
   }
 
   ngOnInit() {
-    this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {
+    this.events.subscribe('teacher-study-material-second-screen-submit-call', (formData) => {
         let v = formData[this.key];
 
         if (!v || v == '' || v.length == 0) {
@@ -52,7 +49,7 @@ export class InputMaterialDocsComponent implements OnInit {
   }
 
   openMaterialPhotos() {
-    this.openPhotosView.emit();
+    this.openDocsView.emit();
 
     // this.nav.push('/material-photoss', {
     //   backUrl: '',
@@ -61,20 +58,28 @@ export class InputMaterialDocsComponent implements OnInit {
     // });
   }
 
-  setBackgroundImage(imageObj: { image: string }): string {
-    const img = imageObj?.image;
+  setBackgroundImage(docObj: { doc: string, type: string }): string {
 
-    if (img) {
-      // If base64, directly return it
-      if (img.startsWith('data:')) {
-        return `url('${img}')`;
-      } else {
-        // If it's a URL, wrap it with `url()`
-        return `url('${img}')`;
-      }
+    console.log(docObj.type);
+
+    let path = "assets/svg/filetypes/";
+    if (docObj.type.includes("pdf")) {
+      path += "pdf.svg";
+    } else
+
+    if (docObj.type.includes("sheet") ) {
+      path += "xls.svg";
+    } else
+
+    if (docObj.type.includes("document")) {
+      path += "doc.svg";
     }
 
-    // Return a fallback, like an empty string or a default background
-    return '';
+    if (docObj.type.includes("image")) {
+      path += "png.svg";
+    }
+
+
+    return `url(${path})`;
   }
 }
