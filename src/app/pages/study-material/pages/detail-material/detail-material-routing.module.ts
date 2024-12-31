@@ -7,9 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DetailMaterialPage
-  },  {
+  },
+  {
     path: 'material-photo',
-    loadChildren: () => import('./material-photo/material-photo.module').then( m => m.MaterialPhotoPageModule)
+    loadChildren: () => import('./material-photos/material-photos.module').then( m => m.MaterialPhotosModule)
   }
 
 ];
