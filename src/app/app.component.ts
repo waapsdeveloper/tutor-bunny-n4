@@ -7,6 +7,9 @@ import { UtilityService } from './services/utility.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // register Swiper custom elements
+import { Stripe } from '@capacitor-community/stripe';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-root',
@@ -50,6 +53,10 @@ export class AppComponent {
     this.registerBackButtonEvent();
 
     // this.router.navigate(['/splash']);
+
+    Stripe.initialize({
+      publishableKey: environment.publishableKey,
+    });
 
   }
 

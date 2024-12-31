@@ -12,7 +12,10 @@ export const environment = {
     messagingSenderId: "968620174522",
     appId: "1:968620174522:web:582b477de22ab40df7a683",
     measurementId: "G-WMJLZVLNXM"
-  }
+  },
+
+  publishableKey: "sk_test_51Prf8JD6pxFjkradhTxNoMRb4wjXQHqsyqiojHbzo1jPr9pH774TPaIs11Jtue5luc9kP4xeOuYnJl17xDHiMVRz006Q8bOAVS"
+
 };
 /*
  * For easier debugging in development mode, you can import the following file

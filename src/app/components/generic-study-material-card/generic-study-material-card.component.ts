@@ -6,14 +6,17 @@ import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student
 import { TrailMessageComponent } from '../trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { log } from 'console';
+import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 
 @Component({
   selector: 'app-generic-study-material-card',
   templateUrl: './generic-study-material-card.component.html',
   styleUrls: ['./generic-study-material-card.component.scss'],
 })
-export class GenericStudyMaterialCardComponent extends BasePage implements OnInit {
-
+export class GenericStudyMaterialCardComponent
+  extends BasePage
+  implements OnInit
+{
   private _item: any;
   displayName;
   flag;
@@ -36,38 +39,36 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
   public set item(value: any) {
     this._item = value;
     this.initialize(value);
-
   }
 
   constructor(
     injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
     public globalCourses: GlobalCoursesService,
-    private chats : ChatService
+    private chats: ChatService
   ) {
     super(injector);
 
     this.user = this.users.getUser();
 
-    this.events.subscribe('update-course-item-like', (data) => {
+    this.events.subscribe(
+      'update-course-item-like',
+      (data) => {
+        // user_id: user.id,
+        // course_id: obj.id,
+        // liked: true
 
-      // user_id: user.id,
-      // course_id: obj.id,
-      // liked: true
+        console.log(data);
 
-      console.log(data)
-
-      if(this.item.id == data.course_id){
-        this.item.is_liked_by_me = data.liked;
-      }
-
-
-    }, false)
-
+        if (this.item.id == data.course_id) {
+          this.item.is_liked_by_me = data.liked;
+        }
+      },
+      false
+    );
   }
 
   initialize(data) {
-
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
@@ -252,12 +253,15 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
 
   async openChatWithData(data) {
     this.user = this.users.getUser();
-    const chatRoomId = await this.chats.getChadRoomId(data.user.id, this.user.id) as number;
+    const chatRoomId = (await this.chats.getChadRoomId(
+      data.user.id,
+      this.user.id
+    )) as number;
 
-    if(chatRoomId != -1){
+    if (chatRoomId != -1) {
       this.nav.push('messages', {
-        chat_room_id: chatRoomId
-      })
+        chat_room_id: chatRoomId,
+      });
     }
   }
 
@@ -278,5 +282,34 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
     }
   }
 
+  async openStripe() {
+    let obj = {
+      study_material_id: this.item.id,
+    };
+    const res = await this.network.purchaseMaterial(obj);
+    console.log(res);
 
+    if (res.bool == true) {
+      try {
+        const paymentIntent = res.result.client_secret;
+        const customer = res.result.customer_id;
+        const ephemeralKey = res.result.ephemeral_key;
+
+        // prepare PaymentSheet with CreatePaymentSheetOption.
+        await Stripe.createPaymentSheet({
+          paymentIntentClientSecret: paymentIntent,
+          customerId: customer,
+          customerEphemeralKeySecret: ephemeralKey,
+          merchantDisplayName: 'TutorBunny',
+        });
+
+        // present PaymentSheet and get result.
+        const result = await Stripe.presentPaymentSheet();
+        console.log(result);
+        if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
+          // Happy path
+        }
+      } catch (error) {}
+    }
+  }
 }
