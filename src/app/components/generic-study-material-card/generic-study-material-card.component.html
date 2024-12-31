@@ -1,6 +1,6 @@
 <div class="nd-card-outer-748">
   <div
-    class="image-outer"
+    class="image-outer" (click)="openDetails.emit()"
     [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
   >
     <div class="label-bar-bottom">
@@ -9,7 +9,7 @@
   </div>
   <div class="content-outer">
     <div class="content-inner">
-      <div class="content-title roboto-medium fs-16">
+      <div class="content-title roboto-medium fs-16" (click)="openDetails.emit()">
         {{ item.title }}
       </div>
       <div class="rating">

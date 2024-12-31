@@ -206,6 +206,10 @@ const routes: Routes = [
     path: 'create-material-docs',
     loadChildren: () => import('./pages/study-material/pages/create-material-docs/create-material-docs.module').then( m => m.CreateMaterialDocsPageModule)
   },
+  {
+    path: 'detail-material',
+    loadChildren: () => import('./pages/study-material/pages/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
+  },
 
   // {
   //   path: 'material-photoss',
@@ -217,10 +221,7 @@ const routes: Routes = [
   //   path: 'list-material',
   //   loadChildren: () => import('./pages/study-material/list-material/list-material.module').then( m => m.ListMaterialPageModule)
   // },
-  // {
-  //   path: 'detail-material',
-  //   loadChildren: () => import('./pages/study-material/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
-  // },
+
   // {
   //   path: 'student-study-material-detail',
   //   loadChildren: () => import('./components/student-study-material-detail/student-study-material-detail.module').then( m => m.StudentStudyMaterialDetailPageModule)

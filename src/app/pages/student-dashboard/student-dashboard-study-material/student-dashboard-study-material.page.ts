@@ -8,13 +8,13 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './student-dashboard-study-material.page.html',
   styleUrls: ['./student-dashboard-study-material.page.scss'],
 })
-export class StudentDashboardStudyMaterialPage extends BasePage implements OnInit {
-
-
+export class StudentDashboardStudyMaterialPage
+  extends BasePage
+  implements OnInit
+{
   list: any[] = [];
   page: 1;
-  search: ''
-
+  search: '';
 
   constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
     super(injector);
@@ -23,21 +23,17 @@ export class StudentDashboardStudyMaterialPage extends BasePage implements OnIni
 
   ngOnInit() {
     console.log('student-dashboard-study-material');
-
-
   }
 
-  async initialize(){
-    let obj = {}
-    const res = await this.network.getAllMaterial(obj)
+  async initialize() {
+    let obj = {};
+    const res = await this.network.getAllMaterial(obj);
     console.log(res);
-    if(res && res.bool == true){
-      console.log(res.result.data)
+    if (res && res.bool == true) {
+      console.log(res.result.data);
       this.list = res.result.data;
     }
-
   }
-
 
   async handleRefresh(event) {
     await this.globalCourses.getCoursesFromApi('', 1);
@@ -52,5 +48,7 @@ export class StudentDashboardStudyMaterialPage extends BasePage implements OnIni
     (ev as InfiniteScrollCustomEvent).target.complete();
   }
 
-
+  openDetails(item: any) {
+    this.nav.push('/detail-material', {material_id: item.id})
+  }
 }

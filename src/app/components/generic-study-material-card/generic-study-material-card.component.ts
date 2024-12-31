@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injector } from '@angular/core';
+import { Component, OnInit, Input, Injector, EventEmitter, Output } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -31,6 +31,8 @@ export class GenericStudyMaterialCardComponent
   loading = false;
   trail = false;
   languageName: any;
+
+  @Output() openDetails = new EventEmitter<any>();
 
   @Input('item')
   public get item() {

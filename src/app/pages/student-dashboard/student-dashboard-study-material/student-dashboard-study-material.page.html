@@ -7,7 +7,7 @@
     <div class="sb-content-7895">
       <div *ngFor="let item of list">
         <!-- (onChange)="reloadList()" -->
-        <app-generic-study-material-card [item]="item"></app-generic-study-material-card>
+        <app-generic-study-material-card [item]="item" (openDetails)="openDetails(item)"></app-generic-study-material-card>
       </div>
       <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
