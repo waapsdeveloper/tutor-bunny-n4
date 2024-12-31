@@ -459,6 +459,10 @@ getcourseById(id) {
     return this.httpPostResponse('material/add', data, null, false, true);
   }
 
+  updateStudyMaterial(data, id) {
+    return this.httpPostResponse('material/edit/' + id, data, null, false, true);
+  }
+
   postStudyMaterialPhoto(data: any) {
     return this.httpPostResponse('material/update-material-image', data, null, false, true);
   }

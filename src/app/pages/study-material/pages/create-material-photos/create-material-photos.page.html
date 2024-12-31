@@ -9,7 +9,7 @@
         <ion-col class="ïon-no-padding" *ngFor="let photo of images$; let i = index" size-xs="4" size-sm="4"
           size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(photo)"
-            (click)="openImage(photo)" (click)="openImage(photo)">
+            (click)="openImage(photo)">
             <!-- <ion-icon name="star" [class.set-feature-input-678956744]="coursePhoto.feature === true"
               class="feature-input-678956744" (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon> -->
             <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(i , $event)">
@@ -18,7 +18,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #photoInput multiple />
+  <input type="file" (change)="onFileSelected($event)" accept=".jpeg,.jpg,.png" style="display: none" #photoInput multiple />
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16" style="width: 100%;">

@@ -39,7 +39,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       image: null,
       images: [],
       docs: [],
-      price: 0,
+      price: null,
       language_id: -1,
       language: null,
       keywords: [],
@@ -127,6 +127,24 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       ...state,
       docs: docs
     }));
+  }
+
+  addDocInDocs(doc: any) {
+    this.setState( state => ({
+      ...state,
+      docs: [...state.docs, doc]
+    }));
+  }
+
+  removeDocInDocsIndex(index){
+    this.setState( state => {
+      const docs = [...state.docs];
+      docs.splice(index, 1);
+      return {
+        ...state,
+        docs
+      }
+    })
   }
 
 
@@ -235,6 +253,10 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     return this.selectState(state => state.images);
   }
 
+  getDocs() {
+    return this.selectState(state => state.docs);
+  }
+
   getImagesPromise() {
     return new Promise((resolve, reject) => {
       this.selectState(state => state.images).subscribe((data) => {
@@ -263,7 +285,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     return this.selectState(state => state.terms);
   }
 
-  async getFormData(){
+  getFormData(){
     return this.selectState(state => state)
   }
 

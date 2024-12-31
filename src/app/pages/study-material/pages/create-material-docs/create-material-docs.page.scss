@@ -11,16 +11,18 @@
   /* Optional: Add styling for image cards */
   background-color: rgb(217, 217, 217);
   border-radius: 5px;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  // height: 100px;
+  padding-bottom: 100%;
   position: relative;
   /* height: auto; */
   display: block;
   border-radius: 5px;
   object-fit: cover;
   aspect-ratio: 4 / 3;
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .image {

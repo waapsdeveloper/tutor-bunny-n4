@@ -26,8 +26,9 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   ) {
     super(injector);
 
-    this.createMaterialService.getFormData().then(data => {
+    this.createMaterialService.getFormData().subscribe(data => {
       this.material$ = data;
+      console.log(this.material$)
     });
 
   }
@@ -60,80 +61,85 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   async onSlideChange() {
 
-    // const data = await this.createMaterialService.getFormDataAsync() as any;
+    const data = await this.createMaterialService.getFormDataAsync() as any;
 
-    // this.events.publish('teacher-study-material-first-screen-submit-call', data)
+    this.events.publish('teacher-study-material-first-screen-submit-call', data)
 
-    // if (!data.title || !data.description || !data.language_id || !data.price) {
-    //   return;
-    // }
+    if (!data.title || !data.description || !data.language_id || !data.price) {
+      return;
+    }
 
-    // if(!data.images || data.images.length == 0){
-    //   return;
-    // }
+    if(!data.images || data.images.length == 0){
+      return;
+    }
 
-    // // submit study matreial form
-    // const user = this.users.getUser();
+    // submit study matreial form
+    const user = this.users.getUser();
 
-    // let formData = {
-    //   "user_id": user.id,
-    //   "title": data.title,
-    //   "description": data.description,
-    //   "language_id": data.language_id,
-    //   "price": data.price,
-    // }
+    let formData = {
+      "user_id": user.id,
+      "title": data.title,
+      "description": data.description,
+      "language_id": data.language_id,
+      "price": data.price,
+    }
 
-    // const res = await this.network.storeStudyMaterial(formData);
 
-    // console.log(res)
-    // let studyMaterialId = res.studyMaterial.id;
 
-    // if (studyMaterialId) {
+    const res = (this.material$.id !- -1) ? await this.network.updateStudyMaterial(formData, this.material$.id) : await this.network.storeStudyMaterial(formData);
 
-    //   this.createMaterialService.setId(studyMaterialId);
+    console.log(res)
+    let studyMaterialId = res.studyMaterial.id;
 
-    //   if(data.image['image']) {
+    if (studyMaterialId) {
 
-    //     let obj = {
-    //       study_material_id: studyMaterialId,
-    //       image: data.image['image'],
-    //     };
+      this.createMaterialService.setId(studyMaterialId);
 
-    //     let simage = await this.network.postStudyMaterialPhoto(obj);
+      if(data.image['image']) {
 
-    //     // if(simage.result.image){
-    //     //   console.log(simage.result.image);
-    //     //   let obj = {
-    //     //     "feature": false,
-    //     //     "image": simage.result.image
-    //     //   }
-    //     //   this.createMaterialService.setImage(obj);
-    //     // }
+        let obj = {
+          study_material_id: studyMaterialId,
+          image: data.image['image'],
+        };
 
+        let simage = await this.network.postStudyMaterialPhoto(obj);
+
+        console.log(simage);
+
+        // if(simage.result.image){
+        //   console.log(simage.result.image);
+        //   let obj = {
+        //     "feature": false,
+        //     "image": simage.result.image
+        //   }
+        //   this.createMaterialService.setImage(obj);
+        // }
+
+      }
+
+      this.step = 2;
+      this.slides?.swiperRef?.slideTo(1, 500, false);
+
+
+      // this.sendPendingImages(studyMaterialId);
+
+    }
+    // this.createCourseService.courseId = courseId;
+    // if (courseId) {
+    //   let obj = {
+    //     course_id: courseId,
+    //     image: this.createCourseService.formData.image,
+    //   };
+    //   if (!this.createCourseService.formData.image.includes('https')) {
+    //     let image = await this.network.postCoursePhoto(obj);
     //   }
 
-
-
-    //   this.sendPendingImages(studyMaterialId);
-
+    //   this.createCourseService.sendPendingImages(courseId);
     // }
-    // // this.createCourseService.courseId = courseId;
-    // // if (courseId) {
-    // //   let obj = {
-    // //     course_id: courseId,
-    // //     image: this.createCourseService.formData.image,
-    // //   };
-    // //   if (!this.createCourseService.formData.image.includes('https')) {
-    // //     let image = await this.network.postCoursePhoto(obj);
-    // //   }
-
-    // //   this.createCourseService.sendPendingImages(courseId);
-    // // }
 
 
 
-    this.step = 2;
-    this.slides?.swiperRef?.slideTo(1, 500, false);
+
 
 
 
