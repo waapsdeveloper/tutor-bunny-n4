@@ -129,6 +129,13 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     }));
   }
 
+  addDocInDocs(doc: any) {
+    this.setState( state => ({
+      ...state,
+      docs: [...state.docs, doc]
+    }));
+  }
+
 
 
   setPrice(price: number) {
@@ -233,6 +240,10 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
   getImages() {
     return this.selectState(state => state.images);
+  }
+
+  getDocs() {
+    return this.selectState(state => state.docs);
   }
 
   getImagesPromise() {

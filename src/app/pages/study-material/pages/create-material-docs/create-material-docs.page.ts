@@ -10,7 +10,7 @@ import { CreateMaterialService } from '../create-material/create-material.servic
 export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   title = 'Study Material Documents';
-  doc:null
+  doc: null
   params;
   remainingSlots;
 
@@ -36,7 +36,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
 
-    this.createMaterialService.getImages().subscribe( (data) => {
+    this.createMaterialService.getDocs().subscribe((data) => {
       this.docs$ = data;
     });
 
@@ -45,23 +45,34 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   }
 
   setBackgroundImage(item) {
-    return `url('${item.image}')`;
+    // return `url('${item.image}')`;
+
+    console.log(item.type);
+
+    let path = "assets/svg/filetypes/";
+    if (item.type.includes("pdf")) {
+      path += "pdf.svg";
+    }
+
+    return `url(${path})`;
   }
 
-  async addImageInArray(imageString) {
+  async addDocInArray(docString, type) {
 
     let obj = {
       feature: false,
-      image: imageString,
+      doc: docString,
+      type: type
     };
 
-    await this.createMaterialService.addImageInImages(obj);
+    await this.createMaterialService.addDocInDocs(obj);
   }
 
 
   async onFileSelected(event: any) {
+
     const files: File[] = Array.from(event.target.files);
-    this.remainingSlots = 8 - this.images$.length;
+    this.remainingSlots = 8 - this.docs$.length;
 
     if (this.remainingSlots <= 0) {
       alert('You have already uploaded the maximum of 8 images.');
@@ -73,15 +84,14 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     console.log(filesToUpload);
 
     for (const file of filesToUpload) {
-      let imageString: string;
+      const fileType = file.type; // Get the MIME type of the file
+      let docString: string;
       if (file.size > 1048576) {
-        console.log(file.size);
-        imageString = await this.imageService.resizeImage(file, 800, 800);
-        console.log(imageString);
+        this.utility.presentFailureToast("File size must be less then 10 mb")
       } else {
-        imageString = await this.fileToDataURL(file);
+        docString = await this.fileToDataURL(file);
       }
-      await this.addImageInArray(imageString);
+      await this.addDocInArray(docString, fileType);
     }
   }
 
@@ -97,13 +107,13 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   async updateFeatureImage(item: any, index, event: Event) {
     event.stopPropagation();
 
-    for (let i = 0; i < this.images$.length; i++) {
-      this.images$[i].feature = false;
+    for (let i = 0; i < this.docs$.length; i++) {
+      this.docs$[i].feature = false;
     }
 
-    this.images$[index].feature = true;
+    this.docs$[index].feature = true;
 
-    this.createMaterialService.setImages(this.images$)
+    this.createMaterialService.setDocs(this.docs$)
   }
 
   async clearImage(index: any, event: Event) {
@@ -114,7 +124,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   }
 
-  openImage(image) {
+  openDoc(doc) {
     // this.nav.push('/course-profile/course-photo/gallery-image', {
     //   backUrl: '/course-profile/course-photo',
     //   image: image,
