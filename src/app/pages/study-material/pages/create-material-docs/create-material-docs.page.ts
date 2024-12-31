@@ -14,7 +14,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   params;
   remainingSlots;
 
-  images$: any[] = [];
+  docs$: any[] = [];
 
 
   constructor(
@@ -37,7 +37,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     console.log(this.params);
 
     this.createMaterialService.getImages().subscribe( (data) => {
-      this.images$ = data;
+      this.docs$ = data;
     });
 
 

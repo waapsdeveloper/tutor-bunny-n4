@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: DetailMaterialPage
   },
-  {
-    path: 'material-photo',
-    loadChildren: () => import('./material-photos/material-photos.module').then( m => m.MaterialPhotosModule)
-  }
 
 ];
 
