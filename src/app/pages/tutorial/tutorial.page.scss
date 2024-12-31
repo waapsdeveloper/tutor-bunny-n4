@@ -1,0 +1,95 @@
+.tutorial-outer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 57px;
+  align-items: center;
+  text-align: center;
+}
+
+.header-outer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px; /* Space between header and the main content */
+}
+.image-outer-877584 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 154px;
+  height: 49px;
+}
+.header-inner {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.content-container {
+  display: flex;
+  margin-top: 67px;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 24px; /* Ensures consistent gap between elements */
+}
+
+.image-outer {
+  width: 200px;
+  height: 150px;
+  margin-bottom: 16px; /* Space between the image and the text */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-image: url("../../../assets/svg/tut1.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 377px;
+  height: 291px;
+}
+
+.content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Even spacing between text elements */
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.tutor-bunny {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.description {
+  color: #666;
+}
+
+.continue-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 32px; /* Spacing between content and button */
+  cursor: pointer;
+}
+
+.continue-button:hover {
+  background-color: #555;
+}
+
+.help-link {
+  margin-top: 16px; /* Spacing between the button and the link */
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}

@@ -37,8 +37,8 @@ export class SplashPage implements OnInit {
     if (res) {
       this.router.navigate(['/pre-splash']);
     } else {
-      this.router.navigate(['/tutorial']);
-      // this.router.navigate(['/role-base']); // Redirect to role-base if no user is logged in
+    //  this.router.navigate(['/tutorial']);
+       this.router.navigate(['/role-base']); // Redirect to role-base if no user is logged in
     }
 
     this.loading = false;
