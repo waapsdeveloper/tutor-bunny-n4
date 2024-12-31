@@ -250,9 +250,10 @@ export class NetworkService {
     return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
   }
 
-  getcourseById(id) {
+getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
+
 
   getCourseImages(data) {
     const str = this.serialize(data);
@@ -472,6 +473,9 @@ export class NetworkService {
 
   purchaseMaterial(data: any) {
     return this.httpPostResponse('material/purchase', data, null, false, true);
+  }
+  getMaterialById(id) {
+    return this.httpGetResponse('material/byid/' + id, null, false, false);
   }
 
   serialize = (obj: any) => {

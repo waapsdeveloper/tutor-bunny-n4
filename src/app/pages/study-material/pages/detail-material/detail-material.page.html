@@ -1,13 +1,101 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>detail-material</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <div *ngIf="loading" class="loading-syn ">
+  <ion-spinner></ion-spinner>
+</div> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detail-material</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<!-- [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" -->
+<ion-content
+  class="remove-pd-top-323243243" #content [fullscreen]="true">
+  <!-- <ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow" > -->
+    <!-- <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
+      (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top> -->
+  <!-- </ion-header> -->
+  <app-material-photos [materialId]="materialId" ></app-material-photos>
+  <div class="body-content ion-padding">
+    <div class="course-heading-78521">
+      {{title}}
+    </div>
+    <div class="cource-price-and-rating-box-78541">
+      <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /lesson</span></div>
+      <div class="cource-rating-box-78543" >
+        <app-rating-stars [rating]="rating"></app-rating-stars>
+        <div class="cource-rating-number-78545">{{rating}} <span
+            style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="cource-details-box-78561">
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
+          hour each lesson</div>
+        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total
+          {{lessons}} lessons
+        </div>
+      </div>
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/online.svg" />{{mode_type}}
+        </div>
+        <div class="cource-lesson-box-78564"> <img class="i-7685" src="assets/icon/smgroup-icon.svg" />{{capacity}}
+        </div>
+      </div>
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"> <img class="img1-789575" src="../../../assets/svg/cake.svg" />Student age
+          {{from_age}}-{{to_age}}</div>
+        <div class="cource-lesson-box-78564"> <img src="../../assets/svg/speaks.svg" alt=""
+            style="height: 16px;">{{language}}</div>
+      </div>
+      <div class="cource-time-and-lessons-78562">
+        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
+          <div style="width: 136px; text-wrap: wrap;">
+            {{state}},
+            {{country}}
+          </div>
+        </div>
+        <div class="cource-lesson-box-78564"> <img class="i-7685"
+            src="../../../assets/svg/course-type.svg" />Workshop/Event
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="detail-box-outer-78522">
+      <div class="detail-head-78523">
+        <div class="detail-heading-78524">Details</div>
+        <div class="detail-heading-left--78524 to-end-dates-included" *ngIf="startDate">
+          <img src="../../assets/svg/calander.svg" alt="" style="height: 16px;">{{startDate}} {{ endDate ? 'to' : '' }}
+          {{endDate}}
+        </div>
+      </div>
+      <div class="fs-16 outfit discription-text">
+        <div class="discription-para" [class.collapsed]="isExpanded" [innerHTML]="description">
+
+        </div>
+        <!-- <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read more</ion-button>
+        <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</ion-button> -->
+        <div class="qulification-box-edu-readmore-98525">
+          <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+        </div>
+        <div class="education-box-edu-readmore-98525">
+          <div class="education-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</div>
+        </div>
+      </div>
+    </div>
+    <div class="line" *ngIf="schedules.length > 0"></div>
+    <div class="detail-box-outer-78522" *ngIf="schedules.length > 0">
+      <div class="detail-head-785234">
+        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type !== 3">
+          Weekly Schedule
+        </div>
+        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type === 3">
+          Event Schedule
+        </div>
+        <div class="days-box">
+          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
+        </div>
+      </div>
+    </div>
+    <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
+    <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
+      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"
+      (onChange)="getOtherCourse($event)"></app-other-courses>
+  </div>
 </ion-content>

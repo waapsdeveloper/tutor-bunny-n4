@@ -32,7 +32,9 @@ export class OtherCoursesComponent extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log();
+  }
 
   gotoCourseList() {
     this.openOtherCourses.emit();
