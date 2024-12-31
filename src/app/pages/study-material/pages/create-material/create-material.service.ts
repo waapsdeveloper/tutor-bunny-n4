@@ -11,6 +11,7 @@ export interface StudyMaterialModel {
   description: string;
   image: any;
   images: any[];
+  docs: any[];
   price: number;
   language_id: number;
   language: any;
@@ -37,6 +38,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       description: '',
       image: null,
       images: [],
+      docs: [],
       price: 0,
       language_id: -1,
       language: null,
@@ -118,6 +120,13 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
         images
       }
     })
+  }
+
+  setDocs(docs: any[]) {
+    this.setState( state => ({
+      ...state,
+      docs: docs
+    }));
   }
 
 
