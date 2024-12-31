@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: DetailMaterialPage
+  },  {
+    path: 'material-photo',
+    loadChildren: () => import('./material-photo/material-photo.module').then( m => m.MaterialPhotoPageModule)
   }
+
 ];
 
 @NgModule({

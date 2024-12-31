@@ -8,9 +8,8 @@ import { DetailMaterialPageRoutingModule } from './detail-material-routing.modul
 
 import { DetailMaterialPage } from './detail-material.page';
 import { CourseSchedulesModule } from 'src/app/components/course-schedules/course-schedules.module';
-import { CoursePhotoModule } from 'src/app/components/course-photo/course-photo.module';
+import { MaterialPhotosModule } from './material-photos/material-photos.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
-import { CoursePhotosModule } from 'src/app/components/course-photos/course-photos.module';
 
 @NgModule({
   imports: [
@@ -20,10 +19,10 @@ import { CoursePhotosModule } from 'src/app/components/course-photos/course-phot
     DetailMaterialPageRoutingModule,
     OtherCoursesModule,
     CourseSchedulesModule,
-    CoursePhotosModule,
-    RatingStarsModule
+    RatingStarsModule,
+    MaterialPhotosModule
 
   ],
-  declarations: [DetailMaterialPage]
+  declarations: [DetailMaterialPage],
 })
 export class DetailMaterialPageModule {}

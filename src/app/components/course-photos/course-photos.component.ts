@@ -1,4 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
+import { log } from 'console';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NetworkService } from 'src/app/services/network.service';
 
@@ -29,7 +30,9 @@ export class CoursePhotosComponent implements OnInit {
   constructor(public network: NetworkService) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+console.log();
+  }
 
   async getCourseImages(id){
     let obj = {

@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -16,7 +16,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   data;
   params;
   backUrl;
-  material_Id;
+ @Input() materialId;
   capacity;
   description;
   currencySymbol;
@@ -60,7 +60,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('CourseDetailPage');
+    console.log('MaterialDetailPage');
   }
 
   async ionViewWillEnter() {
@@ -70,7 +70,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
       this.backUrl = this.params.backUrl;
     }
     if (this.params.material_id) {
-      this.material_Id = this.params.id;
+      this.materialId = this.params.material_id;
     }
     this.callApi();
   }
@@ -92,7 +92,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   async callApi() {
     this.loading = true;
     this.user = this.users.getUser();
-    let res = (await this.network.getcourseById(this.material_Id)) as any;
+    let res = (await this.network.getMaterialById(this.materialId)) as any;
     this.data = res.course;
     this.title = this.data.title;
     this.language = this.data.language.name;
@@ -176,18 +176,18 @@ export class DetailMaterialPage extends BasePage implements OnInit {
 
   openDetails() {
     const params = {
-      course_Id: this.material_Id,
+      material_Id: this.materialId,
       edit: true,
       type: this.data.type,
       showBack: true,
       title: 'Edit Course',
     };
-    this.nav.push('/course-form', params);
+    this.nav.push('/material-form', params);
   }
 
   getOtherCourse(event) {
     console.log(event);
-    this.material_Id = event.id;
+    this.materialId = event.id;
     this.callApi();
 
     this.content.scrollToTop(500); // 500ms animation duration
