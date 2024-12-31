@@ -10,6 +10,7 @@ export interface UserModel {
   id: number;
   name: string;
   currency: string;
+  status: string;
 
 }
 
@@ -36,6 +37,7 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       id: -1,
       name: '',
       currency: '$',
+      status: ''
     };
   }
 
