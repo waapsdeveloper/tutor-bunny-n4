@@ -11,23 +11,24 @@
     height: 150px;
     background: lightblue;
     border-radius: 8px;
-
+    background-position: center;
+    background-size: cover;
     position: relative;
 
     flex-grow: 0;
 
     .label-bar-bottom {
-
       position: absolute;
       height: 25px;
+      display: flex;
+      justify-content: center;
+      color: #ffffffff;
       bottom: 0;
       left: 0;
       width: 100%;
       background-color: rgba(69, 69, 69, 1);
       border-radius: 0px 0px 8px 8px;
-
     }
-
   }
 
   .content-outer {
@@ -35,7 +36,6 @@
     width: calc(100% - 158px);
 
     .content-inner {
-
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -48,7 +48,6 @@
       }
 
       .teacher {
-
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -58,14 +57,10 @@
         .teacher-image {
           width: 24px;
           height: 24px;
-
+          object-fit: cover;
           background-color: black;
           border-radius: 25px;
-
         }
-
-
-
       }
 
       .actions {
@@ -88,23 +83,13 @@
         }
 
         .action-items {
-
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
           gap: 8px;
-
         }
       }
-
-
-
     }
-
   }
-
-
-
-
 }

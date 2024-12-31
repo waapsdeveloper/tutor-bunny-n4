@@ -1,11 +1,16 @@
 <div class="nd-card-outer-748">
-  <div class="image-outer">
-    <div class="label-bar-bottom"></div>
+  <div
+    class="image-outer"
+    [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
+  >
+    <div class="label-bar-bottom">
+      {{ item.auth_user_currency_symbol }}{{ item.price }}
+    </div>
   </div>
   <div class="content-outer">
     <div class="content-inner">
       <div class="content-title roboto-medium fs-16">
-        Yoga Class for the kids in onlid and offl for adults and teens as
+        {{ item.title }}
       </div>
       <div class="rating">
         <app-rating-stars [rating]="rating"></app-rating-stars>
@@ -17,10 +22,11 @@
       <div class="teacher">
         <img
           class="teacher-image"
-          [src]="'assets/learn-piano.jpeg'"
+          [src]="'item.user.image'"
           alt="Teacher"
         />
-        <div class="teacher-name roboto-regular fs-14">Rajshekaraney</div>
+        <div class="teacher-name roboto-regular fs-14">{{user.name}}</div>
+        <span slot="start" class="fi fi-{{flag}}"></span>
       </div>
 
       <div class="actions">
@@ -35,11 +41,7 @@
             (click)="item.is_liked_by_me ? removeToFav() : addToFav()"
           >
           </ion-icon> -->
-          <img
-            src="assets/svg/share-77.svg"
-            alt="Share"
-            class="share-icon"
-          />
+          <img src="assets/svg/share-77.svg" alt="Share" class="share-icon" />
         </div>
       </div>
     </div>

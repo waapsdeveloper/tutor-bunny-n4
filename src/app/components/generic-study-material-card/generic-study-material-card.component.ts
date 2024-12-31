@@ -17,6 +17,7 @@ export class GenericStudyMaterialCardComponent
   extends BasePage
   implements OnInit
 {
+  list: any[] = [];
   private _item: any;
   displayName;
   flag;
@@ -68,11 +69,12 @@ export class GenericStudyMaterialCardComponent
     );
   }
 
-  initialize(data) {
+  async initialize(data) {
+
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
-    this.flag = this.getFlag();
+    this.flag = this.getFlag(data);
     this.status = data.trial ? data.trial.status : null;
 
     if (data && data.trial) {
@@ -81,6 +83,7 @@ export class GenericStudyMaterialCardComponent
     if (data && data.type == 3) {
       this.type = data.type;
     }
+    console.log(data)
   }
 
   ngOnInit() {
@@ -89,9 +92,9 @@ export class GenericStudyMaterialCardComponent
     }, 200);
   }
 
-  getFlag() {
-    if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
-      const flag = this.item.user.teacher.country.iso2;
+  getFlag(data) {
+    if (data && data.user.teacher && data.user.teacher.country) {
+      const flag = data.user.teacher.country.iso2;
       if (flag) {
         return flag.toLowerCase();
       } else {
