@@ -8,6 +8,7 @@ import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { UserSqService } from 'src/app/services/sqlite/user-sq.service';
+import { PendingTrialsService } from 'src/app/services/pending-trials.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -26,36 +27,12 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   travel_policy;
   rating;
 
-  footerlist = [
-    {
-      icon: 'assets/icon/home/home-icon.svg',
-      label: 'Home',
-      active: 0,
-    },
-    {
-      icon: 'assets/icon/home/chat-icon.svg',
-      label: 'Chat',
-      active: 0,
-    },
-    {
-      icon: 'assets/icon/home/calendar-icon.svg',
-      label: 'Calendar',
-      active: 0,
-    },
-    {
-      icon: 'assets/icon/home/box-icon.svg',
-      label: 'My Courses',
-      active: 0,
-    },
-    {
-      icon: 'assets/icon/home/menu-icon.svg',
-      label: 'Menu',
-      active: 0,
-    },
-  ];
+  pendingTrialsCoubt$ = 0;
+
+
   constructor(
     injector: Injector,
-
+    private pendingTrialsService: PendingTrialsService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public chats: ChatService,
@@ -67,6 +44,15 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     this.userSq.loadUsers().then( res => {
       console.log(res)
     });
+
+    this.pendingTrialsService.getCount().subscribe((data) => {
+      this.pendingTrialsCoubt$ = data ?? 0;
+    });
+
+
+
+
+
   }
 
   ngOnInit() {

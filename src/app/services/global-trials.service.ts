@@ -5,10 +5,13 @@ import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
 import { GlobalCoursesService } from './global-courses.service';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalTrialsService {
+
   user: any;
   page = 1;
   last_page = -1;
@@ -27,6 +30,7 @@ export class GlobalTrialsService {
     private events: EventsService,
     private GlobalCourses: GlobalCoursesService
   ) {
+
     this.events.subscribe(
       'clear-all-services-data',
       () => {
