@@ -1,0 +1,105 @@
+.nd-card-outer-748 {
+  height: 150px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
+
+  .image-outer {
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    border-radius: 8px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+    flex-grow: 0;
+
+    .label-bar-bottom {
+      position: absolute;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffffffff;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(69, 69, 69, 1);
+      border-radius: 0px 0px 8px 8px;
+    }
+  }
+
+  .content-outer {
+    height: 150px;
+    width: calc(100% - 158px);
+
+    .content-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      height: 100%;
+
+      .other-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .teacher {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 8px;
+        align-items: center;
+
+        .teacher-image {
+          width: 24px;
+          height: 24px;
+          object-fit: cover;
+          background-color: black;
+          border-radius: 25px;
+        }
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .big-action-button-8574 {
+          height: 34px;
+          width: 143px;
+          border-radius: 8px;
+          background-color: rgba(243, 191, 89, 1);
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .action-items {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 16px;
+        }
+      }
+    }
+  }
+}

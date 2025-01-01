@@ -21,7 +21,7 @@ export class RecTechersBoxComponent extends BasePage implements OnInit {
 
   async callApi() {
     this.loading = true;
-    const res = await this.network.getAllTeachers() as any [];
+    const res = await this.network.getAllTeachers({}) as any [];
 
     this.list = res;
     this.loading = false;

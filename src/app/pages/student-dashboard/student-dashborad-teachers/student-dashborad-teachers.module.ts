@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { StudentDashboradTeachersPageRoutingModule } from './student-dashborad-teachers-routing.module';
 
 import { StudentDashboradTeachersPage } from './student-dashborad-teachers.page';
-import { RecTechersBoxModule } from '../rec-techers-box/rec-techers-box.module';
+import { GenericTeacherCardModule } from 'src/app/components/generic-teacher-card/generic-teacher-card.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { RecTechersBoxModule } from '../rec-techers-box/rec-techers-box.module';
     FormsModule,
     IonicModule,
     StudentDashboradTeachersPageRoutingModule,
-    RecTechersBoxModule
+    GenericTeacherCardModule
   ],
   declarations: [StudentDashboradTeachersPage]
 })

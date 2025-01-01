@@ -189,8 +189,9 @@ export class NetworkService {
     return this.httpPostResponse('recent-searches', data, null, false, false);
   }
 
-  getAllTeachers() {
-    return this.httpGetResponse('teachers/list/approved', null, null, false);
+  getAllTeachers(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('teachers/list/approved' + '?' + str, null, null, false);
   }
 
   getAllFavCourses(data: any) {
