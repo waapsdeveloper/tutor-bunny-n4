@@ -2,17 +2,48 @@
   <div class="image-outer-877584">
     <img src="../../assets/svg/tutor_bunny.svg" />
   </div>
-  <div class="content-container">
-    <div class="image-outer"></div>
-    <div class="content-inner">
-      <div class="tutor-bunny">Welcome to Tutor Bunny.</div>
-      <div class="description">
-        Submit the application form to join <br />
-        Tutor Bunny as a Teacher and <br />
-        create courses you provide for your students.
+
+  <swiper [slidesPerView]="1" [pagination]="{ clickable: true }" class="mySwiper">
+    <ng-template swiperSlide>
+      <div class="content-container">
+        <div class="image-outer "></div>
+        <div class="content-inner">
+          <div class="tutor-bunny fs-16 roboto-medium-2">Welcome to Tutor Bunny.</div>
+          <div class="description fs-16 roboto-regular">
+            Submit the application form to join <br />
+            Tutor Bunny as a Teacher and <br />
+            create courses you provide for your students.
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <button class="continue-button">Continue</button>
-  <a href="#" class="help-link">How to create teacher application?</a>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="content-container">
+        <div class="image-outer-2" ></div>
+        <div class="content-inner">
+          <div class="description fs-16 roboto-regular">
+            Once the profile is approved by the admin, get <br/>
+            connected to your
+            students, chat with them and <br> provide trial sessions.
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="content-container">
+        <div class="image-outer-3"></div>
+        <div class="content-inner">
+          <div class="description fs-16 roboto-regular" >
+            Create and upload study notes, materials of your <br> subject of
+            interests, and sell online to students.
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+
+  <button class="continue-button fs-16 roboto-medium">Continue</button>
+  <a href="#" class="help-link fs-14 roboto-regular">How to create teacher application?</a>
 </div>

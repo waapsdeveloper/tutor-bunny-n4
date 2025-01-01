@@ -38,7 +38,7 @@
   gap: 24px; /* Ensures consistent gap between elements */
 }
 
-.image-outer {
+.image-outer , .image-outer-2, .image-outer-3 {
   width: 200px;
   height: 150px;
   margin-bottom: 16px; /* Space between the image and the text */
@@ -53,6 +53,17 @@
   width: 377px;
   height: 291px;
 }
+.image-outer-2 {
+  background-image: url("../../../assets/svg/tut2.svg");
+  width:406px;
+  height: 367px;
+}
+.image-outer-3 {
+  background-image: url("../../../assets/svg/tut3.svg");
+  width:406px;
+  height: 367px;
+}
+
 
 .content-inner {
   display: flex;
@@ -65,7 +76,8 @@
 .tutor-bunny {
   font-weight: 600;
   color: #333;
-  margin-bottom: 30px;
+//  margin-bottom: 30px;
+  padding: 82px 12px 12px 7px;
 }
 
 .description {
@@ -79,7 +91,6 @@
   padding: 12px 100px;
   border-radius: 8px;
   font-size: 16px;
-  margin-top: 32px; /* Spacing between content and button */
   cursor: pointer;
 }
 
@@ -92,4 +103,21 @@
   font-size: 14px;
   color: #007bff;
   text-decoration: none;
+}
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  background: #333 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #007bff !important;
 }
