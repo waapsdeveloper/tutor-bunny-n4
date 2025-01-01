@@ -9,7 +9,6 @@ import { ModalService } from './basic/modal.service';
 })
 export class NetworkService {
 
-
   constructor(
     public api: ApiService,
     public router: Router,
@@ -471,8 +470,9 @@ getcourseById(id) {
     return this.httpPostResponse('material/image/add', data, null, false, true);
   }
 
-  getAllMaterial(data: any) {
-    return this.httpGetResponse('material/list', null, false, false);
+  getAllMaterials(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('material/list' + '?' + str, null, false, false);
   }
 
   purchaseMaterial(data: any) {
@@ -480,6 +480,14 @@ getcourseById(id) {
   }
   getMaterialById(id) {
     return this.httpGetResponse('material/byid/' + id, null, false, false);
+  }
+
+  uploadStudtMaterialFile(data) {
+    return this.httpPostResponse('material/upload/docs', data, null, false, true, 'multipart/form-data');
+  }
+
+  deleteStudyMaterialFile(data) {
+    return this.httpPostResponse('material/delete/document', data, false, true, true);
   }
 
   serialize = (obj: any) => {

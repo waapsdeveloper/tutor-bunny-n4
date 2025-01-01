@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 
 @Component({
   selector: 'app-student-dashboard-study-material',
@@ -12,38 +12,29 @@ export class StudentDashboardStudyMaterialPage
   extends BasePage
   implements OnInit
 {
-  list: any[] = [];
-  page: 1;
-  search: '';
+  list$;
 
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+  constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
-    this.initialize();
   }
 
   ngOnInit() {
-    console.log('student-dashboard-study-material');
-  }
 
-  async initialize() {
-    let obj = {};
-    const res = await this.network.getAllMaterial(obj);
-    console.log(res);
-    if (res && res.bool == true) {
-      console.log(res.result.data);
-      this.list = res.result.data;
-    }
+    this.globalStudyMaterialService.getList().subscribe((res) => {
+      this.list$ = res;
+    });
+
   }
 
   async handleRefresh(event) {
-    await this.globalCourses.getCoursesFromApi('', 1);
+    this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
     event.target.complete();
   }
 
   async onIonInfinite(ev) {
-    if (this.globalCourses.page <= this.globalCourses.last_page) {
-      const np = this.globalCourses.page + 1;
-      await this.globalCourses.getCoursesFromApi('', np);
+    if (this.globalStudyMaterialService.page <= this.globalStudyMaterialService.last_page) {
+      const np = this.globalStudyMaterialService.page + 1;
+      await this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', np);
     }
     (ev as InfiniteScrollCustomEvent).target.complete();
   }

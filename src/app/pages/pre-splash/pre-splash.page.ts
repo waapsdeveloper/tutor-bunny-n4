@@ -13,6 +13,8 @@ import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.ser
 import { TeacherService } from 'src/app/services/teacher.service';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 import { ViewWillEnter } from '@ionic/angular';
+import { PendingTrialsService } from 'src/app/services/pending-trials.service';
+import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -37,7 +39,14 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notificationService: NotificationsService,
-    private fcm: FirebaseService
+    private fcm: FirebaseService,
+
+    // subscription APIs
+    private pendingTrialsService: PendingTrialsService,
+    private globalStudyMaterialService: GlobalStudyMaterialService
+
+
+
   ) {
     super(injector);
   }
@@ -80,7 +89,9 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     this.network.getTimeZone(time, this.user.id);
 
 
-    this.globalTrials.getPendingTrialsFromApi();
+    // subscription APIs
+    this.pendingTrialsService.getPendingTrialsFromApi();
+    this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
 
     this.globalCourses.getCoursesFromApi();
     this.redirectDependsOnRole(this.user);

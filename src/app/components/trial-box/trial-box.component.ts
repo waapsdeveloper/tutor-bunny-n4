@@ -23,20 +23,15 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   // newTrial;
   // serial_number;
 
-
-
-
-
-
   constructor(injector: Injector, public pendingTrialsService: PendingTrialsService) {
     super(injector)
   }
+
   ngOnInit() {
 
     // this.user = this.users.getUser();
     this.pendingTrialsService.getList().subscribe((data) => {
       this.list$ = data;
-      console.log(data);
     });
 
     this.pendingTrialsService.getCount().subscribe((data) => {

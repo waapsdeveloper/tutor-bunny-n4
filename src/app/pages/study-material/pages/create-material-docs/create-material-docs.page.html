@@ -23,8 +23,11 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16" style="width: 100%;">
     <app-sd-button-gray style="width: 100%;"
+      (click)="docInput.click()" [image]="'assets/svg/upload.svg'"
+      [text]="title"></app-sd-button-gray>
+    <!-- <app-sd-button-gray style="width: 100%;"
       (click)="docs$.length < 8 ? docInput.click() : ''" [image]="'assets/svg/upload.svg'"
-      [disabled]="docs$.length >= 8" [text]="title"></app-sd-button-gray>
+      [disabled]="docs$.length >= 8" [text]="title"></app-sd-button-gray> -->
     <app-sd-button-gray style="width: 100%;" (click)="nav.pop()" [image]="'assets/svg/done.svg'"
       [text]="'Done'"></app-sd-button-gray>
   </div>

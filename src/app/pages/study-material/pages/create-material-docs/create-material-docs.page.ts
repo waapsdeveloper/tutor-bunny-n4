@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateMaterialService } from '../create-material/create-material.service';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-create-material-docs',
@@ -14,14 +15,23 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   params;
   remainingSlots;
 
-  docs$: any[] = [];
+  docs$;
+  studyMaterialId$; // study material id
 
 
   constructor(
     injector: Injector,
-    public createMaterialService: CreateMaterialService
+    public createMaterialService: CreateMaterialService,
   ) {
     super(injector);
+
+    this.createMaterialService.getId().subscribe((data) => {
+      this.studyMaterialId$ = data;
+    });
+
+    this.createMaterialService.getDocs().subscribe((data) => {
+      this.docs$ = data ?? [];
+    });
 
 
 
@@ -36,9 +46,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     this.params = this.nav.getQueryParams();
     console.log(this.params);
 
-    this.createMaterialService.getDocs().subscribe((data) => {
-      this.docs$ = data;
-    });
+
 
 
 
@@ -98,13 +106,27 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
     for (const file of filesToUpload) {
       const fileType = file.type; // Get the MIME type of the file
-      let docString: string;
+
       if (file.size >  25 * 1048576) {
         this.utility.presentFailureToast("File size must be less then 25 mb")
       } else {
-        docString = await this.fileToDataURL(file);
+
+        // docString = await this.fileToDataURL(file);
+        // send file to url
+        const data = new FormData();
+        data.append('document', file);
+        data.append('file_type', fileType);
+        data.append('study_material_id', this.studyMaterialId$);
+
+        const res = await this.network.uploadStudtMaterialFile(data)
+        if(res.bool == true){
+          let docString = res.result.data;
+          await this.addDocInArray(docString, fileType)
+        }
+
+        // await this.addDocInArray(docString, fileType);
       }
-      await this.addDocInArray(docString, fileType);
+
     }
   }
 
@@ -131,7 +153,11 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    this.createMaterialService.removeDocInDocsIndex(index)
+    this.createMaterialService.removeDocInDocsIndex(index);
+
+    let data = this.docs$[index].doc
+
+    this.network.deleteStudyMaterialFile(data);
 
   }
 
