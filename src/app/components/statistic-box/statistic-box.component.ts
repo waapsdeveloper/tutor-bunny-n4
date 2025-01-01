@@ -8,20 +8,18 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class StatisticBoxComponent extends BasePage implements OnInit {
 
-
   trials;
   courses;
   event
   credits;
   views;
-  user;
+
   constructor(injector: Injector) {
     super(injector)
     this.initialize();
   }
 
   async ngOnInit() {
-    this.user = this.users.getUser();
     this.events.subscribe('get-dashboard-stats', this.initialize.bind(this))
 
   }
@@ -33,6 +31,10 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
     this.event = res.events;
     this.credits = res.events;
     this.views = res.events;
+  }
+
+  goToTrialReq() {
+    this.nav.push('my-students')
   }
 
 

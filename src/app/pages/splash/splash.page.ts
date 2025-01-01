@@ -31,7 +31,7 @@ export class SplashPage implements OnInit {
 
     this.loading = true;
 
-    await this.iap.initializeGenericTables();
+    // await this.iap.initializeGenericTables();
     let res = await this.usersService.getLoginUserFromApi();
 
     if (res) {

@@ -11,6 +11,7 @@ export interface UserModel {
   name: string;
   currency: string;
   status: string;
+  image: string;
 
 }
 
@@ -37,7 +38,8 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       id: -1,
       name: '',
       currency: '$',
-      status: ''
+      status: '',
+      image: '',
     };
   }
 
@@ -64,6 +66,7 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       ...state,
       id: user.id,
       name: user.name,
+      image: user.image,
     }));
 
     if(user.role_id == 2){
