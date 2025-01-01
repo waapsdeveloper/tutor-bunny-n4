@@ -40,6 +40,6 @@ export class StudentDashboardStudyMaterialPage
   }
 
   openDetails(item: any) {
-    this.nav.push('/detail-material', {material_id: item.id})
+    this.nav.push('/material-detail', {material_id: item.id})
   }
 }

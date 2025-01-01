@@ -9,25 +9,33 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
 export class StudentDashboradCoursesPage extends BasePage implements OnInit {
-  constructor(injector: Injector, public globalCourses: GlobalCoursesService) {
+
+  list$;
+
+  constructor(injector: Injector, public globalCoursesService: GlobalCoursesService) {
     super(injector);
   }
 
   ngOnInit() {
-    this.events.subscribe('update-course-price', async () => {
-      await this.globalCourses.getCoursesFromApi('', 1);
+    this.globalCoursesService.getList().subscribe((res) => {
+      this.list$ = res;
     });
   }
+
   async handleRefresh(event) {
-    await this.globalCourses.getCoursesFromApi('', 1);
+    await this.globalCoursesService.getGlobalCoursesFromApi('', 1);
     event.target.complete();
   }
 
   async onIonInfinite(ev) {
-    if (this.globalCourses.page <= this.globalCourses.last_page) {
-      const np = this.globalCourses.page + 1;
-      await this.globalCourses.getCoursesFromApi('', np);
+    if (this.globalCoursesService.page <= this.globalCoursesService.last_page) {
+      const np = this.globalCoursesService.page + 1;
+      await this.globalCoursesService.getGlobalCoursesFromApi('', np);
     }
     (ev as InfiniteScrollCustomEvent).target.complete();
+  }
+
+  openDetails(item: any) {
+    this.nav.push('/course-detail', {material_id: item.id})
   }
 }

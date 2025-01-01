@@ -207,7 +207,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/study-material/pages/create-material-docs/create-material-docs.module').then( m => m.CreateMaterialDocsPageModule)
   },
   {
-    path: 'detail-material',
+    path: 'material-detail',
     loadChildren: () => import('./pages/study-material/pages/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
   },
   {

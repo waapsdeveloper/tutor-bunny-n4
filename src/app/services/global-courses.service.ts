@@ -1,13 +1,37 @@
 import { Injectable } from '@angular/core';
-import { NetworkService } from './network.service';
 import { EventsService } from './events.service';
 import Pusher from 'pusher-js';
+
+import {
+  NgSimpleStateBaseRxjsStore,
+  NgSimpleStateStoreConfig,
+} from 'ng-simple-state';
 import { UsersService } from './users.service';
+import { NetworkService } from './network.service';
+
+export interface GlobalCoursesModel {
+  id: number
+  is_liked_by_me: boolean,
+  user_id: 57,
+  user: any,
+  title: string,
+  description: string,
+  language_id: number,
+  image: string,
+  price: string,
+  keywords: [],
+  auth_user_currency_symbol: string,
+  updated_price: string
+}
+
+export type GlobalCoursesModelState = Array<GlobalCoursesModel>;
+
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalCoursesService {
+export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCoursesModelState > {
   page = 1;
   last_page = -1;
   courses: any[] = [];
@@ -24,8 +48,15 @@ export class GlobalCoursesService {
   otherCourseUserId = 0;
   otherExceptCourseId = 0;
 
+
+
   constructor(private network: NetworkService, private events: EventsService, private users :UsersService) {
+
+    super();
+
     this.events.subscribe(
+
+
       'clear-all-services-data',
       () => {
         console.log(this.favorites);
@@ -53,6 +84,58 @@ export class GlobalCoursesService {
     this.CourseChannel = this.pusher.subscribe('course-channel');
   }
 
+  storeConfig(): NgSimpleStateStoreConfig {
+    return {
+      storeName: 'GlobalCoursesModel',
+    };
+  }
+
+  initialState(): GlobalCoursesModelState {
+    return [];
+  }
+
+  getList() {
+    return this.selectState((state) => state);
+  }
+
+  getCount() {
+    return this.selectState((state) => state.length);
+  }
+
+  getCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.length).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getGlobalCoursesFromApi(search = '', page = 1) {
+    return new Promise(async (resolve) => {
+      const user = this.users.getUser();
+      let obj = {
+        search: search,
+        page: page,
+        liked: false,
+      };
+
+      let res = await this.network.getAllCourses(obj);
+      console.log('courses', res);
+
+      const data = res.result;
+      this.page = data.current_page;
+      this.last_page = data.last_page;
+
+      this.setState( (state) => {
+        if (page === 1) {
+          return data.data;
+        }
+        return [...state, ...data.data];
+      });
+
+      resolve(true);
+    });
+  }
 
 
   unRegisterPusherEvent(){

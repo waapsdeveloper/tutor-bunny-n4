@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injector } from '@angular/core';
+import { Component, OnInit, Input, Injector, Output, EventEmitter } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -27,6 +27,9 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   loading = false;
   trail = false;
   languageName: any;
+
+  @Output() openDetails = new EventEmitter<any>();
+
 
   @Input('item')
   public get item() {
@@ -80,12 +83,12 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     if (data && data.type == 3) {
       this.type = data.type;
     }
+
+    this.callApi()
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.callApi();
-    }, 200);
+    console.log(this.item)
   }
 
   getFlag() {

@@ -67,11 +67,10 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
     this.loadResolvers();
     this.user = this.dataR.user;
-    this.iap.initializeUserTables(this.user);
+
 
     this.teacher.registerPusherEvent(this.user.id);
     this.chats.registerPusherEvent(this.user.id);
-
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
     this.notificationService.registerPusherEvent()
@@ -90,10 +89,12 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
 
     // subscription APIs
-    this.pendingTrialsService.getPendingTrialsFromApi();
+    this.pendingTrialsService.getPendingTrialsFromApi('', 1);
     this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
+    this.globalCourses.getGlobalCoursesFromApi('', 1);
 
-    this.globalCourses.getCoursesFromApi();
+    this.iap.initializeUserTables(this.user);
+
     this.redirectDependsOnRole(this.user);
     this.loading = false;
   }
