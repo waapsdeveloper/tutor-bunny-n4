@@ -11,7 +11,9 @@
 .header-outer {
   display: flex;
   align-items: center;
-  margin-bottom: 24px; /* Space between header and the main content */
+  //margin-bottom: 24px; /* Space between header and the main content */
+  position: fixed;
+  top: 24px;
 }
 .image-outer-877584 {
   width: 100%;
@@ -38,7 +40,9 @@
   gap: 24px; /* Ensures consistent gap between elements */
 }
 
-.image-outer , .image-outer-2, .image-outer-3 {
+.image-outer,
+.image-outer-2,
+.image-outer-3 {
   width: 200px;
   height: 150px;
   margin-bottom: 16px; /* Space between the image and the text */
@@ -55,15 +59,14 @@
 }
 .image-outer-2 {
   background-image: url("../../../assets/svg/tut2.svg");
-  width:406px;
+  width: 406px;
   height: 367px;
 }
 .image-outer-3 {
   background-image: url("../../../assets/svg/tut3.svg");
-  width:406px;
+  width: 406px;
   height: 367px;
 }
-
 
 .content-inner {
   display: flex;
@@ -74,14 +77,17 @@
 }
 
 .tutor-bunny {
-  font-weight: 600;
-  color: #333;
-//  margin-bottom: 30px;
-  padding: 82px 12px 12px 7px;
+  color: #666666;
+  //  margin-bottom: 30px;
+  padding: 24px 24px 12px 7px;
 }
 
 .description {
   color: #666;
+}
+.footer {
+  position: fixed;
+  bottom: 50px;
 }
 
 .continue-button {
@@ -107,17 +113,22 @@
 .swiper {
   width: 100%;
 }
-
-.swiper-slide {
+.swiper-pagination {
+  position: relative;
+  bottom: 20px; /* Adjust this based on your layout */
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 8px;
 }
 
 .swiper-pagination-bullet {
-  background: #333 !important;
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-  background: #007bff !important;
+  background-color: #007bff;
 }
