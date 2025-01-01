@@ -10,6 +10,7 @@ export class TutorialPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+ console.log();
   }
 
 }
