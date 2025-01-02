@@ -53,15 +53,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
   }
   // async goToChat(data) {
   //   console.log(data);
-
-  //   this.user = this.users.getUser();
-  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-  //   if (v || v == true) {
-  //     let id = this.user.id;
-  //     let obj = {
-  //       user_id_1: this.user.id,
-  //       user_id_2: data.id,
-  //     };
+w
   //     let res = await this.network.getChadRoomId(obj);
   //     let params = {
   //       student_id: id,

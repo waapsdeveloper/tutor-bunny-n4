@@ -63,13 +63,13 @@ export class GlobalTeacherService extends NgSimpleStateBaseRxjsStore< GlobalTeac
       let res = await this.network.getAllTeachers(obj);
       console.log('teachers', res);
 
-      const data = res.result;
-      this.page = data.current_page;
-      this.last_page = data.last_page;
+      const data = res; // res.result;
+      // this.page = data.current_page;
+      // this.last_page = data.last_page;
 
       this.setState( (state) => {
         if (page === 1) {
-          return data.data;
+          return data //data.data;
         }
         return [...state, ...data.data];
       });

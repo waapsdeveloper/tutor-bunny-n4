@@ -46,6 +46,9 @@ export class StudentDashboradTeachersPage extends BasePage implements OnInit {
   }
 
   openDetails(item: any) {
-    this.nav.push('/material-detail', { material_id: item.id });
+    const params = {
+      email: item.email,
+    };
+    this.nav.push('/teacher-profile', params);
   }
 }
