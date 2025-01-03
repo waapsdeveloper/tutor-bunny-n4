@@ -36,6 +36,6 @@ export class StudentDashboradCoursesPage extends BasePage implements OnInit {
   }
 
   openDetails(item: any) {
-    this.nav.push('/course-detail', {material_id: item.id})
+    this.nav.push('/course-detail', {course_id: item.id})
   }
 }

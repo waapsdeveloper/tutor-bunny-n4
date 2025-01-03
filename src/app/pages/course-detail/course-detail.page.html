@@ -2,57 +2,102 @@
   <ion-spinner></ion-spinner>
 </div> -->
 
-
 <!-- [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" -->
-<ion-content
-  class="remove-pd-top-323243243" #content [fullscreen]="true">
+<ion-content class="ion-no-padding" #content [fullscreen]="true">
   <!-- <ion-header [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow" > -->
-    <!-- <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
+  <!-- <app-sd-header-top [showBack]="true" [title]="'Course Details'" [backUrl]="" [showEdit]="canEditCourse"
       (parentEdit)="openDetails()" [showShare]="true"></app-sd-header-top> -->
   <!-- </ion-header> -->
-  <app-course-photos [course_Id]="course_Id"></app-course-photos>
-  <div class="body-content ion-padding">
-    <div class="course-heading-78521">
-      {{title}}
+  <div class="transparent-header-li-outer-78521">
+    <div class="transparent-header-li-inner-78521">
+      <div class="transparent-header-li left">
+        <div class="rwbutton">
+          <img src="assets/svg/arrow-back.svg" alt="back" />
+        </div>
+
+      </div>
+
+      <div class="transparent-header-li right">
+        <div class="rwbutton">
+          <img src="assets/svg/heart-77.svg" alt="heart" />
+        </div>
+        <div class="rwbutton">
+          <img src="assets/svg/share-77.svg" alt="share" />
+        </div>
+
+        <div class="rwbutton">
+          <img src="assets/svg/gray-info.svg" alt="info" />
+        </div>
+      </div>
     </div>
+    <app-course-photos class="photos-slider-589655" [course_Id]="course_Id"></app-course-photos>
+  </div>
+
+  <div class="body-content ion-padding">
+    <div class="course-heading-78521">{{title}}</div>
     <div class="cource-price-and-rating-box-78541">
-      <div class="cource-price--78542">{{currencySymbol}} {{price}} <span style="font-size: 12px;"> /lesson</span></div>
-      <div class="cource-rating-box-78543" >
+      <div class="cource-price--78542">
+        {{currencySymbol}} {{price}}
+        <span style="font-size: 12px"> /lesson</span>
+      </div>
+      <div class="cource-rating-box-78543">
         <app-rating-stars [rating]="rating"></app-rating-stars>
-        <div class="cource-rating-number-78545">{{rating}} <span
-            style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
+        <div class="cource-rating-number-78545">
+          {{rating}}
+          <span style="font-size: 12px; color: #7c7b7b"
+            >({{total_rating}})</span
+          >
+        </div>
       </div>
     </div>
     <div class="line"></div>
     <div class="cource-details-box-78561">
       <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
-          hour each lesson</div>
-        <div class="cource-lesson-box-78564"><img class="img1-789575" src="../../assets/svg/create-course.svg" /> Total
-          {{lessons}} lessons
+        <div class="cource-time-box-78563">
+          <img class="img1-789575" src="../../../assets/svg/time.svg" />
+          {{duration}} hour each lesson
+        </div>
+        <div class="cource-lesson-box-78564">
+          <img class="img1-789575" src="../../assets/svg/create-course.svg" />
+          Total {{lessons}} lessons
         </div>
       </div>
       <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/online.svg" />{{mode_type}}
+        <div class="cource-time-box-78563">
+          <img
+            class="i-7685"
+            src="../../../assets/svg/online.svg"
+          />{{mode_type}}
         </div>
-        <div class="cource-lesson-box-78564"> <img class="i-7685" src="assets/icon/smgroup-icon.svg" />{{capacity}}
+        <div class="cource-lesson-box-78564">
+          <img class="i-7685" src="assets/icon/smgroup-icon.svg" />{{capacity}}
         </div>
       </div>
       <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"> <img class="img1-789575" src="../../../assets/svg/cake.svg" />Student age
-          {{from_age}}-{{to_age}}</div>
-        <div class="cource-lesson-box-78564"> <img src="../../assets/svg/speaks.svg" alt=""
-            style="height: 16px;">{{language}}</div>
+        <div class="cource-time-box-78563">
+          <img class="img1-789575" src="../../../assets/svg/cake.svg" />Student
+          age {{from_age}}-{{to_age}}
+        </div>
+        <div class="cource-lesson-box-78564">
+          <img
+            src="../../assets/svg/speaks.svg"
+            alt=""
+            style="height: 16px"
+          />{{language}}
+        </div>
       </div>
       <div class="cource-time-and-lessons-78562">
-        <div class="cource-time-box-78563"><img class="i-7685" src="../../../assets/svg/locations.svg" />
-          <div style="width: 136px; text-wrap: wrap;">
-            {{state}},
-            {{country}}
+        <div class="cource-time-box-78563">
+          <img class="i-7685" src="../../../assets/svg/locations.svg" />
+          <div style="width: 136px; text-wrap: wrap">
+            {{state}}, {{country}}
           </div>
         </div>
-        <div class="cource-lesson-box-78564"> <img class="i-7685"
-            src="../../../assets/svg/course-type.svg" />Workshop/Event
+        <div class="cource-lesson-box-78564">
+          <img
+            class="i-7685"
+            src="../../../assets/svg/course-type.svg"
+          />Workshop/Event
         </div>
       </div>
     </div>
@@ -60,42 +105,75 @@
     <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
-        <div class="detail-heading-left--78524 to-end-dates-included" *ngIf="startDate">
-          <img src="../../assets/svg/calander.svg" alt="" style="height: 16px;">{{startDate}} {{ endDate ? 'to' : '' }}
-          {{endDate}}
+        <div
+          class="detail-heading-left--78524 to-end-dates-included"
+          *ngIf="startDate"
+        >
+          <img
+            src="../../assets/svg/calander.svg"
+            alt=""
+            style="height: 16px"
+          />{{startDate}} {{ endDate ? 'to' : '' }} {{endDate}}
         </div>
       </div>
       <div class="fs-16 outfit discription-text">
-        <div class="discription-para" [class.collapsed]="isExpanded" [innerHTML]="description">
-
-        </div>
+        <div
+          class="discription-para"
+          [class.collapsed]="isExpanded"
+          [innerHTML]="description"
+        ></div>
         <!-- <ion-button class="read-more" fill="clear" *ngIf="!isExpanded" (click)="toggleReadMore()">Read more</ion-button>
         <ion-button class="read-more" fill="clear" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</ion-button> -->
         <div class="qulification-box-edu-readmore-98525">
-          <div class="qulification-box-edu-button-98526" *ngIf="!isExpanded" (click)="toggleReadMore()">Read More</div>
+          <div
+            class="qulification-box-edu-button-98526"
+            *ngIf="!isExpanded"
+            (click)="toggleReadMore()"
+          >
+            Read More
+          </div>
         </div>
         <div class="education-box-edu-readmore-98525">
-          <div class="education-box-edu-button-98526" *ngIf="isExpanded" (click)="toggleReadMore()">Read less</div>
+          <div
+            class="education-box-edu-button-98526"
+            *ngIf="isExpanded"
+            (click)="toggleReadMore()"
+          >
+            Read less
+          </div>
         </div>
       </div>
     </div>
     <div class="line" *ngIf="schedules.length > 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules.length > 0">
       <div class="detail-head-785234">
-        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type !== 3">
+        <div
+          class="detail-heading-78524 outfit-medium"
+          *ngIf="schedules[0].type !== 3"
+        >
           Weekly Schedule
         </div>
-        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type === 3">
+        <div
+          class="detail-heading-78524 outfit-medium"
+          *ngIf="schedules[0].type === 3"
+        >
           Event Schedule
         </div>
         <div class="days-box">
-          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
+          <app-course-schedules
+            *ngFor="let item of schedules"
+            [item]="item"
+          ></app-course-schedules>
         </div>
       </div>
     </div>
     <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
-    <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
-      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"
-      (onChange)="getOtherCourse($event)"></app-other-courses>
+    <app-other-courses
+      *ngIf="otherCourseListTotalCount > 0"
+      [count]="otherCourseListTotalCount"
+      [list]="otherCourseList"
+      (openOtherCourses)="openOtherCourses($event)"
+      (onChange)="getOtherCourse($event)"
+    ></app-other-courses>
   </div>
 </ion-content>

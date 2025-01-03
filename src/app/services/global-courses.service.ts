@@ -32,8 +32,13 @@ export type GlobalCoursesModelState = Array<GlobalCoursesModel>;
   providedIn: 'root',
 })
 export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCoursesModelState > {
+
   page = 1;
   last_page = -1;
+
+
+
+  // old variables
   courses: any[] = [];
   CourseChannel: any;
   private pusher: Pusher;
@@ -80,9 +85,12 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       cluster: 'ap2',
       forceTLS: true,
     };
+
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.CourseChannel = this.pusher.subscribe('course-channel');
   }
+
+  // start state management
 
   storeConfig(): NgSimpleStateStoreConfig {
     return {
@@ -96,6 +104,10 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
   getList() {
     return this.selectState((state) => state);
+  }
+
+  getItem(id) {
+    return this.selectState((state) => state.find((x) => x.id == id));
   }
 
   getCount() {
@@ -136,6 +148,8 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       resolve(true);
     });
   }
+
+  // end state management
 
 
   unRegisterPusherEvent(){

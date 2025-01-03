@@ -1,3 +1,4 @@
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
@@ -10,6 +11,8 @@ import { IonContent } from '@ionic/angular';
 })
 export class CourseDetailPage extends BasePage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  course$;
 
   data;
   params;
@@ -53,7 +56,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   courseImages: string[] = []; // Images array
   currentIndex: number = 0;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private globalCoursesService: GlobalCoursesService) {
     super(injector);
   }
 
@@ -66,10 +69,14 @@ export class CourseDetailPage extends BasePage implements OnInit {
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-    if (this.params.id) {
-      this.course_Id = this.params.id;
+    if (this.params.course_id) {
+      this.course_Id = this.params.course_id;
+      this.course$ = this.globalCoursesService.getItem(this.course_Id);
+      this.callData();
     }
-    this.callApi();
+
+
+    // this.callApi();
   }
 
   prevImage() {
@@ -84,6 +91,11 @@ export class CourseDetailPage extends BasePage implements OnInit {
       this.currentIndex < this.courseImages.length - 1
         ? this.currentIndex + 1
         : 0;
+  }
+
+  async callData() {
+    this.loading = true;
+
   }
 
   async callApi() {
