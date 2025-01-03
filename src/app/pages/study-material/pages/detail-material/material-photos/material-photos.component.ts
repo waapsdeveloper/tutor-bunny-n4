@@ -6,43 +6,32 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './material-photos.component.html',
   styleUrls: ['./material-photos.component.scss'],
 })
-export class MaterialPhotosComponent  implements OnInit {
-
-
-
-  private _material_Id: any;
+export class MaterialPhotosComponent implements OnInit {
+  private _materialId: any;
   materialImages: any[] = [];
-  @Input() materialId;
-  
-  public get material_Id() {
-    return this._material_Id;
-  };
-
-  public set course_Id(value: any) {
-    this._material_Id = value;
-    if(value){
-      this.getCourseImages(value)
+  @Input()
+  public get materialId() {
+    return this._materialId;
+  }
+  public set materialId(value: any) {
+    this._materialId = value;
+    if (value) {
+      this.getMaterialImages(value);
     }
-
   }
 
-
-  constructor(public network: NetworkService) {
-  }
+  constructor(public network: NetworkService) {}
 
   ngOnInit() {
-console.log();
+    console.log();
   }
 
-  async getCourseImages(id){
+  async getMaterialImages(id) {
     let obj = {
-      material_id: id
-    }
-    let res  = await this.network.getCourseImages(obj) as any;
+      study_material_id: id,
+    };
+    let res = (await this.network.getMaterialImages(obj)) as any;
     this.materialImages = res.result;
     console.log(this.materialImages);
-
   }
-
-
 }

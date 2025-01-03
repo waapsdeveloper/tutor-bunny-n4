@@ -491,6 +491,11 @@ getcourseById(id) {
     return this.httpPostResponse('material/delete/document', data, false, true, true);
   }
 
+  getMaterialImages(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('material/image/list' + '?' + str, null, false, false);
+  }
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {

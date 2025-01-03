@@ -8,20 +8,20 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./course-photos.component.scss'],
 })
 export class CoursePhotosComponent {
-  private _course_Id: any;
+  private _courseId: any;
   courseImages: any[] = [];
 
   activeIndex = 0;
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  @Input('course_Id')
-  public get course_Id() {
-    return this._course_Id;
+  @Input('courseId')
+  public get courseId() {
+    return this._courseId;
   }
 
-  public set course_Id(value: any) {
-    this._course_Id = value;
+  public set courseId(value: any) {
+    this._courseId = value;
     if (value) {
       this.getCourseImages(value);
     }

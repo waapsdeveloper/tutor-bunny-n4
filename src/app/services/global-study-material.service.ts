@@ -52,6 +52,10 @@ export class GlobalStudyMaterialService extends NgSimpleStateBaseRxjsStore<Globa
     return this.selectState((state) => state);
   }
 
+  getItem(id) {
+    return this.selectState((state) => state.find((x) => x.id == id));
+  }
+
   getCount() {
     return this.selectState((state) => state.length);
   }

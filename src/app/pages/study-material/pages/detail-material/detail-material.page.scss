@@ -1,6 +1,82 @@
-.remove-pd-top-323243243 {
-  --padding-top: 0 !important;
+.transparent-header-li-outer-78521 {
+  width: 100%;
+  position: relative;
+
+  .transparent-header-li-inner-78521 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      // background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      z-index: 1000;
+      padding: 8px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+
+      .transparent-header-li {
+        .rwbutton {
+          width: 32px;
+          height: 32px;
+          background: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border: 0.5px solid rgba(57, 57, 57, 1);
+          padding: 6px;
+        }
+
+
+      }
+
+      .transparent-header-li.right {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+
+      }
+
+
+
+
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .remove-pd-top-323243243 {
+//   --padding-top: 0 !important;
+// }
 
 .image-card-78523 {
 
@@ -486,27 +562,7 @@
     }
   }
 
-  .discription-text {
-    // height: 150px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: center;
 
-    .discription-para {
-      overflow: hidden;
-      display: -webkit-box;
-      line-height: 21px;
-
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
-    }
-
-    .discription-para.collapsed {
-      -webkit-line-clamp: unset;
-    }
-  }
 
   -webkit-line-clamp: unset;
 
@@ -643,47 +699,3 @@
 
 }
 
-.qulification-box-edu-readmore-98525 {
-
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  .qulification-box-edu-button-98526 {
-
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #393939;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    text-wrap: nowrap;
-
-  }
-}
-
-.education-box-edu-readmore-98525 {
-
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  .education-box-edu-button-98526 {
-
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #393939;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    text-wrap: nowrap;
-  }
-}

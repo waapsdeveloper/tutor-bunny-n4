@@ -102,10 +102,6 @@ const routes: Routes = [
     path: 'student-course-detail',
     loadChildren: () => import('./pages/student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
-  {
-    path: 'student-study-material-detail',
-    loadChildren: () => import('./pages/student-study-material-detail/student-study-material-detail.module').then( m => m.StudentStudyMaterialDetailPageModule)
-  },
 
   {
     path: 'my-teachers',

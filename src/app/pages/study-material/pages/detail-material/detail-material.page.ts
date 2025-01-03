@@ -1,3 +1,4 @@
+import { GlobalStudyMaterialService } from './../../../../services/global-study-material.service';
 import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
@@ -10,13 +11,14 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class DetailMaterialPage extends BasePage implements OnInit {
 
-
   @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  material$;
 
   data;
   params;
   backUrl;
- @Input() materialId;
+  materialId;
   capacity;
   description;
   currencySymbol;
@@ -55,7 +57,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   courseImages: string[] = []; // Images array
   currentIndex: number = 0;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
   }
 
@@ -65,14 +67,19 @@ export class DetailMaterialPage extends BasePage implements OnInit {
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params)
+    console.log(this.params);
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
+      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
+        this.material$ = data;
+        this.callApi(this.material$);
+      });
+
+
     }
-    this.callApi();
   }
 
   prevImage() {
@@ -89,11 +96,11 @@ export class DetailMaterialPage extends BasePage implements OnInit {
         : 0;
   }
 
-  async callApi() {
+  async callApi(data) {
     this.loading = true;
     this.user = this.users.getUser();
-    let res = (await this.network.getMaterialById(this.materialId)) as any;
-    this.data = res.course;
+
+    this.data = data;
     this.title = this.data.title;
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
@@ -135,7 +142,6 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
-
   }
 
   formatDescription(description: string): string {
@@ -188,7 +194,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   getOtherCourse(event) {
     console.log(event);
     this.materialId = event.id;
-    this.callApi();
+    // this.callApi();
 
     this.content.scrollToTop(500); // 500ms animation duration
 
@@ -200,4 +206,19 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
 
+  async addToFav() {
+    // let showFav = true;
+    // this.events.publish('show-fav-dot', showFav);
+    let user = this.users.getUser();
+    this.material$.is_liked_by_me = true;
+    // this.courseFavoriteService.addFavorites(this.course$, user);
+  }
+
+  async removeToFav() {
+    // let showFav = false;
+    // this.events.publish('show-fav-dot', showFav);
+    let user = this.users.getUser();
+    this.material$.is_liked_by_me = false;
+    // this.courseFavoriteService.removeFavorites(this.course$, user);
+  }
 }

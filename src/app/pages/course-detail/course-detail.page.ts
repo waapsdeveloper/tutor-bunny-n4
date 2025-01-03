@@ -19,13 +19,13 @@ export class CourseDetailPage extends BasePage implements OnInit {
   data;
   params;
   backUrl;
-  course_Id;
+  courseId;
   capacity;
   description;
   currencySymbol;
   loading = false;
   duration;
-  isExpanded = false;
+
   title;
   type;
   serial_number;
@@ -72,9 +72,9 @@ export class CourseDetailPage extends BasePage implements OnInit {
       this.backUrl = this.params.backUrl;
     }
     if (this.params.course_id) {
-      this.course_Id = this.params.course_id;
-      this.globalCoursesService.getItem(this.course_Id).subscribe((course) => {
-        this.course$ = course;
+      this.courseId = this.params.course_id;
+      this.globalCoursesService.getItem(this.courseId).subscribe((data) => {
+        this.course$ = data;
         this.callApi(this.course$);
       });
     }
@@ -162,9 +162,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.otherCourseListTotalCount = result.total;
     this.otherCourseList = result.data;
   }
-  toggleReadMore() {
-    this.isExpanded = !this.isExpanded;
-  }
+
   getFlag() {
     if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
       const flag = this.data.user.teacher.country.iso2;
@@ -184,7 +182,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   openDetails() {
     const params = {
-      course_Id: this.course_Id,
+      course_Id: this.courseId,
       edit: true,
       type: this.data.type,
       showBack: true,
@@ -195,7 +193,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   getOtherCourse(event) {
     console.log(event);
-    this.course_Id = event.id;
+    this.courseId = event.id;
 
     this.content.scrollToTop(500); // 500ms animation duration
 
