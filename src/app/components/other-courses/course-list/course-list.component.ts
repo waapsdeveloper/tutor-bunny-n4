@@ -7,19 +7,18 @@ import { BasePage } from 'src/app/base-page/base-page';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
 })
-export class CourseListComponent extends BasePage implements OnInit {
+export class CourseListComponent extends BasePage  {
   @Input() list: any[] = [];
   course
   @Input() item
   @ViewChild('slides', { static: false }) slides: any;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() openDetails: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _sanitizer: DomSanitizer, injector: Injector) {
     super(injector)
     this.initialize();
   }
 
-  ngOnInit() { }
 
   async initialize() {
     // let user = JSON.parse(localStorage.getItem('user'))
@@ -38,13 +37,13 @@ export class CourseListComponent extends BasePage implements OnInit {
 
     this.slides?.nativeElement.swiper.slideTo(1, false, false);
   }
-  oepnDeatils(item) {
+  oepnLink(item) {
 
     const params = {
       id: item.id,
       backUrl: '/tabs/courses'
     }
-    this.onChange.emit(params);
+    this.openDetails.emit(params);
 
     // this.nav.push('/tabs/course-detail', params)
 

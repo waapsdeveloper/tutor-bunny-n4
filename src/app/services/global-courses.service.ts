@@ -33,6 +33,7 @@ export type GlobalCoursesModelState = Array<GlobalCoursesModel>;
 })
 export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCoursesModelState > {
 
+
   page = 1;
   last_page = -1;
 
@@ -206,6 +207,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
   }
 
   setFavCourseUpdateLogic(course) {
+
     let courseId = course.id;
     let findIndex = this.favorites.findIndex((x) => x.id == courseId);
 

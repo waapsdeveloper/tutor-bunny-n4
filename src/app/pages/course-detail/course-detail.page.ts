@@ -3,6 +3,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
+import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -10,6 +11,7 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['./course-detail.page.scss'],
 })
 export class CourseDetailPage extends BasePage implements OnInit {
+
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   course$;
@@ -56,7 +58,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   courseImages: string[] = []; // Images array
   currentIndex: number = 0;
 
-  constructor(injector: Injector, private globalCoursesService: GlobalCoursesService) {
+  constructor(injector: Injector, private globalCoursesService: GlobalCoursesService, private courseFavoriteService: CourseFavoriteService,) {
     super(injector);
   }
 
@@ -203,4 +205,22 @@ export class CourseDetailPage extends BasePage implements OnInit {
     //   id: event.id
     // })
   }
+
+  async addToFav() {
+    // let showFav = true;
+    // this.events.publish('show-fav-dot', showFav);
+    let user = this.users.getUser();
+    this.course$.is_liked_by_me = true;
+    this.courseFavoriteService.addFavorites(this.course$, user);
+  }
+
+  async removeToFav() {
+    // let showFav = false;
+    // this.events.publish('show-fav-dot', showFav);
+    let user = this.users.getUser();
+    this.course$.is_liked_by_me = false;
+    this.courseFavoriteService.removeFavorites(this.course$, user);
+  }
+
+
 }

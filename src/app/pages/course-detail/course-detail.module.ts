@@ -14,6 +14,8 @@ import { OtherCoursesModule } from 'src/app/components/other-courses/other-cours
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
 import { SwiperModule } from 'swiper/angular';
+import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { SwiperModule } from 'swiper/angular';
     CourseSchedulesModule,
     OtherCoursesModule,
     CoursePhotosModule,
-    RatingStarsModule
+    RatingStarsModule,
+    GlobalTextReadModule
   ],
   declarations: [CourseDetailPage],
 

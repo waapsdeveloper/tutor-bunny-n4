@@ -47,7 +47,7 @@ export class CoursePhotosComponent {
   }
 
   onSlideChanged() {
-    this.activeIndex = this.slides.swiperRef.activeIndex;
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     console.log('Slide changed! Current index is', this.activeIndex);
     this.cdr.detectChanges();
   }
