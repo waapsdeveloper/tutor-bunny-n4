@@ -13,9 +13,9 @@ swiper-slide {
 }
 
 .vedio-box-inner {
-  border-radius: 6px;
+  // border-radius: 6px;
   width: 100%;
-  height: 290px;
+  // height: 290px;
   // background-color: #393939;
 
 
@@ -129,5 +129,33 @@ swiper-slide {
 .swiper-pagination {
   text-align: center;
   margin-top: 500px;
+}
+
+.nav-tabs {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.count-rec-887 {
+
+  z-index: 1000;
+  position: absolute;
+  bottom: 16px;
+  right: 8px;
+  background-color: rgba(69, 69, 69, 0.75);
+  border-radius: 6px;
+
+  color: #fff;
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px;
+
 }
 

@@ -71,8 +71,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
     }
     if (this.params.course_id) {
       this.course_Id = this.params.course_id;
-      this.course$ = this.globalCoursesService.getItem(this.course_Id);
-      this.callData();
+      this.globalCoursesService.getItem(this.course_Id).subscribe((course) => {
+        this.course$ = course;
+        this.callApi(this.course$);
+      });
     }
 
 
@@ -93,16 +95,11 @@ export class CourseDetailPage extends BasePage implements OnInit {
         : 0;
   }
 
-  async callData() {
-    this.loading = true;
-
-  }
-
-  async callApi() {
+  async callApi(data) {
     this.loading = true;
     this.user = this.users.getUser();
-    let res = (await this.network.getcourseById(this.course_Id)) as any;
-    this.data = res.course;
+    // let res = (await this.network.getcourseById(this.course_Id)) as any;
+    this.data = data;
     this.title = this.data.title;
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
@@ -197,7 +194,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
   getOtherCourse(event) {
     console.log(event);
     this.course_Id = event.id;
-    this.callApi();
 
     this.content.scrollToTop(500); // 500ms animation duration
 

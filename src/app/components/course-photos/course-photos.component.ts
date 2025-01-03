@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { NetworkService } from 'src/app/services/network.service';
+import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-course-photos',
@@ -9,6 +10,10 @@ import { NetworkService } from 'src/app/services/network.service';
 export class CoursePhotosComponent {
   private _course_Id: any;
   courseImages: any[] = [];
+
+  activeIndex = 0;
+
+  @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
   @Input('course_Id')
   public get course_Id() {
@@ -22,7 +27,7 @@ export class CoursePhotosComponent {
     }
   }
 
-  constructor(public network: NetworkService) {}
+  constructor(public network: NetworkService, private cdr: ChangeDetectorRef) {}
 
   async getCourseImages(id) {
     let obj = {
@@ -32,4 +37,19 @@ export class CoursePhotosComponent {
     this.courseImages = res.result;
     console.log(this.courseImages);
   }
+
+  get svgWidth(): number {
+    return this.courseImages.length * 10 + 8; // Dynamic width based on the number of circles
+  }
+
+  get viewBox(): string {
+    return `0 0 ${this.svgWidth} 16`; // Dynamic viewBox to match the SVG's width
+  }
+
+  onSlideChanged() {
+    this.activeIndex = this.slides.swiperRef.activeIndex;
+    console.log('Slide changed! Current index is', this.activeIndex);
+    this.cdr.detectChanges();
+  }
+
 }
