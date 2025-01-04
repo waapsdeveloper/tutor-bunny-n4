@@ -54,7 +54,7 @@ export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore< Global
 
         let res = await this.network.getAllFavMaterialIds();
 
-
+        this.setState( () => res);
         resolve(true);
       });
     }
