@@ -16,6 +16,7 @@ import { ViewWillEnter } from '@ionic/angular';
 import { PendingTrialsService } from 'src/app/services/pending-trials.service';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
+import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -45,7 +46,8 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     // subscription APIs
     private pendingTrialsService: PendingTrialsService,
     private globalStudyMaterialService: GlobalStudyMaterialService,
-    private globalTeacherService: GlobalTeacherService
+    private globalTeacherService: GlobalTeacherService,
+    private globalFavCoursesService: GlobalFavCoursesService
 
 
 
@@ -95,6 +97,8 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
     this.globalCourses.getGlobalCoursesFromApi('', 1);
     this.globalTeacherService.getGlobalTeachersFromApi('', 1);
+    this.globalFavCoursesService.getGlobalFavCoursesFromApi();
+
 
     this.iap.initializeUserTables(this.user);
 
