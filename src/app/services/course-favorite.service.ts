@@ -14,8 +14,6 @@ export class CourseFavoriteService {
   async addFavorites(obj: any, user) {
 
     const flag = await this.favCoursesSqService.addFavorite(user.id, obj.id);
-
-
     const count = await this.favCoursesSqService.getFavoriteCount(user.id);
     this.events.publish('update-course-fav-count', {count})
     this.events.publish('update-course-item-like', {
