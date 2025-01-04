@@ -11,7 +11,7 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './generic-course-card.component.html',
   styleUrls: ['./generic-course-card.component.scss'],
 })
-export class GenericCourseCardComponent extends BasePage implements OnInit {
+export class GenericCourseCardComponent extends BasePage {
 
   private _item: any;
   displayName;
@@ -21,7 +21,6 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   status;
   rating;
   type;
-  blocked;
   total_rating;
   loading = false;
   trail = false;
@@ -76,18 +75,11 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     this.flag = this.getFlag();
     this.status = data.trial ? data.trial.status : null;
 
-    if (data && data.trial) {
-      this.blocked = data.trial.status;
-    }
     if (data && data.type == 3) {
       this.type = data.type;
     }
 
     this.callApi()
-  }
-
-  ngOnInit() {
-
   }
 
   getFlag() {
