@@ -55,10 +55,8 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalF
 
   getGlobalFavCoursesFromApi() {
     return new Promise(async (resolve) => {
-
       let res = await this.network.getAllFavCoursesIds();
-
-
+      this.setState( () => res);
       resolve(true);
     });
   }
