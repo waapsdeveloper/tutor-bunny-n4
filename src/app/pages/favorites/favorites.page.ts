@@ -12,4 +12,20 @@ export class FavoritesPage implements OnInit {
   ngOnInit() {
   }
 
+  // start
+  view = 'course';
+
+  toogleView(view) {
+    this.view = view;
+    if (view == 'course') {
+      // this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
+ 
+    }
+    if (view == 'notes'){
+      // this.nav.push('/tabs/student-dashboard/student-dashboard-study-material');
+
+    }
+  }
+  // end
+
 }
