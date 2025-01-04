@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
 import { FavoritesPage } from './favorites.page';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritesPageRoutingModule
+    FavoritesPageRoutingModule,
+    SdHeaderTopModule,
   ],
   declarations: [FavoritesPage]
 })

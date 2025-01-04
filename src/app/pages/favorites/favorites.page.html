@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>favorites</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border ion-no-shadow" >
+  <app-sd-header-top [title]="'Favorites'" [showBack]="true" [backUrl]=""></app-sd-header-top>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favorites</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<div class="dashboard-top-fixed-98563 ">
+  <div class="header-chips">
+    <div class="header-chip">
+      <div class="ion-chip" [class.active-class]="view === 'course'" [class.inactive-class]="view !== 'course'"
+        (click)="toogleView('course')"><img src="assets/icon/home/my-corces.svg" alt="">Courses</div>
+      <div class="ion-chip" [class.active-class]="view === 'notes'" [class.inactive-class]="view !== 'notes'"
+        (click)="toogleView('notes')"><img src="../../assets/svg/studey-notes.svg" alt="">Study Notes</div>
+    </div>
+  </div>
+</div>

@@ -144,7 +144,7 @@ export class StudentDashboardPage
   }
 
   async showFavCourse() {
-    this.nav.push('/fav-courses');
+    this.nav.push('/favorites');
   }
 
   toogleView(view) {
