@@ -7,7 +7,7 @@ import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-cours
 @Component({
   selector: 'app-fav-courses',
   templateUrl: './fav-courses.page.html',
-  styleUrls: ['./fav-courses.page.scss'],
+  styleUrls: ['./fav-courses.page.scss']
 })
 export class FavCoursesPage extends BasePage implements OnInit {
   user;

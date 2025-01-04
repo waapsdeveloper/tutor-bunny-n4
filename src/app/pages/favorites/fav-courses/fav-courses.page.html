@@ -8,7 +8,7 @@
 </ion-header>
 
 <!-- start -->
-<div class="dashboard-top-fixed-98563 ">
+<!-- <div class="dashboard-top-fixed-98563 ">
   <div class="header-chips">
     <div class="header-chip">
       <div class="ion-chip" [class.active-class]="view === 'course'" [class.inactive-class]="view !== 'course'"
@@ -17,10 +17,20 @@
         (click)="toogleView('notes')"><img src="../../assets/svg/studey-notes.svg" alt="">Study Notes</div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- end -->
 
 <ion-content [fullscreen]="true" class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
+  <div class="dashboard-top-fixed-98563 ">
+    <div class="header-chips">
+      <div class="header-chip">
+        <div class="ion-chip" [class.active-class]="view === 'course'" [class.inactive-class]="view !== 'course'"
+          (click)="toogleView('course')"><img src="assets/icon/home/my-corces.svg" alt="">Courses</div>
+        <div class="ion-chip" [class.active-class]="view === 'notes'" [class.inactive-class]="view !== 'notes'"
+          (click)="toogleView('notes')"><img src="../../assets/svg/studey-notes.svg" alt="">Study Notes</div>
+      </div>
+    </div>
+  </div>
   <div class="body-content-68448" *ngIf="list.length !== 0">
     <div class="sb-content-7895">
       <!-- *ngFor="let item of list"  [item]="item" -->
@@ -36,4 +46,5 @@
 <div class="ion-padding centered-text" *ngIf="list.length === 0">
   <div class="label fs-16 outfit">No Favorite Courses Found</div>
 </div>
+
 </ion-content>

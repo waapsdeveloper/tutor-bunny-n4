@@ -129,7 +129,7 @@ const routes: Routes = [
   },
   {
     path: 'fav-courses',
-    loadChildren: () => import('./pages/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule),
+    loadChildren: () => import('./pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule),
     resolve: {
       user: userResolver
     },
@@ -209,7 +209,8 @@ const routes: Routes = [
   {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then( m => m.TutorialPageModule)
-  },  {
+  },
+  {
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },

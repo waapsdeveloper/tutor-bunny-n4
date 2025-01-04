@@ -59,7 +59,7 @@ const routes: Routes = [
       },
       {
         path: 'fav-courses',
-        loadChildren: () => import('../pages/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
+        loadChildren: () => import('../pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
       },
       {
         path: 'menu',
