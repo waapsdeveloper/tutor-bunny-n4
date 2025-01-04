@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
 })
-export class FavoritesPage implements OnInit {
+export class FavoritesPage {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor(private nav: NavService) { }
 
   // start
   view = 'course';
@@ -18,12 +16,10 @@ export class FavoritesPage implements OnInit {
   toogleView(view) {
     this.view = view;
     if (view == 'course') {
-      // this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
- 
+      this.nav.push('/favorites/fav-courses');
     }
     if (view == 'notes'){
-      // this.nav.push('/tabs/student-dashboard/student-dashboard-study-material');
-
+      this.nav.push('/favorites/fav-material');
     }
   }
   // end
