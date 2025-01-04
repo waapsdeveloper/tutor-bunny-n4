@@ -201,6 +201,9 @@ export class NetworkService {
   getAllFavCoursesIds() {
     return this.httpPostResponse('courses/fav-list-all', null, null, false, false);
   }
+  getAllFavMaterialIds() {
+    return this.httpPostResponse('courses/fav-list-all', null, null, false, false);
+  }
   getAllReqCourses(id: any, data ) {
 
     const str = this.serialize(data);

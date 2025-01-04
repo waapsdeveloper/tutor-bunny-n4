@@ -49,6 +49,15 @@ export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore< Global
         });
       });
     }
+    getGlobalFavMaterialFromApi() {
+      return new Promise(async (resolve) => {
+
+        let res = await this.network.getAllFavMaterialIds();
+
+
+        resolve(true);
+      });
+    }
   }
 
 

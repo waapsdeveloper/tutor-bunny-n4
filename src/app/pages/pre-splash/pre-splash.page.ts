@@ -17,6 +17,7 @@ import { PendingTrialsService } from 'src/app/services/pending-trials.service';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
+import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -47,7 +48,8 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     private pendingTrialsService: PendingTrialsService,
     private globalStudyMaterialService: GlobalStudyMaterialService,
     private globalTeacherService: GlobalTeacherService,
-    private globalFavCoursesService: GlobalFavCoursesService
+    private globalFavCoursesService: GlobalFavCoursesService,
+    private globalFavMaterialService: GlobalFavMaterialService
 
 
 
@@ -98,6 +100,7 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     this.globalCourses.getGlobalCoursesFromApi('', 1);
     this.globalTeacherService.getGlobalTeachersFromApi('', 1);
     this.globalFavCoursesService.getGlobalFavCoursesFromApi();
+    this.globalFavMaterialService.getGlobalFavMaterialFromApi();
 
 
     this.iap.initializeUserTables(this.user);
