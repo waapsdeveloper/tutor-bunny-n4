@@ -86,11 +86,11 @@ export class FavCoursesPage extends BasePage implements OnInit {
     this.view = view;
     if (view == 'course') {
       // this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
-      this.nav.pop('');
+      // this.nav.pop('');
     }
     if (view == 'notes'){
       // this.nav.push('/tabs/student-dashboard/student-dashboard-study-material');
-      this.nav.push('');
+      // this.nav.push('');
     }
   }
   // end

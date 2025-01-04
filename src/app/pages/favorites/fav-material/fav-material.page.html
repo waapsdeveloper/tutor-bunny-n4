@@ -1,13 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>fav-material</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">fav-material</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+<div class="body-content-68448" *ngIf="list.length !== 0">
+  <div class="sb-content-7895">
+    <!-- *ngFor="let item of list"  [item]="item" -->
+    <div *ngFor="let item of list">
+      <app-generic-course-card [item]="item"></app-generic-course-card>
+    </div>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+<!-- </div> -->
+</div>
+<div class="ion-padding centered-text" *ngIf="list.length === 0">
+<div class="label fs-16 outfit">No Favorite Courses Found</div>
+</div>
+

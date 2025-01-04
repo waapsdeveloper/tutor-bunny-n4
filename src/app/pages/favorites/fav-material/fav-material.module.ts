@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FavMaterialPageRoutingModule } from './fav-material-routing.module';
 
 import { FavMaterialPage } from './fav-material.page';
+import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavMaterialPageRoutingModule
+    FavMaterialPageRoutingModule,
+    GenericCourseCardModule
   ],
   declarations: [FavMaterialPage]
 })
