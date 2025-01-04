@@ -1,6 +1,12 @@
 <div *ngIf="loading" class="loading-syn ">
   <ion-spinner></ion-spinner>
 </div>
+
+
+<ion-header class="ion-no-border ion-no-shadow" >
+  <app-sd-header-top [title]="'Favorite  Courses'" [showBack]="true" [backUrl]=""></app-sd-header-top>
+</ion-header>
+
 <!-- start -->
 <div class="dashboard-top-fixed-98563 ">
   <div class="header-chips">
@@ -13,10 +19,6 @@
   </div>
 </div>
 <!-- end -->
-
-<ion-header class="ion-no-border ion-no-shadow" >
-  <app-sd-header-top [title]="'Favorite  Courses'" [showBack]="true" [backUrl]=""></app-sd-header-top>
-</ion-header>
 
 <ion-content [fullscreen]="true" class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <div class="body-content-68448" *ngIf="list.length !== 0">
