@@ -107,7 +107,7 @@ export class UserSqService {
 
 
   async setUserInDatabase(user) {
-    // console.log(user);
+    //
 
     await this.deleteUserById(user.id);
 
@@ -193,7 +193,7 @@ export class UserSqService {
 
     } catch (error) {
 
-      console.log(error.message);
+
       return false;
 
     }

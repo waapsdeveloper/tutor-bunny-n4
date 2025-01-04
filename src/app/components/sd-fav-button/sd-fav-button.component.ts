@@ -20,7 +20,7 @@ export class SdFavButtonComponent implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('show-fav-dot', (showFav) => {
-      console.log(showFav);
+
       this.showFav = showFav;
 
     });

@@ -40,7 +40,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   public set item(value: any) {
     this._item = value;
     this.initialize(value);
-    console.log(value);
+
 
     this.flag = this.getFlag();
     this.checkReview(value);
@@ -129,7 +129,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   }
 
   async addReview(item) {
-    console.log(item);
+
 
     let res = (await this.modals.present(
       TeacherReviewsComponent,

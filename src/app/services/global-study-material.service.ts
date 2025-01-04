@@ -56,6 +56,14 @@ export class GlobalStudyMaterialService extends NgSimpleStateBaseRxjsStore<Globa
     return this.selectState((state) => state.find((x) => x.id == id));
   }
 
+  getItemPromise(id) {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.find((x) => x.id == id)).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
   getCount() {
     return this.selectState((state) => state.length);
   }
@@ -78,7 +86,7 @@ export class GlobalStudyMaterialService extends NgSimpleStateBaseRxjsStore<Globa
       };
 
       let res = await this.network.getAllMaterials(obj);
-      console.log('study materials', res);
+
 
       const data = res.result;
       this.page = data.current_page;

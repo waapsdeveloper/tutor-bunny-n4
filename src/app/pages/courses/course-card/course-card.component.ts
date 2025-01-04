@@ -23,7 +23,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    console.log(value);
+
     const created_at = value.created_at;
     this.created_at = created_at ? moment(created_at).format('DD-MMM-Y') : '';
 

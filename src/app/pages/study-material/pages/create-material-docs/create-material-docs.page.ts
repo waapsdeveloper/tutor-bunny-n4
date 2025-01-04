@@ -44,7 +44,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   async initialize() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
+
 
 
 
@@ -55,7 +55,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   setBackgroundImage(item) {
     // return `url('${item.image}')`;
 
-    console.log(item.type);
+
 
     let path = "assets/svg/filetypes/";
     if (item.type.includes("pdf")) {
@@ -102,7 +102,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
     const filesToUpload = files.slice(0, this.remainingSlots);
 
-    console.log(filesToUpload);
+
 
     for (const file of filesToUpload) {
       const fileType = file.type; // Get the MIME type of the file

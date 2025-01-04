@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [backUrl]="backUrl" [showBack]="true" [title]="title" [parentHandleBack]="step === 2"
+  <app-sd-header-top [backUrl]="backUrl" [showBack]="showBack" [title]="title" [parentHandleBack]="step === 2"
   (parentBack)="shouldHandleBackToPrevScreen($event)"></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding " #content>
@@ -12,7 +12,7 @@
           <app-input-material-description></app-input-material-description>
           <app-input-material-price></app-input-material-price>
           <app-input-material-language></app-input-material-language>
-          <app-input-material-photos (openPhotosView)="openPhotosView()"></app-input-material-photos>
+          <app-input-material-photos (click)="openPhotosView()"></app-input-material-photos>
 
 
 

@@ -25,7 +25,7 @@ export class InputMaterialPriceComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log("material price init")
+
     this.currency = await this.users.getCurrency() as string;
 
     this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {

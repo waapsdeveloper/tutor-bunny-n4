@@ -23,7 +23,7 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
   public set language(value: any) {
     this._language = value;
     if (value && value.name) {
-      console.log(value);
+
       this.selectedLanguage = value;
     }
   }
@@ -60,7 +60,7 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
 
   async openLanguageSelection() {
 
-    console.log(this.language)
+
     let obj = {
       preSelectedLanguages: [this.language]
     }

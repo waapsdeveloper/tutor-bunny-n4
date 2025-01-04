@@ -32,7 +32,7 @@ export class TeacherReviewsComponent extends BasePage {
   }
 
   onRatingChange(newRating: any) {
-    console.log(newRating, "fsdf");
+
 
     this.userRating = newRating;
   }

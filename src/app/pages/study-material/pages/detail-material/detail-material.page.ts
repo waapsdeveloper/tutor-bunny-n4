@@ -62,12 +62,12 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('MaterialDetailPage');
+
   }
 
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params);
+
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
@@ -192,13 +192,13 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
   getOtherCourse(event) {
-    console.log(event);
+
     this.materialId = event.id;
     // this.callApi();
 
     this.content.scrollToTop(500); // 500ms animation duration
 
-    // console.log(event)
+    //
     // // this.callApi();
     // this.nav.push('/course-detail', {
     //   id: event.id
@@ -220,5 +220,15 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     let user = this.users.getUser();
     this.material$.is_liked_by_me = false;
     // this.courseFavoriteService.removeFavorites(this.course$, user);
+  }
+
+  openEdit(){
+    this.nav.push('/create-material', {
+      material_Id: this.materialId,
+      edit: true,
+      type: this.data.type,
+      showBack: true,
+      title: 'Edit Material',
+    });
   }
 }

@@ -41,7 +41,7 @@ export class SelectYearComponent  implements OnInit {
 
   async loadMore($event) {
 
-    console.log("fdds");
+
 
     let yr = this.list[this.list.length - 1];
     for(var i = 0; i < 20; i++){

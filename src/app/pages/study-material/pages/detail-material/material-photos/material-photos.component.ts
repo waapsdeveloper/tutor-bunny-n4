@@ -23,7 +23,7 @@ export class MaterialPhotosComponent implements OnInit {
   constructor(public network: NetworkService) {}
 
   ngOnInit() {
-    console.log();
+
   }
 
   async getMaterialImages(id) {
@@ -32,6 +32,6 @@ export class MaterialPhotosComponent implements OnInit {
     };
     let res = (await this.network.getMaterialImages(obj)) as any;
     this.materialImages = res.result;
-    console.log(this.materialImages);
+
   }
 }

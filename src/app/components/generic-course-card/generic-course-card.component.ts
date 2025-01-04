@@ -57,7 +57,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
       // course_id: obj.id,
       // liked: true
 
-      console.log(data)
+
 
       if(this.item.id == data.course_id){
         this.item.is_liked_by_me = data.liked;
@@ -87,7 +87,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.item)
+
   }
 
   getFlag() {
@@ -240,10 +240,10 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   //   }
   // }
   async goToChat(data) {
-    console.log(data);
+
 
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();

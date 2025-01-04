@@ -33,7 +33,7 @@ export class OtherCoursesComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log();
+
   }
 
   gotoCourseList() {
@@ -41,7 +41,7 @@ export class OtherCoursesComponent extends BasePage implements OnInit {
   }
 
   getOtherCourse(events) {
-    console.log(events);
+
     this.onChange.emit(events);
   }
 }

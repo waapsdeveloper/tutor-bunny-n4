@@ -21,7 +21,7 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
   };
   public set preSelectedLanguages(value: any[]) {
     this._preSelectedLanguages = value;
-    console.log(this._preSelectedLanguages);
+
   }
 
   searchTerm: string = '';
@@ -85,7 +85,7 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
         this.list = [...this.list, ...this.lang["data"]]
       }
 
-      console.log("ewr", this.preSelectedLanguages);
+
       this.list = this.list.map((item) => {
         const fi = this.preSelectedLanguages.find(x => x.id == item.id);
         if (fi) {

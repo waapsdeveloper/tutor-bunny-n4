@@ -24,7 +24,7 @@ export class InputMaterialLanguageComponent  implements OnInit {
   }
 
   async ngOnInit() {
-    console.log("material language init")
+
   }
 
   result(value, key) {

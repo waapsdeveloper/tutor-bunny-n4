@@ -54,7 +54,7 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   ngOnInit() {
-    console.log("pre-splash init")
+
   }
 
   ionViewWillEnter() {
@@ -63,7 +63,7 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async initialize() {
-    console.log("init");
+
 
     this.loading = true;
 

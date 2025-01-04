@@ -35,7 +35,7 @@ export class CoursePhotosComponent {
     };
     let res = (await this.network.getCourseImages(obj)) as any;
     this.courseImages = res.result;
-    console.log(this.courseImages);
+
   }
 
   get svgWidth(): number {
@@ -48,7 +48,7 @@ export class CoursePhotosComponent {
 
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
-    console.log('Slide changed! Current index is', this.activeIndex);
+
     this.cdr.detectChanges();
   }
 

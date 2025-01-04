@@ -61,7 +61,7 @@ export class CreateCourseService {
   }
 
   setFormData(data) {
-    console.log(data);
+
 
     this.formData['title'] = data['title'];
     this.formData['description'] = data['description'];
@@ -94,7 +94,7 @@ export class CreateCourseService {
 
       const res = (await this.network.getCourseImages(obj)) as any;
       this.coursePhotos = res.result;
-      console.log(this.coursePhotos);
+
 
       this.formData.image = this.coursePhotos[0].image
 

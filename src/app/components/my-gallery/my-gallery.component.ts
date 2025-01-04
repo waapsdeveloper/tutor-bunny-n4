@@ -19,7 +19,7 @@ export class MyGalleryComponent extends BasePage implements OnInit {
     this._user = value;
     this.user_Id = value?.id;
 
-    console.log("gallery-user", this.user);
+
     this.user_Id = this.user.id
   }
 
@@ -33,7 +33,7 @@ export class MyGalleryComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("gallery component initiated")
+
    }
 
   goToGallery() {

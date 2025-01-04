@@ -21,7 +21,7 @@ wrongOtp= false;
   }
 
   ngOnInit() {
-    console.log("uiy");
+
   }
 
   getCodeBoxElement(index: number): HTMLInputElement {

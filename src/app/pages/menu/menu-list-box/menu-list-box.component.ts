@@ -27,7 +27,7 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     this.role = localStorage.getItem('role');
   }
   ngOnInit() {
-    console.log('dfgg');
+
   }
 
   gotoProfile() {

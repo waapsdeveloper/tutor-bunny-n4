@@ -28,7 +28,7 @@ export class CertificateImageComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('change-sample-certificate-to-this', (image: any) => {
-      console.log(image);
+
 
 
       if (image) {
@@ -82,7 +82,7 @@ export class CertificateImageComponent extends BasePage implements OnInit {
   }
 
   async uploadCertificate(obj: any): Promise<any> {
-    console.log(obj);
+
     return await this.network.postCertificate(obj);
   }
 
@@ -101,9 +101,9 @@ export class CertificateImageComponent extends BasePage implements OnInit {
     if (certificates.length > 0) {
       let item = certificates[0];
       this.samplecertificateImage = item.image;
-      console.log(this.samplecertificateImage);
+
 
     }
-    console.log(res);
+
   }
 }

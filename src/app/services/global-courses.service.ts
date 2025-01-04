@@ -65,7 +65,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
       'clear-all-services-data',
       () => {
-        console.log(this.favorites);
+
         this.otherCoursesPage = null;
         this.otherCoursesLastPage = null;
         this.otherCourses = [];
@@ -133,7 +133,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       };
 
       let res = await this.network.getAllCourses(obj);
-      console.log('courses', res);
+
 
       const data = res.result;
       this.page = data.current_page;
@@ -175,7 +175,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
   }
 
   async updateCourseList(data: any) {
-    console.log(data);
+
 
     let course_Id = data.course_id;
     if (course_Id) {
@@ -184,7 +184,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       let shownoti = true;
       if (user.role_id == 3) {
         let shownoti = true;
-        console.log(user);
+
 
         this.events.publish('show-noti-dot', shownoti);
       }

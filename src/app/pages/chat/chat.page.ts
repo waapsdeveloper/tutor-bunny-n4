@@ -75,7 +75,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   // }
 
   // updateChatsByMessageReceived(data: any) {
-  //   console.log(data)
+  //
   //   // this.chats.getchatList(this.search, 1)
   //   // this.events.publish('update-chat-lists', data)
   // }
@@ -102,10 +102,10 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     // let previousUrl = this.nav.getPreviousUrl();
     // const url = new URL(previousUrl, window.location.origin);
     // const prevUrl = url.pathname.split('/')[1];
-    // console.log('Previous URL:', prevUrl);
+    //
 
     // this.params = this.nav.getQueryParams();
-    // console.log(this.params);
+    //
     // if (this.params.user) {
     //   this.user = JSON.parse(this.params.user);
     // }
@@ -113,7 +113,7 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     //   this.other_user_id = JSON.parse(this.params.other_user_id);
     // }
     // this.chat_room_id = this.params.chat_room_id;
-    // console.log(this.chat_room_id);
+    //
     // if (this.chat_room_id) {
     //   let item = {
     //     chat_room_id: this.chat_room_id,

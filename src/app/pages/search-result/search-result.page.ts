@@ -24,7 +24,7 @@ export class SearchResultPage extends BasePage implements OnInit {
     super(injector);
   }
   ngOnInit(): void {
-    console.log("run once")
+
   }
 
   ionViewWillEnter() {
@@ -55,13 +55,13 @@ export class SearchResultPage extends BasePage implements OnInit {
       }
 
       let res = (await this.network.getAllCourses(obj)) as any;
-      console.log(res)
+
       let d = Object.assign({}, res.result);
 
       this.page = d.current_page;
       this.last_page = d.last_page;
 
-      console.log(this.page);
+
 
 
       if (this.page == 1) {

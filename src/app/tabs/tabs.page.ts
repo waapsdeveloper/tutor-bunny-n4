@@ -120,7 +120,7 @@ export class TabsPage extends BasePage implements OnInit {
 
     if (res.data.title) {
 
-      console.log(res)
+
 
       if(res.data.type == '2'){
         const params = {

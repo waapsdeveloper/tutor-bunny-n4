@@ -55,7 +55,7 @@ export class LanguageListComponent extends BasePage {
 
 
   async selectedLanguage() {
-    console.log(this.selection)
+
 
     this.modals.dismiss({ 'selection': this.selection });
   }
@@ -71,7 +71,7 @@ export class LanguageListComponent extends BasePage {
   async callApi(): Promise<any> {
 
     // const res = await this.languagesSqService.list(this.search, this.offset, this.limit)
-    // console.log(res);
+    //
 
     // if (this.offset == 0) {
     //   this.list = res;
@@ -100,7 +100,7 @@ export class LanguageListComponent extends BasePage {
       let listw = this.list.filter(x => x.checked == true);
 
       this.lang = await this.network.getLanguage(obj) as any[];
-      console.log(this.lang);
+
       this.page = this.lang.current_page;
 
       if (this.page == 1) {
@@ -126,7 +126,7 @@ export class LanguageListComponent extends BasePage {
       // Ensure all pre-selected items are still in the list
       this.preSelectedLanguages.forEach(selectedItem => {
 
-        console.log("repeat", selectedItem)
+
 
         let findIndex = this.list.findIndex(item => item.name == selectedItem.name)
         if(findIndex == -1){
@@ -142,7 +142,7 @@ export class LanguageListComponent extends BasePage {
   }
 
   addtoselection(item) {
-    console.log(item);
+
 
     if (item.checked == true) {
       const fi = this.selection.findIndex(x => x.id == item.id)

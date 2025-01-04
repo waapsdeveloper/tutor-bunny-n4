@@ -25,7 +25,7 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('change-sample-course-to-this', (image: any) => {
-      console.log(image);
+
 
 
       if (image) {
@@ -79,7 +79,7 @@ export class CoursePhotoComponent extends BasePage implements OnInit {
   }
 
   async uploadCourseImage(obj: any): Promise<any> {
-    console.log(obj);
+
     // return await this.network.postCourseImage(obj);
   }
 

@@ -1,20 +1,21 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateMaterialService } from '../create-material/create-material.service';
+import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-material-photos',
   templateUrl: './create-material-photos.page.html',
   styleUrls: ['./create-material-photos.page.scss'],
 })
-export class CreateMaterialPhotosPage extends BasePage implements OnInit {
+export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter {
 
   title = 'Study Material Photos';
   doc:null
   params;
   remainingSlots;
-
   images$: any[] = [];
+  materialId;
 
 
   constructor(
@@ -27,18 +28,26 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit {
 
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.initialize();
   }
 
 
   async initialize() {
-    this.params = this.nav.getQueryParams();
-    console.log(this.params);
+
+    const d = await this.createMaterialService.getFormDataAsync() as any;
+    this.materialId = d.id;
+
+    if(this.materialId){
+      const images = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
+      console.log(images)
+    }
 
     this.createMaterialService.getImages().subscribe( (data) => {
       this.images$ = data;
     });
+
+
 
 
 
@@ -70,14 +79,14 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit {
 
     const filesToUpload = files.slice(0, this.remainingSlots);
 
-    console.log(filesToUpload);
+
 
     for (const file of filesToUpload) {
       let imageString: string;
       if (file.size > 1048576) {
-        console.log(file.size);
+
         imageString = await this.imageService.resizeImage(file, 800, 800);
-        console.log(imageString);
+
       } else {
         imageString = await this.fileToDataURL(file);
       }
@@ -94,24 +103,9 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit {
     });
   }
 
-  async updateFeatureImage(item: any, index, event: Event) {
-    event.stopPropagation();
-
-    for (let i = 0; i < this.images$.length; i++) {
-      this.images$[i].feature = false;
-    }
-
-    this.images$[index].feature = true;
-
-    this.createMaterialService.setImages(this.images$)
-  }
-
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    console.log(event);
-
     this.createMaterialService.removeImageInImagesIndex(index)
-
   }
 
   openImage(image) {

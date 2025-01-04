@@ -60,14 +60,14 @@ export class SearchBoxPage extends BasePage {
     const data = res.result;
     this.searchCourses = data.data;
 
-    // console.log(this.searchCourses)
+    //
 
   }
 
   // click on recent search
   async openFromRecentSearch(item) {
 
-    console.log(item);
+
 
     if (!item.course_id) {
 

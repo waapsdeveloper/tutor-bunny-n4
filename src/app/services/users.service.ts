@@ -56,11 +56,11 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
   async setUser(user): Promise<any> {
     // const aww = await this.userSq.setUserInDatabase(user);
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(user);
+
 
     this._user = user;
     this.image = user.image;
-    console.log(this.image);
+
 
     this.setState( state => ({
       ...state,
@@ -131,12 +131,12 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
 
   async getLoginUserFromApi() {
     // const res = await this.userSq.loadUsers();
-    // console.log("user-sq", res)
+    //
 
     // await this.userSq.addUser("Peter");
 
     // const res2 = await this.userSq.loadUsers();
-    // console.log("user-sq", res2)
+    //
 
     return new Promise(async (resolve) => {
       let token = localStorage.getItem('token');
@@ -156,12 +156,12 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
 
   async getLoginUser() {
     // const res = await this.userSq.loadUsers();
-    // console.log("user-sq", res)
+    //
 
     // await this.userSq.addUser("Peter");
 
     // const res2 = await this.userSq.loadUsers();
-    // console.log("user-sq", res2)
+    //
 
     return new Promise(async (resolve) => {
       let token = localStorage.getItem('token');

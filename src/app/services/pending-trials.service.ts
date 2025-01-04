@@ -70,7 +70,7 @@ export class PendingTrialsService  extends NgSimpleStateBaseRxjsStore<PendingTri
         teacher_id: user.id,
       };
       let res = await this.network.getPendingTrial(user.id, obj);
-      console.log('trials', res);
+
 
       const data = res.result;
       this.page = data.current_page;

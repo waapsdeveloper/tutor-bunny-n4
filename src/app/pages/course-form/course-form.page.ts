@@ -244,7 +244,7 @@ export class CourseFormPage
   }
 
   shouldHandleBackToPrevScreen(event) {
-    console.log(event);
+
     this.sameCourseEdit = event;
     if (this.step == 2) {
       this.step = 1;

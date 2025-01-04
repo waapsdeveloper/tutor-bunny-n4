@@ -56,7 +56,7 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
   }
 
   getCurrencySymbol(user) {
-    console.log(user);
+
     if(user?.role_id == 2){
       this.currency = user?.student?.country?.currency_symbol
     }else if(user?.role_id == 3){
@@ -64,7 +64,7 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
     }else{
       this.currency = '$'
     }
-    console.log(this.currency);
+
 
   }
 

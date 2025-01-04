@@ -26,7 +26,7 @@ export class MaterialUploadComponent extends BasePage implements OnInit {
   ngOnInit() {
 
     this.events.subscribe('change-sample-material-to-this', (image: any) => {
-      console.log(image);
+
 
 
       if (image) {
@@ -89,7 +89,7 @@ export class MaterialUploadComponent extends BasePage implements OnInit {
   }
 
   async uploadMaterialDoc(obj: any): Promise<any> {
-    console.log(obj);
+
     // return await this.network.postCourseImage(obj);
   }
 

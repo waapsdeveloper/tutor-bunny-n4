@@ -22,7 +22,7 @@ export class ReviewsByStudentPage extends BasePage implements OnInit {
       this.callApi(this.user.id);
     } else {
       this.user = JSON.parse(localStorage.getItem('teacher'));
-      console.log(this.user);
+
       this.rating = this.user.teacher.avg_rating;
       this.image = this.user.image;
       this.callApi(this.user.id);
@@ -35,7 +35,7 @@ export class ReviewsByStudentPage extends BasePage implements OnInit {
     };
 
     let res = await this.network.getReviews(obj);
-    console.log(res);
+
 
     this.reviews = res.result;
   }

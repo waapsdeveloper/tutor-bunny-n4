@@ -19,12 +19,12 @@ export class InputMaterialKeywordsComponent  implements OnInit {
   constructor(public createMaterialService: CreateMaterialService, public events: EventsService) {
     this.createMaterialService.getKeywords().subscribe(keywords => {
       this.keywords$ = keywords;
-      console.log(this.keywords$);
+
     });
   }
 
   ngOnInit() {
-    console.log("keywork initialized");
+
 
     this.events.subscribe('teacher-study-material-second-screen-submit-call', (formData) => {
 
@@ -39,7 +39,7 @@ export class InputMaterialKeywordsComponent  implements OnInit {
   }
 
   result(value, key) {
-    console.log(value, key)
+
   }
 
 }

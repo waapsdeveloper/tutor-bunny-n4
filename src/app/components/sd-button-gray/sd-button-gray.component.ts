@@ -11,7 +11,7 @@ export class SdButtonGrayComponent implements OnInit {
   @Input() disabled: boolean = false;
 
   constructor() {
-    console.log(this.disabled);
+
 
   }
 

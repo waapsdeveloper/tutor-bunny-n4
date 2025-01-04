@@ -34,7 +34,7 @@ export class TeacherCourseListPage extends BasePage implements OnInit {
     let obj = {
       user_id: this.teacher_id,
     };
-    console.log(obj);
+
 
     let res = await this.network.getTeacherCourses(obj);
     this.list = res.result.data;

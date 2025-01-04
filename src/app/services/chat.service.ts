@@ -87,7 +87,7 @@ export class ChatService {
 
   chatChannelReceived($event: any) {
     this.events.publish('message-received-via-pusher', $event);
-    console.log($event);
+
 
     let data = $event;
     if (data.chat_room_id) {
@@ -146,9 +146,9 @@ export class ChatService {
       let res = await this.network.getMessagesRoom(this.user.id, obj);
       if (res) {
         this.chats = res.data;
-        // console.log(this.chats);
+        //
         this.unreadCount = (await this.getUnreadMsgCount()) as number;
-        // console.log(this.unreadCount);
+        //
         let data = await this.network.getRequsetCount(this.user.id);
         if (this.user.role_id == 3) {
           this.getChatRequsts();
@@ -164,9 +164,9 @@ export class ChatService {
     if (this.chats.length == 0) {
       return 0;
     }
-    // console.log(this.chats);
+    //
     let ids = this.chats.map((item) => item.chat_room_id);
-    // console.log(ids);
+    //
     // return
 
     let object = {
@@ -175,10 +175,10 @@ export class ChatService {
     };
 
     let res = await this.network.getUnreadChat(object);
-    // console.log(res);
+    //
 
     this.unreadCount = res.unread_count;
-    // console.log(this.unreadCount, 'unread');
+    //
 
     return this.unreadCount;
   }
@@ -188,10 +188,10 @@ export class ChatService {
       this.user = this.users.getUser();
 
       let res = await this.network.getRequestMessagesRoom(this.user.id);
-      // console.log(res,"dsffdsfsfsdfs");
+      //
 
       this.requestCount = res.total;
-      // console.log(this.requestCount);
+      //
 
       this.requests = res.data;
 
@@ -220,7 +220,7 @@ export class ChatService {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
-      // console.log(this.days);
+      //
       this.events.publish('scroll-to-bottom');
 
       resolve(true);
@@ -228,10 +228,10 @@ export class ChatService {
   }
 
   async updateChatCount(roomId, count) {
-    // console.log(roomId);
-    // console.log(this.chats);
+    //
+    //
     let chatIndex = this.chats.findIndex((chat) => chat.chat_room_id == roomId);
-    console.log(chatIndex);
+
     if (chatIndex != -1) {
       this.chats[chatIndex].unread_count = count;
     }
@@ -257,7 +257,7 @@ export class ChatService {
     };
     let res = await this.network.getChadRoomId(obj);
 
-    // console.log(res);
+    //
     const chatroom = res.chat_room;
 
     if (chatroom) {
@@ -267,7 +267,7 @@ export class ChatService {
   }
 
   async getChatRoomInfo(roomId): Promise<any> {
-    // console.log(this.chats, roomId);
+    //
 
     const findObj = this.chats.find((x) => x.chat_room_id == roomId);
     if (!findObj) {
@@ -277,7 +277,7 @@ export class ChatService {
         offset: this.chats.length
       }
       const res = await this.network.getChatRoomById(roomId,obj);
-      // console.log(res);
+      //
 
       if (res.length > 0) {
         this.chats = [...this.chats, ...res];
@@ -315,14 +315,14 @@ export class ChatService {
   }
 
   async setChatRoomListItemInfo(roomId): Promise<any> {
-    // console.log(this.chats, roomId);
+    //
 
     let obj = {
       limit: 10,
       offset: 0
     }
     const res = await this.network.getChatRoomById(roomId, obj);
-    // console.log(res);
+    //
 
     const findIndex = this.chats.findIndex((x) => x.chat_room_id == roomId);
     if (findIndex != -1 && res.length > 0) {

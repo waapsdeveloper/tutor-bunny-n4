@@ -42,7 +42,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     super(injector);
 
     this.userSq.loadUsers().then( res => {
-      console.log(res)
+
     });
 
     this.pendingTrialsService.getCount().subscribe((data) => {
@@ -76,7 +76,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   async initialize() {
     this.loadResolvers();
     this.user = this.dataR.user;
-    console.log(this.globalTrials.pendingTrials, "ye raha");
+
 
     let obj = {
       email: this.user.email,

@@ -21,9 +21,9 @@ export class MyStudentsPage extends BasePage  { // implements OnInit
   // ngOnInit() { }
 
   doSearch($event) {
-    console.log(this.search);
-    
-    
+
+
+
     this.globalTrials.getTrials(this.search, 1)
   }
 

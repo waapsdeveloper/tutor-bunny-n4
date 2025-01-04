@@ -76,7 +76,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     const res = (await this.modals.present(KeywordListComponent, {
       subs: this.subs,
     })) as any;
-    console.log(res);
+
 
     if (res.data) {
       if (res.data.subs) {

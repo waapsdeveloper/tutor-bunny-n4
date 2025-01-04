@@ -30,7 +30,7 @@ export class NotificationsPage extends BasePage implements ViewWillEnter {
   async initialize() {
     this.loadResolvers();
     // this.notificationService.unread_count = 0;
-    console.log(this.notificationService.unread_count);
+
 
     this.notificationService.sendIsOpenToApis()
 

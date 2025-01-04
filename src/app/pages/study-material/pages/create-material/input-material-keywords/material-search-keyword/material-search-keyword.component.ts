@@ -149,7 +149,7 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
     }
 
     if (!this.subs.some((existingItem) => existingItem.id === item.id)) {
-      console.log(this.subs, item);
+
       // this.subs.push(item);
       this.createMaterialService.addKeywordInKeywords(item);
 

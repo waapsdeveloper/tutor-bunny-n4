@@ -60,7 +60,7 @@ export class InputMaterialDocsComponent implements OnInit {
 
   setBackgroundImage(docObj: { doc: string, type: string }): string {
 
-    console.log(docObj.type);
+
 
     let path = "assets/svg/filetypes/";
     if (docObj.type.includes("pdf")) {

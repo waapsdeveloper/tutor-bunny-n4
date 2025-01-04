@@ -38,7 +38,7 @@ export class GenericTeacherCardComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.item);
+
   }
 
   getFlag() {
@@ -58,7 +58,7 @@ export class GenericTeacherCardComponent extends BasePage implements OnInit {
     this.nav.push('/teacher-profile', params);
   }
   // async goToChat(data) {
-  //   console.log(data);
+  //
 
   //   this.user = this.users.getUser();
   //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
@@ -97,7 +97,7 @@ export class GenericTeacherCardComponent extends BasePage implements OnInit {
   // }
   async goToChat(data) {
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();
@@ -138,7 +138,7 @@ export class GenericTeacherCardComponent extends BasePage implements OnInit {
       user_name: user.name,
       user_id : user.id
     };
-    console.log(params);
+
     // return
 
     this.nav.push('teacher-course-list', params);

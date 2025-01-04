@@ -52,7 +52,7 @@ export class TeacherListComponent extends BasePage implements OnInit {
     this.nav.push('/teacher-profile', params);
   }
   // async goToChat(data) {
-  //   console.log(data);
+  //
 w
   //     let res = await this.network.getChadRoomId(obj);
   //     let params = {
@@ -83,7 +83,7 @@ w
   // }
   async goToChat(data) {
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();
@@ -124,7 +124,7 @@ w
       user_name: user.name,
       user_id : user.id
     };
-    console.log(params);
+
     // return
 
     this.nav.push('teacher-course-list', params);

@@ -157,10 +157,10 @@ export class KeywordListComponent implements OnInit {
 
   async addToSubjects(item) {
     let formtype = localStorage.getItem('formtype');
-    console.log(formtype);
+
 
     if (formtype != 'filter') {
-      console.log('iirirri');
+
 
       let course_Id = JSON.parse(localStorage.getItem('course_Id'));
       let obj = {
@@ -169,7 +169,7 @@ export class KeywordListComponent implements OnInit {
       };
 
       const res = await this.network.addKeyword(obj);
-      console.log(res);
+
 
       let data = {
         course_id: course_Id,

@@ -35,7 +35,7 @@ export class InitializeAppService {
 
         this.isAppInit = true;
       } catch (error) {
-        console.log(`initializeAppError: ${error}`);
+
         // await Toast.show({
         //   text: `initializeAppError: ${error}`,
         //   duration: 'long'
@@ -294,7 +294,7 @@ export class InitializeAppService {
   initializeUserTables(user: any) {
     return new Promise(async (resolve) => {
       const favIds = await this.network.getAllFavCoursesIds();
-      console.log(favIds);
+
       await this.insertCourseFav(user.id, favIds);
 
       let data = {};

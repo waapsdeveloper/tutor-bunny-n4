@@ -1,3 +1,4 @@
+import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 import { Component, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
@@ -13,28 +14,34 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   title = 'Study materials';
+  params;
   backUrl = '';
+  showBack;
+  edit = false;
   loading = false;
   step = 1;
 
   material$;
+  materialId;
 
 
   constructor(
     injector: Injector,
-    public createMaterialService: CreateMaterialService
+    private createMaterialService: CreateMaterialService,
+    private globalStudyMaterialService: GlobalStudyMaterialService
+
   ) {
     super(injector);
 
     this.createMaterialService.getFormData().subscribe(data => {
       this.material$ = data;
-      console.log(this.material$)
+
     });
 
   }
 
   ngOnInit() {
-    console.log("material init")
+
   }
 
   ngOnDestroy(): void {
@@ -45,10 +52,40 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   async ionViewWillEnter() {
 
+    this.params = this.nav.getQueryParams();
+    if (this.params.backUrl) {
+      this.backUrl = this.params.backUrl;
+    }
+    if (this.params.title) {
+      this.title = this.params.title;
+    }
+    if (this.params.showBack) {
+      this.showBack = this.params.showBack;
+    }
+    if (this.params.edit) {
+      this.edit = this.params.edit;
+    }
+
+    if (this.params.material_Id) {
+      this.materialId = this.params.material_Id;
+      const res = await this.globalStudyMaterialService.getItemPromise(this.materialId);
+
+      this.createMaterialService.setStateItem(res);
+
+      // localStorage.setItem('courseId', this.courseId);
+
+      // let res = (await this.network.getcourseById(this.courseId)) as any;
+      // this.setFormDta(res.course);
+
+      // // course images patch
+      // this.createCourseService.courseId = this.courseId;
+      // this.createCourseService.getCourseImages();
+    }
+
   }
 
   shouldHandleBackToPrevScreen(event) {
-    console.log(event);
+
     // this.sameCourseEdit = event;
     if (this.step == 2) {
       this.step = 1;
@@ -88,7 +125,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     const res = (this.material$.id !- -1) ? await this.network.updateStudyMaterial(formData, this.material$.id) : await this.network.storeStudyMaterial(formData);
 
-    console.log(res)
+
     let studyMaterialId = res.studyMaterial.id;
 
     if (studyMaterialId) {
@@ -104,10 +141,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
         let simage = await this.network.postStudyMaterialPhoto(obj);
 
-        console.log(simage);
+
 
         // if(simage.result.image){
-        //   console.log(simage.result.image);
+        //
         //   let obj = {
         //     "feature": false,
         //     "image": simage.result.image
@@ -172,10 +209,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
           };
 
           const res = await this.network.postMaterialImage(obj);
-          console.log(res);
+
 
           if(res.result.id){
-            console.log(res.result.id);
+
             item.id = res.result.id;
             // item.image = res.result.image;
             this.createMaterialService.updateImageInImagesIndex(i, item);

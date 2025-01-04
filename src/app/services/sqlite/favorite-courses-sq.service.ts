@@ -16,7 +16,7 @@ export class FavoriteCoursesSqService {
     try {
       // Attempt to insert into the table
       await this.storageService.executeQuery(sql, params);
-      console.log('Favorite added successfully');
+
       return true;
     } catch (error) {
       // Handle constraint violation for unique constraint
@@ -37,7 +37,7 @@ export class FavoriteCoursesSqService {
     try {
       // Attempt to delete the record
       await this.storageService.executeQuery(sql, params);
-      console.log('Favorite removed successfully');
+
       return true;
     } catch (error) {
       console.error('Error removing favorite:', error);

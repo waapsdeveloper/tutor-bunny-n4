@@ -20,7 +20,7 @@ export class CourseListComponent extends BasePage implements OnInit {
   oepnDeatils(item) {
 
     let role = localStorage.getItem('role');
-    console.log(role);
+
     // return
     if(role =='2'){
       const params = {

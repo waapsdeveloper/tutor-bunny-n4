@@ -62,7 +62,7 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
     this.events.subscribe(
       'change-sample-image-to-this',
       (image: any) => {
-        console.log(image);
+
 
         if (image) {
           this.sampleGalleryImage = image;
@@ -72,14 +72,14 @@ export class SdImageBoxComponent extends BasePage implements OnInit {
     );
 
     this.events.subscribe('change-sample-gallery-to-this', (image) => {
-      console.log(image);
+
       if (image.length == 0) {
-        console.log("emty");
+
         this.sampleGalleryImage = '/assets/gallary.png';
       } else {
-        console.log(image[0].image);
+
         this.sampleGalleryImage = image[0].image;
-        console.log(this.sampleGalleryImage);
+
       }
     });
   }

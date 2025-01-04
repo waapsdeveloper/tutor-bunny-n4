@@ -70,7 +70,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.loadResolvers();
     this.user = this.dataR.user;
     const ch = await this.chats.getChatRoomInfo(roomId);
-    console.log(ch);
+
     if (!ch) {
       this.nav.pop();
       return;
@@ -85,11 +85,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     setTimeout( async () => {
       this.myContent.scrollToBottom(100);
-      console.log('scroll');
+
 
 
       this.chats.unreadCount = (await this.chats.getUnreadMsgCount()) as number;
-      console.log(this.chats.unreadCount)
+
 
     }, 500);
   }
@@ -103,7 +103,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   updateChatsByMessageReceived(data: any) {
     const dm = data;
-    console.log(dm);
+
 
     if(!this.item){
       return;
@@ -113,7 +113,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       if (!this.chats || !this.chats.days) {
         return;
       }
-      console.log(this.chats.days);
+
 
       let newMessage = {
         chat_room_id: dm.chat_room_id,
@@ -186,7 +186,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   scrollToBottomOnInit() {
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
-      console.log('scroll');
+
     }, 500);
   }
   adjustHeight(textArea: HTMLTextAreaElement): void {
@@ -223,7 +223,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.messageInput.nativeElement.value = '';
     this.adjustHeight(this.messageInput.nativeElement);
     let res = await this.network.sendMessage(obj);
-    console.log(res);
+
 
 
     // this.chats.getchatList()
@@ -240,7 +240,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     if (scrollTop < 50 && !this.loadingMore) { // Trigger when near the top
       this.loadingMore = true;
 
-      console.log("ER")
+
 
       // const newMessages = await this.chatService.getMessages(this.offset, this.limit);
       // this.chats.days = this.groupMessagesByDate([...newMessages, ...this.chats.days]);

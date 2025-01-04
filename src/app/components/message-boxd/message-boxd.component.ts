@@ -12,7 +12,7 @@ export class MessageBoxdComponent  implements OnInit {
   constructor(public nav: NavService, public chats: ChatService) { }
 
   ngOnInit() {
-    console.log(this.chats.requestCount);
+
   }
 
   async showRequests() {

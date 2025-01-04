@@ -14,7 +14,7 @@ export class CourseFavoriteService {
   async addFavorites(obj: any, user) {
 
     const flag = await this.favCoursesSqService.addFavorite(user.id, obj.id);
-    console.log(flag);
+
 
     const count = await this.favCoursesSqService.getFavoriteCount(user.id);
     this.events.publish('update-course-fav-count', {count})
@@ -35,7 +35,7 @@ export class CourseFavoriteService {
   async removeFavorites(obj: any, user: any) {
 
     const flag = await this.favCoursesSqService.removeFavorite(user.id, obj.id);
-    console.log(flag);
+
 
     const count = await this.favCoursesSqService.getFavoriteCount(user.id);
     this.events.publish('update-course-fav-count', {count})
@@ -54,7 +54,7 @@ export class CourseFavoriteService {
   }
 
   async getFavCount(user_id: number): Promise<any>{
-    console.log(user_id)
+
     const count = await this.favCoursesSqService.getFavoriteCount(user_id);
     return count;
 

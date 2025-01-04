@@ -42,8 +42,8 @@ export class MyCoursesComponent extends BasePage implements OnInit {
       if (this.categoryId) {
         obj['category_id'] = this.categoryId;
       }
-      console.log(this.categoryId);
-      console.log(obj);
+
+
       let role = localStorage.getItem('role');
       if (role == '3') {
         this.user = this.users.getUser();
@@ -61,7 +61,7 @@ export class MyCoursesComponent extends BasePage implements OnInit {
           this.user.id
         )) as any;
         // await this.network.getOtherCourseList(obj) as any;
-        console.log(res);
+
 
         const result = res.result;
         this.count = res.result.total;
@@ -75,14 +75,14 @@ export class MyCoursesComponent extends BasePage implements OnInit {
         this.onChange.emit(result);
       } else {
         this.teacher = JSON.parse(localStorage.getItem('teacher'));
-        console.log(this.teacher);
+
         let obj = {
           user_id: this.teacher.id,
         };
-        console.log(obj);
+
 
         let res = await this.network.getTeacherCourses(obj);
-        console.log(res);
+
 
         const result = res.result;
         this.count = res.result.total;
@@ -107,7 +107,7 @@ export class MyCoursesComponent extends BasePage implements OnInit {
         user_name: this.teacher.name,
         user_id : this.teacher.id
       };
-      console.log(params);
+
       // return
 
       this.nav.push('teacher-course-list', params);
@@ -116,7 +116,7 @@ export class MyCoursesComponent extends BasePage implements OnInit {
         user_name: this.user.name,
         user_id : this.user.id
       };
-      console.log(params);
+
       // return
 
       this.nav.push('teacher-course-list', params);

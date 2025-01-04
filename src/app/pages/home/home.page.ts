@@ -38,7 +38,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
   }
 
   stepChange($event){
-    console.log($event);
+
     this.step = $event.step;
   }
 
@@ -46,7 +46,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
     if(type == 'login'){
       this.step = 1;
-      console.log($event);
+
       let d = Object.assign({}, $event);
       localStorage.setItem('token', d.token);
       await this.users.setUser(d.user);
@@ -54,7 +54,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
       return;
     }else if(type == 'signup'){
       this.step = 2;
-      console.log($event);
+
       let d = Object.assign({}, $event);
       localStorage.setItem('token', d.token);
       await this.users.setUser(d.user);
@@ -63,7 +63,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
     }else if(type == 'forget'){
       this.step = 1;
-      console.log($event);
+
     }
 
   }
@@ -100,7 +100,7 @@ export class HomePage extends BasePage implements ViewWillEnter {
 
   async initiateLogin() {
     const res = await this.showUpLogin();
-    console.log(res);
+
 
     if (res && res.data) {
       if (res.data.step == 2) {

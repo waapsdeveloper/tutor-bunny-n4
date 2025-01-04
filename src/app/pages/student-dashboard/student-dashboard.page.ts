@@ -56,7 +56,7 @@ export class StudentDashboardPage
   ngOnInit() {
     this.events.subscribe('update-profile-image', (user) => {
       this.profileImage = user.image;
-      console.log(this.profileImage, 'images');
+
     });
 
 
@@ -64,11 +64,11 @@ export class StudentDashboardPage
 
   async initialize() {
     this.user = this.users.getUser();
-    console.log(this.user);
+
     this.profileImage = this.user.image;
 
     this.setupEvents();
-    // console.log(this.user);
+    //
 
     if (
       this.user &&
@@ -165,7 +165,7 @@ export class StudentDashboardPage
     this.events.subscribe(
       'update-course-fav-count',
       (data) => {
-        console.log(data);
+
         this.courseFavCount = data.count;
       },
       true

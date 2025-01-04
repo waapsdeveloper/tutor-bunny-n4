@@ -19,7 +19,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     public createCourseService: CreateCourseService
   ) {
     super(injector);
-    
+
   }
 
   ngOnInit() {
@@ -29,15 +29,15 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async initialize() {
     this.params = this.nav.getQueryParams();
-    console.log(this.params)
+
     if(this.params && this.params['title'] ){
       this.title = this.params['title'];
-      
+
 
     }
 
 
-    
+
   }
 
   setBackgroundImage(item) {
@@ -87,14 +87,14 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
     const filesToUpload = files.slice(0, this.remainingSlots);
 
-    console.log(filesToUpload);
+
 
     for (const file of filesToUpload) {
       let imageString: string;
       if (file.size > 1048576) {
-        console.log(file.size);
+
         imageString = await this.imageService.resizeImage(file, 800, 800);
-        console.log(imageString);
+
       } else {
         imageString = await this.fileToDataURL(file);
       }
@@ -135,7 +135,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    console.log(event);
+
 
     const coursePhotos = this.createCourseService.coursePhotos;
     const courseId = this.createCourseService.courseId;
@@ -154,7 +154,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     if (pht.feature) {
       // First, remove the image from the array
       if (pht.id) {
-        await this.network.deleteCourseImage(pht.id);        
+        await this.network.deleteCourseImage(pht.id);
       }
 
       coursePhotos.splice(index, 1);
@@ -182,7 +182,7 @@ export class CoursePhotossPage extends BasePage implements OnInit {
     } else {
       // If the image being cleared is not the feature image, simply remove it
       if (pht.id) {
-        await this.network.deleteCourseImage(pht.id);        
+        await this.network.deleteCourseImage(pht.id);
       }
       coursePhotos.splice(index, 1);
     }

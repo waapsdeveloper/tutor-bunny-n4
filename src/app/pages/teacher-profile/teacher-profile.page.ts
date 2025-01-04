@@ -108,9 +108,9 @@ export class TeacherProfilePage
       if (res) {
         // this.users.setUser(res.user);
         // this.user = this.users.getUser();
-        console.log('====================================');
-        console.log(this.user);
-        console.log('====================================');
+
+
+
         this.flag = this.getFlag();
         this.displayName = this.utility.getAmericanName(this.user.name);
         this.country = this.user.teacher.country.name;
@@ -200,7 +200,7 @@ export class TeacherProfilePage
 
   async goToChat() {
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();

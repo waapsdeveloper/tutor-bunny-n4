@@ -32,10 +32,10 @@ export class FavCoursesPage extends BasePage implements OnInit {
   async initialize() {
     this.loadResolvers();
     this.user = this.dataR.user;
-    console.log(this.user);
+
     const data = await this.favCourseSqService.list(this.user.id);
     this.courseids = data.map((item) => item.course_id);
-    console.log(this.courseids);
+
     this.loading = true;
     await this.callApi(this.page)
     this.loading = false;
@@ -49,7 +49,7 @@ export class FavCoursesPage extends BasePage implements OnInit {
       };
 
       let res = await this.network.FavCourseByIds(obj);
-      console.log(res);
+
       const result = res.result;
       // this.favorites = data.data;
       this.page = result.current_page;

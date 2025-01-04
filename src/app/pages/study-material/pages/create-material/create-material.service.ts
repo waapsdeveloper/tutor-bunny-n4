@@ -51,6 +51,10 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     super();
   }
 
+  setStateItem(item: any) {
+    this.setState( () => item );
+  }
+
   setId(id: number) {
     this.setState( state => ({
       ...state,
@@ -74,7 +78,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
   setImage(image: any) {
 
-    console.log(image)
+
     this.setState( state => ({
       ...state,
       image: image
@@ -101,7 +105,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     let images = [...res];
     images[index] = image;
 
-    console.log(res, images)
+
 
     this.setState( state => {
       return {

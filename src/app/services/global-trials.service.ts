@@ -76,7 +76,7 @@ export class GlobalTrialsService {
   }
 
   async trialsChannelReceived($event: any) {
-    console.log($event);
+
     this.events.publish('trail-received-via-pusher', $event);
 
     if ($event) {
@@ -94,7 +94,7 @@ export class GlobalTrialsService {
         if (this.user.role_id == 3) {
           let shownoti = true;
           this.user = this.users.getUser();
-          console.log(this.user);
+
 
           this.events.publish('show-noti-dot', shownoti);
         }
@@ -127,7 +127,7 @@ export class GlobalTrialsService {
     } else {
       this.list = [trialObj, ...this.list];
     }
-    console.log(this.list, "bdfgdgfdgdfgdfgfdg");
+
 
     const indexp = this.pendingTrials.findIndex((x) => x.id == trialObj.id);
 
@@ -153,7 +153,7 @@ export class GlobalTrialsService {
         teacher_id: this.user.id,
       };
       let res = await this.network.getPendingTrial(this.user.id, obj);
-      console.log(res, 'trials');
+
 
       const data = res.result;
       this.pendingTrialPage = data.current_page;
@@ -212,7 +212,7 @@ export class GlobalTrialsService {
       } else {
         this.list = [...this.list, ...result['data']];
       }
-    console.log(this.list, "bdfgdgfdgdfgdfgfdg");
+
 
 
       resolve(true);

@@ -106,10 +106,10 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
 
   async goToChat(data) {
-    console.log(data, "here");
+
 
     let user = this.users.getUser();
-    console.log(user);
+
     this.openChatWithData(data);
   }
 
@@ -126,7 +126,7 @@ export class TrailCardComponent extends BasePage implements OnInit {
 
 
   // async goToChat(data) {
-  //   console.log(data);
+  //
 
   //   let id = this.user.id;
 

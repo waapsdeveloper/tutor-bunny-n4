@@ -61,7 +61,7 @@ export class GenericStudyMaterialCardComponent
         // course_id: obj.id,
         // liked: true
 
-        console.log(data);
+
 
         if (this.item.id == data.course_id) {
           this.item.is_liked_by_me = data.liked;
@@ -85,7 +85,7 @@ export class GenericStudyMaterialCardComponent
     if (data && data.type == 3) {
       this.type = data.type;
     }
-    console.log(data)
+
   }
 
   ngOnInit() {
@@ -244,10 +244,10 @@ export class GenericStudyMaterialCardComponent
   //   }
   // }
   async goToChat(data) {
-    console.log(data);
+
 
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();
@@ -292,7 +292,7 @@ export class GenericStudyMaterialCardComponent
       study_material_id: this.item.id,
     };
     const res = await this.network.purchaseMaterial(obj);
-    console.log(res);
+
 
     if (res.bool == true) {
       try {
@@ -310,7 +310,7 @@ export class GenericStudyMaterialCardComponent
 
         // present PaymentSheet and get result.
         const result = await Stripe.presentPaymentSheet();
-        console.log(result);
+
         if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
           // Happy path
         }

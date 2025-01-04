@@ -92,14 +92,14 @@ export class UploadCertificatePage extends BasePage implements OnInit {
 
     const filesToUpload = files.slice(0, this.remainingSlots);
 
-    console.log(filesToUpload);
+
 
     for (const file of filesToUpload) {
       let imageString: string;
       if (file.size > 1048576) {
-        console.log(file.size);
+
         imageString = await this.imageService.resizeImage(file, 800, 800);
-        console.log(imageString);
+
       } else {
         imageString = await this.fileToDataURL(file);
       }

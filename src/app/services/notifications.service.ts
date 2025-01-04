@@ -45,7 +45,7 @@ export class NotificationsService {
 
   registerPusherEvent() {
     let user = this.users.getUser() as any;
-    console.log(user.id, 'users');
+
 
     this.notificationChannel.bind(
       'notification-rec-' + user.id,
@@ -70,17 +70,17 @@ export class NotificationsService {
     let id = $event.notification_id;
 
     let res = await this.network.getNotificationById(id);
-    console.log(res);
+
 
     this.list.unshift(res.data);
     // if (res.data.is_open === 0) {
-    //   console.log(res.data.is_open);
+    //
 
     this.unread_count = this.unread_count + 1;
     // }
 
-    console.log(this.list);
-    console.log('Updated unread count:', this.unread_count);
+
+
   }
 
   getNotificationsFromApi(search = '', page = 1) {
@@ -95,12 +95,12 @@ export class NotificationsService {
       if (page === 1) {
         this.list = data.data;
         const openItemsArray = this.list.filter((item) => item.is_open === 0);
-        console.log(openItemsArray, ' a gaya');
+
         this.unread_count = openItemsArray.length;
       } else {
         this.list = [...this.list, ...data.data];
         const openItemsArray = this.list.filter((item) => item.is_open === 0);
-        console.log(openItemsArray, ' a gaya');
+
         this.unread_count = openItemsArray.length;
       }
       resolve(this.list);
@@ -113,7 +113,7 @@ export class NotificationsService {
       ids: ids,
     };
     let response = await this.network.notificationRead(object);
-    console.log(response);
+
     this.unread_count = 0;
   }
 

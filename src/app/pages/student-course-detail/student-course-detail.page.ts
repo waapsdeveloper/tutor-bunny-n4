@@ -208,7 +208,7 @@ export class StudentCourseDetailPage extends BasePage {
   // }
   async goToChat() {
     let user = this.users.getUser();
-    console.log(user);
+
     let v = (await this.profiles.isProfileCompleted(user)) as any;
     if (!v) {
       await this.openWelcomeComponent();

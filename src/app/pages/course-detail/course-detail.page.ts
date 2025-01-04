@@ -63,7 +63,7 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('CourseDetailPage');
+
   }
 
   async ionViewWillEnter() {
@@ -192,12 +192,12 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   getOtherCourse(event) {
-    console.log(event);
+
     this.courseId = event.id;
 
     this.content.scrollToTop(500); // 500ms animation duration
 
-    // console.log(event)
+    //
     // // this.callApi();
     // this.nav.push('/course-detail', {
     //   id: event.id
