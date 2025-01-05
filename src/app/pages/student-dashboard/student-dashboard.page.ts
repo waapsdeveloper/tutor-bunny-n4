@@ -16,6 +16,7 @@ import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-cours
 import { Subscription } from 'rxjs';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -39,11 +40,11 @@ export class StudentDashboardPage
   view = 'course';
   favCourses;
 
-  courseFavCount: number = 0;
+  courseFavCount$;
 
   constructor(
     injector: Injector,
-    private courseFavoriteService: CourseFavoriteService,
+    private globalFavCoursesService: GlobalFavCoursesService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notification: NotificationsService
@@ -63,7 +64,17 @@ export class StudentDashboardPage
   }
 
   async initialize() {
+
     this.user = this.users.getUser();
+    this.globalFavCoursesService.getCount(this.user.id).subscribe( data => {
+      this.courseFavCount$ = data;
+      console.log(this.courseFavCount$);
+    })
+
+
+
+
+
 
     this.profileImage = this.user.image;
 
@@ -82,10 +93,6 @@ export class StudentDashboardPage
     this.displayName = this.utility.splitName(this.user.name).first_name;
     this.flag = this.getFlag();
 
-    const fav_count = await this.courseFavoriteService.getFavCount(
-      this.user.id
-    );
-    this.courseFavCount = fav_count;
 
     const isProfileCompleted = (await this.profiles.isProfileCompleted(
       this.user
@@ -162,14 +169,7 @@ export class StudentDashboardPage
   }
 
   setupEvents() {
-    this.events.subscribe(
-      'update-course-fav-count',
-      (data) => {
 
-        this.courseFavCount = data.count;
-      },
-      true
-    );
 
     this.events.subscribe('update-course-list', () => {
       this.getlists();

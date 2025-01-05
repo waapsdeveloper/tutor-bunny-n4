@@ -11,7 +11,8 @@ import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-cours
   styleUrls: ['./fav-courses.page.scss']
 })
 export class FavCoursesPage extends BasePage implements OnInit {
-  // user;
+
+  user;
   list$;
   // page = 1;
   // last_page = -1;
@@ -25,19 +26,21 @@ export class FavCoursesPage extends BasePage implements OnInit {
   ) {
     super(injector);
 
-    this.globalFavCoursesService.getList().subscribe((data) => {
-      this.list$ = data;
-      console.log("init-fav", this.list$)
-    });
+
   }
 
   ngOnInit() {
-    // this.initialize();
+    this.initialize();
   }
 
   async initialize() {
-    // this.loadResolvers();
-    // this.user = this.dataR.user;
+    this.loadResolvers();
+    this.user = this.dataR.user;
+
+    this.globalFavCoursesService.getList(this.user.id).subscribe((data) => {
+      this.list$ = data;
+      console.log("init-fav", this.list$)
+    });
 
     // const data = await this.favCourseSqService.list(this.user.id);
     // this.courseids = data.map((item) => item.course_id);

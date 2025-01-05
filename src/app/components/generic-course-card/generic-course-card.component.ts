@@ -47,24 +47,7 @@ export class GenericCourseCardComponent extends BasePage {
     private chats : ChatService
   ) {
     super(injector);
-
     this.user = this.users.getUser();
-
-    this.events.subscribe('update-course-item-like', (data) => {
-
-      // user_id: user.id,
-      // course_id: obj.id,
-      // liked: true
-
-
-
-      if(this.item.id == data.course_id){
-        this.item.is_liked_by_me = data.liked;
-      }
-
-
-    }, false)
-
   }
 
   initialize(data) {
@@ -78,8 +61,6 @@ export class GenericCourseCardComponent extends BasePage {
     if (data && data.type == 3) {
       this.type = data.type;
     }
-
-    this.callApi()
   }
 
   getFlag() {
@@ -92,18 +73,6 @@ export class GenericCourseCardComponent extends BasePage {
       }
     } else {
       return '';
-    }
-  }
-
-  async callApi() {
-    this.loading = true;
-    if (this.item && !this.item.trial) {
-      this.trail = false;
-      this.loading = false;
-    }
-    if (this.item && this.item.trial) {
-      this.trail = true;
-      this.loading = false;
     }
   }
 
@@ -270,6 +239,50 @@ export class GenericCourseCardComponent extends BasePage {
         showBack: true,
       });
     }
+  }
+
+  handleButtonClick(item: any): void {
+    const buttonConfig = this.getButtonConfig(item);
+
+    if (buttonConfig) {
+      if (buttonConfig.action === 'requestTrail') {
+        this.requestTrail(item.id);
+      } else if (buttonConfig.action === 'presentAlert') {
+        this.presentAlert();
+      }
+    }
+  }
+
+  getButtonConfig(item: any) {
+
+    const trail = item?.trial ?? null;
+    const status = item?.trail?.status ?? null;
+
+    // if (!trail && status === 'Pending') {
+    //   return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
+    // }
+
+    if (!trail && status !== 'Rejected') {
+      return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+    }
+
+    if (!trail && status === 'Rejected') {
+      return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+    }
+
+    if (trail && status !== 'Accepted' && status !== 'Rejected' && status !== 'Complete') {
+      return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
+    }
+
+    if (trail && status === 'Accepted') {
+      return { label: 'Trial Accepted', icon: '', action: '' };
+    }
+
+    if (trail && status === 'Complete') {
+      return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
+    }
+
+    return null;
   }
 
 
