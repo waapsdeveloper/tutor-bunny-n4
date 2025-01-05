@@ -58,10 +58,6 @@ const routes: Routes = [
         loadChildren: () => import('../pages/chat/chat.module').then( m => m.ChatPageModule)
       },
       {
-        path: 'fav-courses',
-        loadChildren: () => import('../pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule)
-      },
-      {
         path: 'menu',
         loadChildren: () => import('../pages/menu/menu.module').then( m => m.MenuPageModule)
       },

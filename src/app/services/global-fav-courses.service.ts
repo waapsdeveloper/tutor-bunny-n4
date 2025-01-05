@@ -41,6 +41,14 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalF
     return this.selectState((state) => state.filter((item: any) => item.user_id === user_id));
   }
 
+  getListPromise(user_id: number) {
+    return new Promise( (resolve) => {
+      this.selectState((state) => state.filter((item: any) => item.user_id === user_id)).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
   getCount(user_id: number) {
     return this.selectState((state) => state.filter((item: any) => item.user_id === user_id).length);
   }

@@ -127,13 +127,10 @@ const routes: Routes = [
     path: 'messages',
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
-  {
-    path: 'fav-courses',
-    loadChildren: () => import('./pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule),
-    resolve: {
-      user: userResolver
-    },
-  },
+  // {
+  //   path: 'fav-courses',
+  //   loadChildren: () => import('./pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule),
+  // },
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)

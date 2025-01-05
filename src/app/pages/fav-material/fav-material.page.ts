@@ -25,8 +25,8 @@ export class FavMaterialPage extends BasePage implements OnInit {
   ) {
     super(injector);
     this.globalFavMaterialService.getList().subscribe((data) => {
-      this.list$ = data;
-      console.log("init-fav", this.list$)
+      // this.list$ = data;
+      console.log("init-fav-material", this.list$)
     });
   }
 

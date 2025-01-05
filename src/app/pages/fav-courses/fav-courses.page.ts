@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
@@ -13,12 +13,12 @@ import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-cours
 export class FavCoursesPage extends BasePage implements OnInit {
 
   user;
-  list$;
-  // page = 1;
-  // last_page = -1;
-  // courseids: any[] = [];
-  // loading= false;
-  // view = 'course';
+  list;
+  page = 1;
+  last_page = -1;
+  courseids;
+  loading= false;
+  view = 'course';
 
   constructor(
     injector: Injector,
@@ -26,20 +26,23 @@ export class FavCoursesPage extends BasePage implements OnInit {
   ) {
     super(injector);
 
-
   }
+
+
 
   ngOnInit() {
     this.initialize();
   }
 
   async initialize() {
-    this.loadResolvers();
-    this.user = this.dataR.user;
 
-    this.globalFavCoursesService.getList(this.user.id).subscribe((data) => {
-      this.list$ = data;
-      console.log("init-fav", this.list$)
+    console.log("ujre");
+    this.user = this.users.getUser();
+
+    this.globalFavCoursesService.getListPromise(this.user.id).then((data) => {
+      console.log(data)
+      this.courseids = (data as any[]).map((item) => item.course_id);
+      this.callApi(1)
     });
 
     // const data = await this.favCourseSqService.list(this.user.id);
@@ -50,40 +53,40 @@ export class FavCoursesPage extends BasePage implements OnInit {
     // this.loading = false;
   }
 
-  // callApi(page) {
-  //   return new Promise(async (resolve) => {
-  //     let obj = {
-  //       ids: this.courseids,
-  //       page: page
-  //     };
+  callApi(page) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        ids: this.courseids,
+        page: page
+      };
 
-  //     let res = await this.network.FavCourseByIds(obj);
+      let res = await this.network.FavCourseByIds(obj);
 
-  //     const result = res.result;
-  //     // this.favorites = data.data;
-  //     this.page = result.current_page;
-  //     this.last_page = result.last_page;
-  //     if (this.page == 1) {
-  //       this.list = result['data'];
-  //     } else {
-  //       this.list = [...this.list, ...result['data']];
-  //     }
+      const result = res.result;
+      // this.favorites = data.data;
+      this.page = result.current_page;
+      this.last_page = result.last_page;
+      if (this.page == 1) {
+        this.list = result['data'];
+      } else {
+        this.list = [...this.list, ...result['data']];
+      }
 
-  //     resolve(true);
-  //   });
+      resolve(true);
+    });
 
-  //   // this.list = res.trials;
-  // }
+    // this.list = res.trials;
+  }
 
-  // async onIonInfinite(event) {
-  //   if (this.last_page > this.page) {
-  //     await this.callApi(this.page + 1)
-  //   }
+  async onIonInfinite(event) {
+    if (this.last_page > this.page) {
+      await this.callApi(this.page + 1)
+    }
 
-  //   setTimeout(() => {
-  //     (event as InfiniteScrollCustomEvent).target.complete();
-  //   }, 500);
-  // }
+    setTimeout(() => {
+      (event as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
 
   // shouldHandleBackToPrevScreen() {
   //   this.nav.pop();

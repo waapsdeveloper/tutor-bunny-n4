@@ -16,12 +16,16 @@ export class FavoritesPage {
   toogleView(view) {
     this.view = view;
     if (view == 'course') {
-      this.nav.push('/favorites/fav-courses');
+      this.nav.push('favorites/fav-courses');
     }
     if (view == 'notes'){
-      this.nav.push('/favorites/fav-material');
+      this.nav.push('favorites/fav-material');
     }
   }
   // end
+
+  goback(){
+    this.nav.pop('/tabs/student-dashboard');
+  }
 
 }
