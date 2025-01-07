@@ -35,7 +35,6 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     this.createMaterialService.getFormData().subscribe(data => {
       this.material$ = data;
-
     });
 
   }

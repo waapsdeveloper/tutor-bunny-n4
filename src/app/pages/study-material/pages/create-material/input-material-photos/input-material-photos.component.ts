@@ -22,9 +22,9 @@ export class InputMaterialPhotosComponent implements OnInit {
     public events: EventsService
   ) {
     this.createMaterialService.getImage().subscribe((value) => {
-      this.image$ = {
-        image: value,
-      };
+
+      console.log(value)
+      this.image$ = value;
 
     });
 
