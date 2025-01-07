@@ -11,6 +11,8 @@ import { CourseSchedulesModule } from 'src/app/components/course-schedules/cours
 import { MaterialPhotosModule } from './material-photos/material-photos.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
+import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +22,9 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
     OtherCoursesModule,
     CourseSchedulesModule,
     RatingStarsModule,
-    MaterialPhotosModule
+    GlobalTextReadModule,
+    MaterialPhotosModule,
+    
 
   ],
   declarations: [DetailMaterialPage],
