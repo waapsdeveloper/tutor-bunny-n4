@@ -1,4 +1,5 @@
-<swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
+<swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }"
+class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()">
   <ng-template swiperSlide *ngFor="let item of materialImages">
     <div class="vedio-box-inner" >
       <div class="video-89654"
@@ -7,3 +8,25 @@
     </div>
   </ng-template>
 </swiper>
+
+
+<div class="nav-tabs" *ngIf="materialImages.length > 1">
+  <svg [attr.width]="svgWidth" height="16" [attr.viewBox]="viewBox"  fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect [attr.width]="svgWidth" height="16" rx="8" fill="black" fill-opacity="0.7"></rect>
+    <ng-container *ngFor="let item of materialImages; let i = index">
+      <circle
+        [attr.width]="svgWidth"
+        [attr.cx]="8 + i * 10"
+        cy="7.69238"
+        [attr.r]="i === activeIndex ? 3 : 2"
+        [attr.fill]="i === activeIndex ? 'white' : '#949494'">
+      </circle>
+    </ng-container>
+  </svg>
+</div>
+
+<div class="count-rec-887">
+  <div class="count-887 roboto-regular fs-12">
+    <span>{{activeIndex + 1}}</span> / {{materialImages.length}}
+  </div>
+</div>

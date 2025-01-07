@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-material-attachments',
@@ -14,35 +15,50 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./material-attachments.component.scss'],
 })
 
-export class MaterialAttachmentsComponent extends BasePage implements OnInit {
+export class MaterialAttachmentsComponent {
+
   @Input() count = 0;
-  @Output() openOtherCourses = new EventEmitter<any>();
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  list: any[] = [];
+  // @Output() openOtherCourses = new EventEmitter<any>();
+  // @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  private _list;
+  private _materialId;
   @Input()
-  public get list(): any[] {
-    return this._list;
+  public get materialId(): any[] {
+    return this._materialId;
   }
 
-  public set list(value: any[]) {
-    this._list = value;
+  public set materialId(value: any[]) {
+    this._materialId = value;
+
+    if (value) {
+      this.getMaterialDocs(value);
+    }
+
+
   }
 
-  constructor(injector: Injector) {
-    super(injector);
+  constructor(private network: NetworkService) {
   }
 
-  ngOnInit() {
+  async getMaterialDocs(id) {
+    let obj = {
+      study_material_id: id,
+    };
+    let res = (await this.network.getMaterialDocs(obj)) as any;
+    console.log(res);
+    if(res && res.result && res.result.data){
+      this.list = res.result.data
+    }
 
   }
 
   gotoCourseList() {
-    this.openOtherCourses.emit();
+    // this.openOtherCourses.emit();
   }
 
   getOtherCourse(events) {
 
-    this.onChange.emit(events);
+    // this.onChange.emit(events);
   }
 }

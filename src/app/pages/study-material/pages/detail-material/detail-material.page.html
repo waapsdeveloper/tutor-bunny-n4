@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <app-material-photos [materialId]="materialId"></app-material-photos>
+    <app-material-photos class="photos-slider-589655" [materialId]="materialId"></app-material-photos>
   </div>
 
 
@@ -112,14 +112,9 @@
     </div>
 
     <div class="line" ></div>
-    <app-material-attachments
-      [count]="otherCourseListTotalCount"
-      [list]="otherCourseList"
-      (openOtherCourses)="openOtherCourses($event)"
-      (onChange)="getOtherCourse($event)"
-    ></app-material-attachments>
+    <app-material-attachments [materialId]="materialId"></app-material-attachments>
    <!-- </div>
-   
+
     <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
     <app-other-courses
       *ngIf="otherCourseListTotalCount > 0"

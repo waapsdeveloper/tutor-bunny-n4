@@ -97,6 +97,8 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
   async callApi(data) {
+
+    console.log(data)
     this.loading = true;
     this.user = this.users.getUser();
 
