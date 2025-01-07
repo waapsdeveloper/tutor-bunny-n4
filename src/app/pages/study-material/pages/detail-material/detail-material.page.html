@@ -111,6 +111,15 @@
 
     </div>
 
+    <div class="line" ></div>
+    <app-material-attachments
+      [count]="otherCourseListTotalCount"
+      [list]="otherCourseList"
+      (openOtherCourses)="openOtherCourses($event)"
+      (onChange)="getOtherCourse($event)"
+    ></app-material-attachments>
+   <!-- </div>
+   
     <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
     <app-other-courses
       *ngIf="otherCourseListTotalCount > 0"
@@ -118,6 +127,6 @@
       [list]="otherCourseList"
       (openOtherCourses)="openOtherCourses($event)"
       (onChange)="getOtherCourse($event)"
-    ></app-other-courses>
+    ></app-other-courses> -->
   </div>
 </ion-content>
