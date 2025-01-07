@@ -10,6 +10,7 @@ import { DetailMaterialPage } from './detail-material.page';
 import { CourseSchedulesModule } from 'src/app/components/course-schedules/course-schedules.module';
 import { MaterialPhotosModule } from './material-photos/material-photos.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { MaterialAttachmentsModule } from './material-attachments/material-attachments.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
     OtherCoursesModule,
     CourseSchedulesModule,
     RatingStarsModule,
-    MaterialPhotosModule
+    MaterialPhotosModule,
+    MaterialAttachmentsModule
 
   ],
   declarations: [DetailMaterialPage],
