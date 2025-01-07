@@ -88,7 +88,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
   setImages(images: any[]) {
     this.setState( state => ({
       ...state,
-      images
+      images: images
     }));
   }
 
