@@ -1,0 +1,99 @@
+<div class="courses-block-outer-789565">
+  <div class="courses-block-item-789565">
+    <div class="block-item-header" (click)="oepnDeatils(item)">
+      <div class="block-item-header-title outfit-medium ">
+        {{item?.title}}
+      </div>
+    </div>
+    <div class="block-item-body">
+      <div class="profile-item-block" (click)="oepnDeatils(item)">
+        <div>
+          <div class="profile-item-image-block"
+            [style.background-image]="item.multiple_images ? 'url(' + item.multiple_images + ')' : 'assets/learn-piano.jpeg'">
+          </div>
+        </div>
+        <div class="profile-content-78678564">
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/calander.svg">
+            <div class="label-789575 fs-16 outfit"> Created on {{created_at}}</div>
+          </div>
+          <div class="profile-line-789575" *ngIf="updated_at">
+            <img class="img1-789575" width="16px" src="../../../assets/svg/update.svg" />
+            <div class="label-789575 fs-16 outfit"> Updated on {{updated_at}}</div>
+          </div>
+          <div class="line"></div>
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/id.svg" />
+            <div class="label-789575 fs-16 outfit">{{item.serial_number}}</div>
+          </div>
+          <div class="profile-line-789575">
+            <img class="img1-789575" src="../../../assets/svg/p-tag.svg" />
+            <div class="label-789577 fs-20 outfit">{{item.course_user_currency_symbol}}{{item.price}}<span
+                style="font-size: 12px;">/lesson</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-below-footer-986985">
+        <div class="ble-buttons-789576856">
+          <div class="btn-alg-77">
+            <img src="../../../assets/svg/student-hat.svg" />
+            <div class="label-789575 fs-16 outfit">{{item.trial_count}} Students</div>
+          </div>
+        </div>
+        <div class="right-980676">
+          <div class="profile-line-789576" *ngIf="status == 'active'">
+            <img src="../../../assets/svg/live.svg" />
+            <div class="label-789576 fs-14 outfit">Live</div>
+          </div>
+          <div class="profile-line-789576" *ngIf="status == 'in-progress'">
+            <img src="../../../assets/svg/inactive.svg" />
+            <div class="label-7895766 fs-14 outfit">In Progress</div>
+          </div>
+          <div class="profile-line-789576" *ngIf="status == 'inactive'">
+            <img src="../../../assets/svg/inactive.svg" />
+            <div class="label-7895766 fs-14 outfit">Inactive</div>
+          </div>
+          <div class="profile-line-789576">
+            <img src="../../../assets/svg/option.svg" [id]="'click-trigger-' + item.id" />
+          </div>
+          <ion-popover [trigger]="'click-trigger-' + item.id" triggerAction="click" [dismissOnSelect]="true">
+            <ng-template>
+              <ion-list>
+                <ion-item class="profile-line-789578" (click)="editCourse(item)">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/pencil.svg" />
+                    <div class="label-789575 fs-16 outfit">Edit</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="status == 'active'">
+                <ion-item class="profile-line-789578" (click)="inactiveCourse(item)">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/eye.svg" />
+                    <div class="label-789575 fs-16 outfit">Inactive</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+              <ion-list *ngIf="status == 'inactive'">
+                <ion-item class="profile-line-789578" (click)="activeCourse(item)">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/active-eye.svg" />
+                    <div class="label-789575 fs-16 outfit">Active</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+              <ion-list>
+                <ion-item class="profile-line-789578" (click)="presentAlert(item)" id="present-alert">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img class="img1-789575" src="../../../assets/svg/trash.svg" />
+                    <div class="label-789575 fs-16 outfit">Delete</div>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

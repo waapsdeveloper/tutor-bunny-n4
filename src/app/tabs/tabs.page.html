@@ -28,11 +28,11 @@
       <img [src]="selectedTab === 'search-box' ? 'assets/svg/search-fill.svg' : 'assets/svg/search.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'search-box'">Search</div>
     </ion-tab-button>
-    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" tab="courses">
-      <div class="tab-back-78523" *ngIf="selectedTab === 'courses'"></div>
+    <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 3" tab="course-material">
+      <div class="tab-back-78523" *ngIf="selectedTab === 'course-material'"></div>
       <img
-        [src]="selectedTab === 'courses' ? 'assets/icon/home/my-corces-fill.svg' : 'assets/icon/home/my-corces.svg'" />
-      <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'courses'">Courses</div>
+        [src]="selectedTab === 'course-material' ? 'assets/icon/home/my-corces-fill.svg' : 'assets/icon/home/my-corces.svg'" />
+      <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'course-material'">Courses</div>
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" *ngIf="roleId === 2" tab="requests">
       <div class="tab-back-78523" *ngIf="selectedTab === 'requests'"></div>

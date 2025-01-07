@@ -37,9 +37,13 @@ const routes: Routes = [
         loadChildren: () => import('../pages/profile-details/profile-details.module').then( m => m.ProfileDetailsPageModule)
       },
 
+      // {
+      //   path:'courses',
+      //   loadChildren:() => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
+      // },
       {
-        path:'courses',
-        loadChildren:() => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
+        path: 'course-material',
+        loadChildren: () => import('../pages/course-material/course-material.module').then( m => m.CourseMaterialPageModule)
       },
       {
         path: 'other-courses',

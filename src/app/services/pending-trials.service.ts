@@ -93,6 +93,11 @@ export class PendingTrialsService  extends NgSimpleStateBaseRxjsStore<PendingTri
   }
 
 
+  setRemove(obj: any) {
+    this.setState((state) => state.filter((item: any) => item.id !== obj.id));
+  }
+
+
 
 
 }

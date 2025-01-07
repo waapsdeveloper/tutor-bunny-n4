@@ -33,7 +33,7 @@ export class TrailListComponent extends BasePage implements OnInit {
   }
   flag;
   age;
-  @Output() removeFromList = new EventEmitter<number>();
+  @Output() removeFromList = new EventEmitter<any>();
 
   constructor(injector: Injector, public globalTrials: GlobalTrialsService) {
     super(injector);
@@ -52,6 +52,13 @@ export class TrailListComponent extends BasePage implements OnInit {
     };
     let trialId = this.item.id;
     let res = await this.network.changeTrailStuts(obj, trialId);
+
+    if(key == 'Accepted' || key == 'Rejected'){
+      this.removeFromList.emit({
+        id: trialId
+      })
+    }
+
   }
 
   async presentAlert(item: string) {

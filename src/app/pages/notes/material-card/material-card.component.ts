@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output, output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 
 @Component({
-  selector: 'app-course-card',
-  templateUrl: './course-card.component.html',
-  styleUrls: ['./course-card.component.scss'],
+  selector: 'app-material-card',
+  templateUrl: './material-card.component.html',
+  styleUrls: ['./material-card.component.scss'],
 })
-export class CourseCardComponent extends BasePage implements OnInit {
+export class MaterialCardComponent extends BasePage implements OnInit {
   list;
   trials;
 

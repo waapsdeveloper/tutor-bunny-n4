@@ -1,15 +1,5 @@
-<ion-header class="ion-no-border ion-no-shadow">
-  <div class="top-header-78956">
-    <div class="header-left-items-78956">
-      <app-sd-bback-btn (click)="back()"></app-sd-bback-btn>
-      <div class="header-title ">{{pageTitle}}</div>
-    </div>
-    <div class="header-right-items-78956">
-    </div>
-  </div>
-</ion-header>
-<ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
-  <div class="body-content">
+
+  <div class="body-content ion-padding">
     <div class="search-box-outer-89655" *ngIf="isSearchBarShow">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
@@ -30,4 +20,4 @@
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-</ion-content>
+

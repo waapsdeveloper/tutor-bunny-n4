@@ -8,7 +8,7 @@
 
 <!-- <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895"> -->
   <div *ngFor="let item of list$">
-    <app-trail-list [item]="item" [showMoreOptions]="false"></app-trail-list>
+    <app-trail-list [item]="item" [showMoreOptions]="false" (removeFromList)="removeFromList($event)"></app-trail-list>
   </div>
 <!-- </swiper> -->
 

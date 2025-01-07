@@ -10,16 +10,14 @@ import { NetworkService } from './network.service';
 export interface GlobalFavCoursesModel {
   user_id: number;
   course_id: number;
-
 }
 
 export type GlobalFavCoursesModelState = Array<GlobalFavCoursesModel>;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalFavCoursesModelState > {
-
+export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFavCoursesModelState> {
   page = 1;
   last_page = -1;
 
@@ -38,19 +36,25 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalF
   }
 
   getList(user_id: number) {
-    return this.selectState((state) => state.filter((item: any) => item.user_id === user_id));
+    return this.selectState((state) =>
+      state.filter((item: any) => item.user_id === user_id)
+    );
   }
 
   getListPromise(user_id: number) {
-    return new Promise( (resolve) => {
-      this.selectState((state) => state.filter((item: any) => item.user_id === user_id)).subscribe((res) => {
+    return new Promise((resolve) => {
+      this.selectState((state) =>
+        state.filter((item: any) => item.user_id === user_id)
+      ).subscribe((res) => {
         resolve(res);
       });
     });
   }
 
   getCount(user_id: number) {
-    return this.selectState((state) => state.filter((item: any) => item.user_id === user_id).length);
+    return this.selectState(
+      (state) => state.filter((item: any) => item.user_id === user_id).length
+    );
   }
 
   getCountPromise() {
@@ -64,7 +68,7 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalF
   getGlobalFavCoursesFromApi() {
     return new Promise(async (resolve) => {
       let res = await this.network.getAllFavCoursesIds();
-      this.setState( () => res);
+      this.setState(() => res);
       resolve(true);
     });
   }
@@ -85,6 +89,4 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore< GlobalF
   setRemove(obj: any) {
     this.setState((state) => state.filter((item: any) => item.id !== obj.id));
   }
-
-
 }

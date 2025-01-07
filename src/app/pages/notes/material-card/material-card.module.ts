@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseCardComponent } from './course-card.component';
+import { MaterialCardComponent } from './material-card.component';
 import { IonicModule } from '@ionic/angular';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 
 
 
 @NgModule({
-  declarations: [CourseCardComponent],
+  declarations: [MaterialCardComponent],
   imports: [
     CommonModule,
     IonicModule,
     RatingStarsModule
   ],
-  exports:[CourseCardComponent]
+  exports: [MaterialCardComponent]
 })
-export class CourseCardModule { }
+export class MaterialCardModule { }

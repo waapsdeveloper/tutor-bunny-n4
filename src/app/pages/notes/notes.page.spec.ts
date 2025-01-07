@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CsmatTabsPage } from './csmat-tabs.page';
+import { NotesPage } from './notes.page';
 
-describe('CsmatTabsPage', () => {
-  let component: CsmatTabsPage;
-  let fixture: ComponentFixture<CsmatTabsPage>;
+describe('NotesPage', () => {
+  let component: NotesPage;
+  let fixture: ComponentFixture<NotesPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CsmatTabsPage);
+    fixture = TestBed.createComponent(NotesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

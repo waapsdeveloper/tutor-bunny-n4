@@ -211,9 +211,12 @@ const routes: Routes = [
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },  {
-    path: 'csmat-tabs',
-    loadChildren: () => import('./pages/pages/csmat-tabs/csmat-tabs.module').then( m => m.CsmatTabsPageModule)
+    path: 'notes',
+    loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
   },
+
+
+
 
 
 
