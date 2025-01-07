@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, OnDestroy } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateMaterialService } from '../create-material/create-material.service';
 import { ViewWillEnter } from '@ionic/angular';
@@ -8,7 +8,7 @@ import { ViewWillEnter } from '@ionic/angular';
   templateUrl: './create-material-photos.page.html',
   styleUrls: ['./create-material-photos.page.scss'],
 })
-export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter {
+export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter, OnDestroy {
 
   title = 'Study Material Photos';
   doc:null
@@ -24,7 +24,10 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter 
   ) {
     super(injector);
 
-
+    this.createMaterialService.getImages().subscribe( (data) => {
+      console.log("updates", data)
+      this.images$ = data;
+    });
 
   }
 
@@ -35,17 +38,17 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter 
 
   async initialize() {
 
-    const d = await this.createMaterialService.getFormDataAsync() as any;
-    this.materialId = d.id;
+    // const d = await this.createMaterialService.getFormDataAsync() as any;
+    // this.materialId = d.id;
 
-    if(this.materialId){
-      const images = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
-      console.log(images)
-    }
+    // if(this.materialId){
+    //   const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
+    //   if(res.result){
+    //     this.createMaterialService.setImages(res.result)
+    //   }
+    // }
 
-    this.createMaterialService.getImages().subscribe( (data) => {
-      this.images$ = data;
-    });
+
 
 
 
@@ -113,6 +116,12 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter 
     //   backUrl: '/course-profile/course-photo',
     //   image: image,
     // });
+  }
+
+  ngOnDestroy(): void {
+    if(this.images$.length > 0){
+      this.createMaterialService.setImage(this.images$[0])
+    }
   }
 
 }

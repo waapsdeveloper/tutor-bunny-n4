@@ -221,6 +221,7 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
       description: '',
       image: '',
       images: [],
+      docs: [],
       price: 0,
       language_id: -1,
       language: null,

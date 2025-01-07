@@ -25,13 +25,7 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
   ) {
     super(injector);
 
-    this.createMaterialService.getId().subscribe((data) => {
-      this.studyMaterialId$ = data;
-    });
 
-    this.createMaterialService.getDocs().subscribe((data) => {
-      this.docs$ = data ?? [];
-    });
 
 
 
@@ -44,6 +38,15 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   async initialize() {
     this.params = this.nav.getQueryParams();
+    console.log(this.params)
+
+    this.createMaterialService.getId().subscribe((data) => {
+      this.studyMaterialId$ = data;
+    });
+
+    this.createMaterialService.getDocs().subscribe((data) => {
+      this.docs$ = data ?? [];
+    });
 
 
 

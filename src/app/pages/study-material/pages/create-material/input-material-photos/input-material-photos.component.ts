@@ -22,20 +22,11 @@ export class InputMaterialPhotosComponent implements OnInit {
     public events: EventsService
   ) {
     this.createMaterialService.getImage().subscribe((value) => {
-
       console.log(value)
       this.image$ = value;
 
     });
 
-    this.createMaterialService.getImages().subscribe((value) => {
-      let images = value;
-      if (images.length > 0) {
-        this.createMaterialService.setImage(images[0]);
-      } else {
-        this.createMaterialService.setImage(null);
-      }
-    });
   }
 
   ngOnInit() {

@@ -13,7 +13,7 @@ export class InputMaterialKeywordsComponent  implements OnInit {
 
   @Input() isRequired = false;
   @Input() needed = true;
-  @Input() errorText = 'price is required';
+  @Input() errorText = 'Atleast 1 keyword is required';
   key = 'keyword';
 
   constructor(public createMaterialService: CreateMaterialService, public events: EventsService) {

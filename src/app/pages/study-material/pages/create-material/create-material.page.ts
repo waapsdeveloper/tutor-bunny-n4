@@ -219,7 +219,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       }
     }
 
-    this.createMaterialService.setImages(postImages);
+    console.log(postImages);
+    // this.createMaterialService.setImages(postImages);
 
   }
 
@@ -227,7 +228,13 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
 
 
-  submit() {
+  async submit() {
+
+    const data = await this.createMaterialService.getFormDataAsync() as any;
+    this.events.publish('teacher-study-material-second-screen-submit-call', data);
+
+    console.log(data);
+
 
   }
 
