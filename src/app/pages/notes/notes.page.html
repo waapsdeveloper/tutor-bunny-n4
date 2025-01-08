@@ -1,16 +1,25 @@
-<div class="body-content ion-padding">
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <app-material-card *ngFor="let item of list" [item]="item" (courseDeleted)="onCourseDeleted($event)"
-    (activeTab)="courseActive()" (inActiveTab)="courseInctive()" (detailsAction)="openDetails($event)"
-    (courseEdit)="courseEdit()">
-  </app-material-card>
-  <div style="height: 100%; position: relative;">
-    <div class="centered-message" *ngIf="list.length == 0">No study notes to display</div>
+<ion-content class="">
+  <div class="body-content ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <app-material-card
+      *ngFor="let item of list"
+      [item]="item"
+      (courseDeleted)="onCourseDeleted($event)"
+      (activeTab)="courseActive()"
+      (inActiveTab)="courseInctive()"
+      (detailsAction)="openDetails($event)"
+      (courseEdit)="courseEdit()"
+    >
+    </app-material-card>
+    <div style="height: 100%; position: relative">
+      <div class="centered-message" *ngIf="list.length == 0">
+        No study notes to display
+      </div>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</div>
-
+</ion-content>

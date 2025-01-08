@@ -49,8 +49,8 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   startDate;
   endDate;
   categoryId;
-  otherCourseList: any[] = [];
-  otherCourseListTotalCount: number = 0;
+  otherMaterialList: any[] = [];
+  otherMaterialListTotalCount: number = 0;
   user;
   canEditCourse = false;
 
@@ -134,10 +134,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     const endDate = this.data.end_date;
     this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
 
-    if (this.data.category && this.data.category.length > 0) {
-      this.categoryId = this.data.category[0].id;
-      this.getOtherCourseList(this.data.id);
-    }
+    this.getotherMaterialList(this.data.id);
 
     const uid = this.user.id;
     const cuid = this.data.user_id;
@@ -151,16 +148,16 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     return description.replace(/\n/g, '<br>');
   }
 
-  async getOtherCourseList(id) {
+  async getotherMaterialList(id) {
     let user = this.users.getUser();
     const obj = {
       user_id: user['id'],
-      except_course_id: id,
+      except_material_id: id,
     };
-    const res = await this.network.getOtherCourseList(obj);
+    const res = await this.network.getotherMaterialList(obj);
     const result = res.result;
-    this.otherCourseListTotalCount = result.total;
-    this.otherCourseList = result.data;
+    this.otherMaterialListTotalCount = result.total;
+    this.otherMaterialList = result.data;
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
@@ -179,7 +176,7 @@ export class DetailMaterialPage extends BasePage implements OnInit {
   }
 
   openOtherCourses($event) {
-    this.nav.push('/courses');
+    // this.nav.push('/courses');
   }
 
   openDetails() {

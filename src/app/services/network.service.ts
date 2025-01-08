@@ -9,7 +9,6 @@ import { ModalService } from './basic/modal.service';
 })
 export class NetworkService {
 
-
   constructor(
     public api: ApiService,
     public router: Router,
@@ -512,6 +511,11 @@ getcourseById(id) {
   getMyMaterialList(data: any, id) {
     const str = this.serialize(data);
     return this.httpGetResponse('material/my-material-list/'+ id + '?' + str, null, false, false);
+  }
+
+  getotherMaterialList(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('material/other-material-list' + '?' + str, null, false, false);
   }
 
   serialize = (obj: any) => {
