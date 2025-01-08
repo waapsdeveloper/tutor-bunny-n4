@@ -2,3 +2,5 @@
   <app-accept-terms-profile [terms]="terms$" [key]="'terms'" [errorText]="'Please accept terms'"
     (onChange)="result($event, 'terms')" [needed]="needed"></app-accept-terms-profile>
 </div>
+
+<app-sd-error-input-info  *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>

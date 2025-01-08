@@ -109,6 +109,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       return;
     }
 
+    this.loading = true;
+
     // submit study matreial form
     const user = this.users.getUser();
 
@@ -157,11 +159,15 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       }
 
+
+
+
+      await this.sendPendingImages(studyMaterialId);
+
       this.step = 2;
       this.slides?.swiperRef?.slideTo(1, 500, false);
 
-
-      this.sendPendingImages(studyMaterialId);
+      this.loading = false;
 
     }
     // this.createCourseService.courseId = courseId;
@@ -232,8 +238,28 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     const data = await this.createMaterialService.getFormDataAsync() as any;
     this.events.publish('teacher-study-material-second-screen-submit-call', data);
-
     console.log(data);
+
+    if (!data.terms || !data.keywords || data.keywords.length == 0 || !data.docs || data.docs.length == 0 ) {
+      return;
+    }
+
+    if(this.material$.id == -1){
+      return;
+    }
+
+    // submit study matreial form
+    const user = this.users.getUser();
+
+    let formData = {
+      "terms": data.terms,
+    }
+
+    const res = await this.network.submitSecondMaterial(formData, this.material$.id);
+
+    this.nav.pop();
+
+
 
 
   }

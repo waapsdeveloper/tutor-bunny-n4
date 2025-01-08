@@ -16,8 +16,6 @@ export class NotesPage extends BasePage implements OnInit {
   course;
   isSearchBarShow = false;
   status;
-  categoryId;
-  pageTitle = 'My Courses'
 
   constructor(injector: Injector) {
     super(injector)
@@ -26,22 +24,18 @@ export class NotesPage extends BasePage implements OnInit {
   ngOnInit() {
 
     this.user = this.users.getUser();
-    this.getCourses('', 1)
+    this.getMaterial('', 1)
 
     this.events.subscribe('initilize-the-list', (res) => {
-      this.getCourses('', 1)
+      this.getMaterial('', 1)
     });
 
   }
 
   ionViewWillEnter() {
-    const params = this.nav.getQueryParams() as any
-    if (params.category_id) {
-      this.categoryId = params.category_id;
-      this.pageTitle = 'Courses'
-      this.search = '';
-      this.getCourses(this.search, 1)
-    }
+    // const params = this.nav.getQueryParams() as any
+    this.getMaterial(this.search, 1)
+    // }
 
   }
 
@@ -50,17 +44,16 @@ export class NotesPage extends BasePage implements OnInit {
     this.nav.pop()
   }
 
-  async getCourses(search = '', page = 1) {
+  async getMaterial(search = '', page = 1) {
     return new Promise(async resolve => {
+
       let obj = {
         search: search,
         page: page
       }
 
-      if (this.categoryId) {
-        obj['category_id'] = this.categoryId
-      }
-      const res = this.categoryId ? await this.network.getOtherCourseList(obj) as any : await this.network.getMyCourseList(obj, this.user.id) as any;
+      const res = await this.network.getMyMaterialList(obj, this.user.id) as any;
+      console.log(res);
       const result = res.result;
       this.page = result.current_page;
       this.last_page = result.last_page;
@@ -69,17 +62,13 @@ export class NotesPage extends BasePage implements OnInit {
       } else {
         this.list = [...this.list, ...result["data"]]
       }
-      if (this.list.length == 0) {
-        this.pageTitle = `My Courses`;
-      } else {
-        this.pageTitle = `My Courses (${result.total})`;
-      }
+
       resolve(true)
     })
   }
 
   onCourseDeleted(courseId: number) {
-    this.getCourses(this.search, 1)
+    this.getMaterial(this.search, 1)
   }
   courseActive() {
     // this.initialize()
@@ -91,26 +80,26 @@ export class NotesPage extends BasePage implements OnInit {
 
   courseEdit() {
 
-    this.getCourses(this.search, 1)
+    this.getMaterial(this.search, 1)
   }
 
   openDetails(obj) {
 
     const params = {
-      id: obj.id,
+      material_id: obj.id,
       backUrl: '/tabs/courses'
     }
-    this.nav.push('/course-detail', params)
+    this.nav.push('/material-detail', params)
 
   }
 
   async doSearch($event) {
-    await this.getCourses(this.search, 1);
+    await this.getMaterial(this.search, 1);
   }
 
   async handleRefresh(event) {
 
-    await this.getCourses(this.search, 1);
+    await this.getMaterial(this.search, 1);
     setTimeout(() => {
       // Any calls to load data go here
       event.target.complete();
@@ -120,7 +109,7 @@ export class NotesPage extends BasePage implements OnInit {
   async onIonInfinite(ev) {
 
     if (this.last_page > this.page) {
-      await this.getCourses(this.search, this.page + 1);
+      await this.getMaterial(this.search, this.page + 1);
     }
 
     setTimeout(() => {

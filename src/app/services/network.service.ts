@@ -505,6 +505,15 @@ getcourseById(id) {
     return this.httpGetResponse('material/docs/list' + '?' + str, null, false, false);
   }
 
+  submitSecondMaterial(data, id) {
+    return this.httpPostResponse('material/update-params/' + id, data, null, false, true);
+  }
+
+  getMyMaterialList(data: any, id) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('material/my-material-list/'+ id + '?' + str, null, false, false);
+  }
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {

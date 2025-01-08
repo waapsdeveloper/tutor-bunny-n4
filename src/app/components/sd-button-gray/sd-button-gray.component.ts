@@ -10,6 +10,8 @@ export class SdButtonGrayComponent implements OnInit {
   @Input() text: any = null;
   @Input() disabled: boolean = false;
 
+  @Input() isShowLoader: boolean = false;
+
   constructor() {
 
 
