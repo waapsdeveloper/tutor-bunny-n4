@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TeacherDashboardPage } from './teacher-dashboard.page';
 import { userResolver } from 'src/app/resolvers/user.resolver';
-import { pendingTrialsResolver } from 'src/app/resolvers/pending-trials.resolver';
+import { pendingTrialsResolver } from 'src/app/resolvers/teacher/pending-trials.resolver';
 
 const routes: Routes = [
   {

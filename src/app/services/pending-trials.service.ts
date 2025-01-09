@@ -8,6 +8,7 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
 export interface PendingTrialsModel   {
+
   id: number;
   date: string;
   course: any;
@@ -21,7 +22,7 @@ export type PendingTrialsModelState = Array<PendingTrialsModel>;
 @Injectable({
   providedIn: 'root'
 })
-export class PendingTrialsService  extends NgSimpleStateBaseRxjsStore<PendingTrialsModelState> {
+export class PendingTrialsService extends NgSimpleStateBaseRxjsStore<PendingTrialsModelState> {
 
   page = 1;
   last_page = -1;
@@ -56,10 +57,7 @@ export class PendingTrialsService  extends NgSimpleStateBaseRxjsStore<PendingTri
         resolve(res);
       });
     });
-
   }
-
-
 
   getPendingTrialsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
