@@ -13,7 +13,7 @@ import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.ser
 import { TeacherService } from 'src/app/services/teacher.service';
 import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 import { ViewWillEnter } from '@ionic/angular';
-import { PendingTrialsService } from 'src/app/services/pending-trials.service';
+import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';

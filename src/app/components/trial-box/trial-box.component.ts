@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { PendingTrialsService } from 'src/app/services/pending-trials.service';
+import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
 
 @Component({
   selector: 'app-trial-box',
@@ -62,7 +62,7 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
     this.nav.push('my-students')
   }
 
-  removeFromList($event){
+  removeFromList($event) {
     console.log($event)
     this.pendingTrialsService.setRemove($event);
   }

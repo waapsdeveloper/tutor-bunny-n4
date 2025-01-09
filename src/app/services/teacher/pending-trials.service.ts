@@ -4,10 +4,10 @@ import {
   NgSimpleStateBaseRxjsStore,
   NgSimpleStateStoreConfig,
 } from 'ng-simple-state';
-import { UsersService } from './users.service';
-import { NetworkService } from './network.service';
+import { UsersService } from '../users.service';
+import { NetworkService } from '../network.service';
 
-export interface PendingTrialsModel   {
+export interface PendingTrialsModel {
 
   id: number;
   date: string;
@@ -44,16 +44,16 @@ export class PendingTrialsService extends NgSimpleStateBaseRxjsStore<PendingTria
   }
 
   getList() {
-    return this.selectState( (state) => state );
+    return this.selectState((state) => state);
   }
 
   getCount() {
-    return this.selectState( (state) => state.length);
+    return this.selectState((state) => state.length);
   }
 
   getCountPromise() {
     return new Promise((resolve) => {
-      this.selectState( (state) => state.length).subscribe( (res) => {
+      this.selectState((state) => state.length).subscribe((res) => {
         resolve(res);
       });
     });
@@ -74,7 +74,7 @@ export class PendingTrialsService extends NgSimpleStateBaseRxjsStore<PendingTria
       this.page = data.current_page;
       this.last_page = data.last_page;
 
-      this.setState( (state) => {
+      this.setState((state) => {
         if (page === 1) {
           return data.data;
         }

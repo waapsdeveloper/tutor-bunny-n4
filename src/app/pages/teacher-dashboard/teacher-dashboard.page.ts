@@ -7,7 +7,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserSqService } from 'src/app/services/sqlite/user-sq.service';
-import { PendingTrialsService } from 'src/app/services/pending-trials.service';
+import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -23,7 +23,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   status;
   total_rating;
   state
-  showNoti =false;
+  showNoti = false;
   travel_policy;
   rating;
 
