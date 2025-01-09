@@ -519,6 +519,10 @@ getcourseById(id) {
     return this.httpGetResponse('material/other-material-list' + '?' + str, null, false, false);
   }
 
+  buyNow(data){
+    return this.httpPostResponse('stripe/add', data, false, true, true);
+}
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {

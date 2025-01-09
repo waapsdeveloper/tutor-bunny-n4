@@ -85,7 +85,6 @@ export class GenericStudyMaterialCardComponent
     if (data && data.type == 3) {
       this.type = data.type;
     }
-
   }
 
   ngOnInit() {
@@ -288,33 +287,41 @@ export class GenericStudyMaterialCardComponent
   }
 
   async openStripe() {
+   console.log(this.item);
     let obj = {
       study_material_id: this.item.id,
+      amount:this.item.price,
+      sender_id:this.item.user_id,
+      reciever_id:this.item.user.teacher.teacher_id,
+      stripe_payment_id:"fasdfaksfahdkfakk",
+
+
     };
-    const res = await this.network.purchaseMaterial(obj);
+  //  const res = await this.network.purchaseMaterial(obj);
+    const res = await this.network.buyNow(obj);
 
 
-    if (res.bool == true) {
-      try {
-        const paymentIntent = res.result.client_secret;
-        const customer = res.result.customer_id;
-        const ephemeralKey = res.result.ephemeral_key;
+    // if (res.bool == true) {
+    //   try {
+    //     const paymentIntent = res.result.client_secret;
+    //     const customer = res.result.customer_id;
+    //     const ephemeralKey = res.result.ephemeral_key;
 
-        // prepare PaymentSheet with CreatePaymentSheetOption.
-        await Stripe.createPaymentSheet({
-          paymentIntentClientSecret: paymentIntent,
-          customerId: customer,
-          customerEphemeralKeySecret: ephemeralKey,
-          merchantDisplayName: 'TutorBunny',
-        });
+    //     // prepare PaymentSheet with CreatePaymentSheetOption.
+    //     await Stripe.createPaymentSheet({
+    //       paymentIntentClientSecret: paymentIntent,
+    //       customerId: customer,
+    //       customerEphemeralKeySecret: ephemeralKey,
+    //       merchantDisplayName: 'TutorBunny',
+    //     });
 
-        // present PaymentSheet and get result.
-        const result = await Stripe.presentPaymentSheet();
+    //     // present PaymentSheet and get result.
+    //     const result = await Stripe.presentPaymentSheet();
 
-        if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
-          // Happy path
-        }
-      } catch (error) {}
-    }
+    //     if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
+    //       // Happy path
+    //     }
+    //   } catch (error) {}
+    // }
   }
 }
