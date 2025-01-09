@@ -10,6 +10,7 @@ export class TeacherDashboardHeaderComponent implements OnInit {
 
   user$;
 
+  image = '';
   displayName = '';
   flag;
   shownoti = true;
@@ -31,10 +32,13 @@ export class TeacherDashboardHeaderComponent implements OnInit {
   ngOnInit() { }
 
   setUserData(user) {
+
+    console.log(user)
     // let obj = {
     //   email: this.user.email,
     // };
     // let res = await this.network.getUserByEmail(obj);
+    this.image = user.image;
     this.flag = this.getFlag(user);
     this.displayName = user.displayName;
     this.status = user.status;
