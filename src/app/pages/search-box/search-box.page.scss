@@ -42,7 +42,7 @@
       align-items: center;
       justify-content: flex-start;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
       color: #888787;
       gap: 8px;
     }
@@ -59,8 +59,8 @@
       .recent-search-chip-78524 {
 
         font-size: 16px;
-        font-weight: 400;
-        color: #888787;
+        
+        color: #000000;
         max-width: 40%;
         padding: 6px 16px;
         border-radius: 20px;
@@ -100,6 +100,7 @@
     }
 
     .popular-search-chips-78527 {
+      //color: #000000;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -110,7 +111,7 @@
 
         font-size: 16px;
         font-weight: 400;
-        color: #888787;
+        color:#000000;
         padding: 6px 16px;
         border-radius: 20px;
         background-color: #ffffff;
