@@ -14,6 +14,7 @@ import { TrialBoxModule } from 'src/app/components/trial-box/trial-box.module';
 import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 import { MessageBoxdModule } from 'src/app/components/message-boxd/message-boxd.module';
+import { NotificationDotCountComponent } from './notification-dot-count/notification-dot-count.component';
 
 
 
@@ -32,6 +33,6 @@ import { MessageBoxdModule } from 'src/app/components/message-boxd/message-boxd.
     MessageBoxdModule
 
   ],
-  declarations: [TeacherDashboardPage]
+  declarations: [TeacherDashboardPage, NotificationDotCountComponent]
 })
 export class TeacherDashboardPageModule {}

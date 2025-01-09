@@ -6,7 +6,6 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
-import { NotificationsService } from 'src/app/services/notifications.service';
 import { UserSqService } from 'src/app/services/sqlite/user-sq.service';
 import { PendingTrialsService } from 'src/app/services/pending-trials.service';
 
@@ -36,7 +35,6 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public chats: ChatService,
-    public notification: NotificationsService,
     private userSq: UserSqService
   ) {
     super(injector);
@@ -56,16 +54,10 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   }
 
   ngOnInit() {
-    // this.events.subscribe('update-notifications', () => {
-    //   this.notification.getNotificationsFromApi()
-    // });
 
     this.events.subscribe('user-update-via-pusher', () => {
       this.initialize();
     });
-    // this.events.subscribe('show-noti-dot', (shownoti) =>{
-    //   this.showNoti  = shownoti;
-    // });
 
   }
 

@@ -4,7 +4,7 @@
 
 <ion-tabs [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar class="ion-tab-bar-67895675" slot="bottom">
-    <ion-tab-button class="ion-tab-button-67895675" [tab]="homeTab" (click)="clearChat()">
+    <ion-tab-button class="ion-tab-button-67895675" [tab]="homeTab">
       <div class="tab-back-78523"
         *ngIf=" (selectedTab === 'teacher-dashboard' || selectedTab === 'student-dashboard') "></div>
       <img
@@ -15,7 +15,10 @@
     </ion-tab-button>
     <ion-tab-button class="ion-tab-button-67895675" tab="chat?time=5">
       <div class="tab-back-78523" *ngIf="selectedTab === 'chat'"></div>
-      <div class="unread-count" *ngIf="chatService.unreadCount != 0 || chatService.requestCount != 0"></div>
+
+      <app-chat-dot-count></app-chat-dot-count>
+
+
       <img [src]="selectedTab === 'chat' ? 'assets/icon/home/chat-icon-fill.svg' : 'assets/icon/home/chat-icon.svg'" />
       <div class="footer-tab-label" [class.footer-tab-label-active]="selectedTab === 'chat'">Chat</div>
     </ion-tab-button>

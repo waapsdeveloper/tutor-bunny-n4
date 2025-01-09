@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { EventsService } from './events.service';
 import { NetworkService } from './network.service';
 import { UsersService } from './users.service';
-import { resolve } from 'path';
 import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 import Pusher from 'pusher-js';
 

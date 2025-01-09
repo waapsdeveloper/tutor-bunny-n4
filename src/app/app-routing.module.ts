@@ -7,7 +7,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'splash',
     pathMatch: 'full',
-
   },
   {
     path: 'splash',
@@ -26,10 +25,6 @@ const routes: Routes = [
       user: userResolver
     },
   },
-
-
-
-
   // {
   //   path: 'dashboard',
   //   loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
@@ -210,7 +205,8 @@ const routes: Routes = [
   {
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
-  },  {
+  },
+  {
     path: 'notes',
     loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
   },

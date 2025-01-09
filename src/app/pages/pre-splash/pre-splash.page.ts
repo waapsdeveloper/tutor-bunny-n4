@@ -81,8 +81,8 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     this.globalCourses.registerPusherEvent();
     this.notificationService.registerPusherEvent()
 
-    this.chatService.getchatList();
-    this.notificationService.getNotificationsFromApi();
+    // this.chatService.getchatList();
+    // this.notificationService.getNotificationsFromApi();
 
     this.fcm.setTokenToServer();
 
@@ -95,15 +95,15 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
 
     // subscription APIs
-    this.pendingTrialsService.getPendingTrialsFromApi('', 1);
-    this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
-    this.globalCourses.getGlobalCoursesFromApi('', 1);
-    this.globalTeacherService.getGlobalTeachersFromApi('', 1);
-    this.globalFavCoursesService.getGlobalFavCoursesFromApi();
-    this.globalFavMaterialService.getGlobalFavMaterialFromApi();
+    // this.pendingTrialsService.getPendingTrialsFromApi('', 1);
+    // this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
+    // this.globalCourses.getGlobalCoursesFromApi('', 1);
+    // this.globalTeacherService.getGlobalTeachersFromApi('', 1);
+    // this.globalFavCoursesService.getGlobalFavCoursesFromApi();
+    // this.globalFavMaterialService.getGlobalFavMaterialFromApi();
 
 
-    this.iap.initializeUserTables(this.user);
+    // this.iap.initializeUserTables(this.user);
 
     this.redirectDependsOnRole(this.user);
     this.loading = false;

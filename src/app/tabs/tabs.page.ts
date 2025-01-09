@@ -35,7 +35,7 @@ export class TabsPage extends BasePage implements OnInit {
 
 
     public createCourseService: CreateCourseService,
-    public chatService: ChatService,
+
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
@@ -72,7 +72,6 @@ export class TabsPage extends BasePage implements OnInit {
     this.roleId = this.user.role_id;
 
     this.homeTab = this.returnDashboardLink();
-    this.setupEvents();
 
     this.loading = false;
 
@@ -167,16 +166,5 @@ export class TabsPage extends BasePage implements OnInit {
     return '';
   }
 
-  setupEvents(){
 
-    this.events.subscribe('update-trail-list', () => {
-      this.globalTrials.getPendingTrialsFromApi();
-      this.globalCourses.getCoursesFromApi();
-    });
-
-  }
-
-  clearChat() {
-    this.events.publish('clear-chat-page');
-  }
 }
