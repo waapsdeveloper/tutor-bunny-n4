@@ -1,34 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NetworkService } from 'src/app/services/network.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { IonicSlides } from '@ionic/angular';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-youtube-box',
   templateUrl: './youtube-box.component.html',
   styleUrls: ['./youtube-box.component.scss'],
 })
-export class YoutubeBoxComponent implements OnInit {
-  list;
-  swiperModules = [IonicSlides];
-  @ViewChild('slides', { static: false }) slides: any;
-  constructor(private _sanitizer: DomSanitizer, private network: NetworkService) {
-    this.initialize();
+export class YoutubeBoxComponent {
+
+  constructor() {
+
   }
 
-  ngOnInit() {}
 
-  async initialize() {
-    const res = await this.network.getvideos();
-    this.list = res.data;
-  }
 
-  getLink(item) {
-    const safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(item.link);
-    return safeURL;
-  }
-  async onSlideChange() {
-   
-    this.slides?.nativeElement.swiper.slideTo(1, false, false);
-  }
 }

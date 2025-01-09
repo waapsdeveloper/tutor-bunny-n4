@@ -61,7 +61,6 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
     this._user = user;
     this.image = user.image;
 
-
     this.setState( state => ({
       ...state,
       id: user.id,
@@ -87,16 +86,23 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
     let v = user?.teacher?.country?.currency_symbol;
     this.setCurrency(v ?? '$');
 
+    let status = user?.teacher?.status;
+    this.setState( state => ({
+      ...state,
+      status: status
+    }));
+
   }
 
   setStudent(user) {
-
+    let v = user?.student?.country?.currency_symbol;
+    this.setCurrency(v ?? '$');
   }
 
   setCurrency(currency: string) {
     this.setState( state => ({
       ...state,
-      currency
+      currency: currency
     }));
   }
 

@@ -16,6 +16,7 @@ import { PendingTrialsService } from 'src/app/services/pending-trials.service';
 })
 export class TeacherDashboardPage extends BasePage implements OnInit {
   user;
+
   displayName = '';
   flag;
   shownoti = true;
@@ -39,9 +40,7 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
   ) {
     super(injector);
 
-    this.userSq.loadUsers().then( res => {
 
-    });
 
     this.pendingTrialsService.getCount().subscribe((data) => {
       this.pendingTrialsCoubt$ = data ?? 0;
