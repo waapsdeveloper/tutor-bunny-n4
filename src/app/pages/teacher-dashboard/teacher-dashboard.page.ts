@@ -15,18 +15,8 @@ import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.se
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
 export class TeacherDashboardPage extends BasePage implements OnInit {
+
   user;
-
-  displayName = '';
-  flag;
-  shownoti = true;
-  status;
-  total_rating;
-  state
-  showNoti = false;
-  travel_policy;
-  rating;
-
   pendingTrialsCoubt$ = 0;
 
 
@@ -54,48 +44,9 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
 
   ngOnInit() {
 
-    this.events.subscribe('user-update-via-pusher', () => {
-      this.initialize();
-    });
-
   }
 
-  ionViewWillEnter() {
-    this.initialize();
-  }
-
-  async initialize() {
-    this.loadResolvers();
-    this.user = this.dataR.user;
-
-
-    let obj = {
-      email: this.user.email,
-    };
-    let res = await this.network.getUserByEmail(obj);
-    if (res) {
-      this.users.setUser(res.user);
-      this.user = this.users.getUser();
-      this.flag = this.getFlag();
-      this.displayName = this.utility.getAmericanName(this.user.name);
-      this.status = res.user.teacher.status;
-      this.total_rating = this.user.teacher.total_rating;
-      this.rating = this.user.teacher.avg_rating
-    }
-  }
-
-  getFlag() {
-    if (this.user && this.user.teacher && this.user.teacher.country) {
-      const flag = this.user.teacher.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
+  
 
   openProfile() {
     const params = { user_id: this.user.id, showBack: true };

@@ -5,10 +5,12 @@ import {
   NgSimpleStateBaseRxjsStore,
   NgSimpleStateStoreConfig,
 } from 'ng-simple-state';
+import { UtilityService } from './utility.service';
 
 export interface UserModel {
   id: number;
   name: string;
+  displayName: string;
   currency: string;
   status: string;
   image: string;
@@ -23,7 +25,7 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
   private _user;
   image = null;
 
-  constructor(private network: NetworkService) {
+  constructor(private network: NetworkService, private utility: UtilityService) {
     super();
   }
 
@@ -37,10 +39,15 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
     return {
       id: -1,
       name: '',
+      displayName: '',
       currency: '$',
       status: '',
       image: '',
     };
+  }
+
+  getUserState(){
+    return this.selectState( (state) => state );
   }
 
   getUser() {
@@ -91,6 +98,16 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       ...state,
       status: status
     }));
+
+    // setDisplayName
+    let displayName = this.utility.getAmericanName(user.name);
+    this.setState( state => ({
+      ...state,
+      displayName: displayName
+    }));
+
+
+
 
   }
 

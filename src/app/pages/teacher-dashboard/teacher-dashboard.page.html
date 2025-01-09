@@ -1,53 +1,6 @@
 <ion-content>
   <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
-    <div class="top-dashboard-header-outer ion-padding">
-      <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + users?.image + ')'"
-        (click)="openProfile()">
-      </div>
-      <div class="header-oblique-double-675">
-        <div class="header-line-678576">
-          <div class="header-line-box-678576">
-            <app-notification-dot-count></app-notification-dot-count>
-            <img src="../../../assets/svg/bell.svg" (click)="gotoNotification()" />
-          </div>
-        </div>
-        <div class="d-flex flex-row gap-8 align-center" *ngIf="status === 'In Review'"
-          style=" position: absolute;bottom: 12px;right: 16px;">
-          <div class="ed-circ-67895464"></div>
-          <span class="fs-12 roboto-medium ed-rv-67895464">{{status}} <img src="../../assets/svg/qustionmark.svg" alt=""
-              id="click-review">
-            <ion-popover trigger="click-review" triggerAction="click">
-              <ng-template style="width: 100%;">
-                <div class="ion-padding popover-title">Your profile is under Review by Tutor bunny team and will be
-                  notified once approved.
-                  <br>
-                  <br>
-                  Please ensure all your information is accurate to avoid profile rejection/block.
-                </div>
-              </ng-template>
-            </ion-popover>
-          </span>
-        </div>
-        <div class="d-flex flex-row gap-8 align-center" *ngIf="status === 'rejected'"
-          style=" position: absolute;bottom: 12px;right: 16px;">
-          <div class="ed-circ-67895465"></div> <span class="fs-12 roboto-medium ed-rv-67895465">{{status}}</span>
-        </div>
-        <div class="header-info-box-68447">
-
-          <div class="header-info-user-68448">
-            <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
-            <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
-          </div>
-          <div class="header-info-misc-68448 outfit" *ngIf="total_rating !== 0">
-            <app-rating-stars [rating]="rating"></app-rating-stars>
-            <span class="fs-14 roboto-medium" style="color: white;"> {{rating}} ({{total_rating}})</span>
-          </div>
-          <div class="header-info-misc-68448 outfit" *ngIf="total_rating === 0">
-            <span class="fs-14 roboto-medium" style="color: white;"> No Reviews yet</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-teacher-dashboard-header></app-teacher-dashboard-header>
   </ion-header>
   <div class="ion-padding body-content-68448" style="margin-top: 16px;">
     <app-statistic-box></app-statistic-box>
