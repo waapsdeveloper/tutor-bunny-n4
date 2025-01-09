@@ -6,7 +6,7 @@ import { CreateMaterialService } from '../create-material.service';
   templateUrl: './input-material-language.component.html',
   styleUrls: ['./input-material-language.component.scss'],
 })
-export class InputMaterialLanguageComponent  implements OnInit {
+export class InputMaterialLanguageComponent {
 
   language: any = null;
   language_id: number = null;
@@ -20,10 +20,6 @@ export class InputMaterialLanguageComponent  implements OnInit {
     this.createMaterialService.getLanguage().subscribe((value) => {
       this.language = value;
     });
-
-  }
-
-  async ngOnInit() {
 
   }
 

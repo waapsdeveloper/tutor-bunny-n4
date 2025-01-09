@@ -12,7 +12,7 @@ export class InputMaterialPhotosComponent implements OnInit {
 
   @Input() isRequired = false;
   @Input() needed = true;
-  @Input() errorText = 'price is required';
+  @Input() errorText = 'At least 1 image is required';
   key = 'images';
 
   @Output() openPhotosView = new EventEmitter<any>();
