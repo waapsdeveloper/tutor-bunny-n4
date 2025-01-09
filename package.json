@@ -36,6 +36,7 @@
     "@hreimer/angular-image-viewer": "^0.14.1",
     "@ionic/angular": "^7.0.0",
     "@pscoped/ngx-pub-sub": "^6.0.1",
+    "@stripe/stripe-js": "^5.5.0",
     "capacitor-resources": "^2.0.5",
     "crypto": "^1.0.1",
     "firebase": "^10.11.0",
