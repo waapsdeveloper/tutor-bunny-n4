@@ -14,6 +14,8 @@ export interface UserModel {
   currency: string;
   status: string;
   image: string;
+  total_rating: number;
+  avg_rating: number
 
 }
 
@@ -43,6 +45,7 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       currency: '$',
       status: '',
       image: '',
+      total_rating: 0
     };
   }
 
@@ -104,6 +107,13 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
     this.setState( state => ({
       ...state,
       displayName: displayName
+    }));
+
+    let total_rating = user?.teacher?.total_rating ?? 0;
+
+    this.setState( state => ({
+      ...state,
+      total_rating: total_rating
     }));
 
 

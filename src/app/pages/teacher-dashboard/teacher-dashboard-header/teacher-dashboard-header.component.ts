@@ -42,7 +42,7 @@ export class TeacherDashboardHeaderComponent implements OnInit {
     this.flag = this.getFlag(user);
     this.displayName = user.displayName;
     this.status = user.status;
-    this.total_rating = user.teacher.total_rating;
+    this.total_rating = user.total_rating;
     this.rating = user.teacher.avg_rating
   }
 
