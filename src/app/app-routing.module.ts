@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { courseResolver } from './resolvers/course.resolver';
 import { userResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
@@ -91,7 +92,10 @@ const routes: Routes = [
   },
   {
     path: 'course-detail',
-    loadChildren: () => import('./pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
+    loadChildren: () => import('./pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule),
+    resolve: {
+      course: courseResolver
+    },
   },
   {
     path: 'student-course-detail',

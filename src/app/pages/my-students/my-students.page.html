@@ -58,8 +58,8 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <div *ngFor="let item of globalTrials.list">
-      <app-trail-card  [item]="item" *ngIf="item?.status != 'canceled' "></app-trail-card>
+    <div *ngFor="let item of globalTrials.list | filterStatus: 'canceled'">
+      <app-trail-card  [item]="item"></app-trail-card>
     </div>
     <div class="fs-14 outfit" *ngIf="globalTrials.list.length === 0">No results Found</div>
 

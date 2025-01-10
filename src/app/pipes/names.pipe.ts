@@ -11,7 +11,7 @@ export class NamesPipe implements PipeTransform {
     const names = value.split(' ');
     return names.map(name => {
       if (name.length > 1) {
-        return name[0] + '*'.repeat(name.length - 1);
+        return name[0] + '*'.repeat(name.length - 2) + name[name.length - 1];
       }
       return name;
     }).join(' ');

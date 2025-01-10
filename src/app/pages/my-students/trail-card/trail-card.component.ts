@@ -161,9 +161,8 @@ export class TrailCardComponent extends BasePage implements OnInit {
   }
   goToDeatil() {
     const params = {
-      id: this.item.course.id,
-      backUrl: 'my-students',
+      course_id: this.item.course.id,
     };
-    this.nav.push('/tabs/course-detail', params);
+    this.nav.push('/course-detail', params);
   }
 }

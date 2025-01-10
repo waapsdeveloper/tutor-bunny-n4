@@ -111,6 +111,27 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
     return this.selectState((state) => state.find((x) => x.id == id));
   }
 
+  setItem(obj: any) {
+    this.setState((state) => {
+      const exists = state.some((item: any) => item.id === obj.id);
+      if (exists) {
+        // Update existing item
+        return state.map((item: any) => (item.id === obj.id ? obj : item));
+      } else {
+        // Add new item
+        return [...state, obj];
+      }
+    });
+  }
+
+  getItemPromise(id) {
+    return new Promise ( resolve => {
+      this.selectState((state) => state.find((x) => x.id == id)).subscribe( data => {
+        resolve(data)
+      });
+    });
+  }
+
   getCount() {
     return this.selectState((state) => state.length);
   }
@@ -147,6 +168,14 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       });
 
       resolve(true);
+    });
+  }
+
+  getcourseById(id) {
+    return new Promise(async (resolve) => {
+      let res = (await this.network.getcourseById(id)) as any;
+      const c = res.course;
+      resolve(c);
     });
   }
 
@@ -316,14 +345,6 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
         }
       }
       resolve(true);
-    });
-  }
-
-  getcourseById(id) {
-    return new Promise(async (resolve) => {
-      let res = (await this.network.getcourseById(id)) as any;
-      const c = res.course;
-      resolve(c);
     });
   }
 
