@@ -159,13 +159,16 @@ export class StudentDashboardPage
     if (view == 'course') {
       this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
     }
-
     if (view == 'teacher') {
       this.nav.push('/tabs/student-dashboard/student-dashborad-teachers');
     }
     if (view == 'notes'){
       this.nav.push('/tabs/student-dashboard/student-dashboard-study-material');
     }
+    if (view == 'cart'){
+      this.nav.push('/cart');
+    }
+
   }
 
   setupEvents() {

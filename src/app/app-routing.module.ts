@@ -213,7 +213,11 @@ const routes: Routes = [
   {
     path: 'notes',
     loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
+  },  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   },
+
 
 
 
