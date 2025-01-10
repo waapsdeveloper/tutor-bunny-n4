@@ -95,12 +95,12 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
 
     // subscription APIs
-    this.pendingTrialsService.getPendingTrialsFromApi('', 1);
-    this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
-    this.globalCourses.getGlobalCoursesFromApi('', 1);
-    this.globalTeacherService.getGlobalTeachersFromApi('', 1);
-    this.globalFavCoursesService.getGlobalFavCoursesFromApi();
-    this.globalFavMaterialService.getGlobalFavMaterialFromApi();
+    // this.pendingTrialsService.getPendingTrialsFromApi('', 1);
+    // this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
+    // // this.globalCourses.getGlobalCoursesFromApi('', 1);
+    // this.globalTeacherService.getGlobalTeachersFromApi('', 1);
+    // this.globalFavCoursesService.getGlobalFavCoursesFromApi();
+    // this.globalFavMaterialService.getGlobalFavMaterialFromApi();
 
 
     // this.iap.initializeUserTables(this.user);
