@@ -15,8 +15,8 @@ export interface UserModel {
   status: string;
   image: string;
   total_rating: number;
-  avg_rating: number
-
+  avg_rating: number;
+  flag: string;
 }
 
 @Injectable({
@@ -45,7 +45,9 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       currency: '$',
       status: '',
       image: '',
-      total_rating: 0
+      total_rating: 0,
+      avg_rating: 0,
+      flag: 'US'
     };
   }
 
@@ -116,9 +118,38 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       total_rating: total_rating
     }));
 
+    let avg_rating = user?.teacher?.avg_rating ?? 0;
+
+    this.setState( state => ({
+      ...state,
+      avg_rating: avg_rating
+    }));
+
+    let flag = this.getFlag(user);
+
+    this.setState( state => ({
+      ...state,
+      flag: flag
+    }));
 
 
 
+
+
+
+  }
+
+  getFlag(user) {
+    if (user && user.teacher && user.teacher.country) {
+      const flag = user.teacher.country.iso2;
+      if (flag) {
+        return flag.toLowerCase();
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   }
 
   setStudent(user) {

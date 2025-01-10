@@ -6,7 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './teacher-dashboard-header.component.html',
   styleUrls: ['./teacher-dashboard-header.component.scss'],
 })
-export class TeacherDashboardHeaderComponent implements OnInit {
+export class TeacherDashboardHeaderComponent {
 
   user$;
 
@@ -29,36 +29,15 @@ export class TeacherDashboardHeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
-
   setUserData(user) {
 
     console.log(user)
-    // let obj = {
-    //   email: this.user.email,
-    // };
-    // let res = await this.network.getUserByEmail(obj);
     this.image = user.image;
-    this.flag = this.getFlag(user);
+    this.flag = user.flag;
     this.displayName = user.displayName;
     this.status = user.status;
     this.total_rating = user.total_rating;
-    this.rating = user.teacher.avg_rating
-  }
-
-
-
-  getFlag(user) {
-    if (user && user.teacher && user.teacher.country) {
-      const flag = user.teacher.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
+    this.rating = user.avg_rating
   }
 
 }
