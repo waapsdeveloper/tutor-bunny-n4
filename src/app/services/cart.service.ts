@@ -124,14 +124,7 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
       const user = await this.users.getUser()
       let res = await this.network.getAllCart(user.id);
       console.log(res);
-
-      // this.setState( (state) => {
-      //   if (page === 1) {
-      //     return data.data;
-      //   }
-      //   return [...state, ...data.data];
-      // });
-
+      this.setState(() => res);
       resolve(true);
     });
   }

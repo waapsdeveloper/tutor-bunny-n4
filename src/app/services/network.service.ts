@@ -527,11 +527,11 @@ export class NetworkService {
   }
 
   addItemToCart(data) {
-    return this.httpPostResponse('/material/add-to-cart', data, null, false, false);
+    return this.httpPostResponse('material/add-to-cart', data, null, false, false);
   }
 
   removeItemToCart(data) {
-    return this.httpPostResponse('/material/remove-to-cart', data, null, false, false);
+    return this.httpPostResponse('material/remove-to-cart', data, null, false, false);
   }
 
   buyNow(data) {
@@ -539,7 +539,7 @@ export class NetworkService {
   }
 
   getAllCart(user_id) {
-    return this.httpGetResponse('/material/cart-list', user_id, false, false);
+    return this.httpGetResponse('material/cart-list', user_id, false, false);
   }
 
   serialize = (obj: any) => {
