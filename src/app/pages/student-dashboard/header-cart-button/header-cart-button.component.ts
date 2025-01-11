@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 import { NavService } from 'src/app/services/nav.service';
 
 @Component({
@@ -8,10 +9,14 @@ import { NavService } from 'src/app/services/nav.service';
 })
 export class HeaderCartButtonComponent implements OnInit {
 
-  constructor(private nav: NavService) { }
+  cartCount$;
+
+  constructor(private nav: NavService, private cartService: CartService) { }
 
   ngOnInit() {
-    
+    this.cartService.getCount().subscribe( data => {
+      this.cartCount$ = data;
+    })
   }
 
   toogleView(view) {

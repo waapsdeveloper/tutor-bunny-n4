@@ -8,6 +8,9 @@ import { CartPageRoutingModule } from './cart-routing.module';
 
 import { CartPage } from './cart.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
+import { CartListItemModule } from './cart-list-item/cart-list-item.module';
+import { SdButtonGoldenModule } from 'src/app/components/sd-button-golden/sd-button-golden.module';
+import { StripePayModule } from 'src/app/stripe-pay/stripe-pay.module';
 
 @NgModule({
   imports: [
@@ -15,7 +18,11 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
     FormsModule,
     IonicModule,
     CartPageRoutingModule,
-    SdHeaderTopModule
+    SdHeaderTopModule,
+    CartListItemModule,
+    SdButtonGoldenModule,
+
+    StripePayModule
   ],
   declarations: [CartPage]
 })

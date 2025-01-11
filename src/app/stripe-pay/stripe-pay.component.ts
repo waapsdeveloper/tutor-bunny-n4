@@ -1,22 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js';
-import { log } from 'node:console';
+import { BasePage } from '../base-page/base-page';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-stripe-pay',
   templateUrl: './stripe-pay.component.html',
   styleUrls: ['./stripe-pay.component.scss'],
 })
-export class StripePayComponent  implements OnInit {
+export class StripePayComponent extends BasePage implements OnInit {
+
+  isPaid = false;
+
+  title = 'Cart';
+  list$;
+
   stripe: any;
   cardElement: any;
   clientSecret: string = '';
-  constructor() { }
+
+  total = 0;
+
+  constructor(injector: Injector, private cartService: CartService) { 
+    super(injector);
+  }
 
   ngOnInit() {
-    console.log("aa");
+
     this.initialize();
-  }
+
+    this.cartService.getList().subscribe( data => {
+      this.list$ = data;
+      this.title = 'Cart (' + this.list$.length + ')';
+
+      this.total = this.list$.reduce( (prev, next) => {
+        return prev + parseFloat(next.price)
+      }, 0);
+    });
+  } 
+  
 
   async initialize (){
     this.stripe = await loadStripe('YOUR_PUBLISHABLE_KEY'); // Replace with your Stripe publishable key
@@ -28,6 +50,7 @@ export class StripePayComponent  implements OnInit {
 
   async handlePayment() {
 
+    this.isPaid = true;
 
     // try {
     //   const { paymentIntent, error } = await this.stripe.confirmCardPayment(this.clientSecret, {

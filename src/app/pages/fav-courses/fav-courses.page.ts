@@ -36,10 +36,9 @@ export class FavCoursesPage extends BasePage implements OnInit {
 
   async initialize() {
 
-    console.log("ujre");
     this.user = this.users.getUser();
 
-    this.globalFavCoursesService.getListPromise(this.user.id).then((data) => {
+    this.globalFavCoursesService.getListPromise().then((data) => {
       console.log(data)
       this.courseids = (data as any[]).map((item) => item.course_id);
       this.callApi(1)

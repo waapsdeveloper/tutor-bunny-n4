@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { StripePayComponent } from './stripe-pay.component';
+import { SdInputBoxModule } from '../components/sd-input-box/sd-input-box.module';
+import { SdButtonGoldenModule } from '../components/sd-button-golden/sd-button-golden.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [StripePayComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule,
+    SdInputBoxModule,
+    SdButtonGoldenModule
   ]
 })
 export class StripePayModule { }

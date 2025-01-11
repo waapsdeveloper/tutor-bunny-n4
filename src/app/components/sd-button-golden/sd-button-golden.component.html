@@ -1,0 +1,7 @@
+<div class="sd-clear-btn-967896 ion-activatable ripple-parent rectangle" [class.disabled-gray-btn]="disabled">
+  <ion-ripple-effect></ion-ripple-effect>
+
+  <ion-spinner *ngIf="isShowLoader"></ion-spinner>
+  <img [src]="image" *ngIf="!isShowLoader" />
+  <span class="roboto-medium fs-16 ">{{ text }}</span>
+</div>

@@ -36,25 +36,21 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
     return [];
   }
 
-  getList(user_id: number) {
-    return this.selectState((state) =>
-      state.filter((item: any) => item.user_id === user_id)
-    );
+  getList() {
+    return this.selectState((state) => state);
   }
 
-  getListPromise(user_id: number) {
+  getListPromise() {
     return new Promise((resolve) => {
-      this.selectState((state) =>
-        state.filter((item: any) => item.user_id === user_id)
-      ).subscribe((res) => {
+      this.selectState((state) => state).subscribe((res) => {
         resolve(res);
       });
     });
   }
 
-  getCount(user_id: number) {
+  getCount() {
     return this.selectState(
-      (state) => state.filter((item: any) => item.user_id === user_id).length
+      (state) => state.length
     );
   }
 
