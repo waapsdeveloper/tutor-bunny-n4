@@ -5,34 +5,65 @@
     <div class="stripe-checkout-header">
       <div class="heading roboto-bold">Checkout</div>
     </div>
-  
+
     <div class="stripe-payment-section">
       <div class="heading roboto-bold">Payment</div>
-  
+
       <div class="payment-border-outer ion-padding">
-  
+
         <div class="payment-form-section">
           <div id="card-element"></div>
         </div>
-  
+
       </div>
-  
+
     </div>
 
   </div>
 
   <div *ngIf="isPaid">
+    <div class="order-details d-flex flex-column align-center">
+      <div class="confetti-img">
+        <img src="assets\svg\confetti.svg">
+      </div>
+      <div class="order-heading ">Order completed!</div>
+      <div class="order-number">Order number: #9876543</div>
 
-    Second DIv
+    </div>
+
+    <div class="checkout-border-top">
+    <div class="ion-padding d-flex flex-column gap-16">
+      <div class="d-flex flex-column gap-8 ion-padding">
+
+        <div class="d-flex flex-row justify-content-between">
+          <div>Order</div>
+          <div>$ {{total }}</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div>Tax</div>
+          <div>$8.00</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div>Subtotal</div>
+          <div class="roboto-bold fs-24">$ {{ total + 8.00 }}</div>
+        </div>
+        <div class ="buttons">
+          <div class="continue-button"><app-sd-button-golden [text]="'Continue to the home page'" ></app-sd-button-golden></div>
+          <div class="details-button"><app-sd-button-clear [text]="'Order Details'" ></app-sd-button-clear></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   </div>
 
-  
+
 
 </ion-content>
 <ion-footer class="checkout-border-top" *ngIf="!isPaid">
   <div class="ion-padding d-flex flex-column gap-16">
-    <div class="d-flex flex-column gap-8 ion-padding" >
+    <div class="d-flex flex-column gap-8 ion-padding">
 
       <div class="d-flex flex-row justify-content-between">
         <div>Order</div>
@@ -40,18 +71,19 @@
       </div>
       <div class="d-flex flex-row justify-content-between">
         <div>Tax</div>
-        <div>$8.00</div>        
+        <div>$8.00</div>
       </div>
       <div class="d-flex flex-row justify-content-between">
         <div>Subtotal</div>
-        <div class="roboto-bold fs-24">$ {{ total + 8.00 }}</div>        
+        <div class="roboto-bold fs-24">$ {{ total + 8.00 }}</div>
       </div>
 
 
       <app-sd-button-golden [text]="'Checkout'" (click)="handlePayment()"></app-sd-button-golden>
     </div>
 
-    
-    
+    <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
+
+
   </div>
 </ion-footer>
