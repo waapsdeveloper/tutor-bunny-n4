@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { cartListResolver } from 'src/app/resolvers/student/cartList.resolver';
 
 import { StudentDashboardPage } from './student-dashboard.page';
 
@@ -7,6 +8,11 @@ const routes: Routes = [
   {
     path: '',
     component: StudentDashboardPage,
+
+    resolve: {
+      cart: cartListResolver
+    },
+
     children: [
       {
         path: '',

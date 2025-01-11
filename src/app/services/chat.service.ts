@@ -325,13 +325,13 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
 
       let obj = {
         limit: 20,
-        offset: this.chats.length
+        offset: 0
       }
       const res = await this.network.getChatRoomById(roomId,obj);
       //
 
       if (res.length > 0) {
-        this.chats = [...this.chats, ...res];
+        // this.chats = [...this.chats, ...res];
         return res[0];
       } 
 

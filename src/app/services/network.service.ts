@@ -8,7 +8,7 @@ import { ModalService } from './basic/modal.service';
   providedIn: 'root',
 })
 export class NetworkService {
-  
+
 
   constructor(
     public api: ApiService,
@@ -52,11 +52,11 @@ export class NetworkService {
     return this.httpPostResponse('chat-rooms/update-status/' + id, data);
   }
 
-  postCertificate(data){
+  postCertificate(data) {
     return this.httpPostResponse('certificate/add', data, null, false, true);
   }
 
-  postCourseImage(data){
+  postCourseImage(data) {
     return this.httpPostResponse('course/image/add', data, null, false, true);
   }
 
@@ -167,11 +167,11 @@ export class NetworkService {
   }
 
   getpriceRange(id) {
-    return this.httpPostResponse('min-max/' +  id, null, null, false, false);
+    return this.httpPostResponse('min-max/' + id, null, null, false, false);
   }
 
   getIsProfileComplete(id, data) {
-    return this.httpPostResponse('profile-complete/' +  id, data, null, false, false);
+    return this.httpPostResponse('profile-complete/' + id, data, null, false, false);
   }
 
   getTimeZone(data: any, id) {
@@ -206,7 +206,7 @@ export class NetworkService {
   getAllFavMaterialIds() {
     return this.httpPostResponse('material/fav-list-all', null, null, false, false);
   }
-  getAllReqCourses(id: any, data ) {
+  getAllReqCourses(id: any, data) {
 
     const str = this.serialize(data);
     return this.httpGetResponse('requested/course/trials/' + id + '?' + str, null, false, false);
@@ -255,7 +255,7 @@ export class NetworkService {
     return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
   }
 
-getcourseById(id) {
+  getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
 
@@ -270,12 +270,12 @@ getcourseById(id) {
     return this.httpGetResponse('certificate/list' + '?' + str, null, false, false);
   }
 
-  deleteCourseImage(id){
+  deleteCourseImage(id) {
     return this.httpDeleteResponse('course/image/delete/' + id, false)
 
   }
 
-  deleteCertificates(id){
+  deleteCertificates(id) {
     return this.httpDeleteResponse('certificate/delete/' + id, true)
 
   }
@@ -286,7 +286,7 @@ getcourseById(id) {
 
   getMyCourseList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/my-course-list/'+ id + '?' + str, null, false, false);
+    return this.httpGetResponse('courses/my-course-list/' + id + '?' + str, null, false, false);
   }
 
   getOtherCourseList(data: any) {
@@ -369,7 +369,7 @@ getcourseById(id) {
   }
 
   SubmitCourse(data) {
-    return this.httpPostResponse('courses/add', data, null,false , true);
+    return this.httpPostResponse('courses/add', data, null, false, true);
   }
 
   setRecentSeach(data) {
@@ -472,7 +472,7 @@ getcourseById(id) {
     return this.httpPostResponse('material/update-material-image', data, null, false, true);
   }
 
-  postMaterialImage(data){
+  postMaterialImage(data) {
     return this.httpPostResponse('material/image/add', data, null, false, true);
   }
 
@@ -512,7 +512,7 @@ getcourseById(id) {
 
   getMyMaterialList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/my-material-list/'+ id + '?' + str, null, false, false);
+    return this.httpGetResponse('material/my-material-list/' + id + '?' + str, null, false, false);
   }
 
   getotherMaterialList(data: any) {
@@ -534,11 +534,13 @@ getcourseById(id) {
     return this.httpPostResponse('/material/remove-to-cart', data, null, false, false);
   }
 
-
-
-  buyNow(data){
+  buyNow(data) {
     return this.httpPostResponse('stripe/add', data, false, true, true);
-}
+  }
+
+  getAllCart(user_id) {
+    return this.httpGetResponse('/material/cart-list', user_id, false, false);
+  }
 
   serialize = (obj: any) => {
     const str: any[] = [];
@@ -651,7 +653,7 @@ getcourseById(id) {
         error: (err: any) => {
           this.utility.hideLoader();
 
-          if(showError == true){
+          if (showError == true) {
             this.utility.presentFailureToast(err.error.message);
           }
           if (err.status == 401) {

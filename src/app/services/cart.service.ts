@@ -21,7 +21,7 @@ export type GlobalCartModelState = Array<GlobalCartModel>;
 })
 export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState> {
 
-  constructor(private network: NetworkService) { 
+  constructor(private network: NetworkService, private users: UsersService) { 
     super()
   }
 
@@ -93,7 +93,7 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
 
   async setItemToCartApi(item): Promise<any> {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = await this.users.getUser()
     let obj = {
       buyer_id: user.id,
       study_material_id: item.id,
@@ -107,7 +107,7 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
 
   async removeItemToCartApi(item): Promise<any> {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = await this.users.getUser()
     let obj = {
       buyer_id: user.id,
       study_material_id: item.id,
@@ -117,6 +117,23 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
     console.log(res);
     return res;
 
+  }
+
+  getGlobalCartFromApi() {
+    return new Promise(async (resolve) => {
+      const user = await this.users.getUser()
+      let res = await this.network.getAllCart(user.id);
+      console.log(res);
+
+      // this.setState( (state) => {
+      //   if (page === 1) {
+      //     return data.data;
+      //   }
+      //   return [...state, ...data.data];
+      // });
+
+      resolve(true);
+    });
   }
 
 
