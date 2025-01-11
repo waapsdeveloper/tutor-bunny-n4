@@ -1,9 +1,8 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { MessagesPage } from '../messages/messages.page';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
-import Pusher from 'pusher-js';
+
 
 @Component({
   selector: 'app-chat',
@@ -29,56 +28,19 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
   chat_;
   other_user_id;
   showChat = 'inbox';
-  private pusher: Pusher;
 
   constructor(injector: Injector, public chats: ChatService) {
-    super(injector); const options = {
-      cluster: 'ap2',
-      forceTLS: true,
-    };
-    this.events.subscribe('clear-params-chat', () =>{
-      this.chat_room_id = null;
-      this.params =  null;
-    }, false);
-    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    super(injector); 
 
     this.initialize();
     this.activeUser = this.users.getUser();
 
   }
 
-  ngOnInit() {
-    this.events.subscribe(
-      'clear-all-services-data',
-      () => {
-        if (this.pusher) {
-          this.pusher.unsubscribe('chats-channel');
-          this.pusher.disconnect();
-        }
-        this.events.unsubscribe('message-received-via-pusher');
-      },
-      false
-    );
-    this.events.subscribe('update-chat-lists', (data) => {
-      this.handleRefresh(data);
-    })
-    // this.events.subscribe(
-    //   'message-received-via-pusher',
-    //   this.updateChatsByMessageReceived.bind(this)
-    // );
+  ngOnInit() {    
+    
   }
-  // messageReceivedViaPusher() {
-  //   this.events.subscribe(
-  //     'message-received-via-pusher',
-  //     this.updateChatsByMessageReceived.bind(this)
-  //   );
-  // }
-
-  // updateChatsByMessageReceived(data: any) {
-  //
-  //   // this.chats.getchatList(this.search, 1)
-  //   // this.events.publish('update-chat-lists', data)
-  // }
+  
 
   ngOnDestroy() {
     this.user = null;
@@ -96,41 +58,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     this.chats.getchatList(this.search, 1)
   }
 
-  async ionViewWillEnter() {
-    // this.chats.getUnreadMsgCount()
-
-    // let previousUrl = this.nav.getPreviousUrl();
-    // const url = new URL(previousUrl, window.location.origin);
-    // const prevUrl = url.pathname.split('/')[1];
-    //
-
-    // this.params = this.nav.getQueryParams();
-    //
-    // if (this.params.user) {
-    //   this.user = JSON.parse(this.params.user);
-    // }
-    // if (this.params.other_user_id) {
-    //   this.other_user_id = JSON.parse(this.params.other_user_id);
-    // }
-    // this.chat_room_id = this.params.chat_room_id;
-    //
-    // if (this.chat_room_id) {
-    //   let item = {
-    //     chat_room_id: this.chat_room_id,
-    //     other_user_id: this.other_user_id,
-    //     user: this.user
-    //   }
-    //   let params = {
-    //     item: JSON.stringify(item)
-    //   }
-
-    //   if(prevUrl != 'messages'){
-    //     let res = await this.nav.push('messages', params)
-    //   }
-    //   // this.initialize()
-    // }
-    // this.initialize()
-  }
 
 
   async initialize() {

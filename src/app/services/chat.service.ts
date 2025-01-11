@@ -56,6 +56,8 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
 
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.chatChannel = this.pusher.subscribe('chats-channel');
+
+
     this.events.subscribe(
       'clear-all-services-data',
       () => {
@@ -107,14 +109,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
       });
     });
   }
-
-  
-
-
-
-
-
-
 
 
   unRegisterPusherEvent() {
