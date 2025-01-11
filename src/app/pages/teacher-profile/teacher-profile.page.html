@@ -115,11 +115,11 @@
 
 <ion-footer *ngIf="roleId == 2">
   <div class="footer-buttons-78963">
-    <div class="button-chat-78563" *ngIf="!data?.trial " (click)="goToChat()">
+    <div class="button-chat-78563" *ngIf="!data?.trial " (click)="goToChat(user)">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle">
         <ion-ripple-effect></ion-ripple-effect>
-        <img src="assets/svg/chat.svg" />
-        <span class="roboto-medium fs-16 " style="color: #484848;">Message</span>
+          <img src="assets/svg/send-message-large.svg"/>
+        <span class="roboto-medium fs-16 ">Message</span>
       </div>
     </div>
   </div>
