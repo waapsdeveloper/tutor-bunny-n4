@@ -198,7 +198,7 @@ export class TeacherProfilePage
     this.modals.present(TeacherQualificationComponent, { user });
   }
 
-  async goToChat() {
+  async goToChat(data) {
     let user = this.users.getUser();
 
     let v = (await this.profiles.isProfileCompleted(user)) as any;
@@ -206,14 +206,12 @@ export class TeacherProfilePage
       await this.openWelcomeComponent();
       return;
     }
-
-    this.openChatWithData();
+    this.openChatWithData(data);
   }
 
-  async openChatWithData() {
-    this.teacher = JSON.parse(localStorage.getItem('teacher'));
-    this.student = this.users.getUser();
-    const chatRoomId = await this.chats.getChadRoomId(this.teacher.id, this.student.id) as number;
+  async openChatWithData(data) {
+    this.user = this.users.getUser();
+    const chatRoomId = await this.chats.getChadRoomId(data.id, this.user.id) as number;
 
     if(chatRoomId != -1){
       this.nav.push('messages', {
