@@ -13,7 +13,7 @@ import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student
 import { TrailMessageComponent } from '../trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { CartService } from 'src/app/services/cart.service';
-
+import { MaterialFavoriteService } from 'src/app/services/material-favorite.service';
 @Component({
   selector: 'app-generic-study-material-card',
   templateUrl: './generic-study-material-card.component.html',
@@ -56,8 +56,8 @@ export class GenericStudyMaterialCardComponent
     injector: Injector,
     private cartService: CartService,
 
-    private courseFavoriteService: CourseFavoriteService,
-    public globalCourses: GlobalCoursesService,
+    private materialFavoriteService: MaterialFavoriteService,
+    public globalMaterial: GlobalFavMaterialService,
     private chats: ChatService
   ) {
     super(injector);
@@ -71,7 +71,7 @@ export class GenericStudyMaterialCardComponent
         // course_id: obj.id,
         // liked: true
 
-        if (this.item.id == data.course_id) {
+        if (this.item.id == data.material_id) {
           this.item.is_liked_by_me = data.liked;
         }
       },
@@ -141,69 +141,69 @@ export class GenericStudyMaterialCardComponent
     this.nav.push('student-study-material-detail', params);
   }
 
-  async requestTrail(id) {
-    this.user = this.users.getUser();
+  // async requestTrail(id) {
+  //   this.user = this.users.getUser();
 
-    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
 
-    if (v || v == true) {
-      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
-      // return
-      let send = data.data.send;
-      if (send == true) {
-        this.trail = true;
-        this.globalCourses.requestTrial(
-          this.item,
-          this.user,
-          data.data.message
-        );
-      } else {
-        return;
-      }
-    } else {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
+  //   if (v || v == true) {
+  //     let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
+  //     // return
+  //     let send = data.data.send;
+  //     if (send == true) {
+  //       this.trail = true;
+  //       this.globalMaterial.requestTrial(
+  //         this.item,
+  //         this.user,
+  //         data.data.message
+  //       );
+  //     } else {
+  //       return;
+  //     }
+  //   } else {
+  //     let res = await this.modals.present(
+  //       StudentWelcomeComponent,
+  //       {},
+  //       'auto-height-modal',
+  //       1,
+  //       [0, 1],
+  //       false
+  //     );
+  //     let key = res.data.key;
 
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
-    }
-  }
+  //     if (key == 1) {
+  //       this.nav.push('/student-profile/student-profile-edit', {
+  //         showBack: true,
+  //       });
+  //     }
+  //   }
+  // }
 
-  async presentAlert() {
-    const flag = await this.utility.presentConfirm(
-      'OK',
-      'Cancel',
-      'Cancel Trial',
-      'Are you sure to cancel the Trial?'
-    );
+  // async presentAlert() {
+  //   const flag = await this.utility.presentConfirm(
+  //     'OK',
+  //     'Cancel',
+  //     'Cancel Trial',
+  //     'Are you sure to cancel the Trial?'
+  //   );
 
-    if (flag) {
-      this.cancelTrail(this.item);
-    }
-  }
+  //   if (flag) {
+  //     this.cancelTrail(this.item);
+  //   }
+  // }
 
-  async cancelTrail(id) {
-    this.trail = false;
-    let user = this.users.getUser();
-    this.globalCourses.cancelTrail(this.item, user);
-  }
+  // async cancelTrail(id) {
+  //   this.trail = false;
+  //   let user = this.users.getUser();
+  //   this.globalMaterial.cancelTrail(this.item, user);
+  // }
 
   async addToFav() {
     // let showFav = true;
     // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
     this.item.is_liked_by_me = true;
-    this.courseFavoriteService.addFavorites(this.item, user);
+    this.materialFavoriteService.addFavorites(this.item, user);
   }
 
   async removeToFav() {
@@ -211,7 +211,7 @@ export class GenericStudyMaterialCardComponent
     // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
     this.item.is_liked_by_me = false;
-    this.courseFavoriteService.removeFavorites(this.item, user);
+    this.materialFavoriteService.removeFavorites(this.item, user);
   }
 
   setResult() {
@@ -308,4 +308,5 @@ export class GenericStudyMaterialCardComponent
       this.cartService.setRemove(this.item)
     }
   }
-}
+}import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
+

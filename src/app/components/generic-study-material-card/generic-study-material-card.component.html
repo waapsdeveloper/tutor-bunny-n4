@@ -39,8 +39,8 @@
           </div>
 
           <div class="action-items">
-            <img src="assets/svg/heart-77.svg" />
-            <!-- <ion-icon
+            <img [src]="item.is_liked_by_me ? 'assets/svg/heart-77.svg' : 'assets/svg/heart-77.svg'"
+              (click)="item.is_liked_by_me ? removeToFav() : addToFav()" /><!-- <ion-icon
               [name]="item.is_liked_by_me ? 'heart' : 'heart-outline'"
               (click)="item.is_liked_by_me ? removeToFav() : addToFav()"
             >

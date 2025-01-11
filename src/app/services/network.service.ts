@@ -518,6 +518,14 @@ getcourseById(id) {
     const str = this.serialize(data);
     return this.httpGetResponse('material/other-material-list' + '?' + str, null, false, false);
   }
+  addMaterialFav(data) {
+    return this.httpPostResponse('material/list/add-fav', data, null, false, false);
+  }
+  removeMaterialFav(data) {
+    return this.httpPostResponse('material/list/remove-fav', data, null, false, false);
+  }
+
+
 
   buyNow(data){
     return this.httpPostResponse('stripe/add', data, false, true, true);

@@ -54,4 +54,20 @@ export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore<GlobalF
       resolve(true);
     });
   }
+  setItem(obj: any) {
+    this.setState((state) => {
+      const exists = state.some((item: any) => item.id === obj.id);
+      if (exists) {
+        // Update existing item
+        return state.map((item: any) => (item.id === obj.id ? obj : item));
+      } else {
+        // Add new item
+        return [...state, obj];
+      }
+    });
+  }
+
+  setRemove(obj: any) {
+    this.setState((state) => state.filter((item: any) => item.id !== obj.id));
+  }
 }
