@@ -61,22 +61,8 @@ export class GenericStudyMaterialCardComponent
     private chats: ChatService
   ) {
     super(injector);
-
     this.user = this.users.getUser();
-
-    this.events.subscribe(
-      'update-course-item-like',
-      (data) => {
-        // user_id: user.id,
-        // course_id: obj.id,
-        // liked: true
-
-        if (this.item.id == data.material_id) {
-          this.item.is_liked_by_me = data.liked;
-        }
-      },
-      false
-    );
+    
   }
 
   async initialize(data) {
@@ -103,9 +89,7 @@ export class GenericStudyMaterialCardComponent
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.callApi();
-    }, 200);
+    
   }
 
   getFlag(data) {
@@ -118,18 +102,6 @@ export class GenericStudyMaterialCardComponent
       }
     } else {
       return '';
-    }
-  }
-
-  async callApi() {
-    this.loading = true;
-    if (this.item && !this.item.trial) {
-      this.trail = false;
-      this.loading = false;
-    }
-    if (this.item && this.item.trial) {
-      this.trail = true;
-      this.loading = false;
     }
   }
 
@@ -213,95 +185,9 @@ export class GenericStudyMaterialCardComponent
     this.item.is_liked_by_me = false;
     this.materialFavoriteService.removeFavorites(this.item, user);
   }
-
-  setResult() {
-    this.trail = true;
-  }
-
-  handleOkClick() {
-    this.trail = false;
-  }
-
-  // async goToChat(data) {
-  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-  //   if (v || v == true) {
-  //     let id = this.user.id;
-  //     let obj = {
-  //       user_id_1: this.user.id,
-  //       user_id_2: data.user.id,
-  //     };
-  //     let res = await this.network.getChadRoomId(obj);
-  //     let params = {
-  //       student_id: id,
-  //       other_user_id: data.user.id,
-  //       user: JSON.stringify(data.user),
-  //       chat_room_id: res.chat_room.id,
-  //       goToMessage: true
-  //     };
-  //     this.nav.push('/tabs/chat', params);
-  //   }
-  //   else {
-  //     let res = await this.modals.present(
-  //       StudentWelcomeComponent,
-  //       {},
-  //       'auto-height-modal',
-  //       1,
-  //       [0, 1],
-  //       false
-  //     );
-  //     let key = res.data.key;
-  //     if (key == 1) {
-  //       this.nav.push('/student-profile/student-profile-edit', {
-  //         showBack: true,
-  //       });
-  //     }
-  //   }
-  // }
-  async goToChat(data) {
-    let user = this.users.getUser();
-
-    let v = (await this.profiles.isProfileCompleted(user)) as any;
-    if (!v) {
-      await this.openWelcomeComponent();
-      return;
-    }
-    this.openChatWithData(data);
-  }
-
-  async openChatWithData(data) {
-    this.user = this.users.getUser();
-    const chatRoomId = (await this.chats.getChadRoomId(
-      data.user.id,
-      this.user.id
-    )) as number;
-
-    if (chatRoomId != -1) {
-      this.nav.push('messages', {
-        chat_room_id: chatRoomId,
-      });
-    }
-  }
-
-  async openWelcomeComponent() {
-    let res = await this.modals.present(
-      StudentWelcomeComponent,
-      {},
-      'auto-height-modal',
-      1,
-      [0, 1],
-      false
-    );
-    let key = res.data.key;
-    if (key == 1) {
-      this.nav.push('/student-profile/student-profile-edit', {
-        showBack: true,
-      });
-    }
-  }
-
+  
   toggleCartItem(){
 
-    console.log(this.itemExistInCart$)
     if(this.itemExistInCart$ == 0) {
       this.cartService.setItem(this.item)
     } else {

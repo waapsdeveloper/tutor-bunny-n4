@@ -8,6 +8,7 @@ import { ModalService } from './basic/modal.service';
   providedIn: 'root',
 })
 export class NetworkService {
+  
 
   constructor(
     public api: ApiService,
@@ -523,6 +524,14 @@ getcourseById(id) {
   }
   removeMaterialFav(data) {
     return this.httpPostResponse('material/list/remove-fav', data, null, false, false);
+  }
+
+  addItemToCart(data) {
+    return this.httpPostResponse('/material/add-to-cart', data, null, false, false);
+  }
+
+  removeItemToCart(data) {
+    return this.httpPostResponse('/material/remove-to-cart', data, null, false, false);
   }
 
 

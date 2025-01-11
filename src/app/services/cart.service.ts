@@ -21,7 +21,7 @@ export type GlobalCartModelState = Array<GlobalCartModel>;
 })
 export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState> {
 
-  constructor() { 
+  constructor(private network: NetworkService) { 
     super()
   }
 
@@ -69,6 +69,9 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
   }
 
   setItem(obj: any) {
+
+    this.setItemToCartApi(obj);
+
     this.setState((state) => {
       const exists = state.some((item: any) => item.id === obj.id);
       if (exists) {
@@ -79,10 +82,41 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
         return [...state, obj];
       }
     });
+    
   }
 
   setRemove(obj: any) {
+    this.removeItemToCartApi(obj)
     this.setState((state) => state.filter((item: any) => item.id !== obj.id));
+  }
+
+
+  async setItemToCartApi(item): Promise<any> {
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    let obj = {
+      buyer_id: user.id,
+      study_material_id: item.id,
+    }
+
+    const res = await this.network.addItemToCart(obj);
+    console.log(res);
+    return res;
+
+  }
+
+  async removeItemToCartApi(item): Promise<any> {
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    let obj = {
+      buyer_id: user.id,
+      study_material_id: item.id,
+    }
+
+    const res = await this.network.removeItemToCart(obj);
+    console.log(res);
+    return res;
+
   }
 
 

@@ -1,14 +1,29 @@
 import { Injectable } from '@angular/core';
 import { EventsService } from './events.service';
-import { NetworkService } from './network.service';
-import { UsersService } from './users.service';
 import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 import Pusher from 'pusher-js';
+
+import {
+  NgSimpleStateBaseRxjsStore,
+  NgSimpleStateStoreConfig,
+} from 'ng-simple-state';
+import { UsersService } from './users.service';
+import { NetworkService } from './network.service';
+
+export interface GlobalChatsModel {
+  id: number;
+}
+
+export type GlobalChatsModelState = Array<GlobalChatsModel>;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ChatService {
+export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelState > {
+
+
+
+  
   user: any;
   role_id: any;
   chats;
@@ -33,6 +48,7 @@ export class ChatService {
     private events: EventsService,
     public pubsubSvc: NgxPubSubService
   ) {
+    super();
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -64,6 +80,42 @@ export class ChatService {
       this.getchatList();
     });
   }
+
+
+  storeConfig(): NgSimpleStateStoreConfig {
+    return {
+      storeName: 'GlobalChatsModel',
+    };
+  }
+
+  initialState(): GlobalChatsModelState {
+    return [];
+  }
+
+  getList() {
+    return this.selectState((state) => state);
+  }
+
+  getCount() {
+    return this.selectState((state) => state.length);
+  }
+
+  getCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.length).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  
+
+
+
+
+
+
+
 
   unRegisterPusherEvent() {
     let user = this.users.getUser() as any;
@@ -268,8 +320,8 @@ export class ChatService {
   async getChatRoomInfo(roomId): Promise<any> {
     //
 
-    const findObj = this.chats.find((x) => x.chat_room_id == roomId);
-    if (!findObj) {
+    // const findObj = this.chats.find((x) => x.chat_room_id == roomId);
+    // if (!findObj) {
 
       let obj = {
         limit: 20,
@@ -281,10 +333,12 @@ export class ChatService {
       if (res.length > 0) {
         this.chats = [...this.chats, ...res];
         return res[0];
-      }
-    }
+      } 
 
-    return findObj;
+      return null;
+    // }
+
+    // return findObj;
 
     //   const currectUser = this.users.getUser();
     //   const otherUserId = user1 == currectUser.id ? user2 : user1;
