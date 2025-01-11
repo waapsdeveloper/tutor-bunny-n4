@@ -12,18 +12,9 @@
     <div class="noti-795">
       <div class="icon-box">
         <div class="icon-box-outer">
-          <div class="icon-box-77" (click)="toogleView('cart')">
-            <div class="red-dot-4432432532"></div>
-            <img class="icon-box-77" [src]="'assets/svg/cart.svg'" />
-          </div>
-          <div class="icon-box-77" (click)="showFavCourse()">
-            <div class="red-dot-4432432532" *ngIf="courseFavCount$ > 0"></div>
-            <img class="icon-box-77" [src]="'assets/icon/heart.svg'" />
-          </div>
-          <div class="icon-box-77">
-            <div class="red-dot-4432432532"  *ngIf="notification.unread_count != 0"></div>
-            <img class="icon-box-77" src="assets/icon/notification-bell.svg" (click)="gotoNotification()" />
-          </div>
+          <app-header-cart-button></app-header-cart-button>
+          <app-header-fav-button></app-header-fav-button>
+          <app-header-notification-button></app-header-notification-button>
         </div>
       </div>
     </div>

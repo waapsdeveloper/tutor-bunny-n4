@@ -12,6 +12,9 @@ import { RecTeachersModule } from './rec-teachers/rec-teachers.module';
 import { SearchBoxModule } from './search-box/search-box.module';
 import { RecTechersBoxModule } from './rec-techers-box/rec-techers-box.module';
 import { StudentWelcomeModule } from './student-welcome/student-welcome.module';
+import { HeaderCartButtonComponent } from './header-cart-button/header-cart-button.component';
+import { HeaderFavButtonComponent } from './header-fav-button/header-fav-button.component';
+import { HeaderNotificationButtonComponent } from './header-notification-button/header-notification-button.component';
 
 @NgModule({
   imports: [
@@ -25,6 +28,6 @@ import { StudentWelcomeModule } from './student-welcome/student-welcome.module';
     RecTechersBoxModule,
     StudentWelcomeModule
   ],
-  declarations: [StudentDashboardPage]
+  declarations: [StudentDashboardPage, HeaderCartButtonComponent, HeaderFavButtonComponent, HeaderNotificationButtonComponent]
 })
 export class StudentDashboardPageModule { }

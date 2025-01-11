@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Injector, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Injector,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -8,6 +15,7 @@ import { ChatService } from 'src/app/services/chat.service';
 import { log } from 'console';
 import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-generic-study-material-card',
@@ -18,8 +26,10 @@ export class GenericStudyMaterialCardComponent
   extends BasePage
   implements OnInit
 {
-  list: any[] = [];
   private _item: any;
+
+  itemExistInCart$;
+
   displayName;
   flag;
   user;
@@ -47,6 +57,8 @@ export class GenericStudyMaterialCardComponent
 
   constructor(
     injector: Injector,
+    private cartService: CartService,
+
     private courseFavoriteService: CourseFavoriteService,
     public globalCourses: GlobalCoursesService,
     private chats: ChatService
@@ -62,8 +74,6 @@ export class GenericStudyMaterialCardComponent
         // course_id: obj.id,
         // liked: true
 
-
-
         if (this.item.id == data.course_id) {
           this.item.is_liked_by_me = data.liked;
         }
@@ -73,6 +83,13 @@ export class GenericStudyMaterialCardComponent
   }
 
   async initialize(data) {
+
+    this.cartService.isItemExist(data.id).subscribe( data => {
+      this.itemExistInCart$ = data;
+    })
+
+
+
 
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
@@ -244,8 +261,6 @@ export class GenericStudyMaterialCardComponent
   //   }
   // }
   async goToChat(data) {
-
-
     let user = this.users.getUser();
 
     let v = (await this.profiles.isProfileCompleted(user)) as any;
@@ -288,17 +303,15 @@ export class GenericStudyMaterialCardComponent
   }
 
   async openStripe() {
-   console.log(this.item);
+    console.log(this.item);
     let obj = {
       study_material_id: this.item.id,
-      amount:this.item.price,
-      sender_id:this.item.user_id,
-      reciever_id:this.item.user.teacher.teacher_id,
-      stripe_payment_id:"fasdfaksfahdkfakk",
-
-
+      amount: this.item.price,
+      sender_id: this.item.user_id,
+      reciever_id: this.item.user.teacher.teacher_id,
+      stripe_payment_id: 'fasdfaksfahdkfakk',
     };
-  //  const res = await this.network.purchaseMaterial(obj);
+    //  const res = await this.network.purchaseMaterial(obj);
     // const res = await this.network.buyNow(obj);
 
     const res = await this.modals.present(StripePayComponent);
@@ -348,5 +361,15 @@ export class GenericStudyMaterialCardComponent
     //     }
     //   } catch (error) {}
     // }
+  }
+
+  toggleCartItem(){
+
+    console.log(this.itemExistInCart$)
+    if(this.itemExistInCart$ == 0) {
+      this.cartService.setItem(this.item)
+    } else {
+      this.cartService.setRemove(this.item)
+    }
   }
 }

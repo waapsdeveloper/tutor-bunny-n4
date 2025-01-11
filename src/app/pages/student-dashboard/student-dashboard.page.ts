@@ -3,20 +3,10 @@ import {
   Injector,
   OnInit,
   OnDestroy,
-  ViewChild,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-
-import * as moment from 'moment';
-import { StudentWelcomeComponent } from './student-welcome/student-welcome.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
-import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
-
-import { Subscription } from 'rxjs';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
-import { NotificationsService } from 'src/app/services/notifications.service';
-import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -25,7 +15,7 @@ import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.ser
 })
 export class StudentDashboardPage
   extends BasePage
-  implements OnInit, OnDestroy
+  implements OnInit
 {
   user;
   displayName: string = '';
@@ -40,14 +30,13 @@ export class StudentDashboardPage
   view = 'course';
   favCourses;
 
-  courseFavCount$;
 
   constructor(
     injector: Injector,
-    private globalFavCoursesService: GlobalFavCoursesService,
+    
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public notification: NotificationsService
+    
   ) {
     super(injector);
     this.initialize();
@@ -66,10 +55,7 @@ export class StudentDashboardPage
   async initialize() {
 
     this.user = this.users.getUser();
-    this.globalFavCoursesService.getCount(this.user.id).subscribe( data => {
-      this.courseFavCount$ = data;
-      console.log(this.courseFavCount$);
-    })
+    
 
 
 
@@ -102,17 +88,6 @@ export class StudentDashboardPage
     this.events.publish('is-student-profile-completed', this.showWarning);
   }
 
-  getlists() {
-    this.globalCourses.getCoursesFromApi();
-    // this.globalCourses.getFavToApi();
-  }
-
-  gotoNotification() {
-    this.nav.push('notifications', {
-      backUrl: '',
-      showBack: true,
-    });
-  }
 
   getFlag() {
     if (this.user && this.user.student && this.user.student.country) {
@@ -150,9 +125,7 @@ export class StudentDashboardPage
     }, 800); // 2 seconds
   }
 
-  async showFavCourse() {
-    this.nav.push('/favorites');
-  }
+  
 
   toogleView(view) {
     this.view = view;
@@ -173,21 +146,10 @@ export class StudentDashboardPage
 
   setupEvents() {
 
-
-    this.events.subscribe('update-course-list', () => {
-      this.getlists();
-    });
-    this.events.subscribe('show-fav-dot', (showFav) => {
-      this.showFav = showFav;
-    });
-
     this.events.subscribe('get-user-after-submit-form', (data) => {
       this.initialize();
     });
   }
 
-  ngOnDestroy() {
-    // Unsubscribe to avoid memory leaks
-    this.events.unsubscribe('update-course-fav-count');
-  }
+  
 }

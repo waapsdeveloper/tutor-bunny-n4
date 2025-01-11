@@ -34,8 +34,8 @@
         </div>
 
         <div class="actions">
-          <div class="big-action-button-8574" (click)="openStripe()">
-            <img src="assets/svg/cart.svg" alt="" /> Buy Now
+          <div class="big-action-button-8574" (click)="toggleCartItem()">
+            <img src="assets/svg/cart.svg" alt="" /> {{ itemExistInCart$ > 0 ? 'Remove' : 'Buy Now' }}
           </div>
 
           <div class="action-items">

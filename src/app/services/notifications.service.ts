@@ -1,13 +1,27 @@
 import { Injectable } from '@angular/core';
 import Pusher from 'pusher-js';
+import { EventsService } from './events.service';
+
+import {
+  NgSimpleStateBaseRxjsStore,
+  NgSimpleStateStoreConfig,
+} from 'ng-simple-state';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
-import { EventsService } from './events.service';
+
+export interface GlobalNotificationModel {
+  user_id: number;
+  id: number;
+  item: any;
+}
+
+export type GlobalNotificationModelState = Array<GlobalNotificationModel>;
 
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationsService {
+export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotificationModelState> {
+
   user: any;
   page = 1;
   unread_count = 0;
@@ -23,12 +37,15 @@ export class NotificationsService {
     private users: UsersService,
     private events: EventsService
   ) {
+    super();
+
     const options = {
       cluster: 'ap2',
       forceTLS: true,
     };
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.notificationChannel = this.pusher.subscribe('notification-channel');
+    
     this.events.subscribe(
       'clear-all-services-data',
       () => {
@@ -42,6 +59,22 @@ export class NotificationsService {
       false
     );
   }
+
+  storeConfig(): NgSimpleStateStoreConfig {
+    return {
+      storeName: 'GlobalNotificationModel',
+    };
+  }
+
+  initialState(): GlobalNotificationModelState {
+    return [];
+  }
+
+  
+
+  
+
+  
 
   registerPusherEvent() {
     let user = this.users.getUser() as any;

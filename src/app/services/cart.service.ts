@@ -7,49 +7,54 @@ import {
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
-export interface GlobalFavCoursesModel {
+export interface GlobalCartModel {
   user_id: number;
-  course_id: number;
+  id: number;
+  item: any;
 }
 
-export type GlobalFavCoursesModelState = Array<GlobalFavCoursesModel>;
+export type GlobalCartModelState = Array<GlobalCartModel>;
+
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFavCoursesModelState> {
-  page = 1;
-  last_page = -1;
+export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState> {
 
-  constructor(private users: UsersService, private network: NetworkService) {
-    super();
+  constructor() { 
+    super()
   }
 
+  
   storeConfig(): NgSimpleStateStoreConfig {
     return {
-      storeName: 'GlobalFavCoursesModel',
+      storeName: 'GlobalCartModel',
     };
   }
 
-  initialState(): GlobalFavCoursesModelState {
+  initialState(): GlobalCartModelState {
     return [];
   }
 
-  getList() {
-    return this.selectState((state) => state );
+  getList(user_id: number) {
+    return this.selectState((state) =>
+      state.filter((item: any) => item.user_id === user_id)
+    );
   }
 
-  getListPromise() {
+  getListPromise(user_id: number) {
     return new Promise((resolve) => {
-      this.selectState((state) => state).subscribe((res) => {
+      this.selectState((state) =>
+        state.filter((item: any) => item.user_id === user_id)
+      ).subscribe((res) => {
         resolve(res);
       });
     });
   }
 
-  getCount() {
+  getCount(user_id: number) {
     return this.selectState(
-      (state) => state.length
+      (state) => state.filter((item: any) => item.user_id === user_id).length
     );
   }
 
@@ -61,12 +66,10 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFa
     });
   }
 
-  getGlobalFavCoursesFromApi() {
-    return new Promise(async (resolve) => {
-      let res = await this.network.getAllFavCoursesIds();
-      this.setState(() => res);
-      resolve(true);
-    });
+  isItemExist(id){
+    return this.selectState(
+      (state) => state.filter((item: any) => item.id === id).length
+    );
   }
 
   setItem(obj: any) {
@@ -85,4 +88,6 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFa
   setRemove(obj: any) {
     this.setState((state) => state.filter((item: any) => item.id !== obj.id));
   }
+
+
 }
