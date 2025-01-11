@@ -16,12 +16,7 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
   }
 
   continue(){
-
-    this.events.publish('reset-modal-dismiss', {  
-      canDismiss: true
-    })
-    this.modals.dismiss();
-    
+    this.nav.push('/teacher-profile/teacher-profile-edit');    
   }
 
 }
