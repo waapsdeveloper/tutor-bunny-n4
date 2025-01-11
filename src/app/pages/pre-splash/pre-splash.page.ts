@@ -121,17 +121,20 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
       // Handle Teacher (roleId = 3)
       if (roleId === 3) {
         if (!isProfileCompleted) {
-          let res = await this.modals.present(
-            TeacherWelcomePage,
-            {},
-            'auto-height-modal',
-            1,
-            [0, 1],
-            true
-          );
-          this.nav.push('/teacher-profile/teacher-profile-edit', {
-            backUrl: '/home',
-          });
+
+
+          this.nav.push('/teacher-welcome');
+          // let res = await this.modals.present(
+          //   TeacherWelcomePage,
+          //   {},
+          //   'auto-height-modal',
+          //   1,
+          //   [0, 1],
+          //   true
+          // );
+          // this.nav.push('/teacher-profile/teacher-profile-edit', {
+          //   backUrl: '/home',
+          // });
         } else {
           this.nav.push('/tabs/teacher-dashboard', {
             backUrl: '/home',
