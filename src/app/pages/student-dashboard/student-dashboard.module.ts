@@ -15,6 +15,7 @@ import { StudentWelcomeModule } from './student-welcome/student-welcome.module';
 import { HeaderCartButtonComponent } from './header-cart-button/header-cart-button.component';
 import { HeaderFavButtonComponent } from './header-fav-button/header-fav-button.component';
 import { HeaderNotificationButtonComponent } from './header-notification-button/header-notification-button.component';
+import { HeaderProfileIconComponent } from './header-profile-icon/header-profile-icon.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,6 @@ import { HeaderNotificationButtonComponent } from './header-notification-button/
     RecTechersBoxModule,
     StudentWelcomeModule
   ],
-  declarations: [StudentDashboardPage, HeaderCartButtonComponent, HeaderFavButtonComponent, HeaderNotificationButtonComponent]
+  declarations: [StudentDashboardPage, HeaderProfileIconComponent, HeaderCartButtonComponent, HeaderFavButtonComponent, HeaderNotificationButtonComponent]
 })
 export class StudentDashboardPageModule { }

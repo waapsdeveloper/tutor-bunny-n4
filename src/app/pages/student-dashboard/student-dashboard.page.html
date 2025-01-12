@@ -1,13 +1,6 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
-    <div class="pl-box-785">
-      <div class="image-box-89656" *ngIf="users.image" (click)="updateProfile()"
-        [style.background-image]="'url(' + users.image + ')' ">
-      </div>
-      <div class="image-box-89657" *ngIf="!users.image" (click)="updateProfile()">
-        <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
-      </div>
-    </div>
+    <app-header-profile-icon></app-header-profile-icon>
     <app-profile-search-box style="width: 100%;"></app-profile-search-box>
     <div class="noti-795">
       <div class="icon-box">

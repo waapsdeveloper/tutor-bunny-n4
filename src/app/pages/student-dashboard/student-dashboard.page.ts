@@ -17,19 +17,10 @@ export class StudentDashboardPage
   extends BasePage
   implements OnInit
 {
-  user;
-  displayName: string = '';
-  country;
-  showWarning = false;
-  showFav = false;
-  flag;
-  isProfileComplete;
-  showLiked = false;
-  profileImage= '';
-  showNoti = true;
+  user$;  
+  
+  
   view = 'course';
-  favCourses;
-
 
   constructor(
     injector: Injector,
@@ -44,49 +35,10 @@ export class StudentDashboardPage
   }
 
   ngOnInit() {
-    this.events.subscribe('update-profile-image', (user) => {
-      this.profileImage = user.image;
-
-    });
-
 
   }
 
-  async initialize() {
-
-    this.user = this.users.getUser();
-    
-
-
-
-
-
-
-    this.profileImage = this.user.image;
-
-    this.setupEvents();
-    //
-
-    if (
-      this.user &&
-      this.user.student &&
-      this.user.student.country &&
-      this.user.student.country.name
-    ) {
-      this.country = this.user.student.country.name;
-    }
-
-    this.displayName = this.utility.splitName(this.user.name).first_name;
-    this.flag = this.getFlag();
-
-
-    const isProfileCompleted = (await this.profiles.isProfileCompleted(
-      this.user
-    )) as any;
-    this.showWarning = isProfileCompleted;
-
-    this.events.publish('is-student-profile-completed', this.showWarning);
-  }
+ 
 
 
   getFlag() {
