@@ -1,8 +1,8 @@
 <div class="pl-box-785">
-  <div class="image-box-89656" *ngIf="user$.image" (click)="updateProfile()"
-    [style.background-image]="'url(' + user$.image + ')' ">
+  <div class="image-box-89656" *ngIf="user$?.image" (click)="updateProfile.emit()"
+    [style.background-image]="'url(' + user$?.image + ')' ">
   </div>
-  <div class="image-box-89657" *ngIf="!user$.image" (click)="updateProfile()">
+  <div class="image-box-89657" *ngIf="!user$?.image" (click)="updateProfile.emit()">
     <img src="../../assets/svg/warning.svg" alt="" *ngIf="showWarning === false" class="image-98563">
   </div>
 </div>

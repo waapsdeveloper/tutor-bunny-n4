@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border ion-no-shadow ion-header-bg">
   <div class="profile-bc-header-678956">
-    <app-header-profile-icon></app-header-profile-icon>
+    <app-header-profile-icon (updateProfile)="updateProfile($event)"></app-header-profile-icon>
     <app-profile-search-box style="width: 100%;"></app-profile-search-box>
     <div class="noti-795">
       <div class="icon-box">
-        <div class="icon-box-outer">
+        <div class="icon-box-outer d-flex flex-row gap-8">
           <app-header-cart-button></app-header-cart-button>
           <app-header-fav-button></app-header-fav-button>
           <app-header-notification-button></app-header-notification-button>
