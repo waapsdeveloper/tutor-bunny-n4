@@ -1,4 +1,4 @@
-<div class="vedio-content-89658">
+<!-- <div class="vedio-content-89658">
   <swiper-container #slides style="width: calc(100vw - 32px); display: flex;" slides-per-view="3">
     <swiper-slide style="width: 100%; gap: 100px;" *ngFor="let image of images" >
       <div class="vedio-box-inner" [style.backgroundImage]="setBackgroundImage(image)" (click)="openImage(image.image)">
@@ -6,4 +6,11 @@
     </swiper-slide>
 
   </swiper-container>
-</div>
+</div> -->
+
+<swiper [slidesPerView]="2" [spaceBetween]="10" [pagination]="{ clickable: true }"
+  class="swiper-container-inner-7892" #slides>
+    <ng-template swiperSlide *ngFor="let image of images">
+      <div class="vedio-box-inner" [style.backgroundImage]="setBackgroundImage(image)" (click)="openImage(image.image)"></div>
+    </ng-template>
+  </swiper>
