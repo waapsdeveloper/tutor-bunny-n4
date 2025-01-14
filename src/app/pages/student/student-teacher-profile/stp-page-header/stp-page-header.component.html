@@ -1,0 +1,33 @@
+<ion-header class="ion-no-shadow ion-no-border ion-header-bg">
+  <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
+    <div style="padding: 0 16px 0 0;" (click)="back()">
+      <img src="../../assets/svg/white-back.svg" alt="">
+    </div>
+    <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
+    </div>
+    <div class="header-oblique-double-675">
+      <div class="header-line-678576" (click)="openEditProfile()" *ngIf="roleId === 3">
+        <div class="header-line-box-678576">
+          <img src="../../assets/svg/edit.svg" />
+        </div>
+      </div>
+      <div class="header-info-box-68447">
+        <div class="header-info-user-68448">
+          <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
+        </div>
+        <div class="header-info-misc-68448 outfit" *ngIf="status !== 'In Review'"><img
+            src="../../assets/svg/verified-profile-sheild.svg" />Verified
+          on
+          {{verified_on}}
+        </div>
+        <div class="header-info-misc-68448 outfit" *ngIf="status === 'In Review'"><img
+            src="../../assets/svg/verified-profile-sheild.svg" />Verification pending
+        </div>
+        <div class="header-info-misc-68448 outfit">
+          <app-rating-stars [rating]="rating"></app-rating-stars>
+          {{rating}} ({{total_rating}})
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>

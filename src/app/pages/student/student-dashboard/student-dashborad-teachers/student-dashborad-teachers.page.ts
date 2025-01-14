@@ -49,6 +49,6 @@ export class StudentDashboradTeachersPage extends BasePage implements OnInit {
     const params = {
       email: item.email,
     };
-    this.nav.push('/teacher-profile', params);
-  }
+    this.nav.push('/student-teacher-profile', params);
+  }w
 }
