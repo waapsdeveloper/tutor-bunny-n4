@@ -1,4 +1,4 @@
-<div class="ion-padding">
+<!-- <div class="ion-padding">
   <div class="body-content-68448">
     <div class="body-content-68448">
       <div class="teacher-welcome-image-78521">
@@ -15,4 +15,30 @@
       <app-sd-button-gray [text]="'Continue'" (click)="continue()"></app-sd-button-gray>
     </div>
   </div>
+</div> -->
+
+
+<div class="welcome-page-outer">
+
+  <div class="page-logo-outer">
+
+  </div>
+
+  <div class="swiper-outer">
+    <swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }"
+      class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()">
+      <ng-template swiperSlide *ngFor="let item of list">
+        <div class="vedio-box-inner">
+          <div class="video-89654"
+            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+
+  <div class="welcome-page-footer">
+
+  </div>
+
 </div>

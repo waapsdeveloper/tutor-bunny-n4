@@ -9,6 +9,7 @@ import { TeacherWelcomePageRoutingModule } from './teacher-welcome-routing.modul
 import { TeacherWelcomePage } from './teacher-welcome.page';
 import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
 import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-
     IonicModule,
     SdButtonClearModule,
     SdButtonGrayModule,
-    TeacherWelcomePageRoutingModule
+    TeacherWelcomePageRoutingModule,
+    SwiperModule
   ],
   declarations: [TeacherWelcomePage]
 })
