@@ -9,8 +9,8 @@
 
   
 </ion-content>
-<ion-footer class="checkout-border-top">
-  <div class="ion-padding d-flex flex-column gap-16">
+<ion-footer class="checkout-footer checkout-border-top">
+  <div class="ion-padding d-flex flex-column">
     <div class="d-flex flex-column gap-8 ion-padding" >
 
       <div class="d-flex flex-row justify-content-between">
@@ -27,10 +27,10 @@
       </div>
 
 
-      <app-sd-button-golden [text]="'Checkout'" (click)="openStripe()"></app-sd-button-golden>
+      <app-sd-button-golden [text]="getSelectedItems()" (click)="openStripe()"></app-sd-button-golden>
     </div>
 
-    
+    <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
     
   </div>
 </ion-footer>

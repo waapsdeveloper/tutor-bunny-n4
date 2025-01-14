@@ -6,10 +6,14 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './chat-dot-count.component.html',
   styleUrls: ['./chat-dot-count.component.scss'],
 })
-export class ChatDotCountComponent  implements OnInit {
+export class ChatDotCountComponent {
 
-  constructor(public chatService: ChatService,) { }
+  unreadChatCount$;
 
-  ngOnInit() {}
+  constructor(public chatService: ChatService,) { 
+    this.chatService.getUnreadCount().subscribe( data => {
+      this.unreadChatCount$ = data;
+    })
+  }
 
 }

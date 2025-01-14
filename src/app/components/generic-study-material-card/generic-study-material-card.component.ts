@@ -190,9 +190,11 @@ export class GenericStudyMaterialCardComponent
 
     if(this.itemExistInCart$ == 0) {
       this.cartService.setItem(this.item)
-    } else {
-      this.cartService.setRemove(this.item)
-    }
+    } 
+    
+    // else {
+    //   this.cartService.setRemove(this.item)
+    // }
   }
 }import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 

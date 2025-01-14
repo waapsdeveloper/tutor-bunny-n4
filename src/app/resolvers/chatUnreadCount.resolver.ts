@@ -2,15 +2,15 @@ import { inject } from '@angular/core';
 import { ResolveFn, Router } from '@angular/router'; // Your data service
 import { ChatService } from '../services/chat.service';
 
-export const chatListResolver: ResolveFn<any> = async (route, state) => {
+export const chatUnreadCountResolver: ResolveFn<any> = async (route, state) => {
   const service = inject(ChatService);
   const router = inject(Router);
-  // let count = await service.getCountPromise();
-  // if (!count || count == 0) {
-  //   service.getchatList('', 1, false);
-  // }
+  let count = await service.getUnreadCountPromise();
+  if (!count || count == 0) {
+    service.getUnreadMsgCount()
+  }
 
   // return count;
-  return 0;
+  return count;
   
 };

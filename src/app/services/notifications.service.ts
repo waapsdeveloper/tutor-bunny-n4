@@ -10,27 +10,22 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
 export interface GlobalNotificationModel {
-  user_id: number;
-  id: number;
-  item: any;
+  unread_count: number;
+  list: any[];
+  page: number,
+  last_page: number
 }
-
-export type GlobalNotificationModelState = Array<GlobalNotificationModel>;
 
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotificationModelState> {
+export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotificationModel> {
 
   user: any;
-  page = 1;
-  unread_count = 0;
-  ids: any[] = [];
-  shownoti;
-  last_page = -1;
-  list: any[] = [];
-  notificationChannel: any;
+  
+  
   private pusher: Pusher;
+  notificationChannel: any;
 
   constructor(
     private network: NetworkService,
@@ -66,26 +61,85 @@ export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotif
     };
   }
 
-  initialState(): GlobalNotificationModelState {
-    return [];
+  initialState(): GlobalNotificationModel {
+    return {
+      unread_count: 0,
+      list: [],
+      page: 1,
+      last_page: -1
+    };
   }
 
-  
+  getState(){
+    return this.selectState((state) => state);
+  }
 
-  
+  getList() {
+    return this.selectState((state) => state.list);
+  }
 
-  
+  getListPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.list).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
 
+  getCount() {
+    return this.selectState(
+      (state) => state.list.length
+    );
+  }
+
+  getCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.list.length).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getUnreadCount() {
+    return this.selectState(
+      (state) => state.unread_count
+    );
+  }
+
+  getUnreadCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.unread_count).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getPagePromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.page).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getLastPagePromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.last_page).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+  
   registerPusherEvent() {
     let user = this.users.getUser() as any;
 
-
     this.notificationChannel.bind(
       'notification-rec-' + user.id,
-
       this.notificationChannelReceived.bind(this)
     );
+
   }
+
   unRegisterPusherEvent() {
     let user = this.users.getUser() as any;
 
@@ -95,76 +149,148 @@ export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotif
     }
     this.notificationChannel.unbind('notification-rec-' + user.id);
     this.events.unsubscribe('notification-received-via-pusher');
+
   }
 
   async notificationChannelReceived($event: any) {
     this.events.publish('notification-received-via-pusher', $event);
 
     let id = $event.notification_id;
-
     let res = await this.network.getNotificationById(id);
-
-
-    this.list.unshift(res.data);
+    this.setItem(res.data)
+    // this.list.unshift(res.data);
     // if (res.data.is_open === 0) {
     //
 
-    this.unread_count = this.unread_count + 1;
+    // this.unread_count = this.unread_count + 1;
     // }
 
 
 
   }
 
-  getNotificationsFromApi(search = '', page = 1) {
+  setItem(obj: any) {
+    this.setState((state) => {
+      const exists = state.list.some((item: any) => item.id === obj.id);
+      return {
+        ...state, // Keep other parts of the state unchanged
+        list: exists
+          ? state.list.map((item: any) => (item.id === obj.id ? obj : item)) // Update existing item
+          : [obj, ...state.list], // Add new item
+      };
+    });
+  }
+  
+
+  setRemove(obj: any) {
+    this.setState((state) => ({
+      ...state, // Preserve other state properties
+      list: state.list.filter((item: any) => item.id !== obj.id), // Remove the item with matching ID
+    }));
+  }
+  
+  setList(list: any[]){
+    this.setState((state) => ({
+      ...state, // Preserve other state properties
+      list: list
+    }));
+  }
+
+  setPage(page: number){
+    this.setState((state) => ({
+      ...state, // Preserve other state properties
+      page: page
+    }));
+  }
+
+  setLastPage(last_page: number){
+    this.setState((state) => ({
+      ...state, // Preserve other state properties
+      last_page: last_page
+    }));
+  }
+
+  setUnreadCount(unread_count: number){
+    this.setState((state) => ({
+      ...state, // Preserve other state properties
+      unread_count: unread_count
+    }));
+  }
+
+
+
+  getNotificationsFromApi(search = '', page = 1) {    
+    
+
     return new Promise(async (resolve) => {
       let obj = {
         page: page,
       };
       const res = (await this.network.getAllNotifications(obj)) as any;
       const data = res.result;
-      this.page = data.current_page;
-      this.last_page = data.last_page;
+
+      let list = await this.getListPromise() as any[];
+
+      this.setPage(data.current_page);
+      this.setLastPage(data.last_page);
+
       if (page === 1) {
-        this.list = data.data;
-        const openItemsArray = this.list.filter((item) => item.is_open === 0);
-
-        this.unread_count = openItemsArray.length;
+        list = data.data;
       } else {
-        this.list = [...this.list, ...data.data];
-        const openItemsArray = this.list.filter((item) => item.is_open === 0);
-
-        this.unread_count = openItemsArray.length;
+        list = [...list, ...data.data];        
       }
-      resolve(this.list);
+
+      this.setList(list)
+
+      // const openItemsArray = list.filter((item) => item.is_open === 0);
+
+        // this.unread_count = openItemsArray.length;
+
+      resolve(list);
     });
   }
 
-  async sendIsOpenToApis() {
-    let ids = this.list.map((item) => item.id);
+  getNotificationUnreadCount(){
+    return new Promise( async (resolve) => {
+
+      let count = 0;
+      const res = await this.network.getNotificationUnreadCount();
+      console.log(res)
+      this.setUnreadCount(res.unread_count)
+      resolve(count);
+
+    });
+  }
+
+  async sendIsOpenToApis(list) {
+    let ids = list.map((item) => item.id);
     let object = {
       ids: ids,
     };
-    let response = await this.network.notificationRead(object);
+    await this.network.notificationRead(object);
 
-    this.unread_count = 0;
+    // this.unread_count = 0;
   }
 
-  getAllNotifications() {
-    return new Promise(async (resolve) => {
-      if (this.list.length == 0) {
-        await this.getNotificationsFromApi();
-      }
+  // getAllNotifications() {
+  //   return new Promise(async (resolve) => {
+  //     if (this.list.length == 0) {
+  //       await this.getNotificationsFromApi();
+  //     }
 
-      resolve(this.list);
-    });
-  }
+  //     resolve(this.list);
+  //   });
+  // }
 
   loadMoreNotifications() {
-    return new Promise((resolve) => {
-      if (this.page < this.last_page) {
-        this.page = this.page + 1;
-        this.getNotificationsFromApi('', this.page);
+    return new Promise( async (resolve) => {
+
+      const page = await this.getPagePromise() as number;
+      const last_page = await this.getLastPagePromise() as number;
+
+
+      if (page < last_page) {
+        this.getNotificationsFromApi('', page + 1);
       }
 
       resolve(true);

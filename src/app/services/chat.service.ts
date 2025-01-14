@@ -11,18 +11,15 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
 export interface GlobalChatsModel {
-  id: number;
+  unread_count: number;
+  chats: any[],
+  requests: any[]
 }
-
-export type GlobalChatsModelState = Array<GlobalChatsModel>;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelState > {
-
-
-
+export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > {
   
   user: any;
   role_id: any;
@@ -39,6 +36,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
     user_id: null,
     course_id: null,
   };
+
   days: any[] = [];
   chatChannel: any;
 
@@ -49,6 +47,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
     public pubsubSvc: NgxPubSubService
   ) {
     super();
+
     const options = {
       cluster: 'ap2',
       forceTLS: true,
@@ -81,8 +80,8 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
     this.events.subscribe('update-chat-lists', () => {
       this.getchatList();
     });
+  
   }
-
 
   storeConfig(): NgSimpleStateStoreConfig {
     return {
@@ -90,21 +89,53 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
     };
   }
 
-  initialState(): GlobalChatsModelState {
-    return [];
+  initialState(): GlobalChatsModel {
+    return {
+      unread_count: 0,
+      chats: [],
+      requests: []
+    };
   }
 
-  getList() {
-    return this.selectState((state) => state);
+  getChatList() {
+    return this.selectState((state) => state.chats);
   }
 
-  getCount() {
-    return this.selectState((state) => state.length);
+  getChatCount() {
+    return this.selectState((state) => state.chats.length);
   }
 
-  getCountPromise() {
+  getChatCountPromise() {
     return new Promise((resolve) => {
-      this.selectState((state) => state.length).subscribe((res) => {
+      this.selectState((state) => state.chats.length).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getRequestList() {
+    return this.selectState((state) => state.requests);
+  }
+
+  getRequestCount() {
+    return this.selectState((state) => state.requests.length);
+  }
+
+  getRequestCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.requests.length).subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getUnreadCount() {
+    return this.selectState((state) => state.unread_count);
+  }
+
+  getUnreadCountPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.unread_count).subscribe((res) => {
         resolve(res);
       });
     });
@@ -180,7 +211,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
   }
 
   getchatList(search = '', page = 1, liked = false) {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve) => {  
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;
       let obj = {
@@ -205,26 +236,15 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModelSta
     });
   }
 
-  async getUnreadMsgCount(): Promise<number> {
-    if (this.chats.length == 0) {
-      return 0;
-    }
-    //
-    let ids = this.chats.map((item) => item.chat_room_id);
-    //
-    // return
-
-    let object = {
-      ids: ids,
-      user_id: this.user.id,
-    };
-
-    let res = await this.network.getUnreadChat(object);
-    //
-
+  async getUnreadMsgCount(): Promise<number> { 
+    let res = await this.network.getUnreadChat({});
     this.unreadCount = res.unread_count;
-    //
 
+    this.setState( state => ({
+      ...state,
+      unread_count: res.unread_count
+    }));
+    
     return this.unreadCount;
   }
 

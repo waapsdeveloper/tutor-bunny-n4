@@ -16,11 +16,11 @@ export type GlobalFavMaterailModelState = Array<GlobalFavMaterailModel>;
   providedIn: 'root',
 })
 export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore<GlobalFavMaterailModelState> {
-  page = 1;
-  last_page = -1;
+  
   constructor(private users: UsersService, private network: NetworkService) {
     super();
   }
+
   storeConfig(): NgSimpleStateStoreConfig {
     return {
       storeName: 'GlobalFavMaterailModel',
@@ -54,6 +54,13 @@ export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore<GlobalF
       resolve(true);
     });
   }
+
+  setList(list: any[]){
+    this.setState((state) => {
+      return list.length > 0 ? [...list] : [];
+    })
+  }
+  
   setItem(obj: any) {
     this.setState((state) => {
       const exists = state.some((item: any) => item.id === obj.id);

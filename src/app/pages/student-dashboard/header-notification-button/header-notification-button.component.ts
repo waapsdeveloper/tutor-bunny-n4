@@ -7,18 +7,18 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './header-notification-button.component.html',
   styleUrls: ['./header-notification-button.component.scss'],
 })
-export class HeaderNotificationButtonComponent  implements OnInit {
+export class HeaderNotificationButtonComponent {
 
-  constructor(private nav: NavService, public notification: NotificationsService) { }
 
-  ngOnInit() {}
+  unreadCount$;
 
-  
-  gotoNotification() {
-    this.nav.push('notifications', {
-      backUrl: '',
-      showBack: true,
-    });
+  constructor(public notification: NotificationsService) { 
+
+    this.notification.getUnreadCount().subscribe( data => {
+      this.unreadCount$ = data;
+    })
+
   }
+
 
 }

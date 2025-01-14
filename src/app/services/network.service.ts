@@ -142,8 +142,6 @@ export class NetworkService {
   }
 
   getUnreadChat(data: any) {
-
-    // const str = this.serialize(data);
     return this.httpPostResponse('get-unread-chats/count', data, false, false);
   }
 
@@ -250,6 +248,15 @@ export class NetworkService {
     const str = this.serialize(data);
     return this.httpGetResponse('notifications' + '?' + str, null, false, false);
   }
+
+  getNotificationUnreadCount() {
+    return this.httpGetResponse('notifications/unread-count', null, false, false);
+  }
+
+  
+
+
+
 
   getNotifications(id) {
     return this.httpGetResponse('notifications/by-user/' + id, null, false, false);

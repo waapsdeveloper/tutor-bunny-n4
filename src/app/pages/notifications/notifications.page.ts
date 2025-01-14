@@ -1,5 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { ViewWillEnter } from '@ionic/angular';
+import { Component, Injector } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -8,10 +7,12 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
-export class NotificationsPage extends BasePage implements ViewWillEnter {
+export class NotificationsPage extends BasePage{
+  
   user;
   params: any;
-  notifications;
+  
+  notificationsState$;
   loading = false;
 
   constructor(
@@ -19,24 +20,14 @@ export class NotificationsPage extends BasePage implements ViewWillEnter {
     public notificationService: NotificationsService
   ) {
     super(injector);
-  }
 
-  ionViewWillEnter(): void {
-    this.initialize();
-  }
-
-
-
-  async initialize() {
-    this.loadResolvers();
-    // this.notificationService.unread_count = 0;
-
-
-    this.notificationService.sendIsOpenToApis()
-
+    this.notificationService.getState().subscribe( state => {
+      this.notificationsState$ = state;
+    })
   }
 
   async loadMore($event) {
+    
     if (this.loading == true) {
       return;
     }
@@ -47,8 +38,6 @@ export class NotificationsPage extends BasePage implements ViewWillEnter {
   }
 
   reloadLIst(event) {
-    this.initialize();
-
     this.notificationService.getNotificationsFromApi();
   }
 }

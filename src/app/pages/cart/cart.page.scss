@@ -7,3 +7,20 @@
 .checkout-border-top {
   border: 1px solid rgba(215, 214, 214, 1)
 }
+
+.checkout-footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.Privacy-policy {
+  font-size: 12px;
+  color: #777777;
+  padding-bottom: 20px;
+  text-align: center;
+
+  a {
+      color: #000000;
+      text-decoration: underline;
+  }
+}

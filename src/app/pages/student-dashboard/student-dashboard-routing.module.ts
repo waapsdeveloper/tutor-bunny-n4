@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { notificationCountResolver } from 'src/app/resolvers/notificationCount.resolver';
 import { cartListResolver } from 'src/app/resolvers/student/cartList.resolver';
+import { favoritesCountResolver } from 'src/app/resolvers/student/favoritesCount.resolver';
 
 import { StudentDashboardPage } from './student-dashboard.page';
 
@@ -10,7 +12,9 @@ const routes: Routes = [
     component: StudentDashboardPage,
 
     resolve: {
-      cart: cartListResolver
+      cart: cartListResolver,
+      notificationCount: notificationCountResolver,
+      favorites: favoritesCountResolver 
     },
 
     children: [

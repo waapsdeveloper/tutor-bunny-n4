@@ -13,6 +13,7 @@ import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
 export class CartPage extends BasePage implements OnInit {
 
   title = 'Cart';
+  buttonText = 'Checkout'
   list$;
 
   total = 0;
@@ -34,6 +35,16 @@ export class CartPage extends BasePage implements OnInit {
 
   removeCartitem(item){
     this.cartService.setRemove(item)
+  }
+
+  getSelectedItems(){
+
+    if(!this.list$){
+      return 'Checkout'
+    }
+
+    let items = this.list$.filter( x => x.selected == true).length;
+    return `Checkout (${items}) items`;
   }
 
   async openStripe() {

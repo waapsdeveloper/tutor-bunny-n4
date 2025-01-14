@@ -1,2 +1,2 @@
 <!-- *ngIf="chatService.unreadCount != 0 || chatService.requestCount != 0" -->
-<div class="unread-count" ></div>
+<div class="unread-count" *ngIf="unreadChatCount$ && unreadChatCount$ > 0" ></div>

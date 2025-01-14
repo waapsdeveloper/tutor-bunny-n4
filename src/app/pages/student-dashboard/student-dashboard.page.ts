@@ -42,6 +42,13 @@ export class StudentDashboardPage {
       showBack: true,
     });
   }
+  
+  gotoNotification() {
+    this.nav.push('notifications', {
+      backUrl: '',
+      showBack: true,
+    });
+  }
 
   
 }

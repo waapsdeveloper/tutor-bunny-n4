@@ -17,9 +17,7 @@ export type GlobalFavCoursesModelState = Array<GlobalFavCoursesModel>;
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFavCoursesModelState> {
-  page = 1;
-  last_page = -1;
+export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFavCoursesModelState> {  
 
   constructor(private users: UsersService, private network: NetworkService) {
     super();
@@ -67,6 +65,12 @@ export class GlobalFavCoursesService extends NgSimpleStateBaseRxjsStore<GlobalFa
       this.setState(() => res);
       resolve(true);
     });
+  }
+
+  setList(list: any[]){
+    this.setState((state) => {
+      return list.length > 0 ? [...list] : [];
+    })
   }
 
   setItem(obj: any) {

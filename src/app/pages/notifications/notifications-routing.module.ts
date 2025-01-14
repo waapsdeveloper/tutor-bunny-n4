@@ -3,13 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotificationsPage } from './notifications.page';
 import { userResolver } from 'src/app/resolvers/user.resolver';
+import { notificationListResolver } from 'src/app/resolvers/notificationList.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: NotificationsPage,
     resolve: {
-      user: userResolver
+      list: notificationListResolver
     },
   }
 ];

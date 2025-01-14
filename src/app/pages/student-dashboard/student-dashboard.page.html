@@ -4,10 +4,10 @@
     <app-profile-search-box style="width: 100%;"></app-profile-search-box>
     <div class="noti-795">
       <div class="icon-box">
-        <div class="icon-box-outer d-flex flex-row gap-8">
+        <div class="icon-box-outer d-flex flex-row gap-16">
           <app-header-cart-button></app-header-cart-button>
           <app-header-fav-button></app-header-fav-button>
-          <app-header-notification-button></app-header-notification-button>
+          <app-header-notification-button (click)="gotoNotification()"></app-header-notification-button>
         </div>
       </div>
     </div>

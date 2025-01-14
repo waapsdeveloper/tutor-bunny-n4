@@ -3,10 +3,10 @@
 </ion-header>
 <ion-content>
 
-  <app-notification-box *ngFor="let item of notificationService.list; let i = index" [item]="item" [index]="i"
+  <app-notification-box *ngFor="let item of notificationsState$?.list; let i = index" [item]="item" [index]="i"
     (reloadList)="reloadLIst($event)"></app-notification-box>
   <div style="height: 700px; display: flex; align-items: center; justify-content: center" class="ion-padding"
-    *ngIf="notificationService.list.length == 0">No notification to display</div>
+    *ngIf="notificationsState$?.list.length === 0">No notification to display</div>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

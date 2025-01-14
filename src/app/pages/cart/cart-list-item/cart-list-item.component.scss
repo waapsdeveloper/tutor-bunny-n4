@@ -1,6 +1,15 @@
 .nd-card-outer-748 {
     height: 100px;
   
+    display: block;
+    width: 100%;
+
+    .checkbox-case {
+        width: 35px;
+        float: left;
+    }
+
+    
     // display: flex;
     // flex-direction: row;
     // justify-content: flex-start;
@@ -10,6 +19,7 @@
         display: flex;
         flex-direction: row;
         gap: 8px;
+        width: calc(100% - 35px);
     }
   
     .image-outer {
@@ -36,6 +46,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            gap: 16px;
 
             .price{
                 min-width: max-content;
