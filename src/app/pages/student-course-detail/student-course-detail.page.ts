@@ -3,10 +3,10 @@ import * as moment from 'moment';
 import { BasePage } from '../../base-page/base-page';
 import { GlobalCoursesService } from '../../services/global-courses.service';
 import { IonContent } from '@ionic/angular';
-import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { StudentWelcomeComponent } from '../student/student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-student-course-detail',

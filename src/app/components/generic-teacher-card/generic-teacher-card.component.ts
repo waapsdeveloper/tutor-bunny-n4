@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student-welcome/student-welcome.component';
+import { StudentWelcomeComponent } from 'src/app/pages/student/student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './generic-teacher-card.component.html',
   styleUrls: ['./generic-teacher-card.component.scss'],
 })
-export class GenericTeacherCardComponent extends BasePage implements OnInit {
+export class GenericTeacherCardComponent extends BasePage {
 
   flag;
   rating;
@@ -35,10 +35,6 @@ export class GenericTeacherCardComponent extends BasePage implements OnInit {
   ) {
     super(injector);
     this.user = this.users.getUser();
-  }
-
-  ngOnInit() {
-
   }
 
   getFlag() {

@@ -6,11 +6,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { BasePage } from 'src/app/base-page/base-page';
-import { StudentWelcomeComponent } from 'src/app/pages/student-dashboard/student-welcome/student-welcome.component';
-import { TrailMessageComponent } from '../trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { CartService } from 'src/app/services/cart.service';
 import { MaterialFavoriteService } from 'src/app/services/material-favorite.service';
@@ -19,10 +15,7 @@ import { MaterialFavoriteService } from 'src/app/services/material-favorite.serv
   templateUrl: './generic-study-material-card.component.html',
   styleUrls: ['./generic-study-material-card.component.scss'],
 })
-export class GenericStudyMaterialCardComponent
-  extends BasePage
-  implements OnInit
-{
+export class GenericStudyMaterialCardComponent extends BasePage {
   private _item: any;
 
   itemExistInCart$;
@@ -86,10 +79,6 @@ export class GenericStudyMaterialCardComponent
     if (data && data.type == 3) {
       this.type = data.type;
     }
-  }
-
-  ngOnInit() {
-    
   }
 
   getFlag(data) {

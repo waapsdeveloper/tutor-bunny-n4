@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'student-dashboard',
-        loadChildren: () => import('./../pages/student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule),
+        loadChildren: () => import('./../pages/student/student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule),
         resolve: {
           user: userResolver
         },

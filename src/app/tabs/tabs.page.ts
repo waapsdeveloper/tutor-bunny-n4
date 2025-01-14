@@ -6,12 +6,10 @@ import { ChatService } from '../services/chat.service';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
-import * as moment from 'moment';
 import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
 import { TeacherService } from '../services/teacher.service';
-import { StudentWelcomeComponent } from '../pages/student-dashboard/student-welcome/student-welcome.component';
-import { InitializeAppService } from '../services/sqlite/initialize.app.service';
+import { StudentWelcomeComponent } from '../pages/student/student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-tabs',

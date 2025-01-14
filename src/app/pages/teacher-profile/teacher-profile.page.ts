@@ -4,8 +4,8 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import * as moment from 'moment';
-import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { StudentWelcomeComponent } from '../student/student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -50,7 +50,6 @@ export class TeacherProfilePage
   updateRating;
   updateTotalRating;
 
-
   constructor(injector: Injector, public globalCourses: GlobalCoursesService, private chats: ChatService) {
     super(injector);
   }
@@ -91,6 +90,7 @@ export class TeacherProfilePage
   }
 
   async initialize() {
+
     this.loading = true;
     this.roleId = localStorage.getItem('role');
 
