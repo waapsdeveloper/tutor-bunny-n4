@@ -3,7 +3,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from '../../base-page/base-page';
 import { LoginPage } from '../login/login.page';
-import { TeacherWelcomePage } from '../teacher-welcome/teacher-welcome.page';
 import { SignUpPage } from '../sign-up/sign-up.page';
 import { ForgetPasswordComponent } from '../forget-password/forget-password.component';
 

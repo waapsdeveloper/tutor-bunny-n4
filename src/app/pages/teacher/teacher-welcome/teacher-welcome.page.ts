@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -11,6 +11,7 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
+  activeIndex = 0;
   list = [
     {
       id: 1,
@@ -32,7 +33,7 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
     },
   ]
 
-  constructor(injector:Injector) {
+  constructor(injector:Injector, private cdr: ChangeDetectorRef) {
     super(injector)
    }
 
@@ -41,6 +42,12 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
 
   continue(){
     this.nav.push('/teacher-profile/teacher-profile-edit');    
+  }
+
+  onSlideChanged() {
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+
+    this.cdr.detectChanges();
   }
 
 }
