@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stp-page-rating.component.scss'],
 })
 export class StpPageRatingComponent  implements OnInit {
+  total_rating;
+  rating;
 
   constructor() { }
 

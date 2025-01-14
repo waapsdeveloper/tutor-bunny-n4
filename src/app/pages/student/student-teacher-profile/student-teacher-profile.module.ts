@@ -13,6 +13,7 @@ import { StpPageInfoModule } from './stp-page-info/stp-page-info.module';
 import { StpPageProfileStatisticsModule } from './stp-page-profile-statistics/stp-page-profile-statistics.module';
 import { StpPageCoursesStudyNotesModule } from './stp-page-courses-study-notes/stp-page-courses-study-notes.module';
 import { StpPageGalleryModule } from './stp-page-gallery/stp-page-gallery.module';
+import { StpPageRatingModule } from './stp-page-rating/stp-page-rating.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { StpPageGalleryModule } from './stp-page-gallery/stp-page-gallery.module
     StpPageInfoModule,
     StpPageProfileStatisticsModule,
     StpPageCoursesStudyNotesModule,
-    StpPageGalleryModule
+    StpPageGalleryModule,
+    StpPageRatingModule
 
   ],
   declarations: [StudentTeacherProfilePage]

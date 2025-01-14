@@ -1,0 +1,17 @@
+.video-box-98563 {
+    height: 250px;
+    width: 100%;
+    // margin-top: 16px;
+    // border-radius: 8px;
+    background-image: url(/assets/vedio.jpeg);
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+  
+    .youtube {
+      position: absolute;
+      width: 43px;
+      right: 25px;
+      bottom: 19px;
+    }
+  }
