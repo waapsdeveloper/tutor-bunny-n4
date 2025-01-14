@@ -164,7 +164,7 @@ const routes: Routes = [
   },
   {
     path: 'teacher-welcome',
-    loadChildren: () => import('./pages/teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
+    loadChildren: () => import('./pages/teacher/teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)
   },
   {
     path: 'course-photoss',
