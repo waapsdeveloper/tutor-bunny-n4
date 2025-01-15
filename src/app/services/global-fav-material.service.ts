@@ -74,7 +74,61 @@ export class GlobalFavMaterialService extends NgSimpleStateBaseRxjsStore<GlobalF
     });
   }
 
-  setRemove(obj: any) {
-    this.setState((state) => state.filter((item: any) => item.id !== obj.id));
+  setRemove(study_material_id) {
+    this.setState((state) => state.filter((item: any) => item.study_material_id !== study_material_id));
   }
+
+  isItemExist(study_material_id){
+    return this.selectState(
+      (state) => state.filter((item: any) => item.study_material_id === study_material_id).length
+    );
+  }
+
+  
+  async addFavorites(obj: any, user) {
+    // const flag = await this.globalFavCoursesService.addFavorite(user.id, obj.id);
+    // const count = await this.globalFavCoursesService.getFavoriteCount(user.id);
+    // this.events.publish('update-course-fav-count', {count})
+    // this.events.publish('update-course-item-like', {
+    //   user_id: user.id,
+    //   course_id: obj.id,
+    //   liked: true
+    // })
+
+    let ite = {
+      user_id: user.id,
+      study_material_id: obj.id,
+    };
+    const res = await this.network.addMaterialFav(ite);
+
+    // console.log(res);
+    if (res && res.data) {
+      this.setItem(res.data);
+    }
+  }
+
+  async removeFavorites(obj: any, user: any) {
+    // const flag = await this.globalFavCoursesService.removeFavorite(user.id, obj.id);
+
+    // const count = await this.globalFavCoursesService.getFavoriteCount(user.id);
+    // this.events.publish('update-course-fav-count', {count})
+
+    // this.events.publish('update-course-item-like', {
+    //   user_id: user.id,
+    //   course_id: obj.id,
+    //   liked: false
+    // })
+
+    let ite = {
+      user_id: user.id,
+      study_material_id: obj.id,
+    };
+
+    const res = await this.network.removeMaterialFav(ite);
+    // console.log(res)
+    if (res) {
+      this.setRemove(obj.id);
+    }
+  }
+
 }

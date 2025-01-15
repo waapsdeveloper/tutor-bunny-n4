@@ -9,7 +9,6 @@ import {
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
 import { CartService } from 'src/app/services/cart.service';
-import { MaterialFavoriteService } from 'src/app/services/material-favorite.service';
 @Component({
   selector: 'app-generic-study-material-card',
   templateUrl: './generic-study-material-card.component.html',
@@ -19,6 +18,8 @@ export class GenericStudyMaterialCardComponent extends BasePage {
   private _item: any;
 
   itemExistInCart$;
+  itemExistInFav$;
+  
 
   displayName;
   flag;
@@ -49,7 +50,7 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     injector: Injector,
     private cartService: CartService,
 
-    private materialFavoriteService: MaterialFavoriteService,
+    private materialFavoriteService: GlobalFavMaterialService,
     public globalMaterial: GlobalFavMaterialService,
     private chats: ChatService
   ) {
@@ -64,6 +65,9 @@ export class GenericStudyMaterialCardComponent extends BasePage {
       this.itemExistInCart$ = data;
     })
 
+    this.materialFavoriteService.isItemExist(data.id).subscribe( count => {
+      this.itemExistInFav$ = count > 0;
+    })
 
 
 
