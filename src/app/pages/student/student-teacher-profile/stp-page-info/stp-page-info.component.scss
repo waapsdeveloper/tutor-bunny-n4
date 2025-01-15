@@ -1,0 +1,53 @@
+.techer-subject-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.techer-card-outer-78965 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 16px;
+}
+
+.teacher-card-head {
+  display: flex;
+  //align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100px;
+}
+
+.chips-outer {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 100px);
+  justify-content: flex-start;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.chip-outer-78961 {
+  display: flex;
+  align-items: baseline;
+  //  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  border-radius: 5px;
+  padding: 0px 3px 0 3px;
+  background-color: rgba(69, 69, 69, 0.25);
+}
+
+.techer-card-outer-78965 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 16px;
+}

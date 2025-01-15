@@ -1,27 +1,24 @@
 <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
-  <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
-    <div style="padding: 0 16px 0 0;" (click)="back()">
+  <div class="top-dashboard-header-outer ion-padding">
+    <div style="padding: 0 16px 0 0;" (click)="back.emit()">
       <img src="../../assets/svg/white-back.svg" alt="">
     </div>
-    <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
+    <div class="image-box-89657" [style.background-image]="'url(' + user_image + ')'">
     </div>
     <div class="header-oblique-double-675">
-      <div class="header-line-678576" (click)="openEditProfile()" *ngIf="roleId === 3">
+      <div class="header-line-678576" (click)="openEditProfile()">
         <div class="header-line-box-678576">
-          <img src="../../assets/svg/edit.svg" />
+          <img src="../../assets/svg/share-78.svg" />
         </div>
       </div>
       <div class="header-info-box-68447">
         <div class="header-info-user-68448">
           <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
         </div>
-        <div class="header-info-misc-68448 outfit" *ngIf="status !== 'In Review'"><img
-            src="../../assets/svg/verified-profile-sheild.svg" />Verified
-          on
-          {{verified_on}}
-        </div>
-        <div class="header-info-misc-68448 outfit" *ngIf="status === 'In Review'"><img
-            src="../../assets/svg/verified-profile-sheild.svg" />Verification pending
+        <div class="header-info-misc-68448 outfit">
+          <img src="../../assets/svg/verified-profile-sheild.svg" />
+          <span *ngIf="status !== 'In Review'">Verified on {{verified_on}}</span>
+          <span *ngIf="status === 'In Review'">Verification pending</span>
         </div>
         <div class="header-info-misc-68448 outfit">
           <app-rating-stars [rating]="rating"></app-rating-stars>

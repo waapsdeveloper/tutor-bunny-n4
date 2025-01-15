@@ -7,12 +7,27 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;    
+
+    .image-box-89657 {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: rgb(255, 255, 255);
+      background-repeat: repeat;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      background-size: cover;
+      background-position: center center;
+    }
   
-    // .profile-img {
-    //   width: 100px;
-    //   // border-radius: 0 0 20px 20px;
-    //   // height: 156px;
-    // }
+    .profile-img {
+      width: 100px;
+      border-radius: 0 0 20px 20px;
+      height: 156px;
+    }
   
     .header-oblique-double-675 {
       display: flex;
