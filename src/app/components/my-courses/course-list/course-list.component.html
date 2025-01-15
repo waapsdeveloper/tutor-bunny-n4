@@ -1,13 +1,3 @@
-<!-- <div class="vedio-content-89658">
-  <div class="card-container">
-    <div class="vedio-box-inner card"  style="width: 50%;" *ngFor="let item of list" (click)="oepnDeatils(item)">
-      <div class="video-89654" [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
-      <div class="video-para">{{item.title}}</div>
-      <div class="price-tag">{{item.auth_user_currency_symbol}}{{item.updated_price}}/lesson</div>
-    </div>
-  </div>
-</div> -->
-
 <swiper
   [slidesPerView]="2"
   [spaceBetween]="10"
@@ -15,7 +5,7 @@
   class="swiper-container-inner-7892"
 >
   <ng-template swiperSlide *ngFor="let item of list">
-    <div class="vedio-box-inner card" (click)="oepnDeatils(item)">
+    <div class="vedio-box-inner card" (click)="clickOpen.emit(item)">
       <div
         class="video-89654"
         [style.background-image]="

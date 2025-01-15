@@ -10,8 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   loading = false;
-  user: any;
-  flag: string = '';
+  user: any;  
 
   headerData = {
     image: '',
@@ -32,6 +31,30 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     flag: ''
   };
 
+  countData = {
+    years_of_experience: 0,
+    course_count: 0,
+    notes_count: 0
+  };
+
+  aboutData = {
+    heading: 'About',
+    text: ''
+  }
+
+  courseData = {
+    heading: 'Courses & Study Notes',    
+    list: []
+  }
+
+  galleryData = {
+    heading: 'Gallery',    
+    list: []
+  }
+
+
+
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -49,9 +72,11 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     let obj = {
       email: email,
     };
-    let res = await this.network.getUserByEmail(obj);
+    let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
+    console.log(res);
     this.user = res.user;
+
 
     this.headerData = {
       image: this.user.image,
@@ -70,6 +95,30 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       state: this.user.teacher.state.name,
       flag: this.getFlag()
     }
+
+    this.countData = {
+      years_of_experience: this.user.teacher.started_teaching,
+      course_count: this.user.teacher.course_count,
+      notes_count: this.user.teacher.notes_count
+    }
+
+    this.aboutData = {
+      heading: 'About',
+      text: this.user.teacher.description || ''
+    }
+
+
+    this.courseData = {
+      heading: 'Courses & Study Notes',
+      list: res.course_material.list
+    }
+
+    this.galleryData = {
+      heading: 'Gallery',
+      list: res.gallery
+    }
+
+    this.loading = false;
 
 
     //   const verified_on = this.user.verified_on;
@@ -108,6 +157,10 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     } else {
       return '';
     }
+  }
+
+  clickOpenCourse($event){
+    console.log($event)
   }
 
   

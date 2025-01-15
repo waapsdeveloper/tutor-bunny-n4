@@ -364,6 +364,11 @@ export class NetworkService {
     return this.httpGetResponse('user-by-email' + '?' + str, null, false);
   }
 
+  getStudentTeacherProfileByEmail(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('student-teacher-profile-by-email' + '?' + str, null, false);
+  }
+
   getUserByToken() {
     return this.httpGetResponse('user', null, false);
   }

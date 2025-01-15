@@ -1,10 +1,10 @@
 <div class="student-box-outer-689567">
   <div class="sb-heading-7895">
-    <div class="sb-heading-title-7895 outfit-semibold">My Gallery
+    <div class="sb-heading-title-7895 outfit-semibold">{{heading}}
     </div>
-    <div class="sb-heading-sl-7895 outfit" (click)="goToGallery()">See all</div>
+    <div class="sb-heading-sl-7895 outfit" (click)="seeallEmit.emit()">See all</div>
   </div>
   <div class="sb-content-7895"></div>
 </div>
 
-<app-gallery-list [user]="user"></app-gallery-list>
+<app-gallery-list [list]="list"></app-gallery-list>

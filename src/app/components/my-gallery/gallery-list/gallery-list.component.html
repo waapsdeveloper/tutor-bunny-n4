@@ -10,7 +10,7 @@
 
 <swiper [slidesPerView]="2" [spaceBetween]="10" [pagination]="{ clickable: true }"
   class="swiper-container-inner-7892" #slides>
-    <ng-template swiperSlide *ngFor="let image of images">
+    <ng-template swiperSlide *ngFor="let image of list">
       <div class="vedio-box-inner" [style.backgroundImage]="setBackgroundImage(image)" (click)="openImage(image.image)"></div>
     </ng-template>
   </swiper>

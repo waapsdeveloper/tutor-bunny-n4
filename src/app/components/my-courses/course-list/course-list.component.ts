@@ -1,40 +1,38 @@
-import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { BasePage } from 'src/app/base-page/base-page';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
 })
-export class CourseListComponent extends BasePage implements OnInit {
-  @Input() list: any[] = [];
-  course
-  @Input() item
-  @ViewChild('slides', { static: false }) slides: any;
-  constructor(private _sanitizer: DomSanitizer, injector: Injector) {
-    super(injector)
-  }
-  ngOnInit() {}
+export class CourseListComponent {
+  
+  
+  @Input() list: any[] = [];  
+  @Output() clickOpen = new EventEmitter<any>()
+  
+  constructor() {
 
-  oepnDeatils(item) {
+  }  
 
-    let role = localStorage.getItem('role');
+  // oepnDeatils(item) {
 
-    // return
-    if(role =='2'){
-      const params = {
-        id: item.id,
-      }
-      this.nav.push('/student-course-detail', params)
-    }else{
+  //   let role = localStorage.getItem('role');
 
-      const params = {
-        id: item.id,
-      }
-      this.nav.push('/course-detail', params)
-    }
+  //   // return
+  //   if(role =='2'){
+  //     const params = {
+  //       id: item.id,
+  //     }
+  //     this.nav.push('/student-course-detail', params)
+  //   }else{
 
-  }
+  //     const params = {
+  //       id: item.id,
+  //     }
+  //     this.nav.push('/course-detail', params)
+  //   }
+
+  // }
 
 }

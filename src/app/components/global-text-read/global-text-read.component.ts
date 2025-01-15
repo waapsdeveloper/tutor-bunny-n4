@@ -9,6 +9,7 @@ export class GlobalTextReadComponent{
 
   isExpanded = false;
 
+  @Input() heading: string;
   @Input() text: string;
 
   constructor() { }

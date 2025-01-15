@@ -104,10 +104,10 @@
       <img src="../../assets/svg/qulification.svg" alt="">
       <div>Qualifications and experiences</div>
     </div>
-    <div class="line" *ngIf="course != 0"></div>
+    <div class="line" *ngIf="course != 0"></div> 
     <app-my-courses (onChange)="getCourses($event)" *ngIf="course != 0"></app-my-courses>
-    <div class="line" *ngIf="showGellary === true"></div>
-    <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery>
+    <!-- <div class="line" *ngIf="showGellary === true"></div>
+    <app-my-gallery *ngIf="showGellary === true" [user]="user"></app-my-gallery> -->
     <div class="line" *ngIf="rating != 0"></div>
     <app-rating-review [rating]="total_rating" *ngIf="rating != 0"></app-rating-review>
   </div>

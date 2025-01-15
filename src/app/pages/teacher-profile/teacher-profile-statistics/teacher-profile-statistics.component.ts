@@ -16,7 +16,7 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
 
   public set experince(value: any) {
     this._experince = value;
-    this.calculateAge();
+    // this.calculateAge();
   }
   year;
   trials;
@@ -36,10 +36,7 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
     this.initialize();
   }
 
-  calculateAge() {
-    const currentYear = new Date().getFullYear();
-    this.year = currentYear - this.experince;
-  }
+   
 
   ngOnInit() {}
   async initialize() {

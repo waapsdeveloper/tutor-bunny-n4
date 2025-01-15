@@ -1,50 +1,54 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-my-gallery',
   templateUrl: './my-gallery.component.html',
   styleUrls: ['./my-gallery.component.scss'],
 })
-export class MyGalleryComponent extends BasePage implements OnInit {
+export class MyGalleryComponent {
 
-  user_Id;
-  _user;
+ 
+  
+  private _data: any; 
   @Input()
-  public get user(){
-    return this._user;
+  set data(value: any) {
+    this._data = value;
+    this.updateUserDetails(value);
   }
 
-  public set user(value){
-    this._user = value;
-    this.user_Id = value?.id;
-
-
-    this.user_Id = this.user.id
+  get data(): any {
+    return this._data;
   }
 
 
+  heading: string = '';
+  list: any[] = [];
 
+  @Output() seeallEmit = new EventEmitter<any>();
 
-
-  constructor(injector: Injector) {
-
-    super(injector)
+  constructor() {
+    
   }
 
-  ngOnInit() {
+  
+  updateUserDetails(value: any){
 
-   }
-
-  goToGallery() {
-
-    const obj = {
-      backUrl: '/teacher-profile',
-      gallary: "false",
-      title: 'My Gallery',
-      id: this.user_Id
+    if (value) {
+      this.heading = value.heading || '';
+      this.list = value.list || [];
     }
-    this.nav.push('/teacher-profile/teacher-gallery', obj)
+
   }
+
+  // goToGallery() {
+
+  //   const obj = {
+  //     backUrl: '/teacher-profile',
+  //     gallary: "false",
+  //     title: 'My Gallery',
+  //     id: this.user_Id
+  //   }
+  //   this.nav.push('/teacher-profile/teacher-gallery', obj)
+  // }
 
 }

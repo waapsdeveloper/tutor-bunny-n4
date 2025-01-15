@@ -7,11 +7,14 @@
   <div class="body-content-684488">
     <app-stp-page-info [data]="infoData"></app-stp-page-info>
 
-    <app-stp-page-profile-statistics></app-stp-page-profile-statistics>
+    <app-stp-page-profile-statistics [data]="countData"></app-stp-page-profile-statistics>
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
+
 
     <!-- courses section -->
-    <app-stp-page-courses-study-notes></app-stp-page-courses-study-notes> 
-    <app-stp-page-gallery></app-stp-page-gallery>
+    <app-my-courses [data]="courseData" (clickOpen)="clickOpenCourse($event)"></app-my-courses>
+    <app-my-gallery [data]="galleryData"></app-my-gallery>
+
     <app-stp-page-rating></app-stp-page-rating>
   </div>
  
