@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { StpPageRatingComponent } from './stp-page-rating.component';
+import { SingleRatingItemComponent } from './single-rating-item.component';
 
-describe('StpPageRatingComponent', () => {
-  let component: StpPageRatingComponent;
-  let fixture: ComponentFixture<StpPageRatingComponent>;
+describe('SingleRatingItemComponent', () => {
+  let component: SingleRatingItemComponent;
+  let fixture: ComponentFixture<SingleRatingItemComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ StpPageRatingComponent ],
+      declarations: [ SingleRatingItemComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StpPageRatingComponent);
+    fixture = TestBed.createComponent(SingleRatingItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,0 +1,46 @@
+.single-rating-item-outer-7685 {
+  height: 216px;
+  width: 100%;
+
+  border-radius: 10px;
+  border: 0.5px 0px 0px 0px;
+  opacity: 0px;
+  border: 0.5px solid #00000080;
+  padding: 8px;
+}
+
+.single-rating-item-inner-7685 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.user-card-item-box {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;    
+}
+
+.user-image-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 9px;
+    background: rgba(0,0,0,0.5);
+}
+
+.user-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-location-2432 {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+
+}

@@ -542,8 +542,8 @@ export class NetworkService {
     return this.httpPostResponse('material/add-to-cart', data, null, false, false);
   }
 
-  removeItemToCart(data) {
-    return this.httpPostResponse('material/remove-to-cart', data, null, false, false);
+  removeItemToCart(data, id) {
+    return this.httpPostResponse('material/remove-to-cart/' + id, data, null, false, false);
   }
 
   buyNow(data) {

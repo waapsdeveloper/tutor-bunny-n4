@@ -68,18 +68,18 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
     );
   }
 
-  setItem(obj: any) {
+  async setItem(obj: any) {
 
-    this.setItemToCartApi(obj);
+    const res = await this.setItemToCartApi(obj);
 
     this.setState((state) => {
-      const exists = state.some((item: any) => item.id === obj.id);
+      const exists = state.some((item: any) => item.id === res.id);
       if (exists) {
         // Update existing item
-        return state.map((item: any) => (item.id === obj.id ? obj : item));
+        return state.map((item: any) => (item.id === res.id ? res : item));
       } else {
         // Add new item
-        return [...state, obj];
+        return [...state, res];
       }
     });
     
@@ -100,8 +100,7 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
     }
 
     const res = await this.network.addItemToCart(obj);
-    console.log(res);
-    return res;
+    return { ...res.result, cart_id: res.cart_id };
 
   }
 
@@ -113,7 +112,7 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
       study_material_id: item.id,
     }
 
-    const res = await this.network.removeItemToCart(obj);
+    const res = await this.network.removeItemToCart(obj, item.cart_id);
     console.log(res);
     return res;
 
@@ -124,7 +123,11 @@ export class CartService extends NgSimpleStateBaseRxjsStore<GlobalCartModelState
       const user = await this.users.getUser()
       let res = await this.network.getAllCart(user.id);
       console.log(res);
-      this.setState(() => res);
+      
+      this.setState((state) => {        
+          // Add new item
+          return [...res.result];
+      });
       resolve(true);
     });
   }

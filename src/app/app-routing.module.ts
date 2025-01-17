@@ -216,7 +216,7 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./pages/student/cart/cart.module').then( m => m.CartPageModule)
   },
   {
     path: 'student-teacher-profile',

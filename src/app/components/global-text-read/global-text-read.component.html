@@ -1,6 +1,15 @@
-<div class="fs-16 outfit discription-text">
+<div class="heading-outer-2345253 d-flex flex-column justify-content-between">
+  <div class="heading roboto-bold fs-21">{{heading}}</div>
+  <ng-content #name></ng-content>
+  
+</div>
+<div class="outfit discription-text">
+
+  
+
+
   <div
-    class="discription-para"
+    class="discription-para fs-16"
     [class.collapsed]="isExpanded"
     [innerHTML]="text"
   ></div>

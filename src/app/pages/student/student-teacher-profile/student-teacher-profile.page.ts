@@ -52,6 +52,13 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     list: []
   }
 
+  ratingData = {
+    heading: 'Reviews',
+    list: []
+  }
+
+
+
 
 
 
@@ -98,8 +105,8 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     this.countData = {
       years_of_experience: this.user.teacher.started_teaching,
-      course_count: this.user.teacher.course_count,
-      notes_count: this.user.teacher.notes_count
+      course_count: res.course_material.total_courses,
+      notes_count: res.course_material.total_material,
     }
 
     this.aboutData = {
@@ -116,6 +123,11 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     this.galleryData = {
       heading: 'Gallery',
       list: res.gallery
+    }
+
+    this.ratingData = {
+      heading: 'Reviews',
+      list: res.reviews
     }
 
     this.loading = false;

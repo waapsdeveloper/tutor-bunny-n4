@@ -179,7 +179,7 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     this.materialFavoriteService.removeFavorites(this.item, user);
   }
   
-  toggleCartItem(){
+  async toggleCartItem(){
 
     if(this.itemExistInCart$ == 0) {
       this.cartService.setItem(this.item)
