@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'reviews-by-student',
-    loadChildren: () => import('../reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
+    loadChildren: () => import('./../reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
 
 

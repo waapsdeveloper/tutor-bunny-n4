@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  align-items: center;
+  // align-items: center;
 
   .discription-para {
     overflow: hidden;
@@ -36,16 +36,15 @@
 
   .qulification-box-edu-button-98526 {
 
-    padding: 8px 16px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #393939;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    font-weight: 600;
+    // border: 1px solid #393939;
+    // border-radius: 4px;
+    // background-color: #fff;
     text-wrap: nowrap;
+    color: rgba(0,0,0,0.5);
 
   }
 }

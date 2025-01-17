@@ -48,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'teacher-profile',
-    loadChildren: () => import('./pages/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
+    loadChildren: () => import('./pages/teacher/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
   },
   {
     path: 'student-profile',
@@ -156,7 +156,7 @@ const routes: Routes = [
   },
   {
     path: 'reviews-by-student',
-    loadChildren: () => import('./pages/reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
+    loadChildren: () => import('./pages/teacher/reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
   {
     path: 'search-result',

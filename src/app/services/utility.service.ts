@@ -110,4 +110,42 @@ export class UtilityService {
     return this.strings.validateEmail(email);
   }
 
+  getFlag(user) {
+
+    if (user.student && user.student.country) {
+      const flag = user.student.country.iso2;
+      return flag ? flag.toLowerCase() : "";
+    } else if (user.teacher && user.teacher.country) {
+      const flag = user.teacher.country.iso2;
+      return flag ? flag.toLowerCase() : "";
+    } else {
+      return "";
+    }
+  }
+
+  getLocation(user) {
+
+
+    let str = '';
+
+    if (user.student && user.student.country) {
+
+      if(user.student.city){
+        str = str + user.student.city + ', '
+      }
+      const name = user.student.country.name;
+      str = str + name
+    } else if (user.teacher && user.teacher.country) {
+
+      if(user.teacher.city){
+        str = str + user.teacher.city + ', '
+      }
+      const name = user.teacher.country.name;
+      str = str + name
+    }
+
+    return str;
+
+  }
+
 }

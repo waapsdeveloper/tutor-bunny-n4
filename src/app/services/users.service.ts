@@ -140,15 +140,15 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
   }
 
   getFlag(user) {
-    if (user && user.teacher && user.teacher.country) {
+
+    if (user.student && user.student.country) {
+      const flag = user.student.country.iso2;
+      return flag ? flag.toLowerCase() : "";
+    } else if (user.teacher && user.teacher.country) {
       const flag = user.teacher.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
+      return flag ? flag.toLowerCase() : "";
     } else {
-      return '';
+      return "";
     }
   }
 

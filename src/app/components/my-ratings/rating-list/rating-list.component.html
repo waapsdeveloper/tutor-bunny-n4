@@ -1,6 +1,6 @@
 <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }"
   class="swiper-container-inner-7892" #slides>
     <ng-template swiperSlide *ngFor="let item of list">
-      <app-single-rating-item></app-single-rating-item>
+      <app-single-rating-item [item]="item"></app-single-rating-item>
     </ng-template>
   </swiper>

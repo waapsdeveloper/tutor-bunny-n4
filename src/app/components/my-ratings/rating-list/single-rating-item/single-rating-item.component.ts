@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-single-rating-item',
@@ -7,8 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SingleRatingItemComponent {
   
-  heading = '';
+  image = '';
+  displayName = '';
+  location = '';  
+  flag = '';
   text = '';
+  rating = 0;
+
   
 
   private _item: any; 
@@ -22,10 +28,30 @@ export class SingleRatingItemComponent {
     return this._item;
   }
 
-  constructor() { }
+  constructor(private utility: UtilityService) { }
 
   updateUserDetails(value: any) {
 
+    console.log(value);
+
+    if(value){
+      this.text = value.message;
+      this.rating = value.rating;
+      this.displayName = value.user.name
+      this.location = this.utility.getLocation(value.user);
+      this.flag = this.utility.getFlag(value.user);
+
+      if(value.user.image){
+        this.image = `url(${value.user.image})`
+      }
+
+    }
+    // let 
+
   }
+
+  
+
+
 
 }
