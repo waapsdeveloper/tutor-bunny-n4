@@ -221,14 +221,8 @@ const routes: Routes = [
   {
     path: 'student-teacher-profile',
     loadChildren: () => import('./pages/student/student-teacher-profile/student-teacher-profile.module').then( m => m.StudentTeacherProfilePageModule)
-  },  {
-    path: 'my-earning',
-    loadChildren: () => import('./pages/my-earning/my-earning.module').then( m => m.MyEarningPageModule)
   },
-  {
-    path: 'page-name',
-    loadChildren: () => import('./pages/teacher/page-name/page-name.module').then( m => m.PageNamePageModule)
-  },
+  
   {
     path: 'teacher-my-earning',
     loadChildren: () => import('./pages/teacher/teacher-my-earning/teacher-my-earning.module').then( m => m.TeacherMyEarningPageModule)
