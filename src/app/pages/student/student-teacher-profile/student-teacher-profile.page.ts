@@ -1,6 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-student-teacher-profile',
@@ -62,7 +64,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
 
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private chats : ChatService) {
     super(injector);
   }
 
@@ -176,7 +178,43 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   
+  async goToChat() {
+    let student = this.users.getUser();
 
+    let v = (await this.profiles.isProfileCompleted(student)) as any;
+    if (!v) {
+      await this.openWelcomeComponent();
+      return;
+    }
+    this.openChatWithData();
+  }
+
+  async openChatWithData() {
+      let student = this.users.getUser();
+      const chatRoomId = await this.chats.getChadRoomId(this.user.id, student.id) as number;
   
+      if(chatRoomId != -1){
+        this.nav.push('messages', {
+          chat_room_id: chatRoomId
+        })
+      }
+    }
+  
+    async openWelcomeComponent() {
+      let res = await this.modals.present(
+        StudentWelcomeComponent,
+        {},
+        'auto-height-modal',
+        1,
+        [0, 1],
+        false
+      );
+      let key = res.data.key;
+      if (key == 1) {
+        this.nav.push('/student-profile/student-profile-edit', {
+          showBack: true,
+        });
+      }
+    }
 
 }
