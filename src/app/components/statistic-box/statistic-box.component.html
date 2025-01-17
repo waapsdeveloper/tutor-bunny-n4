@@ -52,20 +52,20 @@
   <ion-row class="dashboard-cards-top-outer">
     <!-- Earnings Card -->
     <ion-col>
-      <div class="card-34567">
+      <div class="card-34567" (click)="openEarnings()">
         <div class="dimg">
           <img src="../../../assets/svg/dashboard-icon.svg" alt="dashboard" />
         </div>
         <div class="txt roboto-bold">₹ 51,858</div>
         <span class="earn roboto-regular">Earnings Till Date</span>
         <div class="arrow-btn">
-          <img src="../../../assets/svg/tarrow.svg" alt="Arrow Button" />
+          <img src="../../../assets/svg/tarrow.svg"  alt="Arrow Button" />
         </div>
       </div>
     </ion-col>
 
     <ion-col>
-      <div class="card-34567">
+      <div class="card-34567" (click)="openCredit()">
         <div class="dimg">
           <img src="../../../assets/svg/coin.svg" alt="coin" />
         </div>

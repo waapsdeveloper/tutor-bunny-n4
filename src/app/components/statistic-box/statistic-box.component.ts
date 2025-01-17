@@ -36,7 +36,14 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
   goToTrialReq() {
     this.nav.push('my-students')
   }
+  openEarnings(){
+    this.nav.push('/teacher-my-earning')
+  }
 
+  openCredit(){
+    this.nav.push('/teacher-credits')
+
+  }
 
 
 }
