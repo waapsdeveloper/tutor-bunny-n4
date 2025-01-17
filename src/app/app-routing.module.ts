@@ -222,6 +222,16 @@ const routes: Routes = [
     path: 'student-teacher-profile',
     loadChildren: () => import('./pages/student/student-teacher-profile/student-teacher-profile.module').then( m => m.StudentTeacherProfilePageModule)
   },
+  
+  {
+    path: 'teacher-my-earning',
+    loadChildren: () => import('./pages/teacher/teacher-my-earning/teacher-my-earning.module').then( m => m.TeacherMyEarningPageModule)
+  },
+  {
+    path: 'teacher-credits',
+    loadChildren: () => import('./pages/teacher/teacher-credits/teacher-credits.module').then( m => m.TeacherCreditsPageModule)
+  },
+
 
 
 
