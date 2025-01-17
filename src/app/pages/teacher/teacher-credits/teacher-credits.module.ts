@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TeacherCreditsPageRoutingModule } from './teacher-credits-routing.module';
 
 import { TeacherCreditsPage } from './teacher-credits.page';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TeacherCreditsPageRoutingModule
+    TeacherCreditsPageRoutingModule,
+    SdHeaderTopModule,
   ],
   declarations: [TeacherCreditsPage]
 })

@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>teacher-my-earning</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top
+    [title]="'My Earnings'"
+    [showBack]="true"
+    [parentHandleBack]="true"
+    (parentBack)="goback()"
+    [backUrl]=""
+  ></app-sd-header-top>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">teacher-my-earning</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>

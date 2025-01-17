@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-teacher-credits',
   templateUrl: './teacher-credits.page.html',
   styleUrls: ['./teacher-credits.page.scss'],
 })
-export class TeacherCreditsPage implements OnInit {
+export class TeacherCreditsPage{
 
-  constructor() { }
+  constructor(private nav: NavService) { }
 
-  ngOnInit() {
+  goback(){
+    this.nav.pop('/tabs/teacher-dashboard');
   }
-
 }

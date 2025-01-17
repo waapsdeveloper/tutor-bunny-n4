@@ -15,7 +15,7 @@ import { SwiperComponent } from 'swiper/angular';
 })
 export class CourseFormPage
   extends BasePage
-  implements OnInit, ViewWillEnter {
+  implements  ViewWillEnter {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -54,7 +54,6 @@ export class CourseFormPage
     }
   }
 
-  ngOnInit() { }
 
 
   async initialize() { }
@@ -239,7 +238,7 @@ export class CourseFormPage
     //   this.utility.presentSuccessToast(message);
     // }
     this.createCourseService.resetFormData()
-    this.nav.pop('/tabs/courses');
+    this.nav.pop('/tabs/teacher-dashboard');
     this.events.publish('initilize-the-list', res);
   }
 
