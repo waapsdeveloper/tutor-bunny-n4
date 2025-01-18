@@ -1,0 +1,22 @@
+<div class="line"></div>
+    <div class="detail-box-outer-78522">
+      <div class="detail-head-785234">
+        <div class="detail-heading-78524 outfit-medium">Instructor</div>
+        <div class="instructor-box-content-78561">
+          <div class="instructor-head-78562">
+            <div class="instructor-image-78563" (click)="goToTeacher()"
+              [style.background-image]="techerImg ? 'url(' + techerImg + ')' : 'assets/learn-piano.jpeg'"></div>
+            <div class="instructor-info-78564" (click)="goToTeacher()">
+              <div class="instructor-info-78564"> {{displayName}}
+              </div>
+              <div class="instructor-country-78567">
+                <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span> {{country}}
+              </div>
+            </div>
+            <img (click)="goToTeacher()" src="../../assets/svg/arrow-right.svg"
+              style="position: absolute; right: 0; top: 9px;" alt="">
+          </div>
+          <div class="instructor-title-78568">{{techerTitle}}</div>
+        </div>
+      </div>
+    </div>

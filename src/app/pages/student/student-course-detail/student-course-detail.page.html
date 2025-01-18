@@ -2,29 +2,38 @@
   <ion-spinner></ion-spinner>
 </div>
 
-<ion-header [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
-    [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
-</ion-header>
+<!--  -->
+<app-scd-page-header></app-scd-page-header>
+<!--  -->
 
-<ion-content [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" [fullscreen]="true"
-  style="--padding-top: 0px !important" #content>
+<ion-content [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" [fullscreen]="true" style="--padding-top: 0px !important" #content>
+  
   <app-course-photos [courseId]="course_Id"></app-course-photos>
-
+  
   <div class="body-content ion-padding">
+  
 
-    <div class="course-heading-78521">
+
+    <!--  -->
+    <app-scd-page-info [data]="infoData"></app-scd-page-info>
+    <!-- <div class="course-heading-78521">
       {{title}}
     </div>
-    <div class="cource-price-and-rating-box-78541">
+    <div class="cource-price-and-rating-box-78541"> 
       <div class="cource-price--78542">{{currencySymbol}}{{price}} <span style="font-size: 12px;"> /lesson</span></div>
       <div class="cource-rating-box-78543">
         <app-rating-stars [rating]="rating"></app-rating-stars>
         <div class="cource-rating-number-78545">{{rating}} <span
             style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
       </div>
-    </div>
-    <div class="line"></div>
+    </div> -->
+    <!--  -->
+
+
+
+    <!--  -->
+    <app-scd-page-course-statistics></app-scd-page-course-statistics>
+    <!-- <div class="line"></div>
     <div class="cource-details-box-78561">
       <div class="cource-time-and-lessons-78562">
         <div class="cource-time-box-78563"><img class="img1-789575" src="../../../assets/svg/time.svg" /> {{duration}}
@@ -56,10 +65,15 @@
             src="../../../assets/svg/course-type.svg" />Workshop/Event
         </div>
       </div>
-    </div>
+    </div> -->
+    <!--  -->
+
     <div class="line"></div>
-    <div class="detail-box-outer-78522">
-      <div class="detail-head-78523">
+    <app-global-text-read [heading]="aboutData.heading" [text]="description"></app-global-text-read>
+    <!-- ADD CALENDER -->
+
+    <!-- <div class="detail-box-outer-78522">
+      <div class="detail-head-78523">     
         <div class="detail-heading-78524">Details</div>
         <div class="detail-heading-left--78524" *ngIf="startDate && endDate"
           style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: #7A7A7A;">
@@ -76,8 +90,12 @@
           <div class="education-box-edu-button-98526" (click)="toggleReadMore()">Read less</div>
         </div>
       </div>
-    </div>
-    <div class="line"></div>
+    </div> -->
+
+
+    <!--  -->
+    <app-scd-page-instructor-details></app-scd-page-instructor-details>
+    <!-- <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-785234">
         <div class="detail-heading-78524 outfit-medium">Instructor</div>
@@ -98,8 +116,12 @@
           <div class="instructor-title-78568">{{techerTitle}}</div>
         </div>
       </div>
-    </div>
-    <div class="line" *ngIf="schedules.length !== 0"></div>
+    </div> -->
+    <!--  -->
+
+    <!--  -->
+   <app-scd-page-course-schedule></app-scd-page-course-schedule>
+    <!-- <div class="line" *ngIf="schedules.length !== 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules.length !== 0">
       <div class="detail-head-785234">
         <div class="detail-heading-78524 outfit-medium">
@@ -110,12 +132,15 @@
             [last]="i === (schedules.length - 1)"></app-course-schedules>
         </div>
       </div>
-    </div>
-    <!-- <div class="line" *ngIf="schedules.length !== 0"></div> -->
+    </div> -->
+    <!--  -->
+
     <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses>
+
   </div>
+  <app-scd-page-footer></app-scd-page-footer>
 </ion-content>
-<ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
+<!-- <ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
     <div class="button-chat-78563" *ngIf="!data?.trial && !btn_loading">
       <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle" (click)="goToChat()">
@@ -151,9 +176,10 @@
         <ion-ripple-effect></ion-ripple-effect>
         <img src="assets/svg/send.svg" />
         <span class="roboto-regular fs-16 " >Join </span>
-      </div>
-      <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> -->
-    </div>
+      </div> -->
+
+      <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> --> commented already
+    <!-- </div>
     <div style="width: 100%;" *ngIf="data?.trial && data.trial.status === 'Pending' && !btn_loading">
       <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="presentAlert()"
         [text]="'Cancel Trial Request'"></app-sd-button-clear>
@@ -162,4 +188,4 @@
       <ion-skeleton-text animated style="width: 100%; height: 57px; border-radius: 8px;"></ion-skeleton-text>
     </div>
   </div>
-</ion-footer>
+</ion-footer> -->
