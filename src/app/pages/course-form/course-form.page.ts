@@ -240,6 +240,7 @@ export class CourseFormPage
     this.createCourseService.resetFormData()
     this.nav.pop('/tabs/teacher-dashboard');
     this.events.publish('initilize-the-list', res);
+    this.loading = false;
   }
 
   shouldHandleBackToPrevScreen(event) {
