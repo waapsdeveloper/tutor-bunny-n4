@@ -1,0 +1,148 @@
+.detail-box-outer-78522 {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  
+    .detail-head-78523 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      .detail-heading-78524 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+  
+      .detail-heading-left-78524 {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  
+    .discription-text {
+      // height: 150px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: flex-start;
+  
+      .discription-para {
+        overflow: hidden;
+        display: -webkit-box;
+        line-height: 21px;
+  
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+      }
+  
+      .discription-para.collapsed {
+        -webkit-line-clamp: unset;
+      }
+    }
+  
+    -webkit-line-clamp: unset;
+  
+  
+  }
+
+  .detail-head-785234 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    .detail-heading-78524 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  
+    .detail-heading-left-78524 {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+
+  .instructor-box-content-78561 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+    align-items: flex-start;
+  
+    .instructor-head-78562 {
+  
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      width: 100%;
+      position: relative;
+      padding: 0;
+  
+  
+      .instructor-image-78563 {
+  
+        height: 70px;
+        width: 70px;
+        background-color: #454545;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+  
+      }
+  
+      .instructor-info-78564 {
+  
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+  
+        .instructor-name-78565 {
+  
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 8px;
+          font-size: 16px;
+          font-weight: 700;
+  
+          .instructor-reting-78566 {
+  
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            font-weight: 400;
+  
+          }
+        }
+  
+        .instructor-country-78567 {
+  
+          font-size: 16px;
+          font-weight: 400;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 8px;
+  
+        }
+      }
+  
+    }
+  
+    .instructor-title-78568 {
+  
+      font-size: 16px;
+      font-weight: 400;
+  
+    }
+  
+  }

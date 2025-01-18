@@ -27,24 +27,24 @@ export class StudentCourseDetailPage extends BasePage {
   btn_loading = false;
   teacher;
   user
-  currencySymbol;
+  // currencySymbol;
   techerTitle;
   language;
   spinner = false;
   capacity;
-  rating;
+  // rating;
   techerImg;
   loading = false;
   description;
   duration;
   mode_type;
   isExpanded = false;
-  title;
+  // title;
   serial_number;
   created_at;
   state;
   image;
-  price;
+  // price;
   from_age;
   to_age;
   endDate;
@@ -55,11 +55,24 @@ export class StudentCourseDetailPage extends BasePage {
   endTime;
   updated_at;
   schedules: any[] = [];
-  total_rating;
+  // total_rating;
   course_user;
   acheduleTime;
   startDate;
   showFavValue = false;
+
+  aboutData = {
+    heading: 'Details',
+    text: ''
+  }
+
+  infoData = {
+    title: '', 
+    currencySymbol: '',
+    price: '',
+    rating: '',
+    total_rating: ''
+  };
 
   constructor(injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
@@ -91,7 +104,7 @@ export class StudentCourseDetailPage extends BasePage {
     localStorage.setItem('teacher', JSON.stringify(this.teacher));
 
     this.events.publish('data-for-other-corses', this.data);
-    this.title = this.data.title;
+    //this.title = this.data.title;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;
     this.description = this.data.description;
@@ -102,7 +115,7 @@ export class StudentCourseDetailPage extends BasePage {
     this.flag = this.getFlag();
     this.duration = this.data.duration;
     this.serial_number = this.data.serial_number;
-    this.price = this.data.updated_price;
+    // this.price = this.data.updated_price;
     this.schedules = this.data.schedules;
     this.acheduleTime = this.schedules;
     this.lessons = this.data.lesson;
@@ -110,14 +123,14 @@ export class StudentCourseDetailPage extends BasePage {
     this.techerTitle = this.data.user.teacher.title;
     this.course_user = this.data.user;
     this.image = this.data.image;
-    this.rating = this.data.user.teacher.avg_rating;
-    this.total_rating = this.data.user.teacher.total_rating;
+    // this.rating = this.data.user.teacher.avg_rating;
+    // this.total_rating = this.data.user.teacher.total_rating;
     this.techerImg = this.data.user.image;
     this.country = this.data.user.teacher.country.name;
     this.state = this.data.user.teacher.state.name;
     this.updated_at = this.data.updated_at;
     this.type = this.data.type;
-    this.currencySymbol = this.data?.auth_user_currency_symbol;
+    // this.currencySymbol = this.data?.auth_user_currency_symbol;
     const startTime = this.acheduleTime.start_date;
     const endTime = this.acheduleTime.end_date;
     this.startTime = moment(startTime).format('hh:mm a');
@@ -132,6 +145,15 @@ export class StudentCourseDetailPage extends BasePage {
       const endDate = this.data.end_date;
       this.endDate = moment(endDate).format('DD-MMM-YYYY');
     }
+
+    this.infoData = {
+      title: this.data.title,
+      currencySymbol: this.data?.auth_user_currency_symbol,
+      price: this.data.updated_price,
+      rating: this.data.user.teacher.avg_rating,
+      total_rating: this.data.user.teacher.total_rating
+    }
+
     this.spinner = false;
 
     return true;

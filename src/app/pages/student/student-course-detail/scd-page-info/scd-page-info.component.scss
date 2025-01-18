@@ -1,0 +1,42 @@
+.course-heading-78521 {
+    font-size: 20px;
+    font-weight: 500;
+  
+  }
+
+  .cource-price-and-rating-box-78541{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+  
+    .cource-price--78542{
+      font-size: 20px;
+      font-weight: 500;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-items: flex-start;
+    }
+  
+    .cource-rating-box-78543{
+  
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+  
+      .cource-rating-number-78545{
+  
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+        font-size: 16px;
+        font-weight: 600;
+  
+  
+      }
+    }
+  }
