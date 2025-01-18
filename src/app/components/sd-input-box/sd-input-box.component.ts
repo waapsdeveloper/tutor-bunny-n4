@@ -25,6 +25,8 @@ export class SdInputBoxComponent implements OnInit {
 
   @Input('modernInput') modernInput = false;
 
+  isInputActive: boolean = false;
+
   constructor(private events: EventsService) { }
 
   ngOnInit() {
@@ -220,5 +222,13 @@ export class SdInputBoxComponent implements OnInit {
   toggleShowPasword(flag) {
     this.togglePassword = !this.togglePassword;
     this.type = this.togglePassword ? 'password' : 'text';
+  }
+
+  onFocus() {
+    this.isInputActive = true;
+  }
+
+  onBlur() {
+    this.isInputActive = false;
   }
 }

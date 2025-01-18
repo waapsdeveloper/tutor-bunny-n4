@@ -1,9 +1,14 @@
-<div class="sd-input-box-outer-675315" [class.modern-input]="modernInput">
+<div class="sd-input-box-outer-675315" [class.modern-input]="modernInput" [class.box-input-golden-border]="isInputActive">
   <img *ngIf="image" [src]="image" alt="" class="input-image">
   <input class="fs-16 roboto-regular sd-input-box-input-675315" [class.low-padding-87678]="!image"
     [minlength]="minlength" [maxlength]="maxlength" [type]="type" [placeholder]="placeholder" [(ngModel)]="inputText"
     (paste)="onPasteHandler($event)" (ngModelChange)="modelChange($event)" (keyup)="result($event)"
-    [readOnly]="isReadOnly" />
+    [readOnly]="isReadOnly"
+
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+
+    />
   <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText && !showTogglePassword" alt=""
     (click)="clearInput()">
   <ion-icon class="passw-input-678956744" *ngIf="showTogglePassword"
