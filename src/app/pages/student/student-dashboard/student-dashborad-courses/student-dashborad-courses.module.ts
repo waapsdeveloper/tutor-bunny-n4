@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StudentDashboradCoursesPageRoutingModule } from './student-dashborad-courses-routing.module';
 import { StudentDashboradCoursesPage } from './student-dashborad-courses.page';
-import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
+import { GenericCourseCardModule } from './../../components/generic-course-card/generic-course-card.module';
 
 @NgModule({
   imports: [

@@ -1,12 +1,12 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
-import { BasePage } from '../../base-page/base-page';
-import { GlobalCoursesService } from '../../services/global-courses.service';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
-import { StudentWelcomeComponent } from '../student/student-dashboard/student-welcome/student-welcome.component';
+import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -73,8 +73,8 @@ export class StudentCourseDetailPage extends BasePage {
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-    if (this.params.id) {
-      this.course_Id = this.params.id;
+    if (this.params.course_id) {
+      this.course_Id = this.params.course_id;
     }
     this.spinner = true;
 

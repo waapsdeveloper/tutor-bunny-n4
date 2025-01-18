@@ -99,7 +99,7 @@ const routes: Routes = [
   },
   {
     path: 'student-course-detail',
-    loadChildren: () => import('./pages/student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
+    loadChildren: () => import('./pages/student/student-course-detail/student-course-detail.module').then( m => m.StudentCourseDetailPageModule)
   },
 
   {
@@ -231,13 +231,6 @@ const routes: Routes = [
     path: 'teacher-credits',
     loadChildren: () => import('./pages/teacher/teacher-credits/teacher-credits.module').then( m => m.TeacherCreditsPageModule)
   },
-
-
-
-
-
-
-
 
 
   // {

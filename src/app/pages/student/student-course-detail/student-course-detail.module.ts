@@ -7,15 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { StudentCourseDetailPageRoutingModule } from './student-course-detail-routing.module';
 
 import { StudentCourseDetailPage } from './student-course-detail.page';
-import { SdHeaderTopModule } from '../../components/sd-header-top/sd-header-top.module';
-import { SdButtonGrayModule } from '../../components/sd-button-gray/sd-button-gray.module';
-import { OtherCoursesModule } from '../../components/other-courses/other-courses.module';
-import { SdButtonClearModule } from '../../components/sd-button-clear/sd-button-clear.module';
-import { CourseSchedulesModule } from '../../components/course-schedules/course-schedules.module';
 import { StudentOtherCoursesModule } from './student-other-courses/student-other-courses.module';
-import { CoursePhotosModule } from '../../components/course-photos/course-photos.module';
 import { TrailMessageModule } from 'src/app/components/trail-message/trail-message.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { CoursePhotosModule } from 'src/app/components/course-photos/course-photos.module';
+import { CourseSchedulesModule } from 'src/app/components/course-schedules/course-schedules.module';
+import { OtherCoursesModule } from 'src/app/components/other-courses/other-courses.module';
+import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
+import { SdButtonGrayModule } from 'src/app/components/sd-button-gray/sd-button-gray.module';
+import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 
 
 @NgModule({

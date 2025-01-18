@@ -81,6 +81,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     let obj = {
       email: email,
     };
+    
     let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
     console.log(res);
