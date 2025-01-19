@@ -23,38 +23,38 @@ export class StudentCourseDetailPage extends BasePage {
   backUrl;
   displayName;
   course_Id;
-  lessons;
+  // lessons;
   btn_loading = false;
   teacher;
   user
   // currencySymbol;
   techerTitle;
-  language;
+  // language;
   spinner = false;
-  capacity;
+  // capacity;
   // rating;
   techerImg;
   loading = false;
-  description;
-  duration;
-  mode_type;
+  //description;
+  // duration;
+  // mode_type;
   isExpanded = false;
   // title;
   serial_number;
   created_at;
-  state;
+  // state;
   image;
   // price;
-  from_age;
-  to_age;
+  // from_age;
+  // to_age;
   endDate;
-  country;
+  // country;
   startTime;
   flag;
   type;
   endTime;
   updated_at;
-  schedules: any[] = [];
+  // schedules: any[] = [];
   // total_rating;
   course_user;
   acheduleTime;
@@ -72,6 +72,22 @@ export class StudentCourseDetailPage extends BasePage {
     price: '',
     rating: '',
     total_rating: ''
+  };
+
+  scheduleData = {
+    schedules: []
+  };
+
+  countData = {
+    duration: '',
+    lessons: '',
+    mode_type: '',
+    capacity: '',
+    from_age: '',
+    to_age: '',
+    language: '',
+    state: '',
+    country: '',
   };
 
   constructor(injector: Injector,
@@ -105,20 +121,20 @@ export class StudentCourseDetailPage extends BasePage {
 
     this.events.publish('data-for-other-corses', this.data);
     //this.title = this.data.title;
-    this.capacity = this.data.capacity;
-    this.mode_type = this.data.mode_type;
-    this.description = this.data.description;
-    this.language = this.data.language.name;
-    this.from_age = this.data.from_age;
-    this.to_age = this.data.to_age;
+    // this.capacity = this.data.mode_type;
+    // this.mode_type = this.data.mode_type;
+    // this.description = this.data.description;
+    // this.language = this.data.language.name;
+    // this.from_age = this.data.from_age;
+    // this.to_age = this.data.to_age;
     this.displayName = this.utility.splitName(this.data.user.name).first_name;
     this.flag = this.getFlag();
-    this.duration = this.data.duration;
+    //this.duration = this.data.capacity;
     this.serial_number = this.data.serial_number;
     // this.price = this.data.updated_price;
-    this.schedules = this.data.schedules;
-    this.acheduleTime = this.schedules;
-    this.lessons = this.data.lesson;
+    //this.schedules = this.data.schedules;
+    // this.acheduleTime = this.schedules;
+    //this.lessons = this.data.lesson;
     this.created_at = this.data.created_at;
     this.techerTitle = this.data.user.teacher.title;
     this.course_user = this.data.user;
@@ -126,15 +142,15 @@ export class StudentCourseDetailPage extends BasePage {
     // this.rating = this.data.user.teacher.avg_rating;
     // this.total_rating = this.data.user.teacher.total_rating;
     this.techerImg = this.data.user.image;
-    this.country = this.data.user.teacher.country.name;
-    this.state = this.data.user.teacher.state.name;
+    // this.country = this.data.user.teacher.country.name;
+    // this.state = this.data.user.teacher.state.name;
     this.updated_at = this.data.updated_at;
     this.type = this.data.type;
     // this.currencySymbol = this.data?.auth_user_currency_symbol;
-    const startTime = this.acheduleTime.start_date;
-    const endTime = this.acheduleTime.end_date;
-    this.startTime = moment(startTime).format('hh:mm a');
-    this.endTime = moment(endTime).format('hh:mm a');
+    // const startTime = this.acheduleTime.start_date;
+    // const endTime = this.acheduleTime.end_date;
+    // this.startTime = moment(startTime).format('hh:mm a');
+    // this.endTime = moment(endTime).format('hh:mm a');
     this.showFavValue = this.data.is_liked_by_me;
     if (this.data.start_date) {
       const startDate = this.data.start_date;
@@ -146,12 +162,39 @@ export class StudentCourseDetailPage extends BasePage {
       this.endDate = moment(endDate).format('DD-MMM-YYYY');
     }
 
+    this.aboutData = {
+      heading: 'Details',
+      text: this.data.description
+    }
+
     this.infoData = {
       title: this.data.title,
       currencySymbol: this.data?.auth_user_currency_symbol,
       price: this.data.updated_price,
       rating: this.data.user.teacher.avg_rating,
       total_rating: this.data.user.teacher.total_rating
+    }
+
+    this.scheduleData = {
+      schedules: this.data.schedules,
+    }
+
+    this.acheduleTime = this.scheduleData.schedules;
+    const endTime = this.acheduleTime.end_date;
+    const startTime = this.acheduleTime.start_date;
+    this.startTime = moment(startTime).format('hh:mm a');
+    this.endTime = moment(endTime).format('hh:mm a');
+    
+    this.countData = {
+      duration: this.data.capacity,
+      lessons: this.data.lesson,
+      mode_type: this.data.mode_type,
+      capacity: this.data.mode_type,
+      from_age: this.data.from_age,
+      to_age: this.data.to_age,
+      language: this.data.language.name,
+      state: this.data.user.teacher.state.name,
+      country: this.data.user.teacher.country.name,
     }
 
     this.spinner = false;
