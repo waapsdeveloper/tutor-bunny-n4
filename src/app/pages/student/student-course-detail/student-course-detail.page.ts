@@ -143,6 +143,14 @@ export class StudentCourseDetailPage extends BasePage {
       sliderImages: resImages.result
     }
 
+    this.infoData = {
+      title: data.title,
+      currencySymbol: data?.auth_user_currency_symbol ?? '$',
+      price: data?.updated_price,
+      rating: data.user.teacher.avg_rating,
+      total_rating: data.user.teacher.total_rating
+    }
+
     // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
     // this.teacher = data.user;
@@ -196,13 +204,7 @@ export class StudentCourseDetailPage extends BasePage {
     //   text: this.data.description
     // }
 
-    // this.infoData = {
-    //   title: this.data.title,
-    //   currencySymbol: this.data?.auth_user_currency_symbol,
-    //   price: this.data.updated_price,
-    //   rating: this.data.user.teacher.avg_rating,
-    //   total_rating: this.data.user.teacher.total_rating
-    // }
+    
 
     // this.scheduleData = {
     //   schedules: this.data.schedules,
