@@ -554,6 +554,16 @@ export class NetworkService {
     return this.httpGetResponse('material/cart-list', user_id, false, false);
   }
 
+  materialCheckout(data) {
+    return this.httpPostResponse('material/cart/checkout', data, false, true, true);
+  }
+
+  materialCheckoutHistory(id) {
+    return this.httpGetResponse('material/buyer-history', id, false, true);
+  }
+
+  
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {

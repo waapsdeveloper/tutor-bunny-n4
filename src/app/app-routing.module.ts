@@ -230,7 +230,12 @@ const routes: Routes = [
   {
     path: 'teacher-credits',
     loadChildren: () => import('./pages/teacher/teacher-credits/teacher-credits.module').then( m => m.TeacherCreditsPageModule)
+  },  
+  {
+    path: 'checkout-history',
+    loadChildren: () => import('./pages/student/checkout-history/checkout-history.module').then( m => m.CheckoutHistoryPageModule)
   },
+
 
 
   // {

@@ -52,6 +52,26 @@ export class StripePayComponent extends BasePage implements OnInit {
 
     this.isPaid = true;
 
+    let items = this.list$.filter( x => x.selected == true) as any[];
+    let item_total = items.reduce( (prev, next) => {
+      return prev + parseFloat(next.price)
+    }, 0);
+
+    let obj = {
+      cart_ids: items.map( x => x.id),  
+      item_total: item_total,
+      tax: 10,
+      total: item_total + 10
+    }
+    const res = await this.network.materialCheckout(obj);
+    console.log(res);
+
+    items.forEach(element => {
+      this.cartService.setRemove(element)
+    });
+
+    this.modals.dismiss();
+
     // try {
     //   const { paymentIntent, error } = await this.stripe.confirmCardPayment(this.clientSecret, {
     //     payment_method: {

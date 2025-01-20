@@ -39,6 +39,10 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     }
   }
 
+  gotoCheckoutHistory(){
+    this.nav.push('/checkout-history')
+  }
+
   async logout() {
 
     this.events.publish('clear-all-services-data');
