@@ -7,14 +7,14 @@ import { NavService } from 'src/app/services/nav.service';
   styleUrls: ['./stp-page-header.component.scss'],
 })
 export class StpPageHeaderComponent {
-  private _data: any;
-
+  
   @Output() back = new EventEmitter<any>()
-
+  
+  private _data: any;
   @Input()
   set data(value: any) {
     this._data = value;
-    this.updateUserDetails(value);
+    this.updateDetails(value);
   }
 
   get data(): any {
@@ -30,7 +30,7 @@ export class StpPageHeaderComponent {
 
   constructor(private nav: NavService) {}
 
-  updateUserDetails(value: any) {
+  updateDetails(value: any) {
     if (value) {
       this.user_image = value.image;
       this.displayName = value.displayName;

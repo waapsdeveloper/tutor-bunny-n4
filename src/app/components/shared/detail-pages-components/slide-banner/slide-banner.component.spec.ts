@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ScdPageHeaderComponent } from './scd-page-header.component';
+import { SlideBannerComponent } from './slide-banner.component';
 
-describe('ScdPageHeaderComponent', () => {
-  let component: ScdPageHeaderComponent;
-  let fixture: ComponentFixture<ScdPageHeaderComponent>;
+describe('SlideBannerComponent', () => {
+  let component: SlideBannerComponent;
+  let fixture: ComponentFixture<SlideBannerComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScdPageHeaderComponent ],
+      declarations: [ SlideBannerComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ScdPageHeaderComponent);
+    fixture = TestBed.createComponent(SlideBannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

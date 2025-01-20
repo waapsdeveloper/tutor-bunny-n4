@@ -1,25 +1,41 @@
-<div *ngIf="spinner" class="loading-syn ">
-  <ion-spinner></ion-spinner>
-</div>
-
-<!--  -->
-<app-scd-page-header></app-scd-page-header>
-<!-- <ion-header [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" class="ion-no-border ion-no-shadow">
-    <app-sd-header-top [showBack]="true" [title]="'Course Details'" [showShare]="true" [showFav]="true"
-      [showFavValue]="showFavValue" (addToFav)="addToFav()" (removetoFav)="removeToFav()"></app-sd-header-top>
-  </ion-header> -->
-<!--  -->
-
-<ion-content [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner" [fullscreen]="true" style="--padding-top: 0px !important" #content>
+<ion-content class="remove-pd-top-323243243" #content [fullscreen]="true">
   
-  <app-course-photos [courseId]="course_Id"></app-course-photos>
+  <app-slide-banner [data]="bannerData"></app-slide-banner>
+
+
+  <!-- <app-scd-page-header (back)="nav.pop()" [data]="bannerData" ></app-scd-page-header>
+  <div class="transparent-header-li-outer-78521">
+    <div class="transparent-header-li-inner-78521">
+      <div class="transparent-header-li left">
+        <div class="rwbutton">
+          <img src="assets/svg/arrow-back.svg" alt="back" (click)="nav.pop()" />
+        </div>
+      </div>
+
+      <div class="transparent-header-li right">
+        <div class="rwbutton">
+          <img [src]="material$?.is_liked_by_me ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'" (click)="material$?.is_liked_by_me ? removeToFav() : addToFav()" />
+        </div>
+        <div class="rwbutton">
+          <img src="assets/svg/share-77.svg" alt="share" />
+        </div>
+
+        <div class="rwbutton">
+          <img src="assets/svg/gray-info.svg" alt="info" />
+        </div>
+      </div>
+    </div>
+    <app-course-photos [courseId]="course_Id"></app-course-photos>
+  </div> -->
+
+  
   
   <div class="body-content ion-padding">
   
 
 
     <!--  -->
-    <app-scd-page-info [data]="infoData"></app-scd-page-info>
+    <!-- <app-scd-page-info [data]="infoData"></app-scd-page-info> -->
     <!-- <div class="course-heading-78521">
       {{title}}
     </div>
@@ -36,7 +52,7 @@
 
 
     <!--  -->
-    <app-scd-page-course-statistics [data]="countData"></app-scd-page-course-statistics>
+    <!-- <app-scd-page-course-statistics [data]="countData"></app-scd-page-course-statistics> -->
     <!-- <div class="line"></div>
     <div class="cource-details-box-78561">
       <div class="cource-time-and-lessons-78562">
@@ -72,8 +88,8 @@
     </div> -->
     <!--  -->
 
-    <div class="line"></div>
-    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
+    <!-- <div class="line"></div> -->
+    <!-- <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read> -->
     <!-- ADD CALENDER -->
 
     <!-- <div class="detail-box-outer-78522">
@@ -98,7 +114,7 @@
 
 
     <!--  -->
-    <app-scd-page-instructor-details></app-scd-page-instructor-details>
+    <!-- <app-scd-page-instructor-details></app-scd-page-instructor-details> -->
     <!-- <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-785234">
@@ -124,7 +140,7 @@
     <!--  -->
 
     <!--  -->
-   <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule>
+   <!-- <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule> -->
     <!-- <div class="line" *ngIf="schedules.length !== 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules.length !== 0">
       <div class="detail-head-785234">
@@ -139,10 +155,10 @@
     </div> -->
     <!--  -->
 
-    <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses>
+    <!-- <app-student-other-courses (onChange)="getOtherCourse($event)" [teacher]="teacher"></app-student-other-courses> -->
 
   </div>
-  <app-scd-page-footer></app-scd-page-footer>
+  <!-- <app-scd-page-footer></app-scd-page-footer> -->
 </ion-content>
 <!-- <ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
@@ -182,7 +198,7 @@
         <span class="roboto-regular fs-16 " >Join </span>
       </div> -->
 
-      <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> --> commented already
+      <!-- <ion-spinner name="dots" *ngIf="loading"></ion-spinner> -->
     <!-- </div>
     <div style="width: 100%;" *ngIf="data?.trial && data.trial.status === 'Pending' && !btn_loading">
       <app-sd-button-clear [image]="'assets/svg/trail.svg'" (click)="presentAlert()"

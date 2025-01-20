@@ -7,6 +7,7 @@ import { ChatService } from 'src/app/services/chat.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
+import { bannerData } from 'src/app/interfaces/banner-data';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -17,6 +18,16 @@ export class StudentCourseDetailPage extends BasePage {
   // implements OnInit
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  course$;
+  courseId;
+
+  bannerData: bannerData = {
+    liked_by_me: false,
+    sliderImages: []
+  }
+
+
 
   data;
   params;
@@ -93,33 +104,51 @@ export class StudentCourseDetailPage extends BasePage {
   constructor(injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
     private chats: ChatService,
-    public globalCourses: GlobalCoursesService) {
+    public globalCoursesService: GlobalCoursesService) {
     super(injector);
   }
 
   async ionViewWillEnter() {
+
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-    if (this.params.course_id) {
-      this.course_Id = this.params.course_id;
-    }
-    this.spinner = true;
 
-    await this.callApi();
-    this.isTrailReq();
+    if (this.params.course_id) {
+      this.courseId = this.params.course_id;
+      this.globalCoursesService.getItem(this.courseId).subscribe((data) => {
+        this.course$ = data;
+        this.callApi(this.course$);
+      });
+
+    } else {
+      this.nav.pop();
+    }
+    // this.spinner = true;
+
+    
+    // this.isTrailReq();
   }
 
-  async callApi(): Promise<boolean> {
+  async callApi(data): Promise<boolean> {
 
-    let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
+    const resImages = await this.network.getCourseImages({
+      course_id: data.id,
+    })
 
-    this.data = res;
-    this.teacher = res.user;
-    localStorage.setItem('teacher', JSON.stringify(this.teacher));
+    console.log(resImages)
+    this.bannerData = {
+      liked_by_me: data.is_liked_by_me,
+      sliderImages: resImages.result
+    }
 
-    this.events.publish('data-for-other-corses', this.data);
+    // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
+
+    // this.teacher = data.user;
+    // localStorage.setItem('teacher', JSON.stringify(this.teacher));
+
+    // this.events.publish('data-for-other-corses', this.data);
     //this.title = this.data.title;
     // this.capacity = this.data.mode_type;
     // this.mode_type = this.data.mode_type;
@@ -127,77 +156,77 @@ export class StudentCourseDetailPage extends BasePage {
     // this.language = this.data.language.name;
     // this.from_age = this.data.from_age;
     // this.to_age = this.data.to_age;
-    this.displayName = this.utility.splitName(this.data.user.name).first_name;
-    this.flag = this.getFlag();
+    // this.displayName = this.utility.splitName(this.data.user.name).first_name;
+    // this.flag = this.getFlag();
     //this.duration = this.data.capacity;
-    this.serial_number = this.data.serial_number;
+    // this.serial_number = this.data.serial_number;
     // this.price = this.data.updated_price;
     //this.schedules = this.data.schedules;
     // this.acheduleTime = this.schedules;
     //this.lessons = this.data.lesson;
-    this.created_at = this.data.created_at;
-    this.techerTitle = this.data.user.teacher.title;
-    this.course_user = this.data.user;
-    this.image = this.data.image;
+    // this.created_at = this.data.created_at;
+    // this.techerTitle = this.data.user.teacher.title;
+    // this.course_user = this.data.user;
+    // this.image = this.data.image;
     // this.rating = this.data.user.teacher.avg_rating;
     // this.total_rating = this.data.user.teacher.total_rating;
-    this.techerImg = this.data.user.image;
+    // this.techerImg = this.data.user.image;
     // this.country = this.data.user.teacher.country.name;
     // this.state = this.data.user.teacher.state.name;
-    this.updated_at = this.data.updated_at;
-    this.type = this.data.type;
+    // this.updated_at = this.data.updated_at;
+    // this.type = this.data.type;
     // this.currencySymbol = this.data?.auth_user_currency_symbol;
     // const startTime = this.acheduleTime.start_date;
     // const endTime = this.acheduleTime.end_date;
     // this.startTime = moment(startTime).format('hh:mm a');
     // this.endTime = moment(endTime).format('hh:mm a');
-    this.showFavValue = this.data.is_liked_by_me;
-    if (this.data.start_date) {
-      const startDate = this.data.start_date;
-      this.startDate = moment(startDate).format('DD-MMM-YYYY');
-    }
+    // this.showFavValue = this.data.is_liked_by_me;
+    // if (this.data.start_date) {
+    //   const startDate = this.data.start_date;
+    //   this.startDate = moment(startDate).format('DD-MMM-YYYY');
+    // }
 
-    if (this.data.end_date) {
-      const endDate = this.data.end_date;
-      this.endDate = moment(endDate).format('DD-MMM-YYYY');
-    }
+    // if (this.data.end_date) {
+    //   const endDate = this.data.end_date;
+    //   this.endDate = moment(endDate).format('DD-MMM-YYYY');
+    // }
 
-    this.aboutData = {
-      heading: 'Details',
-      text: this.data.description
-    }
+    // this.aboutData = {
+    //   heading: 'Details',
+    //   text: this.data.description
+    // }
 
-    this.infoData = {
-      title: this.data.title,
-      currencySymbol: this.data?.auth_user_currency_symbol,
-      price: this.data.updated_price,
-      rating: this.data.user.teacher.avg_rating,
-      total_rating: this.data.user.teacher.total_rating
-    }
+    // this.infoData = {
+    //   title: this.data.title,
+    //   currencySymbol: this.data?.auth_user_currency_symbol,
+    //   price: this.data.updated_price,
+    //   rating: this.data.user.teacher.avg_rating,
+    //   total_rating: this.data.user.teacher.total_rating
+    // }
 
-    this.scheduleData = {
-      schedules: this.data.schedules,
-    }
+    // this.scheduleData = {
+    //   schedules: this.data.schedules,
+    // }
 
-    this.acheduleTime = this.scheduleData.schedules;
-    const endTime = this.acheduleTime.end_date;
-    const startTime = this.acheduleTime.start_date;
-    this.startTime = moment(startTime).format('hh:mm a');
-    this.endTime = moment(endTime).format('hh:mm a');
+    // this.acheduleTime = this.scheduleData.schedules;
+    // const endTime = this.acheduleTime.end_date;
+    // const startTime = this.acheduleTime.start_date;
+    // this.startTime = moment(startTime).format('hh:mm a');
+    // this.endTime = moment(endTime).format('hh:mm a');
     
-    this.countData = {
-      duration: this.data.capacity,
-      lessons: this.data.lesson,
-      mode_type: this.data.mode_type,
-      capacity: this.data.mode_type,
-      from_age: this.data.from_age,
-      to_age: this.data.to_age,
-      language: this.data.language.name,
-      state: this.data.user.teacher.state.name,
-      country: this.data.user.teacher.country.name,
-    }
+    // this.countData = {
+    //   duration: this.data.capacity,
+    //   lessons: this.data.lesson,
+    //   mode_type: this.data.mode_type,
+    //   capacity: this.data.mode_type,
+    //   from_age: this.data.from_age,
+    //   to_age: this.data.to_age,
+    //   language: this.data.language.name,
+    //   state: this.data.user.teacher.state.name,
+    //   country: this.data.user.teacher.country.name,
+    // }
 
-    this.spinner = false;
+    // this.spinner = false;
 
     return true;
   }
@@ -334,12 +363,12 @@ export class StudentCourseDetailPage extends BasePage {
       let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
       let send = data.data.send;
       if (send == true) {
-        await this.globalCourses.requestTrial(
-          this.data,
-          user,
-          data.data.message
-        );
-        await this.callApi();
+        // await this.globalCourses.requestTrial(
+        //   this.data,
+        //   user,
+        //   data.data.message
+        // );
+        // await this.callApi();
         // this.events.publish('update-course-list');
       }
     } else {
@@ -365,8 +394,8 @@ export class StudentCourseDetailPage extends BasePage {
   async cancelTrail() {
     this.btn_loading = true;
     let user = this.users.getUser();
-    await this.globalCourses.cancelTrail(this.data, user);
-    await this.callApi();
+    // await this.globalCourses.cancelTrail(this.data, user);
+    // await this.callApi();
     this.btn_loading = false;
   }
 
@@ -398,7 +427,7 @@ export class StudentCourseDetailPage extends BasePage {
 
   async getOtherCourse(event) {
     this.course_Id = event.id;
-    await this.callApi();
+    // await this.callApi();
     this.content.scrollToTop(500); // 500ms animation duration
   }
 }
