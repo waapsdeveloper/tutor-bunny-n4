@@ -234,9 +234,12 @@ export class StudentCourseDetailPage extends BasePage {
       list: []
     }
 
+    const res = await this.network.getReviews({teacher_id :data.user.id })
+    console.log( this.ratingData.list);
+    
     this.ratingData = {
       heading: 'Reviews',
-      list: []
+      list: res.result
     }
 
 
