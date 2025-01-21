@@ -143,34 +143,34 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     };
 
     const ratings = await this.network.getReviews(reviews_params);
-    console.log(ratings);
     
     this.ratingData = {
       heading: 'Reviews',
       list: ratings.result
     }
 
-    // let obj = {
-    //   email: user.email,
-    // };
+    let obj = {
+      email: user.email,
+    };
 
-    // let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
-    // this.countData = {
-    //   years_of_experience: data.user.teacher.started_teaching,
-    //   course_count: res.course_material.total_courses,
-    //   notes_count: res.course_material.total_material,
-    // }
+    let res = await this.network.getStudentTeacherProfileByEmail(obj);
+  
+    this.countData = {
+      years_of_experience: user.teacher.started_teaching,
+      course_count: res.course_material.total_courses,
+      notes_count: res.course_material.total_material,
+    }
+    
+    this.courseData = {
+      heading: 'Courses & Study Notes',
+      list: res.course_material.list
+    }
 
-    // this.courseData = {
-    //   heading: 'Courses & Study Notes',
-    //   list: res.course_material.list
-    // }
-
-    // this.galleryData = {
-    //   heading: 'Gallery',
-    //   list: res.gallery
-    // }
+    this.galleryData = {
+      heading: 'Gallery',
+      list: res.gallery
+    }
 
     return true;
   }

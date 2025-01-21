@@ -10,6 +10,7 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./detail-material.page.scss'],
 })
 export class DetailMaterialPage extends BasePage implements OnInit {
+[x: string]: any;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -56,6 +57,11 @@ export class DetailMaterialPage extends BasePage implements OnInit {
 
   courseImages: string[] = []; // Images array
   currentIndex: number = 0;
+
+  ratingData = {
+    heading: 'Reviews',
+    list: []
+  }
 
   constructor(injector: Injector, private globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
@@ -141,6 +147,20 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
+
+    let reviews_params = {
+      teacher_id: this.data.user.id,
+      type: 'course'
+    };
+
+    const ratings = await this.network.getReviews(reviews_params);
+    
+    this.ratingData = {
+      heading: 'Reviews',
+      list: ratings.result
+    }
+
+
   }
 
   formatDescription(description: string): string {
@@ -230,4 +250,6 @@ export class DetailMaterialPage extends BasePage implements OnInit {
       title: 'Edit Material',
     });
   }
+
+  goToChat(){}
 }

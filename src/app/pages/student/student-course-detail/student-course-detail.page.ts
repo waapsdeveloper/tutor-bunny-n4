@@ -227,12 +227,13 @@ export class StudentCourseDetailPage extends BasePage {
     this.scheduleData = {
       schedules: data.schedules,
     }
-    console.log(data.id);
+
     let similarcourse_params = {
       course_id: data.id
     }
 
     const similarcourses = await this.network.getSimilarCourses(similarcourse_params);
+    
     this.coursesData = {
       heading: 'Similar Courses',
       list: similarcourses.result.data
@@ -250,8 +251,6 @@ export class StudentCourseDetailPage extends BasePage {
       heading: 'Reviews',
       list: res.result
     }
-
-    console.log(this.course_Id);
     // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
     // this.teacher = data.user;

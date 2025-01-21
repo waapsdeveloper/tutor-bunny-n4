@@ -46,7 +46,6 @@ export class MaterialAttachmentsComponent {
       study_material_id: id,
     };
     let res = (await this.network.getMaterialDocs(obj)) as any;
-    console.log(res);
     if(res && res.result && res.result.data){
       this.list = res.result.data
     }

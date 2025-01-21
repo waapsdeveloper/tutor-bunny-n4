@@ -12,6 +12,9 @@ import { MaterialPhotosModule } from './material-photos/material-photos.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
 import { MaterialAttachmentsModule } from './material-attachments/material-attachments.module';
+import { MyRatingsModule } from "../../../../components/my-ratings/my-ratings.module";
+import { SdButtonClearModule } from "../../../../components/sd-button-clear/sd-button-clear.module";
+import { SdButtonGoldenModule } from "../../../../components/sd-button-golden/sd-button-golden.module";
 
 @NgModule({
   imports: [
@@ -25,9 +28,11 @@ import { MaterialAttachmentsModule } from './material-attachments/material-attac
     GlobalTextReadModule,
     MaterialPhotosModule,
     MaterialPhotosModule,
-    MaterialAttachmentsModule
-
-  ],
+    MaterialAttachmentsModule,
+    MyRatingsModule,
+    SdButtonClearModule,
+    SdButtonGoldenModule
+],
   declarations: [DetailMaterialPage],
 })
 export class DetailMaterialPageModule {}
