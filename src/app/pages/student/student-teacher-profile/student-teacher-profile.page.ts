@@ -137,8 +137,21 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       text: user.teacher.description || ''
     }
 
+    let reviews_params = {
+      teacher_id: user.id,
+      type: 'course'
+    };
+
+    const ratings = await this.network.getReviews(reviews_params);
+    console.log(ratings);
+    
+    this.ratingData = {
+      heading: 'Reviews',
+      list: ratings.result
+    }
+
     // let obj = {
-    //   email: data.user.email,
+    //   email: user.email,
     // };
 
     // let res = await this.network.getStudentTeacherProfileByEmail(obj);
@@ -159,38 +172,29 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     //   list: res.gallery
     // }
 
-    // const ratings = await this.network.getReviews({teacher_id :data.user.id })
-    // // console.log(ratings);
-
-    // this.ratingData = {
-    //   heading: 'Reviews',
-    //   list: ratings.result
-    // }
-    // console.log(this.ratingData.list);
-
     return true;
   }
 
   async initialize(email) {
     this.loading = true;
     
-    let obj = {
-      email: email,
-    };
+    // let obj = {
+    //   email: email,
+    // };
     
-    let res = await this.network.getStudentTeacherProfileByEmail(obj);
+    // let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
-    console.log(res);
-    this.user = res.user;
+    // console.log(res);
+    // this.user = res.user;
 
 
-    this.headerData = {
-      image: this.user.image,
-      displayName: this.utility.getAmericanName(this.user.name),
-      verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
-      rating: this.user.teacher.avg_rating,
-      totalRating: this.user.teacher.total_rating
-    }
+    // this.headerData = {
+    //   image: this.user.image,
+    //   displayName: this.utility.getAmericanName(this.user.name),
+    //   verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
+    //   rating: this.user.teacher.avg_rating,
+    //   totalRating: this.user.teacher.total_rating
+    // }
 
     // this.infoData = {
     //   subjects: this.user.teacher.subjects,
@@ -202,27 +206,27 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     //   //flag: this.getFlag()
     // }
 
-    this.countData = {
-      years_of_experience: this.user.teacher.started_teaching,
-      course_count: res.course_material.total_courses,
-      notes_count: res.course_material.total_material,
-    }
+    // this.countData = {
+    //   years_of_experience: this.user.teacher.started_teaching,
+    //   course_count: res.course_material.total_courses,
+    //   notes_count: res.course_material.total_material,
+    // }
 
-    this.aboutData = {
-      heading: 'About',
-      text: this.user.teacher.description || ''
-    }
+    // this.aboutData = {
+    //   heading: 'About',
+    //   text: this.user.teacher.description || ''
+    // }
 
 
-    this.courseData = {
-      heading: 'Courses & Study Notes',
-      list: res.course_material.list
-    }
+    // this.courseData = {
+    //   heading: 'Courses & Study Notes',
+    //   list: res.course_material.list
+    // }
 
-    this.galleryData = {
-      heading: 'Gallery',
-      list: res.gallery
-    }
+    // this.galleryData = {
+    //   heading: 'Gallery',
+    //   list: res.gallery
+    // }
     
 
     // this.ratingData = {
