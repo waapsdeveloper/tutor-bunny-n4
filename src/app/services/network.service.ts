@@ -454,7 +454,7 @@ export class NetworkService {
   }
 
   addCourseFav(data) {
-    return this.httpPostResponse('courses/list/add-fav', data, null, false, false);
+    return this.httpPostResponse('courses/list/add-fav', data, null, false, true);
   }
 
   addReview(data) {
@@ -462,7 +462,7 @@ export class NetworkService {
   }
 
   removeCourseFav(data) {
-    return this.httpPostResponse('courses/list/remove-fav', data, null, false, false);
+    return this.httpPostResponse('courses/list/remove-fav', data, null, false, true);
   }
 
   isCourseFav(data) {
@@ -672,10 +672,15 @@ export class NetworkService {
 
       seq.subscribe({
         next: (res: any) => {
+
           if (showloader === true) {
-            // return
             this.utility.hideLoader();
           }
+
+          if (showError == true) {
+            this.utility.presentSuccessToast(res.message);
+          }
+
           resolve(res);
         },
         error: (err: any) => {
