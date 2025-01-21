@@ -15,21 +15,21 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
   list = [
     {
       id: 1,
-      image: '',
-      heading: '',
-      text: ''
+      image: 'assets/svg/teacher-complete.svg',
+      heading: 'Welcome to Tutor Bunny.',
+      text: 'Submit the application form to join <br> Tutor bunny as a Teacher and reate courses <br> and upload study notes '
     },
     {
       id: 2,
-      image: '',
+      image: 'assets/svg/2ndcopy.svg',
       heading: '',
-      text: ''
+      text: 'Once the profile is approved by the admin, get <br> connected to your students, chat with them and <br> provide trial sessions'
     },
     {
       id: 3,
-      image: '',
+      image: 'assets/svg/3rdcopy.svg',
       heading: '',
-      text: ''
+      text: 'Create and upload study notes, materials of your <br> subject of interests and sell online to students'
     },
   ]
 
