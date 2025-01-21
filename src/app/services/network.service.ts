@@ -22,11 +22,11 @@ export class NetworkService {
     return this.httpPostResponse('login-via-social', data);
   }
   loginViaEmail(data) {
-    return this.httpPostResponse('login-via-email', data, null, false, true);
+    return this.httpPostResponse('login-via-email', data, null, false, false);
   }
 
   signUpviaEmail(data) {
-    return this.httpPostResponse('signup-via-email', data, null, false, true);
+    return this.httpPostResponse('signup-via-email', data, null, false, false);
   }
 
   postImages(data) {
@@ -53,11 +53,11 @@ export class NetworkService {
   }
 
   postCertificate(data) {
-    return this.httpPostResponse('certificate/add', data, null, false, true);
+    return this.httpPostResponse('certificate/add', data, null, false, false);
   }
 
   postCourseImage(data) {
-    return this.httpPostResponse('course/image/add', data, null, false, true);
+    return this.httpPostResponse('course/image/add', data, null, false, false);
   }
 
   getChatRead(data) {
@@ -253,11 +253,6 @@ export class NetworkService {
     return this.httpGetResponse('notifications/unread-count', null, false, false);
   }
 
-  
-
-
-
-
   getNotifications(id) {
     return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
   }
@@ -374,45 +369,45 @@ export class NetworkService {
   }
 
   updateTeacherProfile(data, id) {
-    return this.httpPostResponse('user/teacher/' + id, data, null, true, true);
+    return this.httpPostResponse('user/teacher/' + id, data, null, true, false);
   }
   updateTeacherProfile3(data, id) {
-    return this.httpPostResponse('ser/teacher/third/' + id, data, null, true, true);
+    return this.httpPostResponse('ser/teacher/third/' + id, data, null, true, false);
   }
 
   SubmitCourse(data) {
-    return this.httpPostResponse('courses/add', data, null, false, true);
+    return this.httpPostResponse('courses/add', data, null, false, false);
   }
 
   setRecentSeach(data) {
-    return this.httpPostResponse('search/course/add', data, null, true, true);
+    return this.httpPostResponse('search/course/add', data, null, true, false);
   }
 
   sendEmail(data) {
-    return this.httpPostResponse('forget-password', data, null, true, true);
+    return this.httpPostResponse('forget-password', data, null, true, false);
   }
 
   resetPassword(data) {
-    return this.httpPostResponse('validate-otp-and-change-password', data, null, true, true);
+    return this.httpPostResponse('validate-otp-and-change-password', data, null, true, false);
   }
   SubmitCourseEdit(data, id) {
-    return this.httpPostResponse('courses/edit', data, id, false, true);
+    return this.httpPostResponse('courses/edit', data, id, false, false);
   }
   SubmitSecondCourse(data, id) {
-    return this.httpPostResponse('course/update-params/' + id, data, null, false, true);
+    return this.httpPostResponse('course/update-params/' + id, data, null, false, false);
   }
 
   AddSchedule(data) {
-    return this.httpPostResponse('schedule/add', data, null, false, true);
+    return this.httpPostResponse('schedule/add', data, null, false, false);
   }
 
   notificationRead(data) {
-    return this.httpPostResponse('notifications/is-open', data, null, false, true);
+    return this.httpPostResponse('notifications/is-open', data, null, false, false);
   }
 
 
   checkReview(data) {
-    return this.httpPostResponse('check-review', data, null, false, true);
+    return this.httpPostResponse('check-review', data, null, false, false);
   }
 
   inactiveCourse(data) {
@@ -444,7 +439,7 @@ export class NetworkService {
   }
 
   getTrail(data) {
-    return this.httpPostResponse('course-trial/is-sent-request', data, null, false, true);
+    return this.httpPostResponse('course-trial/is-sent-request', data, null, false, false);
   }
 
   addCourseFav(data) {
@@ -473,19 +468,19 @@ export class NetworkService {
 
 
   storeStudyMaterial(data) {
-    return this.httpPostResponse('material/add', data, null, false, true);
+    return this.httpPostResponse('material/add', data, null, false, false);
   }
 
   updateStudyMaterial(data, id) {
-    return this.httpPostResponse('material/edit/' + id, data, null, false, true);
+    return this.httpPostResponse('material/edit/' + id, data, null, false, false);
   }
 
   postStudyMaterialPhoto(data: any) {
-    return this.httpPostResponse('material/update-material-image', data, null, false, true);
+    return this.httpPostResponse('material/update-material-image', data, null, false, false);
   }
 
   postMaterialImage(data) {
-    return this.httpPostResponse('material/image/add', data, null, false, true);
+    return this.httpPostResponse('material/image/add', data, null, false, false);
   }
 
   getAllMaterials(data: any) {
@@ -494,18 +489,18 @@ export class NetworkService {
   }
 
   purchaseMaterial(data: any) {
-    return this.httpPostResponse('material/purchase', data, null, false, true);
+    return this.httpPostResponse('material/purchase', data, null, false, false);
   }
   getMaterialById(id) {
     return this.httpGetResponse('material/byid/' + id, null, false, false);
   }
 
   uploadStudtMaterialFile(data) {
-    return this.httpPostResponse('material/upload/docs', data, null, false, true, 'multipart/form-data');
+    return this.httpPostResponse('material/upload/docs', data, null, false, false, 'multipart/form-data');
   }
 
   deleteStudyMaterialFile(data) {
-    return this.httpPostResponse('material/delete/document', data, false, true, true);
+    return this.httpPostResponse('material/delete/document', data, false, true, false);
   }
 
   getMaterialImages(data) {
@@ -519,7 +514,7 @@ export class NetworkService {
   }
 
   submitSecondMaterial(data, id) {
-    return this.httpPostResponse('material/update-params/' + id, data, null, false, true);
+    return this.httpPostResponse('material/update-params/' + id, data, null, false, false);
   }
 
   getMyMaterialList(data: any, id) {
@@ -547,7 +542,7 @@ export class NetworkService {
   }
 
   buyNow(data) {
-    return this.httpPostResponse('stripe/add', data, false, true, true);
+    return this.httpPostResponse('stripe/add', data, false, true, false);
   }
 
   getAllCart(user_id) {
@@ -555,7 +550,7 @@ export class NetworkService {
   }
 
   materialCheckout(data) {
-    return this.httpPostResponse('material/cart/checkout', data, false, true, true);
+    return this.httpPostResponse('material/cart/checkout', data, false, true, false);
   }
 
   materialCheckoutHistory(id) {
