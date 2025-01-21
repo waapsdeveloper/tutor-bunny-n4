@@ -17,11 +17,14 @@ export class HomePage extends BasePage implements ViewWillEnter {
   params: any;
   user;
   role_Id;
+  dynamic_year: number;
 
   step = 1;
 
   constructor(injector: Injector, public authService: AuthenticationService) {
     super(injector);
+
+    this.dynamic_year = new Date().getFullYear();
   }
 
   ionViewWillEnter(): void {
