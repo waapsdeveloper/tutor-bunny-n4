@@ -51,6 +51,10 @@ export class GlobalTeacherService extends NgSimpleStateBaseRxjsStore< GlobalTeac
     });
   }
 
+  getItem(id) {
+    return this.selectState((state) => state.find((x) => x.id == id));
+  }
+
   getGlobalTeachersFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       const user = this.users.getUser();

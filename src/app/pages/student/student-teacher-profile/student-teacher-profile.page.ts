@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 
 @Component({
   selector: 'app-student-teacher-profile',
@@ -13,6 +14,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   loading = false;
   user: any;  
+
+  teacher$;
+  teacherId;
+
+  params;
+  backUrl
 
   headerData = {
     image: '',
@@ -64,7 +71,9 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
 
 
-  constructor(injector: Injector, private chats : ChatService) {
+  constructor(injector: Injector, 
+    public globalTeacherService: GlobalTeacherService,
+    private chats : ChatService) {
     super(injector);
   }
 
@@ -73,6 +82,82 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     if (params['email']) {
       this.initialize(params['email']);      
     }
+  }
+
+  async ionViewWillEnter() {
+
+    this.params = this.nav.getQueryParams();
+    if (this.params.backUrl) {
+      this.backUrl = this.params.backUrl;
+    }
+
+    if (this.params.teacher_id) {
+      
+      this.teacherId = this.params.teacher_id;
+      this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
+        this.teacher$ = data;
+        this.callApi(this.teacher$);
+      });
+
+    } else {
+      this.nav.pop();
+    }
+    // this.spinner = true;
+
+    
+    // this.isTrailReq();
+  }
+
+  async callApi(data): Promise<boolean> {
+
+    console.log(data);
+
+    this.headerData = {
+      image: this.user.image,
+      displayName: this.utility.getAmericanName(this.user.name),
+      verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
+      rating: this.user.teacher.avg_rating,
+      totalRating: this.user.teacher.total_rating
+    }
+
+    this.infoData = {
+      subjects: this.user.teacher.subjects,
+      languages: this.user.teacher.languages,
+      travel_policy: this.user.teacher.travel_policy.name,
+      country: this.user.teacher.country.name,
+      city: this.user.teacher.city,
+      state: this.user.teacher.state.name,
+      flag: this.getFlag()
+    }
+
+    this.countData = {
+      years_of_experience: this.user.teacher.started_teaching,
+      course_count: res.course_material.total_courses,
+      notes_count: res.course_material.total_material,
+    }
+
+    this.aboutData = {
+      heading: 'About',
+      text: this.user.teacher.description || ''
+    }
+
+
+    this.courseData = {
+      heading: 'Courses & Study Notes',
+      list: res.course_material.list
+    }
+
+    this.galleryData = {
+      heading: 'Gallery',
+      list: res.gallery
+    }
+
+    this.ratingData = {
+      heading: 'Reviews',
+      list: res.reviews
+    }
+
+    return true;
   }
 
   async initialize(email) {

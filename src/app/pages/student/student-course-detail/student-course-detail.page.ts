@@ -14,7 +14,7 @@ import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src
   templateUrl: './student-course-detail.page.html',
   styleUrls: ['./student-course-detail.page.scss'],
 })
-export class StudentCourseDetailPage extends BasePage implements OnInit {
+export class StudentCourseDetailPage extends BasePage {
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -68,9 +68,8 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     list: []
   }
 
-
-  data;
   params;
+
   backUrl;
   displayName;
   course_Id;
@@ -122,9 +121,9 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
     
-  }
+  // }
 
   async ionViewWillEnter() {
 
@@ -318,38 +317,22 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
     return true;
   }
 
-  async addToFav() {
-    let user = this.users.getUser();
+  // async addToFav() {
+  //   let user = this.users.getUser();
 
-    this.data.is_liked_by_me = true;
-    this.showFavValue = true;
-    this.courseFavoriteService.addFavorites(this.data, user);
-  }
+  //   this.data.is_liked_by_me = true;
+  //   this.showFavValue = true;
+  //   this.courseFavoriteService.addFavorites(this.data, user);
+  // }
 
-  async removeToFav() {
-    let user = this.users.getUser();
+  // async removeToFav() {
+  //   let user = this.users.getUser();
 
-    this.data.is_liked_by_me = false;
-    this.showFavValue = false;
-    this.courseFavoriteService.removeFavorites(this.data, user);
-  }
+  //   this.data.is_liked_by_me = false;
+  //   this.showFavValue = false;
+  //   this.courseFavoriteService.removeFavorites(this.data, user);
+  // }
 
-  getFlag() {
-    if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
-      const flag = this.data.user.teacher.country.iso2;
-
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
-  toggleReadMore() {
-    this.isExpanded = !this.isExpanded;
-  }
 
   // async goToChat() {
   //   this.user = this.users.getUser();
@@ -505,9 +488,10 @@ export class StudentCourseDetailPage extends BasePage implements OnInit {
 
     return true;
   }
-  goToTeacher() {
+  
+  goToTeacher(user) {
     const params = {
-      email: this.data.user.email,
+      email: user.email,
     };
     this.nav.push('/teacher-profile', params);
   }
