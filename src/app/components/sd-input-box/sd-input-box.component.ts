@@ -225,10 +225,17 @@ export class SdInputBoxComponent implements OnInit {
   }
 
   onFocus() {
+
+    if(this.modernInput){
+      return;
+    }
     this.isInputActive = true;
   }
 
   onBlur() {
+    if(this.modernInput){
+      return;
+    }
     this.isInputActive = false;
   }
 }
