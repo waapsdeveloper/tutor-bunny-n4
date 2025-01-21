@@ -448,7 +448,7 @@ export class NetworkService {
   }
 
   addCourseFav(data) {
-    return this.httpPostResponse('courses/list/add-fav', data, null, false, false);
+    return this.httpPostResponse('courses/list/add-fav', data, null, false, true);
   }
 
   addReview(data) {
