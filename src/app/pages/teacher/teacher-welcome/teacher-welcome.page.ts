@@ -15,9 +15,9 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
   list = [
     {
       id: 1,
-      image: '',
-      heading: '',
-      text: ''
+      image: 'assets/svg/teacher-complete.svg',
+      heading: 'Welcome to Tutor Bunny.',
+      text: 'Submit the application form to join <br> Tutor bunny as a Teacher and reate courses <br> and upload study notes '
     },
     {
       id: 2,
