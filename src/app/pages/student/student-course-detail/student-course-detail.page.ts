@@ -7,15 +7,14 @@ import { ChatService } from 'src/app/services/chat.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
-import { bannerData } from 'src/app/interfaces/banner-data';
+import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-student-course-detail',
   templateUrl: './student-course-detail.page.html',
   styleUrls: ['./student-course-detail.page.scss'],
 })
-export class StudentCourseDetailPage extends BasePage {
-  // implements OnInit
+export class StudentCourseDetailPage extends BasePage implements OnInit {
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -27,6 +26,47 @@ export class StudentCourseDetailPage extends BasePage {
     sliderImages: []
   }
 
+  infoData: infoData = {
+    title: '', 
+    currency_symbol: '',
+    price: '',
+    rating: 0.0,
+    total_rating: 0,
+    per_unit: '/lesson'
+  };
+
+  columnData = {
+    colA: [],
+    colB: []
+  }
+
+  aboutData = {
+    heading: 'Details',
+    text: ''
+  }
+
+  teacherData: teacherCardInfo = {
+    image: '',
+    name: '',
+    flag: '',
+    country: '',
+    icon: '',
+    text: ''
+  }
+
+  scheduleData = {
+    schedules: []
+  };
+
+  coursesData = {
+    heading: 'Similar Courses',
+    list: []
+  }
+
+  ratingData = {
+    heading: 'Reviews',
+    list: []
+  }
 
 
   data;
@@ -72,40 +112,18 @@ export class StudentCourseDetailPage extends BasePage {
   startDate;
   showFavValue = false;
 
-  aboutData = {
-    heading: 'Details',
-    text: ''
-  }
 
-  infoData = {
-    title: '', 
-    currencySymbol: '',
-    price: '',
-    rating: '',
-    total_rating: ''
-  };
 
-  scheduleData = {
-    schedules: []
-  };
-
-  countData = {
-    duration: '',
-    lessons: '',
-    mode_type: '',
-    capacity: '',
-    from_age: '',
-    to_age: '',
-    language: '',
-    state: '',
-    country: '',
-  };
 
   constructor(injector: Injector,
     private courseFavoriteService: CourseFavoriteService,
     private chats: ChatService,
     public globalCoursesService: GlobalCoursesService) {
     super(injector);
+  }
+
+  ngOnInit(): void {
+    
   }
 
   async ionViewWillEnter() {
@@ -116,6 +134,7 @@ export class StudentCourseDetailPage extends BasePage {
     }
 
     if (this.params.course_id) {
+      
       this.courseId = this.params.course_id;
       this.globalCoursesService.getItem(this.courseId).subscribe((data) => {
         this.course$ = data;
@@ -133,6 +152,8 @@ export class StudentCourseDetailPage extends BasePage {
 
   async callApi(data): Promise<boolean> {
 
+    console.log(data);
+
     const resImages = await this.network.getCourseImages({
       course_id: data.id,
     })
@@ -145,11 +166,80 @@ export class StudentCourseDetailPage extends BasePage {
 
     this.infoData = {
       title: data.title,
-      currencySymbol: data?.auth_user_currency_symbol ?? '$',
-      price: data?.updated_price,
-      rating: data.user.teacher.avg_rating,
-      total_rating: data.user.teacher.total_rating
+      currency_symbol: data?.auth_user_currency_symbol ?? '$',
+      price: data?.updated_price ?? 0,
+      rating: data.user.teacher.avg_rating ?? 0.0,
+      total_rating: data.user.teacher.total_rating ?? 0,
+      per_unit: '/lesson'    
     }
+
+    this.columnData = {
+      colA: [
+        {
+          icon: 'assets/svg/time.svg',
+          text: data.duration + ' hours / lesson'
+        },
+        {
+          icon: 'assets/svg/globe-person.svg',
+          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type
+        },
+        {
+          icon: 'assets/svg/cake2.svg',
+          text: `Student Age ${data.from_age} - ${data.to_age}`
+        },
+        {
+          icon: 'assets/svg/locations.svg',
+          text: ''
+        }
+      ] as infoColumnSingleItem[],
+      colB: [
+        {
+          icon: 'assets/svg/create-course.svg',
+          text: `Total ${data.lesson} lessons` 
+        },
+        {
+          icon: 'assets/svg/minicute-group.svg',
+          text: `${data.capacity}`
+        },
+        {
+          icon: 'assets/svg/speaks.svg',
+          text: data.language.name
+        },
+        {
+          icon: 'assets/svg/course-type.svg',
+          text: 'Workshop / Event'
+        }
+      ] as infoColumnSingleItem[]
+    }
+
+    this.aboutData = {
+      heading: 'Details',
+      text: data.description
+    }
+
+    this.teacherData = {
+      image: data.user.image,
+      name: data.user.name,
+      flag: this.utility.getFlag(data.user),
+      country: data.user.teacher.country.name,
+      icon: 'assets/svg/teacher-icon.svg',
+      text: data.user.teacher.title
+    }
+
+    this.scheduleData = {
+      schedules: data.schedules,
+    }
+
+    this.coursesData = {
+      heading: 'Similar Courses',
+      list: []
+    }
+
+    this.ratingData = {
+      heading: 'Reviews',
+      list: []
+    }
+
 
     // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
@@ -199,16 +289,11 @@ export class StudentCourseDetailPage extends BasePage {
     //   this.endDate = moment(endDate).format('DD-MMM-YYYY');
     // }
 
-    // this.aboutData = {
-    //   heading: 'Details',
-    //   text: this.data.description
-    // }
+    
 
     
 
-    // this.scheduleData = {
-    //   schedules: this.data.schedules,
-    // }
+    
 
     // this.acheduleTime = this.scheduleData.schedules;
     // const endTime = this.acheduleTime.end_date;

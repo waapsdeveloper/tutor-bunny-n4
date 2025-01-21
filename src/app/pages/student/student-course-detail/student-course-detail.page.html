@@ -4,27 +4,15 @@
 
   <div class="body-content ion-padding">
     <app-scd-page-info [data]="infoData"></app-scd-page-info>
-
-
-    <!--  -->
-    <!--  -->
-    <!-- <div class="course-heading-78521">
-      {{title}}
-    </div>
-    <div class="cource-price-and-rating-box-78541"> 
-      <div class="cource-price--78542">{{currencySymbol}}{{price}} <span style="font-size: 12px;"> /lesson</span></div>
-      <div class="cource-rating-box-78543">
-        <app-rating-stars [rating]="rating"></app-rating-stars>
-        <div class="cource-rating-number-78545">{{rating}} <span
-            style="font-size: 12px; color: #7C7B7B;">({{total_rating}})</span></div>
-      </div>
-    </div> -->
-    <!--  -->
+    <app-scd-page-course-statistics [data]="columnData"></app-scd-page-course-statistics>
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
+    <app-teacher-info-card [data]="teacherData"></app-teacher-info-card>
+    <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule>
+    <app-my-courses [data]="coursesData" ></app-my-courses>
+    <app-my-ratings [data]="ratingData"></app-my-ratings>
 
 
 
-    <!--  -->
-    <!-- <app-scd-page-course-statistics [data]="countData"></app-scd-page-course-statistics> -->
     <!-- <div class="line"></div>
     <div class="cource-details-box-78561">
       <div class="cource-time-and-lessons-78562">
@@ -86,7 +74,7 @@
 
 
     <!--  -->
-    <!-- <app-scd-page-instructor-details></app-scd-page-instructor-details> -->
+    
     <!-- <div class="line"></div>
     <div class="detail-box-outer-78522">
       <div class="detail-head-785234">
@@ -112,7 +100,7 @@
     <!--  -->
 
     <!--  -->
-   <!-- <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule> -->
+   <!--  -->
     <!-- <div class="line" *ngIf="schedules.length !== 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules.length !== 0">
       <div class="detail-head-785234">
@@ -131,6 +119,12 @@
 
   </div>
   <!-- <app-scd-page-footer></app-scd-page-footer> -->
+
+  
+  <div class="footer-buttons-78963 ion-padding">
+    <app-sd-button-clear class="footer-button-1" [image]="'assets/svg/chat.svg'" [text]="'Chat'" (click)="goToChat()" ></app-sd-button-clear>
+    <app-sd-button-golden class="footer-button-2" [image]="'assets/svg/send.svg'" [text]="'Free Trial'" ></app-sd-button-golden>    
+  </div>
 </ion-content>
 <!-- <ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
