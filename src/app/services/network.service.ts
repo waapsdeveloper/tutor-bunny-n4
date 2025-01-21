@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 import { UtilityService } from './utility.service';
 import { ModalService } from './basic/modal.service';
+import { log } from 'node:console';
 
 @Injectable({
   providedIn: 'root',
@@ -153,6 +154,11 @@ export class NetworkService {
 
   getAllCourses(data: any) {
     return this.httpPostResponse('courses/list', data, null, false, false);
+  }
+
+  getSimilarCourses(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('similar/courses' + '?' + str, null, false, false);
   }
 
   getTeacherCourses(data: any) {

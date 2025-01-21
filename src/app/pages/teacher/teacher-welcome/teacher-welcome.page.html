@@ -21,23 +21,41 @@
 <div class="welcome-page-outer">
 
   <div class="page-logo-outer">
-
+    <img class="page-logo" src="assets/svg/logo.svg">
   </div>
 
   <div class="swiper-outer">
     <swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }"
       class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()">
       <ng-template swiperSlide *ngFor="let item of list">
-        <div class="vedio-box-inner">
-          <div class="video-89654"
-            [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'">
+        <div class="slider-content d-flex flex-column align-items-center justify-content-center">
+          <div class="box-inner text-center">
+            <img class="box-inner-image" [src]="item.image" alt="">
+          </div>
+          <div class="welcome-text-outer">
+            <div class="welcome-text-outer-7892 d-flex flex-column align-items-center justify-content-center gap-16">
+              <div class="welcome-text-7892 text-center fs-16 roboto-medium">{{ item.heading }}</div>
+              <div class="welcome-text-78921 text-center fs-16 roboto-regular" [innerHTML]="item.text"></div>
+            </div>
           </div>
         </div>
+
       </ng-template>
     </swiper>
   </div>
 
-  <div class="welcome-page-footer">
+  <div class="nav-dots text-center">
+    <svg width="22" height="4" viewBox="0 0 22 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="2" cy="2" r="2" fill="#949494" />
+      <circle cx="11" cy="2" r="2" fill="#949494" />
+      <circle cx="20" cy="2" r="2" fill="#949494" />
+    </svg>
+
+  </div>
+
+  <div class="welcome-page-footer ion-padding">
+
+    <app-sd-button-gray [text]="'Continue'" (click)="continue()"></app-sd-button-gray>
 
   </div>
 

@@ -152,7 +152,6 @@ export class StudentCourseDetailPage extends BasePage {
   async callApi(data): Promise<boolean> {
 
     console.log(data);
-
     const resImages = await this.network.getCourseImages({
       course_id: data.id,
     })
@@ -228,21 +227,31 @@ export class StudentCourseDetailPage extends BasePage {
     this.scheduleData = {
       schedules: data.schedules,
     }
-
-    this.coursesData = {
-      heading: 'Similar Courses',
-      list: []
+    console.log(data.id);
+    let similarcourse_params = {
+      course_id: data.id
     }
 
-    const res = await this.network.getReviews({teacher_id :data.user.id })
-    console.log( this.ratingData.list);
+    const similarcourses = await this.network.getSimilarCourses(similarcourse_params);
+    this.coursesData = {
+      heading: 'Similar Courses',
+      list: similarcourses.result.data
+    }
+
+    let reviews_params= {
+      teacher_id: data.user.id,
+      type: 'course'
+    };
+
+    const res = await this.network.getReviews(reviews_params);
+  
     
     this.ratingData = {
       heading: 'Reviews',
       list: res.result
     }
 
-
+    console.log(this.course_Id);
     // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
     // this.teacher = data.user;
