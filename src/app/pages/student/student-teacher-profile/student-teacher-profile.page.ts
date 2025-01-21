@@ -112,8 +112,10 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     console.log(data);
 
+    const user = data;
+
     this.headerData = {
-      image: this.user.image,
+      image: user.image,
       displayName: this.utility.getAmericanName(this.user.name),
       verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
       rating: this.user.teacher.avg_rating,
