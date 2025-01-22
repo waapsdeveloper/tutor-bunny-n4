@@ -4,7 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
-import { bannerData } from 'src/app/interfaces/detail-data';
+import { bannerData, infoData } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-course-detail',
@@ -22,6 +22,15 @@ export class CourseDetailPage extends BasePage implements OnInit {
     liked_by_me: false,
     sliderImages: []
   }
+  
+    infoData: infoData = {
+      title: '', 
+      currency_symbol: '',
+      price: '',
+      rating: 0.0,
+      total_rating: 0,
+      per_unit: '/lesson'
+    };
 
   data;
   params;
@@ -115,6 +124,15 @@ export class CourseDetailPage extends BasePage implements OnInit {
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: resImages.result
+    }
+    
+    this.infoData = {
+      title: data.title,
+      currency_symbol: data?.auth_user_currency_symbol ?? '$',
+      price: data?.updated_price ?? 0,
+      rating: data.user.teacher.avg_rating ?? 0.0,
+      total_rating: data.user.teacher.total_rating ?? 0,
+      per_unit: '/lesson'    
     }
 
 
