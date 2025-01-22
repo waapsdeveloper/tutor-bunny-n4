@@ -12,14 +12,14 @@ const routes: Routes = [
         path: '',
         redirectTo: 'courses',
         pathMatch: 'full'
-      },
+      }, 
       {
         path:'courses',
-        loadChildren:() => import('./../courses/courses.module').then( m => m.CoursesPageModule)
+        loadChildren:() => import('./courses/courses.module').then( m => m.CoursesPageModule)
       },
       {
         path:'notes',
-        loadChildren:() => import('./../notes/notes.module').then( m => m.NotesPageModule)
+        loadChildren:() => import('./notes/notes.module').then( m => m.NotesPageModule)
       },
     ]
   }

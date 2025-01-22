@@ -45,12 +45,12 @@ const routes: Routes = [
       // },
       {
         path: 'course-material',
-        loadChildren: () => import('../pages/course-material/course-material.module').then( m => m.CourseMaterialPageModule)
+        loadChildren: () => import('../pages/teacher/course-material/course-material.module').then( m => m.CourseMaterialPageModule)
       },
-      {
-        path: 'other-courses',
-        loadChildren: () => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
-      },
+      // {
+      //   path: 'other-courses',
+      //   loadChildren: () => import('../pages/courses/courses.module').then( m => m.CoursesPageModule)
+      // },
       // {
       //   path: 'course-detail',
       //   loadChildren: () => import('../pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule)

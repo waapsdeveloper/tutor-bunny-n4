@@ -9,7 +9,6 @@ import { CoursesPageRoutingModule } from './courses-routing.module';
 import { CoursesPage } from './courses.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { CourseCardModule } from './course-card/course-card.module';
-import { ProfileSearchBoxModule } from '../profile-details/profile-search-box/profile-search-box.module';
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
 
 @NgModule({
@@ -19,7 +18,7 @@ import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.m
     IonicModule,
     CoursesPageRoutingModule,
     SdHeaderTopModule,
-    ProfileSearchBoxModule,
+    
     CourseCardModule,
     SdBbackBtnModule
   ],

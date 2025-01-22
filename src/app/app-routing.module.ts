@@ -83,16 +83,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-dates/add-dates.module').then( m => m.AddDatesPageModule)
   },
   {
-    path: 'courses',
-    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
+    path: 'course-material',
+    loadChildren: () => import('./pages/teacher/course-material/course-material.module').then( m => m.CourseMaterialPageModule)
   },
   {
-    path: 'other-courses',
-    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
+    path: 'course-material/courses',
+    loadChildren: () => import('./pages/teacher/course-material/courses/courses.module').then( m => m.CoursesPageModule)
   },
+  // {
+  //   path: 'other-courses',
+  //   loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
+  // },
   {
     path: 'course-detail',
-    loadChildren: () => import('./pages/course-detail/course-detail.module').then( m => m.CourseDetailPageModule),
+    loadChildren: () => import('./pages/teacher/course-detail/course-detail.module').then( m => m.CourseDetailPageModule),
     resolve: {
       course: courseResolver
     },
@@ -210,10 +214,10 @@ const routes: Routes = [
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },
-  {
-    path: 'notes',
-    loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
-  },
+  // {
+  //   path: 'notes',
+  //   loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
+  // },
   {
     path: 'cart',
     loadChildren: () => import('./pages/student/cart/cart.module').then( m => m.CartPageModule)
