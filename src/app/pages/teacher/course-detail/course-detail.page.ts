@@ -4,7 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
-import { bannerData, infoData } from 'src/app/interfaces/detail-data';
+import { bannerData, infoColumnSingleItem, infoData } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-course-detail',
@@ -31,6 +31,11 @@ export class CourseDetailPage extends BasePage implements OnInit {
       total_rating: 0,
       per_unit: '/lesson'
     };
+    
+  columnData = {
+    colA: [],
+    colB: []
+  }
 
   data;
   params;
@@ -133,6 +138,45 @@ export class CourseDetailPage extends BasePage implements OnInit {
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
       per_unit: '/lesson'    
+    }
+
+    this.columnData = {
+      colA: [
+        {
+          icon: 'assets/svg/time.svg',
+          text: data.duration + ' hours / lesson'
+        },
+        {
+          icon: 'assets/svg/globe-person.svg',
+          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type
+        },
+        {
+          icon: 'assets/svg/cake2.svg',
+          text: `Student Age ${data.from_age} - ${data.to_age}`
+        },
+        {
+          icon: 'assets/svg/locations.svg',
+          text: ''
+        }
+      ] as infoColumnSingleItem[],
+      colB: [
+        {
+          icon: 'assets/svg/create-course.svg',
+          text: `Total ${data.lesson} lessons` 
+        },
+        {
+          icon: 'assets/svg/minicute-group.svg',
+          text: `${data.capacity}`
+        },
+        {
+          icon: 'assets/svg/speaks.svg',
+          text: data.language.name
+        },
+        {
+          icon: 'assets/svg/course-type.svg',
+          text: 'Workshop / Event'
+        }
+      ] as infoColumnSingleItem[]
     }
 
 
