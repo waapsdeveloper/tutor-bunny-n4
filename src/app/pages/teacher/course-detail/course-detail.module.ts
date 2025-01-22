@@ -16,6 +16,8 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
 import { SwiperModule } from 'swiper/angular';
 import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
 import { TeacherInfoCardModule } from 'src/app/components/teacher-info-card/teacher-info-card.module';
+import { SlideBannerModule } from "../../../components/shared/detail-pages-components/slide-banner/slide-banner.module";
+import { ScdPageInfoModule } from "../../../components/shared/detail-pages-components/scd-page-info/scd-page-info.module";
 
 @NgModule({
   imports: [
@@ -30,8 +32,10 @@ import { TeacherInfoCardModule } from 'src/app/components/teacher-info-card/teac
     CoursePhotosModule,
     RatingStarsModule,
     GlobalTextReadModule,
-    TeacherInfoCardModule
-  ],
+    TeacherInfoCardModule,
+    SlideBannerModule,
+    ScdPageInfoModule
+],
   declarations: [CourseDetailPage],
 
 })

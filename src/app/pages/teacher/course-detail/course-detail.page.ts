@@ -4,6 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
+import { bannerData } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-course-detail',
@@ -15,11 +16,17 @@ export class CourseDetailPage extends BasePage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   course$;
+  courseId;
+
+  bannerData: bannerData = {
+    liked_by_me: false,
+    sliderImages: []
+  }
 
   data;
   params;
   backUrl;
-  courseId;
+
   capacity;
   description;
   currencySymbol;
@@ -98,6 +105,22 @@ export class CourseDetailPage extends BasePage implements OnInit {
   }
 
   async callApi(data) {
+
+    console.log(data);
+    const resImages = await this.network.getCourseImages({
+      course_id: data.id,
+    })
+
+    console.log(resImages)
+    this.bannerData = {
+      liked_by_me: data.is_liked_by_me,
+      sliderImages: resImages.result
+    }
+
+
+
+
+
     this.loading = true;
     this.user = this.users.getUser();
     // let res = (await this.network.getcourseById(this.course_Id)) as any;

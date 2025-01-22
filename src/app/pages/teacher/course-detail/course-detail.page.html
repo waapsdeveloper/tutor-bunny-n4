@@ -2,33 +2,14 @@
 
   <app-slide-banner [data]="bannerData" (back)="nav.pop()"></app-slide-banner>
 
-
-
-  <div class="transparent-header-li-outer-78521">
-    <div class="transparent-header-li-inner-78521">
-      <div class="transparent-header-li left">
-        <div class="rwbutton">
-          <img src="assets/svg/arrow-back.svg" alt="back" (click)="nav.pop()" />
-        </div>
-      </div>
-
-      <div class="transparent-header-li right">
-        <div class="rwbutton">
-          <img [src]="course$?.is_liked_by_me ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'" (click)="course$?.is_liked_by_me ? removeToFav() : addToFav()" />
-        </div>
-        <div class="rwbutton">
-          <img src="assets/svg/share-77.svg" alt="share" />
-        </div>
-
-        <div class="rwbutton">
-          <img src="assets/svg/gray-info.svg" alt="info" />
-        </div>
-      </div>
-    </div>
-    <app-course-photos class="photos-slider-589655" [courseId]="courseId"></app-course-photos>
-  </div>
-
   <div class="body-content ion-padding">
+
+    <app-scd-page-info [data]="infoData"></app-scd-page-info>
+
+
+
+
+
     <div class="course-heading-78521">{{title}}</div>
     <div class="cource-price-and-rating-box-78541">
       <div class="cource-price--78542">
