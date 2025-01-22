@@ -36,6 +36,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
     colA: [],
     colB: []
   }
+  aboutData = {
+    heading: 'Details',
+    text: ''
+  }
 
   data;
   params;
@@ -179,6 +183,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
       ] as infoColumnSingleItem[]
     }
 
+    this.aboutData = {
+      heading: 'Details',
+      text: data.description
+    }
 
 
 
