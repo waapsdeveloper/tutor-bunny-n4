@@ -18,6 +18,7 @@ import { GlobalTextReadModule } from 'src/app/components/global-text-read/global
 import { TeacherInfoCardModule } from 'src/app/components/teacher-info-card/teacher-info-card.module';
 import { SlideBannerModule } from "../../../components/shared/detail-pages-components/slide-banner/slide-banner.module";
 import { ScdPageInfoModule } from "../../../components/shared/detail-pages-components/scd-page-info/scd-page-info.module";
+import { ScdPageCourseStatisticsModule } from "../../../components/shared/detail-pages-components/scd-page-course-statistics/scd-page-course-statistics.module";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ScdPageInfoModule } from "../../../components/shared/detail-pages-compo
     GlobalTextReadModule,
     TeacherInfoCardModule,
     SlideBannerModule,
-    ScdPageInfoModule
+    ScdPageInfoModule,
+    ScdPageCourseStatisticsModule
 ],
   declarations: [CourseDetailPage],
 
