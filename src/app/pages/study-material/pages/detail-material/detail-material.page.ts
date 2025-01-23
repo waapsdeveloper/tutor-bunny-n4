@@ -3,7 +3,7 @@ import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
-import { bannerData } from 'src/app/interfaces/detail-data';
+import { bannerData, infoData } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-detail-material',
@@ -22,6 +22,15 @@ export class DetailMaterialPage extends BasePage {
     liked_by_me: false,
     sliderImages: []
   }
+  
+    infoData: infoData = {
+      title: '', 
+      currency_symbol: '',
+      price: '',
+      rating: 0.0,
+      total_rating: 0,
+      per_unit: '/lesson'
+    };
 
   data;
   params;
@@ -85,11 +94,13 @@ export class DetailMaterialPage extends BasePage {
       this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
         this.material$ = data;
         this.callApi(this.material$);
+
       });
 
 
     }
   }
+ 
 
   prevImage() {
     this.currentIndex =
@@ -116,6 +127,15 @@ export class DetailMaterialPage extends BasePage {
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: resImages.result
+    }
+
+    this.infoData = {
+      title: data.title,
+      currency_symbol: data?.auth_user_currency_symbol ?? '$',
+      price: data?.updated_price ?? 0,
+      rating: data.user.teacher.avg_rating ?? 0.0,
+      total_rating: data.user.teacher.total_rating ?? 0,
+      per_unit: '/lesson'    
     }
 
 
