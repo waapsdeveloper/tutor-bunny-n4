@@ -563,6 +563,10 @@ export class NetworkService {
     return this.httpGetResponse('material/buyer-history', id, false, true);
   }
 
+  postStudentOrder() {
+    return this.httpPostResponse('student/order', null, false, false);
+  }
+
   
 
   serialize = (obj: any) => {

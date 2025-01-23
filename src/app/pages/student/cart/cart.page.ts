@@ -1,9 +1,8 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
-import { log } from 'console';
-import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
+import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-cart',
@@ -15,10 +14,13 @@ export class CartPage extends BasePage implements OnInit {
   title = 'Cart';
   buttonText = 'Checkout'
   list$;
-
   total = 0;
 
-  constructor(injector: Injector, private cartService: CartService) { 
+  activeIndex = 0;
+
+  @ViewChild('slides', { static: false }) slides: SwiperComponent;
+
+  constructor(injector: Injector, private cartService: CartService, private cdr: ChangeDetectorRef) { 
     super(injector);
   }
 
@@ -107,6 +109,12 @@ export class CartPage extends BasePage implements OnInit {
     //     }
     //   } catch (error) {}
     // }
+  }
+
+  
+  onSlideChanged() {
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+    this.cdr.detectChanges();
   }
 
 }

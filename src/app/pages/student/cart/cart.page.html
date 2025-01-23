@@ -3,9 +3,21 @@
 </ion-header>
 <ion-content class="ion-padding">
 
-  <div class="cart-box-outer-689567 ">
-    <app-cart-list-item *ngFor="let item of list$" [item]="item" (removeCartitem)="removeCartitem(item)"></app-cart-list-item>
-  </div>
+  <swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }" class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()">
+    <ng-template swiperSlide>
+      <div class="cart-box-outer-689567 ">
+        <app-cart-list-item *ngFor="let item of list$" [item]="item" (removeCartitem)="removeCartitem(item)"></app-cart-list-item>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <app-payment-card-item></app-payment-card-item>
+    </ng-template>
+    <ng-template swiperSlide>
+      <app-order-done-card-item></app-order-done-card-item>
+    </ng-template>
+  </swiper>
+
+  
 
   
 </ion-content>
