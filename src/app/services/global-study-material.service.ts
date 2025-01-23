@@ -103,5 +103,31 @@ export class GlobalStudyMaterialService extends NgSimpleStateBaseRxjsStore<Globa
     });
   }
 
+  getMyStudyMaterialFromApi(search = '', page = 1) {
+    return new Promise(async (resolve) => {
+      const user = this.users.getUser();
+      let obj = {
+        search: search,
+        page: page,
+        user_id: user.id,
+      };
+
+      let res = await this.network.getMyMaterialList(obj, user.id);
+
+      const data = res.result;
+      this.page = data.current_page;
+      this.last_page = data.last_page;
+
+      this.setState( (state) => {
+        if (page === 1) {
+          return data.data;
+        }
+        return [...state, ...data.data];
+      });
+
+      resolve(true);
+    });
+  }
+
 
 }

@@ -15,6 +15,7 @@ import { MyRatingsModule } from "../../../../components/my-ratings/my-ratings.mo
 import { SdButtonClearModule } from "../../../../components/sd-button-clear/sd-button-clear.module";
 import { SdButtonGoldenModule } from "../../../../components/sd-button-golden/sd-button-golden.module";
 import { SlideBannerModule } from "../../../../components/shared/detail-pages-components/slide-banner/slide-banner.module";
+import { ScdPageInfoModule } from "../../../../components/shared/detail-pages-components/scd-page-info/scd-page-info.module";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { SlideBannerModule } from "../../../../components/shared/detail-pages-co
     MyRatingsModule,
     SdButtonClearModule,
     SdButtonGoldenModule,
-    SlideBannerModule
+    SlideBannerModule,
+    ScdPageInfoModule
 ],
   declarations: [DetailMaterialPage],
 })

@@ -44,7 +44,7 @@ export class CourseCardComponent extends BasePage implements OnInit {
   @Output() courseDeleted = new EventEmitter<number>();
   @Output() activeTab = new EventEmitter<number>();
   @Output() inActiveTab = new EventEmitter<number>();
-  @Output() detailsAction = new EventEmitter<any>();
+  @Output() openDetails = new EventEmitter<any>();
   @Output() courseEdit = new EventEmitter<any>();
 
   constructor(injector: Injector, private alertController: AlertController) {
@@ -115,14 +115,6 @@ export class CourseCardComponent extends BasePage implements OnInit {
     let res = await this.nav.push('/course-form', params)
 
     this.courseEdit.emit(item.id);
-
-  }
-
-  openDeatils(item) {
-
-    this.detailsAction.emit({
-      id: item.id
-    })
 
   }
 

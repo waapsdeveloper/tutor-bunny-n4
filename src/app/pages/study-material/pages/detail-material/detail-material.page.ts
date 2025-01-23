@@ -8,10 +8,10 @@ import { bannerData, infoData } from 'src/app/interfaces/detail-data';
 @Component({
   selector: 'app-detail-material',
   templateUrl: './detail-material.page.html',
-  styleUrls: ['./detail-material.page.scss'],  
+  styleUrls: ['./detail-material.page.scss'],
 })
 export class DetailMaterialPage extends BasePage {
-[x: string]: any;
+  [x: string]: any;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -20,22 +20,22 @@ export class DetailMaterialPage extends BasePage {
 
   bannerData: bannerData = {
     liked_by_me: false,
-    sliderImages: []
-  }
-  
-    infoData: infoData = {
-      title: '', 
-      currency_symbol: '',
-      price: '',
-      rating: 0.0,
-      total_rating: 0,
-      per_unit: '/lesson'
-    };
+    sliderImages: [],
+  };
+
+  infoData: infoData = {
+    title: '',
+    currency_symbol: '',
+    price: '',
+    rating: 0.0,
+    total_rating: 0,
+    per_unit: '/lesson',
+  };
 
   data;
   params;
   backUrl;
-  
+
   capacity;
   description;
   currencySymbol;
@@ -76,10 +76,13 @@ export class DetailMaterialPage extends BasePage {
 
   ratingData = {
     heading: 'Reviews',
-    list: []
-  }
+    list: [],
+  };
 
-  constructor(injector: Injector, private globalStudyMaterialService: GlobalStudyMaterialService) {
+  constructor(
+    injector: Injector,
+    private globalStudyMaterialService: GlobalStudyMaterialService
+  ) {
     super(injector);
   }
 
@@ -91,43 +94,40 @@ export class DetailMaterialPage extends BasePage {
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
-        this.material$ = data;
-        this.callApi(this.material$);
-
-      });
-
-
+      this.globalStudyMaterialService
+        .getItem(this.materialId)
+        .subscribe((data) => {
+          this.material$ = data;
+          this.callApi(this.material$);
+        });
     }
   }
- 
 
-  prevImage() {
-    this.currentIndex =
-      this.currentIndex > 0
-        ? this.currentIndex - 1
-        : this.courseImages.length - 1;
-  }
+  // prevImage() {
+  //   this.currentIndex =
+  //     this.currentIndex > 0
+  //       ? this.currentIndex - 1
+  //       : this.courseImages.length - 1;
+  // }
 
-  nextImage() {
-    this.currentIndex =
-      this.currentIndex < this.courseImages.length - 1
-        ? this.currentIndex + 1
-        : 0;
-  }
+  // nextImage() {
+  //   this.currentIndex =
+  //     this.currentIndex < this.courseImages.length - 1
+  //       ? this.currentIndex + 1
+  //       : 0;
+  // }
 
   async callApi(data) {
-
     console.log(data);
     const resImages = await this.network.getMaterialImages({
       study_material_id: data.id,
-    })
+    });
 
-    console.log(resImages)
+    console.log(resImages);
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
-      sliderImages: resImages.result
-    }
+      sliderImages: resImages.result,
+    };
 
     this.infoData = {
       title: data.title,
@@ -135,10 +135,8 @@ export class DetailMaterialPage extends BasePage {
       price: data?.updated_price ?? 0,
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
-      per_unit: '/lesson'    
-    }
-
-
+      per_unit: '/lesson',
+    };
 
     this.loading = true;
     this.user = this.users.getUser();
@@ -185,17 +183,15 @@ export class DetailMaterialPage extends BasePage {
 
     let reviews_params = {
       teacher_id: this.data.user.id,
-      type: 'course'
+      type: 'course',
     };
 
     const ratings = await this.network.getReviews(reviews_params);
-    
+
     this.ratingData = {
       heading: 'Reviews',
-      list: ratings.result
-    }
-
-
+      list: ratings.result,
+    };
   }
 
   formatDescription(description: string): string {
@@ -246,7 +242,6 @@ export class DetailMaterialPage extends BasePage {
   }
 
   getOtherCourse(event) {
-
     this.materialId = event.id;
     // this.callApi();
 
@@ -258,7 +253,6 @@ export class DetailMaterialPage extends BasePage {
     //   id: event.id
     // })
   }
-
 
   async addToFav() {
     // let showFav = true;
@@ -276,7 +270,7 @@ export class DetailMaterialPage extends BasePage {
     // this.courseFavoriteService.removeFavorites(this.course$, user);
   }
 
-  openEdit(){
+  openEdit() {
     this.nav.push('/create-material', {
       material_Id: this.materialId,
       edit: true,
@@ -286,5 +280,5 @@ export class DetailMaterialPage extends BasePage {
     });
   }
 
-  goToChat(){}
+  goToChat() {}
 }

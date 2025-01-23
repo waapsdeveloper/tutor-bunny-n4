@@ -4,17 +4,20 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <app-course-card
-      *ngFor="let item of list"
+      *ngFor="let item of list$"
       [item]="item"
-      (courseDeleted)="onCourseDeleted($event)"
+      (openDetails)="openDetails(item)"
+      
+    >
+
+    <!-- (courseDeleted)="onCourseDeleted($event)"
       (activeTab)="courseActive()"
       (inActiveTab)="courseInctive()"
       (detailsAction)="openDetails($event)"
-      (courseEdit)="courseEdit()"
-    >
+      (courseEdit)="courseEdit()" -->
     </app-course-card>
     <div style="height: 100%; position: relative">
-      <div class="centered-message" *ngIf="list.length == 0">
+      <div class="centered-message" *ngIf="list$?.length === 0">
         No course to display
       </div>
     </div>
