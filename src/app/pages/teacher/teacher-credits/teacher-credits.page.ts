@@ -13,4 +13,8 @@ export class TeacherCreditsPage{
   goback(){
     this.nav.pop('/tabs/teacher-dashboard');
   }
+
+  buyCredits(){
+    this.nav.push('/teacher-credits-buy');
+  }
 }
