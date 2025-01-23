@@ -5,11 +5,18 @@
   <div class="body-content ion-padding">
 
     <app-scd-page-info [data]="infoData"></app-scd-page-info>
-    <app-scd-page-course-statistics [data]="columnData"></app-scd-page-course-statistics>    
-    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
-    
-    
-    <div class="detail-box-outer-78522">
+    <app-scd-page-course-statistics [data]="columnData"></app-scd-page-course-statistics>
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text">
+      <div class="detail-heading-left--78524 to-end-dates-included" *ngIf="startDate">
+        <img src="assets/svg/calander2.svg" alt="" style="height: 16px" />{{startDate}} {{ endDate ? 'to' : '' }}
+        {{endDate}}
+      </div>
+    </app-global-text-read>
+
+    <!-- <app-teacher-info-card [data]="teacherData"></app-teacher-info-card> -->
+
+
+    <!-- <div class="detail-box-outer-78522">
       <div class="detail-head-78523">
         <div class="detail-heading-78524">Details</div>
         <div
@@ -25,42 +32,29 @@
       </div>
       <app-global-text-read [text]="description"></app-global-text-read>
 
-    </div>
+    </div> -->
 
-    <div class="line"></div>
-    <app-teacher-info-card></app-teacher-info-card>
-    
+    <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule>
 
-    <div class="line" *ngIf="schedules.length > 0"></div>
+    <!-- <div class="line" *ngIf="schedules.length > 0"></div>
     <div class="detail-box-outer-78522" *ngIf="schedules.length > 0">
       <div class="detail-head-785234">
-        <div
-          class="detail-heading-78524 outfit-medium"
-          *ngIf="schedules[0].type !== 3"
-        >
+        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type !== 3">
           Weekly Schedule
         </div>
-        <div
-          class="detail-heading-78524 outfit-medium"
-          *ngIf="schedules[0].type === 3"
-        >
+        <div class="detail-heading-78524 outfit-medium" *ngIf="schedules[0].type === 3">
           Event Schedule
         </div>
         <div class="days-box">
-          <app-course-schedules
-            *ngFor="let item of schedules"
-            [item]="item"
-          ></app-course-schedules>
+          <app-course-schedules *ngFor="let item of schedules" [item]="item"></app-course-schedules>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <app-my-courses [data]="coursesData" ></app-my-courses>
     <div class="line" *ngIf="otherCourseListTotalCount > 0"></div>
-    <app-other-courses
-      *ngIf="otherCourseListTotalCount > 0"
-      [count]="otherCourseListTotalCount"
-      [list]="otherCourseList"
-      (openOtherCourses)="openOtherCourses($event)"
-      (onChange)="getOtherCourse($event)"
-    ></app-other-courses>
+    <app-other-courses *ngIf="otherCourseListTotalCount > 0" [count]="otherCourseListTotalCount"
+      [list]="otherCourseList" (openOtherCourses)="openOtherCourses($event)"
+      (onChange)="getOtherCourse($event)"></app-other-courses>
   </div>
 </ion-content>

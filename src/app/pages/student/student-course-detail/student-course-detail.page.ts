@@ -244,8 +244,7 @@ export class StudentCourseDetailPage extends BasePage {
       type: 'course'
     };
 
-    const res = await this.network.getReviews(reviews_params);
-  
+    const res = await this.network.getReviews(reviews_params);  
     
     this.ratingData = {
       heading: 'Reviews',

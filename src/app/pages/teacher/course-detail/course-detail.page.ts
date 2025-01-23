@@ -4,14 +4,14 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
-import { bannerData, infoColumnSingleItem, infoData } from 'src/app/interfaces/detail-data';
+import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.page.html',
   styleUrls: ['./course-detail.page.scss'],
 })
-export class CourseDetailPage extends BasePage implements OnInit {
+export class CourseDetailPage extends BasePage {
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -39,6 +39,25 @@ export class CourseDetailPage extends BasePage implements OnInit {
   aboutData = {
     heading: 'Details',
     text: ''
+  }
+
+  
+  teacherData: teacherCardInfo = {
+    image: '',
+    name: '',
+    flag: '',
+    country: '',
+    icon: '',
+    text: ''
+  }
+  
+  scheduleData = {
+    schedules: []
+  };
+
+  coursesData = {
+    heading: 'Similar Courses',
+    list: []
   }
 
   data;
@@ -85,10 +104,6 @@ export class CourseDetailPage extends BasePage implements OnInit {
 
   constructor(injector: Injector, private globalCoursesService: GlobalCoursesService, private courseFavoriteService: CourseFavoriteService,) {
     super(injector);
-  }
-
-  ngOnInit() {
-
   }
 
   async ionViewWillEnter() {
@@ -188,7 +203,36 @@ export class CourseDetailPage extends BasePage implements OnInit {
       text: data.description
     }
 
+    
+    this.teacherData = {
+      image: data.user.image,
+      name: data.user.name,
+      flag: this.utility.getFlag(data.user),
+      country: data.user.teacher.country.name,
+      icon: 'assets/svg/teacher-icon.svg',
+      text: data.user.teacher.title
+    }
 
+    
+    this.scheduleData = {
+      schedules: data.schedules,
+    }
+
+    
+    let similarcourse_params = {
+      course_id: data.id
+    }
+
+    const obj = {
+      user_id: data.user['id'],
+      except_course_id: data.id,
+    };
+    const similarcourses = await this.network.getOtherCourseList(obj);
+    
+    this.coursesData = {
+      heading: 'Other Courses',
+      list: similarcourses.result.data
+    }
 
 
     this.loading = true;
@@ -226,10 +270,10 @@ export class CourseDetailPage extends BasePage implements OnInit {
     const endDate = this.data.end_date;
     this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
 
-    if (this.data.category && this.data.category.length > 0) {
-      this.categoryId = this.data.category[0].id;
-      this.getOtherCourseList(this.data.id);
-    }
+    // if (this.data.category && this.data.category.length > 0) {
+    //   this.categoryId = this.data.category[0].id;
+    //   this.getOtherCourseList(this.data.id);
+    // }
 
     const uid = this.user.id;
     const cuid = this.data.user_id;

@@ -19,6 +19,8 @@ import { TeacherInfoCardModule } from 'src/app/components/teacher-info-card/teac
 import { SlideBannerModule } from "../../../components/shared/detail-pages-components/slide-banner/slide-banner.module";
 import { ScdPageInfoModule } from "../../../components/shared/detail-pages-components/scd-page-info/scd-page-info.module";
 import { ScdPageCourseStatisticsModule } from "../../../components/shared/detail-pages-components/scd-page-course-statistics/scd-page-course-statistics.module";
+import { ScdPageCourseScheduleModule } from "../../student/student-course-detail/scd-page-course-schedule/scd-page-course-schedule.module";
+import { MyCoursesModule } from "../../../components/my-courses/my-courses.module";
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { ScdPageCourseStatisticsModule } from "../../../components/shared/detail
     TeacherInfoCardModule,
     SlideBannerModule,
     ScdPageInfoModule,
-    ScdPageCourseStatisticsModule
+    ScdPageCourseStatisticsModule,
+    ScdPageCourseScheduleModule,
+    MyCoursesModule
 ],
   declarations: [CourseDetailPage],
 

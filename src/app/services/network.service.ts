@@ -672,7 +672,7 @@ export class NetworkService {
             this.utility.hideLoader();
           }
 
-          if (showError == true) {
+          if (showError == true && res.message) {            
             this.utility.presentSuccessToast(res.message);
           }
 

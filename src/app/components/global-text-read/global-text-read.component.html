@@ -1,10 +1,8 @@
-<div class="heading-outer-2345253 d-flex flex-column justify-content-between">
+<div class="heading-outer-2345253 d-flex flex-row justify-content-between align-center">
   <div class="heading roboto-bold fs-21">{{heading}}</div>
   <ng-content #name></ng-content>  
 </div>
 <div class="outfit discription-text">
-
-
   <div class="discription-para fs-16" [class.collapsed]="isExpanded" [innerHTML]="text"></div>
   <div class="qulification-box-edu-readmore-98525">
     <div class="qulification-box-edu-button-98526 fs-14" (click)="toggleReadMore()">
