@@ -3,7 +3,11 @@ import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
-import { bannerData, infoData } from 'src/app/interfaces/detail-data';
+import {
+  bannerData,
+  infoData,
+  teacherCardInfo,
+} from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-detail-material',
@@ -30,6 +34,25 @@ export class DetailMaterialPage extends BasePage {
     rating: 0.0,
     total_rating: 0,
     per_unit: '/lesson',
+  };
+
+  aboutData = {
+    heading: 'Details',
+    text: '',
+  };
+
+  teacherData: teacherCardInfo = {
+    image: '',
+    name: '',
+    flag: '',
+    country: '',
+    icon: '',
+    text: '',
+  };
+
+  materialData = {
+    heading: 'Similar Materials',
+    list: [],
   };
 
   data;
@@ -138,6 +161,26 @@ export class DetailMaterialPage extends BasePage {
       per_unit: '/lesson',
     };
 
+    this.aboutData = {
+      heading: 'Details',
+      text: data.description,
+    };
+
+    this.teacherData = {
+      image: data.user.image,
+      name: data.user.name,
+      flag: this.utility.getFlag(data.user),
+      country: data.user.teacher.country.name,
+      icon: 'assets/svg/teacher-icon.svg',
+      text: data.user.teacher.title,
+    };
+
+    const materialList = await this.getotherMaterialList(data.id);
+    this.materialData = {
+      heading: 'Similar Materials',
+      list: materialList,
+    };
+
     this.loading = true;
     this.user = this.users.getUser();
 
@@ -173,7 +216,7 @@ export class DetailMaterialPage extends BasePage {
     const endDate = this.data.end_date;
     this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
 
-    this.getotherMaterialList(this.data.id);
+    
 
     const uid = this.user.id;
     const cuid = this.data.user_id;
@@ -199,16 +242,17 @@ export class DetailMaterialPage extends BasePage {
     return description.replace(/\n/g, '<br>');
   }
 
-  async getotherMaterialList(id) {
-    let user = this.users.getUser();
-    const obj = {
-      user_id: user['id'],
-      except_material_id: id,
-    };
-    const res = await this.network.getotherMaterialList(obj);
-    const result = res.result;
-    this.otherMaterialListTotalCount = result.total;
-    this.otherMaterialList = result.data;
+  async getotherMaterialList(id): Promise<any[]> {    
+      let user = this.users.getUser();
+      const obj = {
+        user_id: user['id'],
+        except_material_id: id,
+      };
+      const res = await this.network.getotherMaterialList(obj);
+      const result = res.result;
+      this.otherMaterialListTotalCount = result.total;
+      this.otherMaterialList = result.data;
+      return res.result.data;
   }
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;

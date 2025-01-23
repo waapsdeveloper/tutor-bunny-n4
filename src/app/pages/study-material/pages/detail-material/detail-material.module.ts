@@ -16,6 +16,8 @@ import { SdButtonClearModule } from "../../../../components/sd-button-clear/sd-b
 import { SdButtonGoldenModule } from "../../../../components/sd-button-golden/sd-button-golden.module";
 import { SlideBannerModule } from "../../../../components/shared/detail-pages-components/slide-banner/slide-banner.module";
 import { ScdPageInfoModule } from "../../../../components/shared/detail-pages-components/scd-page-info/scd-page-info.module";
+import { TeacherInfoCardModule } from "../../../../components/teacher-info-card/teacher-info-card.module";
+import { MyCoursesModule } from "../../../../components/my-courses/my-courses.module";
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { ScdPageInfoModule } from "../../../../components/shared/detail-pages-co
     SdButtonClearModule,
     SdButtonGoldenModule,
     SlideBannerModule,
-    ScdPageInfoModule
+    ScdPageInfoModule,
+    TeacherInfoCardModule,
+    MyCoursesModule
 ],
   declarations: [DetailMaterialPage],
 })
