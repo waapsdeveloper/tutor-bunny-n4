@@ -4,7 +4,12 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
 import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
-import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src/app/interfaces/detail-data';
+import {
+  bannerData,
+  infoColumnSingleItem,
+  infoData,
+  teacherCardInfo,
+} from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-course-detail',
@@ -12,7 +17,6 @@ import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src
   styleUrls: ['./course-detail.page.scss'],
 })
 export class CourseDetailPage extends BasePage {
-
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   course$;
@@ -20,45 +24,44 @@ export class CourseDetailPage extends BasePage {
 
   bannerData: bannerData = {
     liked_by_me: false,
-    sliderImages: []
-  }
-  
-    infoData: infoData = {
-      title: '', 
-      currency_symbol: '',
-      price: '',
-      rating: 0.0,
-      total_rating: 0,
-      per_unit: '/lesson'
-    };
-    
+    sliderImages: [],
+  };
+
+  infoData: infoData = {
+    title: '',
+    currency_symbol: '',
+    price: '',
+    rating: 0.0,
+    total_rating: 0,
+    per_unit: '/lesson',
+  };
+
   columnData = {
     colA: [],
-    colB: []
-  }
+    colB: [],
+  };
   aboutData = {
     heading: 'Details',
-    text: ''
-  }
+    text: '',
+  };
 
-  
   teacherData: teacherCardInfo = {
     image: '',
     name: '',
     flag: '',
     country: '',
     icon: '',
-    text: ''
-  }
-  
+    text: '',
+  };
+
   scheduleData = {
-    schedules: []
+    schedules: [],
   };
 
   coursesData = {
     heading: 'Similar Courses',
-    list: []
-  }
+    list: [],
+  };
 
   data;
   params;
@@ -102,7 +105,11 @@ export class CourseDetailPage extends BasePage {
   courseImages: string[] = []; // Images array
   currentIndex: number = 0;
 
-  constructor(injector: Injector, private globalCoursesService: GlobalCoursesService, private courseFavoriteService: CourseFavoriteService,) {
+  constructor(
+    injector: Injector,
+    private globalCoursesService: GlobalCoursesService,
+    private courseFavoriteService: CourseFavoriteService
+  ) {
     super(injector);
   }
 
@@ -118,9 +125,6 @@ export class CourseDetailPage extends BasePage {
         this.callApi(this.course$);
       });
     }
-
-
-    // this.callApi();
   }
 
   prevImage() {
@@ -138,102 +142,97 @@ export class CourseDetailPage extends BasePage {
   }
 
   async callApi(data) {
-
     console.log(data);
     const resImages = await this.network.getCourseImages({
       course_id: data.id,
-    })
+    });
 
-    console.log(resImages)
+    console.log(resImages);
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
-      sliderImages: resImages.result
-    }
-    
+      sliderImages: resImages.result,
+    };
+
     this.infoData = {
       title: data.title,
       currency_symbol: data?.auth_user_currency_symbol ?? '$',
       price: data?.updated_price ?? 0,
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
-      per_unit: '/lesson'    
-    }
+      per_unit: '/lesson',
+    };
 
     this.columnData = {
       colA: [
         {
           icon: 'assets/svg/time.svg',
-          text: data.duration + ' hours / lesson'
+          text: data.duration + ' hours / lesson',
         },
         {
           icon: 'assets/svg/globe-person.svg',
-          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type
+          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type,
         },
         {
           icon: 'assets/svg/cake2.svg',
-          text: `Student Age ${data.from_age} - ${data.to_age}`
+          text: `Student Age ${data.from_age} - ${data.to_age}`,
         },
         {
           icon: 'assets/svg/locations.svg',
-          text: ''
-        }
+          text: '',
+        },
       ] as infoColumnSingleItem[],
       colB: [
         {
           icon: 'assets/svg/create-course.svg',
-          text: `Total ${data.lesson} lessons` 
+          text: `Total ${data.lesson} lessons`,
         },
         {
           icon: 'assets/svg/minicute-group.svg',
-          text: `${data.capacity}`
+          text: `${data.capacity}`,
         },
         {
           icon: 'assets/svg/speaks.svg',
-          text: data.language.name
+          text: data.language.name,
         },
         {
           icon: 'assets/svg/course-type.svg',
-          text: 'Workshop / Event'
-        }
-      ] as infoColumnSingleItem[]
-    }
+          text: 'Workshop / Event',
+        },
+      ] as infoColumnSingleItem[],
+    };
 
     this.aboutData = {
       heading: 'Details',
-      text: data.description
-    }
+      text: data.description,
+    };
 
-    
     this.teacherData = {
       image: data.user.image,
       name: data.user.name,
       flag: this.utility.getFlag(data.user),
       country: data.user.teacher.country.name,
       icon: 'assets/svg/teacher-icon.svg',
-      text: data.user.teacher.title
-    }
+      text: data.user.teacher.title,
+    };
 
-    
     this.scheduleData = {
       schedules: data.schedules,
-    }
+    };
 
-    
     let similarcourse_params = {
-      course_id: data.id
-    }
+      course_id: data.id,
+    };
 
     const obj = {
       user_id: data.user['id'],
       except_course_id: data.id,
     };
     const similarcourses = await this.network.getOtherCourseList(obj);
-    
+
     this.coursesData = {
       heading: 'Other Courses',
-      list: similarcourses.result.data
-    }
-
+      list: similarcourses.result.data,
+    };
 
     this.loading = true;
     this.user = this.users.getUser();
@@ -280,7 +279,6 @@ export class CourseDetailPage extends BasePage {
     if (uid == cuid) {
       this.canEditCourse = true;
     }
-
   }
 
   formatDescription(description: string): string {
@@ -329,7 +327,6 @@ export class CourseDetailPage extends BasePage {
   }
 
   getOtherCourse(event) {
-
     this.courseId = event.id;
 
     this.content.scrollToTop(500); // 500ms animation duration
@@ -356,6 +353,4 @@ export class CourseDetailPage extends BasePage {
     this.course$.is_liked_by_me = false;
     this.courseFavoriteService.removeFavorites(this.course$, user);
   }
-
-
 }

@@ -155,6 +155,31 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
       let res = await this.network.getAllCourses(obj);
 
+      const data = res.result;
+      this.page = data.current_page;
+      this.last_page = data.last_page;
+
+      this.setState( (state) => {
+        if (page === 1) {
+          return data.data;
+        }
+        return [...state, ...data.data];
+      });
+
+      resolve(true);
+    });
+
+  }
+
+  getMyCoursesFromApi(search = '', page = 1) {
+    return new Promise(async (resolve) => {
+      const user = this.users.getUser();
+      let obj = {
+        search: search,
+        page: page,
+      };
+
+      let res = await this.network.getMyCourseList(obj, user.id);
 
       const data = res.result;
       this.page = data.current_page;
@@ -169,7 +194,10 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
       resolve(true);
     });
+
   }
+
+
 
   getcourseById(id) {
     return new Promise(async (resolve) => {
