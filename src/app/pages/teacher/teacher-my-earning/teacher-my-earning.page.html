@@ -11,24 +11,28 @@
 <ion-content>
   <div class="earnings-container">
     <div class="tabs">
-      <ion-segment value="pending">
-        <ion-segment-button value="pending">Pending</ion-segment-button>
-        <ion-segment-button value="2024">2024</ion-segment-button>
-        <ion-segment-button value="2023">2023</ion-segment-button>
-        <ion-segment-button value="2022">2022</ion-segment-button>
-      </ion-segment>
+      <div
+        *ngFor="let chip of chips; let i = index"
+        class="chips outfit-light fs-16"
+        [class.active]="selectedChip === i"
+        (click)="selectChip(i)"
+      >
+        {{ chip }}
+      </div>
     </div>
 
     <div class="total-payment">
-      <p>Total Payment</p>
-      <h1>$51,858</h1>
+      <p class="roboto-regular fs-16">Total Payment</p>
+      <span class="roboto-bold fs-16">$51,858</span>
     </div>
 
     <ion-list>
       <ion-item lines="full" *ngFor="let month of months">
-        <ion-label>{{ month }}</ion-label>
-        <ion-text>$317.91</ion-text>
-        <ion-icon name="chevron-forward-outline"></ion-icon>
+        <ion-label class="roboto-regular fs-16 months">{{ month }}</ion-label>
+        <ion-text class="roboto-regular fs-16" style="color: #000000"
+          >$317.91</ion-text
+        >
+        <ion-icon name="chevron-forward-outline" style="color: #454545"></ion-icon>
       </ion-item>
     </ion-list>
   </div>
