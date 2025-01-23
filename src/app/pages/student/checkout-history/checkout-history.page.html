@@ -2,6 +2,17 @@
   <app-sd-header-top [showBack]="true" [title]="title" [backUrl]="" [showNotification]="false" [showSearch]="false"></app-sd-header-top>
 </ion-header>
 
-<ion-content>
+<ion-content >
+
+  <ion-list class="checkout-history-list" inset="true">
+    <ion-item *ngFor="let checkout of list" detail="true">
+      <ion-label>
+        <h2>{{checkout.order_number}}</h2>
+        <p>{{checkout.order_items.length}} items</p>
+      </ion-label>
+      <span slot="end" class="price">{{checkout.total | currency}}</span>
+    </ion-item>
+
+  </ion-list>
   
 </ion-content>

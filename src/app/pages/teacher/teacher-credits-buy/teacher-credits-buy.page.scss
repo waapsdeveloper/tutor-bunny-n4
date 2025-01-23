@@ -20,10 +20,27 @@
 }
 
 .buy-credit-heading {
-    color: #454545;
-    font-size: 35px;
+  color: #454545;
+  font-size: 35px;
 }
 
-.buy-credit-coin {    
-    height: 40px;
+.buy-credit-coin {
+  height: 40px;
+}
+
+.but-credit-counter-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .but-credit-counter-box-inner {
+    width: 338px;
+    height: 60px;
+    top: 217px;
+    left: 51px;
+    gap: 0px;
+    border-radius: 10px 0px 0px 0px;
+    opacity: 0px;
+    border-color: rgba(215, 214, 214, 1);
+  }
 }

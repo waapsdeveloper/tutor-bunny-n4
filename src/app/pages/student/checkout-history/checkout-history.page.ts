@@ -20,9 +20,15 @@ export class CheckoutHistoryPage implements OnInit {
   }
 
   async initialize(){
-    const user = await this.users.getUser();
-    const res = await this.network.materialCheckoutHistory(user.id)
+    const res = await this.network.getStudentOrders()
     console.log(res);
+
+    if(res.result){
+
+      let d = res.result.data;
+      this.list = d;
+
+    }
   }
 
 }

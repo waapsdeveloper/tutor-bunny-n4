@@ -563,8 +563,12 @@ export class NetworkService {
     return this.httpGetResponse('material/buyer-history', id, false, true);
   }
 
-  postStudentOrder() {
-    return this.httpPostResponse('student/order', null, false, false);
+  postStudentOrder(data: any) {
+    return this.httpPostResponse('student/order', data, null, false, true);
+  }
+
+  getStudentOrders() {
+    return this.httpGetResponse('student/order/list', null, false, true);
   }
 
   

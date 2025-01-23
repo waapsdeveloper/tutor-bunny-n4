@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
 import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
@@ -10,9 +16,8 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage extends BasePage implements OnInit {
-
   title = 'Cart';
-  buttonText = 'Checkout'
+  buttonText = 'Checkout';
   list$;
   total = 0;
 
@@ -20,38 +25,39 @@ export class CartPage extends BasePage implements OnInit {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(injector: Injector, private cartService: CartService, private cdr: ChangeDetectorRef) { 
+  constructor(
+    injector: Injector,
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef
+  ) {
     super(injector);
   }
 
   ngOnInit() {
-    this.cartService.getList().subscribe( data => {
+    this.cartService.getList().subscribe((data) => {
       this.list$ = data;
       this.title = 'Cart (' + this.list$.length + ')';
 
-      this.total = this.list$.reduce( (prev, next) => {
-        return prev + parseFloat(next.price)
+      this.total = this.list$.reduce((prev, next) => {
+        return prev + parseFloat(next.price);
       }, 0);
     });
   }
 
-  removeCartitem(item){
-    this.cartService.setRemove(item)
+  removeCartitem(item) {
+    this.cartService.setRemove(item);
   }
 
-  getSelectedItems(){
-
-    if(!this.list$){
-      return 'Checkout'
+  getSelectedItems() {
+    if (!this.list$) {
+      return 'Checkout';
     }
 
-    let items = this.list$.filter( x => x.selected == true).length;
+    let items = this.list$.filter((x) => x.selected == true).length;
     return `Checkout (${items}) items`;
   }
 
   async openStripe() {
-
-
     // let obj = {
     //   study_material_id: this.item.id,
     //   amount: this.item.price,
@@ -61,21 +67,17 @@ export class CartPage extends BasePage implements OnInit {
     // };
     //  const res = await this.network.purchaseMaterial(obj);
     // const res = await this.network.buyNow(obj);
-
-    const res = await this.modals.present(StripePayComponent);
-
+    // const res = await this.modals.present(StripePayComponent);
     // let obj = {
     //   study_material_id: this.item.id,
     // };
     // const res = await this.network.purchaseMaterial(obj);
     // console.log(res);
-
     // if (res.bool == true) {
     //   try {
     //     const paymentIntent = res.result.client_secret;
     //     const customer = res.result.customer_id;
     //     const ephemeralKey = res.result.ephemeral_key;
-
     //     // prepare PaymentSheet with CreatePaymentSheetOption.
     //     await Stripe.createPaymentSheet({
     //       paymentIntentClientSecret: paymentIntent,
@@ -83,7 +85,6 @@ export class CartPage extends BasePage implements OnInit {
     //       customerEphemeralKeySecret: ephemeralKey,
     //       merchantDisplayName: 'TutorBunny',
     //     });
-
     //     // present PaymentSheet and get result.
     //     const result = await Stripe.presentPaymentSheet();
     //     console.log(result);
@@ -92,7 +93,6 @@ export class CartPage extends BasePage implements OnInit {
     //     const paymentIntent = res.result.client_secret;
     //     const customer = res.result.customer_id;
     //     const ephemeralKey = res.result.ephemeral_key;
-
     //     // prepare PaymentSheet with CreatePaymentSheetOption.
     //     await Stripe.createPaymentSheet({
     //       paymentIntentClientSecret: paymentIntent,
@@ -100,10 +100,8 @@ export class CartPage extends BasePage implements OnInit {
     //       customerEphemeralKeySecret: ephemeralKey,
     //       merchantDisplayName: 'TutorBunny',
     //     });
-
     //     // present PaymentSheet and get result.
     //     const result = await Stripe.presentPaymentSheet();
-
     //     if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
     //       // Happy path
     //     }
@@ -111,10 +109,45 @@ export class CartPage extends BasePage implements OnInit {
     // }
   }
 
-  
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     this.cdr.detectChanges();
   }
 
+  checkoutItems() {
+    let items = this.list$.filter((x) => x.selected == true);
+    const order_items = items.map((x) => {
+      return {
+        item_id: x.id,
+        type: 'material',
+        price: x.price,
+        quantity: 1,
+        sub_total: x.price,
+      };
+    });
+
+    let sub_total = order_items.reduce((prev, next) => {
+      return prev + parseFloat(next.price);
+    }, 0);
+
+    let tax = sub_total * 0.1;
+    let total = sub_total + tax;
+
+    let d = {
+      user_id: 1,
+      total: total,
+      tax: tax,
+      sub_total: sub_total,
+      currency: 'USD',
+      order_items: order_items,
+    };
+
+    const res = this.network.postStudentOrder(d);
+    console.log(res);
+
+    for (let i = 0; i < items.length; i++) {
+      this.cartService.setRemove(items[i]);
+    }
+
+  }
 }
