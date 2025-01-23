@@ -3,23 +3,30 @@ import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
+import { bannerData } from 'src/app/interfaces/detail-data';
 
 @Component({
   selector: 'app-detail-material',
   templateUrl: './detail-material.page.html',
-  styleUrls: ['./detail-material.page.scss'],
+  styleUrls: ['./detail-material.page.scss'],  
 })
-export class DetailMaterialPage extends BasePage implements OnInit {
+export class DetailMaterialPage extends BasePage {
 [x: string]: any;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   material$;
+  materialId;
+
+  bannerData: bannerData = {
+    liked_by_me: false,
+    sliderImages: []
+  }
 
   data;
   params;
   backUrl;
-  materialId;
+  
   capacity;
   description;
   currencySymbol;
@@ -67,10 +74,6 @@ export class DetailMaterialPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {
-
-  }
-
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
 
@@ -104,7 +107,19 @@ export class DetailMaterialPage extends BasePage implements OnInit {
 
   async callApi(data) {
 
-    console.log(data)
+    console.log(data);
+    const resImages = await this.network.getMaterialImages({
+      study_material_id: data.id,
+    })
+
+    console.log(resImages)
+    this.bannerData = {
+      liked_by_me: data.is_liked_by_me,
+      sliderImages: resImages.result
+    }
+
+
+
     this.loading = true;
     this.user = this.users.getUser();
 

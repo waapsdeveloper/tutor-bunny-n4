@@ -1,27 +1,6 @@
 <ion-content class="remove-pd-top-323243243" #content [fullscreen]="true">
-  <div class="transparent-header-li-outer-78521">
-    <div class="transparent-header-li-inner-78521">
-      <div class="transparent-header-li left">
-        <div class="rwbutton">
-          <img src="assets/svg/arrow-back.svg" alt="back" (click)="nav.pop()" />
-        </div>
-      </div>
 
-      <div class="transparent-header-li right">
-        <div class="rwbutton">
-          <img [src]="material$?.is_liked_by_me ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'" (click)="material$?.is_liked_by_me ? removeToFav() : addToFav()" />
-        </div>
-        <div class="rwbutton">
-          <img src="assets/svg/share-77.svg" alt="share" />
-        </div>
-
-        <div class="rwbutton" (click)="openEdit()">
-          <img src="assets/svg/gray-info.svg" alt="info" />
-        </div>
-      </div>
-    </div>
-    <app-material-photos class="photos-slider-589655" [materialId]="materialId"></app-material-photos>
-  </div>
+  <app-slide-banner [data]="bannerData" (back)="nav.pop()"></app-slide-banner>
 
 
   <div class="body-content ion-padding">
