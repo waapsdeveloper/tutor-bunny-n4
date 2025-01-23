@@ -17,8 +17,7 @@
   margin: 0;
 }
 
-.total-payment h1 {
-  font-size: 2rem;
+.total-payment {
   margin: 0;
   color: #000;
 }
@@ -39,8 +38,8 @@ ion-item {
   --padding-start: 16px; /* Adjusts padding on the left side */
   --inner-padding-end: 0; /* Ensures no extra padding near the right border */
   padding-right: 8px;
-  --ion-border: 0.25px;
-  --inner-border-color: #677169;
+  --inner-border-color: rgba(103, 113, 105, 1);
+  --ion-border: 0.25px solid;
 }
 
 ion-item ion-icon {
@@ -55,7 +54,7 @@ ion-item ion-icon {
   padding: 5px 10px;
   background-color: #ffffffff;
   border-radius: 16px;
-  color: #020202;
+  color: rgba(2, 2, 2, 1);
   display: inline-block;
   white-space: nowrap;
   border: 0.5px solid #000000;
@@ -68,7 +67,7 @@ ion-item ion-icon {
   font-weight: bold;
 }
 .months {
-  color: #00000080;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 ion-item::part(native) {
@@ -77,4 +76,7 @@ ion-item::part(native) {
 
 ion-list::part(native) {
   border-color: #cccccc; /* Ensure consistent divider styling */
+}
+.pay {
+  color: rgba(0, 0, 0, 0.5);
 }

@@ -13,7 +13,7 @@
     <div class="tabs">
       <div
         *ngFor="let chip of chips; let i = index"
-        class="chips outfit-light fs-16"
+        class="chips outfit-light fs-14"
         [class.active]="selectedChip === i"
         (click)="selectChip(i)"
       >
@@ -22,17 +22,20 @@
     </div>
 
     <div class="total-payment">
-      <p class="roboto-regular fs-16">Total Payment</p>
-      <span class="roboto-bold fs-16">$51,858</span>
+      <p class="roboto-regular fs-14 pay">Total Payment</p>
+      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);
+" >$51,858</span>
     </div>
 
-    <ion-list>
-      <ion-item lines="full" *ngFor="let month of months">
+    <ion-list [inset]="true">
+      <ion-item lines="inset" *ngFor="let month of months">
         <ion-label class="roboto-regular fs-16 months">{{ month }}</ion-label>
-        <ion-text class="roboto-regular fs-16" style="color: #000000"
+        <ion-text class="roboto-regular fs-16" style="color:rgba(0, 0, 0, 1);
+"
           >$317.91</ion-text
         >
-        <ion-icon name="chevron-forward-outline" style="color: #454545"></ion-icon>
+        <ion-icon name="chevron-forward-outline" style="color:rgba(69, 69, 69, 1);
+"></ion-icon>
       </ion-item>
     </ion-list>
   </div>
