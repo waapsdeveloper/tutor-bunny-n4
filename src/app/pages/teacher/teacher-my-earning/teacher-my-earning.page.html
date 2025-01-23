@@ -7,3 +7,29 @@
     [backUrl]=""
   ></app-sd-header-top>
 </ion-header>
+
+<ion-content>
+  <div class="earnings-container">
+    <div class="tabs">
+      <ion-segment value="pending">
+        <ion-segment-button value="pending">Pending</ion-segment-button>
+        <ion-segment-button value="2024">2024</ion-segment-button>
+        <ion-segment-button value="2023">2023</ion-segment-button>
+        <ion-segment-button value="2022">2022</ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="total-payment">
+      <p>Total Payment</p>
+      <h1>$51,858</h1>
+    </div>
+
+    <ion-list>
+      <ion-item lines="full" *ngFor="let month of months">
+        <ion-label>{{ month }}</ion-label>
+        <ion-text>$317.91</ion-text>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

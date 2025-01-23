@@ -10,7 +10,7 @@ export class TeacherMyEarningPage  {
 
   constructor(private nav: NavService) { }
 
-
+months:any[] =["January" , "Febuary","March","April","May" , "June" ,"July", "August" , "September"]
 
   goback(){
     this.nav.pop('/tabs/teacher-dashboard');

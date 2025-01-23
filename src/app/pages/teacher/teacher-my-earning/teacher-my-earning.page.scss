@@ -1,0 +1,47 @@
+.chip {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: #e0e0e0;
+  border-radius: 16px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.earnings-container {
+  padding: 1rem;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+.total-payment p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.total-payment h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #000;
+}
+
+ion-list {
+  margin-top: 1rem;
+}
+
+ion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+ion-item ion-icon {
+  color: #ccc;
+}
