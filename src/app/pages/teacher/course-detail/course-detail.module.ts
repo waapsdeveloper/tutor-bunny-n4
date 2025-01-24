@@ -21,6 +21,7 @@ import { ScdPageInfoModule } from "../../../components/shared/detail-pages-compo
 import { ScdPageCourseStatisticsModule } from "../../../components/shared/detail-pages-components/scd-page-course-statistics/scd-page-course-statistics.module";
 import { ScdPageCourseScheduleModule } from "../../student/student-course-detail/scd-page-course-schedule/scd-page-course-schedule.module";
 import { MyCoursesModule } from "../../../components/my-courses/my-courses.module";
+import { MyRatingsModule } from "../../../components/my-ratings/my-ratings.module";
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { MyCoursesModule } from "../../../components/my-courses/my-courses.modul
     ScdPageInfoModule,
     ScdPageCourseStatisticsModule,
     ScdPageCourseScheduleModule,
-    MyCoursesModule
+    MyCoursesModule,
+    MyRatingsModule
 ],
   declarations: [CourseDetailPage],
 

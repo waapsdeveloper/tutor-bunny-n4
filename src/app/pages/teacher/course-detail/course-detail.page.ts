@@ -63,6 +63,11 @@ export class CourseDetailPage extends BasePage {
     list: [],
   };
 
+  ratingData = {
+    heading: 'Reviews',
+    list: []
+  }
+
   data;
   params;
   backUrl;
@@ -141,7 +146,7 @@ export class CourseDetailPage extends BasePage {
         : 0;
   }
 
-  async callApi(data) {
+  async callApi(data): Promise<boolean> {
     console.log(data);
     const resImages = await this.network.getCourseImages({
       course_id: data.id,
@@ -234,51 +239,68 @@ export class CourseDetailPage extends BasePage {
       list: similarcourses.result.data,
     };
 
-    this.loading = true;
-    this.user = this.users.getUser();
-    // let res = (await this.network.getcourseById(this.course_Id)) as any;
-    this.data = data;
-    this.title = this.data.title;
-    this.language = this.data.language.name;
-    this.capacity = this.data.capacity;
-    this.mode_type = this.data.mode_type;
-    this.description = this.formatDescription(this.data.description); // Process the description
-    this.from_age = this.data.from_age;
-    this.to_age = this.data.to_age;
-    this.displayName = this.utility.getAmericanName(this.data.user.name);
-    this.duration = this.data.duration;
-    this.serial_number = this.data.serial_number;
-    this.lessons = this.data.lesson;
-    this.country = this.data.user.teacher.country.name;
-    this.state = this.data.user.teacher.state.name;
-    this.image = this.data.image;
-    this.rating = this.data.user.teacher.avg_rating;
-    this.total_rating = this.data.user.teacher.total_rating;
-    this.price = this.data.price;
-    this.type = this.data.type;
-    this.schedules = this.data.schedules;
-    this.flag = this.getFlag();
-    this.currencySymbol = this.data?.auth_user_currency_symbol;
-    this.created_at = this.data.created_at;
-    this.updated_at = this.data.updated_at;
-    this.loading = false;
+    let reviews_params= {
+      teacher_id: data.user.id,
+      type: 'course'
+    };
 
-    const startDate = this.data.start_date;
-    this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
+    const res = await this.network.getReviews(reviews_params);
 
-    const endDate = this.data.end_date;
-    this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
+    this.ratingData = {
+      heading: 'Reviews',
+      list: res.result
+    }
 
-    // if (this.data.category && this.data.category.length > 0) {
-    //   this.categoryId = this.data.category[0].id;
-    //   this.getOtherCourseList(this.data.id);
+
+
+
+    // this.loading = true;
+    // this.user = this.users.getUser();
+    // // let res = (await this.network.getcourseById(this.course_Id)) as any;
+    // this.data = data;
+    // this.title = this.data.title;
+    // this.language = this.data.language.name;
+    // this.capacity = this.data.capacity;
+    // this.mode_type = this.data.mode_type;
+    // this.description = this.formatDescription(this.data.description); // Process the description
+    // this.from_age = this.data.from_age;
+    // this.to_age = this.data.to_age;
+    // this.displayName = this.utility.getAmericanName(this.data.user.name);
+    // this.duration = this.data.duration;
+    // this.serial_number = this.data.serial_number;
+    // this.lessons = this.data.lesson;
+    // this.country = this.data.user.teacher.country.name;
+    // this.state = this.data.user.teacher.state.name;
+    // this.image = this.data.image;
+    // this.rating = this.data.user.teacher.avg_rating;
+    // this.total_rating = this.data.user.teacher.total_rating;
+    // this.price = this.data.price;
+    // this.type = this.data.type;
+    // this.schedules = this.data.schedules;
+    // this.flag = this.getFlag();
+    // this.currencySymbol = this.data?.auth_user_currency_symbol;
+    // this.created_at = this.data.created_at;
+    // this.updated_at = this.data.updated_at;
+    // this.loading = false;
+
+    // const startDate = this.data.start_date;
+    // this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
+
+    // const endDate = this.data.end_date;
+    // this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
+
+    // // if (this.data.category && this.data.category.length > 0) {
+    // //   this.categoryId = this.data.category[0].id;
+    // //   this.getOtherCourseList(this.data.id);
+    // // }
+
+    // const uid = this.user.id;
+    // const cuid = this.data.user_id;
+    // if (uid == cuid) {
+    //   this.canEditCourse = true;
     // }
 
-    const uid = this.user.id;
-    const cuid = this.data.user_id;
-    if (uid == cuid) {
-      this.canEditCourse = true;
-    }
+    return true;
   }
 
   formatDescription(description: string): string {

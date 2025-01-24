@@ -5,7 +5,12 @@
   <div class="body-content ion-padding">
     <app-scd-page-info [data]="infoData"></app-scd-page-info>
     <app-scd-page-course-statistics [data]="columnData"></app-scd-page-course-statistics>
-    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text">
+      <div class="detail-heading-left--78524 to-end-dates-included" *ngIf="startDate">
+        <img src="assets/svg/calander2.svg" alt="" style="height: 16px" />{{startDate}} {{ endDate ? 'to' : '' }}
+        {{endDate}}
+      </div>
+    </app-global-text-read>
     <app-teacher-info-card [data]="teacherData"></app-teacher-info-card>
     <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule>
     <app-my-courses [data]="coursesData" ></app-my-courses>
