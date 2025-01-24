@@ -18,10 +18,15 @@
           <div class="but-credit-counter-box">
 
             <div class="d-flex flex-row gap-8 align-items-center justify-content-between but-credit-counter-box-inner">
-              <app-sd-button-golden [text]="'$10'" (click)="buyCredits(10)"></app-sd-button-golden>
-              <app-sd-button-golden [text]="'$20'" (click)="buyCredits(20)"></app-sd-button-golden>
-              <app-sd-button-golden [text]="'$50'" (click)="buyCredits(50)"></app-sd-button-golden>
-              
+              <ion-button fill="clear" (click)="decrementCredit()">
+                <ion-icon name="add-outline"></ion-icon>
+              </ion-button>
+
+              <div class="roboto-bold fs-24">{{ selectedCoin?.level }}</div>
+
+              <ion-button fill="clear" (click)="incrementCredit()">
+                <ion-icon name="remove-outline"></ion-icon>
+              </ion-button>
             </div>
 
 

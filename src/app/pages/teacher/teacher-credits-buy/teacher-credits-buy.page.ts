@@ -11,7 +11,13 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
   total = 7;
   payAmount = 10;
-
+  selectedCoin = {
+    id: 1,
+    name: 'Coin 1',
+    price: 10,
+    quantity: 1,
+    level: 10
+  }
   
   activeIndex = 0;
 
@@ -71,6 +77,14 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     this.cdr.detectChanges();
+  }
+
+  decrementCredit(){
+
+  }
+
+  incrementCredit(){
+
   }
 
 }

@@ -121,11 +121,18 @@
   <!-- <app-scd-page-footer></app-scd-page-footer> -->
 
   
+  
+</ion-content>
+<ion-footer>
   <div class="footer-buttons-78963 ion-padding">
     <app-sd-button-clear class="footer-button-1" [image]="'assets/svg/chat.svg'" [text]="'Chat'" (click)="goToChat()" ></app-sd-button-clear>
     <app-sd-button-golden class="footer-button-2" [image]="'assets/svg/send.svg'" [text]="'Free Trial'" ></app-sd-button-golden>    
   </div>
-</ion-content>
+</ion-footer>
+
+
+
+
 <!-- <ion-footer [class.tabs-opacity-0]="spinner" [class.tabs-opacity-1]="!spinner">
   <div class="footer-buttons-78963">
     <div class="button-chat-78563" *ngIf="!data?.trial && !btn_loading">

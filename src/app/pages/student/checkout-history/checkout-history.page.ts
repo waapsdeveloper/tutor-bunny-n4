@@ -9,8 +9,13 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class CheckoutHistoryPage implements OnInit {
 
-  title = 'Checkout History';
+  chips = ['Pending', '2024', '2023', '2022'];
+  
+  selectedChip = 0; // Default selected chip (e.g., 'Pending')
 
+  
+
+  title = 'Checkout History';
   list: any[] = [];
 
   constructor(private network: NetworkService, private users: UsersService ) { }
@@ -29,6 +34,10 @@ export class CheckoutHistoryPage implements OnInit {
       this.list = d;
 
     }
+  }
+
+  selectChip(index: number) {
+    this.selectedChip = index; // Update the selected chip index
   }
 
 }
