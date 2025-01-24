@@ -37,5 +37,22 @@
     width: 338px;
     height: 60px;
     border: 4px solid rgba(69, 69, 69, 1);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
   }
+}
+
+
+.checkout-history-list{
+  border-radius: 20px;
+  border: 0.5px solid #454545;
+  box-shadow: 1px 4px 4px 0px #00000026;
+}
+
+.center-coin-label {
+  font-size: 28px;
+  font-weight: bold;
 }

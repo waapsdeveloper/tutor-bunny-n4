@@ -9,14 +9,21 @@ import { SwiperComponent } from 'swiper/angular';
 })
 export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
-  total = 7;
-  payAmount = 10;
+
+  total = 0;
+  tax = 0;
+  payAmount = 0;
+
+
+  apiCoins: any[] = [];
+
+
   selectedCoin = {
     id: 1,
     name: 'Coin 1',
     price: 10,
     quantity: 1,
-    level: 10
+    level: 10,    
   }
   
   activeIndex = 0;
@@ -28,7 +35,21 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const res = await this.network.getCoinLevels();
+    console.log(res);
+    this.apiCoins = res.map( (coin, index) => {      
+      return {
+        id: index,
+        name: coin.name,
+        price: coin.price,
+        quantity: 1,
+        level: parseInt(coin.coin_level)
+      }
+    });
+
+    this.selectedCoin = Object.assign({}, this.apiCoins[0]);
+    this.calculateTotal();
   }
 
   getPayAmount() {
@@ -81,9 +102,36 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
   decrementCredit(){
 
+    // check if level not less then 5
+    const d = parseInt(`${this.selectedCoin.level}`)
+    if(d < 5) return;
+    this.selectedCoin.level = d - 5;
+    this.calculateTotal();
+
   }
 
   incrementCredit(){
+    this.selectedCoin.level = parseInt(`${this.selectedCoin.level}`) + 5;
+    this.calculateTotal();
+  }
+
+  selectCoin(_t31: any) {
+    this.selectedCoin = Object.assign({}, _t31);
+    this.calculateTotal();
+  }
+
+  calculateTotal() {
+
+    this.total = this.selectedCoin.price * this.selectedCoin.level;
+    this.total = parseFloat(this.total.toFixed(2));
+
+    this.tax = this.total * 0.07;
+    this.tax = parseFloat(this.tax.toFixed(2));
+
+    this.payAmount = this.total + this.tax;
+    this.payAmount = parseFloat(this.payAmount.toFixed(2));
+
+
 
   }
 

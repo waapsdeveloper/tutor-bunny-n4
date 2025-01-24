@@ -9,6 +9,7 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
+  
 
 
   constructor(
@@ -569,6 +570,10 @@ export class NetworkService {
 
   getStudentOrders() {
     return this.httpGetResponse('student/order/list', null, false, true);
+  }
+
+  getCoinLevels() {
+    return this.httpGetResponse('credit-coins', null, false, false);
   }
 
   
