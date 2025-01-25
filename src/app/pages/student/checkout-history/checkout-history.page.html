@@ -24,7 +24,7 @@
   </div>
 
   <ion-list class="checkout-history-list" inset="true">
-    <ion-item *ngFor="let checkout of list" detail="true">
+    <ion-item *ngFor="let checkout of list" detail="true" (click)="openDetails(checkout)">
       <ion-label>
         <h2>{{checkout.order_number}}</h2>
         <p>{{checkout.order_items.length}} items</p>

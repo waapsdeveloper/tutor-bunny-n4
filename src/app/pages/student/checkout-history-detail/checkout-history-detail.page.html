@@ -1,0 +1,11 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="title"></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="cart-box-outer-689567 ">
+    <app-cart-list-item *ngFor="let item of list" [item]="item"></app-cart-list-item>
+  </div>  
+  
+</ion-content>

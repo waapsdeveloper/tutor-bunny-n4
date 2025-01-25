@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { ApiService } from './api.service';
 import { UtilityService } from './utility.service';
 import { ModalService } from './basic/modal.service';
@@ -9,6 +9,7 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
+  
   
 
 
@@ -572,9 +573,16 @@ export class NetworkService {
     return this.httpGetResponse('student/order/list', null, false, true);
   }
 
+  getStudentOrder(params: Params) {
+    const str = this.serialize(params);
+    return this.httpGetResponse('student/order-by-order-number' + '?' + str  , null, false, false);
+  }
+
   getCoinLevels() {
     return this.httpGetResponse('credit-coins', null, false, false);
   }
+
+  
 
   
 

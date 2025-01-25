@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -18,7 +19,7 @@ export class CheckoutHistoryPage implements OnInit {
   title = 'Checkout History';
   list: any[] = [];
 
-  constructor(private network: NetworkService, private users: UsersService ) { }
+  constructor(private network: NetworkService, private nav: NavService) { }
 
   ngOnInit() {
     this.initialize();
@@ -38,6 +39,10 @@ export class CheckoutHistoryPage implements OnInit {
 
   selectChip(index: number) {
     this.selectedChip = index; // Update the selected chip index
+  }
+
+  openDetails(checkout) {
+    this.nav.push('checkout-history-detail', { id: checkout.id, order_number: checkout.order_number });
   }
 
 }

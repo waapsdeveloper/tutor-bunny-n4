@@ -242,6 +242,10 @@ const routes: Routes = [
     path: 'teacher-credits-buy',
     loadChildren: () => import('./pages/teacher/teacher-credits-buy/teacher-credits-buy.module').then( m => m.TeacherCreditsBuyPageModule)
   },
+  {
+    path: 'checkout-history-detail',
+    loadChildren: () => import('./pages/student/checkout-history-detail/checkout-history-detail.module').then( m => m.CheckoutHistoryDetailPageModule)
+  },
 
 
 
