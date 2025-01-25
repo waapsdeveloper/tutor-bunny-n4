@@ -1,0 +1,46 @@
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-attachment-list',
+  templateUrl: './attachment-list.component.html',
+  styleUrls: ['./attachment-list.component.scss'],
+})
+export class AttachmentListComponent {
+
+
+
+    @Input() list: any[] = [];
+
+    constructor() { }
+
+
+
+    setBackgroundImage(item) {
+      // return `url('${item.image}')`;
+      console.log(item)
+      item.type = item.file_type;
+
+
+      let path = "assets/svg/filetypes/";
+      if (item.type.includes("pdf")) {
+        path += "pdf.svg";
+      } else
+
+      if (item.type.includes("sheet") ) {
+        path += "xls.svg";
+      } else
+
+      if (item.type.includes("document")) {
+        path += "doc.svg";
+      }
+
+      if (item.type.includes("image")) {
+        path += "png.svg";
+      }
+
+
+      return `url(${path})`;
+    }
+
+
+}

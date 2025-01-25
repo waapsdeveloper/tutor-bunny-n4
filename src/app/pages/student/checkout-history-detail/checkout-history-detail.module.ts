@@ -8,7 +8,7 @@ import { CheckoutHistoryDetailPageRoutingModule } from './checkout-history-detai
 
 import { CheckoutHistoryDetailPage } from './checkout-history-detail.page';
 import { SdHeaderTopModule } from "../../../components/sd-header-top/sd-header-top.module";
-import { CartListItemModule } from "../cart/cart-list-item/cart-list-item.module";
+import { CartListItemModule } from "./cart-list-item/cart-list-item.module";
 
 @NgModule({
   imports: [
