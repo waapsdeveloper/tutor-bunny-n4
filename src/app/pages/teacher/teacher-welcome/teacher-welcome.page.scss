@@ -80,6 +80,7 @@
   width: 100%;
   gap: 24px;
   padding: 16px;
+  height: 100%;
 }
 
 
@@ -97,3 +98,22 @@
 .welcome-text-78921 {
   color: rgba(102, 102, 102, 1);
 }
+
+
+/* How to create teacher application? */
+.footerlink{
+  // position: relative;
+  width: 217px;
+  height: 16px;
+  margin: auto;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  text-decoration-line: underline;
+  
+  color: #0386D0;
+}
+
