@@ -48,7 +48,7 @@ export class NetworkService {
     return this.httpPostResponse('user/update-profile-image', data);
   }
   postCoursePhoto(data) {
-    return this.httpPostResponse('courses/update-course-image', data);
+    return this.httpPostResponse('courses/update-course-image', data , false);
   }
 
   updateMessageReaquest(data, id) {
@@ -309,7 +309,7 @@ export class NetworkService {
     return this.httpGetResponse('videos/list', null, false, false);
   }
   getPendingTrial(id, data) {
-    return this.httpPostResponse('get-pending/course/trials/' + id, data, null, false,);
+    return this.httpPostResponse('get-pending/course/trials/' + id, data, null, false, false);
   }
 
   getSchedule(id) {
@@ -329,7 +329,7 @@ export class NetworkService {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
   addKeyword(data) {
-    return this.httpPostResponse('keywords/add-keyword', data);
+    return this.httpPostResponse('keywords/add-keyword', data , false);
   }
 
   addInputKeyword(data) {
