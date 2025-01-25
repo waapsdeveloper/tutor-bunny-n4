@@ -132,7 +132,7 @@ export class NetworkService {
   }
 
   addLanguage(data) {
-    return this.httpPostResponse('languages/add-teacher-language', data, null, false);
+    return this.httpPostResponse('languages/add-teacher-language', data, null, false, false);
   }
 
   getCategory() {
