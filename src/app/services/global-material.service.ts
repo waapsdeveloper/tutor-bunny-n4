@@ -9,36 +9,37 @@ import {
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
-export interface GlobalCoursesModel {
-  id: number
-  is_liked_by_me: boolean,
-  user_id: 57,
-  user: any,
-  title: string,
-  description: string,
-  language_id: number,
-  image: string,
-  price: string,
-  keywords: [],
-  auth_user_currency_symbol: string,
-  updated_price: string
+export interface GlobalMaterialModel {
+  // id: number
+  // is_liked_by_me: boolean,
+  // user_id: 57,
+  // user: any,
+  // title: string,
+  // description: string,
+  // language_id: number,
+  // image: string,
+  // price: string,
+  // keywords: [],
+  // auth_user_currency_symbol: string,
+  // updated_price: string
+  page: number;
+  last_page: number;
+  list: any[];
+
 }
 
-export type GlobalCoursesModelState = Array<GlobalCoursesModel>;
+// export type GlobalCoursesModelState = Array<GlobalCoursesModel>;
 
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCoursesModelState > {
+export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore<GlobalMaterialModel > {
 
 
-  page = 1;
-  last_page = -1;
-
-
-
+  page :any;
+  last_page : any;
   // old variables
   courses: any[] = [];
   CourseChannel: any;
@@ -95,50 +96,60 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
   storeConfig(): NgSimpleStateStoreConfig {
     return {
-      storeName: 'GlobalCoursesModel',
+      storeName: 'GlobalMaterialModel',
     };
   }
 
-  initialState(): GlobalCoursesModelState {
-    return [];
+  initialState(): GlobalMaterialModel {
+    return {
+      page: 1,
+      last_page: -1,
+      list: [],
+    };
   }
 
   getList() {
-    return this.selectState((state) => state);
+    return this.selectState((state) => state.list);
   }
 
   getItem(id) {
-    return this.selectState((state) => state.find((x) => x.id == id));
+    return this.selectState((state) => state.list.find((x) => x.id == id));
   }
 
   setItem(obj: any) {
     this.setState((state) => {
-      const exists = state.some((item: any) => item.id === obj.id);
+      console.log('Before state update:', state);
+      const exists = state.list.some((item: any) => item.id === obj.id);
       if (exists) {
-        // Update existing item
-        return state.map((item: any) => (item.id === obj.id ? obj : item));
+        return {
+          ...state,
+          list: state.list.map((item: any) => (item.id === obj.id ? obj : item)),
+        };
       } else {
-        // Add new item
-        return [...state, obj];
+        return {
+          ...state,
+          list: [obj, ...state.list],
+        };
       }
     });
+    
   }
 
   getItemPromise(id) {
     return new Promise ( resolve => {
-      this.selectState((state) => state.find((x) => x.id == id)).subscribe( data => {
+      this.selectState((state) => state.list.find((x) => x.id == id)).subscribe( data => {
         resolve(data)
       });
     });
   }
 
   getCount() {
-    return this.selectState((state) => state.length);
+    return this.selectState((state) => state.list.length);
   }
 
   getCountPromise() {
     return new Promise((resolve) => {
-      this.selectState((state) => state.length).subscribe((res) => {
+      this.selectState((state) => state.list.length).subscribe((res) => {
         resolve(res);
       });
     });
@@ -164,7 +175,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
         if (page === 1) {
           return data.data;
         }
-        return [...state, ...data.data];
+        return [...state.list, ...data.data];
       });
 
       resolve(true);
