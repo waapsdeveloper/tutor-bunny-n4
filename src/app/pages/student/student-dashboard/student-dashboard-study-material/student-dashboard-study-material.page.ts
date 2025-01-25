@@ -22,7 +22,7 @@ export class StudentDashboardStudyMaterialPage
 
     this.globalStudyMaterialService.getList().subscribe((res) => {
       this.list$ = res;
-    }); 
+    });
 
   }
 
@@ -40,6 +40,6 @@ export class StudentDashboardStudyMaterialPage
   }
 
   openDetails(item: any) {
-    this.nav.push('/material-detail', {material_id: item.id})
+    this.nav.push('/student-material-detail', {material_id: item.id})
   }
 }
