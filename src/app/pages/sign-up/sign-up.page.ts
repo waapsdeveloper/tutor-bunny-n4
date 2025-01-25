@@ -40,7 +40,7 @@ export class SignUpPage extends BasePage {
     if (
       !this.formData.email ||
       !this.formData.password ||
-      !this.formData.name ||
+      // !this.formData.name ||
       !this.formData.confirm_password
     ) {
       return;
