@@ -7,7 +7,12 @@
     </div>
 
     <div class="transparent-header-li right">
-      <div class="rwbutton">
+
+      <div class="rwbutton" *ngFor="let item of actions" (click)="item.action()">
+        <img [src]="item.img" />
+      </div>
+
+      <!-- <div class="rwbutton">
         <img [src]="is_liked_by_me ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'" (click)="favToggle.emit()" />
       </div>
       <div class="rwbutton">
@@ -16,7 +21,7 @@
 
       <div class="rwbutton">
         <img src="assets/svg/gray-info.svg" alt="info" />
-      </div>
+      </div> -->
     </div>
   </div>
   <app-slider-photos [sliderImages]="sliderImages"></app-slider-photos>

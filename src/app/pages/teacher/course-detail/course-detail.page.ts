@@ -25,6 +25,7 @@ export class CourseDetailPage extends BasePage {
   bannerData: bannerData = {
     liked_by_me: false,
     sliderImages: [],
+    actions: []
   };
 
   infoData: infoData = {
@@ -156,6 +157,18 @@ export class CourseDetailPage extends BasePage {
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: resImages.result,
+      actions: [              
+        {
+          name: 'edit',
+          img: 'assets/svg/edit-pencil-77.svg',
+          action: null
+        },
+        {
+          name: 'share',
+          img: 'assets/svg/share-77.svg',
+          action: null
+        },
+    ]
     };
 
     this.infoData = {

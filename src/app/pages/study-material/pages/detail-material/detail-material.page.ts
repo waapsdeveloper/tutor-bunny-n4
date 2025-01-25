@@ -25,6 +25,7 @@ export class DetailMaterialPage extends BasePage {
   bannerData: bannerData = {
     liked_by_me: false,
     sliderImages: [],
+    actions: [],
   };
 
   infoData: infoData = {
@@ -150,6 +151,7 @@ export class DetailMaterialPage extends BasePage {
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: resImages.result,
+      actions: [],
     };
 
     this.infoData = {

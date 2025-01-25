@@ -23,7 +23,8 @@ export class StudentCourseDetailPage extends BasePage {
 
   bannerData: bannerData = {
     liked_by_me: false,
-    sliderImages: []
+    sliderImages: [],
+    actions: []
   }
 
   infoData: infoData = {
@@ -159,7 +160,24 @@ export class StudentCourseDetailPage extends BasePage {
     console.log(resImages)
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
-      sliderImages: resImages.result
+      sliderImages: resImages.result,
+      actions: [              
+          {
+            name: 'favorite',
+            img: 'assets/svg/heart-77.svg',
+            action: null
+          },
+          {
+            name: 'share',
+            img: 'assets/svg/share-77.svg',
+            action: null
+          },
+          {
+            name: 'info',
+            img: 'assets/svg/gray-info.svg',
+            action: null
+          }
+      ]
     }
 
     this.infoData = {
