@@ -1,0 +1,15 @@
+<swiper
+  [slidesPerView]="4"
+  [spaceBetween]="10"
+  [pagination]="{ clickable: true }"
+  class="swiper-container-inner-7892"
+>
+  <ng-template swiperSlide *ngFor="let item of list">
+    <div class="vedio-box-inner card">
+      <div
+        class="video-89654"
+        [style.backgroundImage]="setBackgroundImage(item)"
+      ></div>
+    </div>
+  </ng-template>
+</swiper>

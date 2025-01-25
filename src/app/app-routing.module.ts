@@ -207,6 +207,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/study-material/pages/detail-material/detail-material.module').then( m => m.DetailMaterialPageModule)
   },
   {
+    path: 'student-material-detail',
+    loadChildren: () => import('./pages/student/student-material-detail/student-material-detail.module').then( m => m.StudentMaterialDetailPageModule)
+  }, {
+    path: 'teacher-material-detail',
+    loadChildren: () => import('./pages/teacher/teacher-material-detail/teacher-material-detail.module').then( m => m.TeacherMaterialDetailPageModule)
+  },
+  {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then( m => m.TutorialPageModule)
   },
@@ -226,7 +233,7 @@ const routes: Routes = [
     path: 'student-teacher-profile',
     loadChildren: () => import('./pages/student/student-teacher-profile/student-teacher-profile.module').then( m => m.StudentTeacherProfilePageModule)
   },
-  
+
   {
     path: 'teacher-my-earning',
     loadChildren: () => import('./pages/teacher/teacher-my-earning/teacher-my-earning.module').then( m => m.TeacherMyEarningPageModule)
@@ -234,11 +241,12 @@ const routes: Routes = [
   {
     path: 'teacher-credits',
     loadChildren: () => import('./pages/teacher/teacher-credits/teacher-credits.module').then( m => m.TeacherCreditsPageModule)
-  },  
+  },
   {
     path: 'checkout-history',
     loadChildren: () => import('./pages/student/checkout-history/checkout-history.module').then( m => m.CheckoutHistoryPageModule)
-  },  {
+  },
+  {
     path: 'teacher-credits-buy',
     loadChildren: () => import('./pages/teacher/teacher-credits-buy/teacher-credits-buy.module').then( m => m.TeacherCreditsBuyPageModule)
   },
