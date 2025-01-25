@@ -25,6 +25,7 @@ import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.modu
 import { TravelPoliceModule } from 'src/app/components/travel-police/travel-police.module';
 import { ProfileVideoModule } from 'src/app/components/profile-video/profile-video.module';
 
+import { SwiperModule } from 'swiper/angular';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +33,10 @@ import { ProfileVideoModule } from 'src/app/components/profile-video/profile-vid
     IonicModule,
     ReactiveFormsModule,
     TeacherProfileEditPageRoutingModule,
+
+    SwiperModule,
+
+
     SdHeaderTopModule,
     SdInputBoxModule,
     SdCountryBoxModule,

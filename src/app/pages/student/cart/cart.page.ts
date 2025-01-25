@@ -22,7 +22,6 @@ export class CartPage extends BasePage implements OnInit {
   total = 0;
 
   activeIndex = 0;
-
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
   constructor(

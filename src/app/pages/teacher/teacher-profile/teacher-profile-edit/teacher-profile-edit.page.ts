@@ -1,17 +1,12 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   Injector,
-  OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { IonContent, IonicSlides, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { EventsService } from 'src/app/services/events.service';
-import { NavService } from 'src/app/services/nav.service';
-import { NetworkService } from 'src/app/services/network.service';
+import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-teacher-profile-edit',
@@ -20,9 +15,8 @@ import { NetworkService } from 'src/app/services/network.service';
 })
 export class TeacherProfileEditPage
   extends BasePage
-  implements OnInit, ViewWillEnter {
-  swiperModules = [IonicSlides];
-  @ViewChild('slides', { static: false }) slides: any;
+  implements ViewWillEnter {
+  
   user;
   userId;
   lang;
@@ -66,13 +60,14 @@ export class TeacherProfileEditPage
   @ViewChild(IonContent, { read: IonContent, static: false })
   myContent: IonContent;
 
+  activeIndex = 0;
+  @ViewChild('slides', { static: false }) slides: SwiperComponent;
+
   constructor(injector: Injector) {
     super(injector);
     this.initialize();
     this.scrollToTopOnInit();
   }
-
-  ngOnInit() { }
 
   ionViewWillEnter(): void {
     this.params = this.nav.getQueryParams();
@@ -134,6 +129,7 @@ export class TeacherProfileEditPage
       this.myContent.scrollToTop(300);
     }, 500);
   }
+
   setFormDta(data) {
 
     this.formData['name'] = data['name'];
@@ -190,10 +186,10 @@ export class TeacherProfileEditPage
   async changeToPrev() {
     if (this.step == 2) {
       this.step = 1;
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+      this.slides?.swiperRef?.slideTo(0, 300, false);
     }
   }
-  async onSlideChange() {
+  async onSlideChanged() {
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
       this.formData
@@ -221,7 +217,7 @@ export class TeacherProfileEditPage
 
     // const res = await this.network.updateTeacherProfile(f, user.id);
     // if (res) {
-    this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.slides?.swiperRef?.slideTo(1, 300, false);
     this.step = 2;
     // }
     this.scrollToTopOnInit();
@@ -266,7 +262,11 @@ export class TeacherProfileEditPage
       }
     }
   }
+
   async onSlideChange2() {
+
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+
     const data = this.formData;
     this.userId = this.user.id;
     const f = this.formData;
@@ -298,7 +298,7 @@ export class TeacherProfileEditPage
     //   //   this.utility.presentSuccessToast(res.message)
     //   // }
     //   // this.nav.pop('/tabs/teacher-dashboard')
-    this.slides?.nativeElement.swiper.slideTo(2, false, false);
+    this.slides?.swiperRef?.slideTo(2, 300, false);
     this.step = 3;
     // }
     this.scrollToTopOnInit();
@@ -324,11 +324,11 @@ export class TeacherProfileEditPage
     if (this.step == 2) {
       this.step = 1;
 
-      this.slides?.nativeElement.swiper.slideTo(0, false, false);
+      this.slides?.swiperRef?.slideTo(0, 300, false);
       this.scrollToTopOnInit();
     } else if (this.step == 3) {
       this.step = 2;
-      this.slides?.nativeElement.swiper.slideTo(1, false, false);
+      this.slides?.swiperRef?.slideTo(1, 300, false);
       this.scrollToTopOnInit();
     } else {
       this.nav.pop();

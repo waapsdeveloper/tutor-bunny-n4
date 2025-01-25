@@ -4,16 +4,16 @@
 </ion-header>
 <ion-content class="ion-padding " #content [fullscreen]="true">
   <form>
-    <swiper-container slides-per-view="1" allow-touch-move="false" space-between="40" [modules]="swiperModules" #slides
-      style="padding: 0 6px;">
-      <swiper-slide>
+    <!--  (transitionEnd)="onSlideChanged()" -->
+    <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-inner-7892" #slides [allowSlideNext]="false" [allowSlidePrev]="false">
+      <ng-template swiperSlide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Name</div>
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
               [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8">
+          <div class="input-box-lines d-flex flex-column gap-8"> 
             <div class="input-title fs-14 roboto-medium">Country</div>
             <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country"
               [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
@@ -66,8 +66,8 @@
               [errorText]="'travel policy is required'" [needed]="step === 3"></app-travel-police>
           </div>
         </div>
-      </swiper-slide>
-      <swiper-slide>
+      </ng-template>
+      <ng-template swiperSlide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -132,8 +132,8 @@
               (updatePhotoId)="result($event, 'photo_id')"></app-sd-image-box>
           </div>
         </div>
-      </swiper-slide>
-      <swiper-slide>
+      </ng-template>
+      <ng-template swiperSlide>
         <div class="body-content-68448">
           <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium label-with-word-count">
@@ -201,14 +201,14 @@
               (onChange)="result($event, 'terms')" [needed]="step === 3"></app-accept-terms-profile>
           </div>
         </div>
-      </swiper-slide>
-    </swiper-container>
+      </ng-template>
+    </swiper>
   </form>
 </ion-content>
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
-      <app-sd-button-gray *ngIf="step === 1" [text]="'Next'" (click)="onSlideChange()"></app-sd-button-gray>
+      <app-sd-button-gray *ngIf="step === 1" [text]="'Next'" (click)="onSlideChanged()"></app-sd-button-gray>
       <app-sd-button-gray *ngIf="step === 2" [text]="'Next'" (click)="onSlideChange2()"></app-sd-button-gray>
       <app-sd-button-gray *ngIf="step === 3" [text]="'Submit for Review'" (click)="submit()"></app-sd-button-gray>
     </div>

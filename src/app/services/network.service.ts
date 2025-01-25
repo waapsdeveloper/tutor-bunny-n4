@@ -91,6 +91,7 @@ export class NetworkService {
     return this.httpGetResponse(
       'gallery/list' + '?user_id=' + data,
       null,
+      false,
       false
     );
   }
@@ -692,6 +693,9 @@ export class NetworkService {
           if (showloader === true) {
             this.utility.hideLoader();
           }
+
+          console.log("url " + url);
+          console.log("showerror " + showError);
 
           if (showError == true && res.message) {            
             this.utility.presentSuccessToast(res.message);
