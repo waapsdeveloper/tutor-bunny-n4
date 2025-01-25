@@ -246,6 +246,14 @@ const routes: Routes = [
     path: 'checkout-history-detail',
     loadChildren: () => import('./pages/student/checkout-history-detail/checkout-history-detail.module').then( m => m.CheckoutHistoryDetailPageModule)
   },
+  {
+    path: 'student-material-detail',
+    loadChildren: () => import('./pages/student/student-material-detail/student-material-detail.module').then( m => m.StudentMaterialDetailPageModule)
+  },
+  {
+    path: 'teacher-material-detail',
+    loadChildren: () => import('./pages/teacher/teacher-material-detail/teacher-material-detail.module').then( m => m.TeacherMaterialDetailPageModule)
+  },
 
 
 

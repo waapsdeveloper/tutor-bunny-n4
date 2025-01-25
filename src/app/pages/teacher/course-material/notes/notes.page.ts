@@ -152,6 +152,6 @@ export class NotesPage extends BasePage implements OnInit {
   }
 
   openDetails(item: any) {    
-    this.nav.push('material-detail', {material_id: item.id})
+    this.nav.push('teacher-material-detail', {material_id: item.id})
   }
 }
