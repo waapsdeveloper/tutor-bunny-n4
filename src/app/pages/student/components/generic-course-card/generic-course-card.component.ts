@@ -90,19 +90,32 @@ export class GenericCourseCardComponent extends BasePage {
     let v = (await this.profiles.isProfileCompleted(this.user)) as any;
 
     if (v || v == true) {
-      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
-      // return
-      let send = data.data.send;
-      if (send == true) {
+
+      const flag = await this.utility.presentConfirm(
+        'OK',
+        'Cancel',
+        'Request Trial',
+        'Are you sure to request the Trial?'
+      );
+
+      if (flag) {
         this.trail = true;
-        this.globalCourses.requestTrial(
-          this.item,
-          this.user,
-          data.data.message
-        );
-      } else {
-        return;
+        this.globalCourses.requestTrial(this.item, this.user, '');
       }
+
+      // let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
+      // // return
+      // let send = data.data.send;
+      // if (send == true) {
+      //   this.trail = true;
+      //   this.globalCourses.requestTrial(this.item,this.user, data.data.message );
+      // } else {
+      //   return;
+      // }
+
+
+
+
     } else {
       let res = await this.modals.present(
         StudentWelcomeComponent,

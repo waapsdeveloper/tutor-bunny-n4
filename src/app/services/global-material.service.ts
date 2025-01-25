@@ -10,18 +10,6 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 
 export interface GlobalMaterialModel {
-  // id: number
-  // is_liked_by_me: boolean,
-  // user_id: 57,
-  // user: any,
-  // title: string,
-  // description: string,
-  // language_id: number,
-  // image: string,
-  // price: string,
-  // keywords: [],
-  // auth_user_currency_symbol: string,
-  // updated_price: string
   page: number;
   last_page: number;
   list: any[];

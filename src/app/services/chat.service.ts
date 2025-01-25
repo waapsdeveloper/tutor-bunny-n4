@@ -74,12 +74,13 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
       },
       false
     );
-    this.events.subscribe('clear-chat-data', () => {
-      this.days = null;
-    });
-    this.events.subscribe('update-chat-lists', () => {
-      this.getchatList();
-    });
+    
+    // this.events.subscribe('clear-chat-data', () => {
+    //   this.days = null;
+    // });
+    // this.events.subscribe('update-chat-lists', () => {
+    //   this.getchatList();
+    // });
   
   }
 
@@ -162,6 +163,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
   }
 
   chatChannelReceived($event: any) {
+    
     this.events.publish('message-received-via-pusher', $event);
 
 
