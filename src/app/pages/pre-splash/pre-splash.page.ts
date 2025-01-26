@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
-import { CreateCourseService } from 'src/app/services/create-course.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
@@ -23,7 +22,7 @@ import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.s
   templateUrl: './pre-splash.page.html',
   styleUrls: ['./pre-splash.page.scss'],
 })
-export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
+export class PreSplashPage extends BasePage implements ViewWillEnter {
   user;
   loading = false;
 
@@ -36,7 +35,6 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
     private iap: InitializeAppService,
     public teacher: TeacherService,
     public chats: ChatService,
-    public createCourseService: CreateCourseService,
     public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
@@ -54,10 +52,6 @@ export class PreSplashPage extends BasePage implements OnInit, ViewWillEnter {
 
   ) {
     super(injector);
-  }
-
-  ngOnInit() {
-
   }
 
   ionViewWillEnter() {

@@ -18,11 +18,7 @@ const routes: Routes = [
       //   path: '',
       //   redirectTo: 'dashboard',
       //   pathMatch: 'full',
-      // },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./../dashboard/dashboard.module').then( m => m.DashboardPageModule)
-      },
+      // },      
       {
         path: 'student-dashboard',
         loadChildren: () => import('./../pages/student/student-dashboard/student-dashboard.module').then( m => m.StudentDashboardPageModule),

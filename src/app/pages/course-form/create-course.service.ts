@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NetworkService } from './network.service';
-import { EventsService } from './events.service';
+import { NetworkService } from '../../services/network.service';
+import { EventsService } from '../../services/events.service';
 
 @Injectable({
   providedIn: 'root',

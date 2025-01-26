@@ -14,7 +14,7 @@ import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.se
   templateUrl: './teacher-dashboard.page.html',
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
-export class TeacherDashboardPage extends BasePage implements OnInit {
+export class TeacherDashboardPage extends BasePage {
 
   user;
   pendingTrialsCoubt$ = 0;
@@ -29,23 +29,11 @@ export class TeacherDashboardPage extends BasePage implements OnInit {
     private userSq: UserSqService
   ) {
     super(injector);
-
-
-
     this.pendingTrialsService.getCount().subscribe((data) => {
       this.pendingTrialsCoubt$ = data ?? 0;
     });
 
-
-
-
-
   }
-
-  ngOnInit() {
-
-  }
-
   
 
   openProfile() {

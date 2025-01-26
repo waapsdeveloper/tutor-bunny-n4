@@ -63,8 +63,7 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   }
 
   removeFromList($event) {
-    console.log($event)
-    this.pendingTrialsService.setRemove($event);
+    this.pendingTrialsService.removeItem($event);
   }
 
 }

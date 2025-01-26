@@ -2,11 +2,12 @@ import {
   Component,
   Injector,
   OnInit,
+  OnDestroy,
   ViewChild,
 } from '@angular/core';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCourseService } from 'src/app/services/create-course.service';
+import { CreateCourseService } from 'src/app/pages/course-form/create-course.service';
 import { SwiperComponent } from 'swiper/angular';
 @Component({
   selector: 'app-course-form',
@@ -15,8 +16,8 @@ import { SwiperComponent } from 'swiper/angular';
 })
 export class CourseFormPage
   extends BasePage
-  implements  ViewWillEnter {
-
+  implements ViewWillEnter, OnDestroy
+{
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   params;
@@ -48,18 +49,18 @@ export class CourseFormPage
     this.user = this.users.getUser();
     if (this.user.teacher.country.currency_symbol) {
       this.currency = this.user?.teacher?.country?.currency_symbol;
-    }
-    else {
-      this.currency = '$'
+    } else {
+      this.currency = '$';
     }
   }
 
+  ngOnDestroy() {
+    this.createCourseService.resetFormData();
+  }
 
-
-  async initialize() { }
+  async initialize() {}
 
   async ionViewWillEnter() {
-
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -223,9 +224,9 @@ export class CourseFormPage
     const res = await this.network.SubmitSecondCourse(f, course_id);
     if (res && res.message) {
       if (this.edit && this.sameCourseEdit) {
-        this.utility.presentSuccessToast("Course Saved Successfully ");
+        this.utility.presentSuccessToast('Course Saved Successfully ');
       } else {
-        this.utility.presentSuccessToast("Course Saved Successfully");
+        this.utility.presentSuccessToast('Course Saved Successfully');
       }
     }
 
@@ -237,14 +238,13 @@ export class CourseFormPage
     //     : 'Course Updated Successfully';
     //   this.utility.presentSuccessToast(message);
     // }
-    this.createCourseService.resetFormData()
+    this.createCourseService.resetFormData();
     this.nav.pop('/tabs/teacher-dashboard');
     this.events.publish('initilize-the-list', res);
     this.loading = false;
   }
 
   shouldHandleBackToPrevScreen(event) {
-
     this.sameCourseEdit = event;
     if (this.step == 2) {
       this.step = 1;
@@ -252,7 +252,6 @@ export class CourseFormPage
       this.courseId = this.createCourseService.courseId;
       this.slides?.swiperRef?.slideTo(0, 300, false);
     }
-
   }
 
   openCoursePhotos() {
@@ -262,6 +261,4 @@ export class CourseFormPage
       title: 'Upload Course photos',
     });
   }
-
-
 }

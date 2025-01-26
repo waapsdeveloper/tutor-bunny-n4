@@ -13,6 +13,7 @@ export interface GlobalCoursesModel {
   page: number;
   last_page: number;
   list: any[];
+  total: number;
 }
 
 @Injectable({
@@ -88,6 +89,7 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
       page: 1,
       last_page: -1,
       list: [],
+      total: 0,
     };
   }
 

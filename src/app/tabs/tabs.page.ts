@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
-import { CreateCourseService } from '../services/create-course.service';
 import { ChatService } from '../services/chat.service';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalCoursesService } from '../services/global-courses.service';
@@ -29,11 +28,6 @@ export class TabsPage extends BasePage implements OnInit {
 
   constructor(
     injector: Injector,
-
-
-
-    public createCourseService: CreateCourseService,
-
     private fcm: FirebaseService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
@@ -128,7 +122,7 @@ export class TabsPage extends BasePage implements OnInit {
 
         this.nav.push('/create-material', params);
       } else {
-        this.createCourseService.resetFormData();
+        
         const params = {
           backUrl: '/tabs/teacher-dashboard',
           title: 'Create',
