@@ -9,6 +9,7 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
+  
   constructor(
     public api: ApiService,
     public router: Router,
@@ -987,6 +988,14 @@ export class NetworkService {
   }
   buyCredit(data:any) {
     return this.httpPostResponse('student/order', data, null, false, true);
+  }
+
+  getTeacherWallet() {
+    return this.httpGetResponse('teacher/wallet', null, false, false);
+  }
+
+  getStudentWallet() {
+    return this.httpGetResponse('student/wallet', null, false, false);
   }
 
   serialize = (obj: any) => {

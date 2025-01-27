@@ -13,6 +13,8 @@ export class PurchaseHistoryPage implements OnInit {
   
   selectedChip = 0; // Default selected chip (e.g., 'Pending')
 
+  walletAmount = 0;
+  walletCurrency = '';
   
 
   title = 'Checkout History';
@@ -34,6 +36,12 @@ export class PurchaseHistoryPage implements OnInit {
       this.list = d;
 
     }
+
+    const res2 = await this.network.getTeacherWallet();
+    console.log("waller-", res2);
+    this.walletAmount = res2?.result?.amount || 0;
+    this.walletCurrency = res2?.result?.currency || '';
+
   }
 
   selectChip(index: number) {

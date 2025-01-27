@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-teacher-dashboard-header',
   templateUrl: './teacher-dashboard-header.component.html',
   styleUrls: ['./teacher-dashboard-header.component.scss'],
 })
-export class TeacherDashboardHeaderComponent {
+export class TeacherDashboardHeaderComponent implements OnInit {
 
   user$;
 
@@ -21,8 +22,15 @@ export class TeacherDashboardHeaderComponent {
   travel_policy;
   rating;
 
-  constructor(private users: UsersService) {
+  constructor(private users: UsersService, private utility: UtilityService) {
 
+    
+  }
+
+  ngOnInit(): void {    
+
+    const user = this.users.getUser();
+    this.setRawUserData(user);
     this.users.getUserState().subscribe((data) => {
       this.user$ = data;
       this.setUserData(this.user$);
@@ -38,6 +46,16 @@ export class TeacherDashboardHeaderComponent {
     this.status = user.status;
     this.total_rating = user.total_rating;
     this.rating = user.avg_rating
+  }
+
+  setRawUserData(user){
+    console.log(user)
+    this.image = user.image;
+    this.flag = this.utility.getFlag( user );
+    this.displayName = this.utility.getAmericanName( user.name );
+    this.status = user.teacher.status;
+    this.total_rating = user.teacher.total_rating;
+    this.rating = user.teacher.avg_rating
   }
 
 }

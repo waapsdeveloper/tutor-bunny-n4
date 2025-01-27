@@ -18,7 +18,7 @@
 
     <div class="total-payment">
       <div class="roboto-regular fs-14 pay">Total Payment</div>
-      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >$51,858</span>
+      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{walletCurrency}} {{walletAmount}}</span>
     </div>
     
   </div>
@@ -29,7 +29,7 @@
         <h2>{{checkout.order_number}}</h2>
         <p>{{checkout.order_items.length}} items</p>
       </ion-label>
-      <span slot="end" class="price">{{checkout.total | currency}}</span>
+      <span slot="end" class="price">{{checkout.currency_symbol}} {{checkout.currency_price}}</span>
     </ion-item>
 
   </ion-list>
