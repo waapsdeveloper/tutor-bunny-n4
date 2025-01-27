@@ -56,17 +56,12 @@
         </div>
         <div class="text">
           <h2 style="color: #9FC78A;">Order completed!</h2>
-          <p style="color: #BBBBBB;">Order number: {{order_detail?.order_number}}</p>
-          <p style="color: #42434780;">New credit balance: {{order_detail?.order_items[0]?.quantity}}</p>
+          <p style="color: #BBBBBB;">Order number: {{order_detail?.teacher_credit_buy.order_number}}</p>
+          <p style="color: #42434780;">New credit balance: {{order_detail?.wallet.total_coin}}</p>
         </div>
       </div>
     </ng-template>
 
-
-
-    <ng-template swiperSlide>
-
-    </ng-template>
   </swiper>
 
 </ion-content>
@@ -88,7 +83,7 @@
       </div>
 
 
-      <app-sd-button-golden [text]="getPayAmount()" (click)="continueToNextSlide()" (click)="makeOrder()"></app-sd-button-golden>
+      <app-sd-button-golden [text]="getPayAmount()" (click)="continueToNextSlide()"></app-sd-button-golden>
     </div>
 
     <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>

@@ -10,7 +10,7 @@
 <ion-content>
 <div class="container">
 
-  
+
   <div class="earnings-container ion-padding">
     <div class="tabs-46843543">
       <div
@@ -25,21 +25,21 @@
 
     <div class="total-payment">
       <div class="roboto-regular fs-14 pay">Total Payment</div>
-      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >$51,858</span>
+      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{item?.wallet?.currency}} {{item?.wallet.order_amount}}</span>
     </div>
-    
+
   </div>
 
   <ion-list class="checkout-history-list" inset="true">
-    <ion-item *ngFor="let month of months" detail="true">
+    <ion-item *ngFor="let record of item?.transaction_history" detail="true">
       <ion-label>
-        <h2>{{month}}</h2>        
+        <h2> Coin :{{record?.coins}}</h2>
       </ion-label>
-      <span slot="end" class="price">{{58 | currency}}</span>
+      <span slot="end" class="price">{{record.currency}} {{record?.total}}</span>
     </ion-item>
 
   </ion-list>
-  
+
 </div>
 </ion-content>
 <ion-footer>
@@ -47,7 +47,7 @@
     <app-sd-button-golden
       [text]="'Buy Credit'"
       (click)="buyCredits()"
-    ></app-sd-button-golden>    
+    ></app-sd-button-golden>
   </div>
 </ion-footer>
 

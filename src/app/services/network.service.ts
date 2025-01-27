@@ -985,8 +985,17 @@ export class NetworkService {
   getCoinLevels() {
     return this.httpGetResponse('credit-coins', null, false, false);
   }
-  buyCredit(data:any) {
-    return this.httpPostResponse('student/order', data, null, false, true);
+  buyCredit(data: any) {
+    return this.httpPostResponse('teacher/buy-credit', data, null, false, true);
+  }
+  creditHistory(data: any) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'teacher/credit-history' + '/'+ data,
+      null,
+      false,
+      false
+    );
   }
 
   serialize = (obj: any) => {

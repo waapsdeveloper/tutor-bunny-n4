@@ -81,10 +81,12 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
 
   buyCredits(number) {}
 
-  continueToNextSlide() {
-    this.slides?.swiperRef?.slideNext();
+  async continueToNextSlide() {
+    if (this.activeIndex === 0) {
+      await this.makeOrder(); // Wait for the order API call
+      this.slides?.swiperRef?.slideNext(); // Navigate to the next slide
+    }
   }
-
   purchaseCredits() {
     let obj = {
       user_id: 57,
@@ -141,22 +143,16 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
   async makeOrder() {
     let obj = {
       user_id: this.user.id,
-      total: this.total,
+      order_amount: this.total,
       tax: this.tax,
       sub_total: this.payAmount,
-      currency: this.user.teacher.converted_currency,
-      order_items: [
-        {
-          item_id: this.selectedCoin.id,
-          type: 'coin',
-          price: this.selectedCoin.price,
-          quantity: this.selectedCoin.level,
-          sub_total: this.total,
-        },
-      ],
+      user_currency: this.user.teacher.auth_user_currency_symbol,
+      coin_id: this.selectedCoin.id,
+      price: this.selectedCoin.price,
+      coin_quantity: this.selectedCoin.level,
     };
     let res = await this.network.buyCredit(obj);
-    this.order_detail = res;
+    this.order_detail = res.result;
     console.log(this.order_detail);
   }
 }
