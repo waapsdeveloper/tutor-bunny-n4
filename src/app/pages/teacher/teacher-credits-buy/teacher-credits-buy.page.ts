@@ -38,13 +38,17 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   async ngOnInit() {
     const res = await this.network.getCoinLevels();
     console.log(res);
-    this.apiCoins = res.map( (coin, index) => {      
+
+    const d = res.result.data;
+
+    this.apiCoins = d.map( (coin, index) => {      
       return {
         id: index,
         name: coin.name,
         price: coin.price,
         quantity: 1,
-        level: parseInt(coin.coin_level)
+        level: parseInt(coin.coin_level),
+        currency_symbol: coin.currency_symbol
       }
     });
 
@@ -65,10 +69,6 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   }
 
   continueToNextSlide() {
-
-
-
-
     this.slides?.swiperRef?.slideNext();
   }
 
@@ -92,6 +92,8 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
             },
         ]
     }
+
+    
   }
 
   
