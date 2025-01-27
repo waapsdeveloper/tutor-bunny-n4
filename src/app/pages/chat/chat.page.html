@@ -1,27 +1,26 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'Chat'" [backUrl]="" [showNotification]="false" [showSearch]="true"
-    (toggleSearchBar)="ShowSearchBar($event)"></app-sd-header-top>
+  <!-- (toggleSearchBar)="ShowSearchBar($event)" -->
+  <app-sd-header-top [showBack]="true" [title]="'Chat'" [backUrl]="" [showNotification]="false" [showSearch]="false"></app-sd-header-top>
 </ion-header>
 <ion-content class=" ion-padding" [fullscreen]="true">
   <div class="body-content">
-    <div class="search-box-outer-89655" *ngIf="showChat === 'inbox' && isSearchBarShow">
+    <!-- <div class="search-box-outer-89655" *ngIf="showChat === 'inbox' && isSearchBarShow">
       <div class="search-box-input-outer">
         <img src="assets/icon/input-search-gray.svg" />
         <input type="text" placeholder="Search by name?" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />
       </div>
-    </div>
-    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    </div> -->
+    <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+    </ion-refresher> -->
     <div class="chat-top-header-78521">
       <div class="chat-inbox-78522"><img src="assets/svg/inbox.svg" alt="">Inbox</div>
-      <app-chat-page-requests-button *ngIf="activeUser.role_id === 3"></app-chat-page-requests-button>
-      
+      <app-chat-page-requests-button *ngIf="activeUser.role_id === 3"></app-chat-page-requests-button>      
     </div>
     <div style="height: 100%; position: relative;">
       <!-- (onChange)="gotoMessage($event)" -->
-      <app-chat-list *ngFor="let item of chats.chats" [item]="item" ></app-chat-list>
-      <div class="centered-message" *ngIf="chats.chats == 0">No chat to display</div>
+      <app-chat-list *ngFor="let item of list$" [item]="item" ></app-chat-list>
+      <div class="centered-message" *ngIf="list$?.length === 0">No chat to display</div>
     </div>
   </div>
 </ion-content>

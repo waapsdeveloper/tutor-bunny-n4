@@ -139,25 +139,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     });
   }
 
-  setLastMessageOfChatList(obj: { chat_room_id: number; message: string }) {
-    this.setState((state) => {
-      const exists = state.chats.some((item: any) => item.chat_room_id === obj.chat_room_id);
-      
-      if (!exists) {
-        // If no matching chat room, return state unchanged
-        return state;
-      }
   
-      return {
-        ...state,
-        chats: state.chats.map((item: any) => 
-          item.chat_room_id === obj.chat_room_id 
-            ? { ...item, last_message: obj.message } // Update last_message for the matching chat
-            : item // Return unchanged for others
-        ),
-      };
-    });
-  }
   
 
   unRegisterPusherEvent() {
