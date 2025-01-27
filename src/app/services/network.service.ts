@@ -575,6 +575,10 @@ export class NetworkService {
     return this.httpGetResponse('student/order/list', null, false, true);
   }
 
+  getTeacherPurchases() {
+    return this.httpGetResponse('teacher/order/list', null, false, true);
+  }
+
   getStudentOrder(params: Params) {
     const str = this.serialize(params);
     return this.httpGetResponse('student/order-by-order-number' + '?' + str  , null, false, false);

@@ -25,13 +25,14 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   }
   initialize() {
     this.role = localStorage.getItem('role');
+    this.user = this.users.getUser();
+    console.log(this.user)
   }
   ngOnInit() {
 
   }
 
   gotoProfile() {
-    this.user = this.users.getUser();
     if (this.user.role_id == 2) {
       // this.nav.push('/teacher-profile');
     } else {
@@ -42,6 +43,12 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   gotoCheckoutHistory(){
     this.nav.push('/checkout-history')
   }
+
+  gotoPurchaseHistory(){
+    this.nav.push('/purchase-history')
+  }
+
+
 
   async logout() {
 

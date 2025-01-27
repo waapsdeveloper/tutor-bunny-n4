@@ -257,7 +257,15 @@ const routes: Routes = [
   {
     path: 'teacher-trial-list',
     loadChildren: () => import('./pages/teacher/teacher-trial-list/teacher-trial-list.module').then( m => m.TeacherTrialListPageModule)
+  },  {
+    path: 'purchase-history',
+    loadChildren: () => import('./pages/teacher/purchase-history/purchase-history.module').then( m => m.PurchaseHistoryPageModule)
   },
+  {
+    path: 'purchase-history-detail',
+    loadChildren: () => import('./pages/teacher/purchase-history-detail/purchase-history-detail.module').then( m => m.PurchaseHistoryDetailPageModule)
+  },
+
 
 
 
