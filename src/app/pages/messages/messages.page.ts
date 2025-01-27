@@ -9,6 +9,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
+import { ListChatsService } from 'src/app/services/list-chats.service';
 
 @Component({
   selector: 'app-messages',
@@ -39,7 +40,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   combineMessages = [];
 
-  constructor(injector: Injector, public chats: ChatService) {
+  constructor(injector: Injector, public chats: ChatService, private listChatsService: ListChatsService) {
     super(injector);
   }
 
@@ -224,7 +225,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.adjustHeight(this.messageInput.nativeElement);
     let res = await this.network.sendMessage(obj);
 
-    this.chats.setLastMessageOfChatList(obj)
+    console.log("send msg ", res)
+
+    this.listChatsService.setLastMessageOfChatList(obj)
 
 
     // this.chats.getchatList()
