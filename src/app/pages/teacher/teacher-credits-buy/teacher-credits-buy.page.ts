@@ -65,7 +65,16 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
   }
 
   getPayAmount() {
-    return `Pay ${this.currency_symbol} ${this.payAmount}`;
+    // Return button text based on the current slide
+    switch (this.activeIndex) {
+      case 0:
+        return `Pay ${this.currency_symbol} ${this.payAmount}`;
+      case 1:
+        return 'Continue to the Home Page';
+
+      default:
+        return '';
+    }
   }
 
   openStripe() {}

@@ -57,7 +57,7 @@
         <div class="text">
           <h2 style="color: #9FC78A;">Order completed!</h2>
           <p style="color: #BBBBBB;">Order number: {{order_detail?.order_number}}</p>
-          <p style="color: #42434780;">New credit balance: 30</p>
+          <p style="color: #42434780;">New credit balance: {{order_detail?.order_items[0]?.quantity}}</p>
         </div>
       </div>
     </ng-template>
