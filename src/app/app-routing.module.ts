@@ -109,15 +109,7 @@ const routes: Routes = [
   {
     path: 'my-teachers',
     loadChildren: () => import('./pages/my-teachers/my-teachers.module').then( m => m.MyTeachersPageModule)
-  },
-  {
-    path: 'trail-requests',
-    loadChildren: () => import('./pages/trail-requests/trail-requests.module').then( m => m.TrailRequestsPageModule)
-  },
-  {
-    path: 'my-students',
-    loadChildren: () => import('./pages/my-students/my-students.module').then( m => m.MyStudentsPageModule)
-  },
+  },  
   {
     path: 'notifications',
     loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
@@ -262,6 +254,11 @@ const routes: Routes = [
     path: 'teacher-material-detail',
     loadChildren: () => import('./pages/teacher/teacher-material-detail/teacher-material-detail.module').then( m => m.TeacherMaterialDetailPageModule)
   },
+  {
+    path: 'teacher-trial-list',
+    loadChildren: () => import('./pages/teacher/teacher-trial-list/teacher-trial-list.module').then( m => m.TeacherTrialListPageModule)
+  },
+
 
 
 

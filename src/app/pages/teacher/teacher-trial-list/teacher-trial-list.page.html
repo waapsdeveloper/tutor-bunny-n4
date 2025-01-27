@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [showBack]="true" [title]="'My Students'" [backUrl]=""></app-sd-header-top>
+  <app-sd-header-top [showBack]="true" [title]="'Trials'" [backUrl]=""></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-content-bg ion-padding" [fullscreen]="true">
   <div class="body-content">
@@ -10,8 +10,7 @@
       </div>
       <div class="header-chips">
         <div class="header-chip">
-          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{globalTrials.status ? globalTrials.status
-            : 'Status' }} <img src="../../assets/svg/arrow-dwon.svg" alt=""></ion-chip>
+          <ion-chip id="click-trigger" class="ion-no-padding ion-no-margin">{{status ? status : 'Status' }} <img src="assets/svg/arrow-dwon.svg" alt=""></ion-chip>
           <ion-popover trigger="click-trigger" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
@@ -21,19 +20,19 @@
               </ion-list>
               <ion-list>
                 <ion-item class="profile-line-789578" (click)="filterByStatus('Pending')">
-                  <img class="img1-789575" src="../../../assets/svg/panding.svg" />
+                  <img class="img1-789575" src="assets/svg/panding.svg" />
                   <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Pending</div>
                 </ion-item>
               </ion-list>
               <ion-list>
                 <ion-item class="profile-line-789578" (click)="filterByStatus('Accepted')">
-                  <img class="img1-789575" src="../../../assets/svg/accepted.svg" />
+                  <img class="img1-789575" src="assets/svg/accepted.svg" />
                   <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Accepted</div>
                 </ion-item>
               </ion-list>
               <ion-list>
                 <ion-item class="profile-line-789578" (click)="filterByStatus('Completed')">
-                  <img class="img1-789575" src="../../../assets/svg/complete.svg " />
+                  <img class="img1-789575" src="assets/svg/complete.svg " />
                   <div class="nbl-687 outfit-medium " style="margin-left: 16px;">Completed</div>
                 </ion-item>
               </ion-list>
@@ -58,10 +57,10 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <div *ngFor="let item of globalTrials.list | filterStatus: 'canceled'">
+    <div *ngFor="let item of list$ | filterStatus: 'canceled'">
       <app-trail-card  [item]="item"></app-trail-card>
     </div>
-    <div class="fs-14 outfit" *ngIf="globalTrials.list.length === 0">No results Found</div>
+    <div class="fs-14 outfit" *ngIf="list$?.length === 0">No results Found</div>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

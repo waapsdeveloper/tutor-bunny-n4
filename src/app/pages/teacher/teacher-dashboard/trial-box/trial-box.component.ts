@@ -29,27 +29,8 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
 
   };
 
-  // async updateTrailsList(data: any) {
-  //   let trail_Id = data.id;
-  //   this.initialize();
-  //   this.newTrial = await this.network.geTrailRequestsByPusher(trail_Id);
-  //   if (this.newTrial) {
-  //     const index = this.trial.findIndex(c => c.id === this.newTrial.id);
-  //     if (index !== -1) {
-  //       this.list[index] = this.newTrial;
-
-  //     } else {
-  //       this.list = [this.newTrial, ...this.trial];
-  //     }
-  //   }
-  // }
-
   goToTrialReq() {
-    this.nav.push('my-students')
-  }
-
-  removeFromList($event) {
-    this.pendingTrialsService.removeItem($event);
+    this.nav.push('teacher-trial-list')
   }
 
   goToDeatil(item) {    

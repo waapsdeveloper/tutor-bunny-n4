@@ -60,6 +60,18 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
     });
   }
 
+  getStatPromise() {
+    return new Promise((resolve) => {
+      this.selectState((state) => state).subscribe((res) => {
+        let obj = {
+          page: res.page,
+          last_page: res.last_page,
+          total: res.total
+        }
+        resolve(obj);
+      });
+    });
+  }
 
   setItem(obj: T) {
     this.setState((state) => {
