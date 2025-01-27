@@ -12,7 +12,7 @@
         <div class="d-flex flex-column gap-16 justify-content-center">
           <div class="d-flex flex-row gap-16 align-items-center justify-content-center">
               <div class="outfit-bold fs-21 buy-credit-heading" >Buy Credits</div>
-              <img class="buy-credit-coin" src="assets/svg/coin.svg" />            
+              <img class="buy-credit-coin" src="assets/svg/coin.svg" />
           </div>
 
           <div class="but-credit-counter-box">
@@ -35,12 +35,12 @@
           <ion-list class="checkout-history-list" inset="true">
             <ion-item *ngFor="let item of apiCoins" detail="true" (click)="selectCoin(item)">
               <ion-label>
-                <h2>Buy <b>{{ item.level }}</b> Coins</h2>        
+                <h2>Buy <b>{{ item.level }}</b> Coins</h2>
               </ion-label>
               <span slot="end" class="price">{{ item.currency_symbol }} {{ item.price }}</span>
-            </ion-item>        
+            </ion-item>
           </ion-list>
-          
+
           <!-- <div class="d-flex flex-row gap-8">
             <app-sd-button-golden [text]="'$10'" (click)="buyCredits(10)"></app-sd-button-golden>
             <app-sd-button-golden [text]="'$20'" (click)="buyCredits(20)"></app-sd-button-golden>
@@ -50,13 +50,13 @@
       </div>
     </ng-template>
     <ng-template swiperSlide>
-      
+
     </ng-template>
     <ng-template swiperSlide>
-      
+
     </ng-template>
   </swiper>
-  
+
 </ion-content>
 <ion-footer class="checkout-footer checkout-border-top">
   <div class="ion-padding d-flex flex-column">
@@ -64,15 +64,15 @@
 
       <div class="d-flex flex-row justify-content-between">
         <div>Order</div>
-        <div>${{total}}</div>
+        <div>{{currency_symbol}} {{total}}</div>
       </div>
       <div class="d-flex flex-row justify-content-between">
         <div>Tax</div>
-        <div>${{tax}}</div> 
+        <div>{{currency_symbol}} {{tax}}</div>
       </div>
       <div class="d-flex flex-row justify-content-between">
         <div>Subtotal</div>
-        <div class="roboto-bold fs-24">${{ payAmount }}</div>        
+        <div class="roboto-bold fs-24">{{currency_symbol}} {{ payAmount }}</div>
       </div>
 
 
@@ -80,6 +80,6 @@
     </div>
 
     <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
-    
+
   </div>
 </ion-footer>
