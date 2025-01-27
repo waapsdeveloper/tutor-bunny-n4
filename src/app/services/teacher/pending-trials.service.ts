@@ -29,11 +29,32 @@ export class PendingTrialsService extends NgrxCrudService<any> {
       let res = await this.network.getPendingTrial(user.id, obj);
 
       const data = res.result;      
-      this.setList(data.list, data.page, data.last_page, data.total);
+
+      this.setList(data.data, data.page, data.last_page, data.total);
       
       resolve(true);
     });
   }
+
+  changeTrailStuts(trailId, key, userId) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        status: key,
+        user_id: userId,
+      };
+      let res = await this.network.changeTrailStuts(obj, trailId);
+      
+      if (res) {
+        if(key == 'Accepted' || key == 'Rejected'){
+          this.removeItem(trailId);
+        }  
+      }
+
+      resolve(res);
+    });
+  }
+
+  
 
 
 

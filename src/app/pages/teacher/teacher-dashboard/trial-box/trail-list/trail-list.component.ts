@@ -9,19 +9,25 @@ import {
 import { AlertController } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalTrialsService } from 'src/app/services/global-trials.service';
+import { NavService } from 'src/app/services/nav.service';
+import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-trail-list',
   templateUrl: './trail-list.component.html',
   styleUrls: ['./trail-list.component.scss'],
 })
-export class TrailListComponent extends BasePage implements OnInit {
-  private _item: any;
+export class TrailListComponent {
+
   displayName
+  flag;
+  age;
+
+  private _item: any;
+  
 
   @Input() showMoreOptions: boolean = true;
-
-
   @Input('item')
   public get item() {
     return this._item;
@@ -29,43 +35,37 @@ export class TrailListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    this.displayName = this.utility.getAmericanName(value.student.name);
+    this.updateItem(value);    
   }
-  flag;
-  age;
+  
   @Output() removeFromList = new EventEmitter<any>();
 
-  constructor(injector: Injector, public globalTrials: GlobalTrialsService) {
-    super(injector);
+  // , public globalTrials: GlobalTrialsService
+  constructor(private nav: NavService, private utility: UtilityService, private pendingTrialsService: PendingTrialsService) {
+   
   }
 
-  ngOnInit() {
-    this.flag = this.getFlag();
-    this.calculateAge();
+  async updateItem(value: any) {
+
+    this.displayName = this.utility.getAmericanName(value.student.name);
+    this.flag = this.utility.getFlag(value);
+    const currentYear = new Date().getFullYear();
+    this.age = currentYear - this.item.student.student.dob;
+
+    // let res = await this.network.getTrialById(this.item.id);
+    // this.item = res.result;
   }
 
   async trailStatus(key: string) {
-    this.globalTrials.removeFromPendingTrials(this.item);
-    let obj = {
-      status: key,
-      user_id: this.item.student.id,
-    };
-    let trialId = this.item.id;
-    let res = await this.network.changeTrailStuts(obj, trialId);
-
-    if(key == 'Accepted' || key == 'Rejected'){
-      this.removeFromList.emit({
-        id: trialId
-      })
-    }
+    const res = await this.pendingTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);    
 
   }
 
-  async presentAlert(item: string) {
+  async presentAlert(key: string) {
     let alertHeader: string;
 
     let title = '';
-    switch (item) {
+    switch (key) {
       case 'Accepted':
         alertHeader =
           'Accepting the request will deduct 1 credit from your account.';
@@ -101,40 +101,13 @@ export class TrailListComponent extends BasePage implements OnInit {
       alertHeader
     );
     if (flag) {
-      this.trailStatus(item);
+      this.trailStatus(key);
     }
   }
 
   goToChat() {
     this.nav.push('/tabs/chat');
   }
-  calculateAge() {
-    const currentYear = new Date().getFullYear();
-    this.age = currentYear - this.item.student.student.dob;
-  }
-  getFlag() {
 
-    if (
-      this.item &&
-      this.item.student &&
-      this.item.student.student.country.iso2
-    ) {
-      const flag = this.item.student.student.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
-
-  goToDeatil() {
-    const params = {
-      id: this.item.course.id,
-      backUrl: '/tabs/teacher-dashboard',
-    };
-    this.nav.push('/course-detail', params);
-  }
+  
 }

@@ -1,6 +1,5 @@
 import { inject } from '@angular/core';
 import { ResolveFn, Router } from '@angular/router';  // Your data service
-import { of } from 'rxjs';
 import { PendingTrialsService } from '../../services/teacher/pending-trials.service';
 
 export const pendingTrialsResolver: ResolveFn<any> = async (route, state) => {

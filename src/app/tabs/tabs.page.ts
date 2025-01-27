@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCoursePage } from '../pages/teacher-dashboard/create-course/create-course.page';
 import { ChatService } from '../services/chat.service';
 import { FirebaseService } from '../services/firebase.service';
 import { GlobalCoursesService } from '../services/global-courses.service';
@@ -9,6 +8,7 @@ import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
 import { TeacherService } from '../services/teacher.service';
 import { StudentWelcomeComponent } from '../pages/student/student-dashboard/student-welcome/student-welcome.component';
+import { CreateCoursePage } from '../pages/teacher/teacher-dashboard/create-course/create-course.page';
 
 @Component({
   selector: 'app-tabs',
@@ -110,8 +110,6 @@ export class TabsPage extends BasePage implements OnInit {
       true);
 
     if (res.data.title) {
-
-
 
       if(res.data.type == '2'){
         const params = {

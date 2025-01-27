@@ -8,22 +8,11 @@ import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.se
   styleUrls: ['./trial-box.component.scss'],
 })
 export class TrialBoxComponent extends BasePage { //  implements OnInit
-  // user;
-  // trial;
-  // student;
-  // trailCount;
-  // country;
-  // age;
-  // courseName;
-  // image = 'assets/profileimg.png'
-  // city;
+  
   list$;
   count$;
-  // flag;
-  // newTrial;
-  // serial_number;
 
-  constructor(injector: Injector, public pendingTrialsService: PendingTrialsService) {
+  constructor(injector: Injector, private pendingTrialsService: PendingTrialsService) {
     super(injector)
   }
 
@@ -54,9 +43,6 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   //     }
   //   }
   // }
-  async initialize() {
-    // this.globalTrials.getPendingTrials();
-  }
 
   goToTrialReq() {
     this.nav.push('my-students')
@@ -64,6 +50,14 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
 
   removeFromList($event) {
     this.pendingTrialsService.removeItem($event);
+  }
+
+  goToDeatil(item) {    
+    const params = {
+      id: item.course.id,
+      backUrl: '/tabs/teacher-dashboard',
+    };
+    this.nav.push('/course-detail', params);
   }
 
 }

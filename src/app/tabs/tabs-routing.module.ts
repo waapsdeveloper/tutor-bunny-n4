@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'teacher-dashboard',
-        loadChildren: () => import('./../pages/teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
+        loadChildren: () => import('./../pages/teacher/teacher-dashboard/teacher-dashboard.module').then( m => m.TeacherDashboardPageModule)
       },
       {
         path: 'profile',
