@@ -224,6 +224,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.adjustHeight(this.messageInput.nativeElement);
     let res = await this.network.sendMessage(obj);
 
+    this.chats.setLastMessageOfChatList(obj)
 
 
     // this.chats.getchatList()

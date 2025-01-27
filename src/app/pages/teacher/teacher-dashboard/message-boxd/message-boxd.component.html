@@ -7,7 +7,7 @@
 </div> -->
 
 <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-7895">
-  <ng-template swiperSlide *ngFor="let item of chats.requests">
+  <ng-template swiperSlide *ngFor="let item of list$">
     <app-request-list [item]="item"></app-request-list>
   </ng-template>
 </swiper>

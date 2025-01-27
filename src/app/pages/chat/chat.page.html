@@ -14,8 +14,9 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div class="chat-top-header-78521">
-      <div class="chat-inbox-78522"><img src="../../assets/svg/inbox.svg" alt="">Inbox</div>
-      <div class="chat-inbox-78523" (click)="showRequests()" *ngIf="activeUser.role_id === 3">({{chats.requestCount}}) Requests</div>
+      <div class="chat-inbox-78522"><img src="assets/svg/inbox.svg" alt="">Inbox</div>
+      <app-chat-page-requests-button *ngIf="activeUser.role_id === 3"></app-chat-page-requests-button>
+      
     </div>
     <div style="height: 100%; position: relative;">
       <!-- (onChange)="gotoMessage($event)" -->

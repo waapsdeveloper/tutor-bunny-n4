@@ -28,8 +28,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
   latestEvent = 'randomLast';
   historicalEvent = 'randomHistory';
   unreadCount = 0;
-  requests;
-  requestCount = 0;
+  
   private pusher: Pusher;
 
   review_course = {
@@ -64,8 +63,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
         this.role_id = null;
         this.chats = [];
         this.count = 0;
-        this.requests = [];
-        this.requestCount = 0;
         if (this.pusher) {
           this.pusher.unsubscribe('chats-channel');
           this.pusher.disconnect();
@@ -142,6 +139,26 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     });
   }
 
+  setLastMessageOfChatList(obj: { chat_room_id: number; message: string }) {
+    this.setState((state) => {
+      const exists = state.chats.some((item: any) => item.chat_room_id === obj.chat_room_id);
+      
+      if (!exists) {
+        // If no matching chat room, return state unchanged
+        return state;
+      }
+  
+      return {
+        ...state,
+        chats: state.chats.map((item: any) => 
+          item.chat_room_id === obj.chat_room_id 
+            ? { ...item, last_message: obj.message } // Update last_message for the matching chat
+            : item // Return unchanged for others
+        ),
+      };
+    });
+  }
+  
 
   unRegisterPusherEvent() {
     let user = this.users.getUser() as any;
@@ -251,19 +268,19 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
   }
 
   getChatRequsts() {
-    return new Promise(async (resolve) => {
-      this.user = this.users.getUser();
+  //   return new Promise(async (resolve) => {
+  //     this.user = this.users.getUser();
 
-      let res = await this.network.getRequestMessagesRoom(this.user.id);
-      //
+  //     let res = await this.network.getRequestMessagesRoom(this.user.id);
+  //     //
 
-      this.requestCount = res.total;
-      //
+  //     this.requestCount = res.total;
+  //     //
 
-      this.requests = res.data;
+  //     this.requests = res.data;
 
-      resolve;
-    });
+  //     resolve;
+  //   });
   }
 
   async chatRequstUpdateStatus(value, item) {

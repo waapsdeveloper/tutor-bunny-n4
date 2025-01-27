@@ -241,8 +241,9 @@ export class NetworkService {
     return this.httpGetResponse('chat-rooms/pending/count/' + id, null, false, false);
   }
 
-  getRequestMessagesRoom(id) {
-    return this.httpGetResponse('chat-rooms/pending/' + id, null, false, false);
+  getRequestMessagesRoom(data, id) {
+    const str = this.serialize(data);
+    return this.httpGetResponse('chat-rooms/pending/' + id + '?' + str, null, false, false);
   }
 
   getdashboardcounts() {

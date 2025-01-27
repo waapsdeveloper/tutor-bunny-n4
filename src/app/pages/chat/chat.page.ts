@@ -9,9 +9,11 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage extends BasePage implements OnInit, OnDestroy {
+export class ChatPage extends BasePage implements OnDestroy {
 
-  chat;
+  chats$;
+
+
   request;
   time;
   params;
@@ -35,10 +37,6 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     this.initialize();
     this.activeUser = this.users.getUser();
 
-  }
-
-  ngOnInit() {    
-    
   }
   
 
@@ -97,14 +95,10 @@ export class ChatPage extends BasePage implements OnInit, OnDestroy {
     this.initialize()
   }
 
-  async showRequests() {
-    this.nav.push('chat-requests');
-  }
-
-  async getRequstList() {
-    let res = await this.network.getRequestMessagesRoom(this.user_1.id);
-    this.request = res.data;
-  }
+  // async getRequstList() {
+  //   let res = await this.network.getRequestMessagesRoom(this.user_1.id);
+  //   this.request = res.data;
+  // }
 
 
   ShowSearchBar(event) {

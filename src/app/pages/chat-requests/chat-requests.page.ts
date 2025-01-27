@@ -1,37 +1,40 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
+import { ListPage } from 'src/app/base-page/list-page';
 import { ChatService } from 'src/app/services/chat.service';
+import { ListRequestsService } from 'src/app/services/teacher/list-requests.service';
 
 @Component({
   selector: 'app-chat-requests',
   templateUrl: './chat-requests.page.html',
   styleUrls: ['./chat-requests.page.scss'],
 })
-export class ChatRequestsPage extends BasePage implements OnInit {
+export class ChatRequestsPage extends ListPage {  
+
+  list$;
   request;
   user
   count;
-  constructor(injector:Injector, public chats: ChatService ){
-    super(injector)
-    this.user = this.users.getUser();
-    this.initialize()
+
+  // public chats: ChatService
+
+  constructor(injector:Injector, private listRequestsService: ListRequestsService  ){
+    super(injector);
+    
+    this.listRequestsService.getList().subscribe( (data) => {
+      this.list$ = data;
+    })
 
    }
 
-  ngOnInit() {
-
+   async fetchList(page: number, search: string, status: string): Promise<{ list: any[]; page: number; last_page: number; total: number }> {
+    const res = await this.listRequestsService.getRequests(page, search, status);
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total
+    };
   }
-
-  initialize(){
-    this.chats.getChatRequsts()
-  }
-
-  async getRequstList() {
-    let res = await this.network.getRequestMessagesRoom(this.user.id);
-    this.count = res.total;
-    this.request = res.data;
-  }
-
 
 
 }
