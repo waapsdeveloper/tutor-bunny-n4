@@ -50,7 +50,7 @@ export abstract class ListPage extends BasePage {
       const list = data.data;
 
       // Update state
-      this.list = page === 1 ? data.data : [...this.list, ...list];
+      this.list = page === 1 ? data?.data : [...this.list, ...list];
       this.page = data.current_page;
       this.last_page = data.last_page;
       this.infiniteScrollDisabled = this.page >= this.last_page;
