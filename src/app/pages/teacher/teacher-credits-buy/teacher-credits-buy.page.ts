@@ -9,7 +9,7 @@ import { SwiperComponent } from 'swiper/angular';
 })
 export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
-
+  currency_symbol ;
   total = 0;
   tax = 0;
   payAmount = 0;
@@ -23,15 +23,15 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     name: 'Coin 1',
     price: 10,
     quantity: 1,
-    level: 10,    
+    level: 10,
   }
-  
+
   activeIndex = 0;
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
 
-  constructor(injector: Injector, private cdr: ChangeDetectorRef) { 
+  constructor(injector: Injector, private cdr: ChangeDetectorRef) {
     super(injector);
   }
 
@@ -40,12 +40,13 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     console.log(res);
 
     const d = res.result.data;
+    this.currency_symbol = d[0]?.currency_symbol;
 
-    this.apiCoins = d.map( (coin, index) => {      
+    this.apiCoins = d.map( (coin, index) => {
       return {
         id: index,
         name: coin.name,
-        price: coin.price,
+        price: parseFloat(coin.price.replace(/[^0-9.-]/g, '')),
         quantity: 1,
         level: parseInt(coin.coin_level),
         currency_symbol: coin.currency_symbol
@@ -53,11 +54,12 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     });
 
     this.selectedCoin = Object.assign({}, this.apiCoins[0]);
+    console.log(this.selectedCoin)
     this.calculateTotal();
   }
 
   getPayAmount() {
-    return `Pay $${this.payAmount}`;
+    return `Pay ${this.currency_symbol} ${this.payAmount}`;
   }
 
   openStripe(){
@@ -65,7 +67,7 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   }
 
   buyCredits(number) {
-    
+
   }
 
   continueToNextSlide() {
@@ -75,7 +77,7 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
 
   purchaseCredits() {
-    let obj = 
+    let obj =
     {
         "user_id": 57,
         "total": 500.00,
@@ -93,10 +95,10 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
         ]
     }
 
-    
+
   }
 
-  
+
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     this.cdr.detectChanges();
