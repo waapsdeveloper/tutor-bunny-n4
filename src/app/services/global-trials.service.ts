@@ -11,9 +11,9 @@ import { GlobalCoursesService } from './global-courses.service';
 export class GlobalTrialsService {
 
   user: any;
-  
-  courseId: any;  
-  
+
+  courseId: any;
+
   trialChannel: any;
   private pusher: Pusher;
 
