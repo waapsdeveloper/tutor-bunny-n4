@@ -1,0 +1,26 @@
+<div class="nd-card-outer-748">
+
+  <div class="box-content">
+
+    <div class="image-outer" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"></div>
+
+    <div class="content-container">
+      <div class="title-price-part">
+        <div class="title roboto-regular fs-16">{{ item.title }}</div>
+        <div class="price roboto-medium fs-14"><span>{{ item.auth_user_currency_symbol }} {{ item.price }}</span></div>
+      </div>
+
+      <div class="title-price-part bot">
+        <div class="notice roboto-regular fs-12">(Non refundable)</div>
+        <div class="remove-outer" (click)="removeCartitem.emit()">
+          <img src="assets/svg/trash-gray-87.svg" />
+        </div>
+
+      </div>
+
+      
+    </div>
+
+  </div>
+
+</div>
