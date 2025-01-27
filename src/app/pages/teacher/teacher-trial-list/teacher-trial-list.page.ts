@@ -45,6 +45,11 @@ export class TeacherTrialListPage extends ListPage implements OnInit  { // imple
       total: res.result.total
     };
   }
+
+  changeStatus($event){
+    let obj = Object.assign({}, $event);    
+    this.listTrialsService.changeStatus(obj, obj['trialId']);
+  }
   
 
 }

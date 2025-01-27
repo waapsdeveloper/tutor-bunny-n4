@@ -43,6 +43,23 @@ export class ListTrialsService extends NgrxCrudService<any> {
     });
   }
 
+  async changeStatus(obj, trialId) {
+    
+    let res = await this.network.changeTrailStuts(obj, trialId);
+    if(res){
+      this.setItem(res.trial);
+    }
+    
+    // if (res.status === 200) {
+    //   let findIndex = this.list.findIndex((x) => x.id == trialId);
+
+    //   if (findIndex != -1) {
+    //     this.events.publish('update-trail-list');
+    //     this.list[findIndex] = res.trial;
+    //   }
+    // }
+  }
+
 
 
 }

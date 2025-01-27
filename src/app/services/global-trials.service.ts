@@ -8,7 +8,7 @@ import { GlobalCoursesService } from './global-courses.service';
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalTrialsService {
+export class GlobalTrialsService  {
 
   user: any;
   
@@ -177,15 +177,5 @@ export class GlobalTrialsService {
     // this.list = res.trials;
   }
 
-  async changeStatus(obj, trialId) {
-    // let res = await this.network.changeTrailStuts(obj, trialId);
-    // if (res.status === 200) {
-    //   let findIndex = this.list.findIndex((x) => x.id == trialId);
-
-    //   if (findIndex != -1) {
-    //     this.events.publish('update-trail-list');
-    //     this.list[findIndex] = res.trial;
-    //   }
-    // }
-  }
+  
 }

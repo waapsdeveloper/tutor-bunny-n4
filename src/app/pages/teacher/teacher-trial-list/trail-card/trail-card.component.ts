@@ -26,8 +26,15 @@ export class TrailCardComponent extends BasePage implements OnInit {
   @ViewChild('popover') popover;
 
   isOpen = false;
+
   @Output() removeFromList = new EventEmitter<number>();
-  constructor(injector: Injector, private globalTrials: GlobalTrialsService, private chats: ChatService) {
+  @Output() changeStatus = new EventEmitter<any>();
+
+
+
+  // private globalTrials: GlobalTrialsService,  
+
+  constructor(injector: Injector, private chats: ChatService) {
     super(injector);
     this.user = this.users.getUser();
   }
@@ -57,9 +64,11 @@ export class TrailCardComponent extends BasePage implements OnInit {
     let obj = {
       status: key,
       user_id: this.item?.student?.id,
+      trialId: this.item.id
     };
-    let trialId = this.item.id;
-    this.globalTrials.changeStatus(obj, trialId);
+
+    this.changeStatus.emit(obj);
+
   }
   presentPopover(e: Event) {
     this.popover.event = e;

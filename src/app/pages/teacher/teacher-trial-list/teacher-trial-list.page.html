@@ -58,7 +58,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div *ngFor="let item of list$ | filterStatus: 'canceled'">
-      <app-trail-card  [item]="item"></app-trail-card>
+      <app-trail-card  [item]="item" (changeStatus)="changeStatus($event)"></app-trail-card>
     </div>
     <div class="fs-14 outfit" *ngIf="list$?.length === 0">No results Found</div>
 
