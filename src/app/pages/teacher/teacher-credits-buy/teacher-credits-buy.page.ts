@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -7,16 +13,15 @@ import { SwiperComponent } from 'swiper/angular';
   templateUrl: './teacher-credits-buy.page.html',
   styleUrls: ['./teacher-credits-buy.page.scss'],
 })
-export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
-
-  currency_symbol ;
+export class TeacherCreditsBuyPage extends BasePage implements OnInit {
+  currency_symbol;
   total = 0;
   tax = 0;
   payAmount = 0;
-
+  order_detail;
+  user;
 
   apiCoins: any[] = [];
-
 
   selectedCoin = {
     id: 1,
@@ -24,12 +29,11 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     price: 10,
     quantity: 1,
     level: 10,
-  }
+  };
 
   activeIndex = 0;
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
-
 
   constructor(injector: Injector, private cdr: ChangeDetectorRef) {
     super(injector);
@@ -38,23 +42,25 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   async ngOnInit() {
     const res = await this.network.getCoinLevels();
     console.log(res);
-
+    let user = localStorage.getItem('user');
+    user = JSON.parse(user);
+    this.user = user;
     const d = res.result.data;
     this.currency_symbol = d[0]?.currency_symbol;
 
-    this.apiCoins = d.map( (coin, index) => {
+    this.apiCoins = d.map((coin, index) => {
       return {
         id: index,
         name: coin.name,
         price: parseFloat(coin.price.replace(/[^0-9.-]/g, '')),
         quantity: 1,
         level: parseInt(coin.coin_level),
-        currency_symbol: coin.currency_symbol
-      }
+        currency_symbol: coin.currency_symbol,
+      };
     });
 
     this.selectedCoin = Object.assign({}, this.apiCoins[0]);
-    console.log(this.selectedCoin)
+    console.log(this.selectedCoin);
     this.calculateTotal();
   }
 
@@ -62,59 +68,47 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
     return `Pay ${this.currency_symbol} ${this.payAmount}`;
   }
 
-  openStripe(){
+  openStripe() {}
 
-  }
-
-  buyCredits(number) {
-
-  }
+  buyCredits(number) {}
 
   continueToNextSlide() {
     this.slides?.swiperRef?.slideNext();
   }
 
-
-
   purchaseCredits() {
-    let obj =
-    {
-        "user_id": 57,
-        "total": 500.00,
-        "tax": 10.00,
-        "sub_total": 510.00,
-        "currency": "USD",
-        "credit_items": [
-            {
-                "item_id": 101,
-                "type": "book",
-                "price": 50.00,
-                "quantity": 1,
-                "sub_total": 50.00
-            },
-        ]
-    }
-
-
+    let obj = {
+      user_id: 57,
+      total: 500.0,
+      tax: 10.0,
+      sub_total: 510.0,
+      currency: 'USD',
+      credit_items: [
+        {
+          item_id: 101,
+          type: 'book',
+          price: 50.0,
+          quantity: 1,
+          sub_total: 50.0,
+        },
+      ],
+    };
   }
-
 
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     this.cdr.detectChanges();
   }
 
-  decrementCredit(){
-
+  decrementCredit() {
     // check if level not less then 5
-    const d = parseInt(`${this.selectedCoin.level}`)
-    if(d < 5) return;
+    const d = parseInt(`${this.selectedCoin.level}`);
+    if (d < 5) return;
     this.selectedCoin.level = d - 5;
     this.calculateTotal();
-
   }
 
-  incrementCredit(){
+  incrementCredit() {
     this.selectedCoin.level = parseInt(`${this.selectedCoin.level}`) + 5;
     this.calculateTotal();
   }
@@ -125,7 +119,6 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
   }
 
   calculateTotal() {
-
     this.total = this.selectedCoin.price * this.selectedCoin.level;
     this.total = parseFloat(this.total.toFixed(2));
 
@@ -134,9 +127,27 @@ export class TeacherCreditsBuyPage  extends BasePage implements OnInit {
 
     this.payAmount = this.total + this.tax;
     this.payAmount = parseFloat(this.payAmount.toFixed(2));
-
-
-
   }
 
+  async makeOrder() {
+    let obj = {
+      user_id: this.user.id,
+      total: this.total,
+      tax: this.tax,
+      sub_total: this.payAmount,
+      currency: this.user.teacher.converted_currency,
+      order_items: [
+        {
+          item_id: this.selectedCoin.id,
+          type: 'coin',
+          price: this.selectedCoin.price,
+          quantity: this.selectedCoin.level,
+          sub_total: this.total,
+        },
+      ],
+    };
+    let res = await this.network.buyCredit(obj);
+    this.order_detail = res;
+    console.log(this.order_detail);
+  }
 }

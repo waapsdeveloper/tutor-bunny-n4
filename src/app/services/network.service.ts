@@ -9,16 +9,12 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
-  
-  
-
-
   constructor(
     public api: ApiService,
     public router: Router,
     public utility: UtilityService,
     public modals: ModalService
-  ) { }
+  ) {}
 
   // Authentication Related APIs
   login(data: any) {
@@ -41,14 +37,14 @@ export class NetworkService {
   }
 
   deleteImage(id) {
-    return this.httpDeleteResponse('gallery/delete/ ' + id, true)
+    return this.httpDeleteResponse('gallery/delete/ ' + id, true);
   }
 
   postProfileImage(data) {
     return this.httpPostResponse('user/update-profile-image', data);
   }
   postCoursePhoto(data) {
-    return this.httpPostResponse('courses/update-course-image', data , false);
+    return this.httpPostResponse('courses/update-course-image', data, false);
   }
 
   updateMessageReaquest(data, id) {
@@ -68,26 +64,28 @@ export class NetworkService {
   }
 
   getNotificationRead(data) {
-    return this.httpPostResponse('notifications/is-read', data, null, false, false);
+    return this.httpPostResponse(
+      'notifications/is-read',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   saveFcmToken(data) {
-
     return this.httpPostResponse('update-firebase-token', data);
   }
-
 
   postPhotoIdImage(data) {
     return this.httpPostResponse('user/update-photoid-image', data);
   }
-
 
   postStudentPhotoIdImage(data) {
     return this.httpPostResponse('students/update-profile', data);
   }
 
   getImage(data) {
-
     return this.httpGetResponse(
       'gallery/list' + '?user_id=' + data,
       null,
@@ -97,8 +95,12 @@ export class NetworkService {
   }
   getCountries(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('countries/list' + '?' + str, null, false, false);
-
+    return this.httpGetResponse(
+      'countries/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getAllCountries() {
@@ -111,7 +113,12 @@ export class NetworkService {
 
   getStates(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('states/by-country' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'states/by-country' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getAllStates() {
@@ -124,7 +131,12 @@ export class NetworkService {
 
   getLanguage(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('languages/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'languages/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getAllLanguages() {
@@ -132,14 +144,25 @@ export class NetworkService {
   }
 
   addLanguage(data) {
-    return this.httpPostResponse('languages/add-teacher-language', data, null, false, false);
+    return this.httpPostResponse(
+      'languages/add-teacher-language',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getCategory() {
     return this.httpGetResponse('courses/category/list', null, false, false);
   }
   getTravelPolicy() {
-    return this.httpGetResponse('teachers/travelpolicy/list', null, false, false);
+    return this.httpGetResponse(
+      'teachers/travelpolicy/list',
+      null,
+      false,
+      false
+    );
   }
   getchatById(id: any) {
     return this.httpGetResponse('chat-by-id/' + id, null, false, false);
@@ -150,9 +173,13 @@ export class NetworkService {
   }
 
   getChatRoomById(id: any, params: any) {
-
     const str = this.serialize(params);
-    return this.httpGetResponse('chat-rooms-single/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'chat-rooms-single/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getAllCourses(data: any) {
@@ -161,16 +188,32 @@ export class NetworkService {
 
   getSimilarCourses(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('similar/courses' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'similar/courses' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getTeacherCourses(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/course-list-by-teacher-id' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'courses/course-list-by-teacher-id' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   searchFromKeywords(data: any) {
-    return this.httpPostResponse('courses/special-filter', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/special-filter',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getpriceRange(id) {
@@ -178,11 +221,23 @@ export class NetworkService {
   }
 
   getIsProfileComplete(id, data) {
-    return this.httpPostResponse('profile-complete/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'profile-complete/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getTimeZone(data: any, id) {
-    return this.httpPostResponse('users/timezone/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'users/timezone/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getChadRoomId(data: any) {
@@ -190,7 +245,13 @@ export class NetworkService {
   }
 
   getReviews(data: any) {
-    return this.httpPostResponse('review-by-teacher-id', data, null, false, false);
+    return this.httpPostResponse(
+      'review-by-teacher-id',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getRecentSearchs(data: any) {
@@ -199,7 +260,12 @@ export class NetworkService {
 
   getAllTeachers(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('teachers/list/approved' + '?' + str, null, null, false);
+    return this.httpGetResponse(
+      'teachers/list/approved' + '?' + str,
+      null,
+      null,
+      false
+    );
   }
 
   getAllFavCourses(data: any) {
@@ -207,16 +273,32 @@ export class NetworkService {
   }
 
   getAllFavCoursesIds() {
-    return this.httpPostResponse('courses/fav-list-all', null, null, false, false);
+    return this.httpPostResponse(
+      'courses/fav-list-all',
+      null,
+      null,
+      false,
+      false
+    );
   }
 
   getAllFavMaterialIds() {
-    return this.httpPostResponse('material/fav-list-all', null, null, false, false);
+    return this.httpPostResponse(
+      'material/fav-list-all',
+      null,
+      null,
+      false,
+      false
+    );
   }
   getAllReqCourses(id: any, data) {
-
     const str = this.serialize(data);
-    return this.httpGetResponse('requested/course/trials/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'requested/course/trials/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   deleteCouseImage(data: any) {
@@ -225,112 +307,205 @@ export class NetworkService {
 
   geTrailRequests(data, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('course/recent/trials/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'course/recent/trials/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   geTrailRequestsByPusher(id) {
-    return this.httpGetResponse('course/trials/by-id/' + id, null, false, false);
+    return this.httpGetResponse(
+      'course/trials/by-id/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getMessagesRoom(id, data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('chat-rooms/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'chat-rooms/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getRequsetCount(id) {
-    return this.httpGetResponse('chat-rooms/pending/count/' + id, null, false, false);
+    return this.httpGetResponse(
+      'chat-rooms/pending/count/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getRequestMessagesRoom(data, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('chat-rooms/pending/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'chat-rooms/pending/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getdashboardcounts() {
-    return this.httpGetResponse('teacher/dashboard/card-statistics', null, false, false);
+    return this.httpGetResponse(
+      'teacher/dashboard/card-statistics',
+      null,
+      false,
+      false
+    );
   }
 
   getMessages(id) {
-    return this.httpGetResponse('messages/by-chatroom-id/' + id, null, false, false);
+    return this.httpGetResponse(
+      'messages/by-chatroom-id/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getAllNotifications(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('notifications' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'notifications' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getNotificationUnreadCount() {
-    return this.httpGetResponse('notifications/unread-count', null, false, false);
+    return this.httpGetResponse(
+      'notifications/unread-count',
+      null,
+      false,
+      false
+    );
   }
 
   getNotifications(id) {
-    return this.httpGetResponse('notifications/by-user/' + id, null, false, false);
+    return this.httpGetResponse(
+      'notifications/by-user/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getcourseById(id) {
     return this.httpGetResponse('courses/byid/' + id, null, false, false);
   }
 
-
   getCourseImages(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('course/image/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'course/image/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getCertificates(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('certificate/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'certificate/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   deleteCourseImage(id) {
-    return this.httpDeleteResponse('course/image/delete/' + id, false)
-
+    return this.httpDeleteResponse('course/image/delete/' + id, false);
   }
 
   deleteCertificates(id) {
-    return this.httpDeleteResponse('certificate/delete/' + id, true)
-
+    return this.httpDeleteResponse('certificate/delete/' + id, true);
   }
 
   getCourseList(id) {
-    return this.httpGetResponse('courses/my-course-list/' + id, null, false, false);
+    return this.httpGetResponse(
+      'courses/my-course-list/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getMyCourseList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/my-course-list/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'courses/my-course-list/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getOtherCourseList(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('courses/other-course-list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'courses/other-course-list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getvideos() {
     return this.httpGetResponse('videos/list', null, false, false);
   }
   getPendingTrial(id, data) {
-    return this.httpPostResponse('get-pending/course/trials/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'get-pending/course/trials/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getSchedule(id) {
-    return this.httpGetResponse('schedule/list/by-course/' + id, null, false, false);
+    return this.httpGetResponse(
+      'schedule/list/by-course/' + id,
+      null,
+      false,
+      false
+    );
   }
 
   getMyLanguages(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('languages/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'languages/my-list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   removeMyLanguages(data) {
-    return this.httpPostResponse('languages/remove-from-my-list', data, false, false);
+    return this.httpPostResponse(
+      'languages/remove-from-my-list',
+      data,
+      false,
+      false
+    );
   }
 
   addSubject(data) {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
   addKeyword(data) {
-    return this.httpPostResponse('keywords/add-keyword', data , false);
+    return this.httpPostResponse('keywords/add-keyword', data, false);
   }
 
   addInputKeyword(data) {
@@ -339,29 +514,59 @@ export class NetworkService {
 
   getMySubjects(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('subjects/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'subjects/my-list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getMyKeyword(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('keywords/my-list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'keywords/my-list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   removeMySubjects(data) {
-    return this.httpPostResponse('subjects/remove-from-my-list', data, false, false);
+    return this.httpPostResponse(
+      'subjects/remove-from-my-list',
+      data,
+      false,
+      false
+    );
   }
   removeMyKeyword(data) {
-    return this.httpPostResponse('keywords/remove-from-my-list', data, false, false);
+    return this.httpPostResponse(
+      'keywords/remove-from-my-list',
+      data,
+      false,
+      false
+    );
   }
 
   getSubject(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('subjects/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'subjects/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getKeywords(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('keywords/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'keywords/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getUserByEmail(data) {
@@ -371,7 +576,11 @@ export class NetworkService {
 
   getStudentTeacherProfileByEmail(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('student-teacher-profile-by-email' + '?' + str, null, false);
+    return this.httpGetResponse(
+      'student-teacher-profile-by-email' + '?' + str,
+      null,
+      false
+    );
   }
 
   getUserByToken() {
@@ -382,7 +591,13 @@ export class NetworkService {
     return this.httpPostResponse('user/teacher/' + id, data, null, true, false);
   }
   updateTeacherProfile3(data, id) {
-    return this.httpPostResponse('ser/teacher/third/' + id, data, null, true, false);
+    return this.httpPostResponse(
+      'ser/teacher/third/' + id,
+      data,
+      null,
+      true,
+      false
+    );
   }
 
   SubmitCourse(data) {
@@ -398,13 +613,25 @@ export class NetworkService {
   }
 
   resetPassword(data) {
-    return this.httpPostResponse('validate-otp-and-change-password', data, null, true, false);
+    return this.httpPostResponse(
+      'validate-otp-and-change-password',
+      data,
+      null,
+      true,
+      false
+    );
   }
   SubmitCourseEdit(data, id) {
     return this.httpPostResponse('courses/edit', data, id, false, false);
   }
   SubmitSecondCourse(data, id) {
-    return this.httpPostResponse('course/update-params/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'course/update-params/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   AddSchedule(data) {
@@ -412,24 +639,47 @@ export class NetworkService {
   }
 
   notificationRead(data) {
-    return this.httpPostResponse('notifications/is-open', data, null, false, false);
+    return this.httpPostResponse(
+      'notifications/is-open',
+      data,
+      null,
+      false,
+      false
+    );
   }
-
 
   checkReview(data) {
     return this.httpPostResponse('check-review', data, null, false, false);
   }
 
   inactiveCourse(data) {
-    return this.httpPostResponse('courses/de-activate-course-by-id', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/de-activate-course-by-id',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   activeCourse(data) {
-    return this.httpPostResponse('courses/activate-course-by-id', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/activate-course-by-id',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   deleteCourse(data) {
-    return this.httpPostResponse('courses/delete-course-by-id', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/delete-course-by-id',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   deleteShedule(id) {
@@ -437,23 +687,53 @@ export class NetworkService {
   }
 
   changeTrailStuts(data, id) {
-    return this.httpPostResponse('course/update-status/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'course/update-status/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   requestTrail(data) {
-    return this.httpPostResponse('course-trial/send-request', data, null, false, false);
+    return this.httpPostResponse(
+      'course-trial/send-request',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   cancelTrail(data) {
-    return this.httpPostResponse('course-trial/cancel-request', data, null, false, false);
+    return this.httpPostResponse(
+      'course-trial/cancel-request',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getTrail(data) {
-    return this.httpPostResponse('course-trial/is-sent-request', data, null, false, false);
+    return this.httpPostResponse(
+      'course-trial/is-sent-request',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   addCourseFav(data) {
-    return this.httpPostResponse('courses/list/add-fav', data, null, false, true);
+    return this.httpPostResponse(
+      'courses/list/add-fav',
+      data,
+      null,
+      false,
+      true
+    );
   }
 
   addReview(data) {
@@ -461,11 +741,23 @@ export class NetworkService {
   }
 
   removeCourseFav(data) {
-    return this.httpPostResponse('courses/list/remove-fav', data, null, false, true);
+    return this.httpPostResponse(
+      'courses/list/remove-fav',
+      data,
+      null,
+      false,
+      true
+    );
   }
 
   isCourseFav(data) {
-    return this.httpPostResponse('courses/list/is-fav', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/list/is-fav',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   updateStudentProfile(data, id) {
@@ -476,26 +768,48 @@ export class NetworkService {
     return this.httpPostResponse('signup-via-email', data);
   }
 
-
   storeStudyMaterial(data) {
     return this.httpPostResponse('material/add', data, null, false, false);
   }
 
   updateStudyMaterial(data, id) {
-    return this.httpPostResponse('material/edit/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'material/edit/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   postStudyMaterialPhoto(data: any) {
-    return this.httpPostResponse('material/update-material-image', data, null, false, false);
+    return this.httpPostResponse(
+      'material/update-material-image',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   postMaterialImage(data) {
-    return this.httpPostResponse('material/image/add', data, null, false, false);
+    return this.httpPostResponse(
+      'material/image/add',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getAllMaterials(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'material/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   purchaseMaterial(data: any) {
@@ -506,49 +820,112 @@ export class NetworkService {
   }
 
   uploadStudtMaterialFile(data) {
-    return this.httpPostResponse('material/upload/docs', data, null, false, false, 'multipart/form-data');
+    return this.httpPostResponse(
+      'material/upload/docs',
+      data,
+      null,
+      false,
+      false,
+      'multipart/form-data'
+    );
   }
 
   deleteStudyMaterialFile(data) {
-    return this.httpPostResponse('material/delete/document', data, false, true, false);
+    return this.httpPostResponse(
+      'material/delete/document',
+      data,
+      false,
+      true,
+      false
+    );
   }
 
   getMaterialImages(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/image/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'material/image/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getMaterialDocs(data) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/docs/list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'material/docs/list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   submitSecondMaterial(data, id) {
-    return this.httpPostResponse('material/update-params/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'material/update-params/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getMyMaterialList(data: any, id) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/my-material-list/' + id + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'material/my-material-list/' + id + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getotherMaterialList(data: any) {
     const str = this.serialize(data);
-    return this.httpGetResponse('material/other-material-list' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'material/other-material-list' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
   addMaterialFav(data) {
-    return this.httpPostResponse('material/list/add-fav', data, null, false, false);
+    return this.httpPostResponse(
+      'material/list/add-fav',
+      data,
+      null,
+      false,
+      false
+    );
   }
   removeMaterialFav(data) {
-    return this.httpPostResponse('material/list/remove-fav', data, null, false, false);
+    return this.httpPostResponse(
+      'material/list/remove-fav',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   addItemToCart(data) {
-    return this.httpPostResponse('material/add-to-cart', data, null, false, false);
+    return this.httpPostResponse(
+      'material/add-to-cart',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   removeItemToCart(data, id) {
-    return this.httpPostResponse('material/remove-to-cart/' + id, data, null, false, false);
+    return this.httpPostResponse(
+      'material/remove-to-cart/' + id,
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   buyNow(data) {
@@ -560,7 +937,13 @@ export class NetworkService {
   }
 
   materialCheckout(data) {
-    return this.httpPostResponse('material/cart/checkout', data, false, true, false);
+    return this.httpPostResponse(
+      'material/cart/checkout',
+      data,
+      false,
+      true,
+      false
+    );
   }
 
   materialCheckoutHistory(id) {
@@ -581,21 +964,30 @@ export class NetworkService {
 
   getStudentOrder(params: Params) {
     const str = this.serialize(params);
-    return this.httpGetResponse('student/order-by-order-number' + '?' + str  , null, false, false);
+    return this.httpGetResponse(
+      'student/order-by-order-number' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getTeacherOrder(params: Params) {
     const str = this.serialize(params);
-    return this.httpGetResponse('teacher/order-by-order-number' + '?' + str  , null, false, false);
+    return this.httpGetResponse(
+      'teacher/order-by-order-number' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   getCoinLevels() {
     return this.httpGetResponse('credit-coins', null, false, false);
   }
-
-  
-
-  
+  buyCredit(data:any) {
+    return this.httpPostResponse('student/order', data, null, false, true);
+  }
 
   serialize = (obj: any) => {
     const str: any[] = [];
@@ -673,7 +1065,6 @@ export class NetworkService {
         this.utility.showLoader();
       }
       this.api.delete(key).subscribe((res: any) => {
-
         this.utility.hideLoader();
         resolve(res);
       });
@@ -699,15 +1090,14 @@ export class NetworkService {
 
       seq.subscribe({
         next: (res: any) => {
-
           if (showloader === true) {
             this.utility.hideLoader();
           }
 
-          console.log("url " + url);
-          console.log("showerror " + showError);
+          console.log('url ' + url);
+          console.log('showerror ' + showError);
 
-          if (showError == true && res.message) {            
+          if (showError == true && res.message) {
             this.utility.presentSuccessToast(res.message);
           }
 
