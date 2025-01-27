@@ -572,16 +572,21 @@ export class NetworkService {
   }
 
   getStudentOrders() {
-    return this.httpGetResponse('student/order/list', null, false, true);
+    return this.httpGetResponse('student/order/list', null, false, false);
   }
 
   getTeacherPurchases() {
-    return this.httpGetResponse('teacher/order/list', null, false, true);
+    return this.httpGetResponse('teacher/order/list', null, false, false);
   }
 
   getStudentOrder(params: Params) {
     const str = this.serialize(params);
     return this.httpGetResponse('student/order-by-order-number' + '?' + str  , null, false, false);
+  }
+
+  getTeacherOrder(params: Params) {
+    const str = this.serialize(params);
+    return this.httpGetResponse('teacher/order-by-order-number' + '?' + str  , null, false, false);
   }
 
   getCoinLevels() {
