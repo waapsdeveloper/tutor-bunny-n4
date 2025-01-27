@@ -15,8 +15,20 @@ export class ListChatsService extends NgrxCrudService<any> {
   chats;  
   unreadCount = 0;
 
+  private pusher: Pusher;
+  chatChannel: any;
+
   constructor(private network: NetworkService, private users: UsersService) { 
     super()
+
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true,
+    };
+
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.chatChannel = this.pusher.subscribe('chats-channel');
+
   }
 
   getchatsFromApi(search = '', page = 1, liked = false) {
@@ -35,17 +47,6 @@ export class ListChatsService extends NgrxCrudService<any> {
       this.setList(data.data, data.page, data.last_page, data.total);
 
       this.unreadCount = (await this.getUnreadMsgCount()) as number;
-      // if (res) {
-      //   this.chats = res.data;
-      //   //
-      //   this.unreadCount = (await this.getUnreadMsgCount()) as number;
-      //   //
-      //   let data = await this.network.getRequsetCount(this.user.id);
-      //   if (this.user.role_id == 3) {
-      //     this.getChatRequsts();
-      //   }
-      //   this.count = data.message.pending_count;
-      // }
       resolve(data);
       return;
     });
@@ -81,6 +82,40 @@ export class ListChatsService extends NgrxCrudService<any> {
         ),
       };
     });
+  }
+
+  unRegisterPusherEvent() {
+    let user = this.users.getUser() as any;
+
+    if (this.pusher) {
+      this.pusher.unsubscribe('chats-channel');
+      this.pusher.disconnect();
+    }
+    this.chatChannel.unbind('message-rec-' + user.id);
+  }
+
+  registerPusherEvent(id: any) {
+    this.chatChannel.bind(
+      'message-rec-' + id,
+      this.chatChannelReceived.bind(this)
+    );
+  }
+
+  chatChannelReceived($event: any) {
+
+    let data = $event;
+    console.log("data-chat", data);
+    if (data.chat_room_id) {
+      this.setLastMessageOfChatList({ 
+        chat_room_id: data.chat_room_id,
+        message: data.message 
+      })
+    }
+
+    this.getUnreadMsgCount();
+
+    // this.getchatList();
+    // this.getUnreadMsgCount();
   }
 
 }

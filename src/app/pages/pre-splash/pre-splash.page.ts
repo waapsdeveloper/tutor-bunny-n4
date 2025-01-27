@@ -16,6 +16,7 @@ import { GlobalStudyMaterialService } from 'src/app/services/global-study-materi
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
 import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
+import { ListChatsService } from 'src/app/services/list-chats.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -46,7 +47,11 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     private globalStudyMaterialService: GlobalStudyMaterialService,
     private globalTeacherService: GlobalTeacherService,
     private globalFavCoursesService: GlobalFavCoursesService,
-    private globalFavMaterialService: GlobalFavMaterialService
+    private globalFavMaterialService: GlobalFavMaterialService,
+
+
+    // new services
+    private listChatsService: ListChatsService
 
 
 
@@ -72,7 +77,14 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     this.chats.registerPusherEvent(this.user.id);
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
-    this.notificationService.registerPusherEvent()
+    this.notificationService.registerPusherEvent();
+
+    // new services
+    this.listChatsService.registerPusherEvent(this.user.id);
+
+
+
+
 
     // this.chatService.getchatList();
     // this.notificationService.getNotificationsFromApi();
