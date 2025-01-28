@@ -5,6 +5,8 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
 import { StudentWelcomeComponent } from 'src/app/pages/student/student-dashboard/student-welcome/student-welcome.component';
 import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
+import { log } from 'node:console';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-generic-course-card',
@@ -25,6 +27,7 @@ export class GenericCourseCardComponent extends BasePage {
   loading = false;
   trail = false;
   languageName: any;
+  teacherImage;
 
   @Output() openDetails = new EventEmitter<any>();
 
@@ -54,27 +57,15 @@ export class GenericCourseCardComponent extends BasePage {
 
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
-    this.displayName = this.utility.getAmericanName(this.item.user.name);
-    this.flag = this.getFlag();
+    this.displayName = this.utility.getAmericanName(data.user.name);
+    this.flag = this.utility.getFlag(data.user);
     this.status = data.trial ? data.trial.status : null;
-
+    this.teacherImage = data.user.image
     if (data && data.type == 3) {
       this.type = data.type;
     }
   }
 
-  getFlag() {
-    if (this.item && this.item.user.teacher && this.item.user.teacher.country) {
-      const flag = this.item.user.teacher.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
 
   async goToDetail(item) {
     const params = {

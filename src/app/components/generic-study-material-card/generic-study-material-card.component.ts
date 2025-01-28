@@ -19,8 +19,8 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
   itemExistInCart$;
   itemExistInFav$;
-  
 
+  teacherImage
   displayName;
   flag;
   user;
@@ -56,7 +56,7 @@ export class GenericStudyMaterialCardComponent extends BasePage {
   ) {
     super(injector);
     this.user = this.users.getUser();
-    
+
   }
 
   async initialize(data) {
@@ -73,10 +73,10 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
-    this.displayName = this.utility.getAmericanName(this.item.user.name);
-    this.flag = this.getFlag(data);
+    this.displayName = this.utility.getAmericanName(data.user.name);
+    this.flag = this.utility.getFlag(data.user);
     this.status = data.trial ? data.trial.status : null;
-
+    this.teacherImage = data.user.image
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
@@ -178,13 +178,13 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     this.item.is_liked_by_me = false;
     this.materialFavoriteService.removeFavorites(this.item, user);
   }
-  
+
   async toggleCartItem(){
 
     if(this.itemExistInCart$ == 0) {
       this.cartService.setItem(this.item)
-    } 
-    
+    }
+
     // else {
     //   this.cartService.setRemove(this.item)
     // }

@@ -22,6 +22,7 @@ export class StudentDashboardStudyMaterialPage
 
     this.globalStudyMaterialService.getList().subscribe((res) => {
       this.list$ = res;
+      
     });
 
   }
