@@ -227,17 +227,8 @@ export class TeacherProfilePage
     rating: 0,
     totalRating: 0,
   };
-  openEditProfile() {
-    this.nav.push('/teacher-profile/teacher-profile-edit', {
-      backUrl: '/tabs/teacher-profile?user_id=' + this.user.id,
-      showBack: true,
-      title: 'Edit Profile',
-    });
-  }
-  back() {
-    localStorage.removeItem('teacher');
-    this.nav.pop();
-  }
+
+  
   loading = false;
   user: any;
   teacher$;
@@ -283,19 +274,21 @@ export class TeacherProfilePage
   constructor(
     injector: Injector,
     public globalTeacherService: GlobalTeacherService,
-    private chats: ChatService
   ) {
     super(injector);
   }
 
   ngOnInit() {
+    console.log()
     const params = this.nav.getQueryParams();
+    
     if (params['email']) {
       this.initialize(params['email']);
     }
   }
 
   async ionViewWillEnter() {
+
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -381,22 +374,22 @@ export class TeacherProfilePage
   async initialize(email) {
     this.loading = true;
 
-    // let obj = {
-    //   email: email,
-    // };
+    let obj = {
+      email: email,
+    };
 
-    // let res = await this.network.getStudentTeacherProfileByEmail(obj);
+    let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
-    // console.log(res);
-    // this.user = res.user;
+    console.log(res);
+    this.user = res.user;
 
-    // this.headerData = {
-    //   image: this.user.image,
-    //   displayName: this.utility.getAmericanName(this.user.name),
-    //   verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
-    //   rating: this.user.teacher.avg_rating,
-    //   totalRating: this.user.teacher.total_rating
-    // }
+    this.headerData = {
+      image: this.user.image,
+      displayName: this.utility.getAmericanName(this.user.name),
+      verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
+      rating: this.user.teacher.avg_rating,
+      totalRating: this.user.teacher.total_rating
+    }
 
     // this.infoData = {
     //   subjects: this.user.teacher.subjects,
@@ -516,4 +509,16 @@ export class TeacherProfilePage
   //       });
   //     }
   //   }
+
+  openEditProfile() {
+    this.nav.push('/teacher-profile/teacher-profile-edit', {
+      backUrl: '/tabs/teacher-profile?user_id=' + this.user.id,
+      showBack: true,
+      title: 'Edit Profile',
+    });
+  }
+  back() {
+    localStorage.removeItem('teacher');
+    this.nav.pop();
+  }
 }
