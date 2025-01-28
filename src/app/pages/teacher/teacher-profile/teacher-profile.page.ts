@@ -226,9 +226,10 @@ export class TeacherProfilePage
     verifiedOn: '',
     rating: 0,
     totalRating: 0,
+    is_edit: true
   };
 
-  
+
   loading = false;
   user: any;
   teacher$;
@@ -281,7 +282,7 @@ export class TeacherProfilePage
   ngOnInit() {
     console.log()
     const params = this.nav.getQueryParams();
-    
+
     if (params['email']) {
       this.initialize(params['email']);
     }
@@ -317,6 +318,7 @@ export class TeacherProfilePage
       verifiedOn: moment(user.verified_on).format('DD-MMM-YYYY'),
       rating: user.teacher.avg_rating,
       totalRating: user.teacher.total_rating,
+      is_edit: true
     };
 
     this.infoData = {
@@ -388,7 +390,8 @@ export class TeacherProfilePage
       displayName: this.utility.getAmericanName(this.user.name),
       verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
       rating: this.user.teacher.avg_rating,
-      totalRating: this.user.teacher.total_rating
+      totalRating: this.user.teacher.total_rating,
+      is_edit: true
     }
 
     this.infoData = {

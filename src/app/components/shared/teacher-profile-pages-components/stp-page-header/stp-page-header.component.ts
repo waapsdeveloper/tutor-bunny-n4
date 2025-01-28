@@ -7,9 +7,10 @@ import { NavService } from 'src/app/services/nav.service';
   styleUrls: ['./stp-page-header.component.scss'],
 })
 export class StpPageHeaderComponent {
-  
-  @Output() back = new EventEmitter<any>()
-  
+
+  @Output() back = new EventEmitter<any>();
+  @Output() openEdit = new EventEmitter<any>();
+
   private _data: any;
   @Input()
   set data(value: any) {
@@ -27,6 +28,7 @@ export class StpPageHeaderComponent {
   verified_on;
   rating;
   total_rating;
+  is_edit = false;
 
   constructor(private nav: NavService) {}
 
@@ -38,11 +40,15 @@ export class StpPageHeaderComponent {
       this.verified_on = value.verifiedOn;
       this.rating = value.rating;
       this.total_rating = value.totalRating;
+      this.is_edit = value.is_edit || false
     }
   }
 
   openEditProfile() {
     //
+    if(this.is_edit){
+      this.openEdit.emit()
+    }
   }
 
 }

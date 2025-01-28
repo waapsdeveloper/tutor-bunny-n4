@@ -9,7 +9,7 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
-  
+
   constructor(
     public api: ApiService,
     public router: Router,
@@ -840,6 +840,17 @@ export class NetworkService {
     return this.httpPostResponse(
       'profile/video',
       data,
+      null,
+      false,
+      true,
+      'multipart/form-data'
+    );
+  }
+
+  getIntoVideoFile(data) {
+    let str = this.serialize(data)
+    return this.httpGetResponse(
+      'profile/video' + '?' + str,
       null,
       false,
       false,
