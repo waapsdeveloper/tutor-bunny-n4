@@ -138,7 +138,7 @@ export class CoursesPage extends ListPage implements OnInit {
   // }
 
   
-  list$;
+  // list$;
 
   constructor(injector: Injector, public globalCoursesService: GlobalCoursesService) {
     super(injector);

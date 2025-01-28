@@ -126,9 +126,7 @@ export class NotesPage extends ListPage implements OnInit {
   // ShowSearchBar(event) {
   //   this.isSearchBarShow = !this.isSearchBarShow;
   // }
-
-  list$;
-
+  
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
   }

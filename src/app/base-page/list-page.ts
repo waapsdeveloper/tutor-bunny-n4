@@ -46,11 +46,11 @@ export abstract class ListPage extends BasePage {
     try {
       const res = await this.fetchList(page, search, status);
 
-      const data = res.result;
-      const list = data.data;
+      const data = res;
+      const list = data.list;
 
       // Update state
-      this.list = page === 1 ? data?.data : [...this.list, ...list];
+      this.list = page === 1 ? list : [...this.list, ...list];
       this.page = data.current_page;
       this.last_page = data.last_page;
       this.infiniteScrollDisabled = this.page >= this.last_page;
