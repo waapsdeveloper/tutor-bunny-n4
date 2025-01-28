@@ -14,6 +14,7 @@ import { OtherCoursesModule } from 'src/app/components/other-courses/other-cours
 import { ProfileBoxModule } from 'src/app/components/profile-box/profile-box.module';
 import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
+import { StpPageHeaderModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-header.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,10 @@ import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.
     RatingReviewModule,
     OtherCoursesModule,
     TeacherQualificationModule,
-    RatingStarsModule
+    RatingStarsModule,
+
+    // 
+    StpPageHeaderModule
   ],
   declarations: [TeacherProfilePage],
 })
