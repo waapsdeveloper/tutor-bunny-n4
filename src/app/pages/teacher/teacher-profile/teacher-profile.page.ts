@@ -391,41 +391,41 @@ export class TeacherProfilePage
       totalRating: this.user.teacher.total_rating
     }
 
-    // this.infoData = {
-    //   subjects: this.user.teacher.subjects,
-    //   languages: this.user.teacher.languages,
-    //   travel_policy: this.user.teacher.travel_policy.name,
-    //   country: this.user.teacher.country.name,
-    //   city: this.user.teacher.city,
-    //   state: this.user.teacher.state.name,
-    //   //flag: this.getFlag()
-    // }
+    this.infoData = {
+      subjects: this.user.teacher.subjects,
+      languages: this.user.teacher.languages,
+      travel_policy: this.user.teacher.travel_policy.name,
+      country: this.user.teacher.country.name,
+      city: this.user.teacher.city,
+      state: this.user.teacher.state.name,
+      flag: this.getFlag()
+    }
 
-    // this.countData = {
-    //   years_of_experience: this.user.teacher.started_teaching,
-    //   course_count: res.course_material.total_courses,
-    //   notes_count: res.course_material.total_material,
-    // }
+    this.countData = {
+      years_of_experience: this.user.teacher.started_teaching,
+      course_count: res.course_material.total_courses,
+      notes_count: res.course_material.total_material,
+    }
 
-    // this.aboutData = {
-    //   heading: 'About',
-    //   text: this.user.teacher.description || ''
-    // }
+    this.aboutData = {
+      heading: 'About',
+      text: this.user.teacher.description || ''
+    }
 
-    // this.courseData = {
-    //   heading: 'Courses & Study Notes',
-    //   list: res.course_material.list
-    // }
+    this.courseData = {
+      heading: 'Courses & Study Notes',
+      list: res.course_material.list
+    }
 
-    // this.galleryData = {
-    //   heading: 'Gallery',
-    //   list: res.gallery
-    // }
+    this.galleryData = {
+      heading: 'Gallery',
+      list: res.gallery
+    }
 
-    // this.ratingData = {
-    //   heading: 'Reviews',
-    //   list: res.reviews
-    // }
+    this.ratingData = {
+      heading: 'Reviews',
+      list: res.reviews
+    }
 
     this.loading = false;
 
@@ -442,7 +442,7 @@ export class TeacherProfilePage
     //   this.rating = this.user.teacher.avg_rating;
     //   this.status = this.user.teacher.status;
 
-    //   this.subject = this.user.teacher.subjects;
+      // this.subject = this.user.teacher.subjects;
     //   this.experince = this.user.teacher.started_teaching;
     //   // const user = this.users.getUser();
     //   const data = (await this.network.getImage(res.user.id)) as any;
