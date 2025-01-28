@@ -37,7 +37,9 @@ export class TeacherDashboardPage extends BasePage {
   
 
   openProfile() {
-    const params = { user_id: this.user.id, showBack: true };
+
+    const user = this.users.getUser();
+    const params = { user_id: user.id, showBack: true };
     this.nav.push('/teacher-profile', params);
   }
 

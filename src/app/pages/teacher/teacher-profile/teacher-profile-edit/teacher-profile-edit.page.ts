@@ -16,6 +16,8 @@ import { SwiperComponent } from 'swiper/angular';
 export class TeacherProfileEditPage
   extends BasePage
   implements ViewWillEnter {
+
+  allowSlideNext = false;
   
   user;
   userId;
@@ -190,6 +192,9 @@ export class TeacherProfileEditPage
     }
   }
   async onSlideChanged() {
+
+    
+
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
       this.formData
@@ -213,14 +218,15 @@ export class TeacherProfileEditPage
     if (f.languages.length == 0) {
       return;
     }
+
     const user = JSON.parse(localStorage.getItem('user'));
 
     // const res = await this.network.updateTeacherProfile(f, user.id);
     // if (res) {
-      this.slides?.swiperRef?.slideTo(1, 300, false);
-    this.step = 2;
+      this.moveToNextSlide(1)
+    
     // }
-    this.scrollToTopOnInit();
+    
   }
   async submit() {
     const data = this.formData;
@@ -298,10 +304,11 @@ export class TeacherProfileEditPage
     //   //   this.utility.presentSuccessToast(res.message)
     //   // }
     //   // this.nav.pop('/tabs/teacher-dashboard')
-    this.slides?.swiperRef?.slideTo(2, 300, false);
-    this.step = 3;
+    this.moveToNextSlide(2)
+
+    
     // }
-    this.scrollToTopOnInit();
+    
   }
   disableIfIncomplete() {
     return (
@@ -322,14 +329,9 @@ export class TeacherProfileEditPage
 
   shouldHandleBackToPrevScreen() {
     if (this.step == 2) {
-      this.step = 1;
-
-      this.slides?.swiperRef?.slideTo(0, 300, false);
-      this.scrollToTopOnInit();
+      this.moveToNextSlide(0)
     } else if (this.step == 3) {
-      this.step = 2;
-      this.slides?.swiperRef?.slideTo(1, 300, false);
-      this.scrollToTopOnInit();
+      this.moveToNextSlide(1)      
     } else {
       this.nav.pop();
     }
@@ -337,5 +339,18 @@ export class TeacherProfileEditPage
 
   openUpdateCertificate() {
     this.nav.push('/upload-certificate');
+  }
+
+  moveToNextSlide(step = 1){
+
+    this.allowSlideNext = true;
+    setTimeout( () => {
+      this.slides?.swiperRef?.slideTo(step, 300, false);
+      this.step = step + 1;
+      this.allowSlideNext = false;
+      this.scrollToTopOnInit();
+    }, 100)
+    
+
   }
 }

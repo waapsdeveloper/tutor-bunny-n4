@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
@@ -21,6 +21,8 @@ export class TeacherDashboardHeaderComponent implements OnInit {
   showNoti = false;
   travel_policy;
   rating;
+
+  @Output() openProfile = new EventEmitter<any>()
 
   constructor(private users: UsersService, private utility: UtilityService) {
 
