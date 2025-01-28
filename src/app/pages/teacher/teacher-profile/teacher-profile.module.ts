@@ -15,6 +15,12 @@ import { ProfileBoxModule } from 'src/app/components/profile-box/profile-box.mod
 import { YoutubeBoxModule } from 'src/app/components/youtube-box/youtube-box.module';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 import { StpPageHeaderModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-header.module';
+import { StpPageVideoBoxModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-video-box/stp-page-video-box.module';
+import { StpPageInfoModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-info/stp-page-info.module';
+import { StpPageProfileStatisticsModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-profile-statistics/stp-page-profile-statistics.module';
+import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
+import { MyRatingsModule } from 'src/app/components/my-ratings/my-ratings.module';
+import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
 
 @NgModule({
   imports: [
@@ -24,17 +30,22 @@ import { StpPageHeaderModule } from 'src/app/components/shared/teacher-profile-p
     TeacherProfilePageRoutingModule,
     SdHeaderTopModule,
     ProfileBoxModule,
-    TeacherProfileStatisticsModule,
+    // TeacherProfileStatisticsModule,
     YoutubeBoxModule,
     MyCoursesModule,
     MyGalleryModule,
     RatingReviewModule,
     OtherCoursesModule,
-    TeacherQualificationModule,
+    // TeacherQualificationModule,
     RatingStarsModule,
-
+    GlobalTextReadModule,
+    MyRatingsModule,
     // 
-    StpPageHeaderModule
+    StpPageHeaderModule,
+    StpPageVideoBoxModule,
+    StpPageInfoModule,
+    StpPageProfileStatisticsModule,
+    SdButtonClearModule,
   ],
   declarations: [TeacherProfilePage],
 })
