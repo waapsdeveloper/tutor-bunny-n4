@@ -10,14 +10,10 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
   private _experince: any;
 
   @Input('experince')
-  public get experince() {
-    return this._experince;
-  }
+  // public get experince() {
+  //   return this._experince;
+  // }
 
-  public set experince(value: any) {
-    this._experince = value;
-    // this.calculateAge();
-  }
   year;
   trials;
   courses;
@@ -26,24 +22,20 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
   currency = '$';
   credits;
   views;
-
+  notes_count;
   @Input() hourly_rate = 0;
   @Input() course = 0;
-
 
   constructor(injector: Injector) {
     super(injector)
     this.initialize();
   }
-
-   
-
   ngOnInit() {}
   async initialize() {
     this.user = this.users.getUser()
-
-    this.getCurrencySymbol(this.user)
-
+    this.getexperince(this.user);
+    this.getcourse(this.user);
+    this.getCurrencySymbol(this.user);
     let res = await this.network.getdashboardcounts();
     this.trials = res.trials;
     this.courses = res.courses;
@@ -63,6 +55,28 @@ export class TeacherProfileStatisticsComponent extends BasePage implements OnIni
     }
 
 
+  }
+  getexperince(user) {
+    console.log(this.year);
+    if(user?.role_id == 3){
+      this.year = this.calculateYear(parseInt(user?.teacher?.started_teaching));
+      console.log("This is experience "+this.year);
+    }else{
+      this.year = 0;
+    }
+  }
+  calculateYear(experience) {
+    const currentYear = new Date().getFullYear();
+    return currentYear - experience;
+  }
+
+  getcourse(user) {
+
+    if(user?.role_id == 3){
+      this.courses = this.calculateYear(user?.teacher?.course);
+    }else{
+      this.courses = 0;
+    }
   }
 
 }
