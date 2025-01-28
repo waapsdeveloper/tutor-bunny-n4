@@ -831,6 +831,17 @@ export class NetworkService {
     );
   }
 
+  uploadIntoVideoFile(data) {
+    return this.httpPostResponse(
+      'profile/video',
+      data,
+      null,
+      false,
+      false,
+      'multipart/form-data'
+    );
+  }
+
   deleteStudyMaterialFile(data) {
     return this.httpPostResponse(
       'material/delete/document',
