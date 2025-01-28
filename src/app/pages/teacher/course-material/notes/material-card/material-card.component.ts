@@ -41,7 +41,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   }
   course;
   status;
-  @Output() courseDeleted = new EventEmitter<number>();
+  @Output() materialDeleted = new EventEmitter<number>();
   @Output() activeTab = new EventEmitter<number>();
   @Output() inActiveTab = new EventEmitter<number>();
   @Output() openDeatils = new EventEmitter<any>();
@@ -79,7 +79,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
           text: 'OK',
           role: 'confirm',
           handler: () => {
-            this.deleteCourse(item);
+            this.deleteMaterial(item);
           },
         },
       ],
@@ -91,14 +91,14 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   setResult(ev) {
   }
 
-  async deleteCourse(data) {
+  async deleteMaterial(data) {
     let obj = {
-      course_id: data.id,
+      study_material_id: data.id,
     };
 
-    let res = await this.network.deleteCourse(obj);
+    let res = await this.network.deleteMaterial(obj);
     if (res.status === 200) {
-      this.courseDeleted.emit(data.id);
+      this.materialDeleted.emit(data.id);
     }
   }
 
@@ -121,7 +121,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   async inactiveCourse(data) {
 
     let obj = {
-      course_id: data.id,
+      material_id: data.id,
     }
 
     let res = await this.network.inactiveCourse(obj)
@@ -136,7 +136,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
 
   async activeCourse(data) {
     let obj = {
-      course_id: data.id,
+      material_id: data.id,
     }
 
     let res = await this.network.activeCourse(obj)
