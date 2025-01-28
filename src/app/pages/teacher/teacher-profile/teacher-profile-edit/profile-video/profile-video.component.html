@@ -38,9 +38,10 @@
         </div>
       </ng-template>
     </ion-popover>
-    <div class="video-box-78522">
+    <div class="video-box-78522" (click)="videoInput.click()">
       <img src="../../../assets/svg/video.svg" alt="">
     </div>
+    <input type="file" (change)="onFileSelected($event)" accept=".jpeg,.jpg,.png,.pdf,.doc,.docx,.xls,.xlsx" style="display: none" #videoInput />
   </div>
   <div
     style="display: flex; align-items: flex-start; flex-direction: column; width: 50%; gap: 8px; justify-content: center; padding: 3px 0 0 0;">

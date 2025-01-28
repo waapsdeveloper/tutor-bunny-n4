@@ -23,7 +23,7 @@ import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.m
 import { CertificateImageModule } from 'src/app/components/certificate-image/certificate-image.module';
 import { SdYearBoxModule } from 'src/app/components/sd-year-box/sd-year-box.module';
 import { TravelPoliceModule } from 'src/app/components/travel-police/travel-police.module';
-import { ProfileVideoModule } from 'src/app/components/profile-video/profile-video.module';
+import { ProfileVideoModule } from './profile-video/profile-video.module';
 
 import { SwiperModule } from 'swiper/angular';
 @NgModule({

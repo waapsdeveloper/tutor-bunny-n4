@@ -221,11 +221,10 @@ export class TeacherProfileEditPage
 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    // const res = await this.network.updateTeacherProfile(f, user.id);
-    // if (res) {
-      this.moveToNextSlide(1)
-    
-    // }
+    const res = await this.network.updateTeacherProfile(f, user.id);
+    if (res) {
+      this.moveToNextSlide(1)    
+    }
     
   }
   async submit() {
@@ -298,16 +297,15 @@ export class TeacherProfileEditPage
     }
 
     const user = JSON.parse(localStorage.getItem('user'));
-    // const res = await this.network.updateTeacherProfile(f, user.id);
+    const res = await this.network.updateTeacherProfile(f, user.id);
 
-    // if (res) {
-    //   //   this.utility.presentSuccessToast(res.message)
+    if (res) {
+    //   this.utility.presentSuccessToast(res.message)
     //   // }
     //   // this.nav.pop('/tabs/teacher-dashboard')
-    this.moveToNextSlide(2)
-
+      this.moveToNextSlide(2)
     
-    // }
+    }
     
   }
   disableIfIncomplete() {
