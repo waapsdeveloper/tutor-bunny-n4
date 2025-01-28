@@ -25,11 +25,14 @@ export class GenericTeacherCardComponent extends BasePage {
     this._item = value;
     this.total_rating = value.teacher.total_rating;
     this.rating = value.teacher.avg_rating;
-    this.displayName = this.utility.getAmericanName(this.item.name);
+    this.displayName = this.utility.getAmericanName(value.name);
+    this.teacherImage = value.image;
+    this.flag = this.utility.getFlag(value);
   }
   subjects;
   user;
   displayName;
+  teacherImage;
   constructor(injector: Injector,
     private chats : ChatService
   ) {
@@ -37,14 +40,6 @@ export class GenericTeacherCardComponent extends BasePage {
     this.user = this.users.getUser();
   }
 
-  getFlag() {
-    if (this.item && this.item.teacher && this.item.teacher.country) {
-      const flag = this.item.teacher.country.iso2;
-      return flag.toLowerCase();
-    } else {
-      return '';
-    }
-  }
 
   gototecher(item) {
     localStorage.setItem('teacher', JSON.stringify(item));
