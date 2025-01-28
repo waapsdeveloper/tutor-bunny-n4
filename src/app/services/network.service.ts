@@ -684,13 +684,7 @@ export class NetworkService {
   }
 
   deleteMaterial(data) {
-    return this.httpPostResponse(
-      'material/delete-material-by-id',
-      data,
-      null,
-      false,
-      false
-    );
+    return this.httpPostResponse('material/delete',data, null, false, false);
   }
 
 

@@ -151,7 +151,6 @@ export class NotesPage extends ListPage implements OnInit {
   }
 
   onMaterialDeleted(item: any) {
-    //   this.getMaterial(this.search, 1)
-    // }
+    this.globalStudyMaterialService.removeItem(item);
   }
 }
