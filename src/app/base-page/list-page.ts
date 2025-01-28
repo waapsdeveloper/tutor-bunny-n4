@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Injector,
@@ -46,12 +47,14 @@ export abstract class ListPage extends BasePage {
     try {
       const res = await this.fetchList(page, search, status);
 
-      const data = res.result;
-      const list = data.data;
+      console.log(res);
+
+      const data = res;
+      const list = data.list;
 
       // Update state
-      this.list = page === 1 ? data?.data : [...this.list, ...list];
-      this.page = data.current_page;
+      this.list = page === 1 ? list : [...this.list, ...list];
+      this.page = data.page;
       this.last_page = data.last_page;
       this.infiniteScrollDisabled = this.page >= this.last_page;
     } catch (error) {
@@ -59,6 +62,8 @@ export abstract class ListPage extends BasePage {
     } finally {
       this.loading = false;
     }
+
+    this.cdr.detectChanges();
   }
 
    /**

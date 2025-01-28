@@ -35,7 +35,7 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(injector: Injector, private cdr: ChangeDetectorRef) {
+  constructor(injector: Injector) {
     super(injector);
   }
 

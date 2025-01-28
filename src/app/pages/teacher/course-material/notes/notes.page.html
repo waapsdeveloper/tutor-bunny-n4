@@ -4,7 +4,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <app-material-card
-      *ngFor="let item of list$"
+      *ngFor="let item of list"
       [item]="item"
       (openDeatils)="openDetails(item)"
       (materialDeleted)="onMaterialDeleted(item)"
@@ -17,7 +17,7 @@
       (courseEdit)="courseEdit()" -->
     </app-material-card>
     <div style="height: 100%; position: relative">
-      <div class="centered-message" *ngIf="list$?.length === 0">
+      <div class="centered-message" *ngIf="list?.length === 0">
         No study notes to display
       </div>
     </div>

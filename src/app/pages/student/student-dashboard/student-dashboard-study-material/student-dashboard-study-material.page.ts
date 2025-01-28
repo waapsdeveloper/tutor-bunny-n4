@@ -8,9 +8,7 @@ import { GlobalStudyMaterialService } from 'src/app/services/global-study-materi
   templateUrl: './student-dashboard-study-material.page.html',
   styleUrls: ['./student-dashboard-study-material.page.scss'],
 })
-export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {
-  
-  list$;
+export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {  
 
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
@@ -21,7 +19,7 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
   }
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
-    const res = await this.globalStudyMaterialService.getMyStudyMaterialFromApi(page, search);
+    const res = await this.globalStudyMaterialService.getGlobalStudyMaterialFromApi(page, search);
     return {
       list: res.result.data,
       page: res.result.current_page,
