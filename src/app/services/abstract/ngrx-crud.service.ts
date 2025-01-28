@@ -10,7 +10,7 @@ export interface BasePaginationModel<T> {
   total: number;
 }
 export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<BasePaginationModel<T>> {
-    
+
   abstract ngrxModelName: string;
 
   storeConfig(): NgSimpleStateStoreConfig {
@@ -34,14 +34,14 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
 
   getItem(id: number | string) {
     return this.selectState((state) =>
-      state.list.find((x: any) => x.id === id)
+      state.list.find((x: any) => x.id == id)
     );
   }
 
   getItemPromise(id: number | string): Promise<T | undefined> {
     return new Promise((resolve) => {
       this.selectState((state) =>
-        state.list.find((x: any) => x.id === id)
+        state.list.find((x: any) => x.id == id)
       ).subscribe((data) => {
         resolve(data);
       });

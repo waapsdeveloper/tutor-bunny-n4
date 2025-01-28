@@ -118,12 +118,15 @@ export class StudentMaterialDetailPage extends BasePage {
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService
-        .getItem(this.materialId)
-        .subscribe((data) => {
-          this.material$ = data;
-          this.callApi(this.material$);
-        });
+      const res = await this.globalStudyMaterialService.getItemPromise(this.materialId);
+      console.log(res)
+      if(res){
+        this.material$ = res;
+        this.callApi(this.material$);
+      } else {
+        this.nav.pop();
+      }
+
     }
   }
 
