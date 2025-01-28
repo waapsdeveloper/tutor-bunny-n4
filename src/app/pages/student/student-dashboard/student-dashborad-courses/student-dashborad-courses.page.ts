@@ -19,6 +19,8 @@ export class StudentDashboradCoursesPage extends BasePage implements OnInit {
   ngOnInit() {
     this.globalCoursesService.getList().subscribe((res) => {
       this.list$ = res;
+      console.log("this is eyear",this.list$)
+
     });
   }
 
