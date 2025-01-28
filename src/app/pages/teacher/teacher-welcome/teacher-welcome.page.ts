@@ -33,7 +33,7 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
     },
   ]
 
-  constructor(injector:Injector, private cdr: ChangeDetectorRef) {
+  constructor(injector:Injector) {
     super(injector)
    }
 

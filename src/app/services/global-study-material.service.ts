@@ -20,22 +20,35 @@ export class GlobalStudyMaterialService extends NgrxCrudService<any> {
   }
 
 
-  getGlobalStudyMaterialFromApi(search = '', page = 1) {
+  getGlobalStudyMaterialFromApi(page = 1, search = '' ): Promise<any> {
+    // return new Promise(async (resolve) => {
+    //   const user = this.users.getUser();
+    //   let obj = {
+    //     search: search,
+    //     page: page,
+    //     user_id: user.id,
+    //   };
+
+    //   let res = await this.network.getAllMaterials(obj);
+
+
+    //   const data = res.result;
+    //   this.setList(data.data, data.page, data.last_page, data.total);
+
+    //   resolve(true);
+    // });
+
+    const user = this.users.getUser();
+
+    const params: any = { page };
+    if (search) params.search = search;
+    params.user_id = user.id;
+
     return new Promise(async (resolve) => {
-      const user = this.users.getUser();
-      let obj = {
-        search: search,
-        page: page,
-        user_id: user.id,
-      };
-
-      let res = await this.network.getAllMaterials(obj);
-
-
+      const res = await this.network.getAllMaterials(params);
       const data = res.result;
-      this.setList(data.data, data.page, data.last_page, data.total);
-
-      resolve(true);
+      this.setList(data.data, data.current_page, data.last_page, data.total);
+      resolve(res);
     });
   }
 

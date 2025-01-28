@@ -1,4 +1,4 @@
-import { Injector } from "@angular/core";
+import { ChangeDetectorRef, Injector } from "@angular/core";
 import { ModalService } from "../services/basic/modal.service";
 import { EventsService } from "../services/events.service";
 import { NavService } from "../services/nav.service";
@@ -22,6 +22,7 @@ export abstract class BasePage{
 
   public activatedRoute: ActivatedRoute;  // Add ActivatedRoute here
   public dataR: any;  // To store the resolved user data
+  public cdr: ChangeDetectorRef
 
   constructor(injector: Injector) {
     this.users = injector.get(UsersService);
@@ -34,6 +35,7 @@ export abstract class BasePage{
     this.modals = injector.get(ModalService);
 
     this.activatedRoute = injector.get(ActivatedRoute);
+    this.cdr = injector.get(ChangeDetectorRef);
 
   }
 

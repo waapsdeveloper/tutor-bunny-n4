@@ -27,7 +27,6 @@ export class CartPage extends BasePage implements OnInit {
   constructor(
     injector: Injector,
     private cartService: CartService,
-    private cdr: ChangeDetectorRef
   ) {
     super(injector);
   }
