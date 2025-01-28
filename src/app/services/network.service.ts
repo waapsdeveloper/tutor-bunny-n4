@@ -683,6 +683,17 @@ export class NetworkService {
     );
   }
 
+  deleteMaterial(data) {
+    return this.httpPostResponse(
+      'material/delete-material-by-id',
+      data,
+      null,
+      false,
+      false
+    );
+  }
+
+
   deleteShedule(id) {
     return this.httpDeleteResponse('schedule/delete/' + id, null);
   }
@@ -823,6 +834,17 @@ export class NetworkService {
   uploadStudtMaterialFile(data) {
     return this.httpPostResponse(
       'material/upload/docs',
+      data,
+      null,
+      false,
+      false,
+      'multipart/form-data'
+    );
+  }
+
+  uploadIntoVideoFile(data) {
+    return this.httpPostResponse(
+      'profile/video',
       data,
       null,
       false,

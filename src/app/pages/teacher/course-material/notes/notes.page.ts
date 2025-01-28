@@ -154,4 +154,9 @@ export class NotesPage extends BasePage implements OnInit {
   openDetails(item: any) {    
     this.nav.push('teacher-material-detail', {material_id: item.id})
   }
+
+  onMaterialDeleted(item: any) {
+    //   this.getMaterial(this.search, 1)
+    // }
+    }
 }

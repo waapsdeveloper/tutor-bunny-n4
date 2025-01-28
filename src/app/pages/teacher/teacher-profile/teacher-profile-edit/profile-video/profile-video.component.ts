@@ -33,23 +33,22 @@ export class ProfileVideoComponent  implements OnInit {
 
         const user = this.users.getUser();
         const data = new FormData();
-        data.append('document', file);
-        data.append('file_type', fileType);
-        data.append('profile_id', user.id);
+        data.append('file', file);        
 
         console.log("run bind")
 
-        // const res = await this.network.uploadStudtMaterialFile(data)
-        // if(res.bool == true){
+        const res = await this.network.uploadIntoVideoFile(data)
+        if(res.bool == true){
+          console.log(res)
         //   let docString = res.result.data;
         //   await this.addDocInArray(docString, fileType)
-        // }
+        }
 
         // await this.addDocInArray(docString, fileType);
       }
 
     }
+    
   }
-
 
 }
