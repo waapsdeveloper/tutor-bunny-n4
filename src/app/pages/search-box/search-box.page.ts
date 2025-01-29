@@ -10,6 +10,17 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
 })
 export class SearchBoxPage extends BasePage {
 
+
+  page = 1;
+  last_page = -1
+  list: any[] = [];
+  total = 0;
+
+
+
+
+
+
   searchList: any[] = [];
   recentSearch: any[] = [];
   searchCourses: any[] = [];
@@ -107,8 +118,19 @@ export class SearchBoxPage extends BasePage {
         liked: false,
       };
       let res = (await this.network.searchFromKeywords(obj)) as any;
-      this.searchList = res.keywords;
-      this.searchCourses = res.result.data;
+      console.log(res);
+
+      const data = res.result;
+      this.page = data.current_page
+      this.total = data.total;
+      this.list = data.data;
+
+
+
+
+      
+      // this.searchList = res.keywords;
+      // this.searchCourses = res.result.data;
 
       resolve(true);
     });
@@ -137,7 +159,7 @@ export class SearchBoxPage extends BasePage {
     // };
     // let res = await this.network.setRecentSeach(obj);
     const params = {
-      search: type == 'keyword' ? (item.keyword_name ?? '') : (item.title ?? ''),
+      search: item.name // type == 'keyword' ? (item.keyword_name ?? '') : (item.title ?? ''),
     };
     this.nav.push('search-result', params);
   }
