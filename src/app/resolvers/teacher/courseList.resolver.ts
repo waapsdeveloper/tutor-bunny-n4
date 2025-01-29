@@ -11,7 +11,7 @@ export const courseListResolver: ResolveFn<any> = async (route, state) => {
 
   let count = await service.getCountPromise();
   if (!count || count == 0) {
-    service.getMyCoursesFromApi('', 1);
+    service.getMyCoursesFromApi(1, '');
   }
 
   return count;

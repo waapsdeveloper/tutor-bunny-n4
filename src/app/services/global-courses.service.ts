@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EventsService } from './events.service';
-import Pusher from 'pusher-js';
-
-import {
-  NgSimpleStateBaseRxjsStore,
-  NgSimpleStateStoreConfig,
-} from 'ng-simple-state';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
-
+import { NgrxCrudService } from './abstract/ngrx-crud.service';
+import Pusher from 'pusher-js';
 export interface GlobalCoursesModel {
   page: number;
   last_page: number;
@@ -19,8 +14,10 @@ export interface GlobalCoursesModel {
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCoursesModel > {
+export class GlobalCoursesService extends NgrxCrudService<any>  {
 
+
+  ngrxModelName: string = 'GlobalCoursesModel';
 
   // old variables
   courses: any[] = [];
@@ -76,71 +73,6 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
     this.courseChannel = this.pusher.subscribe('course-channel');
   }
 
-  // start state management
-
-  storeConfig(): NgSimpleStateStoreConfig {
-    return {
-      storeName: 'GlobalCoursesModel',
-    };
-  }
-
-  initialState(): GlobalCoursesModel {
-    return {
-      page: 1,
-      last_page: -1,
-      list: [],
-      total: 0,
-    };
-  }
-
-  getList() {
-    return this.selectState((state) => state.list);
-  }
-
-  getItem(id) {
-    return this.selectState((state) => state.list.find((x) => x.id == id));
-  }
-
-  setItem(obj: any) {
-    this.setState((state) => {
-      const exists = state.list.some((item: any) => item.id === obj.id);
-      if (exists) {
-        // Update existing item
-        return {
-          ...state,
-          list: state.list.map((item: any) => (item.id === obj.id ? obj : item)),
-        };
-      } else {
-        // Add new item
-        return {
-          ...state,
-          list: [obj, ...state.list],
-        };
-      }
-    });
-  }
-  
-
-  getItemPromise(id) {
-    return new Promise ( resolve => {
-      this.selectState((state) => state.list.find((x) => x.id == id)).subscribe( data => {
-        resolve(data)
-      });
-    });
-  }
-
-  getCount() {
-    return this.selectState((state) => state.list.length);
-  }
-
-  getCountPromise() {
-    return new Promise((resolve) => {
-      this.selectState((state) => state.list.length).subscribe((res) => {
-        resolve(res);
-      });
-    });
-  }
-
   getGlobalCoursesFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       const user = this.users.getUser();
@@ -178,38 +110,49 @@ export class GlobalCoursesService extends NgSimpleStateBaseRxjsStore< GlobalCour
 
   }
 
-  getMyCoursesFromApi(search = '', page = 1) {
+  async getMyCoursesFromApi(page = 1, search = '' ): Promise<any> {
+  
+    const user = this.users.getUser();
+
+    const params: any = { page };
+    if (search) params.search = search;
+
     return new Promise(async (resolve) => {
-      const user = this.users.getUser();
-      let obj = {
-        search: search,
-        page: page,
-      };
-
-      let res = await this.network.getMyCourseList(obj, user.id);
-
+      const res = await this.network.getMyCourseList(params, user.id);
       const data = res.result;
-      this.setState((state) => {
-        if (page === 1) {
-          // Replace the list when on the first page
-          return {
-            ...state,
-            page: data.current_page,
-            last_page: data.last_page,
-            list: data.data, // Update the list
-          };
-        }
-        // Append to the list for subsequent pages
-        return {
-          ...state,
-          page: data.current_page,
-          last_page: data.last_page,
-          list: [...state.list, ...data.data],
-        };
-      });
-
-      resolve(true);
+      this.setList(data.data, data.current_page, data.last_page, data.total);
+      resolve(res);
     });
+
+      // const user = this.users.getUser();
+      // let obj = {
+      //   search: search,
+      //   page: page,
+      // };
+
+      // let res = await this.network.getMyCourseList(obj, user.id);
+
+      // const data = res.result;
+      // this.setState((state) => {
+      //   if (page === 1) {
+      //     // Replace the list when on the first page
+      //     return {
+      //       ...state,
+      //       page: data.current_page,
+      //       last_page: data.last_page,
+      //       list: data.data, // Update the list
+      //     };
+      //   }
+      //   // Append to the list for subsequent pages
+      //   return {
+      //     ...state,
+      //     page: data.current_page,
+      //     last_page: data.last_page,
+      //     list: [...state.list, ...data.data],
+      //   };
+      // });
+
+      // resolve(true);
 
   }
 

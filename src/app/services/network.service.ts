@@ -9,7 +9,7 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
-  
+
   constructor(
     public api: ApiService,
     public router: Router,
@@ -26,7 +26,7 @@ export class NetworkService {
   }
 
   signUpviaEmail(data) {
-    return this.httpPostResponse('signup-via-email', data, null, false, false);
+    return this.httpPostResponse('signup-via-email', data, null, false, true);
   }
 
   postImages(data) {
@@ -683,6 +683,11 @@ export class NetworkService {
     );
   }
 
+  deleteMaterial(data) {
+    return this.httpPostResponse('material/delete',data, null, false, false);
+  }
+
+
   deleteShedule(id) {
     return this.httpDeleteResponse('schedule/delete/' + id, null);
   }
@@ -824,6 +829,28 @@ export class NetworkService {
     return this.httpPostResponse(
       'material/upload/docs',
       data,
+      null,
+      false,
+      false,
+      'multipart/form-data'
+    );
+  }
+
+  uploadIntoVideoFile(data) {
+    return this.httpPostResponse(
+      'profile/video',
+      data,
+      null,
+      false,
+      true,
+      'multipart/form-data'
+    );
+  }
+
+  getIntoVideoFile(data) {
+    let str = this.serialize(data)
+    return this.httpGetResponse(
+      'profile/video' + '?' + str,
       null,
       false,
       false,

@@ -13,7 +13,7 @@
             <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
               [inputText]="formData.name" [key]="'name'" [errorText]="'Name is required'"></app-sd-input-box>
           </div>
-          <div class="input-box-lines d-flex flex-column gap-8"> 
+          <div class="input-box-lines d-flex flex-column gap-8">
             <div class="input-title fs-14 roboto-medium">Country</div>
             <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')" [country]="formData.country"
               [key]="'country'" [errorText]="'Country is required'"></app-sd-country-box>
@@ -194,7 +194,7 @@
 
 
           <div class="input-box-lines d-flex flex-column gap-8">
-            <app-profile-video></app-profile-video>
+            <app-profile-video [data]="{user_id: user.id}"></app-profile-video>
           </div>
           <div class="terms-agree" *ngIf="!hideTerms">
             <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"

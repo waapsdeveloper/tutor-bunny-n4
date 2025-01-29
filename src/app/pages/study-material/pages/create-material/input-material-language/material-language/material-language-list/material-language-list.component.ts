@@ -80,17 +80,24 @@ export class MaterialLanguageListComponent extends BasePage implements OnInit {
       }
 
       // Create a Set of preSelectedLanguage IDs for faster lookups
-      const preSelectedIds = new Set(
-        this.preSelectedLanguages.map((lang) => lang.id)
-      );
 
-      this.list = this.list.map((item) => {
-        if (preSelectedIds.has(item.id)) {
-          item.checked = true;
-          this.selectedItemId = item.id;
-        }
-        return item;
-      });
+      if(this.preSelectedLanguages){
+        const preSelectedIds = new Set(
+          this.preSelectedLanguages.map((lang) => lang.id)
+        );
+
+        this.list = this.list.map((item) => {
+          if (preSelectedIds.has(item.id)) {
+            item.checked = true;
+            this.selectedItemId = item.id;
+          }
+          return item;
+        });
+
+      }
+      
+
+      
 
       resolve(true);
     });

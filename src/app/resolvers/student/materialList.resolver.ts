@@ -11,7 +11,7 @@ export const materialListResolver: ResolveFn<any> = async (route, state) => {
 
   let count = await service.getCountPromise();
   if (!count || count == 0) {
-    service.getGlobalStudyMaterialFromApi('', 1);
+    service.getGlobalStudyMaterialFromApi(1, '');
   }
 
   return count;

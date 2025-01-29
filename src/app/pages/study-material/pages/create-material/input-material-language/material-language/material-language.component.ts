@@ -62,7 +62,7 @@ export class MaterialLanguageComponent extends BasePage implements OnInit {
 
 
     let obj = {
-      preSelectedLanguages: [this.language]
+      preSelectedLanguages: this.language ? [this.language] : []
     }
 
     const res = (await this.modals.present(

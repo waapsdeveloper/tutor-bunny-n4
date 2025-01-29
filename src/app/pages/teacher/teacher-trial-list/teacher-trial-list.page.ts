@@ -1,8 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
-// import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -10,9 +10,48 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class ProfileVideoComponent  implements OnInit {
 
+  full_url: string = '';
+
+  private _data: any;
+  @Input()
+  set data(value: any) {
+    this._data = value;
+    this.updateDetails(value);
+  }
+
+  get data(): any {
+    return this._data;
+  }
+
   constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService) { }
 
-  ngOnInit() {}
+  updateDetails(value){
+
+    if(value){
+      let user_id = value.user_id;
+      this.checkFileUploaded(user_id);
+    }
+
+  }
+
+  ngOnInit() {
+
+
+
+  }
+
+  async checkFileUploaded(user_id: any){
+
+    let obj = {
+      user_id: user_id
+    }
+    const res = await this.network.getIntoVideoFile(obj);
+    console.log(res);
+    if(res.result && res.result.full_url){
+      this.full_url = res.result.full_url;
+    }
+
+  }
 
   async onFileSelected(event: any) {
 
@@ -33,23 +72,26 @@ export class ProfileVideoComponent  implements OnInit {
 
         const user = this.users.getUser();
         const data = new FormData();
-        data.append('document', file);
-        data.append('file_type', fileType);
-        data.append('profile_id', user.id);
+        data.append('file', file);
 
         console.log("run bind")
 
-        // const res = await this.network.uploadStudtMaterialFile(data)
+        const res = await this.network.uploadIntoVideoFile(data);
+        console.log(res)
+        if(res.result && res.result.full_url){
+          this.full_url = res.result.full_url;
+        }
         // if(res.bool == true){
-        //   let docString = res.result.data;
-        //   await this.addDocInArray(docString, fileType)
+        //   console.log(res)
+        // //   let docString = res.result.data;
+        // //   await this.addDocInArray(docString, fileType)
         // }
 
         // await this.addDocInArray(docString, fileType);
       }
 
     }
-  }
 
+  }
 
 }

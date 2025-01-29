@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { BasePage } from 'src/app/base-page/base-page';
+import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { GlobalStudyMaterialService } from 'src/app/services/global-study-materi
   templateUrl: './notes.page.html',
   styleUrls: ['./notes.page.scss'],
 })
-export class NotesPage extends BasePage implements OnInit {
+export class NotesPage extends ListPage implements OnInit {
+  
   // user;
   // search = '';
   // page = 1;
@@ -125,33 +126,31 @@ export class NotesPage extends BasePage implements OnInit {
   // ShowSearchBar(event) {
   //   this.isSearchBarShow = !this.isSearchBarShow;
   // }
-
-  list$;
-
+  
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
   }
 
+  async fetchList(page: number, search: string, status: string): Promise<any> {
+    const res = await this.globalStudyMaterialService.getMyStudyMaterialFromApi(page, search);
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total
+    };
+  }
+
   ngOnInit() {
-    this.globalStudyMaterialService.getList().subscribe((res) => {
-      this.list$ = res;
-    });
+    this.resetAndFetch();
   }
 
-  async handleRefresh(event) {
-    await this.globalStudyMaterialService.getMyStudyMaterialFromApi('', 1);
-    event.target.complete();
-  }
-
-  async onIonInfinite(ev) {
-    if (this.globalStudyMaterialService.page <= this.globalStudyMaterialService.last_page) {
-      const np = this.globalStudyMaterialService.page + 1;
-      await this.globalStudyMaterialService.getMyStudyMaterialFromApi('', np);
-    }
-    (ev as InfiniteScrollCustomEvent).target.complete();
-  }
 
   openDetails(item: any) {    
     this.nav.push('teacher-material-detail', {material_id: item.id})
+  }
+
+  onMaterialDeleted(item: any) {
+    this.globalStudyMaterialService.removeItem(item);
   }
 }
