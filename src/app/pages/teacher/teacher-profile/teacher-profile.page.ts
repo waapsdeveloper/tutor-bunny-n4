@@ -226,9 +226,10 @@ export class TeacherProfilePage
     verifiedOn: '',
     rating: 0,
     totalRating: 0,
+    is_edit: true
   };
 
-  
+
   loading = false;
   user: any;
   teacher$;
@@ -281,7 +282,7 @@ export class TeacherProfilePage
   ngOnInit() {
     console.log()
     const params = this.nav.getQueryParams();
-    
+
     if (params['email']) {
       this.initialize(params['email']);
     }
@@ -317,6 +318,7 @@ export class TeacherProfilePage
       verifiedOn: moment(user.verified_on).format('DD-MMM-YYYY'),
       rating: user.teacher.avg_rating,
       totalRating: user.teacher.total_rating,
+      is_edit: true
     };
 
     this.infoData = {
@@ -388,44 +390,45 @@ export class TeacherProfilePage
       displayName: this.utility.getAmericanName(this.user.name),
       verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
       rating: this.user.teacher.avg_rating,
-      totalRating: this.user.teacher.total_rating
+      totalRating: this.user.teacher.total_rating,
+      is_edit: true
     }
 
-    // this.infoData = {
-    //   subjects: this.user.teacher.subjects,
-    //   languages: this.user.teacher.languages,
-    //   travel_policy: this.user.teacher.travel_policy.name,
-    //   country: this.user.teacher.country.name,
-    //   city: this.user.teacher.city,
-    //   state: this.user.teacher.state.name,
-    //   //flag: this.getFlag()
-    // }
+    this.infoData = {
+      subjects: this.user.teacher.subjects,
+      languages: this.user.teacher.languages,
+      travel_policy: this.user.teacher.travel_policy.name,
+      country: this.user.teacher.country.name,
+      city: this.user.teacher.city,
+      state: this.user.teacher.state.name,
+      flag: this.getFlag()
+    }
 
-    // this.countData = {
-    //   years_of_experience: this.user.teacher.started_teaching,
-    //   course_count: res.course_material.total_courses,
-    //   notes_count: res.course_material.total_material,
-    // }
+    this.countData = {
+      years_of_experience: this.user.teacher.started_teaching,
+      course_count: res.course_material.total_courses,
+      notes_count: res.course_material.total_material,
+    }
 
-    // this.aboutData = {
-    //   heading: 'About',
-    //   text: this.user.teacher.description || ''
-    // }
+    this.aboutData = {
+      heading: 'About',
+      text: this.user.teacher.description || ''
+    }
 
-    // this.courseData = {
-    //   heading: 'Courses & Study Notes',
-    //   list: res.course_material.list
-    // }
+    this.courseData = {
+      heading: 'Courses & Study Notes',
+      list: res.course_material.list
+    }
 
-    // this.galleryData = {
-    //   heading: 'Gallery',
-    //   list: res.gallery
-    // }
+    this.galleryData = {
+      heading: 'Gallery',
+      list: res.gallery
+    }
 
-    // this.ratingData = {
-    //   heading: 'Reviews',
-    //   list: res.reviews
-    // }
+    this.ratingData = {
+      heading: 'Reviews',
+      list: res.reviews
+    }
 
     this.loading = false;
 
@@ -442,7 +445,7 @@ export class TeacherProfilePage
     //   this.rating = this.user.teacher.avg_rating;
     //   this.status = this.user.teacher.status;
 
-    //   this.subject = this.user.teacher.subjects;
+      // this.subject = this.user.teacher.subjects;
     //   this.experince = this.user.teacher.started_teaching;
     //   // const user = this.users.getUser();
     //   const data = (await this.network.getImage(res.user.id)) as any;

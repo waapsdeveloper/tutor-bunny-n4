@@ -8,7 +8,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CartListItemComponent {
 
   @Output() openDetails = new EventEmitter<any>()
-  @Output() removeCartitem = new EventEmitter<any>()
+  @Output() removeCartitem = new EventEmitter<any>();
+  @Output() updateSelection = new EventEmitter<any>();
 
   private _item: any;
 

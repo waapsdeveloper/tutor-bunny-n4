@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
 import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
@@ -15,11 +16,18 @@ import { SwiperComponent } from 'swiper/angular';
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
-export class CartPage extends BasePage implements OnInit {
+export class CartPage extends BasePage implements OnInit, ViewWillEnter {
+updateSelection($event: any) {
+throw new Error('Method not implemented.');
+}
   title = 'Cart';
   buttonText = 'Checkout';
   list$;
-  total = 0;
+  subtotal = 0;
+  total;
+  tax;
+  
+  currency_symbol = '$'
 
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
@@ -31,15 +39,46 @@ export class CartPage extends BasePage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {
-    this.cartService.getList().subscribe((data) => {
+  ionViewWillEnter(): void {
+    
+    this.cartService.getListPromise().then((data) => {
       this.list$ = data;
       this.title = 'Cart (' + this.list$.length + ')';
 
-      this.total = this.list$.reduce((prev, next) => {
-        return prev + parseFloat(next.price);
+      console.log(data);
+
+
+
+      this.subtotal = this.list$.reduce((prev, next) => {
+        let n = parseFloat(next.updated_price.replace(/,/g, ''));
+        console.log(n);  
+        return parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''));
       }, 0);
+
+      this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
+
+      this.total = parseFloat( `${this.subtotal + parseFloat(this.tax)}` ).toFixed(2)
+
+
+
+      this.list$ = this.list$.map( item => {
+        item['selected'] = true;
+        return item;
+      })
+
+      let item = this.list$ && this.list$[0] ? this.list$[0] : null;
+      if(item){
+        this.currency_symbol = item['auth_user_currency_symbol']
+      }
+
+
     });
+
+  }
+
+  ngOnInit() {
+
+    
   }
 
   removeCartitem(item) {
@@ -51,7 +90,7 @@ export class CartPage extends BasePage implements OnInit {
       return 'Checkout';
     }
 
-    let items = this.list$.filter((x) => x.selected == true).length;
+    let items = this.list$.filter((x) => x.selected === true).length;
     return `Checkout (${items}) items`;
   }
 
