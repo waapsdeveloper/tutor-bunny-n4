@@ -13,31 +13,34 @@ export class AttachmentListComponent  implements OnInit {
 
   ngOnInit() {}
 
-  setBackgroundImage(item) {
-    // return `url('${item.image}')`;
-    console.log(item)
-    item.type = item.file_type;
+  // setBackgroundImage(item) {
+  //   // return `url('${item.image}')`;
+  //   console.log(item)
+  //   item.type = item.file_type;
 
 
-    let path = "assets/svg/filetypes/";
-    if (item.type.includes("pdf")) {
-      path += "pdf.svg";
-    } else
+  //   let path = "assets/svg/filetypes/";
+  //   if (item.type.includes("pdf")) {
+  //     path += "pdf.svg";
+  //   } else
 
-    if (item.type.includes("sheet") ) {
-      path += "xls.svg";
-    } else
+  //   if (item.type.includes("sheet") ) {
+  //     path += "xls.svg";
+  //   } else
 
-    if (item.type.includes("document")) {
-      path += "doc.svg";
-    }
+  //   if (item.type.includes("document")) {
+  //     path += "doc.svg";
+  //   }
 
-    if (item.type.includes("image")) {
-      path += "png.svg";
-    }
+  //   if (item.type.includes("image")) {
+  //     path += "png.svg";
+  //   }
 
 
-    return `url(${path})`;
+  //   return `url(${path})`;
+  // }
+  setBackgroundImage(item): string {
+    return `url('${item.full_url}')`;
   }
 
 }
