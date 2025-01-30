@@ -13,8 +13,8 @@ import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   loading = false;
-  user: any;  
-
+  user: any;
+  videoBox
   teacher$;
   teacherId;
 
@@ -52,12 +52,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   courseData = {
-    heading: 'Courses & Study Notes',    
+    heading: 'Courses & Study Notes',
     list: []
   }
 
   galleryData = {
-    heading: 'Gallery',    
+    heading: 'Gallery',
     list: []
   }
 
@@ -71,7 +71,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
 
 
-  constructor(injector: Injector, 
+  constructor(injector: Injector,
     public globalTeacherService: GlobalTeacherService,
     private chats : ChatService) {
     super(injector);
@@ -80,7 +80,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   ngOnInit() {
     const params = this.nav.getQueryParams();
     if (params['email']) {
-      this.initialize(params['email']);      
+      this.initialize(params['email']);
     }
   }
 
@@ -92,7 +92,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     }
 
     if (this.params.teacher_id) {
-      
+
       this.teacherId = this.params.teacher_id;
       this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
         this.teacher$ = data;
@@ -104,7 +104,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     }
     // this.spinner = true;
 
-    
+
     // this.isTrailReq();
   }
 
@@ -142,8 +142,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       type: 'course'
     };
 
+    this.videoBox = {
+       user_id :user?.id
+    }
+
     const ratings = await this.network.getReviews(reviews_params);
-    
+
     this.ratingData = {
       heading: 'Reviews',
       list: ratings.result
@@ -155,13 +159,13 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
 
     let res = await this.network.getStudentTeacherProfileByEmail(obj);
-  
+
     this.countData = {
       years_of_experience: user.teacher.started_teaching,
       course_count: res.course_material.total_courses,
       notes_count: res.course_material.total_material,
     }
-    
+
     this.courseData = {
       heading: 'Courses & Study Notes',
       list: res.course_material.list
@@ -177,11 +181,11 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   async initialize(email) {
     this.loading = true;
-    
+
     // let obj = {
     //   email: email,
     // };
-    
+
     // let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
     // console.log(res);
@@ -227,7 +231,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     //   heading: 'Gallery',
     //   list: res.gallery
     // }
-    
+
 
     // this.ratingData = {
     //   heading: 'Reviews',
@@ -279,7 +283,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     console.log($event)
   }
 
-  
+
   async goToChat() {
     let student = this.users.getUser();
 
@@ -294,14 +298,14 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   async openChatWithData() {
       let student = this.users.getUser();
       const chatRoomId = await this.chats.getChadRoomId(this.user.id, student.id) as number;
-  
+
       if(chatRoomId != -1){
         this.nav.push('messages', {
           chat_room_id: chatRoomId
         })
       }
     }
-  
+
     async openWelcomeComponent() {
       let res = await this.modals.present(
         StudentWelcomeComponent,

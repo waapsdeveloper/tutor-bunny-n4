@@ -1,7 +1,7 @@
 <ion-content>
 
   <app-stp-page-header [data]="headerData" (back)="nav.pop()"></app-stp-page-header>
-  <app-stp-page-video-box ></app-stp-page-video-box>
+  <app-stp-page-video-box [data]="videoBox" ></app-stp-page-video-box>
 
 
   <div class="body-content-684488">
@@ -20,7 +20,7 @@
 
   <div class="footer-buttons-78963 ion-padding">
     <app-sd-button-clear class="footer-button-1" [text]="'$7/Hr'" ></app-sd-button-clear>
-    <app-sd-button-golden class="footer-button-2" [image]="'assets/svg/send-message.svg'" [text]="'Message'" (click)="goToChat()"></app-sd-button-golden>    
+    <app-sd-button-golden class="footer-button-2" [image]="'assets/svg/send-message.svg'" [text]="'Message'" (click)="goToChat()"></app-sd-button-golden>
   </div>
-  
+
 </ion-content>
