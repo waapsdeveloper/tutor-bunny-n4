@@ -25,7 +25,7 @@ export class CourseFormPage
   lang;
   showBack;
   title;
-  type;
+  type = 1;
   category;
   user;
   image;
@@ -74,10 +74,10 @@ export class CourseFormPage
     if (this.params.edit) {
       this.edit = this.params.edit;
     }
-    if (this.params.type) {
-      this.type = this.params.type;
-      localStorage.setItem('courseType', this.type);
-    }
+    // if (this.params.type) {
+    //   this.type = this.params.type;
+    //   localStorage.setItem('courseType', this.type);
+    // }
     if (this.params.course_Id) {
       this.courseId = this.params.course_Id;
       localStorage.setItem('courseId', this.courseId);

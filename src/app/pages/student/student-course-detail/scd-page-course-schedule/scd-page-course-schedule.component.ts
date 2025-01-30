@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./scd-page-course-schedule.component.scss'],
 })
 export class ScdPageCourseScheduleComponent  implements OnInit {
+  
   schedules: any[] = [];
 
   private _data: any; 
@@ -25,6 +26,7 @@ export class ScdPageCourseScheduleComponent  implements OnInit {
 
   updateUserDetails(value: any){
 
+    console.log(value)
     if (value) {
       this.schedules = value.schedules;
     }

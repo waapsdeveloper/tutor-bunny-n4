@@ -133,20 +133,6 @@ export class CourseDetailPage extends BasePage {
     }
   }
 
-  prevImage() {
-    this.currentIndex =
-      this.currentIndex > 0
-        ? this.currentIndex - 1
-        : this.courseImages.length - 1;
-  }
-
-  nextImage() {
-    this.currentIndex =
-      this.currentIndex < this.courseImages.length - 1
-        ? this.currentIndex + 1
-        : 0;
-  }
-
   async callApi(data): Promise<boolean> {
     console.log(data);
     const resImages = await this.network.getCourseImages({
@@ -233,8 +219,11 @@ export class CourseDetailPage extends BasePage {
       text: data.user.teacher.title,
     };
 
+    const res2 = await this.network.getScheduleRelation(data.id)
+    console.log(res2)
+
     this.scheduleData = {
-      schedules: data.schedules,
+      schedules: res2.result,
     };
 
     let similarcourse_params = {
@@ -333,19 +322,6 @@ export class CourseDetailPage extends BasePage {
     this.otherCourseList = result.data;
   }
 
-  getFlag() {
-    if (this.data && this.data.user.teacher && this.data.user.teacher.country) {
-      const flag = this.data.user.teacher.country.iso2;
-      if (flag) {
-        return flag.toLowerCase();
-      } else {
-        return '';
-      }
-    } else {
-      return '';
-    }
-  }
-
   openOtherCourses($event) {
     this.nav.push('/courses');
   }
@@ -387,5 +363,23 @@ export class CourseDetailPage extends BasePage {
     let user = this.users.getUser();
     this.course$.is_liked_by_me = false;
     this.courseFavoriteService.removeFavorites(this.course$, user);
+  }
+
+  async tapAction($event){    
+
+    let obj = Object.assign({}, $event);
+    if(obj.name == 'edit'){
+      const params = {
+        title: 'Edit Course',
+        showBack: true,
+        course_Id: this.courseId,
+        edit: true
+      };
+  
+      this.nav.push('/course-form', params)
+  
+      
+    }
+
   }
 }

@@ -483,6 +483,15 @@ export class NetworkService {
     );
   }
 
+  getScheduleRelation(id) {
+    return this.httpGetResponse(
+      'schedule/relation/by-course/' + id,
+      null,
+      false,
+      false
+    );
+  }
+
   getMyLanguages(data) {
     const str = this.serialize(data);
     return this.httpGetResponse(
