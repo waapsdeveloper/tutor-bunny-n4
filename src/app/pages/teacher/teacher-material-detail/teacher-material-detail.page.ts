@@ -123,20 +123,6 @@ export class TeacherMaterialDetailPage extends BasePage {
     }
   }
 
-  // prevImage() {
-  //   this.currentIndex =
-  //     this.currentIndex > 0
-  //       ? this.currentIndex - 1
-  //       : this.courseImages.length - 1;
-  // }
-
-  // nextImage() {
-  //   this.currentIndex =
-  //     this.currentIndex < this.courseImages.length - 1
-  //       ? this.currentIndex + 1
-  //       : 0;
-  // }
-
   async callApi(data) {
     console.log(data);
     const resImages = await this.network.getMaterialImages({
@@ -147,7 +133,18 @@ export class TeacherMaterialDetailPage extends BasePage {
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: resImages.result,
-      actions: [],
+      actions: [
+        {
+          name: 'edit',
+          img: 'assets/svg/edit-pencil-77.svg',
+          action: null
+        },
+        {
+          name: 'share',
+          img: 'assets/svg/share-77.svg',
+          action: null
+        },
+      ],
     };
 
     this.infoData = {
@@ -321,4 +318,23 @@ export class TeacherMaterialDetailPage extends BasePage {
   }
 
   goToChat() {}
+
+  async tapAction($event){    
+
+    let obj = Object.assign({}, $event);
+    if(obj.name == 'edit'){
+      const params = {
+        title: 'Edit Material',
+        showBack: true,
+        material_Id: this.materialId,
+        edit: true
+      };
+  
+      this.nav.push('/create-material', params)
+  
+      
+    }
+
+  }
+
 }
