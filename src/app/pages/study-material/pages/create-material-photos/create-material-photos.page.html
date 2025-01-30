@@ -6,6 +6,15 @@
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
+        <ion-col class="ïon-no-padding" *ngFor="let photo of this.createMaterialService.base64ImagesArray; let i = index" size-xs="4" size-sm="4"
+          size-md="4" size-lg="4">
+          <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(photo)"
+            (click)="openImage(photo)">
+            <!-- <ion-icon name="star" [class.set-feature-input-678956744]="coursePhoto.feature === true"
+              class="feature-input-678956744" (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon> -->
+            <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImageB64(i , $event)">
+          </div>
+        </ion-col>
         <ion-col class="ïon-no-padding" *ngFor="let photo of images$; let i = index" size-xs="4" size-sm="4"
           size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(photo)"

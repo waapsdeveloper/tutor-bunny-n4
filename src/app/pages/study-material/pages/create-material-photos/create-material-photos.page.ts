@@ -14,7 +14,7 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
   doc:null
   params;
   remainingSlots;
-  images$: any[] = [];
+  images$: any[] = [];  
   materialId;
 
 
@@ -111,6 +111,11 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
     this.createMaterialService.removeImageInImagesIndex(index)
   }
 
+  async clearImageB64(index: any, event: Event) {
+    event.stopPropagation();
+    this.createMaterialService.base64ImagesArray.splice(index, 1);
+  }
+
   openImage(image) {
     // this.nav.push('/course-profile/course-photo/gallery-image', {
     //   backUrl: '/course-profile/course-photo',
@@ -119,8 +124,13 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
   }
 
   ngOnDestroy(): void {
+
     if(this.images$.length > 0){
-      this.createMaterialService.setImage(this.images$[0])
+      this.createMaterialService.setImage(this.images$[0].image)
+    }
+
+    if(this.createMaterialService.base64ImagesArray.length > 0){
+      this.createMaterialService.setImage(this.createMaterialService.base64ImagesArray[0].image)
     }
   }
 
