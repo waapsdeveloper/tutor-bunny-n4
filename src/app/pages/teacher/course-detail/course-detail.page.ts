@@ -1,5 +1,5 @@
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
@@ -69,6 +69,14 @@ export class CourseDetailPage extends BasePage {
     list: []
   }
 
+  isMyOwn = false;
+
+
+
+
+
+
+
   data;
   params;
   backUrl;
@@ -114,7 +122,7 @@ export class CourseDetailPage extends BasePage {
   constructor(
     injector: Injector,
     private globalCoursesService: GlobalCoursesService,
-    private courseFavoriteService: CourseFavoriteService
+    private courseFavoriteService: CourseFavoriteService,
   ) {
     super(injector);
   }
@@ -134,6 +142,7 @@ export class CourseDetailPage extends BasePage {
   }
 
   async callApi(data): Promise<boolean> {
+    
     console.log(data);
     const resImages = await this.network.getCourseImages({
       course_id: data.id,
@@ -210,6 +219,9 @@ export class CourseDetailPage extends BasePage {
       text: data.description,
     };
 
+    const authUser = this.users.getUser();
+    this.isMyOwn = authUser.id == data.user.id;
+    
     this.teacherData = {
       image: data.user.image,
       name: data.user.name,

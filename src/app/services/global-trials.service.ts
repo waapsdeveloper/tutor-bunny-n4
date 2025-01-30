@@ -54,8 +54,9 @@ export class GlobalTrialsService  {
   }
 
   registerPusherEvent() {
-    let user = this.users.getUser() as any;
 
+    let user = this.users.getUser() as any;
+    console.log('global-trials-pusher = trials-rec-' + user.id);
     this.trialChannel.bind(
       'trials-rec-' + user.id,
       this.trialsChannelReceived.bind(this)

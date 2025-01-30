@@ -33,7 +33,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     injector: Injector,
     private profilesService: ProfileService,
     private router: Router,
-    private iap: InitializeAppService,
+    // private iap: InitializeAppService,
     public teacher: TeacherService,
     public chats: ChatService,
     public chatService: ChatService,
@@ -43,11 +43,11 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     private fcm: FirebaseService,
 
     // subscription APIs
-    private pendingTrialsService: PendingTrialsService,
-    private globalStudyMaterialService: GlobalStudyMaterialService,
-    private globalTeacherService: GlobalTeacherService,
-    private globalFavCoursesService: GlobalFavCoursesService,
-    private globalFavMaterialService: GlobalFavMaterialService,
+    // private pendingTrialsService: PendingTrialsService,
+    // private globalStudyMaterialService: GlobalStudyMaterialService,
+    // private globalTeacherService: GlobalTeacherService,
+    // private globalFavCoursesService: GlobalFavCoursesService,
+    // private globalFavMaterialService: GlobalFavMaterialService,
 
 
     // new services
