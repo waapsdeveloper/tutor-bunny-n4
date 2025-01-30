@@ -7,6 +7,10 @@ import { NetworkService } from 'src/app/services/network.service';
   styleUrls: ['./stp-page-video-box.component.scss'],
 })
 export class StpPageVideoBoxComponent {
+  
+  doPlay = false;
+  
+  
   videoUrl: string | null = null;
 
   constructor(private network: NetworkService) { }
@@ -29,10 +33,18 @@ export class StpPageVideoBoxComponent {
   async setData(value: any) {
     let res = await this.network.getIntoVideoFile(value)
     console.log(res);
-    if (res?.result?.full_url) {
-      this.videoUrl = res.result.full_url;
-      console.log(this.videoUrl);
+    this.videoUrl = res?.result?.full_url || null;
+    
+  }
 
+  onVideoError(event: any) {
+    console.error('Video failed to load', event);
+    this.videoUrl = null; // Reset video if there's an error
+  }
+
+  playVIdeo(){
+    if(this.videoUrl){
+      this.doPlay = true;
     }
   }
 
