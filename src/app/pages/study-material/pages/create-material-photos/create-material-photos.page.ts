@@ -41,7 +41,7 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
     const d = await this.createMaterialService.getFormDataAsync() as any;
     this.materialId = d.id;
 
-    if(this.materialId){
+    if(this.materialId && this.materialId !== -1){
       const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
       if(res.result){
         this.createMaterialService.setImages(res.result)
