@@ -19,7 +19,6 @@ export class InputMaterialKeywordsComponent  implements OnInit {
   constructor(public createMaterialService: CreateMaterialService, public events: EventsService) {
     this.createMaterialService.getKeywords().subscribe(keywords => {
       this.keywords$ = keywords;
-
     });
   }
 
