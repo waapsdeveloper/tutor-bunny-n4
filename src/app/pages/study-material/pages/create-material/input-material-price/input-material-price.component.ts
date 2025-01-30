@@ -20,7 +20,7 @@ export class InputMaterialPriceComponent implements OnInit {
 
   constructor(public createMaterialService: CreateMaterialService, public users: UsersService, public events: EventsService) {
     this.createMaterialService.getPrice().subscribe((value) => {
-      this.price$ = value;
+      this.price$ = parseInt(`${value}`);
     });
   }
 

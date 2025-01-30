@@ -38,15 +38,15 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
 
   async initialize() {
 
-    // const d = await this.createMaterialService.getFormDataAsync() as any;
-    // this.materialId = d.id;
+    const d = await this.createMaterialService.getFormDataAsync() as any;
+    this.materialId = d.id;
 
-    // if(this.materialId){
-    //   const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
-    //   if(res.result){
-    //     this.createMaterialService.setImages(res.result)
-    //   }
-    // }
+    if(this.materialId){
+      const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
+      if(res.result){
+        this.createMaterialService.setImages(res.result)
+      }
+    }
 
 
 

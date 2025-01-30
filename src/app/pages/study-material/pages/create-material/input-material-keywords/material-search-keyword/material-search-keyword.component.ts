@@ -61,11 +61,7 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
     });
   }
 
-  async loadMore($event) {
-    this.page = this.sub.current_page + 1;
-    await this.callApi();
-    $event.target.complete();
-  }
+
   selection(item: any) {
     this.modals.dismiss(item);
   }
@@ -78,24 +74,31 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
   }
 
   async addSubject() {
-    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+    
+    
+    let study_material_id = await this.createMaterialService.getIdPromise();
     if (this.inputText) {
       let obj = {
-        course_id: course_Id,
+        study_material_id: study_material_id,
         name: this.inputText,
       };
       // return;
-      const res = await this.network.addInputKeyword(obj);
+      const res = await this.network.addMaterialInputKeyword(obj);
       let data = {
-        course_id: course_Id,
+        study_material_id: study_material_id,
       };
-      const res2 = await this.network.getMyKeyword(data);
-      this.inputText = '';
+      const res2 = await this.network.getMaterialKeyword(data);
+      console.log(res2)
+
+      // this.inputText = '';
       this.subs = res2.result;
-      this.suggestionsList = [];
-      this.actionChange.emit({
-        subs: this.subs,
-      });
+      this.createMaterialService.setKeywords(this.subs);
+
+      // this.createMaterialService.addKeywordInKeywords(item);
+      // this.suggestionsList = [];
+      // this.actionChange.emit({
+      //   subs: this.subs,
+      // });
     }
   }
   async checkSuggestions(event) {

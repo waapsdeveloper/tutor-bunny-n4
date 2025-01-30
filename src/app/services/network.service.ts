@@ -522,6 +522,10 @@ export class NetworkService {
     return this.httpPostResponse('keywords/add-name-keyword', data);
   }
 
+  addMaterialInputKeyword(data) {
+    return this.httpPostResponse('keywords/add-material-name-keyword', data);
+  }
+
   getMySubjects(data) {
     const str = this.serialize(data);
     return this.httpGetResponse(
@@ -536,6 +540,16 @@ export class NetworkService {
     const str = this.serialize(data);
     return this.httpGetResponse(
       'keywords/my-list' + '?' + str,
+      null,
+      false,
+      false
+    );
+  }
+
+  getMaterialKeyword(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'keywords/material-list' + '?' + str,
       null,
       false,
       false

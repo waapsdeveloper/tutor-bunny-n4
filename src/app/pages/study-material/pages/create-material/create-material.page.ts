@@ -68,8 +68,18 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     if (this.params.material_Id) {
       this.materialId = this.params.material_Id;
       const res = await this.globalStudyMaterialService.getItemPromise(this.materialId);
-
       this.createMaterialService.setStateItem(res);
+
+      // get keywords from API
+
+      let obj = {
+        study_material_id: this.materialId
+      }
+      const res2 = await this.network.getMaterialKeyword(obj);
+      console.log(res2);
+      if(res2.result){
+        this.createMaterialService.setKeywords(res2.result)
+      }
 
       // localStorage.setItem('courseId', this.courseId);
 
@@ -119,7 +129,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       "title": data.title,
       "description": data.description,
       "language_id": data.language_id,
-      "price": data.price,
+      "price": parseInt(data.price),
     }
 
 
