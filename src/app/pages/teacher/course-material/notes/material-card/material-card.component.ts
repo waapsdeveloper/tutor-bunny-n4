@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -19,7 +26,6 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   total_rating;
   displayName;
 
-
   private _item: any;
 
   @Input('item')
@@ -37,7 +43,6 @@ export class MaterialCardComponent extends BasePage implements OnInit {
     this.updated_at = updated_at ? moment(updated_at).format('DD-MMM-Y') : '';
 
     this.initialize(value);
-
   }
   course;
   status;
@@ -48,8 +53,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   @Output() courseEdit = new EventEmitter<any>();
 
   constructor(injector: Injector, private alertController: AlertController) {
-    super(injector)
-
+    super(injector);
   }
 
   ngOnInit() {
@@ -57,12 +61,9 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   }
 
   async initialize(data) {
-
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
-
-
   }
 
   async presentAlert(item) {
@@ -72,8 +73,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-          },
+          handler: () => {},
         },
         {
           text: 'OK',
@@ -88,8 +88,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
     await alert.present();
   }
 
-  setResult(ev) {
-  }
+  setResult(ev) {}
 
   async deleteMaterial(data) {
     let obj = {
@@ -104,47 +103,38 @@ export class MaterialCardComponent extends BasePage implements OnInit {
 
   async editCourse(item) {
     const params = {
-      backUrl: '/tabs/courses',
-      title: 'Edit Course',
-      type: item.type,
+      title: 'Edit Material',
       showBack: true,
-      course_Id: item.id,
-      edit: true
+      material_Id: item.id,
+      edit: true,
     };
 
-    let res = await this.nav.push('/course-form', params)
-
-    this.courseEdit.emit(item.id);
-
+    this.nav.push('/create-material', params);
   }
 
   async inactiveCourse(data) {
-
     let obj = {
       material_id: data.id,
-    }
+    };
 
-    let res = await this.network.inactiveCourse(obj)
+    let res = await this.network.inactiveCourse(obj);
     if (res.status === 200) {
       this.item = res.course;
       this.status = this.item.status;
       this.inActiveTab.emit();
     }
-
   }
-
 
   async activeCourse(data) {
     let obj = {
       material_id: data.id,
-    }
+    };
 
-    let res = await this.network.activeCourse(obj)
+    let res = await this.network.activeCourse(obj);
     if (res.status === 200) {
       this.item = res.course;
       this.status = this.item.status;
       this.activeTab.emit();
     }
   }
-
 }
