@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-teacher-info-card',
@@ -26,13 +27,12 @@ export class TeacherInfoCardComponent {
   teacher_id = null;
   email = ''
 
-  @Output() openDetail = new EventEmitter<any>()
-
-  constructor() {}
+  constructor(private nav: NavService) {}
 
   updateDetails(value: any) {
     console.log(value)
     if (value) {
+      this.email = value.email,
       this.teacher_id = value.teacher_id
       this.image = value.image;
       this.name = value.name;
@@ -42,6 +42,14 @@ export class TeacherInfoCardComponent {
 
 
     }
+  }
+
+  openTeacherDetail(){
+    
+    const params = {
+      email: this.email,
+    };
+    this.nav.push('/teacher-profile', params);
   }
 
 

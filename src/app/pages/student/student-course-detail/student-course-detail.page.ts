@@ -530,12 +530,5 @@ export class StudentCourseDetailPage extends BasePage {
     // await this.callApi();
     this.content.scrollToTop(500); // 500ms animation duration
   }
-
-  openTeacherDetail($event){
-    let obj = Object.assign({}, $event);
-    const params = {
-      email: obj.email,
-    };
-    this.nav.push('/teacher-profile', params);
-  }
+  
 }
