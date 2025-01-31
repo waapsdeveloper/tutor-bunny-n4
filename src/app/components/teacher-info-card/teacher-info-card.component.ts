@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-teacher-info-card',
@@ -23,12 +23,17 @@ export class TeacherInfoCardComponent {
   flag = ''
   country = '';
   text = '';
+  teacher_id = null;
+  email = ''
+
+  @Output() openDetail = new EventEmitter<any>()
 
   constructor() {}
 
   updateDetails(value: any) {
     console.log(value)
     if (value) {
+      this.teacher_id = value.teacher_id
       this.image = value.image;
       this.name = value.name;
       this.flag = value.flag;
@@ -38,5 +43,7 @@ export class TeacherInfoCardComponent {
 
     }
   }
+
+
 
 }

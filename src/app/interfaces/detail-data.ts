@@ -19,6 +19,8 @@ export interface infoColumnSingleItem {
 }
 
 export interface teacherCardInfo {
+    email: string,
+    teacher_id: number,
     image: string,
     name: string,
     flag: string,

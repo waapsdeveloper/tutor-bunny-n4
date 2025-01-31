@@ -45,6 +45,8 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   teacherData: teacherCardInfo = {
+    email: '',
+    teacher_id: -1,
     image: '',
     name: '',
     flag: '',
@@ -231,6 +233,8 @@ export class StudentCourseDetailPage extends BasePage {
     }
 
     this.teacherData = {
+      email: data.user.email,
+      teacher_id: data.user.id,
       image: data.user.image,
       name: data.user.name,
       flag: this.utility.getFlag(data.user),
@@ -514,16 +518,24 @@ export class StudentCourseDetailPage extends BasePage {
     return true;
   }
   
-  goToTeacher(user) {
-    const params = {
-      email: user.email,
-    };
-    this.nav.push('/teacher-profile', params);
-  }
+  // goToTeacher(user) {
+  //   const params = {
+  //     email: user.email,
+  //   };
+  //   this.nav.push('/teacher-profile', params);
+  // }
 
   async getOtherCourse(event) {
     this.course_Id = event.id;
     // await this.callApi();
     this.content.scrollToTop(500); // 500ms animation duration
+  }
+
+  openTeacherDetail($event){
+    let obj = Object.assign({}, $event);
+    const params = {
+      email: obj.email,
+    };
+    this.nav.push('/teacher-profile', params);
   }
 }

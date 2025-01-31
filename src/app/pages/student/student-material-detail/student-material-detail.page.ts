@@ -49,6 +49,8 @@ export class StudentMaterialDetailPage extends BasePage {
     country: '',
     icon: '',
     text: '',
+    email: '',
+    teacher_id: 0
   };
 
   materialData = {
@@ -175,6 +177,8 @@ export class StudentMaterialDetailPage extends BasePage {
       country: data.user.teacher.country.name,
       icon: 'assets/svg/teacher-icon.svg',
       text: data.user.teacher.title,
+      email: data.user.email,
+      teacher_id: data.user.id,
     };
 
     const materialList = await this.getotherMaterialList(data.id);
