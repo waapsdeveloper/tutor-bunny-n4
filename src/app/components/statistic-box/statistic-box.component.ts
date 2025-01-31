@@ -8,11 +8,14 @@ import { BasePage } from 'src/app/base-page/base-page';
 })
 export class StatisticBoxComponent extends BasePage implements OnInit {
 
-  trials;
-  courses;
-  event
-  credits;
-  views;
+  trials = 0;
+  courses = 0;
+  event = 0
+  credits = 0;
+  views = 0;
+  earnings = 5897640;
+  currency_symbol = '₹'; 
+  coins = 0;
 
   constructor(injector: Injector) {
     super(injector)
@@ -21,16 +24,21 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
 
   async ngOnInit() {
     this.events.subscribe('get-dashboard-stats', this.initialize.bind(this))
-
   }
 
   async initialize() {
+
     let res = await this.network.getdashboardcounts();
+
     this.trials = res.trials;
     this.courses = res.courses;
     this.event = res.events;
     this.credits = res.events;
     this.views = res.events;
+    this.earnings = res.earnings || 0;
+    this.currency_symbol = res.currency_symbol || '$';
+    this.coins = res.coins;
+
   }
 
   goToTrialReq() {
