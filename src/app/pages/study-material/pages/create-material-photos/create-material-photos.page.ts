@@ -41,7 +41,6 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
     });
 
     this.createMaterialService.getImages().subscribe( (data) => {
-      console.log("updates", data)
       this.images$ = data;
     });
 
@@ -69,14 +68,16 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
     return `url('${item.image}')`;
   }
 
-  async addImageInArray(imageString) {
+  async addImageInArray(imageString, type) {
 
     let obj = {
       feature: false,
       image: imageString,
+      type: type
     };
 
     await this.createMaterialService.addImageInImages(obj);
+
   }
 
 
@@ -104,30 +105,18 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
       } else {
 
 
+        const data = new FormData();
+        data.append('image', file);
+        data.append('file_type', fileType);
+        data.append('study_material_id', this.studyMaterialId$);
 
-        let obj = {
-          user_id: user.id,
-          study_material_id: this.studyMaterialId$,
-          image: imageString,
-        };
+        const res = await this.network.uploadStudtMaterialImage(data)
+        if(res.bool == true){
+          let imageString = res.result.data;
+          await this.addImageInArray(imageString, fileType)
+        }
 
-        const res = await this.network.postMaterialImage(obj);
-        console.log(res);
-
-        // const data = new FormData();
-        // data.append('document', file);
-        // data.append('file_type', fileType);
-        // data.append('study_material_id', this.studyMaterialId$);
-
-        // const res = await this.network.uploadStudtMaterialFile(data)
-        // if(res.bool == true){
-        //   let docString = res.result.data;
-        //   await this.addDocInArray(docString, fileType)
-        // }
-
-        // imageString = await this.fileToDataURL(file);
       }
-      // await this.addImageInArray(imageString);
       
     }
   }
@@ -143,7 +132,9 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
+
     this.createMaterialService.removeImageInImagesIndex(index)
+
   }
 
   openImage(image) {

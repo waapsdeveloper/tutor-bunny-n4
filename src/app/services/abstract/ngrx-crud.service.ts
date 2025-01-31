@@ -133,8 +133,9 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
     this.setState((state) => {
       return {
         ...state,
-        list: state.list.filter((x: any) => x.id !== id),
+        list: state.list.filter((x: any) => x.id != id),
       };
     });
+
   }
 }

@@ -871,6 +871,17 @@ export class NetworkService {
     );
   }
 
+  uploadStudtMaterialImage(data) {
+    return this.httpPostResponse(
+      'material/upload/image',
+      data,
+      null,
+      false,
+      false,
+      'multipart/form-data'
+    );
+  }
+
   uploadIntoVideoFile(data) {
     return this.httpPostResponse(
       'profile/video',

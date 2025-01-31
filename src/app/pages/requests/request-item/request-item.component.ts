@@ -146,8 +146,9 @@ export class RequestItemComponent extends BasePage  implements OnInit {
 
   async goToDeatil(item) {
     const params = {
-      id: item.id,
-      backUrl: '/tabs/student-dashboard',
+      course_id: item.id,
+      // backUrl: '/tabs/student-dashboard',
+
     };
     this.nav.push('student-course-detail', params);
   }

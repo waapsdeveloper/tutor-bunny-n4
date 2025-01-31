@@ -68,7 +68,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
 
   async presentAlert(item) {
     const alert = await this.alertController.create({
-      header: 'Are you sure to delete the course?',
+      header: 'Are you sure to delete the material?',
       buttons: [
         {
           text: 'Cancel',
