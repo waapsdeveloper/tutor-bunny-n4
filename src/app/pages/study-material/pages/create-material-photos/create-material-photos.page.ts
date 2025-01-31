@@ -68,15 +68,8 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
     return `url('${item.image}')`;
   }
 
-  async addImageInArray(imageString, type) {
-
-    let obj = {
-      feature: false,
-      image: imageString,
-      type: type
-    };
-
-    await this.createMaterialService.addImageInImages(obj);
+  async addImageInArray(imageObj) {
+    await this.createMaterialService.addImageInImages(imageObj);
 
   }
 
@@ -112,8 +105,8 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
 
         const res = await this.network.uploadStudtMaterialImage(data)
         if(res.bool == true){
-          let imageString = res.result.data;
-          await this.addImageInArray(imageString, fileType)
+          let imageObj = res.result;
+          await this.addImageInArray(imageObj)
         }
 
       }
