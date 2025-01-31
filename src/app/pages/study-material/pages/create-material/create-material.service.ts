@@ -25,8 +25,6 @@ export interface StudyMaterialModel {
 export class
 CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
-  base64ImagesArray: any[] = []
-
   storeConfig(): NgSimpleStateStoreConfig {
     return {
       storeName: 'createMaterialStore'
@@ -96,15 +94,11 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
 
   addImageInImages(obj: any) {
 
-    // if image is base64 string then store in local array else store in state if its a url 
-    if (typeof obj.image === 'string' && obj.image.startsWith('data:image')) {
-      this.base64ImagesArray.push(obj);
-    } else {
-      this.setState(state => ({
-        ...state,
-        images: [...state.images, obj]
-      }));
-    }
+    // if image is base64 string then store in local array else store in state if its a url
+    this.setState(state => ({
+      ...state,
+      images: [...state.images, obj]
+    }));
   }
 
   async updateImageInImagesIndex(index, image){

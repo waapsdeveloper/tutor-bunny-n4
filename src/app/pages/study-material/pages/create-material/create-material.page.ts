@@ -105,6 +105,32 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   }
 
+  async submitFIrstPartForm(data): Promise<any>{
+
+    // submit study matreial form
+    const user = this.users.getUser();
+
+    let formData = {
+      "user_id": user.id,
+      "title": data.title,
+      "description": data.description,
+      "language_id": data.language_id,
+      "price": parseInt(data.price),
+    }
+
+
+
+    const res = (this.material$.id !- -1) ? await this.network.updateStudyMaterial(formData, this.material$.id) : await this.network.storeStudyMaterial(formData);
+
+    let studyMaterialId = res.studyMaterial.id;
+
+    if (studyMaterialId) {
+      this.createMaterialService.setId(studyMaterialId);
+    }
+    return res;
+
+  }
+
   async onSlideChange() {
 
     const data = await this.createMaterialService.getFormDataAsync() as any;
@@ -143,40 +169,36 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       this.createMaterialService.setId(studyMaterialId);
 
-      if(data.image['image']) {
+      // if(data.image['image']) {
 
-        let obj = {
-          study_material_id: studyMaterialId,
-          image: data.image['image'],
-        };
+      //   let obj = {
+      //     study_material_id: studyMaterialId,
+      //     image: data.image['image'],
+      //   };
 
-        console.log("aaaa");
-
-
-
-        let res = await this.network.postStudyMaterialPhoto(obj);
-        console.log(res);
-        if(res && res.result){
-          this.createMaterialService.setImage(res.result)
-        }
+      //   let res = await this.network.postStudyMaterialPhoto(obj);
+      //   console.log(res);
+      //   if(res && res.result){
+      //     this.createMaterialService.setImage(res.result)
+      //   }
 
 
 
-        // if(simage.result.image){
-        //
-        //   let obj = {
-        //     "feature": false,
-        //     "image": simage.result.image
-        //   }
-        //   this.createMaterialService.setImage(obj);
-        // }
+      //   // if(simage.result.image){
+      //   //
+      //   //   let obj = {
+      //   //     "feature": false,
+      //   //     "image": simage.result.image
+      //   //   }
+      //   //   this.createMaterialService.setImage(obj);
+      //   // }
 
-      }
+      // }
 
 
 
 
-      await this.sendPendingImages(studyMaterialId);
+      // await this.sendPendingImages(studyMaterialId);
 
       this.step = 2;
       this.slides?.swiperRef?.slideTo(1, 500, false);
@@ -278,7 +300,11 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   }
 
-  openPhotosView(){
+  async openPhotosView(){
+
+    const data = await this.createMaterialService.getFormDataAsync() as any;
+    await this.submitFIrstPartForm(data);
+
     this.nav.push('/create-material-photos');
   }
 

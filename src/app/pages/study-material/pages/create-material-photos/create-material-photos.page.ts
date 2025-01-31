@@ -8,14 +8,14 @@ import { ViewWillEnter } from '@ionic/angular';
   templateUrl: './create-material-photos.page.html',
   styleUrls: ['./create-material-photos.page.scss'],
 })
-export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter, OnDestroy {
+export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDestroy {
 
   title = 'Study Material Photos';
   doc:null
   params;
   remainingSlots;
-  images$: any[] = [];  
-  materialId;
+  images$: any[] = [];
+  studyMaterialId$;
 
 
   constructor(
@@ -24,29 +24,38 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
   ) {
     super(injector);
 
-    this.createMaterialService.getImages().subscribe( (data) => {
-      console.log("updates", data)
-      this.images$ = data;
-    });
-
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.initialize();
   }
 
 
   async initialize() {
 
-    const d = await this.createMaterialService.getFormDataAsync() as any;
-    this.materialId = d.id;
+    this.params = this.nav.getQueryParams();
+    console.log(this.params)
 
-    if(this.materialId && this.materialId !== -1){
-      const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
-      if(res.result){
-        this.createMaterialService.setImages(res.result)
-      }
-    }
+    this.createMaterialService.getId().subscribe((data) => {
+      this.studyMaterialId$ = data;
+    });
+
+    this.createMaterialService.getImages().subscribe( (data) => {
+      console.log("updates", data)
+      this.images$ = data;
+    });
+
+
+
+    // const d = await this.createMaterialService.getFormDataAsync() as any;
+    // this.materialId = d.id;
+
+    // if(this.materialId && this.materialId !== -1){
+    //   const res = await this.network.getMaterialImages({study_material_id: this.materialId}) as any;
+    //   if(res.result){
+    //     this.createMaterialService.setImages(res.result)
+    //   }
+    // }
 
 
 
@@ -72,6 +81,9 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
 
 
   async onFileSelected(event: any) {
+
+    const user = this.users.getUser();
+
     const files: File[] = Array.from(event.target.files);
     this.remainingSlots = 8 - this.images$.length;
 
@@ -85,15 +97,38 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
 
 
     for (const file of filesToUpload) {
+      const fileType = file.type;
       let imageString: string;
       if (file.size > 1048576) {
-
         imageString = await this.imageService.resizeImage(file, 800, 800);
-
       } else {
-        imageString = await this.fileToDataURL(file);
+
+
+
+        let obj = {
+          user_id: user.id,
+          study_material_id: this.studyMaterialId$,
+          image: imageString,
+        };
+
+        const res = await this.network.postMaterialImage(obj);
+        console.log(res);
+
+        // const data = new FormData();
+        // data.append('document', file);
+        // data.append('file_type', fileType);
+        // data.append('study_material_id', this.studyMaterialId$);
+
+        // const res = await this.network.uploadStudtMaterialFile(data)
+        // if(res.bool == true){
+        //   let docString = res.result.data;
+        //   await this.addDocInArray(docString, fileType)
+        // }
+
+        // imageString = await this.fileToDataURL(file);
       }
-      await this.addImageInArray(imageString);
+      // await this.addImageInArray(imageString);
+      
     }
   }
 
@@ -111,11 +146,6 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
     this.createMaterialService.removeImageInImagesIndex(index)
   }
 
-  async clearImageB64(index: any, event: Event) {
-    event.stopPropagation();
-    this.createMaterialService.base64ImagesArray.splice(index, 1);
-  }
-
   openImage(image) {
     // this.nav.push('/course-profile/course-photo/gallery-image', {
     //   backUrl: '/course-profile/course-photo',
@@ -127,10 +157,6 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
 
     if(this.images$.length > 0){
       this.createMaterialService.setImage(this.images$[0].image)
-    }
-
-    if(this.createMaterialService.base64ImagesArray.length > 0){
-      this.createMaterialService.setImage(this.createMaterialService.base64ImagesArray[0].image)
     }
   }
 

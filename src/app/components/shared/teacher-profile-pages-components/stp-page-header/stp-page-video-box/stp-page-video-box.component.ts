@@ -7,10 +7,10 @@ import { NetworkService } from 'src/app/services/network.service';
   styleUrls: ['./stp-page-video-box.component.scss'],
 })
 export class StpPageVideoBoxComponent {
-  
+
   doPlay = false;
-  
-  
+
+
   videoUrl: string | null = null;
 
   constructor(private network: NetworkService) { }
@@ -34,7 +34,7 @@ export class StpPageVideoBoxComponent {
     let res = await this.network.getIntoVideoFile(value)
     console.log(res);
     this.videoUrl = res?.result?.full_url || null;
-    
+
   }
 
   onVideoError(event: any) {
