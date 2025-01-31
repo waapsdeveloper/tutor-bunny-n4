@@ -6,9 +6,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
+import { log } from 'node:console';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
-import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
+// import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
 import { SwiperComponent } from 'swiper/angular';
 
 @Component({
@@ -17,16 +18,16 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage extends BasePage implements OnInit, ViewWillEnter {
-updateSelection($event: any) {
-throw new Error('Method not implemented.');
-}
+  updateSelection($event: any) {
+    throw new Error('Method not implemented.');
+  }
   title = 'Cart';
   buttonText = 'Checkout';
   list$;
   subtotal = 0;
   total;
   tax;
-  
+
   currency_symbol = '$'
 
   activeIndex = 0;
@@ -40,7 +41,7 @@ throw new Error('Method not implemented.');
   }
 
   ionViewWillEnter(): void {
-    
+
     this.cartService.getListPromise().then((data) => {
       this.list$ = data;
       this.title = 'Cart (' + this.list$.length + ')';
@@ -51,23 +52,23 @@ throw new Error('Method not implemented.');
 
       this.subtotal = this.list$.reduce((prev, next) => {
         let n = parseFloat(next.updated_price.replace(/,/g, ''));
-        console.log(n);  
+        console.log(n);
         return parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''));
       }, 0);
 
       this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
 
-      this.total = parseFloat( `${this.subtotal + parseFloat(this.tax)}` ).toFixed(2)
+      this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(2)
 
 
 
-      this.list$ = this.list$.map( item => {
+      this.list$ = this.list$.map(item => {
         item['selected'] = true;
         return item;
       })
 
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
-      if(item){
+      if (item) {
         this.currency_symbol = item['auth_user_currency_symbol']
       }
 
@@ -77,8 +78,8 @@ throw new Error('Method not implemented.');
   }
 
   ngOnInit() {
+    console.log("aa");
 
-    
   }
 
   removeCartitem(item) {

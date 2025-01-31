@@ -150,6 +150,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
           image: data.image['image'],
         };
 
+        console.log("aaaa");
+
+
+
         let res = await this.network.postStudyMaterialPhoto(obj);
         console.log(res);
         if(res && res.result){

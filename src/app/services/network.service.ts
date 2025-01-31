@@ -821,6 +821,18 @@ export class NetworkService {
     );
   }
 
+  postStudyMaterialImage(data: any) {
+    return this.httpPostResponse(
+      'material/upload/image',
+      data,
+      null,
+      false,
+      false
+    );
+  }
+
+
+
   postMaterialImage(data) {
     return this.httpPostResponse(
       'material/image/add',
