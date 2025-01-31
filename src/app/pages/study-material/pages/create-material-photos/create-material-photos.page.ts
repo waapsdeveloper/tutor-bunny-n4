@@ -126,6 +126,11 @@ export class CreateMaterialPhotosPage extends BasePage implements OnInit, OnDest
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
 
+    let obj = {
+      image_id: this.images$[index].id
+    }
+    const res = await this.network.removeMaterialImage(obj)
+    console.log(res)
     this.createMaterialService.removeImageInImagesIndex(index)
 
   }

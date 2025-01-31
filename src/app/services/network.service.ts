@@ -982,6 +982,16 @@ export class NetworkService {
     );
   }
 
+  removeMaterialImage(data) {
+    return this.httpPostResponse(
+      'material/image/delete',
+      data,
+      null,
+      false,
+      false
+    );
+  }
+
   addItemToCart(data) {
     return this.httpPostResponse(
       'material/add-to-cart',
