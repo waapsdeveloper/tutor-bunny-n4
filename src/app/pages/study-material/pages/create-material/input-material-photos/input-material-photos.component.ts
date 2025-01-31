@@ -22,7 +22,6 @@ export class InputMaterialPhotosComponent implements OnInit {
     public events: EventsService
   ) {
     this.createMaterialService.getImage().subscribe((value) => {
-      console.log(value)
       this.image$ = value;
 
     });
@@ -32,6 +31,8 @@ export class InputMaterialPhotosComponent implements OnInit {
   ngOnInit() {
     this.events.subscribe('teacher-study-material-first-screen-submit-call', (formData) => {
         let v = formData[this.key];
+
+        console.log(formData);
 
         if (!v || v == '' || v.length == 0) {
           this.isRequired = true;
