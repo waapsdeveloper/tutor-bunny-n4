@@ -121,11 +121,7 @@ const routes: Routes = [
   {
     path: 'messages',
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
-  },
-  // {
-  //   path: 'fav-courses',
-  //   loadChildren: () => import('./pages/favorites/fav-courses/fav-courses.module').then( m => m.FavCoursesPageModule),
-  // },
+  },  
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
@@ -257,7 +253,8 @@ const routes: Routes = [
   {
     path: 'teacher-trial-list',
     loadChildren: () => import('./pages/teacher/teacher-trial-list/teacher-trial-list.module').then( m => m.TeacherTrialListPageModule)
-  },  {
+  },
+  {
     path: 'purchase-history',
     loadChildren: () => import('./pages/teacher/purchase-history/purchase-history.module').then( m => m.PurchaseHistoryPageModule)
   },

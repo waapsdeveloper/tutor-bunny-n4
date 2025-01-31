@@ -22,10 +22,5 @@ export class FavoritesPage {
       this.nav.push('favorites/fav-material');
     }
   }
-  // end
-
-  goback(){
-    this.nav.pop('/tabs/student-dashboard');
-  }
-
+  
 }
