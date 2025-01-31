@@ -4,6 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-student-teacher-profile',
@@ -73,7 +74,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   constructor(injector: Injector,
     public globalTeacherService: GlobalTeacherService,
-    private chats : ChatService) {
+    private chats: ChatService) {
     super(injector);
   }
 
@@ -129,7 +130,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       country: user.teacher.country.name,
       city: user.teacher.city,
       state: user.teacher.state.name,
-      flag:  this.utility.getFlag(user)
+      flag: this.utility.getFlag(user)
     }
 
     this.aboutData = {
@@ -142,8 +143,9 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       type: 'course'
     };
 
+
     this.videoBox = {
-       user_id :user?.id
+      user_id: user.id
     }
 
     const ratings = await this.network.getReviews(reviews_params);
@@ -279,7 +281,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     }
   }
 
-  clickOpenCourse($event){
+  clickOpenCourse($event) {
     console.log($event)
   }
 
@@ -296,31 +298,31 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   async openChatWithData() {
-      let student = this.users.getUser();
-      const chatRoomId = await this.chats.getChadRoomId(this.user.id, student.id) as number;
+    let student = this.users.getUser();
+    const chatRoomId = await this.chats.getChadRoomId(this.user.id, student.id) as number;
 
-      if(chatRoomId != -1){
-        this.nav.push('messages', {
-          chat_room_id: chatRoomId
-        })
-      }
+    if (chatRoomId != -1) {
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
     }
+  }
 
-    async openWelcomeComponent() {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
+  async openWelcomeComponent() {
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
+    let key = res.data.key;
+    if (key == 1) {
+      this.nav.push('/student-profile/student-profile-edit', {
+        showBack: true,
+      });
     }
+  }
 
 }

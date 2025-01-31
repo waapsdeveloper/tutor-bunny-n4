@@ -6,23 +6,46 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './stp-page-video-box.component.html',
   styleUrls: ['./stp-page-video-box.component.scss'],
 })
-export class StpPageVideoBoxComponent implements OnInit {
-  
-  constructor(private network: NetworkService) {}
+export class StpPageVideoBoxComponent {
+
+  doPlay = false;
+
+
+  videoUrl: string | null = null;
+
+  constructor(private network: NetworkService) { }
+
+
   private _data: any;
+
+
   @Input()
   set data(value: any) {
     this._data = value;
+    this.setData(value)
   }
+
 
   get data(): any {
     return this._data;
   }
 
-    async ngOnInit() {
-      console.log(this.data);
-      let res = await this.network.getIntoVideoFile(this.data);
-      console.log(res);
+  async setData(value: any) {
+    let res = await this.network.getIntoVideoFile(value)
+    console.log(res);
+    this.videoUrl = res?.result?.full_url || null;
+
+  }
+
+  onVideoError(event: any) {
+    console.error('Video failed to load', event);
+    this.videoUrl = null; // Reset video if there's an error
+  }
+
+  playVIdeo(){
+    if(this.videoUrl){
+      this.doPlay = true;
     }
+  }
 
 }
