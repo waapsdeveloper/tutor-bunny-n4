@@ -7,7 +7,7 @@ import { NetworkService } from 'src/app/services/network.service';
   styleUrls: ['./stp-page-video-box.component.scss'],
 })
 export class StpPageVideoBoxComponent implements OnInit {
-  private;
+  
   constructor(private network: NetworkService) {}
   private _data: any;
   @Input()

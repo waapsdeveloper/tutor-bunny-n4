@@ -14,7 +14,7 @@ export class CreateMaterialPhotosPage extends BasePage implements ViewWillEnter,
   doc:null
   params;
   remainingSlots;
-  images$: any[] = [];  
+  images$: any[] = [];
   materialId;
 
 
