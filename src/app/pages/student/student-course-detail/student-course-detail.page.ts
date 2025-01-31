@@ -1,7 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { BasePage } from 'src/app/base-page/base-page';
@@ -116,7 +114,6 @@ export class StudentCourseDetailPage extends BasePage {
 
 
   constructor(injector: Injector,
-    private courseFavoriteService: CourseFavoriteService,
     private chats: ChatService,
     public globalCoursesService: GlobalCoursesService) {
     super(injector);

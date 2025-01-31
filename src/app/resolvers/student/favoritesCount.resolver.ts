@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { ResolveFn} from '@angular/router'; // Your data service
-import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 
 

@@ -1,15 +1,14 @@
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import * as moment from 'moment';
 import { IonContent } from '@ionic/angular';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import {
   bannerData,
   infoColumnSingleItem,
   infoData,
   teacherCardInfo,
 } from 'src/app/interfaces/detail-data';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -122,7 +121,7 @@ export class CourseDetailPage extends BasePage {
   constructor(
     injector: Injector,
     private globalCoursesService: GlobalCoursesService,
-    private courseFavoriteService: CourseFavoriteService,
+    private courseFavoriteService: GlobalFavCoursesService,
   ) {
     super(injector);
   }

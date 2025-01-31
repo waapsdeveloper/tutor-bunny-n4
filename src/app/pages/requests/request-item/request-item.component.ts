@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { TeacherReviewsComponent } from './teacher-reviews/teacher-reviews.component';
 import { BasePage } from 'src/app/base-page/base-page';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 
 @Component({
   selector: 'app-request-item',
@@ -48,7 +48,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   }
   constructor(
     injector: Injector,
-    private courseFavoriteService: CourseFavoriteService,
+    private courseFavoriteService: GlobalFavCoursesService,
     private globalCourses: GlobalCoursesService,
     public chats: ChatService
   ) {

@@ -14,7 +14,7 @@ import { ViewWillEnter } from '@ionic/angular';
 import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
-import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
 

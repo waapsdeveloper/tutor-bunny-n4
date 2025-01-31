@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 import { NavService } from 'src/app/services/nav.service';
 

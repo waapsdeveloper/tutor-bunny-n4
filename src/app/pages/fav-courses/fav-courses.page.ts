@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { GlobalFavCoursesService } from 'src/app/services/global-fav-courses.service';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class FavCoursesPage extends BasePage implements OnInit {
 
     this.user = this.users.getUser();
 
-    this.globalFavCoursesService.getListPromise().then((data) => {
+    this.globalFavCoursesService.getList().subscribe((data) => {
       console.log(data)
       this.courseids = (data as any[]).map((item) => item.course_id);
       this.callApi(1)

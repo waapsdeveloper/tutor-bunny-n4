@@ -1,12 +1,9 @@
 import { Component, OnInit, Input, Injector, Output, EventEmitter } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { CourseFavoriteService } from 'src/app/services/course-favorite.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
 import { StudentWelcomeComponent } from 'src/app/pages/student/student-dashboard/student-welcome/student-welcome.component';
-import { TrailMessageComponent } from 'src/app/components/trail-message/trail-message.component';
-import { log } from 'node:console';
-import { UtilityService } from 'src/app/services/utility.service';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 
 @Component({
   selector: 'app-generic-course-card',
@@ -45,7 +42,7 @@ export class GenericCourseCardComponent extends BasePage {
 
   constructor(
     injector: Injector,
-    private courseFavoriteService: CourseFavoriteService,
+    private courseFavoriteService: GlobalFavCoursesService,
     public globalCourses: GlobalCoursesService,
     private chats : ChatService
   ) {
