@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { BasePage } from 'src/app/base-page/base-page';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -35,7 +36,7 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector,public router: Router) {
     super(injector);
   }
 
@@ -82,6 +83,8 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
   buyCredits(number) {}
 
   async continueToNextSlide() {
+    if (this.getPayAmount() === 'Continue to the Home Page') {
+      this.router.navigate(['/tabs/teacher-dashboard']);}
     if (this.activeIndex === 0) {
       await this.makeOrder(); // Wait for the order API call
       this.slides?.swiperRef?.slideNext(); // Navigate to the next slide

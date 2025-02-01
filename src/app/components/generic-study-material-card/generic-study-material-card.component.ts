@@ -57,8 +57,8 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
   }
 
-  async initialize(data) {
-
+  async initialize(data) { 
+    console.log(data)
     this.cartService.isItemExist(data.id).subscribe( data => {
       this.itemExistInCart$ = data;
     })

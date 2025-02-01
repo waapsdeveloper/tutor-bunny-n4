@@ -108,6 +108,13 @@ export class StudentMaterialDetailPage extends BasePage {
     heading: 'Reviews',
     list: [],
   };
+  materialFavoriteService
+  itemExistInCart$: number;
+  itemExistInFav$
+
+  status: any;
+  teacherImage: any;
+  blocked: any;
 
   constructor(
     injector: Injector,
@@ -117,10 +124,13 @@ export class StudentMaterialDetailPage extends BasePage {
     private cartService: CartService
   ) {
     super(injector);
+
   }
 
   async ionViewWillEnter() {
+    this.initialize(this.material$);
     this.params = this.nav.getQueryParams();
+    
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
@@ -129,13 +139,38 @@ export class StudentMaterialDetailPage extends BasePage {
       this.materialId = this.params.material_id;
       this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
           this.material$ = data;
+          console.log("this is material" , this.material$)
           this.callApi(data);
       });
     } else {
       this.nav.pop();
     }
   }
+  async initialize(data) {
 
+    this.cartService.isItemExist(data.id).subscribe( data => {
+      this.itemExistInCart$ = data;
+    })
+
+    this.materialFavoriteService.isItemExist('study_material_id', data.id).subscribe( count => {
+      this.itemExistInFav$ = count > 0;
+    })
+
+
+
+    this.rating = data.user.teacher.avg_rating;
+    this.total_rating = data.user.teacher.total_rating;
+    this.displayName = this.utility.getAmericanName(data.user.name);
+    this.flag = this.utility.getFlag(data.user);
+    this.status = data.trial ? data.trial.status : null;
+    this.teacherImage = data.user.image
+    if (data && data.trial) {
+      this.blocked = data.trial.status;
+    }
+    if (data && data.type == 3) {
+      this.type = data.type;
+    }
+  }
   // prevImage() {
   //   this.currentIndex =
   //     this.currentIndex > 0
@@ -151,6 +186,8 @@ export class StudentMaterialDetailPage extends BasePage {
   // }
 
   async callApi(data) {
+
+
     console.log(data);
 
     if (this.sliderImages.length == 0) {
@@ -213,6 +250,10 @@ export class StudentMaterialDetailPage extends BasePage {
       heading: 'Similar Materials',
       list: materialList,
     };
+
+    this.cartService.isItemExist(data.id).subscribe( data => {
+      this.itemExistInCart$ = data;
+    })
 
     this.loading = true;
     this.user = this.users.getUser();
@@ -368,8 +409,7 @@ export class StudentMaterialDetailPage extends BasePage {
   async openChatWithData(data) {
     this.user = this.users.getUser();
     console.log(this.user);
-    const chatRoomId = await this.chats.getChadRoomId(data.teacher_id, this.user.id) as number;
-
+    const chatRoomId = await this.chats.getChadRoomId(data.teacher_id, this.user.id) as number
     if(chatRoomId != -1){
       this.nav.push('messages', {
         chat_room_id: chatRoomId
@@ -378,8 +418,8 @@ export class StudentMaterialDetailPage extends BasePage {
   }
   async toggleCartItem(){
 
-    // if(this.itemExistInCart$ == 0) {
-    //   this.cartService.setItem(this.item)
-    // }
+    if(this.itemExistInCart$ == 0) {
+      this.cartService.setItem(this.material$)
+    }
 }
 }
