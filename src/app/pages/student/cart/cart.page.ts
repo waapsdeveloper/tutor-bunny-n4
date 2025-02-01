@@ -27,6 +27,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   subtotal = 0;
   total;
   tax;
+  user;
 
   currency_symbol = '$'
 
@@ -41,6 +42,9 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   ionViewWillEnter(): void {
+
+    this.user= JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
 
     this.cartService.getListPromise().then((data) => {
       this.list$ = data;
@@ -176,7 +180,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
       total: total,
       tax: tax,
       sub_total: sub_total,
-      currency: 'USD',
+      currency: this.user.student.country.currency,
       order_items: order_items,
     };
 
