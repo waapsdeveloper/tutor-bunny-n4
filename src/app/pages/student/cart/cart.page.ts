@@ -18,9 +18,7 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage extends BasePage implements OnInit, ViewWillEnter {
-  updateSelection($event: any) {
-    throw new Error('Method not implemented.');
-  }
+
   title = 'Cart';
   buttonText = 'Checkout';
   list$;
@@ -43,11 +41,13 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
 
   ionViewWillEnter(): void {
 
-    this.user= JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
+    this.cartService.getList().subscribe((data) => {
 
-    this.cartService.getListPromise().then((data) => {
-      this.list$ = data;
+      let f = Object.assign([], data);
+      for(var i = 0; i < f.length; i++ ){
+        f['selected'] = true;
+      }
+      this.list$ = f;
       this.title = 'Cart (' + this.list$.length + ')';
 
       console.log(data);
@@ -62,14 +62,12 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
 
       this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
 
-      this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(2)
+      this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(2);
 
-
-
-      this.list$ = this.list$.map(item => {
-        item['selected'] = true;
-        return item;
-      })
+      // this.list$ = this.list$.map(item => {
+      //   item['selected'] = true;
+      //   return item;
+      // })
 
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
       if (item) {
@@ -77,7 +75,13 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
       }
 
 
+
+
     });
+
+
+    // update all items to be selected
+
 
   }
 
@@ -88,6 +92,11 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
 
   removeCartitem(item) {
     this.cartService.setRemove(item);
+  }
+
+  updateSelection($event){
+    console.log($event)
+
   }
 
   getSelectedItems() {
