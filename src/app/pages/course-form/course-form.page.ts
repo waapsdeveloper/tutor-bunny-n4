@@ -254,11 +254,37 @@ export class CourseFormPage
     }
   }
 
-  openCoursePhotos() {
+
+  async onImageViewChange(): Promise<boolean> {
+    
+    const f = this.createCourseService.formData;    
+    
+    const user = JSON.parse(localStorage.getItem('user'));
+    f['user_id'] = user.id;
+    f['type'] = this.type;
+    this.loading = true;
+    const res = !this.edit
+      ? await this.network.SubmitCourse(f)
+      : await this.network.SubmitCourseEdit(f, this.courseId);
+
+    let courseId = res.course.id;
+    this.createCourseService.courseId = courseId;
+    
+    localStorage.setItem('course_Id', courseId);
+    this.loading = false;    
+    return true;
+  }
+
+  async openCoursePhotos() {
+
+    await this.onImageViewChange();
+
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',
       gallary: 'true',
       title: 'Upload Course photos',
     });
   }
+
+
 }
