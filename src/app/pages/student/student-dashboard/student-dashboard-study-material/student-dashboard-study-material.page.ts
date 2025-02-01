@@ -20,6 +20,7 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const res = await this.globalStudyMaterialService.getGlobalStudyMaterialFromApi(page, search);
+    console.log("this is material", res);
     return {
       list: res.result.data,
       page: res.result.current_page,

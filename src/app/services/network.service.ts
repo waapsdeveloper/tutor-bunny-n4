@@ -1089,6 +1089,16 @@ export class NetworkService {
       false
     );
   }
+  earningHistory(data:any){
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'teacher/earning-history' + '/'+ data,
+      null,
+      false,
+      false
+    );
+  }
+    
 
   getTeacherWallet() {
     return this.httpGetResponse('teacher/wallet', null, false, false);

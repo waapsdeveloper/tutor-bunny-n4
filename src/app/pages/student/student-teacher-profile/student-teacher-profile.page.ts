@@ -299,7 +299,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   async openChatWithData() {
     let student = this.users.getUser();
-    const chatRoomId = await this.chats.getChadRoomId(this.user.id, student.id) as number;
+    const chatRoomId = await this.chats.getChadRoomId(this.teacherId, student.id) as number;
 
     if (chatRoomId != -1) {
       this.nav.push('messages', {
