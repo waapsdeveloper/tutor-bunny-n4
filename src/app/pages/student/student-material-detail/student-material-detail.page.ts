@@ -16,7 +16,6 @@ import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-ma
   styleUrls: ['./student-material-detail.page.scss'],
 })
 export class StudentMaterialDetailPage extends BasePage {
-  [x: string]: any;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -53,7 +52,7 @@ export class StudentMaterialDetailPage extends BasePage {
     icon: '',
     text: '',
     email: '',
-    teacher_id: 0
+    teacher_id: 0,
   };
 
   materialData = {
@@ -124,12 +123,12 @@ export class StudentMaterialDetailPage extends BasePage {
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService
-        .getItem(this.materialId)
-        .subscribe((data) => {
+      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
           this.material$ = data;
-          this.callApi(this.material$);
-        });
+          this.callApi(data);
+      });
+    } else {
+      this.nav.pop();
     }
   }
 
@@ -148,6 +147,7 @@ export class StudentMaterialDetailPage extends BasePage {
   // }
 
   async callApi(data) {
+    console.log(data);
 
     if (this.sliderImages.length == 0) {
       const resImages = await this.network.getMaterialImages({
@@ -156,16 +156,14 @@ export class StudentMaterialDetailPage extends BasePage {
       this.sliderImages = resImages.result;
     }
 
+
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: this.sliderImages,
       actions: [
         {
           name: 'favorite',
-          img:
-            data.is_liked_by_me == true
-              ? 'assets/svg/heart-78.svg'
-              : 'assets/svg/heart-77.svg',
+          img: data.is_liked_by_me == true ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg',
           action: null,
         },
         {
@@ -329,7 +327,11 @@ export class StudentMaterialDetailPage extends BasePage {
 
   async addToFav() {
     let user = this.users.getUser();
-    this.globalStudyMaterialService.updateItem(this.material$, 'is_liked_by_me', true);
+    this.globalStudyMaterialService.updateItem(
+      this.material$,
+      'is_liked_by_me',
+      true
+    );
     this.globalMaterialFav.addFavorites(this.material$, user);
   }
 
@@ -348,12 +350,9 @@ export class StudentMaterialDetailPage extends BasePage {
     if (obj.name == 'favorite') {
       this.material$.is_liked_by_me == true
         ? this.removeToFav()
-        : this.addToFav();      
+        : this.addToFav();
     }
   }
 
-  goToChat(){
-
-  }
-
+  goToChat() {}
 }
