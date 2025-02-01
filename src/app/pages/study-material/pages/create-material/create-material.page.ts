@@ -123,6 +123,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       // this.edit = true;
       // this.courseId = this.createCourseService.courseId;
       this.slides?.swiperRef?.slideTo(0, 500, false);
+      this.loading = false;
     }
 
   }
@@ -210,6 +211,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       if(mainImage) {
 
+        console.log(mainImage)
+
         const cleanUrl = this.extractAndFormatImageName(mainImage as string);
         console.log(cleanUrl);
 
@@ -219,9 +222,9 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
         };
 
         let res = await this.network.postStudyMaterialPhoto(obj);
-      //   console.log(res);
+        console.log("retwe", res);
         if(res && res.result){
-          this.createMaterialService.setImage(res.result)
+          this.createMaterialService.setImage(res?.result?.image || "" )
         }
 
 
