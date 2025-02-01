@@ -257,10 +257,10 @@ export class CourseFormPage
   }
 
 
-  async onImageViewChange(): Promise<boolean> {
-    
-    const f = this.createCourseService.formData;    
-    
+  async onImageViewChange() : Promise<boolean> {
+
+    const f = this.createCourseService.formData;
+
     const user = JSON.parse(localStorage.getItem('user'));
     f['user_id'] = user.id;
     f['type'] = this.type;
@@ -268,17 +268,17 @@ export class CourseFormPage
 
     const id = localStorage.getItem('course_Id');
     this.courseId = id ? id : null;
-    console.log("I am id :: ",id);
+    console.log("I am id ::",id);
 
     const res = !this.courseId
       ? await this.network.SubmitCourse(f)
       : await this.network.SubmitCourseEdit(f, this.courseId);
-
+      console.log("I am id :: ",id);
     let courseId = res.course.id;
     this.createCourseService.courseId = courseId;
-    
-    localStorage.setItem('course_Id', courseId);
-    this.loading = false;    
+
+   localStorage.setItem('course_Id', courseId);
+    this.loading = false;
     return true;
   }
 

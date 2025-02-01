@@ -20,12 +20,13 @@ export class CartListItemComponent {
 
   set item(value: any){
     this._item = value;
+    
   }
 
   constructor() { }
 
   initialize(){
-    
+
   }
 
 }
