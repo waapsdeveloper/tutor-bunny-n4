@@ -10,6 +10,7 @@ import { CoursesPage } from './courses.page';
 import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-top.module';
 import { CourseCardModule } from './course-card/course-card.module';
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
+import { GlobalListViewModule } from 'src/app/components/global-list-view/global-list-view.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.m
     IonicModule,
     CoursesPageRoutingModule,
     SdHeaderTopModule,
-    
+    GlobalListViewModule,
     CourseCardModule,
     SdBbackBtnModule
   ],

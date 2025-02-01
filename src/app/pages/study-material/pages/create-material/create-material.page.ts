@@ -131,6 +131,16 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   }
 
+  extractAndFormatImageName(url: string): string | null {
+    // Remove query parameters
+    const cleanUrl = url.split('?')[0];
+
+    // Extract filename from /images/ until the extension
+    const match = cleanUrl.match(/\/images\/([^\/]+?\.(jpg|png|jpeg|gif|webp))/i);
+
+    return match ? match[1].replace(/-/g, '') : null;
+  }
+
   async onSlideChange() {
 
     const data = await this.createMaterialService.getFormDataAsync() as any;
@@ -173,11 +183,16 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       this.createMaterialService.setId(studyMaterialId);
 
-      if(data.image['image']) {
+      const mainImage = await this.createMaterialService.getImagePromise();
+
+      if(mainImage) {
+
+        const cleanUrl = 'images/' + this.extractAndFormatImageName(mainImage as string);
+        console.log(cleanUrl);
 
         let obj = {
           study_material_id: studyMaterialId,
-          image: data.image['image'],
+          image: cleanUrl,
         };
 
         let res = await this.network.postStudyMaterialPhoto(obj);

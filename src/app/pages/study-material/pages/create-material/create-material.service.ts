@@ -256,6 +256,14 @@ CreateMaterialService extends NgSimpleStateBaseRxjsStore<StudyMaterialModel> {
     return this.selectState(state => state.image);
   }
 
+  getImagePromise() {
+    return new Promise((resolve, reject) => {
+      this.selectState(state => state.image).subscribe((data) => {
+        resolve(data);
+      });
+    });
+  }
+
   getImages() {
     return this.selectState(state => state.images);
   }
