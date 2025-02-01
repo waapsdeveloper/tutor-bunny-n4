@@ -188,7 +188,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       if(mainImage) {
 
-        const cleanUrl = 'images/' + this.extractAndFormatImageName(mainImage as string);
+        const cleanUrl = this.extractAndFormatImageName(mainImage as string);
         console.log(cleanUrl);
 
         let obj = {
