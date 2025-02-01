@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-order-done-card-item',
@@ -7,8 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderDoneCardItemComponent  implements OnInit {
 
-  constructor() { }
+
+  order_number = '';
+
+  private _data: any;
+
+  get data(): any {
+    return this._data;
+  }
+
+  set data(value: any) {
+    this._data = value;
+    this.updateData(value);
+  }
+
+  constructor(private events: EventsService) { 
+
+    this.events.subscribe("event-order-number", (res) => {
+      this.updateData.bind(res);
+    });
+  }
 
   ngOnInit() {}
+
+
+
+  async updateData(value: any){
+    console.log(value)
+    this.order_number = value.order_number;
+  }
+
+
 
 }

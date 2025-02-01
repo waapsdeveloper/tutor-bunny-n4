@@ -27,9 +27,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   user;
 
   currency_symbol = '$';
-
-  order_number = '';
-
+  order;
 
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
@@ -44,6 +42,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
       
       this.title = 'Cart (' + (this.list$ ? this.list$.length : '' ) + ')';
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
+
       if (item) {
         this.currency_symbol = item['auth_user_currency_symbol'];
       }
@@ -70,7 +69,6 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     }, 0);
 
     this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
-
     this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(
       2
     );
@@ -166,9 +164,6 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     if(this.activeIndex == 1){
       this.title = 'Checkout';
     }
-    
-
-
 
 
     this.cdr.detectChanges();
@@ -213,11 +208,16 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     const res = await this.network.postStudentOrder(d);
     console.log(res);
 
+    this.order = res;
+    this.events.publish("event-order-number", res);
+
     for (let i = 0; i < items.length; i++) {
       this.cartService.setRemove(items[i]);
     }
 
     this.slides?.swiperRef.slideNext(500);
+
+    this.cdr.detectChanges();
 
   }
 

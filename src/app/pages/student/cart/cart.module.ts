@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,8 +14,8 @@ import { SdButtonGoldenModule } from 'src/app/components/sd-button-golden/sd-but
 
 import { SwiperModule } from 'swiper/angular';
 import { PaymentCardItemModule } from './payment-card-item/payment-card-item.module';
-import { OrderDoneCardItemModule } from "./order-done-card-item/order-done-card-item.module";
-import { SdButtonClearModule } from "../../../components/sd-button-clear/sd-button-clear.module";
+import { OrderDoneCardItemModule } from './order-done-card-item/order-done-card-item.module';
+import { SdButtonClearModule } from '../../../components/sd-button-clear/sd-button-clear.module';
 
 @NgModule({
   imports: [
@@ -30,8 +30,11 @@ import { SdButtonClearModule } from "../../../components/sd-button-clear/sd-butt
     // StripePayModule,
     PaymentCardItemModule,
     OrderDoneCardItemModule,
-    SdButtonClearModule
-],
-  declarations: [CartPage]
+    SdButtonClearModule,
+  ],
+  declarations: [CartPage],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class CartPageModule {}
