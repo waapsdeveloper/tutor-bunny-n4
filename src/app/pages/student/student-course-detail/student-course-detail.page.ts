@@ -122,8 +122,8 @@ export class StudentCourseDetailPage extends BasePage {
   constructor(
     injector: Injector,
     private chats: ChatService,
-    public globalCoursesService: GlobalCoursesService,
-    public globalCourseFav: GlobalFavCoursesService
+    private globalCoursesService: GlobalCoursesService,
+    private globalCourseFav: GlobalFavCoursesService
   ) {
     super(injector);
   }
@@ -184,13 +184,6 @@ export class StudentCourseDetailPage extends BasePage {
         },
       ],
     };
-
-    // for cross check if favorite exist
-    this.globalCourseFav
-      .isItemExist('course_id', this.courseId)
-      .subscribe((count) => {
-        this.bannerData.liked_by_me = count > 0;
-      });
 
     this.infoData = {
       title: data.title,
@@ -286,130 +279,12 @@ export class StudentCourseDetailPage extends BasePage {
       heading: 'Reviews',
       list: res.result,
     };
-    // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
-
-    // this.teacher = data.user;
-    // localStorage.setItem('teacher', JSON.stringify(this.teacher));
-
-    // this.events.publish('data-for-other-corses', this.data);
-    //this.title = this.data.title;
-    // this.capacity = this.data.mode_type;
-    // this.mode_type = this.data.mode_type;
-    // this.description = this.data.description;
-    // this.language = this.data.language.name;
-    // this.from_age = this.data.from_age;
-    // this.to_age = this.data.to_age;
-    // this.displayName = this.utility.splitName(this.data.user.name).first_name;
-    // this.flag = this.getFlag();
-    //this.duration = this.data.capacity;
-    // this.serial_number = this.data.serial_number;
-    // this.price = this.data.updated_price;
-    //this.schedules = this.data.schedules;
-    // this.acheduleTime = this.schedules;
-    //this.lessons = this.data.lesson;
-    // this.created_at = this.data.created_at;
-    // this.techerTitle = this.data.user.teacher.title;
-    // this.course_user = this.data.user;
-    // this.image = this.data.image;
-    // this.rating = this.data.user.teacher.avg_rating;
-    // this.total_rating = this.data.user.teacher.total_rating;
-    // this.techerImg = this.data.user.image;
-    // this.country = this.data.user.teacher.country.name;
-    // this.state = this.data.user.teacher.state.name;
-    // this.updated_at = this.data.updated_at;
-    // this.type = this.data.type;
-    // this.currencySymbol = this.data?.auth_user_currency_symbol;
-    // const startTime = this.acheduleTime.start_date;
-    // const endTime = this.acheduleTime.end_date;
-    // this.startTime = moment(startTime).format('hh:mm a');
-    // this.endTime = moment(endTime).format('hh:mm a');
-    // this.showFavValue = this.data.is_liked_by_me;
-    // if (this.data.start_date) {
-    //   const startDate = this.data.start_date;
-    //   this.startDate = moment(startDate).format('DD-MMM-YYYY');
-    // }
-
-    // if (this.data.end_date) {
-    //   const endDate = this.data.end_date;
-    //   this.endDate = moment(endDate).format('DD-MMM-YYYY');
-    // }
-
-    // this.acheduleTime = this.scheduleData.schedules;
-    // const endTime = this.acheduleTime.end_date;
-    // const startTime = this.acheduleTime.start_date;
-    // this.startTime = moment(startTime).format('hh:mm a');
-    // this.endTime = moment(endTime).format('hh:mm a');
-
-    // this.countData = {
-    //   duration: this.data.capacity,
-    //   lessons: this.data.lesson,
-    //   mode_type: this.data.mode_type,
-    //   capacity: this.data.mode_type,
-    //   from_age: this.data.from_age,
-    //   to_age: this.data.to_age,
-    //   language: this.data.language.name,
-    //   state: this.data.user.teacher.state.name,
-    //   country: this.data.user.teacher.country.name,
-    // }
-
-    // this.spinner = false;
 
     return true;
   }
 
   async callImages(courseId) {}
 
-  // async addToFav() {
-  //   let user = this.users.getUser();
-
-  //   this.data.is_liked_by_me = true;
-  //   this.showFavValue = true;
-  //   this.courseFavoriteService.addFavorites(this.data, user);
-  // }
-
-  // async removeToFav() {
-  //   let user = this.users.getUser();
-
-  //   this.data.is_liked_by_me = false;
-  //   this.showFavValue = false;
-  //   this.courseFavoriteService.removeFavorites(this.data, user);
-  // }
-
-  // async goToChat() {
-  //   this.user = this.users.getUser();
-  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-  //   if (v || v == true) {
-
-  //     let id = this.user.id;
-  //     let obj = {
-  //       user_id_1: this.user.id,
-  //       user_id_2: this.course_user.id,
-  //     };
-  //     let res = await this.network.getChadRoomId(obj);
-  //     let params = {
-  //       student_id: id,
-  //       other_user_id: this.course_user.id,
-  //       user: JSON.stringify(this.course_user),
-  //       chat_room_id: res.chat_room.id,
-  //     };
-  //     this.nav.push('/tabs/chat', params);
-  //   } else {
-  //     let res = await this.modals.present(
-  //       StudentWelcomeComponent,
-  //       {},
-  //       'auto-height-modal',
-  //       1,
-  //       [0, 1],
-  //       false
-  //     );
-  //     let key = res.data.key;
-  //     if (key == 1) {
-  //       this.nav.push('/student-profile/student-profile-edit', {
-  //         showBack: true,
-  //       });
-  //     }
-  //   }
-  // }
   async goToChat() {
     let user = this.users.getUser();
 
@@ -564,15 +439,7 @@ export class StudentCourseDetailPage extends BasePage {
     if (obj.name == 'favorite') {
       this.course$.is_liked_by_me == true
         ? this.removeToFav()
-        : this.addToFav();
-      // const params = {
-      //   title: 'Edit Course',
-      //   showBack: true,
-      //   course_Id: this.courseId,
-      //   edit: true
-      // };
-
-      // this.nav.push('/course-form', params)
+        : this.addToFav();      
     }
   }
 }
