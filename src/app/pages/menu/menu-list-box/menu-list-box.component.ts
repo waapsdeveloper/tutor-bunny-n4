@@ -35,6 +35,10 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   gotoProfile() {
     if (this.user.role_id == 2) {
       // this.nav.push('/teacher-profile');
+      this.nav.push('/student-profile/student-profile-edit', {
+        backUrl: '/tabs/menu',
+        showBack: true,
+      });
     } else {
       const params = {
         email: this.user.email,
