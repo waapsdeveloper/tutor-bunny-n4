@@ -35,10 +35,11 @@
     <app-sd-button-clear
       class="footer-button-1"
       [image]="'assets/svg/send-message.svg'"
-      [text]="'Message'"
+      [text]="'Chat'"
       (click)="goToChat(teacherData)"
+      style="width: 130px;"
     ></app-sd-button-clear>
-    <app-sd-button-golden [image]="'assets/svg/cart.svg'" [text]="itemExistInCart$ > 0 ? 'In Cart' : 'Add to Cart'" class="big-action-button-8574" (click)="toggleCartItem()">
+    <app-sd-button-golden [image]="'assets/svg/cart.svg'" [text]="itemExistInCart$ > 0 ? 'In Cart' : 'Add to Cart'" class="big-action-button-8574" (click)="toggleCartItem()" style="width: 230px;">
     
     </app-sd-button-golden>
   </div>
