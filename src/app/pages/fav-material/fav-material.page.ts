@@ -1,20 +1,18 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
-import { FavoriteCoursesSqService } from 'src/app/services/sqlite/favorite-courses-sq.service';
+import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 @Component({
   selector: 'app-fav-material',
   templateUrl: './fav-material.page.html',
   styleUrls: ['./fav-material.page.scss'],
 })
-export class FavMaterialPage extends BasePage implements OnInit {
+export class FavMaterialPage extends BasePage {
   // user;
-  list$;
-  // page = 1;
-  // last_page = -1;
-  // courseids: any[] = [];
+  list;
+  page = 1;
+  last_page = -1;
+  materialids: any[] = [];
   // loading= false;
   // view = 'course';
 
@@ -25,13 +23,12 @@ export class FavMaterialPage extends BasePage implements OnInit {
   ) {
     super(injector);
     this.globalFavMaterialService.getList().subscribe((data) => {
-      // this.list$ = data;
-      console.log("init-fav-material", this.list$)
-    });
-  }
+      this.materialids = (data as any[]).map((item) => item.course_id);
+      // this.callApi(1)
 
-  ngOnInit() {
-    // this.initialize();
+      // this.list$ = data;
+      // console.log("init-fav-material", this.list$)
+    });
   }
 
 //   async initialize() {

@@ -138,4 +138,10 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
     });
 
   }
+
+  isItemExist(key, value){
+    return this.selectState(
+      (state) => state.list.filter((item: any) => item[key] === value).length
+    );
+  }
 }

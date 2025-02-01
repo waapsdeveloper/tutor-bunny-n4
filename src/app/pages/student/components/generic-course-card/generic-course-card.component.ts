@@ -25,6 +25,7 @@ export class GenericCourseCardComponent extends BasePage {
   trail = false;
   languageName: any;
   teacherImage;
+  itemExistInFav$ = false;
 
   @Output() openDetails = new EventEmitter<any>();
 
@@ -51,6 +52,11 @@ export class GenericCourseCardComponent extends BasePage {
   }
 
   initialize(data) {
+
+    
+    this.courseFavoriteService.isItemExist('course_id', data.id).subscribe( count => {
+      this.itemExistInFav$ = count > 0;
+    })
 
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;

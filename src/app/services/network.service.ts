@@ -109,7 +109,7 @@ export class NetworkService {
   }
 
   FavCourseByIds(data) {
-    return this.httpPostResponse('courses/list-By-ids', data, false, false);
+    return this.httpPostResponse('courses/list-By-ids', data, null, false, false);
   }
 
   getStates(data) {

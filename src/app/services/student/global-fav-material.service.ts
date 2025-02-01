@@ -7,54 +7,52 @@ import { NgrxCrudService } from '../abstract/ngrx-crud.service';
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalFavCoursesService extends NgrxCrudService<any> {  
-
+export class GlobalFavMaterialService extends NgrxCrudService<any>  {
+  
   ngrxModelName: string = 'GlobalFavCoursesModel';
 
   constructor(private users: UsersService, private network: NetworkService) {
     super();
   }
 
-  getGlobalFavCoursesFromApi() {
+  getGlobalFavMaterialFromApi() {
     return new Promise(async (resolve) => {
-      let res = await this.network.getAllFavCoursesIds();
+      let res = await this.network.getAllFavMaterialIds();
       this.setList(res, 1, -1, res.length)
-      // this.setState(() => res);
       resolve(true);
     });
   }
 
-  async addFavorites(obj: any, user) {
+
+  
+
+  
+  async addFavorites(obj: any, user) {    
 
     let ite = {
       user_id: user.id,
-      course_id: obj.id,
+      study_material_id: obj.id,
     };
+    const res = await this.network.addMaterialFav(ite);
 
-    const res = await this.network.addCourseFav(ite);
-    console.log(res);
-    const d = res.data;
-
-    if(d){
-      this.setItem(d)
+    // console.log(res);
+    if (res && res.data) {
+      this.setItem(res.data);
     }
-
-
-
   }
 
-  async removeFavorites(obj: any, user: any) {
+  async removeFavorites(obj: any, user: any) {   
 
     let ite = {
       user_id: user.id,
-      course_id: obj.id,
+      study_material_id: obj.id,
     };
-    const res = await this.network.removeCourseFav(ite);
+
+    const res = await this.network.removeMaterialFav(ite);
     console.log(res)
     if(res.data && res.data.id){
       this.removeItem(res.data.id)
     }
-
   }
 
 }

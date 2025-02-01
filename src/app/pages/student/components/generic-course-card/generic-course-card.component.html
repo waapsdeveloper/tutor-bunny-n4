@@ -45,8 +45,8 @@
           </div>
 
           <div class="action-items">
-            <img [src]="item.is_liked_by_me ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'"
-              (click)="item.is_liked_by_me ? removeToFav() : addToFav()" />
+            <img [src]="itemExistInFav$ ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'"
+              (click)="itemExistInFav$ ? removeToFav() : addToFav()" />
             <img src="assets/svg/share-77.svg" alt="Share" class="share-icon" />
           </div>
         </div>

@@ -65,7 +65,7 @@ export class GenericStudyMaterialCardComponent extends BasePage {
       this.itemExistInCart$ = data;
     })
 
-    this.materialFavoriteService.isItemExist(data.id).subscribe( count => {
+    this.materialFavoriteService.isItemExist('study_material_id', data.id).subscribe( count => {
       this.itemExistInFav$ = count > 0;
     })
 
@@ -189,5 +189,5 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     //   this.cartService.setRemove(this.item)
     // }
   }
-}import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
+}import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 
