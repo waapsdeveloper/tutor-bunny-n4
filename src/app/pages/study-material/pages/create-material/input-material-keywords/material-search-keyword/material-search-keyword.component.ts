@@ -159,7 +159,16 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
       // this.subs.push(item);
       this.createMaterialService.addKeywordInKeywords(item);
 
+      let study_material_id = await this.createMaterialService.getIdPromise();
+      let obj = {
+        study_material_id: study_material_id,
+        keyword_id: item.id
+      }
+      this.network.addMaterialKeyword(obj)
+
     }
+
+
 
     const result = this.suggestionsList.filter( (item2) => item2.id !== item.id)
     this.suggestionsList = result;

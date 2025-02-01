@@ -519,8 +519,12 @@ export class NetworkService {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
   addKeyword(data) {
-    return this.httpPostResponse('keywords/add-keyword', data, false);
+    return this.httpPostResponse('keywords/add-keyword', data, false, false, false);
   }
+
+  addMaterialKeyword(data) {
+    return this.httpPostResponse('keywords/add-material-keyword', data, false, false, false);
+  } 
 
   addInputKeyword(data) {
     return this.httpPostResponse('keywords/add-name-keyword', data);
