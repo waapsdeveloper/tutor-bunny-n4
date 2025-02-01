@@ -1,7 +1,7 @@
 <div class="nd-card-outer-748">
 
   <div class="checkbox-case">
-    <ion-checkbox [(ngModel)]="item.selected" (ngModelChange)="updateSelection.emit(item)"></ion-checkbox>
+    <ion-checkbox [(ngModel)]="item.selected" [checked]="item.selected" (ngModelChange)="updateSelection.emit(item)"></ion-checkbox>
   </div>
 
   <div class="box-content">

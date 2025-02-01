@@ -18,7 +18,6 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage extends BasePage implements OnInit, ViewWillEnter {
-
   title = 'Cart';
   buttonText = 'Checkout';
   list$;
@@ -27,76 +26,62 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   tax;
   user;
 
-  currency_symbol = '$'
+  currency_symbol = '$';
+
 
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(
-    injector: Injector,
-    private cartService: CartService,
-  ) {
+  constructor(injector: Injector, private cartService: CartService) {
     super(injector);
   }
 
   ionViewWillEnter(): void {
-
     this.cartService.getList().subscribe((data) => {
-
-      let f = Object.assign([], data);
-      for(var i = 0; i < f.length; i++ ){
-        f['selected'] = true;
-      }
-      this.list$ = f;
-      this.title = 'Cart (' + this.list$.length + ')';
-
-      console.log(data);
-
-
-
-      this.subtotal = this.list$.reduce((prev, next) => {
-        let n = parseFloat(next.updated_price.replace(/,/g, ''));
-        console.log(n);
-        return parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''));
-      }, 0);
-
-      this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
-
-      this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(2);
-
-      // this.list$ = this.list$.map(item => {
-      //   item['selected'] = true;
-      //   return item;
-      // })
+      this.list$ = data.map(item => ({ ...item, selected: true }));
 
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
       if (item) {
-        this.currency_symbol = item['auth_user_currency_symbol']
+        this.currency_symbol = item['auth_user_currency_symbol'];
       }
 
-
-
-
+      this.calculateCart();
     });
 
-
     // update all items to be selected
-
-
   }
 
   ngOnInit() {
-    console.log("aa");
+    console.log('aa');
+  }
 
+  calculateCart() {
+    const selectedList = this.list$.filter((x) => x.selected == true);
+
+    this.title = 'Cart (' + selectedList.length + ')';
+
+    this.subtotal = selectedList.reduce((prev, next) => {
+      let n = parseFloat(next.updated_price.replace(/,/g, ''));
+      console.log(n);
+      return (
+        parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''))
+      );
+    }, 0);
+
+    this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
+
+    this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(
+      2
+    );
   }
 
   removeCartitem(item) {
     this.cartService.setRemove(item);
   }
 
-  updateSelection($event){
-    console.log($event)
-
+  updateSelection($event) {
+    console.log($event);
+    this.calculateCart();
   }
 
   getSelectedItems() {
@@ -165,7 +150,9 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     this.cdr.detectChanges();
   }
 
-  checkoutItems() {
+  async checkoutItems() {
+
+
     let items = this.list$.filter((x) => x.selected == true);
     const order_items = items.map((x) => {
       return {
@@ -177,27 +164,34 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
       };
     });
 
-    let sub_total = order_items.reduce((prev, next) => {
-      return prev + parseFloat(next.price);
-    }, 0);
-
-    let tax = sub_total * 0.1;
-    let total = sub_total + tax;
-
+    const user = this.users.getUser();
+    
     let d = {
       user_id: 1,
-      total: total,
-      tax: tax,
-      sub_total: sub_total,
-      currency: this.user.student.country.currency,
+      total: this.total,
+      tax: this.tax,
+      sub_total: this.subtotal,
+      currency: user.student.country.currency,
       order_items: order_items,
     };
 
-    const res = this.network.postStudentOrder(d);
+    const res = await this.network.postStudentOrder(d);
     console.log(res);
 
     for (let i = 0; i < items.length; i++) {
       this.cartService.setRemove(items[i]);
+    }
+
+    this.slides?.swiperRef.slideNext(500);
+  }
+
+  parentBack($event: any){
+
+    const activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+    if (activeIndex !== 0) {
+      this.slides?.swiperRef.slidePrev(500);
+    } else {
+      this.nav.pop();
     }
 
   }
