@@ -131,14 +131,15 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
   }
 
-  extractAndFormatImageName(url: string): string | null {
+  extractAndFormatImageName(url: string) {
     // Remove query parameters
     const cleanUrl = url.split('?')[0];
+    return cleanUrl;
 
     // Extract filename from /images/ until the extension
-    const match = cleanUrl.match(/\/images\/([^\/]+?\.(jpg|png|jpeg|gif|webp))/i);
+    // const match = cleanUrl.match(/\/images\/([^\/]+?\.(jpg|png|jpeg|gif|webp))/i);
 
-    return match ? match[1].replace(/-/g, '') : null;
+    // return match ? match[1].replace(/-/g, '') : null;
   }
 
   async onSlideChange() {
