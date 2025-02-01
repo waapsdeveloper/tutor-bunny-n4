@@ -9,6 +9,7 @@ import {
   teacherCardInfo,
 } from 'src/app/interfaces/detail-data';
 import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-student-material-detail',
@@ -110,7 +111,8 @@ export class StudentMaterialDetailPage extends BasePage {
   constructor(
     injector: Injector,
     private globalStudyMaterialService: GlobalStudyMaterialService,
-    private globalMaterialFav: GlobalFavMaterialService
+    private globalMaterialFav: GlobalFavMaterialService,
+    private chats : ChatService
   ) {
     super(injector);
   }
@@ -353,6 +355,23 @@ export class StudentMaterialDetailPage extends BasePage {
         : this.addToFav();
     }
   }
+  async goToChat(data) {
+    console.log(data);
+    let user = this.users.getUser();
 
-  goToChat() {}
+
+    this.openChatWithData(data);
+  }
+
+  async openChatWithData(data) {
+    this.user = this.users.getUser();
+    console.log(this.user);
+    const chatRoomId = await this.chats.getChadRoomId(data.teacher_id, this.user.id) as number;
+
+    if(chatRoomId != -1){
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId
+      })
+    }
+  }
 }

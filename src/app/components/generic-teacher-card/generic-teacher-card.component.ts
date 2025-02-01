@@ -98,6 +98,7 @@ export class GenericTeacherCardComponent extends BasePage {
   }
 
   async openChatWithData(data) {
+    console.log("this is item",this.item);
     this.user = this.users.getUser();
     const chatRoomId = await this.chats.getChadRoomId(data.id, this.user.id) as number;
 
