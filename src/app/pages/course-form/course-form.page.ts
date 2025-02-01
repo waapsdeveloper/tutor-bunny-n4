@@ -55,6 +55,8 @@ export class CourseFormPage
   }
 
   ngOnDestroy() {
+    this.createCourseService.courseId = null;
+    localStorage.removeItem("course_Id");
     this.createCourseService.resetFormData();
   }
 
@@ -263,7 +265,12 @@ export class CourseFormPage
     f['user_id'] = user.id;
     f['type'] = this.type;
     this.loading = true;
-    const res = !this.edit
+
+    const id = localStorage.getItem('course_Id');
+    this.courseId = id ? id : null;
+    console.log("I am id :: ",id);
+
+    const res = !this.courseId
       ? await this.network.SubmitCourse(f)
       : await this.network.SubmitCourseEdit(f, this.courseId);
 
