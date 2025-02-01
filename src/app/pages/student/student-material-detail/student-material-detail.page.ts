@@ -10,6 +10,7 @@ import {
 } from 'src/app/interfaces/detail-data';
 import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-student-material-detail',
@@ -112,7 +113,8 @@ export class StudentMaterialDetailPage extends BasePage {
     injector: Injector,
     private globalStudyMaterialService: GlobalStudyMaterialService,
     private globalMaterialFav: GlobalFavMaterialService,
-    private chats : ChatService
+    private chats : ChatService,
+    private cartService: CartService
   ) {
     super(injector);
   }
@@ -374,4 +376,10 @@ export class StudentMaterialDetailPage extends BasePage {
       })
     }
   }
+  async toggleCartItem(){
+
+    // if(this.itemExistInCart$ == 0) {
+    //   this.cartService.setItem(this.item)
+    // }
+}
 }

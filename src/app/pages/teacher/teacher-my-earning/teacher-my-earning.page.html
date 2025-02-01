@@ -21,17 +21,17 @@
 
     <div class="total-payment">
       <div class="roboto-regular fs-14 pay">Total Payment</div>
-      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >$51,858</span>
+      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{currency}}{{wallet}}</span>
     </div>
     
   </div>
 
   <ion-list class="checkout-history-list" inset="true">
-    <ion-item *ngFor="let month of months" detail="true">
+    <ion-item *ngFor="let record of history" detail="true">
       <ion-label>
-        <h2>{{month}}</h2>        
+        <h2>{{record?.order_number}}</h2>
       </ion-label>
-      <span slot="end" class="price">{{58 | currency}}</span>
+      <span slot="end" class="price">{{record.currency_symbol}} {{record?.total}}</span>
     </ion-item>
 
   </ion-list>
