@@ -15,6 +15,7 @@ import { SdButtonGoldenModule } from 'src/app/components/sd-button-golden/sd-but
 import { SwiperModule } from 'swiper/angular';
 import { PaymentCardItemModule } from './payment-card-item/payment-card-item.module';
 import { OrderDoneCardItemModule } from "./order-done-card-item/order-done-card-item.module";
+import { SdButtonClearModule } from "../../../components/sd-button-clear/sd-button-clear.module";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { OrderDoneCardItemModule } from "./order-done-card-item/order-done-card-
     SwiperModule,
     // StripePayModule,
     PaymentCardItemModule,
-    OrderDoneCardItemModule
+    OrderDoneCardItemModule,
+    SdButtonClearModule
 ],
   declarations: [CartPage]
 })

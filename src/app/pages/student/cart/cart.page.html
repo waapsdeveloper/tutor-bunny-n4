@@ -35,14 +35,21 @@
       </div>
       <div class="d-flex flex-row justify-content-between">
         <div>Total</div>
-        <div class="roboto-bold fs-24">{{currency_symbol}} {{ total }}</div>        
+        <div class="roboto-bold fs-24">{{currency_symbol}} {{ total }}</div> 
       </div>
 
 
-      <app-sd-button-golden [text]="getSelectedItems()" (click)="checkoutItems()"></app-sd-button-golden>
+      <app-sd-button-golden *ngIf="activeIndex === 0" [text]="getSelectedItems()" (click)="confirmAndMoveToPaySlide()"></app-sd-button-golden>
+      <app-sd-button-golden *ngIf="activeIndex === 1" [text]="getPayButtonText()" (click)="checkoutItems()"></app-sd-button-golden>
+
+      <app-sd-button-golden *ngIf="activeIndex === 2" [text]="'Continue to Home Page'" (click)="gotoHomePage()"></app-sd-button-golden>
+      <app-sd-button-clear *ngIf="activeIndex === 2" [text]="'Purchase History'" (click)="gotoPurchaseHistory()"></app-sd-button-clear>
+
+
+
     </div>
 
-    <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
+    <div class="Privacy-policy outfit" *ngIf="activeIndex !== 2" >By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
     
   </div>
 </ion-footer>

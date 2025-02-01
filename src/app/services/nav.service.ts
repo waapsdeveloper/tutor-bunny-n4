@@ -61,9 +61,9 @@ export class NavService {
     return new Promise<void>(async (resolve) => {
       // ;
       if(link){
-        this.navc.navigateBack(link);
+        await this.navc.navigateBack(link);
       } else {
-        this.navc.back()
+        await this.navc.back()
       }
 
       resolve();

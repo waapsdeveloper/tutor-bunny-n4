@@ -1,3 +1,39 @@
-<p>
-  payment-card-item works!
-</p>
+<div class="cart-payment-outer">
+
+  <div class="heading fs-24 roboto-bold">Payment</div>
+
+  <ion-note>This form is not activated yet, in development mode you can just post your order without card inserted</ion-note>
+
+  <div class="form-outer" >
+
+    <div class="body-content-68448">
+      <div class="input-box-lines d-flex flex-column gap-8">
+        <app-sd-input-box placeholder="Name on Card"
+          (onChange)="result($event, 'name_on_card')" [inputText]="formData.email" [key]="'name_on_card'"
+          [errorText]="'Name on card required'" [type]="'text'" [modernInput]="true"></app-sd-input-box>
+      </div>
+      <div class="input-box-lines d-flex flex-column gap-8">
+        <app-sd-input-box  placeholder="Card Number"
+          (onChange)="result($event, 'card_number')" [inputText]="formData.password" [key]="'card_number'"
+          [errorText]="'Card No is required'" [type]="'text'" [modernInput]="true"></app-sd-input-box>
+      </div>
+
+      <div class="d-flex flex-row gap-8">
+
+        <div class="input-box-lines d-flex flex-column gap-8">
+          <app-sd-input-box  placeholder="Expiry"
+            (onChange)="result($event, 'expiry')" [inputText]="formData.password" [key]="'expiry'"
+            [errorText]="'Expiry is required'" [type]="'text'" [modernInput]="true"></app-sd-input-box>
+        </div>
+        <div class="input-box-lines d-flex flex-column gap-8">
+          <app-sd-input-box  placeholder="CVV"
+            (onChange)="result($event, 'cvv')" [inputText]="formData.password" [key]="'cvv'"
+            [errorText]="'CVV is required'" [type]="'text'" [modernInput]="true"></app-sd-input-box>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+</div>

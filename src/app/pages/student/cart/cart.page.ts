@@ -28,6 +28,8 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
 
   currency_symbol = '$';
 
+  order_number = '';
+
 
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
@@ -39,7 +41,8 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   ionViewWillEnter(): void {
     this.cartService.getList().subscribe((data) => {
       this.list$ = data.map(item => ({ ...item, selected: true }));
-
+      
+      this.title = 'Cart (' + (this.list$ ? this.list$.length : '' ) + ')';
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
       if (item) {
         this.currency_symbol = item['auth_user_currency_symbol'];
@@ -57,8 +60,6 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
 
   calculateCart() {
     const selectedList = this.list$.filter((x) => x.selected == true);
-
-    this.title = 'Cart (' + selectedList.length + ')';
 
     this.subtotal = selectedList.reduce((prev, next) => {
       let n = parseFloat(next.updated_price.replace(/,/g, ''));
@@ -90,7 +91,15 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     }
 
     let items = this.list$.filter((x) => x.selected === true).length;
-    return `Checkout (${items}) items`;
+    return `Checkout (${items} items)`;
+  }
+
+  getPayButtonText() {
+    if (!this.list$) {
+      return 'Pay';
+    }
+
+    return `Pay ${this.currency_symbol}${this.total}`;
   }
 
   async openStripe() {
@@ -146,8 +155,34 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   onSlideChanged() {
+    
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+
+    if(this.activeIndex == 0){
+      const countText = this.list$?.length || 0;
+      this.title = 'Cart (' + countText + ')';
+    }
+
+    if(this.activeIndex == 1){
+      this.title = 'Checkout';
+    }
+    
+
+
+
+
     this.cdr.detectChanges();
+  }
+
+  async confirmAndMoveToPaySlide(){
+    
+    let items = this.list$.filter((x) => x.selected == true);
+
+    if(items.length > 0){
+      this.slides?.swiperRef.slideNext(500);
+    }
+
+
   }
 
   async checkoutItems() {
@@ -183,16 +218,33 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     }
 
     this.slides?.swiperRef.slideNext(500);
+
   }
 
   parentBack($event: any){
 
     const activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
     if (activeIndex !== 0) {
+
       this.slides?.swiperRef.slidePrev(500);
     } else {
       this.nav.pop();
     }
 
   }
+
+  gotoHomePage(){
+    this.nav.pop();
+  }
+
+  async gotoPurchaseHistory(){
+    await this.nav.pop();
+
+    setTimeout(() => {
+      this.nav.push('checkout-history')
+    }, 1000);
+
+  }
+
+
 }

@@ -7,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentCardItemComponent  implements OnInit {
 
+  formData: any = {
+    name_on_card: null,
+    password: null,
+  };
+
   constructor() { }
 
   ngOnInit() {}
+
+  result(value, key) {
+    this.formData[key] = value;
+  }
 
 }
