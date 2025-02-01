@@ -8,7 +8,6 @@ import { CreateMaterialService } from '../create-material.service';
   styleUrls: ['./input-material-docs.component.scss'],
 })
 export class InputMaterialDocsComponent implements OnInit {
-
   doc$;
 
   @Input() isRequired = false;
@@ -22,7 +21,6 @@ export class InputMaterialDocsComponent implements OnInit {
     public createMaterialService: CreateMaterialService,
     public events: EventsService
   ) {
-
     this.createMaterialService.getDocs().subscribe((value) => {
       let docs = value;
       if (docs.length > 0) {
@@ -34,7 +32,9 @@ export class InputMaterialDocsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.events.subscribe('teacher-study-material-second-screen-submit-call', (formData) => {
+    this.events.subscribe(
+      'teacher-study-material-second-screen-submit-call',
+      (formData) => {
         let v = formData[this.key];
 
         if (!v || v == '' || v.length == 0) {
@@ -58,27 +58,19 @@ export class InputMaterialDocsComponent implements OnInit {
     // });
   }
 
-  setBackgroundImage(docObj: { doc: string, type: string }): string {
+  setBackgroundImage(docObj: { doc: string; type: string, file_type: string }): string {
+    let path = 'assets/svg/filetypes/';
+    const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
 
-
-
-    let path = "assets/svg/filetypes/";
-    if (docObj.type.includes("pdf")) {
-      path += "pdf.svg";
-    } else
-
-    if (docObj.type.includes("sheet") ) {
-      path += "xls.svg";
-    } else
-
-    if (docObj.type.includes("document")) {
-      path += "doc.svg";
+    if (fileType.includes('pdf')) {
+      path += 'pdf.svg';
+    } else if (fileType.includes('sheet')) {
+      path += 'xls.svg';
+    } else if (fileType.includes('document')) {
+      path += 'doc.svg';
+    } else if (fileType.includes('image')) {
+      path += 'png.svg';
     }
-
-    if (docObj.type.includes("image")) {
-      path += "png.svg";
-    }
-
 
     return `url(${path})`;
   }

@@ -66,12 +66,30 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
     }
 
     if (this.params.material_Id) {
+
+
       this.materialId = this.params.material_Id;
       const res = await this.globalStudyMaterialService.getItemPromise(this.materialId);
       this.createMaterialService.setStateItem(res);
 
-      // get keywords from API
+      const resImages = await this.network.getMaterialImages({
+        study_material_id: this.materialId,
+      });
 
+      this.createMaterialService.setImages(resImages.result);
+
+      if(resImages?.result?.length > 0){
+        this.createMaterialService.setImage(resImages.result[0].image);
+      }
+
+      const resDocs = await this.network.getMaterialDocs({
+        study_material_id: this.materialId,
+      });
+
+      this.createMaterialService.setDocs(resDocs?.result?.data || []);
+
+
+      // get keywords from API
       let obj = {
         study_material_id: this.materialId
       }
@@ -80,6 +98,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       if(res2.result){
         this.createMaterialService.setKeywords(res2.result)
       }
+
+
+
+
 
       // localStorage.setItem('courseId', this.courseId);
 
@@ -188,7 +210,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       if(mainImage) {
 
-        const cleanUrl = 'images/' + this.extractAndFormatImageName(mainImage as string);
+        const cleanUrl = this.extractAndFormatImageName(mainImage as string);
         console.log(cleanUrl);
 
         let obj = {

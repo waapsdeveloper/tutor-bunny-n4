@@ -55,26 +55,22 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   }
 
-  setBackgroundImage(item) {
+  setBackgroundImage(docObj: any) {
     // return `url('${item.image}')`;
 
 
 
-    let path = "assets/svg/filetypes/";
-    if (item.type.includes("pdf")) {
-      path += "pdf.svg";
-    } else
+    let path = 'assets/svg/filetypes/';
+    const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
 
-    if (item.type.includes("sheet") ) {
-      path += "xls.svg";
-    } else
-
-    if (item.type.includes("document")) {
-      path += "doc.svg";
-    }
-
-    if (item.type.includes("image")) {
-      path += "png.svg";
+    if (fileType.includes('pdf')) {
+      path += 'pdf.svg';
+    } else if (fileType.includes('sheet')) {
+      path += 'xls.svg';
+    } else if (fileType.includes('document')) {
+      path += 'doc.svg';
+    } else if (fileType.includes('image')) {
+      path += 'png.svg';
     }
 
 
