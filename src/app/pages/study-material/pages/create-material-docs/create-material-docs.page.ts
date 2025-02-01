@@ -152,12 +152,17 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    this.createMaterialService.removeDocInDocsIndex(index);
 
-    let data = this.docs$[index].doc
+    let data = this.docs$[index]
 
-    this.network.deleteStudyMaterialFile(data);
+     let obj = {
+        id: data.id,
+        study_material_id: data.study_material_id
+      }
 
+      this.network.deleteStudyMaterialFile(obj);
+
+      this.createMaterialService.removeDocInDocsIndex(index);
   }
 
   openDoc(doc) {

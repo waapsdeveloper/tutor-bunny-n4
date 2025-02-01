@@ -1,6 +1,6 @@
 <ion-content class="remove-pd-top-323243243" #content [fullscreen]="true">
   
-  <app-slide-banner [data]="bannerData" (back)="nav.pop()"></app-slide-banner>
+  <app-slide-banner [data]="bannerData" (back)="nav.pop()" (tapAction)="tapAction($event)"></app-slide-banner>
 
   <div class="body-content ion-padding">
     <app-scd-page-info [data]="infoData"></app-scd-page-info>

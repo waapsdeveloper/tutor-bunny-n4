@@ -8,6 +8,7 @@ import {
   infoData,
   teacherCardInfo,
 } from 'src/app/interfaces/detail-data';
+import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 
 @Component({
   selector: 'app-student-material-detail',
@@ -15,12 +16,13 @@ import {
   styleUrls: ['./student-material-detail.page.scss'],
 })
 export class StudentMaterialDetailPage extends BasePage {
-  [x: string]: any;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   material$;
   materialId;
+
+  sliderImages: any[] = [];
 
   bannerData: bannerData = {
     liked_by_me: false,
@@ -34,7 +36,7 @@ export class StudentMaterialDetailPage extends BasePage {
     price: '',
     rating: 0.0,
     total_rating: 0,
-    per_unit: '/lesson',
+    per_unit: '',
   };
 
   aboutData = {
@@ -50,7 +52,7 @@ export class StudentMaterialDetailPage extends BasePage {
     icon: '',
     text: '',
     email: '',
-    teacher_id: 0
+    teacher_id: 0,
   };
 
   materialData = {
@@ -107,7 +109,8 @@ export class StudentMaterialDetailPage extends BasePage {
 
   constructor(
     injector: Injector,
-    private globalStudyMaterialService: GlobalStudyMaterialService
+    private globalStudyMaterialService: GlobalStudyMaterialService,
+    private globalMaterialFav: GlobalFavMaterialService
   ) {
     super(injector);
   }
@@ -120,12 +123,12 @@ export class StudentMaterialDetailPage extends BasePage {
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService
-        .getItem(this.materialId)
-        .subscribe((data) => {
+      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
           this.material$ = data;
-          this.callApi(this.material$);
-        });
+          this.callApi(data);
+      });
+    } else {
+      this.nav.pop();
     }
   }
 
@@ -145,15 +148,35 @@ export class StudentMaterialDetailPage extends BasePage {
 
   async callApi(data) {
     console.log(data);
-    const resImages = await this.network.getMaterialImages({
-      study_material_id: data.id,
-    });
 
-    console.log(resImages);
+    if (this.sliderImages.length == 0) {
+      const resImages = await this.network.getMaterialImages({
+        study_material_id: data.id,
+      });
+      this.sliderImages = resImages.result;
+    }
+
+
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
-      sliderImages: resImages.result,
-      actions: [],
+      sliderImages: this.sliderImages,
+      actions: [
+        {
+          name: 'favorite',
+          img: data.is_liked_by_me == true ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg',
+          action: null,
+        },
+        {
+          name: 'share',
+          img: 'assets/svg/share-77.svg',
+          action: null,
+        },
+        {
+          name: 'info',
+          img: 'assets/svg/gray-info.svg',
+          action: null,
+        },
+      ],
     };
 
     this.infoData = {
@@ -162,7 +185,7 @@ export class StudentMaterialDetailPage extends BasePage {
       price: data?.updated_price ?? 0,
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
-      per_unit: '/lesson',
+      per_unit: '',
     };
 
     this.aboutData = {
@@ -303,29 +326,32 @@ export class StudentMaterialDetailPage extends BasePage {
   }
 
   async addToFav() {
-    // let showFav = true;
-    // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
-    this.material$.is_liked_by_me = true;
-    // this.courseFavoriteService.addFavorites(this.course$, user);
+    this.globalStudyMaterialService.updateItem(
+      this.material$,
+      'is_liked_by_me',
+      true
+    );
+    this.globalMaterialFav.addFavorites(this.material$, user);
   }
 
   async removeToFav() {
-    // let showFav = false;
-    // this.events.publish('show-fav-dot', showFav);
     let user = this.users.getUser();
-    this.material$.is_liked_by_me = false;
-    // this.courseFavoriteService.removeFavorites(this.course$, user);
+    this.globalStudyMaterialService.updateItem(
+      this.materialId,
+      'is_liked_by_me',
+      false
+    );
+    this.globalMaterialFav.removeFavorites(this.material$, user);
   }
 
-  openEdit() {
-    this.nav.push('/create-material', {
-      material_Id: this.materialId,
-      edit: true,
-      type: this.data.type,
-      showBack: true,
-      title: 'Edit Material',
-    });
+  async tapAction($event) {
+    let obj = Object.assign({}, $event);
+    if (obj.name == 'favorite') {
+      this.material$.is_liked_by_me == true
+        ? this.removeToFav()
+        : this.addToFav();
+    }
   }
 
   goToChat() {}

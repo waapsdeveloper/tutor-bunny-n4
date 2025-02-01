@@ -81,6 +81,20 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
     });
   }
 
+  updateItem(id: number | string, key: keyof T, value: any) {
+    this.setState((state) => {
+      return {
+        ...state,
+        list: state.list.map((item: any) => {
+          if (item.id == id) {
+            return { ...item, [key]: value };
+          }
+          return item;
+        }),
+      };
+    });
+  }
+  
   setItem(obj: T) {
     this.setState((state) => {
       const exists = state.list.some((item: any) => item['id'] === obj['id']);
