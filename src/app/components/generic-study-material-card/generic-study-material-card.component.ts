@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { ChatService } from 'src/app/services/chat.service';
 import { CartService } from 'src/app/services/cart.service';
 @Component({
   selector: 'app-generic-study-material-card',
@@ -52,7 +51,6 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
     private materialFavoriteService: GlobalFavMaterialService,
     public globalMaterial: GlobalFavMaterialService,
-    private chats: ChatService
   ) {
     super(injector);
     this.user = this.users.getUser();

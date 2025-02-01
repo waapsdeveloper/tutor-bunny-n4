@@ -13,6 +13,8 @@ import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-cou
 export class GenericCourseCardComponent extends BasePage {
 
   private _item: any;
+  itemExistInFav$ = false;
+  
   displayName;
   flag;
   user;
@@ -25,7 +27,6 @@ export class GenericCourseCardComponent extends BasePage {
   trail = false;
   languageName: any;
   teacherImage;
-  itemExistInFav$ = false;
 
   @Output() openDetails = new EventEmitter<any>();
 
@@ -52,7 +53,6 @@ export class GenericCourseCardComponent extends BasePage {
   }
 
   initialize(data) {
-
     
     this.courseFavoriteService.isItemExist('course_id', data.id).subscribe( count => {
       this.itemExistInFav$ = count > 0;

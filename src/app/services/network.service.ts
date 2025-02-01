@@ -108,8 +108,12 @@ export class NetworkService {
     return this.httpGetResponse('countries/all', null, false, false);
   }
 
-  FavCourseByIds(data) {
+  favCourseByIds(data) {
     return this.httpPostResponse('courses/list-By-ids', data, null, false, false);
+  }
+
+  favMaterialByIds(data) {
+    return this.httpPostResponse('material/list-By-ids', data, null, false, false);
   }
 
   getStates(data) {

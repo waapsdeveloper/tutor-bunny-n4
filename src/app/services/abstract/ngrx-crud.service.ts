@@ -32,6 +32,14 @@ export abstract class NgrxCrudService<T> extends NgSimpleStateBaseRxjsStore<Base
     return this.selectState((state) => state.list);
   }
 
+  getListPromise(): Promise<T[]> {
+    return new Promise((resolve) => {
+      this.selectState((state) => state.list).subscribe((list) => {
+        resolve(list);
+      });
+    });
+  }
+
   getItem(id: number | string) {
     return this.selectState((state) =>
       state.list.find((x: any) => x.id == id)

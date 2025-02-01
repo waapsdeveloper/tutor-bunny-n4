@@ -1,0 +1,21 @@
+.body-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Space between items
+}
+
+.list-item {
+//   padding-bottom: 16px; // Ensures spacing before the divider
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ddd; // Light gray border line
+}

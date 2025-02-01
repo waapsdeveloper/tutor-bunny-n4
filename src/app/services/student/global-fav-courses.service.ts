@@ -32,11 +32,10 @@ export class GlobalFavCoursesService extends NgrxCrudService<any> {
     };
 
     const res = await this.network.addCourseFav(ite);
-    console.log(res);
-    const d = res.data;
-
-    if(d){
-      this.setItem(d)
+    
+    // console.log(res);
+    if (res && res.data) {
+      this.setItem(res.data);
     }
 
 

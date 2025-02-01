@@ -207,7 +207,7 @@ const routes: Routes = [
   },
   {
     path: 'favorites',
-    loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
+    loadChildren: () => import('./pages/student/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },
   // {
   //   path: 'notes',

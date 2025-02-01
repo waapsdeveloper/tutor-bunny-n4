@@ -1,34 +1,43 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
+
 @Component({
   selector: 'app-fav-material',
   templateUrl: './fav-material.page.html',
   styleUrls: ['./fav-material.page.scss'],
 })
-export class FavMaterialPage extends BasePage {
-  // user;
-  list;
-  page = 1;
-  last_page = -1;
-  materialids: any[] = [];
-  // loading= false;
-  // view = 'course';
+export class FavMaterialPage extends ListPage implements OnInit {
+  
+  constructor( injector: Injector, private globalFavMaterialService: GlobalFavMaterialService ) {
+    super(injector);    
+  }
 
-  constructor(
-    injector: Injector,
-    private globalFavMaterialService: GlobalFavMaterialService,
-    public globalCourses: GlobalCoursesService
-  ) {
-    super(injector);
-    this.globalFavMaterialService.getList().subscribe((data) => {
-      this.materialids = (data as any[]).map((item) => item.course_id);
-      // this.callApi(1)
+  async fetchList(page: number, search: string, status: string): Promise<any> {
+    const data = await this.globalFavMaterialService.getListPromise();
+    const materialids = (data as any[]).map((item) => item.study_material_id);
 
-      // this.list$ = data;
-      // console.log("init-fav-material", this.list$)
-    });
+    let obj = {
+      ids: materialids,
+      page: page,
+    };
+
+    let res = await this.network.favMaterialByIds(obj);
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total,
+    };
+  }
+
+  
+  ngOnInit() {
+    this.resetAndFetch();
+  }
+
+  openDetails(item: any) {
+    this.nav.push('/student-material-detail', {material_id: item.id})
   }
 
 //   async initialize() {
