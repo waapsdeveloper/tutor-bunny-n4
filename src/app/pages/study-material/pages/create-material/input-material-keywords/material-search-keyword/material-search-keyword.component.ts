@@ -83,7 +83,8 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
         name: this.inputText,
       };
       // return;
-      const res = await this.network.addMaterialInputKeyword(obj);
+      await this.network.addMaterialInputKeyword(obj);
+
       let data = {
         study_material_id: study_material_id,
       };
@@ -93,6 +94,8 @@ export class MaterialSearchKeywordComponent extends BasePage implements OnInit {
       // this.inputText = '';
       this.subs = res2.result;
       this.createMaterialService.setKeywords(this.subs);
+
+      this.inputText = '';
 
       // this.createMaterialService.addKeywordInKeywords(item);
       // this.suggestionsList = [];

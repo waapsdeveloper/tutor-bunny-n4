@@ -141,6 +141,10 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       return;
     }
 
+    if(data.description && data.description.length < 250){
+      return;
+    }
+
     if(!data.images || data.images.length == 0){
       return;
     }
@@ -169,18 +173,18 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
       this.createMaterialService.setId(studyMaterialId);
 
-      // if(data.image['image']) {
+      if(data.image['image']) {
 
-      //   let obj = {
-      //     study_material_id: studyMaterialId,
-      //     image: data.image['image'],
-      //   };
+        let obj = {
+          study_material_id: studyMaterialId,
+          image: data.image['image'],
+        };
 
-      //   let res = await this.network.postStudyMaterialPhoto(obj);
+        let res = await this.network.postStudyMaterialPhoto(obj);
       //   console.log(res);
-      //   if(res && res.result){
-      //     this.createMaterialService.setImage(res.result)
-      //   }
+        if(res && res.result){
+          this.createMaterialService.setImage(res.result)
+        }
 
 
 
@@ -193,7 +197,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
       //   //   this.createMaterialService.setImage(obj);
       //   // }
 
-      // }
+      }
 
 
 

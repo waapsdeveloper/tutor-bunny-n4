@@ -3,12 +3,12 @@
       id="click-keyword "></div>
   <ion-popover trigger="click-keyword " triggerAction="click">
     <ng-template>
-      <div class="ion-padding popover-title">Add multiple search keywords so that the course will come up in the search result.</div>
+      <div class="ion-padding popover-title">Add multiple search keywords so that the course will come up in the search
+        result.</div>
     </ng-template>
   </ion-popover>
   <div class="input-box-lines" style="width: 100%;">
-    <app-material-search-keyword [subs]="keywords$"
-      placeholder="Type and add"></app-material-search-keyword>
+    <app-material-search-keyword [subs]="keywords$" placeholder="Type and add"></app-material-search-keyword>
   </div>
 </div>
 <app-sd-error-input-info *ngIf="isRequired" [errorText]="errorText"></app-sd-error-input-info>
