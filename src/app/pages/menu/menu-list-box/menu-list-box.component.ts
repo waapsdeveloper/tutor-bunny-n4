@@ -36,7 +36,10 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     if (this.user.role_id == 2) {
       // this.nav.push('/teacher-profile');
     } else {
-      this.nav.push('/teacher-profile');
+      const params = {
+        email: this.user.email,
+      };
+      this.nav.push('/teacher-profile', params);
     }
   }
 
