@@ -18,7 +18,6 @@ import { SwiperComponent } from 'swiper/angular';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage extends BasePage implements OnInit, ViewWillEnter {
-  
   title = 'Cart';
   buttonText = 'Checkout';
   list$;
@@ -26,76 +25,66 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   total;
   tax;
 
-  currency_symbol = '$'
+  currency_symbol = '$';
 
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(
-    injector: Injector,
-    private cartService: CartService,
-  ) {
+  constructor(injector: Injector, private cartService: CartService) {
     super(injector);
   }
 
   ionViewWillEnter(): void {
-
     this.cartService.getList().subscribe((data) => {
-
       let f = Object.assign([], data);
-      for(var i = 0; i < f.length; i++ ){
-        f['selected'] = true;
+      for (var i = 0; i < f.length; i++) {
+        f[i]['selected'] = true;
       }
+
       this.list$ = f;
-      this.title = 'Cart (' + this.list$.length + ')';
-
-      console.log(data);
-
-
-
-      this.subtotal = this.list$.reduce((prev, next) => {
-        let n = parseFloat(next.updated_price.replace(/,/g, ''));
-        console.log(n);
-        return parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''));
-      }, 0);
-
-      this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
-
-      this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(2);
-
-      // this.list$ = this.list$.map(item => {
-      //   item['selected'] = true;
-      //   return item;
-      // })
 
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
       if (item) {
-        this.currency_symbol = item['auth_user_currency_symbol']
+        this.currency_symbol = item['auth_user_currency_symbol'];
       }
 
-      
-
-
+      this.calculateCart();
     });
 
-
-    // update all items to be selected 
-
-
+    // update all items to be selected
   }
 
   ngOnInit() {
-    console.log("aa");
+    console.log('aa');
+  }
 
+  calculateCart() {
+    const selectedList = this.list$.filter((x) => x.selected == true);
+
+    this.title = 'Cart (' + selectedList.length + ')';
+
+    this.subtotal = selectedList.reduce((prev, next) => {
+      let n = parseFloat(next.updated_price.replace(/,/g, ''));
+      console.log(n);
+      return (
+        parseFloat(prev) + parseFloat(next.updated_price.replace(/,/g, ''))
+      );
+    }, 0);
+
+    this.tax = parseFloat(`${this.subtotal * 0.01}`).toFixed(2);
+
+    this.total = parseFloat(`${this.subtotal + parseFloat(this.tax)}`).toFixed(
+      2
+    );
   }
 
   removeCartitem(item) {
     this.cartService.setRemove(item);
   }
 
-  updateSelection($event){
-    console.log($event)
-
+  updateSelection($event) {
+    console.log($event);
+    this.calculateCart();
   }
 
   getSelectedItems() {
@@ -198,6 +187,5 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     for (let i = 0; i < items.length; i++) {
       this.cartService.setRemove(items[i]);
     }
-
   }
 }
