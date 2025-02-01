@@ -1,5 +1,5 @@
 export interface bannerData {
-    liked_by_me: false;
+    liked_by_me: boolean;
     sliderImages: any[];
     actions: any[];
 }

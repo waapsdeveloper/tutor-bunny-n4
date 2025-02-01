@@ -5,7 +5,13 @@ import { ChatService } from 'src/app/services/chat.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
-import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src/app/interfaces/detail-data';
+import {
+  bannerData,
+  infoColumnSingleItem,
+  infoData,
+  teacherCardInfo,
+} from 'src/app/interfaces/detail-data';
+import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -13,36 +19,37 @@ import { bannerData, infoColumnSingleItem, infoData, teacherCardInfo } from 'src
   styleUrls: ['./student-course-detail.page.scss'],
 })
 export class StudentCourseDetailPage extends BasePage {
-
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   course$;
   courseId;
 
+  sliderImages: any[] = [];
+
   bannerData: bannerData = {
     liked_by_me: false,
     sliderImages: [],
-    actions: []
-  }
+    actions: [],
+  };
 
   infoData: infoData = {
-    title: '', 
+    title: '',
     currency_symbol: '',
     price: '',
     rating: 0.0,
     total_rating: 0,
-    per_unit: '/lesson'
+    per_unit: '/lesson',
   };
 
   columnData = {
     colA: [],
-    colB: []
-  }
+    colB: [],
+  };
 
   aboutData = {
     heading: 'Details',
-    text: ''
-  }
+    text: '',
+  };
 
   teacherData: teacherCardInfo = {
     email: '',
@@ -52,22 +59,22 @@ export class StudentCourseDetailPage extends BasePage {
     flag: '',
     country: '',
     icon: '',
-    text: ''
-  }
+    text: '',
+  };
 
   scheduleData = {
-    schedules: []
+    schedules: [],
   };
 
   coursesData = {
     heading: 'Similar Courses',
-    list: []
-  }
+    list: [],
+  };
 
   ratingData = {
     heading: 'Reviews',
-    list: []
-  }
+    list: [],
+  };
 
   params;
 
@@ -77,7 +84,7 @@ export class StudentCourseDetailPage extends BasePage {
   // lessons;
   btn_loading = false;
   teacher;
-  user
+  user;
   // currencySymbol;
   techerTitle;
   // language;
@@ -112,72 +119,78 @@ export class StudentCourseDetailPage extends BasePage {
   startDate;
   showFavValue = false;
 
-
-
-
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     private chats: ChatService,
-    public globalCoursesService: GlobalCoursesService) {
+    public globalCoursesService: GlobalCoursesService,
+    public globalCourseFav: GlobalFavCoursesService
+  ) {
     super(injector);
   }
 
   // ngOnInit(): void {
-    
+
   // }
 
   async ionViewWillEnter() {
-
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
 
     if (this.params.course_id) {
-      
       this.courseId = this.params.course_id;
       this.globalCoursesService.getItem(this.courseId).subscribe((data) => {
         this.course$ = data;
-        this.callApi(this.course$);
+        this.callApi(data);
       });
-
     } else {
       this.nav.pop();
     }
     // this.spinner = true;
 
-    
     // this.isTrailReq();
   }
 
-  async callApi(data): Promise<boolean> {
+  async callApi(data): Promise<boolean> {    
+    if (this.sliderImages.length == 0) {
+      const resImages = await this.network.getCourseImages({
+        course_id: data.id,
+      });
+      this.sliderImages = resImages.result;
+    }
 
-    console.log(data);
-    const resImages = await this.network.getCourseImages({
-      course_id: data.id,
-    })
-
-    console.log(resImages)
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
-      sliderImages: resImages.result,
-      actions: [              
-          {
-            name: 'favorite',
-            img: 'assets/svg/heart-77.svg',
-            action: null
-          },
-          {
-            name: 'share',
-            img: 'assets/svg/share-77.svg',
-            action: null
-          },
-          {
-            name: 'info',
-            img: 'assets/svg/gray-info.svg',
-            action: null
-          }
-      ]
-    }
+      sliderImages: this.sliderImages,
+      actions: [
+        {
+          name: 'favorite',
+          img:
+            data.is_liked_by_me == true
+              ? 'assets/svg/heart-78.svg'
+              : 'assets/svg/heart-77.svg',
+          action: null,
+        },
+        {
+          name: 'share',
+          img: 'assets/svg/share-77.svg',
+          action: null,
+        },
+        {
+          name: 'info',
+          img: 'assets/svg/gray-info.svg',
+          action: null,
+        },
+      ],
+    };
+
+    // for cross check if favorite exist
+    this.globalCourseFav
+      .isItemExist('course_id', this.courseId)
+      .subscribe((count) => {
+        this.bannerData.liked_by_me = count > 0;
+      });
 
     this.infoData = {
       title: data.title,
@@ -185,52 +198,54 @@ export class StudentCourseDetailPage extends BasePage {
       price: data?.updated_price ?? 0,
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
-      per_unit: '/lesson'    
-    }
+      per_unit: '/lesson',
+    };
+
+    this;
 
     this.columnData = {
       colA: [
         {
           icon: 'assets/svg/time.svg',
-          text: data.duration + ' hours / lesson'
+          text: data.duration + ' hours / lesson',
         },
         {
           icon: 'assets/svg/globe-person.svg',
-          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type
+          text: data.mode_type == 'online' ? 'Online (live)' : data.mode_type,
         },
         {
           icon: 'assets/svg/cake2.svg',
-          text: `Student Age ${data.from_age} - ${data.to_age}`
+          text: `Student Age ${data.from_age} - ${data.to_age}`,
         },
         {
           icon: 'assets/svg/locations.svg',
-          text: ''
-        }
+          text: '',
+        },
       ] as infoColumnSingleItem[],
       colB: [
         {
           icon: 'assets/svg/create-course.svg',
-          text: `Total ${data.lesson} lessons` 
+          text: `Total ${data.lesson} lessons`,
         },
         {
           icon: 'assets/svg/minicute-group.svg',
-          text: `${data.capacity}`
+          text: `${data.capacity}`,
         },
         {
           icon: 'assets/svg/speaks.svg',
-          text: data.language.name
+          text: data.language.name,
         },
         {
           icon: 'assets/svg/course-type.svg',
-          text: 'Workshop / Event'
-        }
-      ] as infoColumnSingleItem[]
-    }
+          text: 'Workshop / Event',
+        },
+      ] as infoColumnSingleItem[],
+    };
 
     this.aboutData = {
       heading: 'Details',
-      text: data.description
-    }
+      text: data.description,
+    };
 
     this.teacherData = {
       email: data.user.email,
@@ -240,35 +255,37 @@ export class StudentCourseDetailPage extends BasePage {
       flag: this.utility.getFlag(data.user),
       country: data.user.teacher.country.name,
       icon: 'assets/svg/teacher-icon.svg',
-      text: data.user.teacher.title
-    }
+      text: data.user.teacher.title,
+    };
 
     this.scheduleData = {
       schedules: data.schedules,
-    }
+    };
 
     let similarcourse_params = {
-      course_id: data.id
-    }
+      course_id: data.id,
+    };
 
-    const similarcourses = await this.network.getSimilarCourses(similarcourse_params);
-    
+    const similarcourses = await this.network.getSimilarCourses(
+      similarcourse_params
+    );
+
     this.coursesData = {
       heading: 'Similar Courses',
-      list: similarcourses.result.data
-    }
+      list: similarcourses.result.data,
+    };
 
-    let reviews_params= {
+    let reviews_params = {
       teacher_id: data.user.id,
-      type: 'course'
+      type: 'course',
     };
 
     const res = await this.network.getReviews(reviews_params);
-    
+
     this.ratingData = {
       heading: 'Reviews',
-      list: res.result
-    }
+      list: res.result,
+    };
     // let res = (await this.globalCourses.getcourseById(this.course_Id)) as any;
 
     // this.teacher = data.user;
@@ -317,18 +334,12 @@ export class StudentCourseDetailPage extends BasePage {
     //   this.endDate = moment(endDate).format('DD-MMM-YYYY');
     // }
 
-    
-
-    
-
-    
-
     // this.acheduleTime = this.scheduleData.schedules;
     // const endTime = this.acheduleTime.end_date;
     // const startTime = this.acheduleTime.start_date;
     // this.startTime = moment(startTime).format('hh:mm a');
     // this.endTime = moment(endTime).format('hh:mm a');
-    
+
     // this.countData = {
     //   duration: this.data.capacity,
     //   lessons: this.data.lesson,
@@ -346,6 +357,8 @@ export class StudentCourseDetailPage extends BasePage {
     return true;
   }
 
+  async callImages(courseId) {}
+
   // async addToFav() {
   //   let user = this.users.getUser();
 
@@ -362,12 +375,10 @@ export class StudentCourseDetailPage extends BasePage {
   //   this.courseFavoriteService.removeFavorites(this.data, user);
   // }
 
-
   // async goToChat() {
   //   this.user = this.users.getUser();
   //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
   //   if (v || v == true) {
-
 
   //     let id = this.user.id;
   //     let obj = {
@@ -414,12 +425,15 @@ export class StudentCourseDetailPage extends BasePage {
   async openChatWithData() {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.user = this.users.getUser();
-    const chatRoomId = await this.chats.getChadRoomId(this.course_user.id, this.user.id) as number;
+    const chatRoomId = (await this.chats.getChadRoomId(
+      this.course_user.id,
+      this.user.id
+    )) as number;
 
-    if(chatRoomId != -1){
+    if (chatRoomId != -1) {
       this.nav.push('messages', {
-        chat_room_id: chatRoomId
-      })
+        chat_room_id: chatRoomId,
+      });
     }
   }
 
@@ -439,7 +453,6 @@ export class StudentCourseDetailPage extends BasePage {
       });
     }
   }
-
 
   async presentAlert() {
     const flag = await this.utility.presentConfirm(
@@ -486,8 +499,7 @@ export class StudentCourseDetailPage extends BasePage {
         });
       }
     }
-    this.btn_loading = false
-
+    this.btn_loading = false;
   }
 
   async cancelTrail() {
@@ -517,7 +529,7 @@ export class StudentCourseDetailPage extends BasePage {
 
     return true;
   }
-  
+
   // goToTeacher(user) {
   //   const params = {
   //     email: user.email,
@@ -530,5 +542,37 @@ export class StudentCourseDetailPage extends BasePage {
     // await this.callApi();
     this.content.scrollToTop(500); // 500ms animation duration
   }
-  
+
+  async addToFav() {
+    let user = this.users.getUser();
+    this.globalCoursesService.updateItem(this.courseId, 'is_liked_by_me', true);
+    this.globalCourseFav.addFavorites(this.course$, user);
+  }
+
+  async removeToFav() {
+    let user = this.users.getUser();
+    this.globalCoursesService.updateItem(
+      this.courseId,
+      'is_liked_by_me',
+      false
+    );
+    this.globalCourseFav.removeFavorites(this.course$, user);
+  }
+
+  async tapAction($event) {
+    let obj = Object.assign({}, $event);
+    if (obj.name == 'favorite') {
+      this.course$.is_liked_by_me == true
+        ? this.removeToFav()
+        : this.addToFav();
+      // const params = {
+      //   title: 'Edit Course',
+      //   showBack: true,
+      //   course_Id: this.courseId,
+      //   edit: true
+      // };
+
+      // this.nav.push('/course-form', params)
+    }
+  }
 }

@@ -23,22 +23,14 @@ export class SlideBannerComponent {
     return this._data;
   }
 
-  is_liked_by_me = false;
-  sliderImages: any[] = []
-
+  sliderImages: any[] = [];
 
   constructor() {}
 
   updateDetails(value: any) {
-    if (value) {
-      this.is_liked_by_me = value.is_liked_by_me ?? false;
+    if (value) {      
       this.sliderImages = value.sliderImages ?? [];
-
-
       this.actions = value.actions.map(action => {
-        if (action.name === 'favorite') {
-          action.img = this.is_liked_by_me ? 'assets/svg/heart-77.svg' : 'assets/svg/heart-78.svg';
-        }
         action.action = () => this.tapAction.emit(action);
         return action;
       });
