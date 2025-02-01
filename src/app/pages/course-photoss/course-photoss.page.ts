@@ -1,20 +1,17 @@
-import { Component, Injector, OnInit, OnDestroy } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCourseService } from '../course-form/create-course.service';
-import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-course-photoss',
   templateUrl: './course-photoss.page.html',
   styleUrls: ['./course-photoss.page.scss'],
 })
-export class CoursePhotossPage extends BasePage implements ViewWillEnter, OnDestroy {
+export class CoursePhotossPage extends BasePage implements OnInit {
   backBtn = '/course-profile/course-photo-edit';
   title = 'Course Photos';
   doc:null
   params;
-  images$: any[] = [];
-  courseId;
   remainingSlots;
 
   constructor(
@@ -25,68 +22,58 @@ export class CoursePhotossPage extends BasePage implements ViewWillEnter, OnDest
 
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.initialize();
   }
 
 
   async initialize() {
+    this.params = this.nav.getQueryParams();
 
-    const d = await this.createCourseService.getFormDataAsync() as any;
-    this.courseId = d.id;
+    if(this.params && this.params['title'] ){
+      this.title = this.params['title'];
 
-    if(this.courseId && this.courseId !== -1){
-      const res = await this.network.getMaterialImages({study_material_id: this.courseId}) as any;
-      if(res.result){
-        this.createCourseService.setImages(res.result)
-      }
+
     }
 
 
 
   }
+
   setBackgroundImage(item) {
     return `url('${item.image}')`;
   }
 
-
   async addImageInArray(imageString) {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    // const courseId = this.createCourseService.courseId;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const courseId = this.createCourseService.courseId;
 
-    // let obj = {
-    //   user_id: user.id,
-    //   course_id: courseId,
-    //   image: imageString,
-    // };
-
-    // this.createCourseService.coursePhotos.push(obj);
-
-    // if (courseId) {
-    //   obj.course_id = courseId;
-    //   await this.network.postCourseImage(obj);
-    // }
-
-    // if (this.createCourseService.coursePhotos.length == 1) {
-    //   this.createCourseService.coursePhotos[0].feature = true;
-    //   this.createCourseService.formData.image = imageString;
-
-    //   if (courseId) {
-    //     let obj = {
-    //       course_id: courseId,
-    //       image: imageString,
-    //     };
-    //     await this.network.postCoursePhoto(obj);
-    //   }
     let obj = {
-      feature: false,
+      user_id: user.id,
+      course_id: courseId,
       image: imageString,
     };
 
-    await this.createCourseService.addImageInImages(obj);
+    this.createCourseService.coursePhotos.push(obj);
+
+    if (courseId) {
+      obj.course_id = courseId;
+      await this.network.postCourseImage(obj);
     }
 
+    if (this.createCourseService.coursePhotos.length == 1) {
+      this.createCourseService.coursePhotos[0].feature = true;
+      this.createCourseService.formData.image = imageString;
 
+      if (courseId) {
+        let obj = {
+          course_id: courseId,
+          image: imageString,
+        };
+        await this.network.postCoursePhoto(obj);
+      }
+    }
+  }
 
 
   async onFileSelected(event: any) {
@@ -148,61 +135,57 @@ export class CoursePhotossPage extends BasePage implements ViewWillEnter, OnDest
 
   async clearImage(index: any, event: Event) {
     event.stopPropagation();
-    this.createCourseService.removeImageInImagesIndex(index)
-
-    // const coursePhotos = this.createCourseService.coursePhotos;
-    // const courseId = this.createCourseService.courseId;
-    // const pht = coursePhotos[index];
-    // let image = coursePhotos[0].image;
-    // this.events.publish('change-sample-course-to-this', image);
-
-    // if (!pht) {
-    //   return;
-    // }
 
 
+    const coursePhotos = this.createCourseService.coursePhotos;
+    const courseId = this.createCourseService.courseId;
+    const pht = coursePhotos[index];
+    let image = coursePhotos[0].image;
+    this.events.publish('change-sample-course-to-this', image);
+
+    if (!pht) {
+      return;
+    }
 
 
-    // // Check if the photo being cleared is the feature image
-    // if (pht.feature) {
-    //   // First, remove the image from the array
-    //   if (pht.id) {
-    //     await this.network.deleteCourseImage(pht.id);
-    //   }
 
-    //   coursePhotos.splice(index, 1);
 
-    //   // Check if there are still photos in the array
-    //   if (coursePhotos.length > 0) {
-    //     // Set the first photo in the array as the feature image
-    //     coursePhotos[0].feature = true;
-    //     this.createCourseService.formData.image = coursePhotos[0].image;
-    //     let image = coursePhotos[0].image;
-    //     this.events.publish('change-sample-course-to-this', image);
+    // Check if the photo being cleared is the feature image
+    if (pht.feature) {
+      // First, remove the image from the array
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+      }
 
-    //     // Update the feature image on the server if courseId exists
-    //     if (courseId) {
-    //       let obj = {
-    //         course_id: courseId,
-    //         image: coursePhotos[0].image,
-    //       };
-    //       await this.network.postCoursePhoto(obj);
-    //     }
-    //   } else {
-    //     // If no photos remain, reset the feature image
-    //     this.createCourseService.formData.image = null;
-    //   }
-    // } else {
-    //   // If the image being cleared is not the feature image, simply remove it
-    //   if (pht.id) {
-    //     await this.network.deleteCourseImage(pht.id);
-    //   }
-    //   coursePhotos.splice(index, 1);
-    // }
-  }
-  async clearImageB64(index: any, event: Event) {
-    event.stopPropagation();
-    this.createCourseService.base64ImagesArray.splice(index, 1);
+      coursePhotos.splice(index, 1);
+
+      // Check if there are still photos in the array
+      if (coursePhotos.length > 0) {
+        // Set the first photo in the array as the feature image
+        coursePhotos[0].feature = true;
+        this.createCourseService.formData.image = coursePhotos[0].image;
+        let image = coursePhotos[0].image;
+        this.events.publish('change-sample-course-to-this', image);
+
+        // Update the feature image on the server if courseId exists
+        if (courseId) {
+          let obj = {
+            course_id: courseId,
+            image: coursePhotos[0].image,
+          };
+          await this.network.postCoursePhoto(obj);
+        }
+      } else {
+        // If no photos remain, reset the feature image
+        this.createCourseService.formData.image = null;
+      }
+    } else {
+      // If the image being cleared is not the feature image, simply remove it
+      if (pht.id) {
+        await this.network.deleteCourseImage(pht.id);
+      }
+      coursePhotos.splice(index, 1);
+    }
   }
 
   openImage(image) {
@@ -214,15 +197,5 @@ export class CoursePhotossPage extends BasePage implements ViewWillEnter, OnDest
 
   backToProfile() {
     this.nav.pop();
-  }
-  ngOnDestroy(): void {
-
-    if(this.images$.length > 0){
-      this.createCourseService.setImage(this.images$[0].image)
-    }
-
-    if(this.createCourseService.base64ImagesArray.length > 0){
-      this.createCourseService.setImage(this.createCourseService.base64ImagesArray[0].image)
-    }
   }
 }
