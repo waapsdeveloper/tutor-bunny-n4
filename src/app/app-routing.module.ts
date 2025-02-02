@@ -160,7 +160,7 @@ const routes: Routes = [
   },
   {
     path: 'course-photoss',
-    loadChildren: () => import('./pages/course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
+    loadChildren: () => import('./pages/teacher/course-form/course-photoss/course-photoss.module').then( m => m.CoursePhotossPageModule)
   },
 
   {
