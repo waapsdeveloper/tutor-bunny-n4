@@ -8,6 +8,7 @@ import { NotesPageRoutingModule } from './notes-routing.module';
 
 import { NotesPage } from './notes.page';
 import { MaterialCardModule } from './material-card/material-card.module';
+import { GlobalListViewModule } from "../../../../components/global-list-view/global-list-view.module";
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { MaterialCardModule } from './material-card/material-card.module';
     FormsModule,
     IonicModule,
     NotesPageRoutingModule,
-    MaterialCardModule
-  ],
+    MaterialCardModule,
+    GlobalListViewModule
+],
   declarations: [NotesPage]
 })
 export class NotesPageModule {}

@@ -338,6 +338,8 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     const res = await this.network.submitSecondMaterial(formData, this.material$.id);
 
+    this.globalStudyMaterialService.getMyStudyMaterialFromApi(1, '');
+
     this.nav.pop();
 
 

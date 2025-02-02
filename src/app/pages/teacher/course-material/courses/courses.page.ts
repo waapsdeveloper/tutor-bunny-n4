@@ -10,6 +10,7 @@ import { ListPage } from 'src/app/base-page/list-page';
 })
 export class CoursesPage extends ListPage implements OnInit {
   
+  list$;
 
   constructor(injector: Injector, public globalCoursesService: GlobalCoursesService) {
     super(injector);
@@ -17,16 +18,24 @@ export class CoursesPage extends ListPage implements OnInit {
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const res = await this.globalCoursesService.getMyCoursesFromApi(page, search);
-    return {
+    
+    let pagination = {
       list: res.result.data,
       page: res.result.current_page,
       last_page: res.result.last_page,
       total: res.result.total
     };
+
+    this.globalCoursesService.setList(pagination.list, pagination.page, pagination.last_page, pagination.total)
+
+    return pagination;
   }
 
   ngOnInit() {
-    this.resetAndFetch();
+    // this.resetAndFetch();
+    this.globalCoursesService.getList().subscribe( (data) => {
+      this.list$ = data;
+    });
   }
 
   openDetails(item: any) {    

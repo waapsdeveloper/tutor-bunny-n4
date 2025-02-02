@@ -45,7 +45,7 @@ export class NetworkService {
     return this.httpPostResponse('user/update-profile-image', data);
   }
   postCoursePhoto(data) {
-    return this.httpPostResponse('courses/update-course-image', data, false);
+    return this.httpPostResponse('courses/update-course-image', data, false, false, false);
   }
 
   updateMessageReaquest(data, id) {

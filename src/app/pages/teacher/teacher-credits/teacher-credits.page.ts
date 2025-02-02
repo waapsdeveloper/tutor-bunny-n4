@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { NetworkInterfaceBase } from 'os';
 import { NavService } from 'src/app/services/nav.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -8,9 +9,10 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './teacher-credits.page.html',
   styleUrls: ['./teacher-credits.page.scss'],
 })
-export class TeacherCreditsPage implements OnInit {
-user ;
-item;
+export class TeacherCreditsPage implements OnInit, ViewWillEnter {
+
+  user;
+  item;
   months: any[] = [
     'January',
     'Febuary',
@@ -33,28 +35,26 @@ item;
     this.selectedChip = index; // Update the selected chip index
   }
 
-  constructor(private nav: NavService,private network:NetworkService) { }
+  constructor(private nav: NavService, private network: NetworkService) {}
 
-  goback(){
+  goback() {
     this.nav.pop('/tabs/teacher-dashboard');
   }
 
-  buyCredits(){
+  buyCredits() {
     this.nav.push('/teacher-credits-buy');
   }
 
-
- async ngOnInit(){
-  let user = localStorage.getItem('user');
-  this.user = JSON.parse(user);
-  console.log(this.user);
-   let res = await this.network.creditHistory(this.user?.id);
-   console.log(res);
-   this.item = res
+  async ngOnInit() {
+    console.log("err")
   }
 
-
-
-
-
+  async ionViewWillEnter() {
+    let user = localStorage.getItem('user');
+    this.user = JSON.parse(user);
+    console.log(this.user);
+    let res = await this.network.creditHistory(this.user?.id);
+    console.log(res);
+    this.item = res;
+  }
 }

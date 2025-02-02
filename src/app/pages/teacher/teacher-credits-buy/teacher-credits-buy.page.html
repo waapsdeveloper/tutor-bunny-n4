@@ -32,14 +32,16 @@
 
           </div>
 
-          <ion-list class="checkout-history-list" inset="true">
+          <app-payment-card-item></app-payment-card-item>
+
+          <!-- <ion-list class="checkout-history-list" inset="true">
             <ion-item *ngFor="let item of apiCoins" detail="true" (click)="selectCoin(item)">
               <ion-label>
                 <h2>Buy <b>{{ item.level }}</b> Coins</h2>
               </ion-label>
               <span slot="end" class="price">{{ item.currency_symbol }} {{ item.price }}</span>
             </ion-item>
-          </ion-list>
+          </ion-list> -->
 
           <!-- <div class="d-flex flex-row gap-8">
             <app-sd-button-golden [text]="'$10'" (click)="buyCredits(10)"></app-sd-button-golden>

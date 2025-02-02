@@ -10,6 +10,7 @@ import { TeacherCreditsBuyPage } from './teacher-credits-buy.page';
 import { SwiperModule } from 'swiper/angular';
 import { SdHeaderTopModule } from "../../../components/sd-header-top/sd-header-top.module";
 import { SdButtonGoldenModule } from "../../../components/sd-button-golden/sd-button-golden.module";
+import { PaymentCardItemModule } from "./payment-card-item/payment-card-item.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SdButtonGoldenModule } from "../../../components/sd-button-golden/sd-bu
     TeacherCreditsBuyPageRoutingModule,
     SwiperModule,
     SdHeaderTopModule,
-    SdButtonGoldenModule
+    SdButtonGoldenModule,
+    PaymentCardItemModule
 ],
   declarations: [TeacherCreditsBuyPage]
 })

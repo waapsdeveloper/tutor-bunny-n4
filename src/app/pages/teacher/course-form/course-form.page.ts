@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCourseService } from 'src/app/pages/course-form/create-course.service';
+import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { SwiperComponent } from 'swiper/angular';
+import { CreateCourseService } from './create-course.service';
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.page.html',
@@ -41,7 +42,8 @@ export class CourseFormPage
 
   constructor(
     injector: Injector,
-    public createCourseService: CreateCourseService
+    public createCourseService: CreateCourseService,
+    private globalCourseService: GlobalCoursesService
   ) {
     super(injector);
 
@@ -178,9 +180,9 @@ export class CourseFormPage
         course_id: courseId,
         image: this.createCourseService.formData.image,
       };
-      if (!this.createCourseService.formData.image.includes('https')) {
+      // if (!this.createCourseService.formData.image.includes('https')) {
         let image = await this.network.postCoursePhoto(obj);
-      }
+      // }
 
       this.createCourseService.sendPendingImages(courseId);
     }
@@ -243,6 +245,7 @@ export class CourseFormPage
     this.createCourseService.resetFormData();
     this.nav.pop('/tabs/teacher-dashboard');
     this.events.publish('initilize-the-list', res);
+    this.globalCourseService.getMyCoursesFromApi(1, '')
     this.loading = false;
   }
 
@@ -257,6 +260,7 @@ export class CourseFormPage
   }
 
 
+  // this function will use later
   async onImageViewChange() : Promise<boolean> {
 
     const f = this.createCourseService.formData;
@@ -277,14 +281,14 @@ export class CourseFormPage
     let courseId = res.course.id;
     this.createCourseService.courseId = courseId;
 
-   localStorage.setItem('course_Id', courseId);
-    this.loading = false;
+    localStorage.setItem('course_Id', courseId);
+    this.loading = false;    
     return true;
   }
 
   async openCoursePhotos() {
 
-    await this.onImageViewChange();
+    // await this.onImageViewChange();
 
     this.nav.push('/course-photoss', {
       backUrl: '/course-form',

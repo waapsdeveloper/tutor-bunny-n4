@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCourseService } from '../course-form/create-course.service';
+import { CreateCourseService } from '../create-course.service';
 
 @Component({
   selector: 'app-course-photoss',

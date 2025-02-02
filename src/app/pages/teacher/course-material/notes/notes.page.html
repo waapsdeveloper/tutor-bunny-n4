@@ -1,4 +1,4 @@
-<ion-content class="">
+<!-- <ion-content class="">
   <div class="body-content ion-padding">
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
@@ -10,11 +10,11 @@
       (materialDeleted)="onMaterialDeleted(item)"
       
     >
-    <!-- (courseDeleted)="onCourseDeleted($event)"
+    (courseDeleted)="onCourseDeleted($event)"
       (activeTab)="courseActive()"
       (inActiveTab)="courseInctive()"
       (detailsAction)="openDetails($event)"
-      (courseEdit)="courseEdit()" -->
+      (courseEdit)="courseEdit()"
     </app-material-card>
     <div style="height: 100%; position: relative">
       <div class="centered-message" *ngIf="list?.length === 0">
@@ -25,4 +25,10 @@
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-</ion-content>
+</ion-content> -->
+
+<app-global-list-view [list]="list$" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+  <ng-template #itemTemplate let-item>
+    <app-material-card [item]="item" (openDetails)="openDetails(item)"></app-material-card>
+  </ng-template>
+</app-global-list-view>

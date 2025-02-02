@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { NetworkService } from '../../services/network.service';
-import { EventsService } from '../../services/events.service';
+
 import {
   NgSimpleStateBaseRxjsStore,
   NgSimpleStateStoreConfig,
 } from 'ng-simple-state';
+import { EventsService } from 'src/app/services/events.service';
+import { NetworkService } from 'src/app/services/network.service';
 
 export interface CourseModel {
   id: number;
@@ -68,7 +69,7 @@ export class CreateCourseService extends NgSimpleStateBaseRxjsStore<CourseModel>
       };
     }
 
-  constructor(private network: NetworkService, private events: EventsService) {
+  constructor(private network: NetworkService, private events: EventsService,) {
     super();
     this.events.subscribe(
       'clear-all-services-data',

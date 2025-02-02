@@ -84,7 +84,10 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
 
   async continueToNextSlide() {
     if (this.getPayAmount() === 'Continue to the Home Page') {
-      this.router.navigate(['/tabs/teacher-dashboard']);}
+      // this.router.navigate(['/tabs/teacher-dashboard']);}
+      this.nav.pop('/tabs/teacher-dashboard');
+    }
+    
     if (this.activeIndex === 0) {
       await this.makeOrder(); // Wait for the order API call
       this.slides?.swiperRef?.slideNext(); // Navigate to the next slide
