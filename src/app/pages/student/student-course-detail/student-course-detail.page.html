@@ -12,9 +12,9 @@
       </div>
     </app-global-text-read>
     <app-teacher-info-card [data]="teacherData"></app-teacher-info-card>
-    <app-scd-page-course-schedule [data]="scheduleData"></app-scd-page-course-schedule>
-    <app-my-courses [data]="coursesData" ></app-my-courses>
-    <app-my-ratings [data]="ratingData"></app-my-ratings>
+    <app-scd-page-course-schedule [data]="scheduleData" *ngIf="scheduleData.schedules.length !== 0"></app-scd-page-course-schedule>
+    <app-my-courses [data]="coursesData" *ngIf="coursesData.list.length !== 0"></app-my-courses>
+    <app-my-ratings [data]="ratingData" *ngIf="ratingData.list.length !== 0"></app-my-ratings>
 
 
 
