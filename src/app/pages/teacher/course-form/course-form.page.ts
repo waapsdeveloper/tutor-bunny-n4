@@ -180,9 +180,9 @@ export class CourseFormPage
         course_id: courseId,
         image: this.createCourseService.formData.image,
       };
-      if (!this.createCourseService.formData.image.includes('https')) {
+      // if (!this.createCourseService.formData.image.includes('https')) {
         let image = await this.network.postCoursePhoto(obj);
-      }
+      // }
 
       this.createCourseService.sendPendingImages(courseId);
     }
