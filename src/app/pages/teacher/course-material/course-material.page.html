@@ -6,30 +6,33 @@
     (parentBack)="goback()"
     [backUrl]=""
   ></app-sd-header-top>
-</ion-header>
-
-<div class="dashboard-top-fixed-98563">
-  <div class="header-chips">
-    <div class="header-chip">
-      <div
-        class="ion-chip"
-        [class.active-class]="view === 'course'"
-        [class.inactive-class]="view !== 'course'"
-        (click)="toogleView('course')"
-      >
-        <img src="assets/icon/home/my-corces.svg" alt="" />Courses
-      </div>
-      <div
-        class="ion-chip"
-        [class.active-class]="view === 'notes'"
-        [class.inactive-class]="view !== 'notes'"
-        (click)="toogleView('notes')"
-      >
-        <img src="assets/svg/studey-notes.svg" alt="" />Study Notes
+  <ion-toolbar>
+    <div class="header-chips">
+      <div class="header-chip">
+        <div
+          class="ion-chip"
+          [class.active-class]="view === 'course'"
+          [class.inactive-class]="view !== 'course'"
+          (click)="toogleView('course')"
+        >
+          <img src="assets/icon/home/my-corces.svg" alt="" />Courses
+        </div>
+        <div
+          class="ion-chip"
+          [class.active-class]="view === 'notes'"
+          [class.inactive-class]="view !== 'notes'"
+          (click)="toogleView('notes')"
+        >
+          <img src="assets/svg/studey-notes.svg" alt="" />Study Notes
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </ion-toolbar>
+</ion-header>
+<!-- 
+<div class="dashboard-top-fixed-98563">
+  
+</div> -->
 <ion-content>
   <ion-router-outlet></ion-router-outlet>
 </ion-content>

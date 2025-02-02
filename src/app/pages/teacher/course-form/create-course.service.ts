@@ -69,7 +69,7 @@ export class CreateCourseService extends NgSimpleStateBaseRxjsStore<CourseModel>
       };
     }
 
-  constructor(private network: NetworkService, private events: EventsService) {
+  constructor(private network: NetworkService, private events: EventsService,) {
     super();
     this.events.subscribe(
       'clear-all-services-data',

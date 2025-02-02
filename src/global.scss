@@ -227,3 +227,8 @@ ion-header {
 .swiper-container-7895 {
   width: calc(100vw - 32px);
 }
+
+app-global-list-view {
+  height: 100%;
+  overflow-y: scroll;
+}
