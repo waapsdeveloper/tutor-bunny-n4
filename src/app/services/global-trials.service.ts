@@ -41,7 +41,7 @@ export class GlobalTrialsService  {
     this.trialChannel = this.pusher.subscribe('trials-channel');
   }
 
-  unRegisterPusherEvent(){
+  unRegisterPusherEvent(){  
     let user = this.users.getUser() as any;
 
     if (this.pusher) {
@@ -65,6 +65,18 @@ export class GlobalTrialsService  {
 
   async trialsChannelReceived($event: any) {
 
+    const user = this.users.getUser();
+    if(user.role_id == 2){
+
+      // check if user is student 
+      // check if the student has a course of that trial 
+      // update course key trial to the receievd object
+      let obj = Object.assign({}, $event);
+      console.log(obj);
+
+
+    }
+
     this.events.publish('trail-received-via-pusher', $event);
 
     if ($event) {
@@ -79,11 +91,11 @@ export class GlobalTrialsService  {
         let res = await this.network.geTrailRequestsByPusher(id);
         this.updateTrailsList(res.trial);
         this.events.publish('update-notifications');
-        if (this.user.role_id == 3) {
+        
+        
+        if (user.role_id == 3) {
           let shownoti = true;
           this.user = this.users.getUser();
-
-
           this.events.publish('show-noti-dot', shownoti);
         }
         this.events.publish('get-dashboard-stats');

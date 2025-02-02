@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injector, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Injector, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
@@ -19,12 +19,12 @@ export class GenericCourseCardComponent extends BasePage {
   flag;
   user;
   courseId;
-  status;
+  status = null;
   rating;
   type;
   total_rating;
   loading = false;
-  trail = false;
+  trail = null;
   languageName: any;
   teacherImage;
 
@@ -46,7 +46,7 @@ export class GenericCourseCardComponent extends BasePage {
     injector: Injector,
     private courseFavoriteService: GlobalFavCoursesService,
     public globalCourses: GlobalCoursesService,
-    private chats : ChatService
+    private chats : ChatService,
   ) {
     super(injector);
     this.user = this.users.getUser();
@@ -67,6 +67,7 @@ export class GenericCourseCardComponent extends BasePage {
     if (data && data.type == 3) {
       this.type = data.type;
     }
+    this.trail = data.trial;
   }
 
 
@@ -93,8 +94,13 @@ export class GenericCourseCardComponent extends BasePage {
       );
 
       if (flag) {
-        this.trail = true;
-        this.globalCourses.requestTrial(this.item, this.user, '');
+        this.loading = true;
+        const res = await this.globalCourses.requestTrial(this.item, this.user, '');
+        console.log(res)
+        this.cdr.detectChanges();
+        this.loading = false;
+        // console.log(res)
+        // this.initialize(res)
       }
 
       // let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
@@ -143,9 +149,15 @@ export class GenericCourseCardComponent extends BasePage {
   }
 
   async cancelTrail(id) {
-    this.trail = false;
+    this.loading = true;
     let user = this.users.getUser();
-    this.globalCourses.cancelTrail(this.item, user);
+    const res = await this.globalCourses.cancelTrail(this.item, user);
+    console.log(res)
+    this.cdr.detectChanges();
+    this.loading = false;
+    // console.log(res);
+    // this.item = res;
+    // this.initialize(res)
   }
 
   async addToFav() {
@@ -262,34 +274,34 @@ export class GenericCourseCardComponent extends BasePage {
 
   getButtonConfig(item: any) {
 
-    const trail = item?.trial ?? null;
-    const status = item?.trail?.status ?? null;
+    
+    // console.log(item.trial)
 
     // if (!trail && status === 'Pending') {
     //   return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
     // }
 
-    if (!trail && status !== 'Rejected') {
-      return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-    }
+    // if (!trail && status !== 'Rejected') {
+    //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+    // }
 
-    if (!trail && status === 'Rejected') {
-      return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-    }
+    // if (!trail && status === 'Rejected') {
+    //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+    // }
 
-    if (trail && status !== 'Accepted' && status !== 'Rejected' && status !== 'Complete') {
+    if (this.trail && this.status == 'Pending' ) {
       return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
     }
 
-    if (trail && status === 'Accepted') {
+    if (this.trail && this.status == 'Accepted') {
       return { label: 'Trial Accepted', icon: '', action: '' };
     }
 
-    if (trail && status === 'Complete') {
-      return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
-    }
+    // if (trail && status === 'Complete') {
+    //   return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
+    // }
 
-    return null;
+    return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
   }
 
 

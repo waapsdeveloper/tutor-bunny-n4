@@ -302,13 +302,17 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
         course_id: obj.id,
       };
       let res = await this.network.cancelTrail(ite);
-      if (res.states == 200) {
-        let findIndex = this.courses.findIndex((x) => x.id == obj.id);
-        if (findIndex != -1) {
-          this.courses[findIndex].trial = res.trial;
-        }
-      }
-      resolve(true);
+      console.log(res)
+
+      const trialo = res.trialo;
+      delete trialo['course'];
+      console.log(trialo)
+
+      this.updateItem(obj.id, 'trial', trialo)
+
+        
+      const courseItem = await this.getItemPromise(obj.id);
+      resolve(courseItem);
     });
   }
 
@@ -321,13 +325,15 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
       };
       let res = await this.network.requestTrail(ite);
 
-      if (res.states == 200) {
-        let findIndex = this.courses.findIndex((x) => x.id == obj.id);
-        if (findIndex != -1) {
-          this.courses[findIndex].trial = res.trial;
-        }
-      }
-      resolve(true);
+      const trialo = res.trialo;
+      delete trialo['course'];
+      console.log(trialo)
+
+      this.updateItem(obj.id, 'trial', trialo)
+
+        
+      const courseItem = await this.getItemPromise(obj.id);
+      resolve(courseItem);
     });
   }
 
