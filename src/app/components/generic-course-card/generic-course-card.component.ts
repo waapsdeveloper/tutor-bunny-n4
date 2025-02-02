@@ -21,7 +21,7 @@ export class GenericCourseCardComponent extends BasePage {
   status;
   rating;
   type;
-  total_rating;
+  total_rating; 
   loading = false;
   trail = false;
   languageName: any;

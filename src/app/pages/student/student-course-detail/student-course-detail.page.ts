@@ -24,7 +24,7 @@ export class StudentCourseDetailPage extends BasePage {
 
   course$;
   courseId;
-
+  trail = false;
   sliderImages: any[] = [];
 
   bannerData: bannerData = {
@@ -343,22 +343,24 @@ export class StudentCourseDetailPage extends BasePage {
     }
   }
 
-  async requestTrail() {
-    this.btn_loading = true;
+  async requestTrail(id) {
+    this.user = this.users.getUser();
 
-    let user = this.users.getUser();
-    let v = (await this.profiles.isProfileCompleted(user)) as any;
+    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+
     if (v || v == true) {
       let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
+      // return
       let send = data.data.send;
       if (send == true) {
-        // await this.globalCourses.requestTrial(
-        //   this.data,
-        //   user,
-        //   data.data.message
-        // );
-        // await this.callApi();
-        // this.events.publish('update-course-list');
+        this.trail = true;
+        this.globalCoursesService.requestTrial(
+          this.course$,
+          this.user,
+          data.data.message
+        );
+      } else {
+        return;
       }
     } else {
       let res = await this.modals.present(
@@ -370,21 +372,18 @@ export class StudentCourseDetailPage extends BasePage {
         false
       );
       let key = res.data.key;
+
       if (key == 1) {
         this.nav.push('/student-profile/student-profile-edit', {
           showBack: true,
         });
       }
     }
-    this.btn_loading = false;
   }
-
   async cancelTrail() {
-    this.btn_loading = true;
+    this.trail = false;
     let user = this.users.getUser();
-    // await this.globalCourses.cancelTrail(this.data, user);
-    // await this.callApi();
-    this.btn_loading = false;
+    this.globalCoursesService.cancelTrail(this.course$, user);
   }
 
   async isTrailReq(): Promise<boolean> {
@@ -443,5 +442,69 @@ export class StudentCourseDetailPage extends BasePage {
         ? this.removeToFav()
         : this.addToFav();
     }
+  }
+
+  handleButtonClick(item: any): void {
+    const buttonConfig = this.getButtonConfig(item);
+
+    if (buttonConfig) {
+      if (buttonConfig.action === 'requestTrail') {
+        this.requestTrail(item.id);
+      } else if (buttonConfig.action === 'presentAlert') {
+        this.presentAlert();
+      }
+    }
+  }
+
+  getButtonConfig(item: any) {
+    const trail = item?.trial ?? null;
+    const status = item?.trail?.status ?? null;
+
+    // if (!trail && status === 'Pending') {
+    //   return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
+    // }
+
+    if (!trail && status !== 'Rejected') {
+      return {
+        label: 'Free trial',
+        icon: 'assets/svg/transfer.svg',
+        action: 'requestTrail',
+      };
+    }
+
+    if (!trail && status === 'Rejected') {
+      return {
+        label: 'Free trial',
+        icon: 'assets/svg/transfer.svg',
+        action: 'requestTrail',
+      };
+    }
+
+    if (
+      trail &&
+      status !== 'Accepted' &&
+      status !== 'Rejected' &&
+      status !== 'Complete'
+    ) {
+      return {
+        label: 'Cancel trial',
+        icon: 'assets/svg/trail.svg',
+        action: 'presentAlert',
+      };
+    }
+
+    if (trail && status === 'Accepted') {
+      return { label: 'Trial Accepted', icon: '', action: '' };
+    }
+
+    if (trail && status === 'Complete') {
+      return {
+        label: 'Trial Completed',
+        icon: 'assets/svg/complete.svg',
+        action: '',
+      };
+    }
+
+    return null;
   }
 }
