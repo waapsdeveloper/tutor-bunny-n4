@@ -12,6 +12,7 @@ import {
   teacherCardInfo,
 } from 'src/app/interfaces/detail-data';
 import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-student-course-detail',
@@ -152,7 +153,7 @@ export class StudentCourseDetailPage extends BasePage {
     // this.isTrailReq();
   }
 
-  async callApi(data): Promise<boolean> {    
+  async callApi(data): Promise<boolean> {
     if (this.sliderImages.length == 0) {
       const resImages = await this.network.getCourseImages({
         course_id: data.id,
@@ -285,7 +286,7 @@ export class StudentCourseDetailPage extends BasePage {
 
   async callImages(courseId) {}
 
-  async goToChat() {
+  async goToChat(data) {
     let user = this.users.getUser();
 
     let v = (await this.profiles.isProfileCompleted(user)) as any;
@@ -294,15 +295,16 @@ export class StudentCourseDetailPage extends BasePage {
       return;
     }
 
-    this.openChatWithData();
+    this.openChatWithData(data);
   }
 
-  async openChatWithData() {
+  async openChatWithData(data) {
     this.teacher = JSON.parse(localStorage.getItem('teacher'));
     this.user = this.users.getUser();
+    console.log(this.user);
     const chatRoomId = (await this.chats.getChadRoomId(
-      this.course_user.id,
-      this.user.id
+      this.user.id,
+      data.teacher_id
     )) as number;
 
     if (chatRoomId != -1) {
@@ -439,7 +441,7 @@ export class StudentCourseDetailPage extends BasePage {
     if (obj.name == 'favorite') {
       this.course$.is_liked_by_me == true
         ? this.removeToFav()
-        : this.addToFav();      
+        : this.addToFav();
     }
   }
 }
