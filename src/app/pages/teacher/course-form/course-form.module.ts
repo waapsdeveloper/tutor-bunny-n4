@@ -11,7 +11,6 @@ import { AcceptTermsProfileModule } from 'src/app/components/accept-terms-profil
 import { CourseCategoryModule } from 'src/app/components/course-category/course-category.module';
 import { CourseDatesModule } from 'src/app/components/course-dates/course-dates.module';
 import { CourseLanguageModule } from 'src/app/components/course-language/course-language.module';
-import { CoursePhotoModule } from 'src/app/components/course-photo/course-photo.module';
 import { ModeOfTeachingModule } from 'src/app/components/mode-of-teaching/mode-of-teaching.module';
 import { SdAgeBooxModule } from 'src/app/components/sd-age-boox/sd-age-boox.module';
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
@@ -29,6 +28,7 @@ import { SdTextareaAboutModule } from 'src/app/components/sd-textarea-about/sd-t
 import { SdTextareaBoxModule } from 'src/app/components/sd-textarea-box/sd-textarea-box.module';
 import { SearchKeywordModule } from 'src/app/components/search-keyword/search-keyword.module';
 import { SwiperModule } from 'swiper/angular';
+import { CoursePhotoModule } from 'src/app/components/course-photo/course-photo.module';
 @NgModule({
   imports: [
     CommonModule,

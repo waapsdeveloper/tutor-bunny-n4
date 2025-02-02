@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { NetworkService } from '../../services/network.service';
-import { EventsService } from '../../services/events.service';
+
 import {
   NgSimpleStateBaseRxjsStore,
   NgSimpleStateStoreConfig,
 } from 'ng-simple-state';
+import { EventsService } from 'src/app/services/events.service';
+import { NetworkService } from 'src/app/services/network.service';
 
 export interface CourseModel {
   id: number;

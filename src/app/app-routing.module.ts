@@ -72,7 +72,7 @@ const routes: Routes = [
   },
   {
     path: 'course-form',
-    loadChildren: () => import('./pages/course-form/course-form.module').then( m => m.CourseFormPageModule),
+    loadChildren: () => import('./pages/teacher/course-form/course-form.module').then( m => m.CourseFormPageModule),
   },
   // {
   //   path: 'study-form',

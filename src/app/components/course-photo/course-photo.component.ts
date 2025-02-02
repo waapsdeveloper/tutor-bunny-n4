@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCourseService } from 'src/app/pages/course-form/create-course.service';
+import { CreateCourseService } from 'src/app/pages/teacher/course-form/create-course.service';
 
 @Component({
   selector: 'app-course-photo',

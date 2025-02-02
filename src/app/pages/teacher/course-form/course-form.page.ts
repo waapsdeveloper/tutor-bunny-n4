@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { IonContent, ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { CreateCourseService } from 'src/app/pages/course-form/create-course.service';
 import { SwiperComponent } from 'swiper/angular';
+import { CreateCourseService } from './create-course.service';
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.page.html',
