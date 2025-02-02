@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
@@ -23,8 +24,9 @@ export class TeacherDashboardHeaderComponent implements OnInit {
   rating;
 
   @Output() openProfile = new EventEmitter<any>()
+  @Output() openNotifications = new EventEmitter<any>()
 
-  constructor(private users: UsersService, private utility: UtilityService) {
+  constructor(private users: UsersService, private utility: UtilityService, private notifications: NotificationsService) {
 
     
   }

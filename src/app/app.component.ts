@@ -8,7 +8,8 @@ import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // register Swiper custom elements
 // import { Stripe } from '@capacitor-community/stripe';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
+import { Keyboard } from '@capacitor/keyboard';
 
 
 @Component({
@@ -114,4 +115,18 @@ export class AppComponent {
   exitApp() {
     navigator['app'].exitApp();
   }
+
+
+  initializeKeyboardListeners() {
+    this.platform.ready().then(() => {
+      Keyboard.addListener('keyboardWillShow', () => {
+        document.body.classList.add('keyboard-is-open');
+      });
+
+      Keyboard.addListener('keyboardWillHide', () => {
+        document.body.classList.remove('keyboard-is-open');
+      });
+    });
+  }
+
 }

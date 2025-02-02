@@ -30,7 +30,7 @@ export class TeacherMaterialDetailPage extends BasePage {
     price: '',
     rating: 0.0,
     total_rating: 0,
-    per_unit: '/lesson',
+    per_unit: '',
   };
 
   aboutData = {
@@ -155,7 +155,7 @@ export class TeacherMaterialDetailPage extends BasePage {
       price: data?.updated_price ?? 0,
       rating: data.user.teacher.avg_rating ?? 0.0,
       total_rating: data.user.teacher.total_rating ?? 0,
-      per_unit: '/lesson',
+      per_unit: '',
     };
 
     this.aboutData = {

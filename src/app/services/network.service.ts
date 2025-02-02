@@ -174,7 +174,7 @@ export class NetworkService {
   }
 
   getUnreadChat(data: any) {
-    return this.httpPostResponse('get-unread-chats/count', data, false, false);
+    return this.httpPostResponse('get-unread-chats/count', data, null, false, false);
   }
 
   getChatRoomById(id: any, params: any) {
@@ -616,7 +616,7 @@ export class NetworkService {
   }
 
   getUserByToken() {
-    return this.httpGetResponse('user', null, false);
+    return this.httpGetResponse('user', null, false, false);
   }
 
   updateTeacherProfile(data, id) {
@@ -802,7 +802,7 @@ export class NetworkService {
   }
 
   signupViaEmail(data) {
-    return this.httpPostResponse('signup-via-email', data);
+    return this.httpPostResponse('signup-via-email', data, null, false, false);
   }
 
   storeStudyMaterial(data) {

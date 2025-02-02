@@ -137,4 +137,9 @@ export class MaterialCardComponent extends BasePage implements OnInit {
       this.activeTab.emit();
     }
   }
+
+  openClickDetail(){
+    console.log("ret");
+    this.openDeatils.emit(this.item)
+  }
 }

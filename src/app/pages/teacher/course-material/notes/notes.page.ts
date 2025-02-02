@@ -26,7 +26,9 @@ export class NotesPage extends ListPage implements OnInit {
       total: res.result.total
     };
 
-    this.globalStudyMaterialService.setList(pagination.list, pagination.page, pagination.last_page, pagination.total)
+    this.globalStudyMaterialService.setList(pagination.list, pagination.page, pagination.last_page, pagination.total);
+
+    return pagination;
   }
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class NotesPage extends ListPage implements OnInit {
   }
 
 
-  openDetails(item: any) {    
+  openDetails(item: any) {
+    console.log("er", item)
     this.nav.push('teacher-material-detail', {material_id: item.id})
   }
 

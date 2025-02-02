@@ -4,10 +4,10 @@
   </div>
   <div class="header-oblique-double-675">
     <div class="header-line-678576">
-      <div class="header-line-box-678576">
+      <div class="header-line-box-678576" (click)="openNotifications.emit()">
         <app-notification-dot-count></app-notification-dot-count>
         <!-- (click)="gotoNotification()" -->
-        <img src="../../../assets/svg/bell.svg"  />
+        <img src="assets/svg/bell.svg"  />
       </div>
     </div>
     <div class="d-flex flex-row gap-8 align-center" *ngIf="status === 'In Review'"

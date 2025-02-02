@@ -232,3 +232,7 @@ app-global-list-view {
   height: 100%;
   overflow-y: scroll;
 }
+
+.keyboard-is-open ion-footer {
+  display: none !important;
+}

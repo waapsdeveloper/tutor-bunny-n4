@@ -9,6 +9,10 @@ import { BasePage } from 'src/app/base-page/base-page';
 export class StatisticBoxComponent extends BasePage implements OnInit {
 
   trials = 0;
+  pending_trials = 0;
+  accepted_trials = 0;
+  complete_trials = 0;
+  message_requests = 0;
   courses = 0;
   event = 0
   credits = 0;
@@ -38,6 +42,11 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
     this.earnings = res.earnings || 0;
     this.currency_symbol = res.currency_symbol || '$';
     this.coins = res.coins;
+    this.pending_trials = res.pending_trials;
+    this.accepted_trials = res.accepted_trials;
+    this.complete_trials = res.complete_trials;
+    this.message_requests = res.message_requests;
+
 
   }
 

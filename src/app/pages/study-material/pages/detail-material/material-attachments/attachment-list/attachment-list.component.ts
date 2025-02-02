@@ -39,8 +39,9 @@ export class AttachmentListComponent  implements OnInit {
 
   //   return `url(${path})`;
   // }
-  setBackgroundImage(item): string {
-    return `url('${item.full_url}')`;
-  }
+  // setBackgroundImage(item): string {
+  //   return 'assets/svg/file-icon-large.svg';
+  //   // return `url('${item.full_url}')`;
+  // }
 
 }
