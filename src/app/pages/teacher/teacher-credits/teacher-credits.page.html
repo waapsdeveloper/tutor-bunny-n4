@@ -1,58 +1,51 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top
-    [title]="'Credit Balance'"
-    [showBack]="true"
-    [parentHandleBack]="true"
-    (parentBack)="goback()"
-    [backUrl]=""
-  ></app-sd-header-top>
+  <app-sd-header-top [title]="'Credit Balance'" [showBack]="true" [parentHandleBack]="true" (parentBack)="goback()"
+    [backUrl]=""></app-sd-header-top>
 </ion-header>
 <ion-content>
-<div class="container">
+  <div class="container" *ngIf="item?.transaction_history?.length">
 
 
-  <div class="earnings-container ion-padding">
-    <div class="tabs-46843543">
-      <div
-        *ngFor="let chip of chips; let i = index"
-        class="chips outfit-light fs-14"
-        [class.active]="selectedChip === i"
-        (click)="selectChip(i)"
-      >
-        {{ chip }}
+    <div class="earnings-container ion-padding">
+      <div class="tabs-46843543">
+        <div *ngFor="let chip of chips; let i = index" class="chips outfit-light fs-14"
+          [class.active]="selectedChip === i" (click)="selectChip(i)">
+          {{ chip }}
+        </div>
       </div>
+
+      <div class="total-payment">
+        <div class="roboto-regular fs-14 pay">Total Payment</div>
+        <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);">{{item?.currency_symbol}}
+          {{item?.wallet.order_amount || '0.00'}}</span>
+      </div>
+
     </div>
 
-    <div class="total-payment">
-      <div class="roboto-regular fs-14 pay">Total Payment</div>
-      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{item?.wallet?.currency}} {{item?.wallet.order_amount}}</span>
-    </div>
+
+    <ion-list class="checkout-history-list" inset="true">
+      <ion-item *ngFor="let record of item?.transaction_history" detail="true">
+        <ion-label>
+          <h2>Coin: {{record?.coins}}</h2>
+        </ion-label>
+        <span slot="end" class="price">{{item?.currency_symbol}} {{record?.total}}</span>
+      </ion-item>
+    </ion-list>
 
   </div>
 
-  <ion-list class="checkout-history-list" inset="true">
-    <ion-item *ngFor="let record of item?.transaction_history" detail="true">
-      <ion-label>
-        <h2> Coin :{{record?.coins}}</h2>
-      </ion-label>
-      <span slot="end" class="price">{{record.currency}} {{record?.total}}</span>
-    </ion-item>
-
-  </ion-list>
-
-</div>
+  <div *ngIf="!item?.transaction_history?.length" class="centered-message">
+    <p>You haven't purchased any credit yet</p>
+  </div>
 </ion-content>
 <ion-footer>
   <div class="d-flex flex-column gap-16 ion-padding">
-    <app-sd-button-golden
-      [text]="'Buy Credit'"
-      (click)="buyCredits()"
-    ></app-sd-button-golden>
+    <app-sd-button-golden [text]="'Buy Credit'" (click)="buyCredits()"></app-sd-button-golden>
   </div>
 </ion-footer>
 
 
-  <!-- <ion-footer>
+<!-- <ion-footer>
     <div class="d-flex flex-column gap-16">
       <app-sd-button-golden
         [text]="'Continue to the home page'"
@@ -60,4 +53,3 @@
       <app-sd-button-clear [text]="'Order Details'"></app-sd-button-clear>
     </div>
   </ion-footer> -->
-

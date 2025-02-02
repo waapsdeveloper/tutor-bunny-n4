@@ -236,3 +236,18 @@ app-global-list-view {
 .keyboard-is-open ion-footer {
   display: none !important;
 }
+
+
+.centered-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height to vertically center within ion-content */
+  font-size: 1.2em;
+  text-align: center;
+  color: #666; /* Optional: adjust color */
+  // position: absolute;
+  width: 100%;
+  top: 300px;
+  left: 0;
+}
