@@ -15,7 +15,7 @@
         <div class="header-info-user-68448">
           <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
         </div>
-        <div class="header-info-misc-68448 outfit">
+        <div class="header-info-misc-68448 outfit" *ngIf="verified_on" >
           <img src="../../assets/svg/verified-profile-sheild.svg" />
           <span *ngIf="status !== 'In Review'">Verified on {{verified_on}}</span>
           <span *ngIf="status === 'In Review'">Verification pending</span>

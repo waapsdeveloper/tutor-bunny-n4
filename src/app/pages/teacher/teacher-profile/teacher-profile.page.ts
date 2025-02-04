@@ -315,7 +315,7 @@ export class TeacherProfilePage
     this.headerData = {
       image: user.image,
       displayName: this.utility.getAmericanName(user.name),
-      verifiedOn: moment(user.verified_on).format('DD-MMM-YYYY'),
+      verifiedOn: (user.verified_on == null) ? moment(user.verified_on).format('DD-MMM-YYYY') : 'In Review',
       rating: user.teacher.avg_rating,
       totalRating: user.teacher.total_rating,
       is_edit: true
@@ -388,7 +388,7 @@ export class TeacherProfilePage
     this.headerData = {
       image: this.user.image,
       displayName: this.utility.getAmericanName(this.user.name),
-      verifiedOn: moment(this.user.verified_on).format('DD-MMM-YYYY'),
+      verifiedOn: (this.user.verified_on) ? moment(this.user.verified_on).format('DD-MMM-YYYY') : null,
       rating: this.user.teacher.avg_rating,
       totalRating: this.user.teacher.total_rating,
       is_edit: true

@@ -113,8 +113,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     console.log(data);
 
-    const user = data;
-
+    const user = data;  
     this.headerData = {
       image: user.image,
       displayName: this.utility.getAmericanName(user.name),

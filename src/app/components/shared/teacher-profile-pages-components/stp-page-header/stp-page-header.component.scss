@@ -3,7 +3,7 @@
     border-radius: 0 0 20px 20px;
     height: 120px;
     display: flex;
-    display: flex;
+    // display: flex;
     align-items: center;
     justify-content: flex-start;
     width: 100%;    
@@ -33,7 +33,7 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-  
+      // align-items: center;
       .header-line-678576 {
         display: flex;
         flex-direction: row;
@@ -49,7 +49,7 @@
           flex-direction: row;
           justify-content: flex-end;
           gap: 24px;
-  
+          // align-items: center;
           img {
             height: 24px;
           }
@@ -62,6 +62,8 @@
         align-items: flex-start;
         justify-content: end;
         padding-left: 16px;
+        padding-bottom: 7.5px;
+        padding-top: 3px;
         height: 100%;
         gap: 6px;
         position: absolute;
