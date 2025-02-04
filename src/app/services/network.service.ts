@@ -30,7 +30,7 @@ export class NetworkService {
   }
 
   postImages(data) {
-    return this.httpPostResponse('gallery/add', data, null, false);
+    return this.httpPostResponse('gallery/add', data, null, false,false);
   }
 
   sendMessage(data) {
@@ -524,7 +524,7 @@ export class NetworkService {
 
   addMaterialKeyword(data) {
     return this.httpPostResponse('keywords/add-material-keyword', data, false, false, false);
-  } 
+  }
 
   addInputKeyword(data) {
     return this.httpPostResponse('keywords/add-name-keyword', data);
@@ -1098,7 +1098,7 @@ export class NetworkService {
       false
     );
   }
-    
+
 
   getTeacherWallet() {
     return this.httpGetResponse('teacher/wallet', null, false, false);
