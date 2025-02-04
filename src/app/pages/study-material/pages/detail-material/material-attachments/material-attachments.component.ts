@@ -48,6 +48,8 @@ export class MaterialAttachmentsComponent {
     let res = (await this.network.getMaterialDocs(obj)) as any;
     if(res && res.result && res.result.data){
       this.list = res.result.data
+      console.log("List" , this.list);
+
     }
 
   }

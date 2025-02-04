@@ -43,5 +43,16 @@ export class AttachmentListComponent  implements OnInit {
   //   return 'assets/svg/file-icon-large.svg';
   //   // return `url('${item.full_url}')`;
   // }
+  formatFileType(value: string): string {
+    if (!value) return '';
+
+    const parts = value.split('/');
+    if (parts.length === 2) {
+      return parts[1].toUpperCase();
+    } else if (parts.length > 2) {
+      return parts[parts.length - 1].toUpperCase();
+    }
+    return value;
+  }
 
 }
