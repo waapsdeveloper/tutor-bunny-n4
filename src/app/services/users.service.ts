@@ -50,6 +50,16 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
       flag: 'US'
     };
   }
+  resetUserState() {
+    this._user = null;  // Clear local user object
+    this.image = null;
+
+    // Reset ngSimpleState
+    this.resetState();
+
+    // Remove persisted userStore from localStorage (if ngSimpleState persists it)
+    localStorage.removeItem('NgSimpleState::userStore');
+}
 
   getUserState(){
     return this.selectState( (state) => state );
