@@ -28,6 +28,9 @@ export class GenericCourseCardComponent extends BasePage {
   languageName: any;
   teacherImage;
 
+  favLoading = false;
+
+
   @Output() openDetails = new EventEmitter<any>();
 
 
@@ -163,17 +166,31 @@ export class GenericCourseCardComponent extends BasePage {
   async addToFav() {
     // let showFav = true;
     // this.events.publish('show-fav-dot', showFav);
+
+    if(this.favLoading == true){
+      return
+    }
+    this.favLoading = true;
+    this.itemExistInFav$ = true;
     let user = this.users.getUser();
     this.item.is_liked_by_me = true;
-    this.courseFavoriteService.addFavorites(this.item, user);
+    await this.courseFavoriteService.addFavorites(this.item, user);
+    this.favLoading = false;
   }
 
   async removeToFav() {
     // let showFav = false;
     // this.events.publish('show-fav-dot', showFav);
+    if(this.favLoading == true){
+      return
+    }
+    
+    this.favLoading = true;
+    this.itemExistInFav$ = false;
     let user = this.users.getUser();
     this.item.is_liked_by_me = false;
-    this.courseFavoriteService.removeFavorites(this.item, user);
+    await this.courseFavoriteService.removeFavorites(this.item, user);
+    this.favLoading = false;
   }
 
   setResult() {

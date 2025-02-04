@@ -24,7 +24,7 @@ export class GlobalFavCoursesService extends NgrxCrudService<any> {
     });
   }
 
-  async addFavorites(obj: any, user) {
+  async addFavorites(obj: any, user): Promise<any> {
 
     let ite = {
       user_id: user.id,
@@ -38,11 +38,12 @@ export class GlobalFavCoursesService extends NgrxCrudService<any> {
       this.setItem(res.data);
     }
 
+    return true;
 
 
   }
 
-  async removeFavorites(obj: any, user: any) {
+  async removeFavorites(obj: any, user: any): Promise<any> {
 
     let ite = {
       user_id: user.id,
@@ -53,6 +54,8 @@ export class GlobalFavCoursesService extends NgrxCrudService<any> {
     if(res.data && res.data.id){
       this.removeItem(res.data.id)
     }
+
+    return true;
 
   }
 

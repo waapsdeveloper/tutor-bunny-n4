@@ -33,6 +33,8 @@ export class GenericStudyMaterialCardComponent extends BasePage {
   trail = false;
   languageName: any;
 
+  favLoading = false;
+
   @Output() openDetails = new EventEmitter<any>();
 
   @Input('item')
@@ -164,17 +166,29 @@ export class GenericStudyMaterialCardComponent extends BasePage {
   async addToFav() {
     // let showFav = true;
     // this.events.publish('show-fav-dot', showFav);
+    if(this.favLoading == true){
+      return
+    }
+    this.favLoading = true;
+    this.itemExistInFav$ = true;
     let user = this.users.getUser();
     this.item.is_liked_by_me = true;
     this.materialFavoriteService.addFavorites(this.item, user);
+    this.favLoading = false;
   }
 
   async removeToFav() {
     // let showFav = false;
     // this.events.publish('show-fav-dot', showFav);
+    if(this.favLoading == true){
+      return
+    }
+    this.favLoading = true;
+    this.itemExistInFav$ = false;
     let user = this.users.getUser();
     this.item.is_liked_by_me = false;
     this.materialFavoriteService.removeFavorites(this.item, user);
+    this.favLoading = false;
   }
 
   async toggleCartItem(){
