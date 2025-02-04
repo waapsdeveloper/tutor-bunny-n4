@@ -18,7 +18,7 @@ export class TeacherProfileEditPage
   implements ViewWillEnter {
 
   allowSlideNext = false;
-  
+
   user;
   userId;
   lang;
@@ -155,6 +155,9 @@ export class TeacherProfileEditPage
     this.formData['started_teaching'] = data['teacher']['started_teaching'];
     this.formData['experience_description'] =
       data['teacher']['experience_description'];
+      this.formData['profile_video'] =
+      data['teacher']['profile_video'];
+
     this.formData['hourly_rate'] = data['teacher']['hourly_rate'];
     const travel = data['teacher']['travel_policy'];
     if (travel) {
@@ -193,7 +196,7 @@ export class TeacherProfileEditPage
   }
   async onSlideChanged() {
 
-    
+
 
     this.events.publish(
       'teacher-profile-first-screen-submit-call',
@@ -223,9 +226,9 @@ export class TeacherProfileEditPage
 
     const res = await this.network.updateTeacherProfile(f, user.id);
     if (res) {
-      this.moveToNextSlide(1)    
+      this.moveToNextSlide(1)
     }
-    
+
   }
   async submit() {
     const data = this.formData;
@@ -304,9 +307,9 @@ export class TeacherProfileEditPage
     //   // }
     //   // this.nav.pop('/tabs/teacher-dashboard')
       this.moveToNextSlide(2)
-    
+
     }
-    
+
   }
   disableIfIncomplete() {
     return (
@@ -329,7 +332,7 @@ export class TeacherProfileEditPage
     if (this.step == 2) {
       this.moveToNextSlide(0)
     } else if (this.step == 3) {
-      this.moveToNextSlide(1)      
+      this.moveToNextSlide(1)
     } else {
       this.nav.pop();
     }
@@ -348,7 +351,7 @@ export class TeacherProfileEditPage
       this.allowSlideNext = false;
       this.scrollToTopOnInit();
     }, 100)
-    
+
 
   }
 }
