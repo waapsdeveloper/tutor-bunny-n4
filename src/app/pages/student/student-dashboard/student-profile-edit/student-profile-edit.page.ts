@@ -153,7 +153,11 @@ export class StudentProfileEditPage
     if (res) {
       let user = res.user;
       this.users.setUser(user);
+
+      // -- START -- do not remove this event, this will update course list when profile update      
       this.events.publish('update-course-price');
+      // -- STOP -- do not remove this event, this will update course list when profile update      
+      
       this.events.publish('update-profile-image', user);
       this.events.publish('get-user-after-submit-form', user);
       let data = {

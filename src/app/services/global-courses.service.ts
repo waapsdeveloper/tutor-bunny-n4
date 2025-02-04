@@ -14,9 +14,7 @@ export interface GlobalCoursesModel {
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalCoursesService extends NgrxCrudService<any>  {
-
-
+export class GlobalCoursesService extends NgrxCrudService<any> {
   ngrxModelName: string = 'GlobalCoursesModel';
 
   // old variables
@@ -36,18 +34,16 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
   page: any;
   last_page: any;
 
-
-
-  constructor(private network: NetworkService, private events: EventsService, private users :UsersService) {
-
+  constructor(
+    private network: NetworkService,
+    private events: EventsService,
+    private users: UsersService
+  ) {
     super();
 
     this.events.subscribe(
-
-
       'clear-all-services-data',
       () => {
-
         this.otherCoursesPage = null;
         this.otherCoursesLastPage = null;
         this.otherCourses = [];
@@ -63,6 +59,10 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
       },
       false
     );
+
+    this.events.subscribe('update-course-price', () => {
+      this.getGlobalCoursesFromApi('', 1)
+    } );
 
     const options = {
       cluster: 'ap2',
@@ -107,11 +107,9 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
 
       resolve(true);
     });
-
   }
 
-  async getMyCoursesFromApi(page = 1, search = '' ): Promise<any> {
-  
+  async getMyCoursesFromApi(page = 1, search = ''): Promise<any> {
     const user = this.users.getUser();
 
     const params: any = { page };
@@ -124,39 +122,36 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
       resolve(res);
     });
 
-      // const user = this.users.getUser();
-      // let obj = {
-      //   search: search,
-      //   page: page,
-      // };
+    // const user = this.users.getUser();
+    // let obj = {
+    //   search: search,
+    //   page: page,
+    // };
 
-      // let res = await this.network.getMyCourseList(obj, user.id);
+    // let res = await this.network.getMyCourseList(obj, user.id);
 
-      // const data = res.result;
-      // this.setState((state) => {
-      //   if (page === 1) {
-      //     // Replace the list when on the first page
-      //     return {
-      //       ...state,
-      //       page: data.current_page,
-      //       last_page: data.last_page,
-      //       list: data.data, // Update the list
-      //     };
-      //   }
-      //   // Append to the list for subsequent pages
-      //   return {
-      //     ...state,
-      //     page: data.current_page,
-      //     last_page: data.last_page,
-      //     list: [...state.list, ...data.data],
-      //   };
-      // });
+    // const data = res.result;
+    // this.setState((state) => {
+    //   if (page === 1) {
+    //     // Replace the list when on the first page
+    //     return {
+    //       ...state,
+    //       page: data.current_page,
+    //       last_page: data.last_page,
+    //       list: data.data, // Update the list
+    //     };
+    //   }
+    //   // Append to the list for subsequent pages
+    //   return {
+    //     ...state,
+    //     page: data.current_page,
+    //     last_page: data.last_page,
+    //     list: [...state.list, ...data.data],
+    //   };
+    // });
 
-      // resolve(true);
-
+    // resolve(true);
   }
-
-
 
   getcourseById(id) {
     return new Promise(async (resolve) => {
@@ -168,8 +163,7 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
 
   // end state management
 
-
-  unRegisterPusherEvent(){
+  unRegisterPusherEvent() {
     if (this.pusher) {
       this.pusher.unsubscribe('course-channel');
       this.pusher.disconnect();
@@ -191,17 +185,15 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
   }
 
   async updateCourseList(data: any) {
-
-    console.log("rewqtwrw", data)
+    console.log('rewqtwrw', data);
 
     let course_Id = data.course_id;
     if (course_Id) {
-      let res = (await this.network.getcourseById(course_Id)) as any;      
+      let res = (await this.network.getcourseById(course_Id)) as any;
       const course = res.course;
       if (course) {
-
         this.setItem(course);
-        
+
         // const index = this.courses.findIndex((c) => c.id == course.id);
         // if (index != -1) {
         //   this.courses[index] = course;
@@ -219,7 +211,6 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
   }
 
   setFavCourseUpdateLogic(course) {
-
     let courseId = course.id;
     let findIndex = this.favorites.findIndex((x) => x.id == courseId);
 
@@ -302,15 +293,14 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
         course_id: obj.id,
       };
       let res = await this.network.cancelTrail(ite);
-      console.log(res)
+      console.log(res);
 
       const trialo = res.trialo;
       delete trialo['course'];
-      console.log(trialo)
+      console.log(trialo);
 
-      this.updateItem(obj.id, 'trial', trialo)
+      this.updateItem(obj.id, 'trial', trialo);
 
-        
       const courseItem = await this.getItemPromise(obj.id);
       resolve(courseItem);
     });
@@ -327,11 +317,10 @@ export class GlobalCoursesService extends NgrxCrudService<any>  {
 
       const trialo = res.trialo;
       delete trialo['course'];
-      console.log(trialo)
+      console.log(trialo);
 
-      this.updateItem(obj.id, 'trial', trialo)
+      this.updateItem(obj.id, 'trial', trialo);
 
-        
       const courseItem = await this.getItemPromise(obj.id);
       resolve(courseItem);
     });
