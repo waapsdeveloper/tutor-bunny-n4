@@ -243,7 +243,7 @@ export class CourseFormPage
     //   this.utility.presentSuccessToast(message);
     // }
     this.createCourseService.resetFormData();
-    this.nav.pop('/tabs/teacher-dashboard');
+    this.nav.push('/tabs/course-material/courses');
     this.events.publish('initilize-the-list', res);
     this.globalCourseService.getMyCoursesFromApi(1, '')
     this.loading = false;
@@ -282,7 +282,7 @@ export class CourseFormPage
     this.createCourseService.courseId = courseId;
 
     localStorage.setItem('course_Id', courseId);
-    this.loading = false;    
+    this.loading = false;
     return true;
   }
 
