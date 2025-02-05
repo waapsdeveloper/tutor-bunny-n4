@@ -120,7 +120,7 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
   decrementCredit() {
     // check if level not less then 5
     const d = parseInt(`${this.selectedCoin.level}`);
-    if (d < 5) return;
+    if (d <= 5) return;
     this.selectedCoin.level = d - 5;
     this.calculateTotal();
   }

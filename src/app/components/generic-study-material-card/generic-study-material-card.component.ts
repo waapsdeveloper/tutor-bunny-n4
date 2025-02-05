@@ -193,6 +193,13 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
   async toggleCartItem(){
 
+    const flag = await this.utility.presentConfirm('Yes', 'No', 'Add Item to Cart', 'Are you sure you want to add this item to cart?');
+    if(!flag) {
+      return;
+    }
+
+
+
     if(this.itemExistInCart$ == 0) {
       this.cartService.setItem(this.item)
     }

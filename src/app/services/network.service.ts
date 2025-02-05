@@ -22,7 +22,7 @@ export class NetworkService {
     return this.httpPostResponse('login-via-social', data);
   }
   loginViaEmail(data) {
-    return this.httpPostResponse('login-via-email', data, null, false, false);
+    return this.httpPostResponse('login-via-email', data, null, false, true);
   }
 
   signUpviaEmail(data) {
