@@ -125,3 +125,23 @@ swiper-slide {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }
+.video-89654 {
+  position: relative; /* Needed for absolute positioning of the file type */
+  display: inline-block; /* Or block, depending on desired layout */
+  text-align: center; /* Center the text horizontally */
+}
+
+.video-89654 img {
+  display: block; /* Make the image a block element to allow centering */
+  margin: 0 auto; /* Center the image horizontally */
+}
+
+.file-type {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed to control spacing from the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center the text horizontally */
+  padding: 5px 10px; /* Optional: Add padding around the text */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  font-size: 14px; /* Adjust font size as needed */
+}

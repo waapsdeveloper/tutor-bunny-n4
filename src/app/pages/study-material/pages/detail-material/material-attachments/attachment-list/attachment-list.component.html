@@ -6,9 +6,10 @@
 >
   <ng-template swiperSlide *ngFor="let item of list">
     <div class="vedio-box-inner card">
-      <div class="video-89654" >
+      <div class="video-89654">
         <img src="assets/svg/file-icon-large.svg" />
-      </div>
+        <span class="file-type">{{ formatFileType(item.file_type) }}</span>
+    </div>
     </div>
   </ng-template>
 </swiper>
