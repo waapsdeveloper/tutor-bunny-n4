@@ -39,7 +39,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   ionViewWillEnter(): void {
     this.cartService.getList().subscribe((data) => {
       this.list$ = data.map(item => ({ ...item, selected: true }));
-      
+
       this.title = 'Cart (' + (this.list$ ? this.list$.length : '' ) + ')';
       let item = this.list$ && this.list$[0] ? this.list$[0] : null;
 
@@ -74,7 +74,16 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     );
   }
 
-  removeCartitem(item) {
+async  removeCartitem(item) {
+    const flag = await this.utility.presentConfirm(
+      'Yes',
+      'No',
+      'Remove from cart',
+      'Do you really want to delete this item from cart?'
+    );
+    if (!flag) {
+      return;
+    }
     this.cartService.setRemove(item);
   }
 
@@ -153,7 +162,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   onSlideChanged() {
-    
+
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
 
     if(this.activeIndex == 0){
@@ -170,7 +179,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   async confirmAndMoveToPaySlide(){
-    
+
     let items = this.list$.filter((x) => x.selected == true);
 
     if(items.length > 0){
@@ -195,7 +204,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
     });
 
     const user = this.users.getUser();
-    
+
     let d = {
       user_id: 1,
       total: this.total,

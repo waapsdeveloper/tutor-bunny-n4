@@ -18,7 +18,6 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./student-material-detail.page.scss'],
 })
 export class StudentMaterialDetailPage extends BasePage {
-
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   material$;
@@ -108,9 +107,9 @@ export class StudentMaterialDetailPage extends BasePage {
     heading: 'Reviews',
     list: [],
   };
-  materialFavoriteService
+  materialFavoriteService;
   itemExistInCart$: number;
-  itemExistInFav$
+  itemExistInFav$;
 
   status: any;
   teacherImage: any;
@@ -120,50 +119,49 @@ export class StudentMaterialDetailPage extends BasePage {
     injector: Injector,
     private globalStudyMaterialService: GlobalStudyMaterialService,
     private globalMaterialFav: GlobalFavMaterialService,
-    private chats : ChatService,
+    private chats: ChatService,
     private cartService: CartService
   ) {
     super(injector);
-
   }
 
   async ionViewWillEnter() {
     this.initialize(this.material$);
     this.params = this.nav.getQueryParams();
-    
 
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
+      this.globalStudyMaterialService
+        .getItem(this.materialId)
+        .subscribe((data) => {
           this.material$ = data;
-          console.log("this is material" , this.material$)
+          console.log('this is material', this.material$);
           this.callApi(data);
-      });
+        });
     } else {
       this.nav.pop();
     }
   }
   async initialize(data) {
-
-    this.cartService.isItemExist(data.id).subscribe( data => {
+    this.cartService.isItemExist(data.id).subscribe((data) => {
       this.itemExistInCart$ = data;
-    })
+    });
 
-    this.materialFavoriteService.isItemExist('study_material_id', data.id).subscribe( count => {
-      this.itemExistInFav$ = count > 0;
-    })
-
-
+    this.materialFavoriteService
+      .isItemExist('study_material_id', data.id)
+      .subscribe((count) => {
+        this.itemExistInFav$ = count > 0;
+      });
 
     this.rating = data.user.teacher.avg_rating;
     this.total_rating = data.user.teacher.total_rating;
     this.displayName = this.utility.getAmericanName(data.user.name);
     this.flag = this.utility.getFlag(data.user);
     this.status = data.trial ? data.trial.status : null;
-    this.teacherImage = data.user.image
+    this.teacherImage = data.user.image;
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
@@ -186,8 +184,6 @@ export class StudentMaterialDetailPage extends BasePage {
   // }
 
   async callApi(data) {
-
-
     console.log(data);
 
     if (this.sliderImages.length == 0) {
@@ -197,14 +193,16 @@ export class StudentMaterialDetailPage extends BasePage {
       this.sliderImages = resImages.result;
     }
 
-
     this.bannerData = {
       liked_by_me: data.is_liked_by_me,
       sliderImages: this.sliderImages,
       actions: [
         {
           name: 'favorite',
-          img: data.is_liked_by_me == true ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg',
+          img:
+            data.is_liked_by_me == true
+              ? 'assets/svg/heart-78.svg'
+              : 'assets/svg/heart-77.svg',
           action: null,
         },
         {
@@ -251,9 +249,9 @@ export class StudentMaterialDetailPage extends BasePage {
       list: materialList,
     };
 
-    this.cartService.isItemExist(data.id).subscribe( data => {
+    this.cartService.isItemExist(data.id).subscribe((data) => {
       this.itemExistInCart$ = data;
-    })
+    });
 
     this.loading = true;
     this.user = this.users.getUser();
@@ -402,24 +400,34 @@ export class StudentMaterialDetailPage extends BasePage {
     console.log(data);
     let user = this.users.getUser();
 
-
     this.openChatWithData(data);
   }
 
   async openChatWithData(data) {
     this.user = this.users.getUser();
     console.log(this.user);
-    const chatRoomId = await this.chats.getChadRoomId(data.teacher_id, this.user.id) as number
-    if(chatRoomId != -1){
+    const chatRoomId = (await this.chats.getChadRoomId(
+      data.teacher_id,
+      this.user.id
+    )) as number;
+    if (chatRoomId != -1) {
       this.nav.push('messages', {
-        chat_room_id: chatRoomId
-      })
+        chat_room_id: chatRoomId,
+      });
     }
   }
-  async toggleCartItem(){
-
-    if(this.itemExistInCart$ == 0) {
-      this.cartService.setItem(this.material$)
+  async toggleCartItem() {
+    if (this.itemExistInCart$ == 0) {
+      const flag = await this.utility.presentConfirm(
+        'Yes',
+        'No',
+        'Add Item to Cart',
+        'Are you sure you want to add this item to cart?'
+      );
+      if (!flag) {
+        return;
+      }
+      this.cartService.setItem(this.material$);
     }
-}
+  }
 }
