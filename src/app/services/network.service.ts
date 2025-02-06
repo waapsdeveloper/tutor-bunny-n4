@@ -75,7 +75,7 @@ export class NetworkService {
   }
 
   saveFcmToken(data) {
-    return this.httpPostResponse('update-firebase-token', data,false,false);
+    return this.httpPostResponse('update-firebase-token', data,null,false,false);
   }
 
   postPhotoIdImage(data) {
