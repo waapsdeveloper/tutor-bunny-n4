@@ -5,15 +5,17 @@ import {
   Injector,
   EventEmitter,
   Output,
+  HostListener,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
+import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 @Component({
   selector: 'app-generic-study-material-card',
   templateUrl: './generic-study-material-card.component.html',
   styleUrls: ['./generic-study-material-card.component.scss'],
 })
-export class GenericStudyMaterialCardComponent extends BasePage {
+export class GenericStudyMaterialCardComponent extends BasePage implements OnInit {
   private _item: any;
 
   itemExistInCart$;
@@ -37,6 +39,19 @@ export class GenericStudyMaterialCardComponent extends BasePage {
 
   @Output() openDetails = new EventEmitter<any>();
 
+  
+  hostScreensize = -1;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
+  }
+
+  updateColumnClass(width: number) {
+    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+  }
+
+
   @Input('item')
   public get item() {
     return this._item;
@@ -57,6 +72,10 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     super(injector);
     this.user = this.users.getUser();
 
+  }
+
+  ngOnInit(): void {
+    this.updateColumnClass(window.innerWidth);
   }
 
   async initialize(data) { 
@@ -199,21 +218,19 @@ export class GenericStudyMaterialCardComponent extends BasePage {
         return;
       }
 
-
-      this.cartService.setItem(this.item)
+      this.cartService.setItem(this.item);
     }
 
-
-
-    
-
-
-
-    
-
-    // else {
-    //   this.cartService.setRemove(this.item)
-    // }
   }
-}import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
+
+  getButtonText(){
+
+
+    if(this.hostScreensize <= 400 ){
+      return '';
+    }
+
+     return this.itemExistInCart$ > 0 ? 'In Cart' : 'Add to Cart'
+  }
+}
 
