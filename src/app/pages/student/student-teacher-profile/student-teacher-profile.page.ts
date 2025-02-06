@@ -113,7 +113,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     console.log(data);
 
-    const user = data;  
+    let user = data;  
     this.headerData = {
       image: user.image,
       displayName: this.utility.getAmericanName(user.name),
@@ -132,10 +132,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       flag: this.utility.getFlag(user)
     }
 
-    this.aboutData = {
-      heading: 'About',
-      text: user.teacher.description || ''
-    }
+    
 
     let reviews_params = {
       teacher_id: user.id,
@@ -160,6 +157,13 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
 
     let res = await this.network.getStudentTeacherProfileByEmail(obj);
+
+    user = res.user;
+
+    this.aboutData = {
+      heading: 'About',
+      text: user.teacher.description || ''
+    }
 
     this.countData = {
       years_of_experience: user.teacher.started_teaching,
