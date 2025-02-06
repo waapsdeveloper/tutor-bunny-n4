@@ -6,79 +6,57 @@ import {
 } from 'ng-simple-state';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
+import { NgrxCrudService } from './abstract/ngrx-crud.service';
 
-export interface GlobalTeachersModel {
-  id: number;
-}
-
-export type GlobalTeachersModelState = Array<GlobalTeachersModel>;
 
 @Injectable({
   providedIn: 'root'
 })
-export class GlobalTeacherService extends NgSimpleStateBaseRxjsStore< GlobalTeachersModelState > {
+export class GlobalTeacherService extends NgrxCrudService<any>  {
 
-  page = 1;
-  last_page = -1;
-
+  ngrxModelName: string = 'GlobalTeachersModel';
   constructor(private users: UsersService, private network: NetworkService) {
     super();
   }
 
-  storeConfig(): NgSimpleStateStoreConfig {
-    return {
-      storeName: 'GlobalTeachersModel',
-    };
-  }
+  getGlobalTeachersFromApi(search = '', page = 1) {
+    
 
-  initialState(): GlobalTeachersModelState {
-    return [];
-  }
+      const user = this.users.getUser();
 
-  getList() {
-    return this.selectState((state) => state);
-  }
-
-  getCount() {
-    return this.selectState((state) => state.length);
-  }
-
-  getCountPromise() {
-    return new Promise((resolve) => {
-      this.selectState((state) => state.length).subscribe((res) => {
+      const params: any = { page };
+      if (search) params.search = search;
+      params.user_id = user.id;
+  
+      return new Promise(async (resolve) => {
+        const res = await this.network.getAllTeachers(params);
+        const data = res.result;
+        this.setList(data.data, data.current_page, data.last_page, data.total);
         resolve(res);
       });
-    });
-  }
 
-  getItem(id) {
-    return this.selectState((state) => state.find((x) => x.id == id));
-  }
+    //   const user = this.users.getUser();
+    //   let obj = {
+    //     search: search,
+    //     page: page,
+    //     user_id: user.id,
+    //   };
 
-  getGlobalTeachersFromApi(search = '', page = 1) {
-    return new Promise(async (resolve) => {
-      const user = this.users.getUser();
-      let obj = {
-        search: search,
-        page: page,
-        user_id: user.id,
-      };
-
-      let res = await this.network.getAllTeachers(obj);
+    //   let res = await this.network.getAllTeachers(obj);
 
 
-      const data = res.result;
-      this.page = data.current_page;
-      this.last_page = data.last_page;
+    //   const data = res.result;
+    //   this.page = data.current_page;
+    //   this.last_page = data.last_page;
 
-      this.setState( (state) => {
-        if (page === 1) {
-          return data.data;
-        }
-        return [...state, ...data.data];
-      });
+    //   this.setState( (state) => {
+    //     if (page === 1) {
+    //       return data.data;
+    //     }
+    //     return [...state, ...data.data];
+    //   });
 
-      resolve(true);
-    });
+    //   resolve(true);
+    // });
   }
 }

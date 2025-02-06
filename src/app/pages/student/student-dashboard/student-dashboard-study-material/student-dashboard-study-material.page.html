@@ -1,4 +1,4 @@
-<ion-content class="">
+<!-- <ion-content class="">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -15,5 +15,10 @@
     </div>
   </div>
 
-  <!-- <app-rec-courses ></app-rec-courses> -->
-</ion-content>
+</ion-content> -->
+
+<app-global-list-view [list]="list" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+  <ng-template #itemTemplate let-item>
+    <app-generic-study-material-card [item]="item" (openDetails)="openDetails(item)"></app-generic-study-material-card>
+  </ng-template>
+</app-global-list-view>

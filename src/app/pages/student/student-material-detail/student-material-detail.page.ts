@@ -61,6 +61,8 @@ export class StudentMaterialDetailPage extends BasePage {
     list: [],
   };
 
+  itemExistInFav$ = false;
+
   data;
   params;
   backUrl;
@@ -109,7 +111,7 @@ export class StudentMaterialDetailPage extends BasePage {
   };
   materialFavoriteService;
   itemExistInCart$: number;
-  itemExistInFav$;
+
 
   status: any;
   teacherImage: any;
@@ -126,7 +128,7 @@ export class StudentMaterialDetailPage extends BasePage {
   }
 
   async ionViewWillEnter() {
-    this.initialize(this.material$);
+    
     this.params = this.nav.getQueryParams();
 
     if (this.params.backUrl) {
@@ -134,57 +136,40 @@ export class StudentMaterialDetailPage extends BasePage {
     }
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
-      this.globalStudyMaterialService
-        .getItem(this.materialId)
-        .subscribe((data) => {
-          this.material$ = data;
-          console.log('this is material', this.material$);
-          this.callApi(data);
-        });
+      this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
+        this.material$ = data;          
+        this.callApi(data);
+      });
     } else {
       this.nav.pop();
     }
   }
-  async initialize(data) {
+
+  async callApi(data) {
+    console.log(data);
+
     this.cartService.isItemExist(data.id).subscribe((data) => {
       this.itemExistInCart$ = data;
     });
 
-    this.materialFavoriteService
-      .isItemExist('study_material_id', data.id)
-      .subscribe((count) => {
-        this.itemExistInFav$ = count > 0;
+    this.globalMaterialFav.isItemExist('study_material_id', data.id).subscribe((count) => {
+      this.itemExistInFav$ = count > 0;
+
+      let actions = this.bannerData.actions.map((action) => {
+        if (action.name == 'favorite') {
+          action.img = this.itemExistInFav$
+            ? 'assets/svg/heart-78.svg'
+            : 'assets/svg/heart-77.svg';
+        }
+        return action;
       });
 
-    this.rating = data.user.teacher.avg_rating;
-    this.total_rating = data.user.teacher.total_rating;
-    this.displayName = this.utility.getAmericanName(data.user.name);
-    this.flag = this.utility.getFlag(data.user);
-    this.status = data.trial ? data.trial.status : null;
-    this.teacherImage = data.user.image;
-    if (data && data.trial) {
-      this.blocked = data.trial.status;
-    }
-    if (data && data.type == 3) {
-      this.type = data.type;
-    }
-  }
-  // prevImage() {
-  //   this.currentIndex =
-  //     this.currentIndex > 0
-  //       ? this.currentIndex - 1
-  //       : this.courseImages.length - 1;
-  // }
+      this.bannerData = {
+        ...this.bannerData,
+        actions
+      };
 
-  // nextImage() {
-  //   this.currentIndex =
-  //     this.currentIndex < this.courseImages.length - 1
-  //       ? this.currentIndex + 1
-  //       : 0;
-  // }
-
-  async callApi(data) {
-    console.log(data);
+    });
 
     if (this.sliderImages.length == 0) {
       const resImages = await this.network.getMaterialImages({
@@ -194,13 +179,12 @@ export class StudentMaterialDetailPage extends BasePage {
     }
 
     this.bannerData = {
-      liked_by_me: data.is_liked_by_me,
+      liked_by_me: this.itemExistInFav$,
       sliderImages: this.sliderImages,
       actions: [
         {
           name: 'favorite',
-          img:
-            data.is_liked_by_me == true
+          img: this.itemExistInFav$
               ? 'assets/svg/heart-78.svg'
               : 'assets/svg/heart-77.svg',
           action: null,
@@ -257,6 +241,20 @@ export class StudentMaterialDetailPage extends BasePage {
     this.user = this.users.getUser();
 
     this.data = data;
+
+    this.rating = data.user.teacher.avg_rating;
+    this.total_rating = data.user.teacher.total_rating;
+    this.displayName = this.utility.getAmericanName(data.user.name);
+    this.flag = this.utility.getFlag(data.user);
+    this.status = data.trial ? data.trial.status : null;
+    this.teacherImage = data.user.image;
+    if (data && data.trial) {
+      this.blocked = data.trial.status;
+    }
+    if (data && data.type == 3) {
+      this.type = data.type;
+    }
+
     this.title = this.data.title;
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;

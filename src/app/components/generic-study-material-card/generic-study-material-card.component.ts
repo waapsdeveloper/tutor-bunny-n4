@@ -172,7 +172,6 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     this.favLoading = true;
     this.itemExistInFav$ = true;
     let user = this.users.getUser();
-    this.item.is_liked_by_me = true;
     this.materialFavoriteService.addFavorites(this.item, user);
     this.favLoading = false;
   }
@@ -186,7 +185,6 @@ export class GenericStudyMaterialCardComponent extends BasePage {
     this.favLoading = true;
     this.itemExistInFav$ = false;
     let user = this.users.getUser();
-    this.item.is_liked_by_me = false;
     this.materialFavoriteService.removeFavorites(this.item, user);
     this.favLoading = false;
   }

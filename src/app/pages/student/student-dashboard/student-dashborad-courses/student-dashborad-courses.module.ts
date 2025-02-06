@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { StudentDashboradCoursesPageRoutingModule } from './student-dashborad-courses-routing.module';
 import { StudentDashboradCoursesPage } from './student-dashborad-courses.page';
 import { GenericCourseCardModule } from './../../components/generic-course-card/generic-course-card.module';
+import { GlobalListViewModule } from 'src/app/components/global-list-view/global-list-view.module';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { GenericCourseCardModule } from './../../components/generic-course-card/
     FormsModule,
     IonicModule,
     StudentDashboradCoursesPageRoutingModule,
+    GlobalListViewModule,
     GenericCourseCardModule
 
   ],

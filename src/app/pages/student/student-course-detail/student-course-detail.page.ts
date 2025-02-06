@@ -76,6 +76,8 @@ export class StudentCourseDetailPage extends BasePage {
     heading: 'Reviews',
     list: [],
   };
+  
+  itemExistInFav$ = false;
 
   params;
 
@@ -129,10 +131,6 @@ export class StudentCourseDetailPage extends BasePage {
     super(injector);
   }
 
-  // ngOnInit(): void {
-
-  // }
-
   async ionViewWillEnter() {
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
@@ -148,9 +146,6 @@ export class StudentCourseDetailPage extends BasePage {
     } else {
       this.nav.pop();
     }
-    // this.spinner = true;
-
-    // this.isTrailReq();
   }
 
   async callApi(data): Promise<boolean> {
@@ -161,14 +156,34 @@ export class StudentCourseDetailPage extends BasePage {
       this.sliderImages = resImages.result;
     }
 
+    this.globalCourseFav.isItemExist('course_id', data.id).subscribe( count => {
+      this.itemExistInFav$ = count > 0;
+
+      let actions = this.bannerData.actions.map((action) => {
+        if (action.name == 'favorite') {
+          action.img = this.itemExistInFav$
+            ? 'assets/svg/heart-78.svg'
+            : 'assets/svg/heart-77.svg';
+        }
+        return action;
+      });
+
+      this.bannerData = {
+        ...this.bannerData,
+        actions
+      };
+
+    })
+
+    
+
     this.bannerData = {
-      liked_by_me: data.is_liked_by_me,
+      liked_by_me: this.itemExistInFav$,
       sliderImages: this.sliderImages,
       actions: [
         {
           name: 'favorite',
-          img:
-            data.is_liked_by_me == true
+          img: this.itemExistInFav$
               ? 'assets/svg/heart-78.svg'
               : 'assets/svg/heart-77.svg',
           action: null,

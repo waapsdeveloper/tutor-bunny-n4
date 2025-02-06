@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injector, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Injector, Output, EventEmitter, ChangeDetectorRef, HostListener } from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
@@ -10,7 +10,7 @@ import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-cou
   templateUrl: './generic-course-card.component.html',
   styleUrls: ['./generic-course-card.component.scss'],
 })
-export class GenericCourseCardComponent extends BasePage {
+export class GenericCourseCardComponent extends BasePage implements OnInit {
 
   private _item: any;
   itemExistInFav$ = false;
@@ -33,6 +33,16 @@ export class GenericCourseCardComponent extends BasePage {
 
   @Output() openDetails = new EventEmitter<any>();
 
+  hostScreensize = -1;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
+  }
+
+  updateColumnClass(width: number) {
+    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+  }
 
   @Input('item')
   public get item() {
@@ -53,6 +63,10 @@ export class GenericCourseCardComponent extends BasePage {
   ) {
     super(injector);
     this.user = this.users.getUser();
+  }
+
+  ngOnInit(): void {
+    this.updateColumnClass(window.innerWidth);   
   }
 
   initialize(data) {
@@ -173,7 +187,6 @@ export class GenericCourseCardComponent extends BasePage {
     this.favLoading = true;
     this.itemExistInFav$ = true;
     let user = this.users.getUser();
-    this.item.is_liked_by_me = true;
     await this.courseFavoriteService.addFavorites(this.item, user);
     this.favLoading = false;
   }
@@ -188,7 +201,6 @@ export class GenericCourseCardComponent extends BasePage {
     this.favLoading = true;
     this.itemExistInFav$ = false;
     let user = this.users.getUser();
-    this.item.is_liked_by_me = false;
     await this.courseFavoriteService.removeFavorites(this.item, user);
     this.favLoading = false;
   }
@@ -291,6 +303,10 @@ export class GenericCourseCardComponent extends BasePage {
 
   getButtonConfig(item: any) {
 
+    let label = '';
+    let icon = '';
+    let action = '';
+
     
     // console.log(item.trial)
 
@@ -306,19 +322,43 @@ export class GenericCourseCardComponent extends BasePage {
     //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
     // }
 
-    if (this.trail && this.status == 'Pending' ) {
-      return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
+    if (this.trail && this.status == 'Pending' ) {      
+      label = 'Cancel Trial';
+      icon = 'assets/svg/trail.svg';
+      action = 'presentAlert';      
     }
 
     if (this.trail && this.status == 'Accepted') {
-      return { label: 'Trial Accepted', icon: '', action: '' };
+      label = 'Trial Accepted';
+      icon = '';
+      action = '';
+      // return { label: 'Trial Accepted', icon: '', action: '' };
     }
 
     // if (trail && status === 'Complete') {
     //   return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
     // }
 
-    return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+    if(!this.trail){
+      label = 'Free trial';
+      icon = 'assets/svg/transfer.svg';
+      action = 'requestTrail';
+    }
+
+    // return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+
+    if(this.hostScreensize <= 400){
+      label = '';
+    }
+    
+    return {
+      label,
+      icon,
+      action,
+    }
+
+
+
   }
 
 

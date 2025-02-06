@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
+import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 
 @Component({
@@ -9,10 +8,8 @@ import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
   templateUrl: './student-dashborad-teachers.page.html',
   styleUrls: ['./student-dashborad-teachers.page.scss'],
 })
-export class StudentDashboradTeachersPage extends BasePage implements OnInit {
-
-  list$;
-
+export class StudentDashboradTeachersPage extends ListPage implements OnInit {
+  
   constructor(
     injector: Injector,
     public globalTeacherService: GlobalTeacherService
@@ -20,30 +17,32 @@ export class StudentDashboradTeachersPage extends BasePage implements OnInit {
     super(injector);
   }
 
+  async fetchList(page: number, search: string, status: string): Promise<any> {
+    
+    const user = this.users.getUser();
+
+    let obj = {
+      search: search,
+      page: page,
+      user_id: user.id,
+    };
+
+    let res = await this.network.getAllTeachers(obj);
+
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total,
+    };
+  }
+
   ngOnInit() {
     this.globalTeacherService.getList().subscribe((res) => {
-      this.list$ = res;
+      this.list = [...res];
     });
   }
 
-  async handleRefresh(event) {
-    this.globalTeacherService.getGlobalTeachersFromApi('', 1);
-    event.target.complete();
-  }
-
-  async onIonInfinite(ev) {
-    if (
-      this.globalTeacherService.page <=
-      this.globalTeacherService.last_page
-    ) {
-      const np = this.globalTeacherService.page + 1;
-      await this.globalTeacherService.getGlobalTeachersFromApi(
-        '',
-        np
-      );
-    }
-    (ev as InfiniteScrollCustomEvent).target.complete();
-  }
 
   openDetails(item: any) {
     const params = {

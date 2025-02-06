@@ -40,7 +40,7 @@ export class FavCoursesPage extends ListPage implements OnInit {
   }
 
   openDetails(item: any) {
-    this.nav.push('course-detail', { course_id: item.id });
+    this.nav.push('student-course-detail', { course_id: item.id });
   }
 
 

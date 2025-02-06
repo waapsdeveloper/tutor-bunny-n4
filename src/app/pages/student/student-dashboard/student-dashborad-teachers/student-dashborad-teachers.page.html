@@ -1,7 +1,4 @@
-<!-- <ion-content class="ion-content-medium-background">
-  <app-rec-techers-box></app-rec-techers-box>
-</ion-content> -->
-
+<!-- 
 <ion-content class="">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -10,7 +7,6 @@
   <div class="std-box-outer-689567 ">
     <div class="sb-content-7895">
       <div *ngFor="let item of list$">
-        <!-- (onChange)="reloadList()" -->
         <app-generic-teacher-card [item]="item" (openDetails)="openDetails(item)"></app-generic-teacher-card>
         <div class="line"></div>
       </div>
@@ -20,8 +16,12 @@
     </div>
   </div>
 
-  <!-- <app-rec-courses ></app-rec-courses> -->
 </ion-content>
 
 
-
+ -->
+ <app-global-list-view [list]="list" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+  <ng-template #itemTemplate let-item>
+    <app-generic-teacher-card [item]="item" (openDetails)="openDetails(item)"></app-generic-teacher-card>
+  </ng-template>
+</app-global-list-view>

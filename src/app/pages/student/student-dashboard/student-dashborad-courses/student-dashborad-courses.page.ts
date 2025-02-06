@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { BasePage } from 'src/app/base-page/base-page';
+import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 
 @Component({
@@ -8,37 +8,38 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   templateUrl: './student-dashborad-courses.page.html',
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
-export class StudentDashboradCoursesPage extends BasePage implements OnInit {
-
-  list$;
+export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   constructor(injector: Injector, public globalCoursesService: GlobalCoursesService) {
     super(injector);
   }
 
+  
+
+  async fetchList(page: number, search: string, status: string): Promise<any> {    
+
+    let obj = {
+      page: page,
+      liked: false,
+    };
+
+    let res = await this.network.getAllCourses(obj);
+
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total,
+    };
+  }
+
   ngOnInit() {
     this.globalCoursesService.getList().subscribe((res) => {
-      this.list$ = res;
-      console.log("this is eyear",this.list$)
-
+      this.list = res;
     });
   }
 
-  async handleRefresh(event) {
-    await this.globalCoursesService.getGlobalCoursesFromApi('', 1);
-    event.target.complete();
-  }
-
-  async onIonInfinite(ev) {
-    if (this.globalCoursesService.page <= this.globalCoursesService.last_page) {
-      const np = this.globalCoursesService.page + 1;
-      await this.globalCoursesService.getGlobalCoursesFromApi('', np);
-    }
-    (ev as InfiniteScrollCustomEvent).target.complete();
-  }
-
   openDetails(item: any) {
-    // this.nav.push('/course-detail', {course_id: item.id})
     this.nav.push('./student-course-detail', {course_id: item.id})
   }
 }

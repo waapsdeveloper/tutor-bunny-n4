@@ -91,9 +91,11 @@
 
         .big-action-button-8574 {
           height: 34px;
-          width: 143px;
+          // width: 143px;
           border-radius: 8px;
           background-color: rgba(243, 191, 89, 1);
+          padding-left: 16px;
+          padding-right: 16px;
 
           display: flex;
           flex-direction: row;

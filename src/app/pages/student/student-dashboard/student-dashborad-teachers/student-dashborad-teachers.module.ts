@@ -8,6 +8,7 @@ import { StudentDashboradTeachersPageRoutingModule } from './student-dashborad-t
 
 import { StudentDashboradTeachersPage } from './student-dashborad-teachers.page';
 import { GenericTeacherCardModule } from 'src/app/components/generic-teacher-card/generic-teacher-card.module';
+import { GlobalListViewModule } from "../../../../components/global-list-view/global-list-view.module";
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { GenericTeacherCardModule } from 'src/app/components/generic-teacher-car
     FormsModule,
     IonicModule,
     StudentDashboradTeachersPageRoutingModule,
-    GenericTeacherCardModule
-  ],
+    GlobalListViewModule,
+    GenericTeacherCardModule,
+],
   declarations: [StudentDashboradTeachersPage]
 })
 export class StudentDashboradTeachersPageModule {}

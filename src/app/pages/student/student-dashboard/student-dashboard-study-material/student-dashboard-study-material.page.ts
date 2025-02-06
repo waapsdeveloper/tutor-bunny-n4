@@ -14,19 +14,20 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
     super(injector);
   }
 
-  ngOnInit() {
-    this.resetAndFetch();
-  }
-
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const res = await this.globalStudyMaterialService.getGlobalStudyMaterialFromApi(page, search);
-    console.log("this is material", res);
     return {
       list: res.result.data,
       page: res.result.current_page,
       last_page: res.result.last_page,
       total: res.result.total
     };
+  }
+
+  ngOnInit() {
+    this.globalStudyMaterialService.getList().subscribe(data => {      
+      this.list = data;
+    });
   }
 
 
