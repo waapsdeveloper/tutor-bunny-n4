@@ -17,18 +17,21 @@
     outline: none;
     flex-grow: 1;
   }
-  
+
   .sd-input-box-input-675315:focus {
     box-shadow: none;
   }
-  
+
   .clear-input-678956744{
     height: 16px;
     opacity: 0.6;
     position: absolute;
     right: 8px;
     top: 10px;
-  
+
+  }
+  .box-input-golden-border {
+    border: 2px solid #F3BF59;
   }
 }
 

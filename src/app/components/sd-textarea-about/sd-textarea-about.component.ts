@@ -15,7 +15,10 @@ export class SdTextareaAboutComponent implements OnInit {
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   @Input('needed') needed = true;
+  @Input('modernInput') modernInput = false;
+
   isRequired = false;
+  isInputActive: boolean = true;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(private events: EventsService) {}
   ngOnInit() {
@@ -37,7 +40,7 @@ export class SdTextareaAboutComponent implements OnInit {
       false
     );
 
-    
+
     this.events.subscribe(
       'teacher-course-first-screen-submit-call',
       (formData: any) => {
@@ -155,5 +158,20 @@ export class SdTextareaAboutComponent implements OnInit {
   modelChange($event) {
     let v = $event;
     this.onChange.emit(v);
+  }
+  onFocus() {
+
+    if(this.modernInput){
+      return;
+    }
+    console.log("inside") ;
+       this.isInputActive = true;
+  }
+
+  onBlur() {
+    if(this.modernInput){
+      return;
+    }
+    this.isInputActive = false;
   }
 }

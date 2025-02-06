@@ -1,7 +1,31 @@
-<div class="sd-input-box-outer-675315">
-  <textarea class="fs-16 outfit sd-input-box-input-675315" style="height: 160px;" rows="10" [placeholder]="placeholder" [minlength]="minlength"
-    [maxlength]="maxlength" [(ngModel)]="inputText" (keyup)="result($event)" (paste)="onPasteHandler($event)"
-    (ngModelChange)="modelChange($event)"></textarea>
-  <img src="assets/svg/clear.svg" class="clear-input-678956744" *ngIf="inputText" alt="" (click)="clearInput()">
+<div
+  class="sd-input-box-outer-675315"
+  [class.modern-input]="modernInput"
+  [class.box-input-golden-border]="isInputActive"
+>
+  <textarea
+    class="fs-16 outfit sd-input-box-input-675315"
+    style="height: 160px"
+    rows="10"
+    [placeholder]="placeholder"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [(ngModel)]="inputText"
+    (keyup)="result($event)"
+    (paste)="onPasteHandler($event)"
+    (ngModelChange)="modelChange($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+  ></textarea>
+  <img
+    src="assets/svg/clear.svg"
+    class="clear-input-678956744"
+    *ngIf="inputText"
+    alt=""
+    (click)="clearInput()"
+  />
 </div>
-<app-sd-error-input-info *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>
+<app-sd-error-input-info
+  *ngIf="isRequired && needed"
+  [errorText]="errorText"
+></app-sd-error-input-info>
