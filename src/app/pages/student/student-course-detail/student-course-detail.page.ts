@@ -79,6 +79,8 @@ export class StudentCourseDetailPage extends BasePage {
   
   itemExistInFav$ = false;
 
+  trialRequestLoading = false;
+
   params;
 
   backUrl;
@@ -369,11 +371,10 @@ export class StudentCourseDetailPage extends BasePage {
       let send = data.data.send;
       if (send == true) {
         this.trail = true;
-        this.globalCoursesService.requestTrial(
-          this.course$,
-          this.user,
-          data.data.message
-        );
+        this.trialRequestLoading = true;
+        await this.globalCoursesService.requestTrial(this.course$, this.user, '');
+        this.cdr.detectChanges();
+        this.trialRequestLoading = false;
       } else {
         return;
       }
@@ -460,6 +461,8 @@ export class StudentCourseDetailPage extends BasePage {
   }
 
   handleButtonClick(item: any): void {
+
+
     const buttonConfig = this.getButtonConfig(item);
 
     if (buttonConfig) {
