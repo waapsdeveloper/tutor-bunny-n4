@@ -26,6 +26,21 @@ export class ListTrialsService extends NgrxCrudService<any> {
 
   }
 
+  getGlobalTeacherTrialFromApi(search = '', page = 1, perpage = 10) {
+    return new Promise(async (resolve) => {
+      const user = await this.users.getUser();
+      const params: any = { teacher_id: user.id };
+      if (search) params.search = search;
+      if (page) params.page = page;
+      if (perpage) params.perpage = perpage;
+
+      let res = await this.network.geTeacherTrialList(params);
+      const data = res.result;
+      this.setList(data.data, data.current_page, data.last_page, data.total);
+      resolve(res);
+    });
+  }
+
 
   getTrials(page: number, search: string = '', status: string = ''): Promise<any> {
 
@@ -34,6 +49,7 @@ export class ListTrialsService extends NgrxCrudService<any> {
     const params: any = { page };
     if (search) params.search = search;
     if (status) params.status = status;
+
 
     return new Promise(async (resolve) => {
       const res = await this.network.geTrailRequests(params, user.id);
@@ -58,6 +74,42 @@ export class ListTrialsService extends NgrxCrudService<any> {
     //     this.list[findIndex] = res.trial;
     //   }
     // }
+  }
+
+  
+  
+  getPendingTrialsFromApi(search = '', page = 1) {
+    return new Promise(async (resolve) => {
+      const user = this.users.getUser();
+      let obj = {
+        search: search,
+        page: page,
+        teacher_id: user.id,
+      };
+      let res = await this.network.getPendingTrial(user.id, obj);
+      const data = res.result;
+      this.setList(data.data, data.page, data.last_page, data.total);
+      
+      resolve(true);
+    });
+  }
+
+  changeTrailStuts(trailId, key, userId) {
+    return new Promise(async (resolve) => {
+      let obj = {
+        status: key,
+        user_id: userId,
+      };
+      let res = await this.network.changeTrailStuts(obj, trailId);
+      
+      if (res) {
+        if(key == 'Accepted' || key == 'Rejected'){
+          this.removeItem(trailId);
+        }  
+      }
+
+      resolve(res);
+    });
   }
 
 

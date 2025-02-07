@@ -330,6 +330,16 @@ export class NetworkService {
     );
   }
 
+  geTeacherTrialList(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'course/teacher-trial-list' + '?' + str,
+      null,
+      false,
+      false
+    );
+  }
+
 
 
 

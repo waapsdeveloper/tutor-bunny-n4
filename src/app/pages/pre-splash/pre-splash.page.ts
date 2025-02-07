@@ -17,6 +17,7 @@ import { ViewWillEnter } from '@ionic/angular';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 // import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
+import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -39,6 +40,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
+    public pendingTrialsService: PendingTrialsService,
     public notificationService: NotificationsService,
     private fcm: FirebaseService,
 
@@ -77,6 +79,19 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     this.chats.registerPusherEvent(this.user.id);
     this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
+
+
+
+
+    if(this.user.role_id == 2){
+      this.pendingTrialsService.registerPusherEvent();
+    }
+
+
+
+
+
+
     this.notificationService.registerPusherEvent();
 
     // new services
