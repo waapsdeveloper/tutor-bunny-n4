@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Injector, Output, EventEmitter, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Injector, Output, EventEmitter, ChangeDetectorRef, HostListener} from '@angular/core';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
 import { StudentWelcomeComponent } from 'src/app/pages/student/student-dashboard/student-welcome/student-welcome.component';
 import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
+import { GlobalTrialCoursesService } from 'src/app/services/student/global-trial-courses.service';
 
 @Component({
   selector: 'app-generic-course-card',
@@ -14,6 +15,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
 
   private _item: any;
   itemExistInFav$ = false;
+  itemExistInTrial$ = false;
   
   displayName;
   flag;
@@ -33,16 +35,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
 
   @Output() openDetails = new EventEmitter<any>();
 
-  hostScreensize = -1;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.updateColumnClass(event.target.innerWidth);
-  }
-
-  updateColumnClass(width: number) {
-    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
-  }
+  
 
   @Input('item')
   public get item() {
@@ -58,6 +51,7 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   constructor(
     injector: Injector,
     private courseFavoriteService: GlobalFavCoursesService,
+    private trialCoursesService: GlobalTrialCoursesService,
     public globalCourses: GlobalCoursesService,
     private chats : ChatService,
   ) {
@@ -96,86 +90,20 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     this.nav.push('student-course-detail', params);
   }
 
-  async requestTrail(id) {
-    this.user = this.users.getUser();
 
-    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
+  hostScreensize = -1;
 
-    if (v || v == true) {
-
-      const flag = await this.utility.presentConfirm(
-        'OK',
-        'Cancel',
-        'Request Trial',
-        'Are you sure to request the Trial?'
-      );
-
-      if (flag) {
-        this.loading = true;
-        const res = await this.globalCourses.requestTrial(this.item, this.user, '');
-        console.log(res)
-        this.cdr.detectChanges();
-        this.loading = false;
-        // console.log(res)
-        // this.initialize(res)
-      }
-
-      // let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
-      // // return
-      // let send = data.data.send;
-      // if (send == true) {
-      //   this.trail = true;
-      //   this.globalCourses.requestTrial(this.item,this.user, data.data.message );
-      // } else {
-      //   return;
-      // }
-
-
-
-
-    } else {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
-
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
-    }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
   }
 
-  async presentAlert() {
-    const flag = await this.utility.presentConfirm(
-      'OK',
-      'Cancel',
-      'Cancel Trial',
-      'Are you sure to cancel the Trial?'
-    );
-
-    if (flag) {
-      this.cancelTrail(this.item);
-    }
+  updateColumnClass(width: number) {
+    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
   }
+  
 
-  async cancelTrail(id) {
-    this.loading = true;
-    let user = this.users.getUser();
-    const res = await this.globalCourses.cancelTrail(this.item, user);
-    console.log(res)
-    this.cdr.detectChanges();
-    this.loading = false;
-    // console.log(res);
-    // this.item = res;
-    // this.initialize(res)
-  }
+ 
 
   async addToFav() {
     // let showFav = true;
@@ -289,77 +217,8 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     }
   }
 
-  handleButtonClick(item: any): void {
-    const buttonConfig = this.getButtonConfig(item);
+  
 
-    if (buttonConfig) {
-      if (buttonConfig.action === 'requestTrail') {
-        this.requestTrail(item.id);
-      } else if (buttonConfig.action === 'presentAlert') {
-        this.presentAlert();
-      }
-    }
-  }
-
-  getButtonConfig(item: any) {
-
-    let label = '';
-    let icon = '';
-    let action = '';
-
-    
-    // console.log(item.trial)
-
-    // if (!trail && status === 'Pending') {
-    //   return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
-    // }
-
-    // if (!trail && status !== 'Rejected') {
-    //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-    // }
-
-    // if (!trail && status === 'Rejected') {
-    //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-    // }
-
-    if (this.trail && this.status == 'Pending' ) {      
-      label = 'Cancel Trial';
-      icon = 'assets/svg/trail.svg';
-      action = 'presentAlert';      
-    }
-
-    if (this.trail && this.status == 'Accepted') {
-      label = 'Trial Accepted';
-      icon = '';
-      action = '';
-      // return { label: 'Trial Accepted', icon: '', action: '' };
-    }
-
-    // if (trail && status === 'Complete') {
-    //   return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
-    // }
-
-    if(!this.trail){
-      label = 'Free trial';
-      icon = 'assets/svg/transfer.svg';
-      action = 'requestTrail';
-    }
-
-    // return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-
-    if(this.hostScreensize <= 400){
-      label = '';
-    }
-    
-    return {
-      label,
-      icon,
-      action,
-    }
-
-
-
-  }
 
 
 }

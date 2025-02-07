@@ -194,7 +194,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser();
-    await this.globalCourses.cancelTrail(this.item, user);
+    // await this.globalCourses.cancelTrail(this.item, user);
     this.onChange.emit();
   }
 }

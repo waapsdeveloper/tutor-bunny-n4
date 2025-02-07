@@ -84,43 +84,6 @@ export class GenericCourseCardComponent extends BasePage {
     this.nav.push('student-course-detail', params);
   }
 
-  async requestTrail(id) {
-    this.user = this.users.getUser();
-
-    let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-
-    if (v || v == true) {
-      let data = await this.modals.present(TrailMessageComponent, {}, '', 0.7);
-      // return
-      let send = data.data.send;
-      if (send == true) {
-        this.trail = true;
-        this.globalCourses.requestTrial(
-          this.item,
-          this.user,
-          data.data.message
-        );
-      } else {
-        return;
-      }
-    } else {
-      let res = await this.modals.present(
-        StudentWelcomeComponent,
-        {},
-        'auto-height-modal',
-        1,
-        [0, 1],
-        false
-      );
-      let key = res.data.key;
-
-      if (key == 1) {
-        this.nav.push('/student-profile/student-profile-edit', {
-          showBack: true,
-        });
-      }
-    }
-  }
 
   async presentAlert() {
     const flag = await this.utility.presentConfirm(
@@ -138,7 +101,7 @@ export class GenericCourseCardComponent extends BasePage {
   async cancelTrail(id) {
     this.trail = false;
     let user = this.users.getUser();
-    this.globalCourses.cancelTrail(this.item, user);
+    // this.globalCourses.cancelTrail(this.item, user);
   }
 
   async addToFav() {
@@ -165,41 +128,6 @@ export class GenericCourseCardComponent extends BasePage {
     this.trail = false;
   }
 
-  // async goToChat(data) {
-  //   let v = (await this.profiles.isProfileCompleted(this.user)) as any;
-  //   if (v || v == true) {
-  //     let id = this.user.id;
-  //     let obj = {
-  //       user_id_1: this.user.id,
-  //       user_id_2: data.user.id,
-  //     };
-  //     let res = await this.network.getChadRoomId(obj);
-  //     let params = {
-  //       student_id: id,
-  //       other_user_id: data.user.id,
-  //       user: JSON.stringify(data.user),
-  //       chat_room_id: res.chat_room.id,
-  //       goToMessage: true
-  //     };
-  //     this.nav.push('/tabs/chat', params);
-  //   }
-  //   else {
-  //     let res = await this.modals.present(
-  //       StudentWelcomeComponent,
-  //       {},
-  //       'auto-height-modal',
-  //       1,
-  //       [0, 1],
-  //       false
-  //     );
-  //     let key = res.data.key;
-  //     if (key == 1) {
-  //       this.nav.push('/student-profile/student-profile-edit', {
-  //         showBack: true,
-  //       });
-  //     }
-  //   }
-  // }
   async goToChat(data) {
 
 
@@ -241,17 +169,17 @@ export class GenericCourseCardComponent extends BasePage {
     }
   }
 
-  handleButtonClick(item: any): void {
-    const buttonConfig = this.getButtonConfig(item);
+  // handleButtonClick(item: any): void {
+  //   const buttonConfig = this.getButtonConfig(item);
 
-    if (buttonConfig) {
-      if (buttonConfig.action === 'requestTrail') {
-        this.requestTrail(item.id);
-      } else if (buttonConfig.action === 'presentAlert') {
-        this.presentAlert();
-      }
-    }
-  }
+  //   if (buttonConfig) {
+  //     if (buttonConfig.action === 'requestTrail') {
+  //       this.requestTrail(item.id);
+  //     } else if (buttonConfig.action === 'presentAlert') {
+  //       this.presentAlert();
+  //     }
+  //   }
+  // }
 
   getButtonConfig(item: any) {
 
