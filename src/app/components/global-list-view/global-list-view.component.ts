@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { log } from 'console';
 
 @Component({
   selector: 'app-global-list-view',
   templateUrl: './global-list-view.component.html',
   styleUrls: ['./global-list-view.component.scss'],
 })
-export class GlobalListViewComponent implements OnInit {  
-  
+export class GlobalListViewComponent implements OnInit {
+
   private _list: any[] = [];
 
   @Input()
@@ -18,8 +19,8 @@ export class GlobalListViewComponent implements OnInit {
     this._list = value;
     console.log(value)
   }
-  
-  
+
+
   @Input() itemTemplate!: TemplateRef<any>;
 
   @Output() refresh = new EventEmitter<any>();
@@ -30,8 +31,10 @@ export class GlobalListViewComponent implements OnInit {
   }
 
   onIonInfinite(event: any) {
+    console.log('this this this');
     this.loadMore.emit(event);
   }
+ 
 
   ngOnInit(): void {
     console.log("Item template available?", !!this.itemTemplate);

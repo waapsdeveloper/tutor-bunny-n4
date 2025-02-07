@@ -17,8 +17,17 @@
 
 </ion-content> -->
 
-<app-global-list-view [list]="list" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
-  <ng-template #itemTemplate let-item>
-    <app-generic-course-card  [item]="item" (openDetails)="openDetails(item)"></app-generic-course-card>
-  </ng-template>
-</app-global-list-view>
+<ion-content>
+  <app-global-list-view
+    [list]="list"
+    [itemTemplate]="itemTemplate"
+    (refresh)="handleRefresh($event)"
+    (loadMore)="onIonInfinite($event)">
+    <ng-template #itemTemplate let-item>
+      <app-generic-course-card
+        [item]="item"
+        (openDetails)="openDetails(item)">
+      </app-generic-course-card>
+    </ng-template>
+  </app-global-list-view>
+</ion-content>

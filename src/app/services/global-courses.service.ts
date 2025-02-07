@@ -286,9 +286,9 @@ export class GlobalCoursesService extends NgrxCrudService<any> {
     });
   }
 
-  
 
-  
+
+
 
   async removeFavorite(obj: any, user) {
     const index = this.courses.findIndex((x) => x.id == obj.id);

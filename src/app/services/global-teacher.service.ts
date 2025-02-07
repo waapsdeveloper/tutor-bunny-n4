@@ -20,14 +20,14 @@ export class GlobalTeacherService extends NgrxCrudService<any>  {
   }
 
   getGlobalTeachersFromApi(search = '', page = 1) {
-    
+
 
       const user = this.users.getUser();
 
       const params: any = { page };
       if (search) params.search = search;
       params.user_id = user.id;
-  
+
       return new Promise(async (resolve) => {
         const res = await this.network.getAllTeachers(params);
         const data = res.result;

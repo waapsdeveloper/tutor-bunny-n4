@@ -46,7 +46,7 @@ export class ProfileVideoComponent  implements OnInit {
       user_id: user_id
     }
     const res = await this.network.getIntoVideoFile(obj);
-    console.log(res);
+    console.log("video",res,user_id);
     if(res.result && res.result.full_url){
       this.full_url = res.result.full_url;
     }

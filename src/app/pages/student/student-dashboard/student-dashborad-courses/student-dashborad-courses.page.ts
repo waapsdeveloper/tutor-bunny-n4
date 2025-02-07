@@ -9,20 +9,18 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
 export class StudentDashboradCoursesPage extends ListPage implements OnInit {
-
-  constructor(injector: Injector, public globalCoursesService: GlobalCoursesService) {
+  constructor(
+    injector: Injector,
+    public globalCoursesService: GlobalCoursesService
+  ) {
     super(injector);
   }
 
-  
-
-  async fetchList(page: number, search: string, status: string): Promise<any> {    
-
+  async fetchList(page: number, search: string, status: string): Promise<any> {
     let obj = {
       page: page,
       liked: false,
     };
-
     let res = await this.network.getAllCourses(obj);
 
     return {
@@ -37,9 +35,10 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
     this.globalCoursesService.getList().subscribe((res) => {
       this.list = res;
     });
+    console.log('list', this.list);
   }
 
   openDetails(item: any) {
-    this.nav.push('./student-course-detail', {course_id: item.id})
+    this.nav.push('./student-course-detail', { course_id: item.id });
   }
 }
