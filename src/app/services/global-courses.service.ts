@@ -286,45 +286,9 @@ export class GlobalCoursesService extends NgrxCrudService<any> {
     });
   }
 
-  cancelTrail(obj, user) {
-    return new Promise(async (resolve) => {
-      let ite = {
-        user_id: user.id,
-        course_id: obj.id,
-      };
-      let res = await this.network.cancelTrail(ite);
-      console.log(res);
+  
 
-      const trialo = res.trialo;
-      delete trialo['course'];
-      console.log(trialo);
-
-      this.updateItem(obj.id, 'trial', trialo);
-
-      const courseItem = await this.getItemPromise(obj.id);
-      resolve(courseItem);
-    });
-  }
-
-  requestTrial(obj, user, message) {
-    return new Promise(async (resolve) => {
-      let ite = {
-        user_id: user.id,
-        course_id: obj.id,
-        message: message,
-      };
-      let res = await this.network.requestTrail(ite);
-
-      const trialo = res.trialo;
-      delete trialo['course'];
-      console.log(trialo);
-
-      this.updateItem(obj.id, 'trial', trialo);
-
-      const courseItem = await this.getItemPromise(obj.id);
-      resolve(courseItem);
-    });
-  }
+  
 
   async removeFavorite(obj: any, user) {
     const index = this.courses.findIndex((x) => x.id == obj.id);

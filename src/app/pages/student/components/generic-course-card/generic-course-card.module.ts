@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RatingStarsModule } from 'src/app/components/rating-stars/rating-stars.module';
 import { TrailMessageModule } from 'src/app/components/trail-message/trail-message.module';
+import { TrialReqButtonModule } from '../trial-req-button/trial-req-button.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TrailMessageModule } from 'src/app/components/trail-message/trail-messa
     IonicModule,
     TrailMessageModule,
     RatingStarsModule,
-    FormsModule
+    FormsModule,
+    TrialReqButtonModule
   ],
   exports: [
     GenericCourseCardComponent

@@ -1,0 +1,29 @@
+.big-action-button-8574 {
+  height: 34px;
+  // width: 100px;
+  border-radius: 8px;
+  background-color: rgba(243, 191, 89, 1);
+  padding-left: 16px;
+  padding-right: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pending-colors-btn {
+  background-color: #ffffff !important;
+  border: 1px solid;
+  min-width: 145px;
+}
+
+.less-screen-width-style {
+  background: unset !important;
+  border: unset !important;
+  justify-content: flex-start !important;
+  align-items: start !important;
+  padding-left: 0 !important;
+  padding-top: 8px;
+}

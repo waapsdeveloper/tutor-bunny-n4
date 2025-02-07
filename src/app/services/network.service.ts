@@ -320,6 +320,19 @@ export class NetworkService {
     );
   }
 
+  geStudentTrialList(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'course/student-trial-list' + '?' + str,
+      null,
+      false,
+      false
+    );
+  }
+
+  
+
+
   geTrailRequestsByPusher(id) {
     return this.httpGetResponse(
       'course/trials/by-id/' + id,

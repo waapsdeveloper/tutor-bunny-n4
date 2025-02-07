@@ -372,7 +372,7 @@ export class StudentCourseDetailPage extends BasePage {
       if (send == true) {
         this.trail = true;
         this.trialRequestLoading = true;
-        await this.globalCoursesService.requestTrial(this.course$, this.user, '');
+        // await this.globalCoursesService.requestTrial(this.course$, this.user, '');
         this.cdr.detectChanges();
         this.trialRequestLoading = false;
       } else {
@@ -399,7 +399,7 @@ export class StudentCourseDetailPage extends BasePage {
   async cancelTrail() {
     this.trail = false;
     let user = this.users.getUser();
-    this.globalCoursesService.cancelTrail(this.course$, user);
+    // this.globalCoursesService.cancelTrail(this.course$, user);
   }
 
   async isTrailReq(): Promise<boolean> {

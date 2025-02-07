@@ -40,11 +40,9 @@
           </div> -->
 
           <!-- *ngIf="getButtonConfig(item)" -->
-          <div class="big-action-button-8574" [class.pending-colors-btn]="status === 'Pending'" (click)="handleButtonClick(item)" >
-            <img *ngIf="!loading" [src]="getButtonConfig(item)?.icon" alt="" />
-            <ion-spinner *ngIf="loading"></ion-spinner>
-            <span *ngIf="!loading">{{ getButtonConfig(item)?.label }}</span>
-          </div>
+          <app-trial-req-button [courseId]="item.id" ></app-trial-req-button>
+
+          
 
           <div class="action-items">
             <img [src]="itemExistInFav$ ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'"
