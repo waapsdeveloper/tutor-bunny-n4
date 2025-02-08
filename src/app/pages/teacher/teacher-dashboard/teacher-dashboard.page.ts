@@ -36,7 +36,7 @@ export class TeacherDashboardPage extends BasePage {
 
     console.log(data)
 
-    this.pendingTrialsCoubt$ = data ?? 0;
+    // this.pendingTrialsCoubt$ = data ?? 0;
 
   }
   

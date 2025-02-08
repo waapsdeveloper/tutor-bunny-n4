@@ -4,4 +4,5 @@
   <span *ngIf="!loading">{{ getButtonConfig()?.label }}</span>
 </div>
 
-<app-sd-button-golden *ngIf="buttonType === 'large'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-golden>
+<app-sd-button-golden *ngIf="buttonType === 'large' && status !== 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-golden>
+<app-sd-button-clear *ngIf="buttonType === 'large' && status === 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-clear>
