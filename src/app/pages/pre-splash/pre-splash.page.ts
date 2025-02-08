@@ -11,13 +11,13 @@ import { ProfileService } from 'src/app/services/profile.service';
 // import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { ViewWillEnter } from '@ionic/angular';
-// import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
+// import { listTrialsService } from 'src/app/services/teacher/pending-trials.service';
 // import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 // import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 // import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
-import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
+import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
 
 @Component({
   selector: 'app-pre-splash',
@@ -40,12 +40,12 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
-    public pendingTrialsService: PendingTrialsService,
+    public listTrialsService: ListTrialsService,
     public notificationService: NotificationsService,
     private fcm: FirebaseService,
 
     // subscription APIs
-    // private pendingTrialsService: PendingTrialsService,
+    // private listTrialsService: listTrialsService,
     // private globalStudyMaterialService: GlobalStudyMaterialService,
     // private globalTeacherService: GlobalTeacherService,
     // private globalFavCoursesService: GlobalFavCoursesService,
@@ -84,7 +84,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
 
     if(this.user.role_id == 2){
-      this.pendingTrialsService.registerPusherEvent();
+      this.listTrialsService.registerPusherEvent();
     }
 
 
@@ -115,7 +115,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
 
     // subscription APIs
-    // this.pendingTrialsService.getPendingTrialsFromApi('', 1);
+    // this.listTrialsService.getPendingTrialsFromApi('', 1);
     // this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
     // // this.globalCourses.getGlobalCoursesFromApi('', 1);
     // this.globalTeacherService.getGlobalTeachersFromApi('', 1);

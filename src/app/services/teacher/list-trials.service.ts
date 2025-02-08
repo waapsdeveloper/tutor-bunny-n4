@@ -26,6 +26,63 @@ export class ListTrialsService extends NgrxCrudService<any> {
 
   }
 
+  unRegisterPusherEvent(){  
+    let user = this.users.getUser() as any;
+    if (this.pusher) {
+      this.pusher.unsubscribe('trials-channel');
+      this.pusher.disconnect();
+    }
+    this.trialChannel.unbind('trials-rec-' + user.id);
+  }
+
+  registerPusherEvent() {
+
+    let user = this.users.getUser() as any;
+    console.log('global-trials-pusher = trials-rec-' + user.id);
+    this.trialChannel.bind(
+      'trials-rec-' + user.id,
+      this.trialsChannelReceived.bind(this)
+    );
+  }
+
+  async trialsChannelReceived($event: any) {
+
+    // const user = this.users.getUser();
+    // if(user.role_id == 2){
+
+    //   // check if user is student 
+    //   // check if the student has a course of that trial 
+    //   // update course key trial to the receievd object
+    //   let obj = Object.assign({}, $event);
+    //   console.log(obj);
+
+
+    // }
+
+    // if ($event) {
+    //   if ($event.slug) {
+    //     let trialId = $event.trial_id;
+    //     this.removeFromListAndPendingTrials(trialId);
+    //     this.GlobalCourses.getCoursesFromApi();
+    //     this.events.publish('get-dashboard-stats');
+    //     this.events.publish('update-notifications');
+    //   } else {
+    //     let id = $event.trial_id;
+    //     let res = await this.network.geTrailRequestsByPusher(id);
+    //     this.updateTrailsList(res.trial);
+    //     this.events.publish('update-notifications');
+        
+        
+    //     if (user.role_id == 3) {
+    //       let shownoti = true;
+    //       this.user = this.users.getUser();
+    //       this.events.publish('show-noti-dot', shownoti);
+    //     }
+    //     this.events.publish('get-dashboard-stats');
+    //   }
+    // }
+  }
+
   getGlobalTeacherTrialFromApi(search = '', page = 1, perpage = 10) {
     return new Promise(async (resolve) => {
       const user = await this.users.getUser();

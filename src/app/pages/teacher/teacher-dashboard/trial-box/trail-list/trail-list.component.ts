@@ -6,11 +6,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { BasePage } from 'src/app/base-page/base-page';
-import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { NavService } from 'src/app/services/nav.service';
-import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
+import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -41,7 +38,7 @@ export class TrailListComponent {
   @Output() removeFromList = new EventEmitter<any>();
 
   // , public globalTrials: GlobalTrialsService
-  constructor(private nav: NavService, private utility: UtilityService, private pendingTrialsService: PendingTrialsService) {
+  constructor(private nav: NavService, private utility: UtilityService, private listTrialsService: ListTrialsService) {
    
   }
 
@@ -57,7 +54,7 @@ export class TrailListComponent {
   }
 
   async trailStatus(key: string) {
-    const res = await this.pendingTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);    
+    const res = await this.listTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);    
 
   }
 

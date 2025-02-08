@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { PendingTrialsService } from 'src/app/services/teacher/pending-trials.service';
+import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
 
 @Component({
   selector: 'app-trial-box',
@@ -12,18 +12,18 @@ export class TrialBoxComponent extends BasePage { //  implements OnInit
   list$;
   count$;
 
-  constructor(injector: Injector, private pendingTrialsService: PendingTrialsService) {
+  constructor(injector: Injector, private listTrialsService: ListTrialsService) {
     super(injector)
   }
 
   ngOnInit() {
 
     // this.user = this.users.getUser();
-    this.pendingTrialsService.getList().subscribe((data) => {
+    this.listTrialsService.getList().subscribe((data) => {
       this.list$ = data;
     });
 
-    this.pendingTrialsService.getCount().subscribe((data) => {
+    this.listTrialsService.getCount().subscribe((data) => {
       this.count$ = data;
     });
 
