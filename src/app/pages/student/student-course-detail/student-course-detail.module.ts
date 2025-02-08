@@ -27,6 +27,7 @@ import { TeacherInfoCardModule } from 'src/app/components/teacher-info-card/teac
 import { MyCoursesModule } from "../../../components/my-courses/my-courses.module";
 import { MyRatingsModule } from "../../../components/my-ratings/my-ratings.module";
 import { SdButtonGoldenModule } from "../../../components/sd-button-golden/sd-button-golden.module";
+import { TrialReqButtonModule } from '../components/trial-req-button/trial-req-button.module';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { SdButtonGoldenModule } from "../../../components/sd-button-golden/sd-bu
     ScdPageFooterModule,
     MyCoursesModule,
     MyRatingsModule,
-    SdButtonGoldenModule
+    SdButtonGoldenModule,
+    TrialReqButtonModule
 ],
   declarations: [StudentCourseDetailPage]
 })

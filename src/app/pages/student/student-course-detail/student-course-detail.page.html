@@ -134,8 +134,8 @@
     <app-sd-button-clear class="footer-button-1" [image]="'assets/svg/chat.svg'" [text]="'Chat'" (click)="goToChat(teacherData)" ></app-sd-button-clear>
 
 
-
-    <app-sd-button-golden class="footer-button-2" [isShowLoader]="trialRequestLoading" [disabled]="trialRequestLoading" [image]="'assets/svg/send.svg'" [text]="getButtonConfig(course$)?.label" (click)="handleButtonClick(course$)" *ngIf="getButtonConfig(course$)"></app-sd-button-golden>
+    <app-trial-req-button class="footer-button-2" [courseId]="courseId" ></app-trial-req-button>
+    <!-- <app-sd-button-golden class="footer-button-2" [isShowLoader]="trialRequestLoading" [disabled]="trialRequestLoading" [image]="'assets/svg/send.svg'" [text]="getButtonConfig(course$)?.label" (click)="handleButtonClick(course$)" *ngIf="getButtonConfig(course$)"></app-sd-button-golden> -->
 
   </div>
 </ion-footer>
