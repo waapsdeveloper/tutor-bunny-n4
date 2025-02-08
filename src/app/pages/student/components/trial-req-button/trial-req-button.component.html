@@ -1,8 +1,21 @@
-<div class="big-action-button-8574" *ngIf="buttonType === 'small'" [class.pending-colors-btn]="status === 'Pending'" [class.less-screen-width-style]="hostScreensize <= 400" (click)="handleButtonClick()" >
+<!-- <div class="big-action-button-8574" *ngIf="buttonType === 'small'" [class.pending-colors-btn]="status === 'Pending'" [class.less-screen-width-style]="hostScreensize <= 400" (click)="handleButtonClick()" >
+  <img *ngIf="!loading" [src]="getButtonConfig()?.icon" alt="" />
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <span *ngIf="!loading">{{ getButtonConfig()?.label }}</span>
+</div> -->
+
+<!-- <app-sd-button-golden *ngIf="buttonType === 'large' && status !== 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-golden> -->
+<!-- <app-sd-button-clear *ngIf="buttonType === 'large' && status === 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-clear> -->
+
+
+<div class="big-action-button-8574"
+     [ngClass]="{'big-action-button-8575': buttonType === 'large'}"
+     *ngIf="buttonType === 'small' || buttonType === 'large'"
+     [class.pending-colors-btn]="status === 'Pending'"
+     [class.less-screen-width-style]="hostScreensize <= 400"
+     (click)="handleButtonClick()">
+
   <img *ngIf="!loading" [src]="getButtonConfig()?.icon" alt="" />
   <ion-spinner *ngIf="loading"></ion-spinner>
   <span *ngIf="!loading">{{ getButtonConfig()?.label }}</span>
 </div>
-
-<app-sd-button-golden *ngIf="buttonType === 'large' && status !== 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-golden>
-<app-sd-button-clear *ngIf="buttonType === 'large' && status === 'Pending'" class="footer-button-2" [isShowLoader]="loading" [disabled]="loading" [image]="getButtonConfig()?.icon" [text]=" getButtonConfig()?.label" (click)="handleButtonClick()" ></app-sd-button-clear>
