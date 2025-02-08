@@ -20,7 +20,7 @@ export class TrialReqButtonComponent implements OnInit {
   loading: boolean = false;
   course: any;
 
-
+  @Input() buttonTYpe: string = '';
 
   private _courseId;
   @Input()
