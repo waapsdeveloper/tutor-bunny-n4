@@ -55,27 +55,27 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
 
   }
 
-  setBackgroundImage(docObj: any) {
-    // return `url('${item.image}')`;
+  // setBackgroundImage(docObj: any) {
+  //   // return `url('${item.image}')`;
 
 
 
-    let path = 'assets/svg/filetypes/';
-    const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
+  //   let path = 'assets/svg/filetypes/';
+  //   const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
 
-    if (fileType.includes('pdf')) {
-      path += 'pdf.svg';
-    } else if (fileType.includes('sheet')) {
-      path += 'xls.svg';
-    } else if (fileType.includes('document')) {
-      path += 'doc.svg';
-    } else if (fileType.includes('image')) {
-      path += 'png.svg';
-    }
+  //   if (fileType.includes('pdf')) {
+  //     path += 'pdf.svg';
+  //   } else if (fileType.includes('sheet')) {
+  //     path += 'xls.svg';
+  //   } else if (fileType.includes('document')) {
+  //     path += 'doc.svg';
+  //   } else if (fileType.includes('image')) {
+  //     path += 'png.svg';
+  //   }
 
 
-    return `url(${path})`;
-  }
+  //   return `url(${path})`;
+  // }
 
   async addDocInArray(docString, type) {
 
@@ -170,6 +170,17 @@ export class CreateMaterialDocsPage extends BasePage implements OnInit {
     //   backUrl: '/course-profile/course-photo',
     //   image: image,
     // });
+  }
+  formatFileType(value: string): string {
+    if (!value) return '';
+
+    const parts = value.split('/');
+    if (parts.length === 2) {
+      return parts[1].toUpperCase();
+    } else if (parts.length > 2) {
+      return parts[parts.length - 1].toUpperCase();
+    }
+    return value;
   }
 
 }

@@ -1,34 +1,56 @@
 <ion-header class="ion-no-border ion-no-shadow">
-  <app-sd-header-top [title]="title" [backUrl]="" [showBack]="true"></app-sd-header-top>
+  <app-sd-header-top
+    [title]="title"
+    [backUrl]=""
+    [showBack]="true"
+  ></app-sd-header-top>
 </ion-header>
 
 <ion-content class="ion-padding ion-content-medium-background">
   <div class="gallery-outer-8965">
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let doc of docs$; let i = index" size-xs="4" size-sm="4"
-          size-md="4" size-lg="4">
-          <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(doc)"
-            (click)="openDoc(doc)">
-            <!-- <ion-icon name="star" [class.set-feature-input-678956744]="coursePhoto.feature === true"
-              class="feature-input-678956744" (click)="updateFeatureImage(coursePhoto, i, $event)"></ion-icon> -->
-            <img src="assets/svg/delete.svg" class="clear-input-678956744" (click)="clearImage(i , $event)">
+        <ion-col *ngFor="let doc of docs$; let i = index" size-xs="4" size-sm="4" size-md="4" size-lg="4">
+          <div class="file-card" (click)="openDoc(doc)">
+            <div class="file-icon">
+              <img src="assets/svg/file-icon-large.svg" alt="File" />
+            </div>
+            <div class="file-type">
+              {{ formatFileType(doc.type) }}
+            </div>
           </div>
         </ion-col>
+
       </ion-row>
     </ion-grid>
   </div>
-  <input type="file" (change)="onFileSelected($event)" accept=".jpeg,.jpg,.png,.pdf,.doc,.docx,.xls,.xlsx" style="display: none" #docInput multiple />
+  <input
+    type="file"
+    (change)="onFileSelected($event)"
+    accept=".jpeg,.jpg,.png,.pdf,.doc,.docx,.xls,.xlsx"
+    style="display: none"
+    #docInput
+    multiple
+  />
 </ion-content>
-<ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
-  <div class="d-flex flex-column gap-16" style="width: 100%;">
-    <app-sd-button-gray style="width: 100%;"
-      (click)="docInput.click()" [image]="'assets/svg/upload.svg'"
-      [text]="title"></app-sd-button-gray>
+<ion-footer
+  class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background"
+>
+  <div class="d-flex flex-column gap-16" style="width: 100%">
+    <app-sd-button-gray
+      style="width: 100%"
+      (click)="docInput.click()"
+      [image]="'assets/svg/upload.svg'"
+      [text]="title"
+    ></app-sd-button-gray>
     <!-- <app-sd-button-gray style="width: 100%;"
       (click)="docs$.length < 8 ? docInput.click() : ''" [image]="'assets/svg/upload.svg'"
       [disabled]="docs$.length >= 8" [text]="title"></app-sd-button-gray> -->
-    <app-sd-button-gray style="width: 100%;" (click)="nav.pop()" [image]="'assets/svg/done.svg'"
-      [text]="'Done'"></app-sd-button-gray>
+    <app-sd-button-gray
+      style="width: 100%"
+      (click)="nav.pop()"
+      [image]="'assets/svg/done.svg'"
+      [text]="'Done'"
+    ></app-sd-button-gray>
   </div>
 </ion-footer>

@@ -12,24 +12,22 @@ import { log } from 'node:console';
   styleUrls: ['./student-teacher-profile.page.scss'],
 })
 export class StudentTeacherProfilePage extends BasePage implements OnInit {
-
   loading = false;
   user: any;
-  videoBox
+  videoBox;
   teacher$;
   teacherId;
 
   params;
-  backUrl
+  backUrl;
 
   headerData = {
     image: '',
     displayName: '',
     verifiedOn: '',
     rating: 0,
-    totalRating: 0
-
-  }
+    totalRating: 0,
+  };
 
   infoData = {
     subjects: [],
@@ -38,43 +36,40 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     country: '',
     city: '',
     state: '',
-    flag: ''
+    flag: '',
   };
 
   countData = {
     years_of_experience: 0,
     course_count: 0,
-    notes_count: 0
+    notes_count: 0,
   };
 
   aboutData = {
     heading: 'About',
-    text: ''
-  }
+    text: '',
+  };
 
   courseData = {
     heading: 'Courses & Study Notes',
-    list: []
-  }
+    list: [],
+  };
 
   galleryData = {
     heading: 'Gallery',
-    list: []
-  }
+    list: [],
+  };
 
   ratingData = {
     heading: 'Reviews',
-    list: []
-  }
+    list: [],
+  };
 
-
-
-
-
-
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     public globalTeacherService: GlobalTeacherService,
-    private chats: ChatService) {
+    private chats: ChatService
+  ) {
     super(injector);
   }
 
@@ -86,41 +81,42 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   async ionViewWillEnter() {
-
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
 
     if (this.params.teacher_id) {
-
       this.teacherId = this.params.teacher_id;
-      this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
-        this.teacher$ = data;
-        this.callApi(this.teacher$);
-      });
+      // this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
+      //   this.teacher$ = data;
+      //   this.callApi(this.teacher$);
+      // });
 
-    } else {
-      this.nav.pop();
+      let res = await this.network.teacherById(this.teacherId);
+      console.log('hello', res.result);
+      this.teacher$ = res.result;
+      this.callApi(this.teacher$);
     }
+    // } else {
+    //   this.nav.pop();
+    // }
     // this.spinner = true;
-
 
     // this.isTrailReq();
   }
 
   async callApi(data): Promise<boolean> {
-
     console.log(data);
 
-    let user = data;  
+    let user = data;
     this.headerData = {
       image: user.image,
       displayName: this.utility.getAmericanName(user.name),
       verifiedOn: moment(user.verified_on).format('DD-MMM-YYYY'),
       rating: user.teacher.avg_rating,
-      totalRating: user.teacher.total_rating
-    }
+      totalRating: user.teacher.total_rating,
+    };
 
     this.infoData = {
       subjects: user.teacher.subjects,
@@ -129,32 +125,28 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       country: user.teacher.country.name,
       city: user.teacher.city,
       state: user.teacher.state.name,
-      flag: this.utility.getFlag(user)
-    }
-
-    
+      flag: this.utility.getFlag(user),
+    };
 
     let reviews_params = {
       teacher_id: user.id,
-      type: 'course'
+      type: 'course',
     };
 
-
     this.videoBox = {
-      user_id: user.id
-    }
+      user_id: user.id,
+    };
 
     const ratings = await this.network.getReviews(reviews_params);
 
     this.ratingData = {
       heading: 'Reviews',
-      list: ratings.result
-    }
+      list: ratings.result,
+    };
 
     let obj = {
       email: user.email,
     };
-
 
     let res = await this.network.getStudentTeacherProfileByEmail(obj);
 
@@ -162,24 +154,24 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     this.aboutData = {
       heading: 'About',
-      text: user.teacher.description || ''
-    }
+      text: user.teacher.description || '',
+    };
 
     this.countData = {
       years_of_experience: user.teacher.started_teaching,
       course_count: res.course_material.total_courses,
       notes_count: res.course_material.total_material,
-    }
+    };
 
     this.courseData = {
       heading: 'Courses & Study Notes',
-      list: res.course_material.list
-    }
+      list: res.course_material.list,
+    };
 
     this.galleryData = {
       heading: 'Gallery',
-      list: res.gallery
-    }
+      list: res.gallery,
+    };
 
     return true;
   }
@@ -195,7 +187,6 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     // console.log(res);
     // this.user = res.user;
-
 
     // this.headerData = {
     //   image: this.user.image,
@@ -226,7 +217,6 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     //   text: this.user.teacher.description || ''
     // }
 
-
     // this.courseData = {
     //   heading: 'Courses & Study Notes',
     //   list: res.course_material.list
@@ -237,14 +227,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     //   list: res.gallery
     // }
 
-
     // this.ratingData = {
     //   heading: 'Reviews',
     //   list: res.reviews
     // }
 
     this.loading = false;
-
 
     //   const verified_on = this.user.verified_on;
     //   this.verified_on = moment(verified_on).format('DD-MMM-YYYY');
@@ -285,9 +273,8 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   clickOpenCourse($event) {
-    console.log($event)
+    console.log($event);
   }
-
 
   async goToChat() {
     let student = this.users.getUser();
@@ -302,12 +289,15 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   async openChatWithData() {
     let student = this.users.getUser();
-    const chatRoomId = await this.chats.getChadRoomId(this.teacherId, student.id) as number;
+    const chatRoomId = (await this.chats.getChadRoomId(
+      this.teacherId,
+      student.id
+    )) as number;
 
     if (chatRoomId != -1) {
       this.nav.push('messages', {
-        chat_room_id: chatRoomId
-      })
+        chat_room_id: chatRoomId,
+      });
     }
   }
 
@@ -327,5 +317,4 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       });
     }
   }
-
 }

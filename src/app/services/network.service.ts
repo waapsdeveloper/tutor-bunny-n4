@@ -1042,6 +1042,9 @@ export class NetworkService {
       false
     );
   }
+  teacherById(id){
+    return this.httpGetResponse('teachers/by-id', id, false, false);
+  }
 
   buyNow(data) {
     return this.httpPostResponse('stripe/add', data, false, true, false);
