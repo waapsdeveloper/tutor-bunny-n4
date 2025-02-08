@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TeacherDashboardPage } from './teacher-dashboard.page';
 import { userResolver } from 'src/app/resolvers/user.resolver';
-import { pendingTrialsResolver } from 'src/app/resolvers/teacher/trialList.resolver';
+import { listTrialsResolver } from 'src/app/resolvers/teacher/trialList.resolver';
 import { requestListResolver } from 'src/app/resolvers/teacher/requestList.resolver';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
     component: TeacherDashboardPage,
     resolve: {
       user: userResolver,
-      pendingTrials: pendingTrialsResolver,
+      listTrials: listTrialsResolver,
       requestList: requestListResolver
     },
   },

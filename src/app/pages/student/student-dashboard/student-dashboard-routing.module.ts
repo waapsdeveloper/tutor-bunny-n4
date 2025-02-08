@@ -14,7 +14,7 @@ const routes: Routes = [
     resolve: {
       cart: cartListResolver,
       notificationCount: notificationCountResolver,
-      favorites: favoritesCountResolver 
+      favorites: favoritesCountResolver,
     },
 
     children: [

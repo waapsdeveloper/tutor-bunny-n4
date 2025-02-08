@@ -3,7 +3,7 @@ import { ResolveFn, Router } from '@angular/router'; // Your data service
 import { of } from 'rxjs';
 import { GlobalTrialCoursesService } from 'src/app/services/student/global-trial-courses.service';
 
-export const trialListResolver: ResolveFn<any> = async (route, state) => {
+export const listTrialsResolver: ResolveFn<any> = async (route, state) => {
   const service = inject(GlobalTrialCoursesService);
   const router = inject(Router);
 
