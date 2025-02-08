@@ -11,7 +11,7 @@ export class TrialBoxComponent extends BasePage implements OnInit {
   //  implements OnInit
 
   list$;
-  filteredList$;
+  filteredList$: any = [];
   count$;
   pendingTrialsCount$;
 
@@ -35,10 +35,19 @@ export class TrialBoxComponent extends BasePage implements OnInit {
     // });
   }
 
-  checkNumberOfPendings(data) {
-    console.log('inside trial box  ', data);
-    this.filteredList$ = data.filter((element) => element.status === 'Pending');
-    console.log('Filtered List', this.filteredList$);
+  async checkNumberOfPendings(data) {
+    const flist = data.filter((element) => element.status === 'Pending');
+
+    const ids = flist.map((element) => element.id);
+
+    const d = await this.listTrialsService.getTrialsByIds({
+      ids: ids,
+    }) as any
+
+    console.log('Filtered List', d.trials);
+    if(d.trials){
+      this.filteredList$ = d.trials;
+    }
   }
 
   goToTrialReq() {

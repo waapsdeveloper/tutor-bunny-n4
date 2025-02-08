@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { NavService } from 'src/app/services/nav.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-teacher-info-card',
@@ -27,7 +28,7 @@ export class TeacherInfoCardComponent {
   teacher_id = null;
   email = ''
 
-  constructor(private nav: NavService) {}
+  constructor(private nav: NavService, private users: UsersService) {}
 
   updateDetails(value: any) {
     console.log(value)
@@ -46,10 +47,14 @@ export class TeacherInfoCardComponent {
 
   openTeacherDetail(){
     
-    const params = {
-      email: this.email,
-    };
-    this.nav.push('/teacher-profile', params);
+    const user = this.users.getUser();
+    if(user && user.role_id == 2){
+      this.nav.push('/student-teacher-profile', {
+        teacher_id: this.teacher_id
+      });
+    }else{
+      this.nav.push('/teacher-profile', { email: this.email });
+    }
   }
 
 

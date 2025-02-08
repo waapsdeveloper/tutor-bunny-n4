@@ -320,6 +320,16 @@ export class NetworkService {
     );
   }
 
+  geTrailsByIds(data) {    
+    return this.httpPostResponse(
+      'courses/trials/by/ids',
+      data,
+      null,
+      false,
+      false
+    );
+  }
+
   geStudentTrialList(data) {
     const str = this.serialize(data);
     return this.httpGetResponse(

@@ -116,6 +116,15 @@ export class ListTrialsService extends NgrxCrudService<any> {
     });
   }
 
+  getTrialsByIds(ids: any){
+    return new Promise(async (resolve) => {
+      const res = await this.network.geTrailsByIds(ids);
+      const data = res;
+      console.log(data)
+      resolve(res);
+    });
+  }
+
   async changeStatus(obj, trialId) {
     
     let res = await this.network.changeTrailStuts(obj, trialId);
