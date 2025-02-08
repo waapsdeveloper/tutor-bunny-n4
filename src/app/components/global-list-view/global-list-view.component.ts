@@ -27,14 +27,18 @@ export class GlobalListViewComponent implements OnInit {
   @Output() loadMore = new EventEmitter<any>();
 
   handleRefresh(event: any) {
-    this.refresh.emit(event);
-  }
+  this.refresh.emit(event);
+  setTimeout(() => {
+    event.target.complete(); // Stop the refresher animation
+  }, 1000); // Simulating network delay
+}
+
 
   onIonInfinite(event: any) {
     console.log('this this this');
     this.loadMore.emit(event);
   }
- 
+
 
   ngOnInit(): void {
     console.log("Item template available?", !!this.itemTemplate);
