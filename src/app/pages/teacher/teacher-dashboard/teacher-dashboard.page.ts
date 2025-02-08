@@ -32,7 +32,7 @@ export class TeacherDashboardPage extends BasePage {
 
   }
 
-  checkNumberOfPendings(data){
+  checkNumberOfPendings(data: any[]){
 
     console.log(data)
 
