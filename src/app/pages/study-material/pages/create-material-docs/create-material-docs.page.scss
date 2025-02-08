@@ -68,3 +68,29 @@ ion-footer {
   top: 1px;
   border-radius: 50%;
 }
+.file-card {
+  width: 100%;
+  height: 100px;
+  max-width: 100px; /* Adjust size */
+  height: 140px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid #ddd; /* Light border */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.file-icon img {
+  width: 50px;
+}
+
+.file-type {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}

@@ -12,15 +12,14 @@ import { NetworkService } from './network.service';
 
 export interface GlobalChatsModel {
   unread_count: number;
-  chats: any[],
-  requests: any[]
+  chats: any[];
+  requests: any[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > {
-  
+export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
   user: any;
   role_id: any;
   chats;
@@ -28,7 +27,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
   latestEvent = 'randomLast';
   historicalEvent = 'randomHistory';
   unreadCount = 0;
-  
+
   private pusher: Pusher;
 
   review_course = {
@@ -38,6 +37,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
 
   days: any[] = [];
   chatChannel: any;
+  presenceChannel: any;
 
   constructor(
     private users: UsersService,
@@ -54,7 +54,19 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
 
     this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
     this.chatChannel = this.pusher.subscribe('chats-channel');
+    this.presenceChannel = this.pusher.subscribe('presence-chat-room');
 
+    this.presenceChannel.bind('pusher:subscription_succeeded', (members) => {
+      console.log('Users in channel:', members);
+    });
+
+    this.presenceChannel.bind('pusher:member_added', (member) => {
+      console.log('New user joined:', member.info);
+    });
+
+    this.presenceChannel.bind('pusher:member_removed', (member) => {
+      console.log('User left:', member.info);
+    });
 
     this.events.subscribe(
       'clear-all-services-data',
@@ -65,20 +77,20 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
         this.count = 0;
         if (this.pusher) {
           this.pusher.unsubscribe('chats-channel');
+          this.pusher.unsubscribe('presence-chat-room');
           this.pusher.disconnect();
         }
         this.events.unsubscribe('message-received-via-pusher');
       },
       false
     );
-    
+
     // this.events.subscribe('clear-chat-data', () => {
     //   this.days = null;
     // });
     // this.events.subscribe('update-chat-lists', () => {
     //   this.getchatList();
     // });
-  
   }
 
   storeConfig(): NgSimpleStateStoreConfig {
@@ -91,7 +103,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     return {
       unread_count: 0,
       chats: [],
-      requests: []
+      requests: [],
     };
   }
 
@@ -139,9 +151,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     });
   }
 
-  
-  
-
   unRegisterPusherEvent() {
     let user = this.users.getUser() as any;
 
@@ -159,12 +168,11 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
       'message-rec-' + id,
       this.chatChannelReceived.bind(this)
     );
+    
   }
 
   chatChannelReceived($event: any) {
-    
     this.events.publish('message-received-via-pusher', $event);
-
 
     let data = $event;
     if (data.chat_room_id) {
@@ -212,7 +220,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
   }
 
   getchatList(search = '', page = 1, liked = false) {
-    return new Promise(async (resolve) => {  
+    return new Promise(async (resolve) => {
       this.user = this.users.getUser();
       this.role_id = this.user.role_id;
       let obj = {
@@ -237,32 +245,28 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     });
   }
 
-  async getUnreadMsgCount(): Promise<number> { 
+  async getUnreadMsgCount(): Promise<number> {
     let res = await this.network.getUnreadChat({});
     this.unreadCount = res.unread_count;
 
-    this.setState( state => ({
+    this.setState((state) => ({
       ...state,
-      unread_count: res.unread_count
+      unread_count: res.unread_count,
     }));
-    
+
     return this.unreadCount;
   }
 
   getChatRequsts() {
-  //   return new Promise(async (resolve) => {
-  //     this.user = this.users.getUser();
-
-  //     let res = await this.network.getRequestMessagesRoom(this.user.id);
-  //     //
-
-  //     this.requestCount = res.total;
-  //     //
-
-  //     this.requests = res.data;
-
-  //     resolve;
-  //   });
+    //   return new Promise(async (resolve) => {
+    //     this.user = this.users.getUser();
+    //     let res = await this.network.getRequestMessagesRoom(this.user.id);
+    //     //
+    //     this.requestCount = res.total;
+    //     //
+    //     this.requests = res.data;
+    //     resolve;
+    //   });
   }
 
   async chatRequstUpdateStatus(value, item) {
@@ -338,19 +342,19 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     // const findObj = this.chats.find((x) => x.chat_room_id == roomId);
     // if (!findObj) {
 
-      let obj = {
-        limit: 20,
-        offset: 0
-      }
-      const res = await this.network.getChatRoomById(roomId,obj);
-      //
+    let obj = {
+      limit: 20,
+      offset: 0,
+    };
+    const res = await this.network.getChatRoomById(roomId, obj);
+    //
 
-      if (res.length > 0) {
-        // this.chats = [...this.chats, ...res];
-        return res[0];
-      } 
+    if (res.length > 0) {
+      // this.chats = [...this.chats, ...res];
+      return res[0];
+    }
 
-      return null;
+    return null;
     // }
 
     // return findObj;
@@ -387,8 +391,8 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
 
     let obj = {
       limit: 10,
-      offset: 0
-    }
+      offset: 0,
+    };
     const res = await this.network.getChatRoomById(roomId, obj);
     //
 
@@ -400,9 +404,5 @@ export class ChatService extends NgSimpleStateBaseRxjsStore< GlobalChatsModel > 
     }
 
     // this.getUnreadMsgCount();
-
-
-
-
   }
 }
