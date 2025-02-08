@@ -16,6 +16,10 @@ import { HeaderCartButtonComponent } from './header-cart-button/header-cart-butt
 import { HeaderFavButtonComponent } from './header-fav-button/header-fav-button.component';
 import { HeaderNotificationButtonComponent } from './header-notification-button/header-notification-button.component';
 import { HeaderProfileIconComponent } from './header-profile-icon/header-profile-icon.component';
+import { SwiperModule } from 'swiper/angular';
+import { StudentDashboardStudyMaterialPageModule } from "./student-dashboard-study-material/student-dashboard-study-material.module";
+import { StudentDashboradCoursesPageModule } from './student-dashborad-courses/student-dashborad-courses.module';
+import { StudentDashboradTeachersPageModule } from './student-dashborad-teachers/student-dashborad-teachers.module';
 
 @NgModule({
   imports: [
@@ -27,8 +31,14 @@ import { HeaderProfileIconComponent } from './header-profile-icon/header-profile
     RecTeachersModule,
     SearchBoxModule,
     RecTechersBoxModule,
-    StudentWelcomeModule
-  ],
+    StudentWelcomeModule,
+    SwiperModule,
+
+    // pages import
+    StudentDashboardStudyMaterialPageModule,
+    StudentDashboradCoursesPageModule,
+    StudentDashboradTeachersPageModule
+],
   declarations: [StudentDashboardPage, HeaderProfileIconComponent, HeaderCartButtonComponent, HeaderFavButtonComponent, HeaderNotificationButtonComponent]
 })
 export class StudentDashboardPageModule { }

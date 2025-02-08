@@ -25,9 +25,10 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
   }
 
   ngOnInit() {
-    this.globalStudyMaterialService.getList().subscribe(data => {      
-      this.list = data;
-    });
+    // this.globalStudyMaterialService.getList().subscribe(data => {      
+    //   this.list = data;
+    // });
+    this.resetAndFetch();
   }
 
 

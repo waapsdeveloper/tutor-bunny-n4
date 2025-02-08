@@ -38,9 +38,10 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.globalTeacherService.getList().subscribe((res) => {
-      this.list = [...res];
-    });
+    // this.globalTeacherService.getList().subscribe((res) => {
+    //   this.list = [...res];
+    // });
+    this.resetAndFetch();
   }
 
 

@@ -19,6 +19,7 @@ import { GlobalListViewModule } from "../../../../components/global-list-view/gl
     GlobalListViewModule,
     GenericTeacherCardModule,
 ],
-  declarations: [StudentDashboradTeachersPage]
+  declarations: [StudentDashboradTeachersPage],
+  exports: [StudentDashboradTeachersPage]
 })
 export class StudentDashboradTeachersPageModule {}

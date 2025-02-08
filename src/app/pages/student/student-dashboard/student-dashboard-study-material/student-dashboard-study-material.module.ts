@@ -16,6 +16,7 @@ import { GlobalListViewModule } from 'src/app/components/global-list-view/global
     GenericStudyMaterialCardModule,
 
   ],
-  declarations: [StudentDashboardStudyMaterialPage]
+  declarations: [StudentDashboardStudyMaterialPage],
+  exports: [StudentDashboardStudyMaterialPage]
 })
 export class StudentDashboardStudyMaterialPageModule {}

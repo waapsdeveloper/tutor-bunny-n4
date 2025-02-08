@@ -17,6 +17,7 @@ import { GlobalListViewModule } from 'src/app/components/global-list-view/global
     GenericCourseCardModule
 
   ],
-  declarations: [StudentDashboradCoursesPage]
+  declarations: [StudentDashboradCoursesPage],
+  exports: [StudentDashboradCoursesPage]
 })
 export class StudentDashboradCoursesPageModule {}

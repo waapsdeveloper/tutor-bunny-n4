@@ -17,26 +17,26 @@ const routes: Routes = [
       favorites: favoritesCountResolver,
     },
 
-    children: [
-      {
-        path: '',
-        redirectTo: 'student-dashborad-courses',
-        pathMatch: 'full',
-      },
-      {
-        path: 'student-dashborad-courses',
-        loadChildren: () => import('./student-dashborad-courses/student-dashborad-courses.module').then(m => m.StudentDashboradCoursesPageModule)
-      },
-      {
-        path: 'student-dashborad-teachers',
-        loadChildren: () => import('./student-dashborad-teachers/student-dashborad-teachers.module').then(m => m.StudentDashboradTeachersPageModule)
-      },
+    // children: [
+    //   {
+    //     path: '',
+    //     redirectTo: 'student-dashborad-courses',
+    //     pathMatch: 'full',
+    //   },
+    //   {
+    //     path: 'student-dashborad-courses',
+    //     loadChildren: () => import('./student-dashborad-courses/student-dashborad-courses.module').then(m => m.StudentDashboradCoursesPageModule)
+    //   },
+    //   {
+    //     path: 'student-dashborad-teachers',
+    //     loadChildren: () => import('./student-dashborad-teachers/student-dashborad-teachers.module').then(m => m.StudentDashboradTeachersPageModule)
+    //   },
       
-      {
-        path: 'student-dashboard-study-material',
-        loadChildren: () => import('./student-dashboard-study-material/student-dashboard-study-material.module').then( m => m.StudentDashboardStudyMaterialPageModule)
-      },
-    ]
+    //   {
+    //     path: 'student-dashboard-study-material',
+    //     loadChildren: () => import('./student-dashboard-study-material/student-dashboard-study-material.module').then( m => m.StudentDashboardStudyMaterialPageModule)
+    //   },
+    // ]
   },
   {
     path: 'student-menu',

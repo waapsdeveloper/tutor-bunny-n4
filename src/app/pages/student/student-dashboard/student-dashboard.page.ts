@@ -50,5 +50,9 @@ export class StudentDashboardPage {
     });
   }
 
+  onSlideChanged() {
+
+  }
+
   
 }
