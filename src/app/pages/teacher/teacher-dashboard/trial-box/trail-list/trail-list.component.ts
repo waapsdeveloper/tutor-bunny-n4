@@ -22,7 +22,7 @@ export class TrailListComponent {
   age;
 
   private _item: any;
-  
+
 
   @Input() showMoreOptions: boolean = true;
   @Input('item')
@@ -32,14 +32,14 @@ export class TrailListComponent {
 
   public set item(value: any) {
     this._item = value;
-    this.updateItem(value);    
+    this.updateItem(value);
   }
-  
+
   @Output() removeFromList = new EventEmitter<any>();
 
   // , public globalTrials: GlobalTrialsService
   constructor(private nav: NavService, private utility: UtilityService, private listTrialsService: ListTrialsService) {
-   
+
   }
 
   async updateItem(value: any) {
@@ -54,7 +54,7 @@ export class TrailListComponent {
   }
 
   async trailStatus(key: string) {
-    const res = await this.listTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);    
+    const res = await this.listTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);
 
   }
 
@@ -106,5 +106,5 @@ export class TrailListComponent {
     this.nav.push('/tabs/chat');
   }
 
-  
+
 }

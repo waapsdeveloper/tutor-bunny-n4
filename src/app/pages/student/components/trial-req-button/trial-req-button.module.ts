@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrialReqButtonComponent } from './trial-req-button.component';
 import { IonicModule } from '@ionic/angular';
+import { SdButtonGoldenModule } from "../../../../components/sd-button-golden/sd-button-golden.module";
 
 
 
@@ -9,8 +10,9 @@ import { IonicModule } from '@ionic/angular';
   declarations: [TrialReqButtonComponent],
   imports: [
     CommonModule,
-    IonicModule
-  ],
+    IonicModule,
+    SdButtonGoldenModule
+],
   exports: [TrialReqButtonComponent]
 })
 export class TrialReqButtonModule { }

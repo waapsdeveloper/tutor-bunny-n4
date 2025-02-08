@@ -7,38 +7,49 @@ import { ListTrialsService } from 'src/app/services/teacher/list-trials.service'
   templateUrl: './trial-box.component.html',
   styleUrls: ['./trial-box.component.scss'],
 })
-export class TrialBoxComponent extends BasePage { //  implements OnInit
-  
-  list$;
-  count$;
+export class TrialBoxComponent extends BasePage implements OnInit {
+  //  implements OnInit
 
-  constructor(injector: Injector, private listTrialsService: ListTrialsService) {
-    super(injector)
+  list$;
+  filteredList$;
+  count$;
+  pendingTrialsCount$;
+
+  constructor(
+    injector: Injector,
+    private listTrialsService: ListTrialsService
+  ) {
+    super(injector);
   }
 
-  ngOnInit() {
-
+  async ngOnInit() {
     // this.user = this.users.getUser();
-    this.listTrialsService.getList().subscribe((data) => {
+    await this.listTrialsService.getList().subscribe((data) => {
       this.list$ = data;
+      console.log('this is my list ', this.list$);
+      this.checkNumberOfPendings(this.list$);
     });
 
-    this.listTrialsService.getCount().subscribe((data) => {
-      this.count$ = data;
-    });
+    // this.listTrialsService.getCount().subscribe((data) => {
+    //   this.count$ = data;
+    // });
+  }
 
-  };
+  checkNumberOfPendings(data) {
+    console.log('inside trial box  ', data);
+    this.filteredList$ = data.filter((element) => element.status === 'Pending');
+    console.log('Filtered List', this.filteredList$);
+  }
 
   goToTrialReq() {
-    this.nav.push('teacher-trial-list')
+    this.nav.push('teacher-trial-list');
   }
 
-  goToDeatil(item) {    
+  goToDeatil(item) {
     const params = {
       id: item.course.id,
       backUrl: '/tabs/teacher-dashboard',
     };
     this.nav.push('/course-detail', params);
   }
-
 }
