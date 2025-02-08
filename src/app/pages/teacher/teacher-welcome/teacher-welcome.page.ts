@@ -16,8 +16,8 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
     {
       id: 1,
       image: 'assets/svg/teacher-complete.svg',
-      heading: 'Welcome to Tutor Bunny.',
-      text: 'Submit the application form to join <br> Tutor bunny as a Teacher and reate courses <br> and upload study notes '
+      heading: 'Welcome to Tutor Bunny',
+      text: 'Submit the application form to join <br> Tutor Bunny as a teacher to create courses <br> and upload study notes '
     },
     {
       id: 2,
@@ -41,7 +41,7 @@ export class TeacherWelcomePage extends BasePage implements OnInit {
   }
 
   continue(){
-    this.nav.push('/teacher-profile/teacher-profile-edit');    
+    this.nav.push('/teacher-profile/teacher-profile-edit');
   }
 
   onSlideChanged() {
