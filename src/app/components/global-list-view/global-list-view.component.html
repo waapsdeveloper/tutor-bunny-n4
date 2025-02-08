@@ -1,4 +1,4 @@
-<div class="body-content ion-padding app-global-list-view">
+<!-- <div class="body-content ion-padding app-global-list-view">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -13,10 +13,42 @@
   </ng-container>
 
   <ng-template #noData>
-    <div class="centered-message">No items to display</div>
+    <div class="centered-message"></div>
   </ng-template>
 
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles"> </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-</div>
+</div> -->
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="body-content ion-padding app-global-list-view">
+    <ng-container *ngIf="list?.length > 0; else noData">
+      <ng-container *ngFor="let item of list; let last = last">
+        <div class="list-item">
+          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+        </div>
+        <div class="divider" *ngIf="!last"></div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="centered-message">No Data</div>
+    </ng-template>
+
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>
+
