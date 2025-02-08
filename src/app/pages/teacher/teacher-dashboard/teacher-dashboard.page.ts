@@ -13,10 +13,8 @@ import { ListTrialsService } from 'src/app/services/teacher/list-trials.service'
   styleUrls: ['./teacher-dashboard.page.scss'],
 })
 export class TeacherDashboardPage extends BasePage {
-
   user;
   pendingTrialsCoubt$ = 0;
-
 
   constructor(
     injector: Injector,
@@ -27,22 +25,19 @@ export class TeacherDashboardPage extends BasePage {
   ) {
     super(injector);
     this.listTrialsService.getList().subscribe((data) => {
-        this.checkNumberOfPendings(data)
+      this.checkNumberOfPendings(data);
     });
-
   }
 
-  checkNumberOfPendings(data){
-
-    console.log(data)
-
-    this.pendingTrialsCoubt$ = data ?? 0;
-
+  checkNumberOfPendings(data) {
+    console.log(data);
+    this.pendingTrialsCoubt$ = data.filter(
+      (element) => element.status === 'Pending'
+    ).length;
+    console.log("all " , this.pendingTrialsCoubt$)
   }
-  
 
   openProfile() {
-
     const user = this.users.getUser();
     const params = { email: user.email, showBack: true };
     this.nav.push('/teacher-profile', params);
@@ -52,7 +47,6 @@ export class TeacherDashboardPage extends BasePage {
     let res = await this.modals.present(CreateCoursePage, {}, '', 0.7);
 
     if (res.data.title) {
-
       const params = {
         backUrl: '/tabs/teacher-dashboard',
         title: res.data.title,
@@ -63,7 +57,6 @@ export class TeacherDashboardPage extends BasePage {
     }
   }
   gotoNotification() {
-
     this.nav.push('notifications', {
       backUrl: '/tabs/teacher-dashboard',
       showBack: true,
