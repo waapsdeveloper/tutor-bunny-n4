@@ -2,9 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CreateCoursePage } from './create-course/create-course.page';
 
-import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
-import { GlobalTrialsService } from 'src/app/services/global-trials.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserSqService } from 'src/app/services/sqlite/user-sq.service';
 import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
@@ -24,14 +22,21 @@ export class TeacherDashboardPage extends BasePage {
     injector: Injector,
     private listTrialsService: ListTrialsService,
     public globalCourses: GlobalCoursesService,
-    public globalTrials: GlobalTrialsService,
     public chats: ChatService,
     private userSq: UserSqService
   ) {
     super(injector);
-    this.listTrialsService.getCount().subscribe((data) => {
-      this.pendingTrialsCoubt$ = data ?? 0;
+    this.listTrialsService.getList().subscribe((data) => {
+        this.checkNumberOfPendings(data)
     });
+
+  }
+
+  checkNumberOfPendings(data){
+
+    console.log(data)
+
+    this.pendingTrialsCoubt$ = data ?? 0;
 
   }
   
