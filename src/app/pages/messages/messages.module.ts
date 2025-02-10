@@ -13,6 +13,7 @@ import { ImageViewModule } from './image-view/image-view.module';
 import { SdBbackBtnModule } from 'src/app/components/sd-bback-btn/sd-bback-btn.module';
 import { SdBontiBtnModule } from 'src/app/components/sd-bonti-btn/sd-bonti-btn.module';
 import { SdBsearchBtnModule } from 'src/app/components/sd-bsearch-btn/sd-bsearch-btn.module';
+import { TypingBoxModule } from './typing-box/typing-box.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,9 @@ import { SdBsearchBtnModule } from 'src/app/components/sd-bsearch-btn/sd-bsearch
     SdBsearchBtnModule,
     SdBontiBtnModule,
     MessageListModule,
-    ImageViewModule
+    ImageViewModule,
+
+    TypingBoxModule
   ],
   declarations: [MessagesPage]
 })
