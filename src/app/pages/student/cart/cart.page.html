@@ -1,13 +1,19 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="title" [backUrl]="" [showNotification]="false" [showSearch]="false" [parentHandleBack]="true" (parentBack)="parentBack($event)"></app-sd-header-top>
 </ion-header>
-<ion-content class="ion-padding">
+<ion-content>
 
   <swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }" class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()" >
     <ng-template swiperSlide>
-      <div class="cart-box-outer-689567 ">
-        <app-cart-list-item *ngFor="let item of list$" [item]="item" (removeCartitem)="removeCartitem(item)" (updateSelection)="updateSelection($event)"></app-cart-list-item>
-      </div>
+
+      <app-global-list-view style="width: 100%; height: auto;"
+        [list]="list$"
+        [itemTemplate]="itemTemplate">
+        <ng-template #itemTemplate let-item>
+          <app-cart-list-item [item]="item" (removeCartitem)="removeCartitem(item)" (updateSelection)="updateSelection($event)"></app-cart-list-item>
+        </ng-template>
+      </app-global-list-view>
+
     </ng-template>
     <ng-template swiperSlide>
       <app-payment-card-item></app-payment-card-item>

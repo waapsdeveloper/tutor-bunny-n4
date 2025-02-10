@@ -16,6 +16,7 @@ import { SwiperModule } from 'swiper/angular';
 import { PaymentCardItemModule } from './payment-card-item/payment-card-item.module';
 import { OrderDoneCardItemModule } from './order-done-card-item/order-done-card-item.module';
 import { SdButtonClearModule } from '../../../components/sd-button-clear/sd-button-clear.module';
+import { GlobalListViewModule } from 'src/app/components/global-list-view/global-list-view.module';
 
 @NgModule({
   imports: [
@@ -31,6 +32,8 @@ import { SdButtonClearModule } from '../../../components/sd-button-clear/sd-butt
     PaymentCardItemModule,
     OrderDoneCardItemModule,
     SdButtonClearModule,
+    GlobalListViewModule,
+
   ],
   declarations: [CartPage],
   schemas: [

@@ -17,13 +17,13 @@
     ></app-global-text-read>
 
     <!-- courses section -->
-    <app-my-courses
+    <app-my-courses *ngIf="courseData.list.length !== 0"
       [data]="courseData"
       (clickOpen)="clickOpenCourse($event)"
     ></app-my-courses>
-    <app-my-gallery [data]="galleryData"></app-my-gallery>
+    <app-my-gallery [data]="galleryData" *ngIf="galleryData.list.length !== 0"></app-my-gallery>
 
-    <app-my-ratings [data]="ratingData"></app-my-ratings>
+    <app-my-ratings [data]="ratingData" *ngIf="ratingData.list.length !== 0"></app-my-ratings>
   </div>
 </ion-content>
 <ion-footer
