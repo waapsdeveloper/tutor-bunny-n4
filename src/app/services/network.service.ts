@@ -350,6 +350,18 @@ export class NetworkService {
     );
   }
 
+  geTeacherTrialSingle(data) {
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'course/teacher-trial-single' + '?' + str,
+      null,
+      false,
+      false
+    );
+  }
+
+  
+
 
 
 

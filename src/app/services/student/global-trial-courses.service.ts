@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgrxCrudService } from '../abstract/ngrx-crud.service';
 import { NetworkService } from '../network.service';
 import { UsersService } from '../users.service';
-
+import Pusher from 'pusher-js';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +10,43 @@ export class GlobalTrialCoursesService extends NgrxCrudService<any> {
   
   ngrxModelName: string = 'TrialCoursesModel';
 
+  trialChannel: any;
+  private pusher: Pusher;
+
   constructor(private network: NetworkService, private users: UsersService) { 
     super();
+
+    const options = {
+      cluster: 'ap2',
+      forceTLS: true,
+    };
+    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
+    this.trialChannel = this.pusher.subscribe('trials-channel');
+
+  }
+
+  
+  unRegisterPusherEvent(){  
+    let user = this.users.getUser() as any;
+    if (this.pusher) {
+      this.pusher.unsubscribe('trials-channel');
+      this.pusher.disconnect();
+    }
+    this.trialChannel.unbind('trials-rec-' + user.id);
+  }
+
+  registerPusherEvent() {
+
+    let user = this.users.getUser() as any;
+    console.log('global-trials-pusher = trials-rec-' + user.id);
+    this.trialChannel.bind(
+      'trials-rec-' + user.id,
+      this.trialsChannelReceived.bind(this)
+    );
+  }
+
+  async trialsChannelReceived(obj: any) {
+    console.log( obj );
   }
 
   getGlobalStudentTrialFromApi(search = '', page = 1, perpage = 10) {
@@ -53,6 +88,8 @@ export class GlobalTrialCoursesService extends NgrxCrudService<any> {
       };
       let res = await this.network.cancelTrail(ite);
       console.log(res);
+
+      
 
       const trialo = res.trialo;
       delete trialo['course'];

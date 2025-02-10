@@ -45,7 +45,21 @@ export class ListTrialsService extends NgrxCrudService<any> {
     );
   }
 
-  async trialsChannelReceived($event: any) {
+  async trialsChannelReceived(obj: {trial_id: number}) {
+
+    let res = await this.network.geTeacherTrialSingle(obj);
+    console.log(res)
+
+    if(!res.result){
+      this.removeItem(obj.trial_id)
+      return;
+    }
+
+    this.setItem(res.result);
+
+
+    // this.updateTrailsList(res.trial);
+
 
     // const user = this.users.getUser();
     // if(user.role_id == 2){
