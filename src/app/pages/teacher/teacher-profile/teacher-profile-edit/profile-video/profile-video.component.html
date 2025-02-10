@@ -38,7 +38,13 @@
         </div>
       </ng-template>
     </ion-popover>
-    <div class="video-box-78522" (click)="videoInput.click()">
+
+    <div *ngIf="videoUrl" class="video-box-98563" (click)="videoInput.click()">
+      <video  [attr.src]="videoUrl" (error)="onVideoError($event)" style="width: 100%;">
+      </video>
+    </div>
+
+    <div *ngIf="!videoUrl" class="video-box-78522" (click)="videoInput.click()">
       <ion-icon name="checkmark-circle-outline" class="upload-check-icon"></ion-icon>
       <img src="../../../assets/svg/video.svg" alt="">
     </div>

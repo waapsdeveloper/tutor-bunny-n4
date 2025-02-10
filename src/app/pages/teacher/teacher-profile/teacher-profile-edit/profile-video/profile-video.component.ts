@@ -8,15 +8,17 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './profile-video.component.html',
   styleUrls: ['./profile-video.component.scss'],
 })
-export class ProfileVideoComponent  implements OnInit {
+export class ProfileVideoComponent implements OnInit {
 
   full_url: string = '';
 
   private _data: any;
+  videoUrl: any;
   @Input()
   set data(value: any) {
     this._data = value;
     this.updateDetails(value);
+    this.setData(value);
   }
 
   get data(): any {
@@ -25,9 +27,9 @@ export class ProfileVideoComponent  implements OnInit {
 
   constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService) { }
 
-  updateDetails(value){
+  updateDetails(value) {
 
-    if(value){
+    if (value) {
       let user_id = value.user_id;
       this.checkFileUploaded(user_id);
     }
@@ -35,19 +37,32 @@ export class ProfileVideoComponent  implements OnInit {
   }
 
   ngOnInit() {
-
-
-
   }
 
-  async checkFileUploaded(user_id: any){
+  async setData(value: any) {
+    if (!value) {
+      return;
+    }
+    console.log(value, 'aaaaaaaaaaaaaaaaaaaaaa');
+
+    let res = await this.network.getIntoVideoFile(value);
+    console.log(res);
+    this.videoUrl = res?.result?.full_url || null;
+  }
+
+  onVideoError(event: any) {
+    console.error('Video failed to load', event);
+    this.videoUrl = null; // Reset video if there's an error
+  }
+
+  async checkFileUploaded(user_id: any) {
 
     let obj = {
       user_id: user_id
     }
     const res = await this.network.getIntoVideoFile(obj);
-    console.log("video",res,user_id);
-    if(res.result && res.result.full_url){
+    console.log("video", res, user_id);
+    if (res.result && res.result.full_url) {
       this.full_url = res.result.full_url;
     }
 
@@ -63,7 +78,7 @@ export class ProfileVideoComponent  implements OnInit {
     for (const file of filesToUpload) {
       const fileType = file.type; // Get the MIME type of the file
 
-      if (file.size >  25 * 1048576) {
+      if (file.size > 25 * 1048576) {
         this.utility.presentFailureToast("File size must be less then 25 mb")
       } else {
 
@@ -78,7 +93,7 @@ export class ProfileVideoComponent  implements OnInit {
 
         const res = await this.network.uploadIntoVideoFile(data);
         console.log(res)
-        if(res.result && res.result.full_url){
+        if (res.result && res.result.full_url) {
           this.full_url = res.result.full_url;
         }
         // if(res.bool == true){
