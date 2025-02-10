@@ -12,35 +12,27 @@ export class ListTrialsService extends NgrxCrudService<any> {
   ngrxModelName: string = 'ListTrialsModel';
 
   trialChannel: any;
-  private pusher: Pusher;
 
   constructor(private network: NetworkService, private users: UsersService) { 
     super();
-
-    const options = {
-      cluster: 'ap2',
-      forceTLS: true,
-    };
-    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
-    this.trialChannel = this.pusher.subscribe('trials-channel');
+    
 
   }
 
-  unRegisterPusherEvent(){  
-    let user = this.users.getUser() as any;
-    if (this.pusher) {
-      this.pusher.unsubscribe('trials-channel');
-      this.pusher.disconnect();
+  unRegisterPusherEvent(pusher: Pusher, user_id: number){  
+    if (pusher) {
+      pusher.unsubscribe('trials-channel');
+      pusher.disconnect();
     }
-    this.trialChannel.unbind('trials-rec-' + user.id);
+    this.trialChannel.unbind('trials-rec-' + user_id);
   }
 
-  registerPusherEvent() {
+  registerPusherEvent(pusher: Pusher, user_id: number) {
 
-    let user = this.users.getUser() as any;
-    console.log('global-trials-pusher = trials-rec-' + user.id);
+    this.trialChannel = pusher.subscribe('trials-channel');
+    console.log('global-trials-pusher = trials-rec-' + user_id);
     this.trialChannel.bind(
-      'trials-rec-' + user.id,
+      'trials-rec-' + user_id,
       this.trialsChannelReceived.bind(this)
     );
   }

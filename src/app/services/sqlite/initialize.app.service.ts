@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetworkService } from '../network.service';
+import { PusherSingleService } from '../pusher-single.service';
 import { SQLiteService } from './sqlite.service';
 
 import { StorageService } from './storage.service';
@@ -12,10 +13,12 @@ export class InitializeAppService {
   constructor(
     private sqliteService: SQLiteService,
     private storageService: StorageService,
-    private network: NetworkService
+    private network: NetworkService,    
   ) {}
 
   async initializeApp() {
+
+
     await this.sqliteService.initializePlugin().then(async (ret) => {
       this.platform = this.sqliteService.platform;
       try {

@@ -94,9 +94,12 @@ export class TrialReqButtonComponent implements OnInit {
     //   return { label: 'Cancel trial', icon: 'assets/svg/trail.svg', action: 'presentAlert' };
     // }
 
-    // if (!trail && status !== 'Rejected') {
-    //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-    // }
+    if (this.trial && this.status == 'Rejected') {
+      // return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
+      label = 'Rejected';
+      icon = '';
+      action = 'removeTrail';
+    }
 
     // if (!trail && status === 'Rejected') {
     //   return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
@@ -109,7 +112,7 @@ export class TrialReqButtonComponent implements OnInit {
     }
 
     if (this.trial && this.status == 'Accepted') {
-      label = 'Trial Accepted';
+      label = 'Accepted';
       icon = '';
       action = '';
       // return { label: 'Trial Accepted', icon: '', action: '' };
@@ -143,6 +146,10 @@ export class TrialReqButtonComponent implements OnInit {
     if(!this.trial){
       this.requestTrail();
       return;
+    }
+
+    if(this.status == 'Rejected') {
+      this.globalTrialCoursesService.removeItem(this.trial.id);
     }
 
     if(this.status == 'Pending') {

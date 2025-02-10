@@ -27,7 +27,6 @@ import { TypingBoxModule } from './typing-box/typing-box.module';
     SdBontiBtnModule,
     MessageListModule,
     ImageViewModule,
-
     TypingBoxModule
   ],
   declarations: [MessagesPage]

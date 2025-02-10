@@ -11,16 +11,12 @@ import { ProfileService } from 'src/app/services/profile.service';
 // import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { ViewWillEnter } from '@ionic/angular';
+import { PusherSingleService } from 'src/app/services/pusher-single.service';
 // import { listTrialsService } from 'src/app/services/teacher/pending-trials.service';
 // import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 // import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 // import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
-import { ListChatsService } from 'src/app/services/list-chats.service';
-
-import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
-import { GlobalTrialCoursesService } from 'src/app/services/student/global-trial-courses.service';
-
 
 
 @Component({
@@ -36,6 +32,10 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
   constructor(
     injector: Injector,
+
+    private pusherService: PusherSingleService,
+
+
     private profilesService: ProfileService,
     private router: Router,
     // private iap: InitializeAppService,
@@ -44,9 +44,11 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
     // public globalTrials: GlobalTrialsService,
-    public listTrialsService: ListTrialsService,
+    
     public notificationService: NotificationsService,
     private fcm: FirebaseService,
+
+
 
     // subscription APIs
     // private listTrialsService: listTrialsService,
@@ -57,8 +59,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
 
     // new services
-    private listChatsService: ListChatsService,
-    private globalTrialCoursesService: GlobalTrialCoursesService
+    
 
 
 
@@ -74,6 +75,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
   async initialize() {
 
 
+    this.pusherService.initialize();
     this.loading = true;
 
     this.loadResolvers();
@@ -87,23 +89,16 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
     if(this.user.role_id == 3){
       this.teacher.registerPusherEvent(this.user.id);
-      this.listTrialsService.registerPusherEvent();
     }
 
-    console.log(this.user.role_id == 2)
-    if(this.user.role_id == 2){
-      this.globalTrialCoursesService.registerPusherEvent();
-    }
-
-
-
+    
 
 
 
     this.notificationService.registerPusherEvent();
 
     // new services
-    this.listChatsService.registerPusherEvent(this.user.id);
+    // this.listChatsService.registerPusherEvent(this.user.id);
 
 
 

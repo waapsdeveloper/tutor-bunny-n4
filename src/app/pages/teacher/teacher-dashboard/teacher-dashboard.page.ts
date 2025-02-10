@@ -24,9 +24,17 @@ export class TeacherDashboardPage extends BasePage {
     private userSq: UserSqService
   ) {
     super(injector);
+    this.initialize();
+    
+  }
+
+  async initialize(){
+
+    await this.listTrialsService.getGlobalTeacherTrialFromApi('', 1, 500);
     this.listTrialsService.getList().subscribe((data) => {
       this.checkNumberOfPendings(data);
     });
+
   }
 
   checkNumberOfPendings(data) {

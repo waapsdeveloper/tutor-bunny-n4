@@ -19,6 +19,20 @@
   min-width: 145px;
 }
 
+.rejected-colors-btn {
+  background-color: #ffffff !important;
+  border: 1px solid red;
+  color: red;
+  min-width: 145px;
+}
+
+.accepted-colors-btn {
+  background-color: #ffffff !important;
+  border: 1px solid green;
+  color: green;
+  min-width: 145px;
+}
+
 .less-screen-width-style {
   background: unset !important;
   border: unset !important;
