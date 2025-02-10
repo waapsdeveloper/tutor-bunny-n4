@@ -20,10 +20,12 @@ export class FavoritesPage {
   toogleView(view) {
     this.view = view;
     if (view == 'course') {
-      this.nav.push('favorites/fav-courses');
+      this.changeToActiveIndex(0);
+      // this.nav.push('favorites/fav-courses');
     }
     if (view == 'notes'){
-      this.nav.push('favorites/fav-material');
+      this.changeToActiveIndex(1);
+      // this.nav.push('favorites/fav-material');
     }
   }
 
