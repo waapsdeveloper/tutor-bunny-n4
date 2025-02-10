@@ -18,17 +18,13 @@
 </ion-content> -->
 
 <ion-content  [scrollY]="false">
-  <!-- <ion-router-outlet></ion-router-outlet> -->
 
   <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-inner-78967852" #slides (transitionEnd)="onSlideChanged()">
     <ng-template swiperSlide>
-      <app-student-dashborad-courses style="height: 100%; width: 100%;"></app-student-dashborad-courses>
+      <app-fav-courses style="height: 100%; width: 100%;"></app-fav-courses>
     </ng-template>
     <ng-template swiperSlide>
-      <app-student-dashborad-teachers style="height: 100%; width: 100%;"></app-student-dashborad-teachers>
-    </ng-template>
-    <ng-template swiperSlide>
-      <app-student-dashboard-study-material style="height: 100%; width: 100%;"></app-student-dashboard-study-material>
+      <app-fav-material style="height: 100%; width: 100%;"></app-fav-material>
     </ng-template>
   </swiper>
 
