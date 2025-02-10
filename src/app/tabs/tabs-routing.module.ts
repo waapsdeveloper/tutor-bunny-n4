@@ -65,7 +65,7 @@ const routes: Routes = [
       },
       {
         path: 'requests',
-        loadChildren: () => import('../pages/requests/requests.module').then( m => m.RequestsPageModule)
+        loadChildren: () => import('../pages/student/requests/requests.module').then( m => m.RequestsPageModule)
       },
       {
         path: 'search-box',
