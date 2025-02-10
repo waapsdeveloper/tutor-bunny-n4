@@ -19,6 +19,7 @@ import { GenericStudyMaterialCardModule } from 'src/app/components/generic-study
     GlobalListViewModule,
     GenericStudyMaterialCardModule
   ],
-  declarations: [FavMaterialPage]
+  declarations: [FavMaterialPage],
+  exports: [FavMaterialPage]
 })
 export class FavMaterialPageModule {}
