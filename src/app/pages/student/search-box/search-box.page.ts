@@ -7,7 +7,7 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
   templateUrl: './search-box.page.html',
   styleUrls: ['./search-box.page.scss'],
 })
-export class SearchBoxPage extends BasePage {
+export class SearchBoxPage extends BasePage implements OnInit{
 
 
   tagSearchData = {
@@ -35,7 +35,13 @@ export class SearchBoxPage extends BasePage {
     super(injector);
 
   }
-
+  ngOnInit(): void {
+    this.events.subscribe('filter-result',(data)=>{
+      console.log(data);
+      this.step = 3;
+      
+    })
+  }
   // click on recent search
   async openFromRecentSearch(item) {
 
