@@ -10,8 +10,9 @@
 </ion-header>
 <ion-content class="ion-padding ">
   <div class="body-content-68448">
-    <div class="input-title fs-14 roboto-medium">Weekly schedule in your local timezone <img src="../../assets/svg/add.svg" alt=""
-        (click)="addMoreSchedule()"></div>
+    <div class="input-title fs-14 roboto-regular" (click)="addMoreSchedule()" >Add weekly availability at your local time
+       <!-- <img src="../../assets/svg/add.svg" alt=""> -->
+      </div>
     <div class="dates-box-outer-65891" *ngFor="let item of schedule; let i = index">
       <ion-datetime-button presentation="date" placeholder="select date" datetime="startDatetime-{{i}}"
         *ngIf="courseType == 3" class="date-time-button-112"></ion-datetime-button>
