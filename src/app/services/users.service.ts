@@ -37,6 +37,7 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
 
   updateUserEvent(event: any){
     console.log("update user", event )
+    this.getLoginUserFromApi()
   }
 
   storeConfig(): NgSimpleStateStoreConfig {
