@@ -112,9 +112,9 @@ export class TrialReqButtonComponent implements OnInit {
     }
 
     if (this.trial && this.status == 'Accepted') {
-      label = 'Accepted';
+      label = 'Message';
       icon = '';
-      action = '';
+      action = 'chatMessage';
       // return { label: 'Trial Accepted', icon: '', action: '' };
     }
 
@@ -146,6 +146,10 @@ export class TrialReqButtonComponent implements OnInit {
     if(!this.trial){
       this.requestTrail();
       return;
+    }
+
+    if(this.status == 'Accepted') {
+      this.globalTrialCoursesService.removeItem(this.trial.id);
     }
 
     if(this.status == 'Rejected') {
