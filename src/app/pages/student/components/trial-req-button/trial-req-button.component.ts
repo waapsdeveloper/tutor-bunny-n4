@@ -7,6 +7,7 @@ import { GlobalTrialCoursesService } from 'src/app/services/student/global-trial
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { StudentWelcomeComponent } from '../../student-dashboard/student-welcome/student-welcome.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-trial-req-button',
@@ -19,6 +20,7 @@ export class TrialReqButtonComponent implements OnInit {
   trial: any;
   loading: boolean = false;
   course: any;
+  teacher;
 
   @Input() buttonType: 'small' | 'large' = 'small';
 
@@ -49,12 +51,12 @@ export class TrialReqButtonComponent implements OnInit {
     private profiles: ProfileService,
     private globalTrialCoursesService: GlobalTrialCoursesService,
     private modals: ModalService,
-    private nav: NavService
-
+    private nav: NavService,
+    private chats: ChatService
   ) {}
 
   ngOnInit(): void {
-    this.updateColumnClass(window.innerWidth);   
+    this.updateColumnClass(window.innerWidth);
   }
 
   initiateTrialStatus(value: any) {
@@ -70,6 +72,7 @@ export class TrialReqButtonComponent implements OnInit {
       }
 
       if(data){
+        console.log("Hello",data);
         this.trial = data;
         this.status = data.status;
         console.log(this.status);
@@ -149,7 +152,14 @@ export class TrialReqButtonComponent implements OnInit {
     }
 
     if(this.status == 'Accepted') {
-      this.globalTrialCoursesService.removeItem(this.trial.id);
+
+      let data = {
+        teacher_id: this.trial.teacher_id,
+        course_id: this.trial.course_id
+      }
+
+      this.chatMessage(data);
+      // this.globalTrialCoursesService.removeItem(this.trial.id);
     }
 
     if(this.status == 'Rejected') {
@@ -250,4 +260,50 @@ export class TrialReqButtonComponent implements OnInit {
       }
     }
   }
+
+  async chatMessage(data) {
+      let user = this.users.getUser();
+
+      let v = (await this.profiles.isProfileCompleted(user)) as any;
+      if (!v) {
+        await this.openWelcomeComponent();
+        return;
+      }
+
+      this.openChatWithData(data);
+  }
+
+  async openChatWithData(data) {
+    this.teacher = JSON.parse(localStorage.getItem('teacher'));
+    let user = this.users.getUser();
+    console.log(user);
+    const chatRoomId = (await this.chats.getChadRoomId(
+      user.id,
+      data.teacher_id
+    )) as number;
+
+    if (chatRoomId != -1) {
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId,
+      });
+    }
+  }
+
+  async openWelcomeComponent() {
+    let res = await this.modals.present(
+      StudentWelcomeComponent,
+      {},
+      'auto-height-modal',
+      1,
+      [0, 1],
+      false
+    );
+    let key = res.data.key;
+    if (key == 1) {
+      this.nav.push('/student-profile/student-profile-edit', {
+        showBack: true,
+      });
+    }
+  }
+
 }
