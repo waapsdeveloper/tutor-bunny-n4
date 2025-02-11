@@ -114,3 +114,17 @@
     }
   }
 }
+
+.less-screen-width-style {
+  background: unset !important;
+  border: unset !important;
+  justify-content: flex-start !important;
+  align-items: start !important;
+  padding-left: 0 !important;
+  padding-top: 10px;
+
+  .message-text {
+    visibility: hidden !important;
+  }
+}
+
