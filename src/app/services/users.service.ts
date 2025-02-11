@@ -6,6 +6,7 @@ import {
   NgSimpleStateStoreConfig,
 } from 'ng-simple-state';
 import { UtilityService } from './utility.service';
+import { EventsService } from './events.service';
 
 export interface UserModel {
   id: number;
@@ -27,8 +28,15 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
   private _user;
   image = null;
 
-  constructor(private network: NetworkService, private utility: UtilityService) {
+  constructor(private network: NetworkService, private utility: UtilityService, private events: EventsService) {
     super();
+
+    this.events.subscribe('user-update-via-pusher', this.updateUserEvent.bind(this));
+
+  }
+
+  updateUserEvent(event: any){
+    console.log("update user", event )
   }
 
   storeConfig(): NgSimpleStateStoreConfig {

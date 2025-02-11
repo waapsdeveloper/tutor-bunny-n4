@@ -16,13 +16,14 @@ export class SearchBoxPage extends BasePage {
   list: any[] = [];
   total = 0;
 
+  step = 1;
 
 
 
 
 
   searchList: any[] = [];
-  recentSearch: any[] = [];
+  
   searchCourses: any[] = [];
 
   search = '';
@@ -33,52 +34,10 @@ export class SearchBoxPage extends BasePage {
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
 
-
-  }
-
-  ionViewWillEnter(){
-    this.initialize();
-  }
-
-  async initialize() {
-
-    this.loadResolvers();
-    this.user = this.dataR.user;
-    let obj = {
-      user_id: this.user.id,
-    };
-    let res = await this.network.getRecentSearchs(obj);
-
-    if(res && res.result){
-      this.recentSearch = res.result;
-    }
-
-  }
-
-  async getSearchFromKeywordName(item){
-
-    this.search = item.keyword_name;
-
-    if(!this.search){
-      return;
-    }
-    let obj = {
-      search: this.search,
-      page: 1,
-      liked: false,
-    };
-    const res = (await this.network.getAllCourses(obj)) as any;
-    const data = res.result;
-    this.searchCourses = data.data;
-
-    //
-
   }
 
   // click on recent search
   async openFromRecentSearch(item) {
-
-
 
     if (!item.course_id) {
 
@@ -91,7 +50,11 @@ export class SearchBoxPage extends BasePage {
     }
   }
 
+  searchKeyword($event){
+    console.log($event);
 
+    
+  }
 
 
 

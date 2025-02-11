@@ -38,6 +38,8 @@ export class TeacherService {
   }
 
   userChannelReceived($event: any) {
-    this.events.publish('user-update-via-pusher', $event);
+    this.events.publish('user-update-via-pusher', $event);    
   }
+
+
 }

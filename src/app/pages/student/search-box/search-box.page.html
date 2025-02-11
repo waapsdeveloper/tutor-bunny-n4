@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border ion-no-shadow ion-header-bg">
+  <div class="profile-bc-header-678956">
+    <div class="bback-btn-7895 ion-activatable ripple-parent rectangle" (click)="back()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <img src="assets/svg/chv-back-black.svg" />
+    </div>
+    <div style="width: 100%;">
+      <div class="search-box-outer-89655">
+        <div class="search-box-input-outer">
+          <input type="text" placeholder="Search" type="search" style="background: white;" [(ngModel)]="search"
+            (keyup)="onKeyUp($event)" (search)="onSearch($event)" />
+          <img src="assets/icon/input-search-gray.svg" />
+        </div>
+        <div class="search-box-filter-outer" style="width: 24px;" (click)="gotoFilter()">
+          <img class="img-986675555" src="assets/icon/filter-icon.svg">
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class=" ion-padding">
+
+  <app-empty-search-view *ngIf="step === 1" (searchKeyword)="searchKeyword($event)"></app-empty-search-view>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</ion-content>

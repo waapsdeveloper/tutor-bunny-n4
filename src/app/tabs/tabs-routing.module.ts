@@ -69,7 +69,7 @@ const routes: Routes = [
       },
       {
         path: 'search-box',
-        loadChildren: () => import('../pages/search-box/search-box.module').then( m => m.SearchBoxPageModule)
+        loadChildren: () => import('../pages/student/search-box/search-box.module').then( m => m.SearchBoxPageModule)
       },
 
     ]
