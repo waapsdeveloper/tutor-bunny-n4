@@ -1,3 +1,6 @@
-<p>
-  tag-search-view works!
-</p>
+<div class="search-seggetion-box-78521" *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')">
+  <img src="assets/svg/searchs.svg" alt="">
+  <div class="search-seggetion-title-78522">
+    {{item.name}}
+  </div>
+</div>

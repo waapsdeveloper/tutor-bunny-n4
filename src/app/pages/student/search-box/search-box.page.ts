@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { initializeApp } from 'firebase/app';
 import { SearchFilterService } from 'src/app/services/search-filter.service';
 
 @Component({
@@ -11,10 +10,11 @@ import { SearchFilterService } from 'src/app/services/search-filter.service';
 export class SearchBoxPage extends BasePage {
 
 
-  page = 1;
-  last_page = -1
-  list: any[] = [];
-  total = 0;
+  tagSearchData = {
+    search: '',
+    tags: [],
+  }
+
 
   step = 1;
 
@@ -29,7 +29,7 @@ export class SearchBoxPage extends BasePage {
   search = '';
   user;
 
-  debounceTimer: any; // Debounce timer property
+  
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
@@ -66,38 +66,22 @@ export class SearchBoxPage extends BasePage {
 
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
-    this.search = event.target.value;
-    clearTimeout(this.debounceTimer);
-    this.debounceTimer = setTimeout(async () => {
-      let res = this.callAPiOnSerch(this.search);
-    }, 500);
-  }
 
-  callAPiOnSerch(search) {
-    return new Promise(async (resolve) => {
-      let obj = {
-        search: search,
-        page: 1,
-        liked: false,
-      };
-      let res = (await this.network.searchFromKeywords(obj)) as any;
-      console.log(res);
+    this.step = 2;
 
-      const data = res.result;
-      this.page = data.current_page
-      this.total = data.total;
-      this.list = data.data;
-
-
-
-
-      
-      // this.searchList = res.keywords;
-      // this.searchCourses = res.result.data;
-
-      resolve(true);
+    console.log(event);
+    this.events.publish('text-input-search-triggered', {
+      keyword: event.target.value,
     });
+    // this.tagSearchData = {
+    //   search: event.target.value,
+    //   tags: [],
+    // }
+
+    
+   
   }
+
 
   async onSearch(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -107,25 +91,14 @@ export class SearchBoxPage extends BasePage {
       keyword_name: searchTerm,
       keyword_id: null,
     };
-    let res = await this.network.setRecentSeach(obj);
-    const params = {
-      title: searchTerm,
-    };
-    this.nav.push('search-result', params);
+    // let res = await this.network.setRecentSeach(obj);
+    // const params = {
+    //   title: searchTerm,
+    // };
+    // this.nav.push('search-result', params);
   }
 
-  async setRecentSeach(item, type) {
-    // let obj = {
-    //   user_id: this.user.id,
-    //   keyword_name: item.name,
-    //   keyword_id: item.id,
-    // };
-    // let res = await this.network.setRecentSeach(obj);
-    const params = {
-      search: item.name // type == 'keyword' ? (item.keyword_name ?? '') : (item.title ?? ''),
-    };
-    this.nav.push('search-result', params);
-  }
+  
 
   back() {
     this.nav.pop();

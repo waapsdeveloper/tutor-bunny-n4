@@ -8,7 +8,8 @@
       <div class="search-box-outer-89655">
         <div class="search-box-input-outer">
           <input type="text" placeholder="Search" type="search" style="background: white;" [(ngModel)]="search"
-            (keyup)="onKeyUp($event)" (search)="onSearch($event)" />
+            (keyup)="onKeyUp($event)"  />
+            <!-- (search)="onSearch($event)" -->
           <img src="assets/icon/input-search-gray.svg" />
         </div>
         <div class="search-box-filter-outer" style="width: 24px;" (click)="gotoFilter()">
@@ -22,6 +23,7 @@
 <ion-content class=" ion-padding">
 
   <app-empty-search-view *ngIf="step === 1" (searchKeyword)="searchKeyword($event)"></app-empty-search-view>
+  <app-tag-search-view *ngIf="step === 2" ></app-tag-search-view>
 
 
 
