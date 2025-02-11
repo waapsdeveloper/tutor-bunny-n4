@@ -1,0 +1,15 @@
+.center-border {
+    position: relative;
+    padding-bottom: 10px; /* Adjust spacing */
+}
+
+.center-border::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%; /* Adjust the width of the colored part */
+    height: 2px; /* Thickness of border */
+    background-color: rgb(167, 156, 156); /* Color of the center part */
+    transform: translateX(-50%);
+}
