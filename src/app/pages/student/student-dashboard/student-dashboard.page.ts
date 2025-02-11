@@ -3,6 +3,7 @@ import {
   ViewChild,
   OnInit,
   ChangeDetectorRef,
+  AfterViewInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavService } from 'src/app/services/nav.service';
@@ -13,7 +14,7 @@ import { SwiperComponent } from 'swiper/angular';
   templateUrl: './student-dashboard.page.html',
   styleUrls: ['./student-dashboard.page.scss'],
 })
-export class StudentDashboardPage {
+export class StudentDashboardPage implements AfterViewInit {
 
 
   activeIndex = 0;
@@ -25,6 +26,12 @@ export class StudentDashboardPage {
 
 
   constructor(private nav: NavService, private cdr: ChangeDetectorRef) {}
+  
+  ngAfterViewInit(): void {
+    this.toogleView('course');
+  }
+
+
 
   toogleView(view) {
     this.view = view;
@@ -66,6 +73,20 @@ export class StudentDashboardPage {
 
   onSlideChanged() {
     this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+
+    if(this.activeIndex == 0){
+      this.toogleView('course');
+    }
+
+    if(this.activeIndex == 1){
+      this.toogleView('teacher');
+    }
+
+    if(this.activeIndex == 2){
+      this.toogleView('notes');
+    }
+
+
     this.cdr.detectChanges();
   }
 

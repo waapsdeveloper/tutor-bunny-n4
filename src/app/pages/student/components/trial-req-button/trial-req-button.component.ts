@@ -96,9 +96,9 @@ export class TrialReqButtonComponent implements OnInit {
 
     if (this.trial && this.status == 'Rejected') {
       // return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
-      label = 'Rejected';
-      icon = '';
-      action = 'removeTrail';
+      label = 'Free trial';
+      icon = 'assets/svg/transfer.svg';
+      action = 'requestTrail';
     }
 
     // if (!trail && status === 'Rejected') {
