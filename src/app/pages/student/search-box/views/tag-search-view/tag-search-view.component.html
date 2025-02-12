@@ -1,6 +1,8 @@
-<div class="search-seggetion-box-78521" *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')">
-  <img src="assets/svg/searchs.svg" alt="">
-  <div class="search-seggetion-title-78522">
-    {{item.name}}
+<div class="ch d-flex justify-content-center align-items-center " style="flex-direction: column; margin: auto; width: 90%; padding: 5px ">
+  <div class="search-seggetion-box-78521 d-flex center-border" style=" margin-bottom: 20px;" *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')">
+    <img style="margin-right: 5px;" src="assets/icon/input-search-gray.svg" height="20px" alt="">
+    <div class="search-seggetion-title-78522 " style="font-size: 20px; color: rgb(92, 87, 87);">
+      {{item.name}}
+    </div>
   </div>
 </div>

@@ -80,13 +80,17 @@
 
 
 .input-title {
-  font-size: 14px;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-bottom: 3px;
+    height: 40px;
+    color: black;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #45454540;
+    gap: 8px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
 .date-time-button-112 {

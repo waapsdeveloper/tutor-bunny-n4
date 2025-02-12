@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Injector, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from 'src/app/pages/student/student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
@@ -8,7 +8,7 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './generic-teacher-card.component.html',
   styleUrls: ['./generic-teacher-card.component.scss'],
 })
-export class GenericTeacherCardComponent extends BasePage {
+export class GenericTeacherCardComponent extends BasePage implements OnInit {
 
   flag;
   rating;
@@ -29,15 +29,32 @@ export class GenericTeacherCardComponent extends BasePage {
     this.teacherImage = value.image;
     this.flag = this.utility.getFlag(value);
   }
+
+  hostScreensize = -1;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+      this.updateColumnClass(event.target.innerWidth);
+    }
+
+    updateColumnClass(width: number) {
+      this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+    }
+
   subjects;
   user;
   displayName;
   teacherImage;
+
   constructor(injector: Injector,
     private chats : ChatService
   ) {
     super(injector);
     this.user = this.users.getUser();
+  }
+
+  ngOnInit(): void {
+    this.updateColumnClass(window.innerWidth);
   }
 
 
