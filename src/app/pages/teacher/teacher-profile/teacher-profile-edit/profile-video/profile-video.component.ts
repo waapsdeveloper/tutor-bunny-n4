@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalService } from 'src/app/services/basic/modal.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { IntoVideoGuideComponent } from '../into-video-guide/into-video-guide.component';
 
 @Component({
   selector: 'app-profile-video',
@@ -25,7 +27,7 @@ export class ProfileVideoComponent implements OnInit {
     return this._data;
   }
 
-  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService) { }
+  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService, private modals: ModalService) { }
 
   updateDetails(value) {
 
@@ -107,6 +109,10 @@ export class ProfileVideoComponent implements OnInit {
 
     }
 
+  }
+
+  openGuide(){
+    this.modals.present(IntoVideoGuideComponent)
   }
 
 }

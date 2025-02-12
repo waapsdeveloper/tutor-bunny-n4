@@ -26,6 +26,7 @@ import { TravelPoliceModule } from 'src/app/components/travel-police/travel-poli
 import { ProfileVideoModule } from './profile-video/profile-video.module';
 
 import { SwiperModule } from 'swiper/angular';
+import { IntoVideoGuideComponent } from './into-video-guide/into-video-guide.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +56,7 @@ import { SwiperModule } from 'swiper/angular';
     TravelPoliceModule,
     ProfileVideoModule
 ],
-  declarations: [TeacherProfileEditPage],
+  declarations: [TeacherProfileEditPage, IntoVideoGuideComponent],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
