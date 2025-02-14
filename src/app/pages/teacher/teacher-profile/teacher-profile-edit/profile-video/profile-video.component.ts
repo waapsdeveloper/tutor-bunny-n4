@@ -20,9 +20,11 @@ export class ProfileVideoComponent implements OnInit {
   full_url: string = '';
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  
+  videoUrl: any;
 
   private _data: any;
-  videoUrl: any;
+
   @Input()
   set data(value: any) {
     this._data = value;
@@ -31,7 +33,9 @@ export class ProfileVideoComponent implements OnInit {
   }
 
   get data(): any {
+
     return this._data;
+
   }
 
   constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService, private modals: ModalService, private events: EventsService) { }
