@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-filter-search-view',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterSearchViewComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private events: EventsService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.events.subscribe('tag-input-search-triggered', this.triggerSearchWithParams.bind(this));
+  }
+
+  triggerSearchWithParams(data: any){
+    console.log('triggerSearch', data);
+  }
 
 }
