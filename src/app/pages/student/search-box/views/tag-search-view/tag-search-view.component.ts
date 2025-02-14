@@ -49,7 +49,8 @@ export class TagSearchViewComponent  implements OnInit {
 
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(async () => {
-      let res = this.callAPiOnSerch(this.search);
+      let res = await this.callAPiOnSerch(this.search);
+      console.log(res)
 
     }, 500);
 

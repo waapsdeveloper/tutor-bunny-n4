@@ -59,6 +59,18 @@ export class SearchBoxPage extends BasePage implements OnInit{
   searchKeyword($event){
     console.log($event);
 
+    let v = $event.keyword;
+    if(v){
+      this.search = v;
+
+      this.step = 2;
+      console.log(event);
+      this.events.publish('text-input-search-triggered', {
+        keyword: v,
+      });
+
+    }
+
     
   }
 
