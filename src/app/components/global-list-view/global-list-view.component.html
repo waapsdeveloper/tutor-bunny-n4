@@ -41,7 +41,8 @@
     </ng-container>
 
     <ng-template #noData>
-      <div class="centered-message">No Data</div>
+      <ion-spinner></ion-spinner>
+      <!-- <div class="centered-message">No Data</div> -->
     </ng-template>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
