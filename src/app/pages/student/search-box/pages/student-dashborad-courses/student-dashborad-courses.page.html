@@ -1,0 +1,33 @@
+<!-- <ion-content class="" >
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="std-box-outer-689567 ">
+    <div class="sb-content-7895">
+      <div *ngFor="let item of list$">
+        <app-generic-course-card [item]="item" (openDetails)="openDetails(item)"></app-generic-course-card >
+        <div class="line"></div>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+
+</ion-content> -->
+
+<!-- <ion-content> -->
+  <app-global-list-view
+    [list]="list"
+    [itemTemplate]="itemTemplate"
+    (refresh)="handleRefresh($event)"
+    (loadMore)="onIonInfinite($event)">
+    <ng-template #itemTemplate let-item>
+      <app-generic-course-card
+        [item]="item"
+        (openDetails)="openDetails(item)">
+      </app-generic-course-card>
+    </ng-template>
+  </app-global-list-view>
+<!-- </ion-content> -->
