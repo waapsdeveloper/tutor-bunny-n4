@@ -11,7 +11,8 @@
 <div class="big-action-button-8574"
      [ngClass]="{'big-action-button-8575': buttonType === 'large'}"
      *ngIf="buttonType === 'small' || buttonType === 'large'"
-     [class.pending-colors-btn]="status === 'Pending'"
+     [class.pending-colors-btn]="status === 'Pending'"     
+     
      [class.less-screen-width-style]="hostScreensize <= 400"
      (click)="handleButtonClick()">
 

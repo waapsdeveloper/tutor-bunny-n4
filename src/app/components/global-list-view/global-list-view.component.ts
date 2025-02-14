@@ -37,6 +37,9 @@ export class GlobalListViewComponent implements OnInit {
   onIonInfinite(event: any) {
     console.log('this this this');
     this.loadMore.emit(event);
+    setTimeout(() => {
+      event.target.complete(); // Stop the refresher animation
+    }, 1000); 
   }
 
 

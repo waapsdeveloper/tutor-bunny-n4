@@ -11,6 +11,7 @@ import { SdHeaderTopModule } from 'src/app/components/sd-header-top/sd-header-to
 import { GenericCourseCardModule } from 'src/app/components/generic-course-card/generic-course-card.module';
 import { RequestItemModule } from './request-item/request-item.module';
 import { NoDataModule } from 'src/app/components/no-data/no-data.module';
+import { GlobalListViewModule } from "../../../components/global-list-view/global-list-view.module";
 
 @NgModule({
   imports: [
@@ -21,8 +22,9 @@ import { NoDataModule } from 'src/app/components/no-data/no-data.module';
     SdHeaderTopModule,
     GenericCourseCardModule,
     RequestItemModule,
-    NoDataModule
-  ],
+    NoDataModule,
+    GlobalListViewModule
+],
   declarations: [RequestsPage]
 })
 export class RequestsPageModule {}

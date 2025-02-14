@@ -128,7 +128,7 @@ const routes: Routes = [
   },
   {
     path: 'requests',
-    loadChildren: () => import('./pages/requests/requests.module').then( m => m.RequestsPageModule)
+    loadChildren: () => import('./pages/student/requests/requests.module').then( m => m.RequestsPageModule)
   },
   {
     path: 'teacher-course-list',
@@ -136,11 +136,11 @@ const routes: Routes = [
   },
   {
     path: 'search-box',
-    loadChildren: () => import('./pages/search-box/search-box.module').then( m => m.SearchBoxPageModule)
+    loadChildren: () => import('./pages/student/search-box/search-box.module').then( m => m.SearchBoxPageModule)
   },
   {
     path: 'search-filter',
-    loadChildren: () => import('./pages/search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
+    loadChildren: () => import('./pages/student/search-box/search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
   },
   {
     path: 'chat-requests',
@@ -150,10 +150,10 @@ const routes: Routes = [
     path: 'reviews-by-student',
     loadChildren: () => import('./pages/teacher/reviews-by-student/reviews-by-student.module').then( m => m.ReviewsByStudentPageModule)
   },
-  {
-    path: 'search-result',
-    loadChildren: () => import('./pages/search-result/search-result.module').then( m => m.SearchResultPageModule)
-  },
+  // {
+  //   path: 'search-result',
+  //   loadChildren: () => import('./pages/search-result/search-result.module').then( m => m.SearchResultPageModule)
+  // },
   {
     path: 'teacher-welcome',
     loadChildren: () => import('./pages/teacher/teacher-welcome/teacher-welcome.module').then( m => m.TeacherWelcomePageModule)

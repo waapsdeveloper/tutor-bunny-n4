@@ -13,12 +13,19 @@
   </div>
 </div>
 
-<ion-content>
-  <ion-router-outlet></ion-router-outlet>
-</ion-content>
-
-
-
 <!-- <ion-content>
-
+  <ion-router-outlet></ion-router-outlet>
 </ion-content> -->
+
+<ion-content  [scrollY]="false">
+
+  <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-inner-78967852" #slides (transitionEnd)="onSlideChanged()">
+    <ng-template swiperSlide>
+      <app-fav-courses style="height: 100%; width: 100%;"></app-fav-courses>
+    </ng-template>
+    <ng-template swiperSlide>
+      <app-fav-material style="height: 100%; width: 100%;"></app-fav-material>
+    </ng-template>
+  </swiper>
+
+</ion-content>

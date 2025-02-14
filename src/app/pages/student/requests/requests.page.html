@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [showBack]="true" [title]="pageTitle" [showFav]="false" [showSearch]="false"
+    [showNotification]="false" [goToFav]="false"></app-sd-header-top>
+</ion-header>
+
+<ion-content>
+
+  <app-global-list-view
+    [list]="list"
+    [itemTemplate]="itemTemplate"
+    (refresh)="refreshPage($event)"
+    (loadMore)="loadMore($event)">
+    <ng-template #itemTemplate let-item>
+      <app-generic-course-card
+        [item]="item"
+        (openDetails)="openDetails(item)">
+      </app-generic-course-card>
+    </ng-template>
+  </app-global-list-view>
+
+</ion-content>

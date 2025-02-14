@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { notificationCountResolver } from 'src/app/resolvers/notificationCount.resolver';
 import { cartListResolver } from 'src/app/resolvers/student/cartList.resolver';
+import { courseListResolver } from 'src/app/resolvers/student/courseList.resolver';
 import { favoritesCountResolver } from 'src/app/resolvers/student/favoritesCount.resolver';
+import { listTrialsResolver } from 'src/app/resolvers/student/trialList.resolver';
 
 import { StudentDashboardPage } from './student-dashboard.page';
 
@@ -14,7 +16,9 @@ const routes: Routes = [
     resolve: {
       cart: cartListResolver,
       notificationCount: notificationCountResolver,
-      favorites: favoritesCountResolver,
+      favorites: favoritesCountResolver,      
+      courseList: courseListResolver,
+      listTrials: listTrialsResolver
     },
 
     // children: [

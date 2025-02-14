@@ -22,6 +22,7 @@ import { GlobalListViewModule } from 'src/app/components/global-list-view/global
     GenericCourseCardModule
 
   ],
-  declarations: [FavCoursesPage]
+  declarations: [FavCoursesPage],
+  exports: [FavCoursesPage]
 })
 export class FavCoursesPageModule { }

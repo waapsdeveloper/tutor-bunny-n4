@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { log } from 'node:console';
 import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
@@ -29,6 +30,8 @@ export class StpPageVideoBoxComponent {
     if (!value) {
       return;
     }
+    console.log(value,'aaaaaaaaaaaaaaaaaaaaaa');
+
     let res = await this.network.getIntoVideoFile(value);
     console.log(res);
     this.videoUrl = res?.result?.full_url || null;

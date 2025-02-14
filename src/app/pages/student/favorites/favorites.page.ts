@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NavService } from 'src/app/services/nav.service';
+import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-favorites',
@@ -8,7 +9,10 @@ import { NavService } from 'src/app/services/nav.service';
 })
 export class FavoritesPage {
 
-  constructor(private nav: NavService) { }
+  activeIndex = 0;
+  @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
+
+  constructor(private nav: NavService, private cdr: ChangeDetectorRef) { }
 
   // start
   view = 'course';
@@ -16,11 +20,24 @@ export class FavoritesPage {
   toogleView(view) {
     this.view = view;
     if (view == 'course') {
-      this.nav.push('favorites/fav-courses');
+      this.changeToActiveIndex(0);
+      // this.nav.push('favorites/fav-courses');
     }
     if (view == 'notes'){
-      this.nav.push('favorites/fav-material');
+      this.changeToActiveIndex(1);
+      // this.nav.push('favorites/fav-material');
     }
+  }
+
+  
+
+  changeToActiveIndex(index) {
+    this.slides?.swiperRef?.slideTo(index);
+  }
+
+  onSlideChanged() {
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+    this.cdr.detectChanges();
   }
   
 }

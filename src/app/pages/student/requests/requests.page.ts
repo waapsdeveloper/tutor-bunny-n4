@@ -66,4 +66,8 @@ export class RequestsPage extends BasePage {
       resolve(true);
     });
   }
+
+  openDetails(item: any) {
+    this.nav.push('./student-course-detail', { course_id: item.id });
+  }
 }

@@ -35,7 +35,7 @@ firebase.initializeApp(environment.firebaseConfig);
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     provideNgSimpleState({
       enableDevTool: isDevMode(),
-      enableLocalStorage: true,
+      // enableLocalStorage: true,
       persistentStorage: 'local'
     })
 

@@ -12,7 +12,6 @@ const routes: Routes = [
     component: TeacherDashboardPage,
     resolve: {
       user: userResolver,
-      listTrials: listTrialsResolver,
       requestList: requestListResolver
     },
   },

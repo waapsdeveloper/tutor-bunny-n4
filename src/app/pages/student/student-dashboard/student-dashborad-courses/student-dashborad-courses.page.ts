@@ -32,11 +32,11 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.globalCoursesService.getList().subscribe((res) => {
-    //   this.list = res;
-    // });
+    this.globalCoursesService.getList().subscribe((res) => {
+      this.list = res;
+    });
     // console.log('list', this.list);
-    this.resetAndFetch();
+    // this.resetAndFetch();
   }
 
   openDetails(item: any) {

@@ -10,6 +10,7 @@ import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // import { Stripe } from '@capacitor-community/stripe';
 // import { environment } from 'src/environments/environment';
 import { Keyboard } from '@capacitor/keyboard';
+import { PusherSingleService } from './services/pusher-single.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class AppComponent {
 
   isModalOpen: any;
   constructor(
+    private pusherService: PusherSingleService,
     private fcm: FirebaseService,
     public platform: Platform,
     private router: Router,
@@ -29,6 +31,7 @@ export class AppComponent {
     private modalController: ModalController,
     private zone: NgZone,
     private iap: InitializeAppService,
+
   ) {
 
     platform.ready().then(async () => {
@@ -45,6 +48,7 @@ export class AppComponent {
     }
 
     await this.iap.initializeApp();
+    this.pusherService.initialize();
 
     if (Capacitor.getPlatform() != 'web') {
       this.fcm.setupFMC();
