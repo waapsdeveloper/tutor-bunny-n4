@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
-import { NetworkService } from './network.service';
+import { NetworkService } from '../../../services/network.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchFilterService {
 
+  private selectedKeyword: any = null;
+  searchText: any = null;
+
+
+
+
   formData = {
+    search: null,
     keywords: null,
     language: null,
     mode_type: null,
@@ -30,6 +37,18 @@ export class SearchFilterService {
   page = 0;
   last_page = -1;
   constructor(private network: NetworkService) {}
+
+
+
+  getSelectedKeyword() {
+    return this.selectedKeyword;
+  }
+  setSelectedKeyword(keyword) {
+    this.selectedKeyword = keyword;
+  }
+
+
+
 
   updateFormData(value: any, key: string): void {
     this.formData[key] = value;
