@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -11,7 +12,10 @@ import { UtilityService } from 'src/app/services/utility.service';
 export class ProfileVideoComponent  implements OnInit {
 
   full_url: string = '';
-
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  @Input('needed') needed = true;
+  isRequired:boolean = true;
   private _data: any;
   @Input()
   set data(value: any) {
@@ -20,13 +24,15 @@ export class ProfileVideoComponent  implements OnInit {
   }
 
   get data(): any {
+
     return this._data;
+
   }
 
-  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService) { }
+  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService,private events: EventsService) { }
 
   updateDetails(value){
-
+console.log(this.errorText);
     if(value){
       let user_id = value.user_id;
       this.checkFileUploaded(user_id);
@@ -35,9 +41,123 @@ export class ProfileVideoComponent  implements OnInit {
   }
 
   ngOnInit() {
+    this.events.subscribe(
+      'teacher-profile-first-screen-submit-call',
+      (formData: any) => {
+        if (this.key == 'title' || this.key == 'description') {
+          return;
+        }
+
+        let v = formData[this.key];
+        if (!v || v == '') {
+          this.isRequired = true;
+          setTimeout(() => {
+            this.isRequired = false;
+          }, 5000);
+        }
+      },
+      false
+    );
 
 
+    this.events.subscribe(
+      'teacher-course-first-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        if (this.key == 'description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The Detail field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+    this.events.subscribe(
+      'teacher-profile-second-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+        if (this.key == 'description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+            return;
+          }
 
+          if (v && v.length < 400) {
+            this.isRequired = true;
+            this.errorText =
+              'The About field should have minimum 400 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+
+    this.events.subscribe(
+      'teacher-profile-third-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+
+        if (this.key == 'experience_description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+            return;
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The experience field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
+    this.events.subscribe(
+      'teacher-profile-third-screen-submit-call',
+      (formData: any) => {
+        let v = formData[this.key];
+
+        if (this.key == 'qualification_description') {
+          if (!v || v == '') {
+            this.isRequired = true;
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+          if (v && v.length < 250) {
+            this.isRequired = true;
+            this.errorText =
+              'The Education field should have minimum 250 characters';
+            setTimeout(() => {
+              this.isRequired = false;
+            }, 5000);
+          }
+        }
+      },
+      false
+    );
   }
 
   async checkFileUploaded(user_id: any){
