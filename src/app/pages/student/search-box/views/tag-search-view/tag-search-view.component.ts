@@ -19,9 +19,13 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
     super(injector);
   }
 
+
+
   async fetchList(page: number, search: string, status: string): Promise<any> {
-    const data = await this.filter.getSelectedKeyword();
-    const courseids = (data as any[]).map((item) => item.course_id);
+    const data = await this.filter.getItemByKeyPromise('search')
+    console.log(data)
+    
+    const courseids = []; // (data as any[]).map((item) => item.course_id);
 
     let obj = {
       ids: courseids,

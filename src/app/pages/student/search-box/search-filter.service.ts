@@ -27,8 +27,8 @@ export interface GlobalSearchFormModel {
   providedIn: 'root',
 })
 export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearchFormModel> {
-
-
+  
+  
   ngrxModelName: string = 'GlobalSearchFormModel';
 
   storeConfig(): NgSimpleStateStoreConfig {
@@ -220,9 +220,17 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
   getTravelPolicyId() {
     return this.selectState((state) => state.travel_policy_id);
   }
-
-
+  reset() {
+    this.setState(() => this.initialState());
+  }
   
+  getItemByKeyPromise(key: string): Promise<any | undefined> {
+    return new Promise((resolve) => {
+      this.selectState((state) => state[key]).subscribe((data) => {
+        resolve(data);
+      });
+    });
+  }
 
 
   
