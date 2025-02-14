@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
-import { SearchFilterService } from 'src/app/services/search-filter.service';
+import { SearchFilterService } from 'src/app/pages/student/search-box/search-filter.service';
 
 @Component({
   selector: 'app-search-box',
@@ -90,18 +90,21 @@ export class SearchBoxPage extends BasePage implements OnInit{
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
 
-    this.step = 2;
+    this.search = event.target.value;
 
-    console.log(event);
-    this.events.publish('text-input-search-triggered', {
-      keyword: event.target.value,
-    });
-    // this.tagSearchData = {
-    //   search: event.target.value,
-    //   tags: [],
-    // }
+    if(this.step === 2){
+      this.events.publish('text-input-search-triggered', {
+        text: event.target.value,
+      });
+    } else {
+      this.step = 2;
 
-    
+      setTimeout( () => {
+        this.events.publish('text-input-search-triggered', {
+          text: event.target.value,
+        });
+      }, 500)
+    }
    
   }
 
