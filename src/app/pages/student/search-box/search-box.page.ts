@@ -9,23 +9,7 @@ import { SearchFilterService } from 'src/app/pages/student/search-box/search-fil
 })
 export class SearchBoxPage extends BasePage implements OnInit{
 
-
-  tagSearchData = {
-    search: '',
-    tags: [],
-  }
-
-
   step = 1;
-
-
-
-
-
-  searchList: any[] = [];
-  
-  searchCourses: any[] = [];
-
   search = '';
   user;
 
@@ -35,26 +19,26 @@ export class SearchBoxPage extends BasePage implements OnInit{
     super(injector);
 
   }
-  ngOnInit(): void {
-    this.events.subscribe('filter-result',(data)=>{
-      console.log(data);
-      this.step = 3;
-      
-    })
+  async ngOnInit(){
+    this.step = 1;    
+    this.search = '';
+    this.user = await this.users.getUser();
+    this.filter.reset();
+
   }
   // click on recent search
-  async openFromRecentSearch(item) {
+  // async openFromRecentSearch(item) {
 
-    if (!item.course_id) {
+  //   if (!item.course_id) {
 
-    } else {
-      const params = {
-        id: item.id,
-        backUrl: '/tabs/student-dashboard',
-      };
-      this.nav.push('student-course-detail', params);
-    }
-  }
+  //   } else {
+  //     const params = {
+  //       id: item.id,
+  //       backUrl: '/tabs/student-dashboard',
+  //     };
+  //     this.nav.push('student-course-detail', params);
+  //   }
+  // }
 
   searchKeyword($event){
     console.log($event);
@@ -89,22 +73,23 @@ export class SearchBoxPage extends BasePage implements OnInit{
 
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
+    this.step == 2;
+    this.filter.setSearch(event.target.value);
 
-    this.search = event.target.value;
+    // if(this.step === 2){
 
-    if(this.step === 2){
-      this.events.publish('text-input-search-triggered', {
-        text: event.target.value,
-      });
-    } else {
-      this.step = 2;
+    //   this.events.publish('text-input-search-triggered', {
+    //     text: event.target.value,
+    //   });
+    // } else {
+    //   this.step = 2;
 
-      setTimeout( () => {
-        this.events.publish('text-input-search-triggered', {
-          text: event.target.value,
-        });
-      }, 500)
-    }
+    //   setTimeout( () => {
+    //     this.events.publish('text-input-search-triggered', {
+    //       text: event.target.value,
+    //     });
+    //   }, 500)
+    // }
    
   }
 
