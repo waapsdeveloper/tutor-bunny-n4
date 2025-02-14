@@ -43,6 +43,8 @@ export class PusherSingleService {
   async initialize() {
     let user = await this.getUser();
 
+    
+
     if (!user) {
       return;
     }
