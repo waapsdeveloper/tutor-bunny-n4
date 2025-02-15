@@ -15,10 +15,10 @@ import { BasePage } from 'src/app/base-page/base-page';
   styleUrls: ['./my-courses.component.scss'],
 })
 export class MyCoursesComponent {
-  
 
-  
-  private _data: any; 
+
+
+  private _data: any;
   @Input()
   set data(value: any) {
     this._data = value;
@@ -37,10 +37,10 @@ export class MyCoursesComponent {
   @Output() clickOpen = new EventEmitter<any>()
 
   constructor() {
-    
+
   }
 
-  
+
   updateUserDetails(value: any){
 
     if (value) {
@@ -50,7 +50,7 @@ export class MyCoursesComponent {
 
   }
 
-  
+
   // async updateUserDetails2(data) {
 
   //   return new Promise(async (resolve) => {
