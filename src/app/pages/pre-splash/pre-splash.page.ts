@@ -9,7 +9,6 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { ProfileService } from 'src/app/services/profile.service';
 // import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
-import { TeacherService } from 'src/app/services/teacher.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { PusherSingleService } from 'src/app/services/pusher-single.service';
 // import { listTrialsService } from 'src/app/services/teacher/pending-trials.service';
@@ -38,7 +37,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     private profilesService: ProfileService,
     private router: Router,
     // private iap: InitializeAppService,
-    public teacher: TeacherService,
+    
     public chats: ChatService,
     public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
@@ -84,13 +83,6 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     this.chats.registerPusherEvent(this.user.id);
     // this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
-
-    if(this.user.role_id == 3){
-      this.teacher.registerPusherEvent(this.user.id);
-    }
-
-    
-
 
 
     this.notificationService.registerPusherEvent();

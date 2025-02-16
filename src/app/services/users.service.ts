@@ -70,6 +70,10 @@ export class UsersService extends NgSimpleStateBaseRxjsStore<UserModel> {
     localStorage.removeItem('NgSimpleState::userStore');
 }
 
+  getUserStatus(){
+    return this.selectState( (state) => state.status );
+  }
+
   getUserState(){
     return this.selectState( (state) => state );
   }

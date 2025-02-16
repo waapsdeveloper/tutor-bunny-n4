@@ -4,6 +4,7 @@ import { GlobalTrialCoursesService } from './student/global-trial-courses.servic
 import { ListTrialsService } from './teacher/list-trials.service';
 
 import Pusher from 'pusher-js';
+import { TeacherService } from './teacher/teacher.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class PusherSingleService {
 
     // teacher service
     public listTrialsService: ListTrialsService,
+    public teacher: TeacherService,
 
     // student service
     private globalTrialCoursesService: GlobalTrialCoursesService
@@ -55,6 +57,7 @@ export class PusherSingleService {
     console.log("W8965468465", this.pusher)
 
     if (user.role_id == 3) {
+      this.teacher.registerPusherEvent(this.pusher, user.id);
       this.listTrialsService.registerPusherEvent(this.pusher, user.id);
     }
 

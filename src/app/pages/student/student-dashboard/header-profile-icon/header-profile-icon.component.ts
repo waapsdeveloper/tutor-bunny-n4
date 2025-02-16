@@ -17,7 +17,7 @@ export class HeaderProfileIconComponent {
 
   constructor(private users: UsersService, private profiles: ProfileService ) { 
 
-    this.users.getUserState().subscribe( data => {
+    this.users.getUser().subscribe( data => {
       this.user$ = data;
       this.initialize(data);
     });

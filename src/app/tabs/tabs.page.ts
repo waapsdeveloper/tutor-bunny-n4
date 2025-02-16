@@ -6,7 +6,6 @@ import { GlobalCoursesService } from '../services/global-courses.service';
 import { GlobalTrialsService } from '../services/global-trials.service';
 import { IonTabs } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
-import { TeacherService } from '../services/teacher.service';
 import { StudentWelcomeComponent } from '../pages/student/student-dashboard/student-welcome/student-welcome.component';
 import { CreateCoursePage } from '../pages/teacher/teacher-dashboard/create-course/create-course.page';
 
@@ -32,7 +31,6 @@ export class TabsPage extends BasePage implements OnInit {
     public globalCourses: GlobalCoursesService,
     public globalTrials: GlobalTrialsService,
     public notificationService: NotificationsService,
-    public teacher: TeacherService,
     public chats: ChatService
   ) {
     super(injector);
