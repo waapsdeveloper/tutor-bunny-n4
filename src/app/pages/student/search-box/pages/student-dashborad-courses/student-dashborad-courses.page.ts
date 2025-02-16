@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
@@ -9,6 +9,20 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
 export class StudentDashboradCoursesPage extends ListPage implements OnInit {
+
+  private _keyword: any;
+  @Input()
+  set keyword(value: any) {
+    this._keyword = value;
+    this.resetAndFetch();
+  }
+  get keyword(): any {
+    return this._keyword;
+  }
+
+
+
+
   constructor(
     injector: Injector,
     public globalCoursesService: GlobalCoursesService
@@ -18,10 +32,12 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     let obj = {
+      type: "course",
+      keyword_id: this.keyword.id,
       page: page,
       liked: false,
     };
-    let res = await this.network.getAllCourses(obj);
+    let res = await this.network.getGlobalSearch(obj);
 
     return {
       list: res.result.data,
@@ -31,11 +47,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
     };
   }
 
-  ngOnInit() {
-    this.globalCoursesService.getList().subscribe((res) => {
-      this.list = res;
-    });
-    // console.log('list', this.list);
+  ngOnInit() {    
     // this.resetAndFetch();
   }
 

@@ -23,7 +23,7 @@
 <ion-content class="">
 
   <app-empty-search-view *ngIf="step === 1" (searchKeyword)="searchKeyword($event)"></app-empty-search-view>
-  <app-tag-search-view *ngIf="step === 2" ></app-tag-search-view>
+  <app-tag-search-view *ngIf="step === 2" (selectKeyword)="searchKeyword($event)" ></app-tag-search-view>
   <app-filter-search-view *ngIf="step === 3"></app-filter-search-view>
 
 

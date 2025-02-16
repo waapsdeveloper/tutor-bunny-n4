@@ -9,27 +9,30 @@ import { SearchFilterService } from '../search-filter.service';
 })
 export class SearchFilterPage extends BasePage implements OnInit {
 
-  countryId = null;
+  formData$: any;
+
   formType = 'filter';
   currency = "$"
+  
   user;
 
   constructor(injector: Injector, public filters: SearchFilterService, ) {
     super(injector)
-    localStorage.setItem('formtype', this.formType)
-
   }
 
   ngOnInit() {
+
     this.loadResolvers();
     this.user = this.dataR.user;
-
     this.currency = this.user?.student?.country?.currency_symbol ?? "$";
-    this.countryId = this.filters.getCountryId();
+    this.filters.getFormData().subscribe(data => {
+      this.formData$ = data;
+    });
+    
   }
 
   result(value: any, key: string): void {
-    // this.filters.updateFormData(value, key);
+    this.filters.updateFormData(value, key);
   }
 
   async submit(){

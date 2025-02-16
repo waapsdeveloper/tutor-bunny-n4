@@ -1,8 +1,8 @@
 
 
 <app-global-list-view [list]="list" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
-  <ng-template #itemTemplate let-item>
-    <ion-item (openDetails)="openDetails(item)" detail="true">
+  <ng-template #itemTemplate let-item >
+    <ion-item (click)="openDetails(item)" detail="true" lines="none">
       <ion-icon slot="start" name="search-outline"></ion-icon>
       <ion-label class="search-seggetion-title-78522 roboto-regular">{{item.name}}</ion-label>
     </ion-item>

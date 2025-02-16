@@ -12,18 +12,31 @@ export class FilterSearchViewComponent implements OnInit {
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   view = 'course';
   activeIndex = 0;
-  constructor(private events: EventsService, private nav: NavService,private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  selectedKeyword: any = null;
+
+  constructor(private events: EventsService, private nav: NavService,private cdr: ChangeDetectorRef) {}
+  ngOnInit(): void {
+    console.log('filter-search-view');
+
     this.events.subscribe(
       'tag-input-search-triggered',
       this.triggerSearchWithParams.bind(this)
     );
+
+
   }
 
-  triggerSearchWithParams(data: any) {
-    console.log('triggerSearch', data);
+  triggerSearchWithParams(params) {
+    console.log('triggerSearch', params);
+    this.selectedKeyword = params;
+    // this.updateViewDetails({
+    //   search: params.text,
+    // });
+    // this.cdr.detectChanges();
   }
+
+  
 
   toogleView(view) {
     this.view = view;

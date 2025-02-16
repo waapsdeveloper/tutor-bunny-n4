@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injector } from '@angular/core';
+import { Component, OnInit, Input, Injector, Output, EventEmitter } from '@angular/core';
 import { ListPage } from 'src/app/base-page/list-page';
 import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
@@ -10,35 +10,46 @@ import { SearchFilterService } from '../../search-filter.service';
   styleUrls: ['./tag-search-view.component.scss'],
 })
 export class TagSearchViewComponent extends ListPage implements OnInit {
-
   
+
+  @Output() selectKeyword: EventEmitter<any> = new EventEmitter<any>();
+
+
   constructor(
     injector: Injector,
     public filter: SearchFilterService
   ) {
     super(injector);
+
+    this.events.subscribe(
+      'text-input-search-triggered',
+      this.triggerSearchWithParams.bind(this)
+    );
+  }
+
+  triggerSearchWithParams(data: any) {
+    console.log('triggerSearch', data);
+    this.search = data.text;
+    this.resetAndFetch();
+    // this.fetchList(1, data.text, '');
   }
 
 
-
   async fetchList(page: number, search: string, status: string): Promise<any> {
-    const data = await this.filter.getItemByKeyPromise('search')
-    console.log(data)
-    
-    const courseids = []; // (data as any[]).map((item) => item.course_id);
-
+   
     let obj = {
-      ids: courseids,
+      search: search,
       page: page,
+      perpage: 20
     };
 
-    let res = await this.network.favCourseByIds(obj);
+    let res = await this.network.getKeywords(obj);
     console.log(res)
     return {
-      list: res.result.data,
-      page: res.result.current_page,
-      last_page: res.result.last_page,
-      total: res.result.total,
+      list: res.data,
+      page: res.current_page,
+      last_page: res.last_page,
+      total: res.total,
     };
   }
 
@@ -47,7 +58,10 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
   }
 
   openDetails(item: any) {
-    this.nav.push('student-course-detail', { course_id: item.id });
+    console.log('openDetails', item);
+    this.selectKeyword.emit(item);
+    // this.nav.push('student-course-detail', { course_id: item.id });
+
   }
 
 

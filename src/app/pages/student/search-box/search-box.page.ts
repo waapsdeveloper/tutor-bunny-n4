@@ -44,7 +44,7 @@ export class SearchBoxPage extends BasePage implements OnInit{
     console.log($event);
 
     let id = $event.id;
-    let v = $event.keyword;
+    let v = $event.name;
     if(v){
       this.search = v;
       this.step = 3;
@@ -52,10 +52,9 @@ export class SearchBoxPage extends BasePage implements OnInit{
       setTimeout( () => {
         this.events.publish('tag-input-search-triggered', {
           id: id,
-          keyword: v,
+          name: v,
         });
-      }, 1000)
-      
+      }, 500)
       
 
     }
@@ -66,30 +65,28 @@ export class SearchBoxPage extends BasePage implements OnInit{
 
 
 
-
   gotoFilter() {
     this.nav.push('search-filter');
   }
 
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
-    this.step == 2;
+
+    let v = event.target.value;
+    console.log(v);
+    if(!v || !v.length || v == ''){
+      this.step = 1;      
+    } else {
+      this.step = 2;
+    }
+
     this.filter.setSearch(event.target.value);
 
-    // if(this.step === 2){
-
-    //   this.events.publish('text-input-search-triggered', {
-    //     text: event.target.value,
-    //   });
-    // } else {
-    //   this.step = 2;
-
-    //   setTimeout( () => {
-    //     this.events.publish('text-input-search-triggered', {
-    //       text: event.target.value,
-    //     });
-    //   }, 500)
-    // }
+    setTimeout( () => {
+      this.events.publish('text-input-search-triggered', {
+        text: event.target.value,
+      });
+    }, 500)
    
   }
 

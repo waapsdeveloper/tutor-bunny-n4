@@ -37,7 +37,7 @@ export class EmptySearchViewComponent  implements OnInit {
 
     let obj = {
       id: item.id,
-      keyword: item.keyword_name,
+      name: item.keyword_name,
     };
     // emit keyword search to parent object
     this.searchKeyword.emit(obj);

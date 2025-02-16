@@ -1156,6 +1156,11 @@ export class NetworkService {
     return this.httpGetResponse('student/wallet', null, false, false);
   }
 
+  getGlobalSearch(params: any) {
+    const str = this.serialize(params);
+    return this.httpGetResponse('global-search' + '?' + str, null, false, false);
+  }
+
   serialize = (obj: any) => {
     const str: any[] = [];
     for (const p in obj) {
