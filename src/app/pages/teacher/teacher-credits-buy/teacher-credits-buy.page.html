@@ -70,9 +70,12 @@
 <ion-footer class="checkout-footer checkout-border-top">
   <div class="ion-padding d-flex flex-column">
     <div class="d-flex flex-column gap-8 ion-padding" >
-
       <div class="d-flex flex-row justify-content-between">
-        <div>Order</div>
+        <div>Credit </div>
+        <div>{{selectedCoin?.level}}</div>
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <div>Subtotal</div>
         <div>{{currency_symbol}} {{total}}</div>
       </div>
       <div class="d-flex flex-row justify-content-between">
@@ -80,7 +83,7 @@
         <div>{{currency_symbol}} {{tax}}</div>
       </div>
       <div class="d-flex flex-row justify-content-between">
-        <div>Subtotal</div>
+        <div>Total</div>
         <div class="roboto-bold fs-24">{{currency_symbol}} {{ payAmount }}</div>
       </div>
 
