@@ -33,7 +33,7 @@ export class TeacherDashboardHeaderComponent implements OnInit {
 
   ngOnInit(): void {    
 
-    // const user = this.users.getUser();
+    const user = this.users.getUser();
     // this.setRawUserData(user);
     this.users.getUserState().subscribe((data) => {
       console.log("ujyhtreter", data)

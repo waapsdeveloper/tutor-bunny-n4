@@ -1,7 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
-import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 
 @Component({
   selector: 'app-student-dashborad-teachers',
@@ -12,7 +10,6 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   
   constructor(
     injector: Injector,
-    public globalTeacherService: GlobalTeacherService
   ) {
     super(injector);
   }
@@ -37,10 +34,7 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
     };
   }
 
-  ngOnInit() {
-    // this.globalTeacherService.getList().subscribe((res) => {
-    //   this.list = [...res];
-    // });
+  ngOnInit() {    
     this.resetAndFetch();
   }
 

@@ -18,7 +18,7 @@ export class SdTextareaAboutComponent implements OnInit {
   @Input('modernInput') modernInput = false;
 
   isRequired = false;
-  isInputActive: boolean = true;
+  isInputActive: boolean = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   constructor(private events: EventsService) {}
   ngOnInit() {

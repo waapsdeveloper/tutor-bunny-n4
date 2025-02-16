@@ -1,11 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
-import { TeacherQualificationComponent } from './teacher-qualification/teacher-qualification.component';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import * as moment from 'moment';
-import { ChatService } from 'src/app/services/chat.service';
-import { StudentWelcomeComponent } from '../../student/student-dashboard/student-welcome/student-welcome.component';
 
 @Component({
   selector: 'app-teacher-profile',

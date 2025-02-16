@@ -396,6 +396,8 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
     const res = await this.network.getChatRoomById(roomId, obj);
     //
 
+    this.chats = this.chats ?? [];
+
     const findIndex = this.chats.findIndex((x) => x.chat_room_id == roomId);
     if (findIndex != -1 && res.length > 0) {
       this.chats[findIndex] = res[0];

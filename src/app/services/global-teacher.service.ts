@@ -1,9 +1,4 @@
 import { Injectable } from '@angular/core';
-
-import {
-  NgSimpleStateBaseRxjsStore,
-  NgSimpleStateStoreConfig,
-} from 'ng-simple-state';
 import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 import { NgrxCrudService } from './abstract/ngrx-crud.service';

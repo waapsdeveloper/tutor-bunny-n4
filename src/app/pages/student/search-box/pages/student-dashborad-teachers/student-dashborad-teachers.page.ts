@@ -1,7 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
-import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 
 @Component({
   selector: 'app-student-dashborad-teachers',
@@ -10,11 +8,22 @@ import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 })
 export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   
+  keyword: any;
   constructor(
     injector: Injector,
-    public globalTeacherService: GlobalTeacherService
   ) {
     super(injector);
+    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+  }
+
+  triggerSearchWithParams(params) {
+    console.log('triggerSearch', params);
+    this.keyword = params;
+    this.resetAndFetch();
+    // this.updateViewDetails({
+    //   search: params.text,
+    // });
+    // this.cdr.detectChanges();
   }
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
@@ -22,12 +31,13 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
     const user = this.users.getUser();
 
     let obj = {
-      search: search,
+      type: "teacher",
+      keyword_id: this.keyword.id,
       page: page,
       user_id: user.id,
     };
 
-    let res = await this.network.getAllTeachers(obj);
+    let res = await this.network.getGlobalSearch(obj);
 
     return {
       list: res.result.data,
@@ -38,9 +48,6 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.globalTeacherService.getList().subscribe((res) => {
-    //   this.list = [...res];
-    // });
     this.resetAndFetch();
   }
 

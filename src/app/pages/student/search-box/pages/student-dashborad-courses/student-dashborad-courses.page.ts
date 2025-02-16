@@ -14,11 +14,9 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   constructor(
     injector: Injector,
-    public globalCoursesService: GlobalCoursesService
+    // public globalCoursesService: GlobalCoursesService
   ) {
     super(injector);
-
-    console.log('filter-search-view');
     this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
   }
 
@@ -41,7 +39,6 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
       type: "course",
       keyword_id: this.keyword.id,
       page: page,
-      liked: false,
     };
     let res = await this.network.getGlobalSearch(obj);
     console.log('fetchList', res);

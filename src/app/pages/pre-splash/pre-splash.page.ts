@@ -14,7 +14,6 @@ import { ViewWillEnter } from '@ionic/angular';
 import { PusherSingleService } from 'src/app/services/pusher-single.service';
 // import { listTrialsService } from 'src/app/services/teacher/pending-trials.service';
 // import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
-// import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 // import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 
@@ -53,7 +52,6 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     // subscription APIs
     // private listTrialsService: listTrialsService,
     // private globalStudyMaterialService: GlobalStudyMaterialService,
-    // private globalTeacherService: GlobalTeacherService,
     // private globalFavCoursesService: GlobalFavCoursesService,
     // private globalFavMaterialService: GlobalFavMaterialService,
 
@@ -121,7 +119,6 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     // this.listTrialsService.getPendingTrialsFromApi('', 1);
     // this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
     // // this.globalCourses.getGlobalCoursesFromApi('', 1);
-    // this.globalTeacherService.getGlobalTeachersFromApi('', 1);
     // this.globalFavCoursesService.getGlobalFavCoursesFromApi();
     // this.globalFavMaterialService.getGlobalFavMaterialFromApi();
 

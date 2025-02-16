@@ -9,6 +9,7 @@ import { SearchFilterService } from 'src/app/pages/student/search-box/search-fil
 })
 export class SearchBoxPage extends BasePage implements OnInit{
 
+  showFilterStep = false;
   step = 1;
   search = '';
   user;
@@ -66,6 +67,7 @@ export class SearchBoxPage extends BasePage implements OnInit{
 
 
   gotoFilter() {
+    // this.showFilterStep = !this.showFilterStep;
     this.nav.push('search-filter');
   }
 

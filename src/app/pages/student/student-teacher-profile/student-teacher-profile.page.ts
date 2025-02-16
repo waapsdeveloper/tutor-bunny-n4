@@ -3,8 +3,6 @@ import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
-import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
-import { log } from 'node:console';
 
 @Component({
   selector: 'app-student-teacher-profile',
@@ -67,7 +65,6 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
   constructor(
     injector: Injector,
-    public globalTeacherService: GlobalTeacherService,
     private chats: ChatService
   ) {
     super(injector);
@@ -88,11 +85,6 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
 
     if (this.params.teacher_id) {
       this.teacherId = this.params.teacher_id;
-      // this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
-      //   this.teacher$ = data;
-      //   this.callApi(this.teacher$);
-      // });
-
       let res = await this.network.teacherById(this.teacherId);
       console.log('hello', res.result);
       this.teacher$ = res.result;
