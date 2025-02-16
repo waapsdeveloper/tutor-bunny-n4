@@ -2,7 +2,6 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
-import { ChatService } from 'src/app/services/chat.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 // import { GlobalTrialsService } from 'src/app/services/global-trials.service';
@@ -38,8 +37,6 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     private router: Router,
     // private iap: InitializeAppService,
     
-    public chats: ChatService,
-    public chatService: ChatService,
     public globalCourses: GlobalCoursesService,
     // public globalTrials: GlobalTrialsService,
     
@@ -80,7 +77,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
 
     
-    this.chats.registerPusherEvent(this.user.id);
+    
     // this.globalTrials.registerPusherEvent();
     this.globalCourses.registerPusherEvent();
 

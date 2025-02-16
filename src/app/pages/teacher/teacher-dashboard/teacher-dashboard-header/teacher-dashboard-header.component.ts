@@ -35,11 +35,14 @@ export class TeacherDashboardHeaderComponent implements OnInit {
 
     const user = this.users.getUser();
     this.setRawUserData(user);
-    this.users.getUserStatus().subscribe((data) => {
+    this.users.getUserState().subscribe((data) => {
 
+      if(data.id == -1){
+        return;
+      }
       console.log("user status", data)
-    //   this.user$ = data;
-    //   this.setUserData(this.user$);
+      this.user$ = data;
+      this.setUserData(this.user$);
     });
   }
 

@@ -62,7 +62,7 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   async logout() {
 
     this.events.publish('clear-all-services-data');
-    this.chats.unRegisterPusherEvent();
+    // this.chats.unRegisterPusherEvent();
     this.trails.unRegisterPusherEvent();
     this.courses.unRegisterPusherEvent();
     this.notification.unRegisterPusherEvent();

@@ -28,8 +28,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
   historicalEvent = 'randomHistory';
   unreadCount = 0;
 
-  private pusher: Pusher;
-
   review_course = {
     user_id: null,
     course_id: null,
@@ -47,43 +45,23 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
   ) {
     super();
 
-    const options = {
-      cluster: 'ap2',
-      forceTLS: true,
-    };
-
-    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
-    this.chatChannel = this.pusher.subscribe('chats-channel');
-    this.presenceChannel = this.pusher.subscribe('presence-chat-room');
-
-    this.presenceChannel.bind('pusher:subscription_succeeded', (members) => {
-      console.log('Users in channel:', members);
-    });
-
-    this.presenceChannel.bind('pusher:member_added', (member) => {
-      console.log('New user joined:', member.info);
-    });
-
-    this.presenceChannel.bind('pusher:member_removed', (member) => {
-      console.log('User left:', member.info);
-    });
-
-    this.events.subscribe(
-      'clear-all-services-data',
-      () => {
-        this.user = null;
-        this.role_id = null;
-        this.chats = [];
-        this.count = 0;
-        if (this.pusher) {
-          this.pusher.unsubscribe('chats-channel');
-          this.pusher.unsubscribe('presence-chat-room');
-          this.pusher.disconnect();
-        }
-        this.events.unsubscribe('message-received-via-pusher');
-      },
-      false
-    );
+    
+    // this.events.subscribe(
+    //   'clear-all-services-data',
+    //   () => {
+    //     this.user = null;
+    //     this.role_id = null;
+    //     this.chats = [];
+    //     this.count = 0;
+    //     if (this.pusher) {
+    //       this.pusher.unsubscribe('chats-channel');
+    //       this.pusher.unsubscribe('presence-chat-room');
+    //       this.pusher.disconnect();
+    //     }
+    //     this.events.unsubscribe('message-received-via-pusher');
+    //   },
+    //   false
+    // );
 
     // this.events.subscribe('clear-chat-data', () => {
     //   this.days = null;
@@ -151,39 +129,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
     });
   }
 
-  unRegisterPusherEvent() {
-    let user = this.users.getUser() as any;
-
-    if (this.pusher) {
-      this.pusher.unsubscribe('chats-channel');
-      this.pusher.disconnect();
-    }
-    this.chatChannel.unbind('message-rec-' + user.id);
-
-    this.events.unsubscribe('message-received-via-pusher');
-  }
-
-  registerPusherEvent(id: any) {
-    this.chatChannel.bind(
-      'message-rec-' + id,
-      this.chatChannelReceived.bind(this)
-    );
-    
-  }
-
-  chatChannelReceived($event: any) {
-    this.events.publish('message-received-via-pusher', $event);
-
-    let data = $event;
-    if (data.chat_room_id) {
-      this.setChatRoomListItemInfo(data.chat_room_id);
-    }
-
-    this.getUnreadMsgCount();
-
-    // this.getchatList();
-    // this.getUnreadMsgCount();
-  }
 
   reviewCoursebyChat(data) {
     this.review_course.course_id = data.course_id;

@@ -261,6 +261,7 @@ export class TeacherProfileEditPage
     if(res){
       let user = res.user;
       this.users.setUser(user);
+      this.events.publish('user-update-via-pusher', user)
     }
     if (res && res.message) {
       if (this.edit) {

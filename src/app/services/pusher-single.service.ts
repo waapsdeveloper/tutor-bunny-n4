@@ -15,7 +15,7 @@ export class PusherSingleService {
 
   constructor(
     // common services
-    // private listChatsService: ListChatsService,
+    private listChatsService: ListChatsService,
 
     // teacher service
     public listTrialsService: ListTrialsService,
@@ -55,6 +55,9 @@ export class PusherSingleService {
       return;
     }
     console.log("W8965468465", this.pusher)
+
+    // common pusher registers
+    this.listChatsService.registerPusherEvent(this.pusher, user.id);
 
     if (user.role_id == 3) {
       this.teacher.registerPusherEvent(this.pusher, user.id);

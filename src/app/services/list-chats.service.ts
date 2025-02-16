@@ -6,33 +6,22 @@ import { NgrxCrudService } from './abstract/ngrx-crud.service';
 import Pusher from 'pusher-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListChatsService extends NgrxCrudService<any> {
-
   ngrxModelName: string = 'ListChatsModel';
 
-  chats;  
+  chats;
   unreadCount = 0;
 
-  private pusher: Pusher;
   chatChannel: any;
 
-  constructor(private network: NetworkService, private users: UsersService) { 
-    super()
-
-    const options = {
-      cluster: 'ap2',
-      forceTLS: true,
-    };
-
-    this.pusher = new Pusher('a45efbe1a2e731b6dbfb', options);
-    this.chatChannel = this.pusher.subscribe('chats-channel');
-
+  constructor(private network: NetworkService, private users: UsersService) {
+    super();
   }
 
   getchatsFromApi(search = '', page = 1, liked = false) {
-    return new Promise(async (resolve) => {  
+    return new Promise(async (resolve) => {
       const user = this.users.getUser();
       const role_id = user.role_id;
 
@@ -52,64 +41,66 @@ export class ListChatsService extends NgrxCrudService<any> {
     });
   }
 
-  async getUnreadMsgCount(): Promise<number> { 
+  async getUnreadMsgCount(): Promise<number> {
     let res = await this.network.getUnreadChat({});
     this.unreadCount = res.unread_count;
 
-    this.setState( state => ({
+    this.setState((state) => ({
       ...state,
-      unread_count: res.unread_count
+      unread_count: res.unread_count,
     }));
-    
+
     return this.unreadCount;
   }
 
   setLastMessageOfChatList(obj: { chat_room_id: number; message: string }) {
     this.setState((state) => {
-      const exists = state.list.some((item: any) => item.chat_room_id === obj.chat_room_id);
-      
+      const exists = state.list.some(
+        (item: any) => item.chat_room_id === obj.chat_room_id
+      );
+
       if (!exists) {
         // If no matching chat room, return state unchanged
         return state;
       }
-  
+
       return {
         ...state,
-        list: state.list.map((item: any) => 
-          item.chat_room_id === obj.chat_room_id 
-            ? { ...item, last_message: obj.message } // Update last_message for the matching chat
-            : item // Return unchanged for others
+        list: state.list.map(
+          (item: any) =>
+            item.chat_room_id === obj.chat_room_id
+              ? { ...item, last_message: obj.message } // Update last_message for the matching chat
+              : item // Return unchanged for others
         ),
       };
     });
   }
 
-  unRegisterPusherEvent() {
-    let user = this.users.getUser() as any;
-
-    if (this.pusher) {
-      this.pusher.unsubscribe('chats-channel');
-      this.pusher.disconnect();
+  unRegisterPusherEvent(pusher: Pusher, user_id: number) {
+    if (pusher) {
+      pusher.unsubscribe('chats-channel');
+      pusher.disconnect();
     }
-    this.chatChannel.unbind('message-rec-' + user.id);
+
+    this.chatChannel.unbind('message-rec-' + user_id);
   }
 
-  registerPusherEvent(id: any) {
+  registerPusherEvent(pusher: Pusher, user_id: number) {
+    this.chatChannel = pusher.subscribe('chats-channel');
     this.chatChannel.bind(
-      'message-rec-' + id,
+      'message-rec-' + user_id,
       this.chatChannelReceived.bind(this)
     );
   }
 
   chatChannelReceived($event: any) {
-
     let data = $event;
-    console.log("data-chat", data);
+    console.log('data-chat', data);
     if (data.chat_room_id) {
-      this.setLastMessageOfChatList({ 
+      this.setLastMessageOfChatList({
         chat_room_id: data.chat_room_id,
-        message: data.message 
-      })
+        message: data.message,
+      });
     }
 
     this.getUnreadMsgCount();
@@ -117,5 +108,4 @@ export class ListChatsService extends NgrxCrudService<any> {
     // this.getchatList();
     // this.getUnreadMsgCount();
   }
-
 }
