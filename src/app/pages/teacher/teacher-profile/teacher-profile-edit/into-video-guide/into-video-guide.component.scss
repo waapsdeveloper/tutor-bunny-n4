@@ -1,71 +1,104 @@
-.sd-input-box-outer-675315 {
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Limits the max width */
+  margin: 0 auto; /* Centers the container */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: auto; /* Maintains aspect ratio */
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.play-button {
+  position: absolute;
+  bottom: 25px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.guidelines {
+  padding: 16px;
+  background: white;
+  border-radius: 10px;
+  margin: 16px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.guidelines h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+ion-item {
+  --padding-start: 0;
+  font-size: 16px;
+}
+.check-round {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+
+ion-list {
+  --ion-item-border-width: 0; /* Removes item separators */
+  --ion-item-divider-border-width: 0;
+}
+
+ion-item {
+  --background: transparent; /* Ensures no background */
+  --inner-border-width: 0; /* Removes inner lines */
+  --border-width: 0;
+  --padding-start: 0;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .video-container {
+    max-width: 100%; /* Allows it to shrink for smaller screens */
+  }
+
+  .play-button {
+    width: 40px;
     height: 40px;
-    border-radius: 8px;
-    background: #ffffff;
-  
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 8px;
-    padding-right: 8px;
-    gap: 8px;
-    width: 100% !important;
   }
-  
-  .sd-input-box-input-675315 {
-    background: none;
-    border: none;
-    outline: none; /* Remove default focus outline */
-    flex-grow: 1;
-  }
-  
-  .sd-input-box-input-675315:focus {
-    /* Additional styles when input is focused */
-    /* You can customize this block based on your requirements */
-    box-shadow: none; /* Remove any focus box-shadow */
-  }
-  
-  .add-icon{
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding: 20px;
-  }
-  .top-header-78956 {
-    background: #ffffff;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 16px;
-  
-    .header-left-items-78956 {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 16px;
-  
-      .header-title {
-        color: #393939;
-        font-size: 20px;
-      }
-    }
-  
-    .header-right-items-78956 {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 8px;
-    }
-  }
-  
-  .image {
-    height: 18px;
-  }
-  
+}

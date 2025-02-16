@@ -1,15 +1,52 @@
 <ion-header>
-  <div class="top-header-78956">
-    <div class="header-left-items-78956">
-      <div class="header-title  roboto-regular ">VIdeo uide</div>
+  <div class="top-header">
+    <div class="header-left-items">
+      <div class="header-title">Video Guide</div>
     </div>
-    <div class="header-right-items-78956" (click)="back()">
-      <img class="image" src="../../assets/svg/cancel.svg" alt="">
+    <div class="header-right-items" (click)="back()">
+      <img class="close-icon" src="../../assets/svg/cancel.svg" alt="Close">
     </div>
   </div>
 </ion-header>
 
 <ion-content>
-  
+  <div class="video-container">
+    <img class="video-thumbnail" src="../../assets/sample-video-thumbnail.png" alt="Sample Video">
+    <div class="play-button">
+      <img src="assets/svg/vedio.svg" alt="video placeholder">
+    </div>
+  </div>
+
+
+
+  <div class="guidelines">
+    <h2>Guidelines</h2>
+    <ion-list>
+      <ion-item>
+        <img class="check-round" src="../../assets/svg/check-round.svg">
+        <ion-label>The video should be captured in the landscape mode.</ion-label>
+      </ion-item>
+      <ion-item>
+        <img class="check-round" src="../../assets/svg/check-round.svg">
+        <ion-label>The intro video can be recorded in any language with
+          clear voice without any background noises.</ion-label>
+      </ion-item>
+      <ion-item>
+        <img class="check-round" src="../../assets/svg/check-round.svg">
+        <ion-label>The video should be in good quality, properly lighted.</ion-label>
+      </ion-item>
+      <ion-item>
+        <img class="check-round" src="../../assets/svg/check-round.svg">
+        <ion-label class="fs-14">In the video mention your name, your country,
+          educational qualification, certification, teaching
+          experience, skills/specialization, the languages you
+          speak, hobbies etc.</ion-label>
+      </ion-item>
+      <ion-item>
+        <img class="check-round" src="../../assets/svg/check-round.svg" alt="Close">
+        <ion-label>The video length should be less than 60 seconds.</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>
