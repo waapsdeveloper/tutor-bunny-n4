@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { NetworkService } from './network.service';
 import { NgrxCrudService } from './abstract/ngrx-crud.service';
 import Pusher from 'pusher-js';
+import { ListRequestsService } from './teacher/list-requests.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class ListChatsService extends NgrxCrudService<any> {
 
   chatChannel: any;
 
-  constructor(private network: NetworkService, private users: UsersService) {
+  constructor(private network: NetworkService, private users: UsersService, private listRequestsService: ListRequestsService) {
     super();
   }
 
@@ -104,6 +105,9 @@ export class ListChatsService extends NgrxCrudService<any> {
     }
 
     this.getUnreadMsgCount();
+
+    // when chat received, update message request 
+    this.listRequestsService.getRequests(1, '')
 
     // this.getchatList();
     // this.getUnreadMsgCount();
