@@ -18,11 +18,7 @@ export class FilterSearchViewComponent implements OnInit {
   constructor(private events: EventsService, private nav: NavService,private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     console.log('filter-search-view');
-
-    this.events.subscribe(
-      'tag-input-search-triggered',
-      this.triggerSearchWithParams.bind(this)
-    );
+    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
 
 
   }

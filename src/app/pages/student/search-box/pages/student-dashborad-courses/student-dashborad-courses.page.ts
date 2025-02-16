@@ -10,24 +10,30 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 })
 export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
-  private _keyword: any;
-  @Input()
-  set keyword(value: any) {
-    this._keyword = value;
-    this.resetAndFetch();
-  }
-  get keyword(): any {
-    return this._keyword;
-  }
-
-
-
+  keyword: any;
 
   constructor(
     injector: Injector,
     public globalCoursesService: GlobalCoursesService
   ) {
     super(injector);
+
+    console.log('filter-search-view');
+    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit called');
+  }
+
+  triggerSearchWithParams(params) {
+    console.log('triggerSearch', params);
+    this.keyword = params;
+    this.resetAndFetch();
+    // this.updateViewDetails({
+    //   search: params.text,
+    // });
+    // this.cdr.detectChanges();
   }
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
@@ -38,6 +44,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
       liked: false,
     };
     let res = await this.network.getGlobalSearch(obj);
+    console.log('fetchList', res);
 
     return {
       list: res.result.data,
@@ -45,10 +52,6 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
       last_page: res.result.last_page,
       total: res.result.total,
     };
-  }
-
-  ngOnInit() {    
-    // this.resetAndFetch();
   }
 
   openDetails(item: any) {
