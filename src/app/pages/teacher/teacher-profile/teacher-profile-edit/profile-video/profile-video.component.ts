@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
+import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -12,10 +13,18 @@ import { IntoVideoGuideComponent } from '../into-video-guide/into-video-guide.co
 })
 export class ProfileVideoComponent implements OnInit {
 
+  @Input('key') key = '';
+  @Input('errorText') errorText = '';
+  @Input('needed') needed = true;
+  isRequired = false;  
   full_url: string = '';
 
-  private _data: any;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  
   videoUrl: any;
+
+  private _data: any;
+
   @Input()
   set data(value: any) {
     this._data = value;
@@ -24,10 +33,12 @@ export class ProfileVideoComponent implements OnInit {
   }
 
   get data(): any {
+
     return this._data;
+
   }
 
-  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService, private modals: ModalService) { }
+  constructor(private utility: UtilityService, private users: UsersService, private network: NetworkService, private modals: ModalService, private events: EventsService) { }
 
   updateDetails(value) {
 
@@ -39,6 +50,18 @@ export class ProfileVideoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.events.subscribe('teacher-profile-third-screen-submit-call', (formData: any) => {
+      let v = formData[this.key];
+      if (!v || v == '') {
+        this.isRequired = true;
+        setTimeout(() => {
+          this.isRequired = false;
+        }, 5000);
+        return;
+      }
+    }, false)
+
   }
 
   async setData(value: any) {
@@ -50,11 +73,16 @@ export class ProfileVideoComponent implements OnInit {
     let res = await this.network.getIntoVideoFile(value);
     console.log(res);
     this.videoUrl = res?.result?.full_url || null;
+
+    this.onChange.emit(this.videoUrl)
+
+
   }
 
   onVideoError(event: any) {
     console.error('Video failed to load', event);
     this.videoUrl = null; // Reset video if there's an error
+    this.onChange.emit(this.videoUrl)
   }
 
   async checkFileUploaded(user_id: any) {
@@ -66,6 +94,8 @@ export class ProfileVideoComponent implements OnInit {
     console.log("video", res, user_id);
     if (res.result && res.result.full_url) {
       this.full_url = res.result.full_url;
+      this.videoUrl = this.full_url;
+      this.onChange.emit(this.videoUrl)
     }
 
   }
@@ -97,6 +127,8 @@ export class ProfileVideoComponent implements OnInit {
         console.log(res)
         if (res.result && res.result.full_url) {
           this.full_url = res.result.full_url;
+          this.videoUrl = this.full_url;
+          this.onChange.emit(this.videoUrl)
         }
         // if(res.bool == true){
         //   console.log(res)

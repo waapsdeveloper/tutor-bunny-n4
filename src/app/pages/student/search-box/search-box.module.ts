@@ -8,9 +8,9 @@ import { SearchBoxPageRoutingModule } from './search-box-routing.module';
 
 import { SearchBoxPage } from './search-box.page';
 import { EmptySearchViewModule } from './views/empty-search-view/empty-search-view.module';
-import { FilterSearchViewModule } from './views/filter-search-view/filter-search-view.module';
 import { ListSearchViewModule } from './views/list-search-view/list-search-view.module';
 import { TagSearchViewModule } from './views/tag-search-view/tag-search-view.module';
+import { FilterSearchViewModule } from './views/filter-search-view/filter-search-view.module';
 
 @NgModule({
   imports: [

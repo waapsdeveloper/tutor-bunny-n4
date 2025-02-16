@@ -1,45 +1,45 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<!-- <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="'Filter'" [backUrl]=""></app-sd-header-top>
 </ion-header>
 <ion-content class="ion-padding">
   <div class="body-content-68448" style="padding: 0 6px;">
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">What do you want to learn?</div>
-      <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="searchFilterService.formData.keywords"
+      <app-search-keyword (onChange)="result($event, 'keyword')" [subs]="formData$.keywords"
         placeholder="Type and add" [key]="'keyword'" [errorText]="'keyword is required'"></app-search-keyword>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Language of communication</div>
       <app-course-language placeholder="Select" (onChange)="result($event, 'language')"
-        [language]="searchFilterService.formData.language" [key]="'language'"
+        [language]="formData$.language" [key]="'language'"
         [errorText]="'language is required'"></app-course-language>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Course Price</div>
-      <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'" [currentValue]="searchFilterService.formData.price"> </app-course-prise-range>
+      <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'" [currentValue]="formData$.price"> </app-course-prise-range>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
-        (onChange)="result($event, 'mode_type')" [mode]="searchFilterService.formData.mode_type"
-        [capacity]="searchFilterService.formData.capacity" [key]="'mode_type'"
+        (onChange)="result($event, 'mode_type')" [mode]="formData$.mode_type"
+        [capacity]="formData$.capacity" [key]="'mode_type'"
         [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Hourly rate {{currency}}</div>
       <app-sd-input-box (onChange)="result($event, 'hourly_rate')"
-        [inputText]="searchFilterService.formData.hourly_rate" [key]="'hourly_rate'" [errorText]="'price is required'"
+        [inputText]="formData$.hourly_rate" [key]="'hourly_rate'" [errorText]="'price is required'"
         [type]="'number'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Name</div>
       <app-sd-input-box placeholder="Teacher or institute name" (onChange)="result($event, 'name')"
-        [inputText]="searchFilterService.formData.name" [key]="'name'"
+        [inputText]="formData$.name" [key]="'name'"
         [errorText]="'Name is required'"></app-sd-input-box>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Country</div>
       <app-sd-country-box placeholder="Select" (onChange)="result($event, 'country')"
-        [country]="searchFilterService.formData.country" [key]="'country'"
+        [country]="formData$.country" [key]="'country'"
         [errorText]="'Country is required'"></app-sd-country-box>
     </div>
 
@@ -49,7 +49,7 @@
         [errorText]="'travel_policy is required'"></app-travel-police>
     </div>
     <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')"
-      [from_age]="searchFilterService.formData.from_age" [to_age]="searchFilterService.formData.to_age" [key]="'age'"
+      [from_age]="formData$.from_age" [to_age]="formData$.to_age" [key]="'age'"
       [errorText]="'Age Range is required'"></app-sd-age-boox>
   </div>
 </ion-content>
@@ -59,4 +59,4 @@
       <app-sd-button-gray [text]="'See results'" (click)="submit()"></app-sd-button-gray>
     </div>
   </div>
-</ion-footer>
+</ion-footer> -->

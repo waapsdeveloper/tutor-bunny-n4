@@ -244,7 +244,9 @@ export class TeacherProfileEditPage
       !f.started_teaching ||
       !f.experience_description ||
       f.qualification_description.length < 250 ||
-      f.experience_description.length < 250
+      f.experience_description.length < 250 || 
+      !f.profile_video
+      
     ) {
       return;
     }

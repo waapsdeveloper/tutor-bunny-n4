@@ -1,8 +1,30 @@
-<div class="ch d-flex justify-content-center align-items-center " style="flex-direction: column; margin: auto; width: 90%; padding: 5px ">
-  <div class="search-seggetion-box-78521 d-flex center-border" style=" margin-bottom: 20px;" *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')">
+
+
+<app-global-list-view [list]="list" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+  <ng-template #itemTemplate let-item >
+    <ion-item (click)="openDetails(item)" detail="true" lines="none">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      <ion-label class="search-seggetion-title-78522 roboto-regular">{{item.name}}</ion-label>
+    </ion-item>
+  </ng-template>
+</app-global-list-view>
+
+
+<!-- <ion-list>
+  <ion-item *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')" detail="true">
+    <ion-icon slot="start" name="search-outline"></ion-icon>
+    <ion-label class="search-seggetion-title-78522 roboto-regular">{{item.name}}</ion-label>
+  </ion-item>
+</ion-list>
+<ion-infinite-scroll (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll> -->
+
+<!-- <div class="" >
+  <div class="search-seggetion-box-78521" *ngFor="let item of list" (click)="setRecentSeach(item, 'keyword')">
     <img style="margin-right: 5px;" src="assets/icon/input-search-gray.svg" height="20px" alt="">
     <div class="search-seggetion-title-78522 " style="font-size: 20px; color: rgb(92, 87, 87);">
       {{item.name}}
     </div>
   </div>
-</div>
+</div> -->

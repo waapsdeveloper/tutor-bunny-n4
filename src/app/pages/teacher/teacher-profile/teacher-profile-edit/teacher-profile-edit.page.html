@@ -194,7 +194,7 @@
 
 
           <div class="input-box-lines d-flex flex-column gap-8">
-            <app-profile-video [key]="'profile_video'" [errorText]="'Please Add a video'" [data]="{user_id: user.id}"></app-profile-video>
+            <app-profile-video [key]="'profile_video'" (onChange)="result($event, 'profile_video')" [errorText]="'Please Add a video'" [data]="{user_id: user.id}"></app-profile-video>
           </div>
           <div class="terms-agree" *ngIf="!hideTerms">
             <app-accept-terms-profile [terms]="formData.terms" [key]="'terms'" [errorText]="'Please accept terms'"
