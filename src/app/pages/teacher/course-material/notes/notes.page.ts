@@ -46,7 +46,7 @@ export class NotesPage extends ListPage implements OnInit {
 
   onMaterialDeleted(item: any) {
     console.log(item);
-    this.globalStudyMaterialService.removeItem(item);
+    this.globalStudyMaterialService.removeItem(item.id);
     this.cdr.detectChanges()
   }
 }
