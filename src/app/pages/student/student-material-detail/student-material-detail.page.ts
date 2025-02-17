@@ -128,7 +128,7 @@ export class StudentMaterialDetailPage extends BasePage {
   }
 
   async ionViewWillEnter() {
-    
+
     this.params = this.nav.getQueryParams();
 
     if (this.params.backUrl) {
@@ -137,7 +137,7 @@ export class StudentMaterialDetailPage extends BasePage {
     if (this.params.material_id) {
       this.materialId = this.params.material_id;
       this.globalStudyMaterialService.getItem(this.materialId).subscribe((data) => {
-        this.material$ = data;          
+        this.material$ = data;
         this.callApi(data);
       });
     } else {
@@ -395,7 +395,7 @@ export class StudentMaterialDetailPage extends BasePage {
     }
   }
   async goToChat(data) {
-    console.log(data);
+    console.log(data,"chat data ");
     let user = this.users.getUser();
 
     this.openChatWithData(data);

@@ -6,8 +6,10 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
 import { NavService } from 'src/app/services/nav.service';
 import { ListTrialsService } from 'src/app/services/teacher/list-trials.service';
+import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
@@ -16,13 +18,12 @@ import { UtilityService } from 'src/app/services/utility.service';
   styleUrls: ['./trail-list.component.scss'],
 })
 export class TrailListComponent {
-
-  displayName
+  displayName;
   flag;
   age;
-
+  user;
+  student;
   private _item: any;
-
 
   @Input() showMoreOptions: boolean = true;
   @Input('item')
@@ -38,12 +39,18 @@ export class TrailListComponent {
   @Output() removeFromList = new EventEmitter<any>();
 
   // , public globalTrials: GlobalTrialsService
-  constructor(private nav: NavService, private utility: UtilityService, private listTrialsService: ListTrialsService) {
-
-  }
+  constructor(
+    private nav: NavService,
+    private utility: UtilityService,
+    private listTrialsService: ListTrialsService,
+    private users: UsersService,
+    private chats: ChatService
+  ) {}
 
   async updateItem(value: any) {
-
+    console.log(value, 'my value');
+    this.student = value.student;
+    console.log('I am a teacher', this.student);
     this.displayName = this.utility.getAmericanName(value.student.name);
     this.flag = this.utility.getFlag(value);
     const currentYear = new Date().getFullYear();
@@ -53,9 +60,12 @@ export class TrailListComponent {
     // this.item = res.result;
   }
 
-  async trailStatus(key: string) {
-    const res = await this.listTrialsService.changeTrailStuts(this.item.id, key, this.item.student.id);
-
+  async trailStatus(key: string): Promise<void> {
+    const res = await this.listTrialsService.changeTrailStuts(
+      this.item.id,
+      key,
+      this.item.student.id
+    );
   }
 
   async presentAlert(key: string) {
@@ -69,22 +79,18 @@ export class TrailListComponent {
         title = 'Are you sure to Accept the request?';
         break;
       case 'Rejected':
-
         title = 'Are you sure to Reject the request?';
 
         break;
       case 'Blocked':
-
         title = 'Are you sure to Block the request?';
 
         break;
       case 'Unblock':
-
         title = 'Are you sure to Unblock the request?';
 
         break;
       case 'Complete':
-
         title = 'Are you sure to Complete the request?';
 
         break;
@@ -99,12 +105,25 @@ export class TrailListComponent {
     );
     if (flag) {
       this.trailStatus(key);
+      console.log("i am ");
+      this.openChatWithData();
     }
   }
 
-  goToChat() {
-    this.nav.push('/tabs/chat');
+
+
+  async openChatWithData() {
+    let user = this.users.getUser();
+    console.log(this.user);
+    const chatRoomId = (await this.chats.getChadRoomId(
+      this.student.id,
+     user.id,
+    )) as number;
+    console.log()
+    if (chatRoomId != -1) {
+      this.nav.push('messages', {
+        chat_room_id: chatRoomId,
+      });
+    }
   }
-
-
 }
