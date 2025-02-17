@@ -95,10 +95,10 @@ export class MaterialCardComponent extends BasePage implements OnInit {
       study_material_id: data.id,
     };
 
+    this.materialDeleted.emit(data);
     let res = await this.network.deleteMaterial(obj);
-    if (res.status === 200) {
-      this.materialDeleted.emit(data.id);
-    }
+    // if (res.status === 200) {
+    // }
   }
 
   async editCourse(item) {
@@ -107,7 +107,7 @@ export class MaterialCardComponent extends BasePage implements OnInit {
       showBack: true,
       material_Id: item.id,
       edit: true,
-    };
+    };///////
 
     this.nav.push('/create-material', params);
   }
