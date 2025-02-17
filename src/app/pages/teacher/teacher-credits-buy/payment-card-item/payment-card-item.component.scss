@@ -1,14 +1,19 @@
-
 .cart-payment-outer {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .form-outer {
-    border: 0.5px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    padding: 16px;
-
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px;
+}
+.purchase-history-link {
+  color:  #0386D0;
+   text-decoration: underline;
+}
+.purchase-history-link:hover {
+  text-decoration: underline;
 }

@@ -15,7 +15,7 @@
               <img class="buy-credit-coin" src="assets/svg/coin.svg" />
           </div>
 
-         
+
 
           <div class="but-credit-counter-box">
 
@@ -84,6 +84,27 @@
           <p style="color: #BBBBBB;">Order number: {{order_detail?.teacher_credit_buy.order_number}}</p>
           <p style="color: #42434780;">New credit balance: {{order_detail?.wallet.total_coin}}</p>
         </div>
+
+      </div>
+      <div class="outer-total-price-4684564  ion-padding-top ion-padding-bottom" >
+
+        <div class="d-flex flex-row justify-content-between">
+          <div>Credit </div>
+          <div>{{selectedCoin?.level}}</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div>Subtotal</div>
+          <div>{{currency_symbol}} {{total}}</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div>Tax</div>
+          <div>{{currency_symbol}} {{tax}}</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div>Total</div>
+          <div class="roboto-regular fs-24">{{currency_symbol}} {{ payAmount }}</div>
+        </div>
+
       </div>
     </ng-template>
 
@@ -93,10 +114,11 @@
 <ion-footer class="checkout-footer checkout-border-top">
   <div class="ion-padding d-flex flex-column">
     <div class="d-flex flex-column gap-8 ion-padding" >
-        
+
 
 
       <app-sd-button-golden [text]="getPayAmount()" (click)="continueToNextSlide()"></app-sd-button-golden>
+      <app-sd-button-clear [text]="'Purchase History'"  *ngIf="activeIndex === 1 " [routerLink]="'/purchase-history'" ></app-sd-button-clear>
     </div>
 
     <div class="Privacy-policy outfit">By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
