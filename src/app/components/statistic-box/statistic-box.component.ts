@@ -27,7 +27,7 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.events.subscribe('get-dashboard-stats', this.initialize.bind(this))
+    this.events.subscribe('get-dashboard-stats', this.initialize.bind(this), false)
   }
 
   async initialize() {

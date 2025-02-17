@@ -160,5 +160,12 @@ export class TeacherCreditsBuyPage extends BasePage implements OnInit {
     let res = await this.network.buyCredit(obj);
     this.order_detail = res.result;
     console.log(this.order_detail);
+
+    this.events.publish('get-dashboard-stats');
+
+
+
+
+
   }
 }
