@@ -32,7 +32,7 @@ export class NotesPage extends ListPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.resetAndFetch();
+    this.resetAndFetch();
     this.globalStudyMaterialService.getList().subscribe( (data) => {
       this.list$ = data;
     });

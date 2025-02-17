@@ -32,7 +32,7 @@ export class CoursesPage extends ListPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.resetAndFetch();
+    this.resetAndFetch();
     this.globalCoursesService.getList().subscribe( (data) => {
       this.list$ = data;
     });
