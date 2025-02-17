@@ -1,7 +1,9 @@
 <div class="cart-payment-outer ion-padding">
 
-  <div class="heading fs-24 roboto-bold">Payment</div>
-
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="heading fs-24 roboto-bold">Payment</div>
+    <a href="/purchase-history" class="purchase-history-link fs-24 roboto-bold">Purchase History</a>
+  </div>
   <ion-note>This form is not activated yet, in development mode you can just post your order without card inserted</ion-note>
 
   <div class="form-outer" >
@@ -31,7 +33,7 @@
             [errorText]="'CVV is required'" [type]="'text'" [modernInput]="true"></app-sd-input-box>
         </div>
       </div>
-      
+
     </div>
 
   </div>
