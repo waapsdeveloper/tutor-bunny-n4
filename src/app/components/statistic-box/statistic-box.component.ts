@@ -58,7 +58,10 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
   }
 
   openCredit(){
-    this.nav.push('/teacher-credits')
+    // this.nav.push('/teacher-credits')
+    this.nav.push('/teacher-credits-buy')
+    
+
 
   }
 
