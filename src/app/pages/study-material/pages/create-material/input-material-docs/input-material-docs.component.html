@@ -8,11 +8,11 @@
     </ion-popover>
   <div class="image-upload-box-st-78955674" >
     <div class="icno-text-88666" >
-      <div *ngIf="doc$" class="image-box-78559" [style.backgroundImage]="setBackgroundImage(doc$)" >
-      </div>
+      <div *ngIf="doc$" class="image-box-78559" [style.backgroundImage]="setBackgroundImage(doc$)" ></div>
+      <div *ngIf="doc$" class="roboto-regular fs-14">{{ docsLength }} items have been uploaded</div>
 
-      <img *ngIf="!doc$" src="../../../assets/svg/material-photo.svg" alt="Selected Image" class="img-67855" />
-      <div class="roboto-regular fs-14">Upload &#40;PDF, DOC, XL, JPEG, PNG, BMP &#41;</div>
+      <img *ngIf="!doc$" src="assets/svg/material-photo.svg" alt="Selected Image" class="img-67855" />
+      <div *ngIf="!doc$" class="roboto-regular fs-14">Upload &#40;PDF, DOC, XL, JPEG, PNG, BMP &#41;</div>
     </div>
     <ion-icon name="chevron-forward-outline"></ion-icon>
   </div>

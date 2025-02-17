@@ -23,6 +23,7 @@ import { GlobalListViewModule } from 'src/app/components/global-list-view/global
     CourseCardModule,
     SdBbackBtnModule
   ],
-  declarations: [CoursesPage]
+  declarations: [CoursesPage],
+  exports: [CoursesPage]
 })
 export class CoursesPageModule {}

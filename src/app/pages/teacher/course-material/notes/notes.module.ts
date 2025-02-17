@@ -19,6 +19,7 @@ import { GlobalListViewModule } from "../../../../components/global-list-view/gl
     MaterialCardModule,
     GlobalListViewModule
 ],
-  declarations: [NotesPage]
+  declarations: [NotesPage],
+  exports: [NotesPage]
 })
 export class NotesPageModule {}

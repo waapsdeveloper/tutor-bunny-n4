@@ -9,6 +9,7 @@ import { CreateMaterialService } from '../create-material.service';
 })
 export class InputMaterialDocsComponent implements OnInit {
   doc$;
+  docsLength = 0;
 
   @Input() isRequired = false;
   @Input() needed = true;
@@ -24,6 +25,7 @@ export class InputMaterialDocsComponent implements OnInit {
     this.createMaterialService.getDocs().subscribe((value) => {
       let docs = value;
       if (docs.length > 0) {
+        this.docsLength = docs.length;
         this.doc$ = docs[0];
       } else {
         this.doc$ = null;
@@ -59,19 +61,21 @@ export class InputMaterialDocsComponent implements OnInit {
   }
 
   setBackgroundImage(docObj: { doc: string; type: string, file_type: string }): string {
-    let path = 'assets/svg/filetypes/';
-    const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
+    // Let path = 'assets/svg/filetypes/';
+    // const fileType = docObj.type || docObj.file_type || ''; // Check for both keys, fallback to an empty string
 
-    if (fileType.includes('pdf')) {
-      path += 'pdf.svg';
-    } else if (fileType.includes('sheet')) {
-      path += 'xls.svg';
-    } else if (fileType.includes('document')) {
-      path += 'doc.svg';
-    } else if (fileType.includes('image')) {
-      path += 'png.svg';
-    }
+    // if (fileType.includes('pdf')) {
+    //   path += 'pdf.svg';
+    // } else if (fileType.includes('sheet')) {
+    //   path += 'xls.svg';
+    // } else if (fileType.includes('document')) {
+    //   path += 'doc.svg';
+    // } else if (fileType.includes('image')) {
+    //   path += 'png.svg';
+    // }
 
-    return `url(${path})`;
+    // return `url(${path})`;
+
+    return `url('assets/svg/file-icon-large.svg')`;
   }
 }
