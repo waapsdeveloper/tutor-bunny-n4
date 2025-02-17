@@ -93,7 +93,7 @@
       </div>
     </ion-col>
     <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
-      <div class="icon-item">
+      <div class="icon-item" (click)="showRequests()" >
         <div class="icon">
           <img src="../../../assets/svg/message.svg" alt="Message" />
         </div>
@@ -107,7 +107,7 @@
     </ion-col>
     <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
 
-      <div class="icon-item">
+      <div class="icon-item" (click)="goToTrialReq()">
         <div class="icon">
           <img src="../../../assets/svg/in-progress.svg" alt="In Progress" />
         </div>
@@ -119,7 +119,7 @@
 
     </ion-col>
     <ion-col size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
-      <div class="icon-item">
+      <div class="icon-item" (click)="goToTrialReq()">
         <div class="icon">
           <img src="../../../assets/svg/trial-completed.svg" alt="Completed" />
         </div>

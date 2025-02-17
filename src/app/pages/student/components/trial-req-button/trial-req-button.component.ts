@@ -116,7 +116,7 @@ export class TrialReqButtonComponent implements OnInit {
 
     if (this.trial && this.status == 'Accepted') {
       label = 'Message';
-      icon = '';
+      icon = 'assets/icon/home/chat-icon.svg';
       action = 'chatMessage';
       // return { label: 'Trial Accepted', icon: '', action: '' };
     }
@@ -133,7 +133,7 @@ export class TrialReqButtonComponent implements OnInit {
 
     // return { label: 'Free trial', icon: 'assets/svg/transfer.svg', action: 'requestTrail' };
 
-    if (this.hostScreensize <= 400) {
+    if (this.hostScreensize <= 400 && this.buttonType !== 'large') {
       label = '';
     }
 

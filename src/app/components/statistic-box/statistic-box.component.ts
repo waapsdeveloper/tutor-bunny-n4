@@ -50,9 +50,9 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
 
   }
 
-  goToTrialReq() {
-    this.nav.push('my-students')
-  }
+  // goToTrialReq() {
+  //   this.nav.push('my-students')
+  // }
   openEarnings(){
     this.nav.push('/teacher-my-earning')
   }
@@ -61,9 +61,16 @@ export class StatisticBoxComponent extends BasePage implements OnInit {
     // this.nav.push('/teacher-credits')
     this.nav.push('/teacher-credits-buy')
     
-
-
   }
+
+  async showRequests() {
+    this.nav.push('chat-requests');
+  }
+
+  goToTrialReq() {
+    this.nav.push('teacher-trial-list');
+  }
+  
 
 
 }
