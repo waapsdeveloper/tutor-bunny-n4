@@ -73,17 +73,17 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   callApi() {}
 
   async openSubjectSelection() {
-    const res = (await this.modals.present(KeywordListComponent, {
-      subs: this.subs,
-    })) as any;
+    // const res = (await this.modals.present(KeywordListComponent, {
+    //   subs: this.subs,
+    // })) as any;
 
 
-    if (res.data) {
-      if (res.data.subs) {
-        this.subs = res.data.subs;
-      }
-      this.onChange.emit(this.subs);
-    }
+    // if (res.data) {
+    //   if (res.data.subs) {
+    //     this.subs = res.data.subs;
+    //   }
+    //   this.onChange.emit(this.subs);
+    // }
   }
 
   async addSubject() {

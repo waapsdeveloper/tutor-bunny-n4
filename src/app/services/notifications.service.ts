@@ -13,7 +13,8 @@ export interface GlobalNotificationModel {
   unread_count: number;
   list: any[];
   page: number,
-  last_page: number
+  last_page: number,
+  total: number
 }
 
 @Injectable({
@@ -66,7 +67,8 @@ export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotif
       unread_count: 0,
       list: [],
       page: 1,
-      last_page: -1
+      last_page: -1,
+      total: 0
     };
   }
 
@@ -258,6 +260,17 @@ export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotif
       console.log(res)
       this.setUnreadCount(res.unread_count)
       resolve(count);
+
+    });
+  }
+
+  setNotificationUnreadCount(params: {unread_count: number}){
+    return new Promise( async (resolve) => {
+
+      const res = await this.network.setNotificationUnreadCount(params);
+      console.log(res);
+      this.setUnreadCount(res.unread_count)
+      resolve(res.unread_count);
 
     });
   }

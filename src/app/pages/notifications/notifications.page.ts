@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -7,11 +7,11 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
-export class NotificationsPage extends BasePage{
-  
+export class NotificationsPage extends BasePage implements OnInit {
+
   user;
   params: any;
-  
+
   notificationsState$;
   loading = false;
 
@@ -23,11 +23,31 @@ export class NotificationsPage extends BasePage{
 
     this.notificationService.getState().subscribe( state => {
       this.notificationsState$ = state;
-    })
+    });
+
+
+
+
+
+
+
+
+  }
+  ngOnInit(): void {
+    setTimeout( async () => {
+
+      console.log("reawe")
+
+      const count = await this.notificationService.getUnreadCountPromise() as number;
+      console.log("count: " + count)
+      this.notificationService.setNotificationUnreadCount({
+        unread_count: 0
+      });
+    }, 1000);
   }
 
   async loadMore($event) {
-    
+
     if (this.loading == true) {
       return;
     }
