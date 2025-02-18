@@ -27,7 +27,9 @@ export class NotificationsPage extends BasePage{
 
 
     setTimeout( () => {       
-      this.notificationService.getNotificationUnreadCount();
+      this.notificationService.setNotificationUnreadCount({
+        unread_count: 0
+      });
     }, 1000);
 
 

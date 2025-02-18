@@ -264,7 +264,7 @@ export class NotificationsService extends NgSimpleStateBaseRxjsStore<GlobalNotif
     });
   }
 
-  setNotificationUnreadCount(params: {unreadCount: number}){
+  setNotificationUnreadCount(params: {unread_count: number}){
     return new Promise( async (resolve) => {
 
       const res = await this.network.getNotificationUnreadCount();
