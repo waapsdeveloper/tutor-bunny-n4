@@ -22,7 +22,7 @@ export class PaymentCardItemComponent  implements OnInit {
   }
 
   goToPurchaseHistory(){
-    this.nav.push('purchase-history');
+    this.nav.push('teacher-credits');
   }
 
 }
