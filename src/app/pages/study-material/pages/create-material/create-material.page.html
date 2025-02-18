@@ -20,10 +20,9 @@
       </ng-template>
       <ng-template swiperSlide>
 
-        <div class="body-content-68448">
+        <div class="body-content-684492">
           <app-input-material-keywords></app-input-material-keywords>
           <app-input-material-docs (click)="openDocssView()"></app-input-material-docs>
-          <app-input-material-terms></app-input-material-terms>
         </div>
 
       </ng-template>
@@ -34,6 +33,8 @@
 <ion-footer class="ion-padding ion-no-border ion-no-shadow ion-content-medium-background">
   <div class="d-flex flex-column gap-16">
     <div class="input-box-lines">
+      <app-input-material-terms *ngIf="step === 2"></app-input-material-terms>
+
       <app-sd-button-gray [text]="'Next'" [isShowLoader]="loading"  [disabled]="loading" *ngIf="step === 1" (click)="onSlideChange()"></app-sd-button-gray>
       <app-sd-button-gray [text]="'Save'" [isShowLoader]="loading"  *ngIf="step === 2" (click)="submit()"></app-sd-button-gray>
     </div>

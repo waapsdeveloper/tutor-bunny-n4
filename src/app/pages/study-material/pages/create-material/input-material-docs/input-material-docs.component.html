@@ -12,9 +12,13 @@
       <div *ngIf="doc$" class="roboto-regular fs-14">{{ docsLength }} items have been uploaded</div>
 
       <img *ngIf="!doc$" src="assets/svg/material-photo.svg" alt="Selected Image" class="img-67855" />
-      <div *ngIf="!doc$" class="roboto-regular fs-14">Upload &#40;PDF, DOC, XL, JPEG, PNG, BMP &#41;</div>
+      <div *ngIf="!doc$" class="roboto-regular fs-14">Upload study materials</div>
+
     </div>
+
     <ion-icon name="chevron-forward-outline"></ion-icon>
   </div>
+  <div class="input-title fs-12 roboto-regular">Supported file types: PDF, DOC, XL, JPEG, PNG, BMP, TXT</div>
+
 </div>
 <app-sd-error-input-info  *ngIf="isRequired && needed" [errorText]="errorText"></app-sd-error-input-info>
