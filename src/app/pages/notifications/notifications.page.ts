@@ -26,9 +26,11 @@ export class NotificationsPage extends BasePage{
     });
 
 
-    setTimeout( () => {       
+    setTimeout( async () => {       
+
+      const count = await this.notificationService.getUnreadCountPromise() as number
       this.notificationService.setNotificationUnreadCount({
-        unread_count: 0
+        unread_count: count
       });
     }, 1000);
 
