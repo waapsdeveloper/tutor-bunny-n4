@@ -8,10 +8,10 @@ import { NotificationsService } from 'src/app/services/notifications.service';
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage extends BasePage implements OnInit {
-  
+
   user;
   params: any;
-  
+
   notificationsState$;
   loading = false;
 
@@ -26,7 +26,7 @@ export class NotificationsPage extends BasePage implements OnInit {
     });
 
 
-    
+
 
 
 
@@ -34,20 +34,20 @@ export class NotificationsPage extends BasePage implements OnInit {
 
   }
   ngOnInit(): void {
-    setTimeout( async () => {       
+    setTimeout( async () => {
 
       console.log("reawe")
 
       const count = await this.notificationService.getUnreadCountPromise() as number;
       console.log("count: " + count)
       this.notificationService.setNotificationUnreadCount({
-        unread_count: count
+        unread_count: 0
       });
     }, 1000);
   }
 
   async loadMore($event) {
-    
+
     if (this.loading == true) {
       return;
     }
