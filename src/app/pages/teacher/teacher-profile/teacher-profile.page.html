@@ -1,29 +1,141 @@
-<ion-content>
-  <app-stp-page-header
-    [data]="headerData"
-    (back)="nav.pop()"
-  ></app-stp-page-header>
-  <app-stp-page-video-box [data]="videoBox"></app-stp-page-video-box>
 
+<ion-content >
+  <app-stp-page-header [data]="headerData" (openEdit)="openEditProfile()" (back)="nav.pop()"></app-stp-page-header>
+  <!-- <ion-header class="ion-no-shadow ion-no-border ion-header-bg">
+    <div class="top-dashboard-header-outer ion-padding" *ngIf="user">
+      <div style="padding: 0 16px 0 0;" (click)="back()">
+        <img src="../../assets/svg/white-back.svg" alt="">
+      </div>
+      <div *ngIf="user" class="image-box-89657" [style.background-image]="'url(' + user.image + ')'">
+      </div>
+      <div class="header-oblique-double-675">
+        <div class="header-line-678576" (click)="openEditProfile()" *ngIf="roleId == 3">
+          <div class="header-line-box-678576">
+            <img src="../../assets/svg/edit.svg" />
+          </div>
+        </div>
+        <div class="header-info-box-68447">
+          <div class="header-info-user-68448">
+            <div class="header-info-user-name outfit-semibold ">{{displayName}}</div>
+          </div>
+          <div class="header-info-misc-68448 outfit" *ngIf="status != 'In Review'"><img
+              src="../../assets/svg/verified-profile-sheild.svg" />Verified
+            on
+            {{verified_on}}
+          </div>
+          <div class="header-info-misc-68448 outfit" *ngIf="status == 'In Review'"><img
+              src="../../assets/svg/verified-profile-sheild.svg" />Verification pending
+          </div>
+          <div class="header-info-misc-68448 outfit">
+            <app-rating-stars [rating]="rating"></app-rating-stars>
+            {{rating}} ({{total_rating}})
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-header> -->
+  <app-stp-page-video-box></app-stp-page-video-box>
   <div class="body-content-684488">
     <app-stp-page-info [data]="infoData"></app-stp-page-info>
 
-    <app-stp-page-profile-statistics
-      [data]="countData"
-    ></app-stp-page-profile-statistics>
-    <app-global-text-read
-      [heading]="aboutData.heading"
-      [text]="aboutData.text"
-    ></app-global-text-read>
+    <app-stp-page-profile-statistics [data]="countData"></app-stp-page-profile-statistics>
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
+
 
     <!-- courses section -->
-    <app-my-courses *ngIf="courseData.list.length !== 0"
-      [data]="courseData"
-      (clickOpen)="clickOpenCourse($event)"
-    ></app-my-courses>
+    <app-my-courses [data]="courseData" *ngIf="courseData.list.length !== 0" (clickOpen)="clickOpenCourse($event)"></app-my-courses>
     <app-my-gallery [data]="galleryData" *ngIf="galleryData.list.length !== 0"></app-my-gallery>
 
     <app-my-ratings [data]="ratingData" *ngIf="ratingData.list.length !== 0"></app-my-ratings>
   </div>
+  <div class="footer-buttons-78963 ion-padding">
+  </div>
+
 </ion-content>
-<ion-footer></ion-footer>
+
+
+
+
+
+  <!-- <div class="body-content-684488">
+    <div class="techer-subject-content">
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="assets/svg/techer-card.svg" alt="">
+          <div class="fs-16 roboto-regular">Teaches:</div>
+        </div>
+        <div class="chips-outer">
+          <div class="chip-outer-78961 fs-16 roboto-regular" *ngFor="let item of subject">{{item?.name}}</div>
+        </div>
+      </div>
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="assets/svg/speaks.svg" alt="">
+          <div class="fs-16 roboto-regular">Speaks:</div>
+        </div>
+        <div class="chips-outer">
+          <div class="chip-outer-78961 fs-16 roboto-regular" *ngFor="let item of language">{{item?.name}}</div>
+        </div>
+      </div>
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="../../assets/svg/bike.svg" alt="">
+          <div class="fs-16 roboto-regular">Travel:</div>
+        </div>
+        <div class="chips-outer">
+          {{travel_policy}}
+        </div>
+      </div>
+      <div class="techer-card-outer-78965">
+        <div class="teacher-card-head">
+          <img src="../../assets/svg/locations.svg" alt="">
+          <div class="fs-16 roboto-regular" style="text-wrap: nowrap;"><span>{{city}}, {{state}},
+              {{country}}</span><span *ngIf="flag" slot="start" class="fi fi-{{flag}}" style="margin-left: 8px;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-teacher-profile-statistics [course]="course" [experince]="experince"
+        [hourly_rate]="hourly_rate" ></app-teacher-profile-statistics>
+    </div>
+    <div class="fs-16 outfit"
+      style="display: flex;    align-items: flex-start;    flex-direction: column;    gap: 16px;">
+      <div class="about-heading">About</div>
+      <div class="about-para" style="text-wrap: wrap;">
+        {{user?.teacher?.title}}
+      </div>
+    </div>
+    <div class="fs-16 outfit discription-text">
+      <div class="discription-para" [class.collapsed]="isExpanded">
+        {{ user?.teacher?.description }}
+      </div>
+      <div class="qulification-box-edu-readmore-98525" *ngIf="!isExpanded">
+        <div class="qulification-box-edu-button-98526" (click)="toggleReadMore()">Read More</div>
+      </div>
+      <div class="education-box-edu-readmore-98525" *ngIf="isExpanded">
+        <div class="education-box-edu-button-98526" (click)="toggleReadMore()">Read less</div>
+      </div>
+    </div>
+    <div class="read-more" fill="clear" style="padding: 24px;" (click)="openQulification()">
+      <img src="../../assets/svg/qulification.svg" alt="">
+      <div>Qualifications and experiences</div>
+    </div>
+    <div class="line" *ngIf="course != 0"></div>
+    <app-my-courses (onChange)="getCourses($event)" *ngIf="course != 0"></app-my-courses>
+    <div class="line" *ngIf="rating != 0"></div>
+    <app-rating-review [rating]="total_rating" *ngIf="rating != 0"></app-rating-review>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="roleId == 2">
+  <div class="footer-buttons-78963">
+    <div class="button-chat-78563" *ngIf="!data?.trial " (click)="goToChat(user)">
+      <div class="sd-clear-btn-967895 ion-activatable ripple-parent rectangle">
+        <ion-ripple-effect></ion-ripple-effect>
+          <img src="assets/svg/send-message-large.svg"/>
+        <span class="roboto-medium fs-16 ">Message</span>
+      </div>
+    </div>
+  </div>
+</ion-footer> -->
