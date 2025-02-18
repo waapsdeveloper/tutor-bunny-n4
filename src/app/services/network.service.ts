@@ -440,6 +440,16 @@ export class NetworkService {
     );
   }
 
+  setNotificationUnreadCount(data) {
+    return this.httpPostResponse(
+      'notifications/unread-count',
+      data,
+      null,
+      false,
+      false
+    );
+  }
+
   getNotifications(id) {
     return this.httpGetResponse(
       'notifications/by-user/' + id,

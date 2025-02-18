@@ -23,7 +23,17 @@ export class NotificationsPage extends BasePage{
 
     this.notificationService.getState().subscribe( state => {
       this.notificationsState$ = state;
-    })
+    });
+
+
+    setTimeout( () => {       
+      this.notificationService.getNotificationUnreadCount();
+    }, 1000);
+
+
+
+
+
   }
 
   async loadMore($event) {
