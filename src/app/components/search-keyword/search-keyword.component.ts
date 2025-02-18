@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Injector,
+  input,
   Input,
   OnInit,
   Output,
@@ -27,6 +28,19 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
   @Input('key') key = '';
   @Input('errorText') errorText = '';
   isRequired = false;
+
+  private _courseId: string = '';
+  @Input()
+    get courseId(): string {
+      return this._courseId;
+    }
+
+    set courseId(value: string) {
+      // console.log('courseId changed:', value);
+      this._courseId = value;
+      this.callApi();
+    }
+
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(injector: Injector) {
@@ -68,9 +82,25 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
     });
 
     this.inputText = '';
+
+    // this.callApi();
   }
 
-  callApi() {}
+  async callApi() {
+    // let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+
+    console.log('course_Id', this.courseId);
+    let data = {
+      course_id: this.courseId,
+    };
+
+    console.log('data', data);
+
+
+    const res = await this.network.getMyKeyword(data);
+    this.subs = res.result;
+    // console.log('subs', this.subs);
+  }
 
   async openSubjectSelection() {
     // const res = (await this.modals.present(KeywordListComponent, {

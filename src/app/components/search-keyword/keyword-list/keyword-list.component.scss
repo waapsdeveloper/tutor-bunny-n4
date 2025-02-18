@@ -35,12 +35,16 @@
   gap: 8px;
 
   .add-sub {
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 39px;
+    border: 0.5px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    background: rgba(69, 69, 69, 0.25);
+
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    border: none;
+    align-items: center;
 
     ion-icon {
       font-size: 45px;
