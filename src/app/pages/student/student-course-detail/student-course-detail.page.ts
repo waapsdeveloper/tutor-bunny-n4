@@ -76,7 +76,7 @@ export class StudentCourseDetailPage extends BasePage {
     heading: 'Reviews',
     list: [],
   };
-  
+
   itemExistInFav$ = false;
 
   trialRequestLoading = false;
@@ -177,7 +177,7 @@ export class StudentCourseDetailPage extends BasePage {
 
     })
 
-    
+
 
     this.bannerData = {
       liked_by_me: this.itemExistInFav$,
@@ -524,5 +524,8 @@ export class StudentCourseDetailPage extends BasePage {
     }
 
     return null;
+  }
+  handleSeeAll(){
+    console.log("handleSeeAll")
   }
 }

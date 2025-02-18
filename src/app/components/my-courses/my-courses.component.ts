@@ -49,7 +49,10 @@ export class MyCoursesComponent {
     }
 
   }
-
+  emitSeeAll() {
+    this.seeallEmit.emit();
+    console.log("EMitted")
+  }
 
   // async updateUserDetails2(data) {
 
