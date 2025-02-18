@@ -98,8 +98,10 @@ export class KeywordListComponent implements OnInit {
       };
       const res2 = await this.network.getMyKeyword(data);
       this.inputText = '';
+
       this.subs = res2.result;
       this.suggestionsList = [];
+
       this.onChange.emit({
         subs: this.subs,
       });
