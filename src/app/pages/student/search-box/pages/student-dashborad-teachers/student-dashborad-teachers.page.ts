@@ -40,7 +40,7 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
 
     let obj = {
       type: "teacher",
-      keyword_id: this.keyword.id,
+      keyword_id: this.keyword ? this.keyword.id : null,
       filters: this.filters,
       page: page,
       user_id: user.id,

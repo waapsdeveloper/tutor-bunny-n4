@@ -40,7 +40,7 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
 
     let obj = {
       type: "material",
-      keyword_id: this.keyword.id,
+      keyword_id: this.keyword ? this.keyword.id : null,
       filters: this.filters,
       page: page,
       user_id: user.id,

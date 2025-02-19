@@ -46,7 +46,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   async fetchList(page: number, search: string, status: string): Promise<any> {
     let obj = {
       type: "course",
-      keyword_id: this.keyword.id,
+      keyword_id: this.keyword ? this.keyword.id : null,
       filters: this.filters,
       page: page,
     };
