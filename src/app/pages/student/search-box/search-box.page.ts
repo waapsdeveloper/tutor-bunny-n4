@@ -26,6 +26,8 @@ export class SearchBoxPage extends BasePage implements OnInit{
     this.user = await this.users.getUser();
     this.filter.reset();
 
+    this.events.subscribe('filter-result', this.getResultsByFilter.bind(this));
+
   }
   // click on recent search
   // async openFromRecentSearch(item) {
@@ -63,7 +65,14 @@ export class SearchBoxPage extends BasePage implements OnInit{
     
   }
 
+  getResultsByFilter(formData){
+    console.log(formData)
+    this.step = 3;
 
+    setTimeout( () => {
+      this.events.publish('tag-filter-result-triggered', formData);
+    }, 500)
+  }
 
 
   gotoFilter() {

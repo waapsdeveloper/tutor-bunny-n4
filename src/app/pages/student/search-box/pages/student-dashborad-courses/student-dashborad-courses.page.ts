@@ -11,6 +11,7 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   keyword: any;
+  filters: any = null
 
   constructor(
     injector: Injector,
@@ -18,6 +19,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   ) {
     super(injector);
     this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+    this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
   }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   triggerSearchWithParams(params) {
     console.log('triggerSearch', params);
     this.keyword = params;
+
     this.resetAndFetch();
     // this.updateViewDetails({
     //   search: params.text,
@@ -34,10 +37,17 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
     // this.cdr.detectChanges();
   }
 
+  getResultsByFilter(data){
+    console.log('getResultsByFilter', data);
+    this.filters = data;
+    this.resetAndFetch();
+  }
+
   async fetchList(page: number, search: string, status: string): Promise<any> {
     let obj = {
       type: "course",
       keyword_id: this.keyword.id,
+      filters: this.filters,
       page: page,
     };
     let res = await this.network.getGlobalSearch(obj);

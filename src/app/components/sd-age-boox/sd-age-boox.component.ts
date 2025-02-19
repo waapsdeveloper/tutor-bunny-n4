@@ -21,7 +21,7 @@ export class SdAgeBooxComponent extends BasePage implements OnInit {
   @Input() image = '';
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  selectedFromAge = {
+  @Input() selectedFromAge = {
     from_age: '',
     to_age: ''
   };

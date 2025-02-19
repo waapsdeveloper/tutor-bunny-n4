@@ -9,11 +9,13 @@ import { ListPage } from 'src/app/base-page/list-page';
 export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   
   keyword: any;
+  filters: any = null;
   constructor(
     injector: Injector,
   ) {
     super(injector);
     this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+    this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
   }
 
   triggerSearchWithParams(params) {
@@ -26,6 +28,12 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
     // this.cdr.detectChanges();
   }
 
+  getResultsByFilter(data){
+    console.log('getResultsByFilter', data);
+    this.filters = data;
+    this.resetAndFetch();
+  }
+
   async fetchList(page: number, search: string, status: string): Promise<any> {
     
     const user = this.users.getUser();
@@ -33,6 +41,7 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
     let obj = {
       type: "teacher",
       keyword_id: this.keyword.id,
+      filters: this.filters,
       page: page,
       user_id: user.id,
     };

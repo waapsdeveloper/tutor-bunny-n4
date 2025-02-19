@@ -37,6 +37,13 @@ export class SearchFilterPage extends BasePage implements OnInit {
 
   result(value: any, key: string): void {
 
+    if(key === 'age'){
+      console.log(value)
+      this.filters.updateFormData(value.from_age, 'from_age');
+      this.filters.updateFormData(value.to_age, 'to_age');
+      return
+    }
+
     if(key === 'mode_type'){
       console.log(value)
       this.filters.updateFormData(value.mode, 'mode_type');
@@ -50,8 +57,10 @@ export class SearchFilterPage extends BasePage implements OnInit {
   async submit(){
   //   let res = await this.filters.submitFormData(1) as any;
   //   // console.log(res);
-  //   this.events.publish('filter-result',res);
-  //   this.nav.pop();
+
+  
+    this.events.publish('filter-result', this.formData$);
+    this.nav.pop();
 
   }
 }

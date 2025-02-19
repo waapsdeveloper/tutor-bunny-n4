@@ -11,9 +11,12 @@ import { GlobalStudyMaterialService } from 'src/app/services/global-study-materi
 export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {  
 
   keyword: any;
+  filters: any = null;
+
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
     this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+    this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
   }
 
   triggerSearchWithParams(params) {
@@ -26,12 +29,19 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
     // this.cdr.detectChanges();
   }
 
+  getResultsByFilter(data){
+    console.log('getResultsByFilter', data);
+    this.filters = data;
+    this.resetAndFetch();
+  }
+
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const user = this.users.getUser();
 
     let obj = {
       type: "material",
       keyword_id: this.keyword.id,
+      filters: this.filters,
       page: page,
       user_id: user.id,
     };

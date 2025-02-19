@@ -20,8 +20,8 @@
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
       <app-mode-of-teaching placeholder="Provide the brief details of the course (Minimum 250 characters)"
-        (onChange)="result($event, 'mode_type')" [mode]="formData$?.mode_type"
-        [capacity]="formData$?.capacity" [key]="'mode_type'"
+        (onChange)="result($event, 'mode_type')" [teachingMode]="{mode: formData$?.mode_type, capacity: formData$?.capacity}"
+        [key]="'mode_type'"
         [errorText]="'Mode of Teaching & Capacity is required'"></app-mode-of-teaching>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
@@ -45,11 +45,11 @@
 
     <div class="input-box-lines d-flex flex-column gap-8">
       <div class="input-title fs-14 roboto-medium">Travel policy</div>
-      <app-travel-police placeholder="Select" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
+      <app-travel-police placeholder="Select" [travel_policy]="formData$.travel_policy" (onChange)="result($event, 'travel_policy')" [key]="'travel_policy'"
         [errorText]="'travel_policy is required'"></app-travel-police>
     </div>
     <app-sd-age-boox placeholder="Select" (onChange)="result($event, 'age')"
-      [from_age]="formData$?.from_age" [to_age]="formData$?.to_age" [key]="'age'"
+      [selectedFromAge]="{from_age: formData$?.from_age, to_age: formData$?.to_age}" [key]="'age'"
       [errorText]="'Age Range is required'"></app-sd-age-boox>
   </div>
 </ion-content>
