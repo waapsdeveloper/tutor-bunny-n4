@@ -16,8 +16,8 @@ import { SdAgeBooxModule } from 'src/app/components/sd-age-boox/sd-age-boox.modu
 import { SdCountryBoxModule } from 'src/app/components/sd-country-box/sd-country-box.module';
 import { SdInputBoxModule } from 'src/app/components/sd-input-box/sd-input-box.module';
 import { SdStateBoxModule } from 'src/app/components/sd-state-box/sd-state-box.module';
-import { SearchKeywordModule } from 'src/app/components/search-keyword/search-keyword.module';
 import { TravelPoliceModule } from 'src/app/components/travel-police/travel-police.module';
+import { SearchKeywordModule } from './search-keyword/search-keyword.module';
 
 @NgModule({
   imports: [

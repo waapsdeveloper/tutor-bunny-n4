@@ -20,7 +20,7 @@ export class ModeOfTeachingComponent extends BasePage implements OnInit {
   @Input() image = ''
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
   isRequired = false;
-  teachingMode = {
+  @Input() teachingMode = {
     mode: '',
     capacity: ''
   }

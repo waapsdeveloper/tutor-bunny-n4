@@ -15,7 +15,7 @@
         [errorText]="'language is required'"></app-course-language>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">
-      <div class="input-title fs-14 roboto-medium">Course Price</div>
+      <div class="input-title fs-14 roboto-medium">Course Price {{ formData$.price }}</div>
       <app-course-prise-range (onChange)="result($event, 'price')" [key]="'price'" [currentValue]="formData$?.price"> </app-course-prise-range>
     </div>
     <div class="input-box-lines d-flex flex-column gap-8">

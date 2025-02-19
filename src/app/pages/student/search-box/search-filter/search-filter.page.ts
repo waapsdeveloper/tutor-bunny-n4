@@ -30,11 +30,20 @@ export class SearchFilterPage extends BasePage implements OnInit {
     this.currency = this.user?.student?.country?.currency_symbol ?? "$";
     this.filters.getFormData().subscribe(data => {
       this.formData$ = data;
+      console.log(this.formData$)
     });
     
   }
 
   result(value: any, key: string): void {
+
+    if(key === 'mode_type'){
+      console.log(value)
+      this.filters.updateFormData(value.mode, 'mode_type');
+      this.filters.updateFormData(value.capacity, 'capacity');
+      return 
+    }
+    console.log(value, key)
     this.filters.updateFormData(value, key);
   }
 

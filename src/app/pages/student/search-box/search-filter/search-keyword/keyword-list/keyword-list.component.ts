@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { EventsService } from 'src/app/services/events.service';
 import { NetworkService } from 'src/app/services/network.service';
-import { SubjectListComponent } from '../../sd-subject-box/subject-list/subject-list.component';
 
 @Component({
   selector: 'app-keyword-list',
@@ -28,6 +27,7 @@ export class KeywordListComponent implements OnInit {
   @Input('errorText') errorText = '';
   isRequired = false;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output('onRemove') onRemove: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private modals: ModalService,
     private network: NetworkService,
@@ -78,12 +78,7 @@ export class KeywordListComponent implements OnInit {
     let list = this.list.filter((x) => x.checked == true);
     this.modals.dismiss(list);
   }
-  async openSubjectSelection() {
-    const res = (await this.modals.present(SubjectListComponent)) as any;
-    if (res.data) {
-      this.onChange.emit(res.data);
-    }
-  }
+
   async addSubject() {
     let course_Id = JSON.parse(localStorage.getItem('course_Id'));
     if (this.inputText) {
@@ -130,23 +125,16 @@ export class KeywordListComponent implements OnInit {
     this.suggestionsList = [];
     const res = await this.network.getKeywords(obj);
     if (res.data) {
+      console.log(this.subs, res.data);
 
-      console.log(this.subs, res.data )
-
-      if(this.subs && this.subs.length > 0){
-        const result = res.data.filter(item2 =>
-          !this.subs.some(item1 => item1.id === item2.id)
+      if (this.subs && this.subs.length > 0) {
+        const result = res.data.filter(
+          (item2) => !this.subs.some((item1) => item1.id === item2.id)
         );
         this.suggestionsList = result;
       } else {
         this.suggestionsList = res.data;
       }
-
-
-
-
-
-
     }
     if (res.data.length == 0) {
       this.noSugg = true;
@@ -160,69 +148,48 @@ export class KeywordListComponent implements OnInit {
   }
 
   async addToSubjects(item) {
-    let formtype = localStorage.getItem('formtype');
+    this.inputText = '';
 
+    // Ensure item is an array
+    const newItems = Array.isArray(item) ? item : [item];
 
-    if (formtype != 'filter') {
+    // Filter out items that already exist in this.subs
+    const uniqueItems = newItems.filter(
+        newItem => !this.subs.some(existingItem => existingItem.id === newItem.id)
+    );
 
+    // Append only unique items
+    this.subs = [...this.subs, ...uniqueItems];
 
-      let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-      let obj = {
-        course_id: course_Id,
-        keyword_id: item.id,
-      };
+    // Remove added items from suggestionsList
+    this.suggestionsList = this.suggestionsList.filter(
+        suggestion => !uniqueItems.some(newItem => newItem.id === suggestion.id)
+    );
 
-      const res = await this.network.addKeyword(obj);
-
-
-      let data = {
-        course_id: course_Id,
-      };
-
-      const res2 = await this.network.getMyKeyword(data);
-      this.inputText = '';
-      this.subs = res2.result;
-      this.suggestionsList = [];
-
-
-      this.onChange.emit({
+    this.onChange.emit({
         subs: this.subs,
-      });
-    } else {
-      this.inputText = '';
-
-      this.myArray.push(item);
-
-      if(this.myArray && this.myArray.length > 0){
-        const result = this.suggestionsList.filter(item2 =>
-          !this.myArray.some(item1 => item1.id === item2.id)
-        );
-        this.suggestionsList = result;
-      } else {
-        this.suggestionsList = [];
-      }
-
-      this.subs = this.myArray;
+    });
+}
 
 
-
-      this.onChange.emit({
-        subs: this.subs,
-      });
-    }
-  }
   async removeMySubject(item) {
     let index = this.subs.findIndex((x) => x.id == item.id);
     this.subs.splice(index, 1);
-    let course_Id = JSON.parse(localStorage.getItem('course_Id'));
-    let obj = {
-      course_id: course_Id,
-      keyword_id: item.id,
-    };
-    const res2 = await this.network.removeMyKeyword(obj);
-    this.onChange.emit({
-      subs: this.subs,
-    });
+    console.log(this.subs)
+    // let course_Id = JSON.parse(localStorage.getItem('course_Id'));
+    // let obj = {
+    //   course_id: course_Id,
+    //   keyword_id: item.id,
+    // };
+    // const res2 = await this.network.removeMyKeyword(obj);
+
+    this.onRemove.emit(item);
+
+
+
+    // this.onChange.emit({
+    //   subs: this.subs,
+    // });
   }
   showAddSuggestionsButton() {
     if (!this.inputText) {

@@ -11,7 +11,7 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
   minValue: number = 0;
   maxValue: number = 100;
   @Input('currentValue') currentValue = 0;
-  currency_symbol;
+  currency_symbol = '$';
   @Input('key') key = '';
 
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
@@ -32,8 +32,10 @@ export class CoursePriseRangeComponent extends BasePage implements OnInit {
         this.maxValue = res.max_price;
         this.currency_symbol = res.currency_symbol
 
+        if(!this.currentValue){
+          this.currentValue = this.minValue;
+        }
 
-        this.currentValue = this.minValue;
       }
     } catch (error) {
       console.error('Error fetching price range:', error);

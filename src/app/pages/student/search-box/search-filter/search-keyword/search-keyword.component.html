@@ -1,0 +1,18 @@
+<!-- <div class="sd-input-box-outer-675315 ion-activatable ripple-parent rectangle" (click)="openSubjectSelection()">
+  <ion-ripple-effect></ion-ripple-effect>
+  <input class="fs-16 outfit sd-input-box-input-675315" [type]="type" [placeholder]="placeholder" readonly />
+  <ion-icon name="chevron-down-outline"></ion-icon>
+</div> -->
+
+<app-keyword-list [subs]="subs" (onChange)="setKeyworkIn($event)" (onRemove)="removeKeyword($event)"></app-keyword-list>
+<!-- <div class="suggestions-list-outer" *ngIf="suggestionsList?.length > 0 || subs?.length > 0">
+  <div class="fs-14 outfit-light" *ngIf="suggestionsList.length > 0">Tap on suggestions to add (max 5)</div>
+  <div class="suggestions-list-678564" >
+    <div class="sub-chips" *ngFor="let item of subs">
+      <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item?.name}}
+      </ion-chip>
+    </div>
+    <ion-chip class="fs-14 outfit-light sub-chips-76544" fill="clear" *ngFor="let item of suggestionsList"
+      (click)="addToSubjects(item)">{{item.name}}</ion-chip>
+  </div>
+</div> -->

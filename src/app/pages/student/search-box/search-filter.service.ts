@@ -8,11 +8,11 @@ import {
 
 export interface GlobalSearchFormModel {
   search: string;
-  keywords: string;
+  keywords: any[];
   language: string;
   mode_type: string;
   capacity: string;
-  price: string;
+  price: number;
   name: string;
   country: string;
   from_age: string;
@@ -40,11 +40,11 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
   initialState(): GlobalSearchFormModel {
     return {
       search: '',
-      keywords: '',
+      keywords: [],
       language: '',
       mode_type: '',
       capacity: '',
-      price: '',
+      price: 0,
       name: '',
       country: '',
       from_age: '',
@@ -80,7 +80,7 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
     });
   }
 
-  setKeywords(keywords: string) {
+  setKeywords(keywords: any[]) {
     this.setState((state) => ({
       ...state,
       keywords: keywords,
@@ -108,7 +108,7 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
     }));
   }
   
-  setPrice(price: string) {
+  setPrice(price: number) {
     this.setState((state) => ({
       ...state,
       price: price,
@@ -236,6 +236,15 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
       this.selectState((state) => state[key]).subscribe((data) => {
         resolve(data);
       });
+    });
+  }
+
+  removeKeyword(keyword: any){
+    this.setState((state) => {
+      return {
+       ...state,
+        keywords: state.keywords.filter((item) => item.id !== keyword.id),
+      };
     });
   }
 
