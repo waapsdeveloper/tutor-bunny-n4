@@ -13,8 +13,8 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   filters: any = null;
 
   constructor(
-    injector: Injector
-    // public globalCoursesService: GlobalCoursesService
+    injector: Injector,
+    public globalCoursesService: GlobalCoursesService
   ) {
     super(injector);
     this.events.subscribe(
@@ -68,7 +68,12 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
       to_age: this.filters?.age?.to_age || null,
     };
 
-    let res = await this.network.getGlobalSearch(obj);
+    // Remove keys with null values
+    let filteredObj = Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => value !== null)
+    );
+
+    let res = await this.network.getGlobalSearch(filteredObj);
     console.log('fetchList', res);
 
     return {
@@ -80,6 +85,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   }
 
   openDetails(item: any) {
+    this.globalCoursesService.setItem(item)
     this.nav.push('./student-course-detail', { course_id: item.id });
   }
 }

@@ -48,7 +48,11 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
       hourly_rate: this.filters?.hourly_rate || null,
     };
 
-    let res = await this.network.getGlobalSearch(obj);
+    let filteredObj = Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => value !== null)
+    );
+
+    let res = await this.network.getGlobalSearch(filteredObj);
 
     return {
       list: res.result.data,

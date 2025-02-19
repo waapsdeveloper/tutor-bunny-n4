@@ -50,7 +50,11 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
       country_id: this.filters?.country?.id || null,
     };
 
-    let res = await this.network.getGlobalSearch(obj);
+    let filteredObj = Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => value !== null)
+    );
+
+    let res = await this.network.getGlobalSearch(filteredObj);
 
     return {
       list: res.result.data,
@@ -69,6 +73,7 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
 
 
   openDetails(item: any) {
+    this.globalStudyMaterialService.setItem(item);
     this.nav.push('/student-material-detail', {material_id: item.id})
   }
 }

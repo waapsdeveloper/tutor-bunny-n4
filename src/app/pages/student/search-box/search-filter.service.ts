@@ -14,12 +14,12 @@ export interface GlobalSearchFormModel {
   capacity: string;
   price: number;
   name: string;
-  country: string;
+  country: any;
   from_age: string;
   to_age: string;
   keyword_id: string;
   hourly_rate: string;
-  country_id: string;
+  country_id: number;
   travel_policy: any,
   travel_policy_id: string;
 }
@@ -47,12 +47,12 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
       capacity: '',
       price: 0,
       name: '',
-      country: '',
+      country: null,
       from_age: '',
       to_age: '',
       keyword_id: '',
       hourly_rate: '',
-      country_id: '',
+      country_id: null,
       travel_policy: null,
       travel_policy_id: '',
     };
@@ -173,7 +173,7 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
     }));
   }
   
-  setCountryId(country_id: string) {
+  setCountryId(country_id: number) {
     this.setState((state) => ({
       ...state,
       country_id: country_id,
