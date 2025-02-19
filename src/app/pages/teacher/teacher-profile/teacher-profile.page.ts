@@ -3,6 +3,7 @@ import { ViewWillEnter } from '@ionic/angular';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import * as moment from 'moment';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -223,9 +224,8 @@ export class TeacherProfilePage
     verifiedOn: '',
     rating: 0,
     totalRating: 0,
-    is_edit: true
+    is_edit: true,
   };
-
 
   loading = false;
   user: any;
@@ -233,6 +233,7 @@ export class TeacherProfilePage
   teacherId;
   params;
   backUrl;
+  videoBox;
   infoData = {
     subjects: [],
     languages: [],
@@ -272,12 +273,13 @@ export class TeacherProfilePage
   constructor(
     injector: Injector,
     public globalTeacherService: GlobalTeacherService,
+    private userService : UsersService
   ) {
     super(injector);
   }
 
   ngOnInit() {
-    console.log()
+    console.log();
     const params = this.nav.getQueryParams();
 
     if (params['email']) {
@@ -286,22 +288,17 @@ export class TeacherProfilePage
   }
 
   async ionViewWillEnter() {
-
+    let user = this.userService.getUser();
+    console.log(user, "i am a user");
+    this.teacherId =  user.id;
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-
-    if (this.params.teacher_id) {
-      this.teacherId = this.params.teacher_id;
-      this.globalTeacherService.getItem(this.teacherId).subscribe((data) => {
-        this.teacher$ = data;
-        this.callApi(this.teacher$);
-      });
-    } else {
-      // this.nav.pop();
-    }
-
+       let res = await this.network.teacherById(this.teacherId);
+      console.log('hello', res.result);
+      this.teacher$ = res.result;
+      this.callApi(this.teacher$);
   }
 
   async callApi(data): Promise<boolean> {
@@ -312,10 +309,13 @@ export class TeacherProfilePage
     this.headerData = {
       image: user.image,
       displayName: this.utility.getAmericanName(user.name),
-      verifiedOn: (user.verified_on == null) ? moment(user.verified_on).format('DD-MMM-YYYY') : 'In Review',
+      verifiedOn:
+        user.verified_on == null
+          ? moment(user.verified_on).format('DD-MMM-YYYY')
+          : 'In Review',
       rating: user.teacher.avg_rating,
       totalRating: user.teacher.total_rating,
-      is_edit: true
+      is_edit: true,
     };
 
     this.infoData = {
@@ -366,6 +366,10 @@ export class TeacherProfilePage
       heading: 'Gallery',
       list: res.gallery,
     };
+    this.videoBox = {
+      user_id: user.id,
+    };
+    console.log(this.videoBox , "video box id" )
 
     return true;
   }
@@ -385,11 +389,13 @@ export class TeacherProfilePage
     this.headerData = {
       image: this.user.image,
       displayName: this.utility.getAmericanName(this.user.name),
-      verifiedOn: (this.user.verified_on) ? moment(this.user.verified_on).format('DD-MMM-YYYY') : null,
+      verifiedOn: this.user.verified_on
+        ? moment(this.user.verified_on).format('DD-MMM-YYYY')
+        : null,
       rating: this.user.teacher.avg_rating,
       totalRating: this.user.teacher.total_rating,
-      is_edit: true
-    }
+      is_edit: true,
+    };
 
     this.infoData = {
       subjects: this.user.teacher.subjects,
@@ -398,34 +404,34 @@ export class TeacherProfilePage
       country: this.user.teacher.country.name,
       city: this.user.teacher.city,
       state: this.user.teacher.state.name,
-      flag: this.getFlag()
-    }
+      flag: this.getFlag(),
+    };
 
     this.countData = {
       years_of_experience: this.user.teacher.started_teaching,
       course_count: res.course_material.total_courses,
       notes_count: res.course_material.total_material,
-    }
+    };
 
     this.aboutData = {
       heading: 'About',
-      text: this.user.teacher.description || ''
-    }
+      text: this.user.teacher.description || '',
+    };
 
     this.courseData = {
       heading: 'Courses & Study Notes',
-      list: res.course_material.list
-    }
+      list: res.course_material.list,
+    };
 
     this.galleryData = {
       heading: 'Gallery',
-      list: res.gallery
-    }
+      list: res.gallery,
+    };
 
     this.ratingData = {
       heading: 'Reviews',
-      list: res.reviews
-    }
+      list: res.reviews,
+    };
 
     this.loading = false;
 
@@ -442,7 +448,7 @@ export class TeacherProfilePage
     //   this.rating = this.user.teacher.avg_rating;
     //   this.status = this.user.teacher.status;
 
-      // this.subject = this.user.teacher.subjects;
+    // this.subject = this.user.teacher.subjects;
     //   this.experince = this.user.teacher.started_teaching;
     //   // const user = this.users.getUser();
     //   const data = (await this.network.getImage(res.user.id)) as any;
