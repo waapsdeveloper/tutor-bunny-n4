@@ -184,3 +184,10 @@
 .profile-line-7895760 {
   margin: 8px;
 }
+.rectangle-content-outer {
+  width: 222px !important;
+}
+
+.rectangle-image-outer {
+  width: calc(100% - 222px) !important;
+}

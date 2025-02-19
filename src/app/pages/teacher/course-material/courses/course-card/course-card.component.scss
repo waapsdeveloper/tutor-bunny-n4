@@ -185,10 +185,10 @@
   margin: 8px;
 }
 
-.rectable-image-outer {
-  
+.rectangle-content-outer {
+  width: 222px !important;
 }
 
-.rectable-content-outer {
-
+.rectangle-image-outer {
+  width: calc(100% - 222px) !important;
 }
