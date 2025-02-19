@@ -5,9 +5,9 @@
 </div> -->
 
 <app-keyword-list [subs]="subs"></app-keyword-list>
-<div class="suggestions-list-outer">
+<div class="suggestions-list-outer" *ngIf="suggestionsList?.length > 0 || subs?.length > 0">
   <div class="fs-14 outfit-light" *ngIf="suggestionsList.length > 0">Tap on suggestions to add (max 5)</div>
-  <div class="suggestions-list-678564">
+  <div class="suggestions-list-678564" >
     <div class="sub-chips" *ngFor="let item of subs">
       <ion-chip class="chips-type-sm-7895 fs-14 outfit">{{item?.name}}
       </ion-chip>
