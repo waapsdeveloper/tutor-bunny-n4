@@ -1,13 +1,13 @@
 <div class="nd-card-outer-748">
   <div
-    class="image-outer" (click)="openDetails.emit()"
+    class="image-outer" [class.rectangle-image-outer]="hostScreensize <400" (click)="openDetails.emit()"
     [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
 >
-    <div class="label-bar-bottom">
+    <div class="label-bar-bottom" *ngIf="hostScreensize>400">
       <span>{{ item.teacher.auth_user_currency_symbol }} {{ item.teacher.hourly_rate }}</span>
     </div>
   </div>
-  <div class="content-outer">
+  <div class="content-outer" [class.rectangle-content-outer]="hostScreensize <400">
     <div class="content-inner">
 
       <div class="content-title roboto-medium fs-16" (click)="openDetails.emit()">

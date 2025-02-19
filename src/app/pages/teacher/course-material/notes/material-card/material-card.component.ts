@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  HostListener,
   Injector,
   Input,
   OnInit,
@@ -56,8 +57,21 @@ export class MaterialCardComponent extends BasePage implements OnInit {
     super(injector);
   }
 
+  hostScreensize = -1;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
+  }
+
+  updateColumnClass(width: number) {
+    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+  }
+
+ 
   ngOnInit() {
     this.status = this.item.status;
+    this.updateColumnClass(window.innerWidth);
   }
 
   async initialize(data) {

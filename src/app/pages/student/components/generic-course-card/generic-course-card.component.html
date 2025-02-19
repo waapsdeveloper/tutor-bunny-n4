@@ -1,6 +1,6 @@
 <div class="nd-card-outer-748">
   <div class="image-outer" [class.rectable-image-outer]="hostScreensize <= 400" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
-    <div class="label-bar-bottom">
+    <div class="label-bar-bottom" *ngIf="hostScreensize>400">
       <span>{{ item.auth_user_currency_symbol }} {{ item.updated_price }}/lesson</span>
     </div>
   </div>
@@ -42,7 +42,7 @@
           <!-- *ngIf="getButtonConfig(item)" -->
           <app-trial-req-button [courseId]="item.id" ></app-trial-req-button>
 
-          
+
 
           <div class="action-items">
             <img [src]="itemExistInFav$ ? 'assets/svg/heart-78.svg' : 'assets/svg/heart-77.svg'"
@@ -54,4 +54,3 @@
     </div>
   </div>
 </div>
- 

@@ -18,9 +18,9 @@
 
     <div class="total-payment">
       <div class="roboto-regular fs-14 pay">Total Payment</div>
-      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{walletCurrency}} {{walletAmount}}</span>
+      <span class="roboto-bold fs-21 " style="color:rgba(24, 28, 50, 1);" >{{walletCurrency}} {{walletAmount.toFixed(2)}}</span>
     </div>
-    
+
   </div>
 
   <ion-list class="checkout-history-list" inset="true">
@@ -33,5 +33,5 @@
     </ion-item>
 
   </ion-list>
-  
+
 </ion-content>

@@ -1,6 +1,6 @@
 <div class="nd-card-outer-748">
-  <div class="image-outer" [class.rectable-image-outer]="hostScreensize <= 400" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
-    <div class="label-bar-bottom">
+  <div class="image-outer" [class.rectangle-image-outer]="hostScreensize <= 400" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
+    <div class="label-bar-bottom" *ngIf="hostScreensize > 400 ">
       <span>{{ item.auth_user_currency_symbol }} {{ item.price }}</span>
     </div>
 
@@ -18,7 +18,7 @@
     </div>
 
   </div>
-  <div class="content-outer" [class.rectable-content-outer]="hostScreensize <= 400">
+  <div class="content-outer" [class.rectangle-content-outer]="hostScreensize <= 400">
     <div class="content-inner">
       <div class="content-title roboto-medium fs-16" (click)="openDetails.emit()">
         {{ item.title }}
@@ -74,7 +74,7 @@
                     </div>
                   </ion-item>
                 </ion-list>
-                <ion-list *ngIf="status == 'active'">
+                <ion-list *ngIf="status === 'active'">
                   <ion-item class="profile-line-789578" (click)="inactiveCourse(item)">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                       <img class="img1-789575" src="../../../assets/svg/eye.svg" />
@@ -82,7 +82,7 @@
                     </div>
                   </ion-item>
                 </ion-list>
-                <ion-list *ngIf="status == 'inactive'">
+                <ion-list *ngIf="status === 'inactive'">
                   <ion-item class="profile-line-789578" (click)="activeCourse(item)">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                       <img class="img1-789575" src="../../../assets/svg/active-eye.svg" />
