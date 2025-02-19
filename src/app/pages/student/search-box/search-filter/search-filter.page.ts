@@ -9,7 +9,10 @@ import { SearchFilterService } from '../search-filter.service';
 })
 export class SearchFilterPage extends BasePage implements OnInit {
 
-  formData$: any;
+  formData$: any = {
+    keywords: [],
+    price_range: [0, 1000],
+  }
 
   formType = 'filter';
   currency = "$"
