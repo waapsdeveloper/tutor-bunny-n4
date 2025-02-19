@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, HostListener, Injector, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
@@ -8,7 +8,7 @@ import { GlobalStudyMaterialService } from 'src/app/services/global-study-materi
   templateUrl: './student-dashboard-study-material.page.html',
   styleUrls: ['./student-dashboard-study-material.page.scss'],
 })
-export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {  
+export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {
 
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
@@ -24,10 +24,22 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
     };
   }
 
+   hostScreensize = -1;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+      this.updateColumnClass(event.target.innerWidth);
+    }
+
+    updateColumnClass(width: number) {
+      this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+    }
+
   ngOnInit() {
-    // this.globalStudyMaterialService.getList().subscribe(data => {      
+    // this.globalStudyMaterialService.getList().subscribe(data => {
     //   this.list = data;
     // });
+    this.updateColumnClass(window.innerWidth);
     this.resetAndFetch();
   }
 

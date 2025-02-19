@@ -127,4 +127,10 @@
     visibility: hidden !important;
   }
 }
+.rectangle-content-outer {
+  width: 222px !important;
+}
 
+.rectangle-image-outer {
+  width: calc(100% - 222px) !important;
+}
