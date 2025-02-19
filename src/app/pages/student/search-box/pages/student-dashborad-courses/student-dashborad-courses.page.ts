@@ -9,17 +9,24 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
   styleUrls: ['./student-dashborad-courses.page.scss'],
 })
 export class StudentDashboradCoursesPage extends ListPage implements OnInit {
-
   keyword: any;
-  filters: any = null
+  filters: any = null;
 
   constructor(
-    injector: Injector,
+    injector: Injector
     // public globalCoursesService: GlobalCoursesService
   ) {
     super(injector);
-    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
-    this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
+    this.events.subscribe(
+      'tag-input-search-triggered',
+      this.triggerSearchWithParams.bind(this),
+      false
+    );
+    this.events.subscribe(
+      'tag-filter-result-triggered',
+      this.getResultsByFilter.bind(this),
+      false
+    );
   }
 
   ngOnInit(): void {
@@ -37,7 +44,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
     // this.cdr.detectChanges();
   }
 
-  getResultsByFilter(data){
+  getResultsByFilter(data) {
     console.log('getResultsByFilter', data);
     this.filters = data;
     this.resetAndFetch();
@@ -45,11 +52,22 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     let obj = {
-      type: "course",
-      keyword_id: this.keyword ? this.keyword.id : null,
-      filters: this.filters,
+      type: 'course',
       page: page,
+      keyword_id: this.keyword ? this.keyword.id : null,
+      keywords: this.filters?.keywords || [],
+      language_id: this.filters?.language?.id || null,
+      travel_policy_id: this.filters?.travel_policy?.id || null,      
+      price: this.filters?.price || null,
+      mode: this.filters?.mode_type || null,
+      capacity: this.filters?.capacity || null,
+      hourly_rate: this.filters?.hourly_rate || null,
+      teacher_name: this.filters?.name || null,
+      country_id: this.filters?.country?.id || null,
+      from_age: this.filters?.age?.from_age || null,
+      to_age: this.filters?.age?.to_age || null,
     };
+
     let res = await this.network.getGlobalSearch(obj);
     console.log('fetchList', res);
 

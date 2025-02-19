@@ -63,4 +63,8 @@ export class SearchFilterPage extends BasePage implements OnInit {
     this.nav.pop();
 
   }
+
+  dismiss() {
+    this.filters.reset();
+  }
 }

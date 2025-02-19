@@ -116,3 +116,11 @@
     }
   }
 }
+
+.rectable-image-outer {
+  width: calc(100% - 222px) !important;
+}
+
+.rectable-content-outer {
+  width: 222px !important;
+}

@@ -1,10 +1,10 @@
 <div class="nd-card-outer-748">
-  <div class="image-outer" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
+  <div class="image-outer" [class.rectable-image-outer]="hostScreensize <= 400" (click)="openDetails.emit()" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
     <div class="label-bar-bottom">
       <span>{{ item.auth_user_currency_symbol }} {{ item.updated_price }}/lesson</span>
     </div>
   </div>
-  <div class="content-outer">
+  <div class="content-outer" [class.rectable-content-outer]="hostScreensize <= 400">
     <div class="content-inner">
       <div class="content-title roboto-medium fs-16" (click)="openDetails.emit()">
         {{ item.title }}

@@ -13,5 +13,7 @@
       (removetoFav)="removeToFav()"></app-sd-fav-button>
     <app-sd-fav-button *ngIf="goToFav" [flag]="showFavValue" (click)="showFavCourse()"></app-sd-fav-button>
     <app-sd-share-button *ngIf="showShare"></app-sd-share-button>
+    <ng-content #buttons></ng-content>
+    
   </div>
 </div>

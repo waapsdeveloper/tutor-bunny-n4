@@ -25,8 +25,14 @@ export class TravelPoliceComponent extends BasePage implements OnInit {
   public set travel_policy(value: any){
     this._travel_policy = value;
     if(value && value.name){
-
       this.selectedtravelpolicy = value;
+    } else {
+      this.selectedtravelpolicy = {
+        "created_at": null,
+        "id": -1,
+        "name": "",
+        "updated_at": null
+      }
     }
 
   }

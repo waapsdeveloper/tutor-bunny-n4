@@ -20,6 +20,7 @@ export interface GlobalSearchFormModel {
   keyword_id: string;
   hourly_rate: string;
   country_id: string;
+  travel_policy: any,
   travel_policy_id: string;
 }
 
@@ -52,6 +53,7 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
       keyword_id: '',
       hourly_rate: '',
       country_id: '',
+      travel_policy: null,
       travel_policy_id: '',
     };
   }
@@ -114,6 +116,13 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
       price: price,
     }));
   }
+
+  setPriceCurrency(price_currency: string) {
+    this.setState((state) => ({
+      ...state,
+      price_currency: price_currency,
+    }));
+  }
   
   setName(name: string) {
     this.setState((state) => ({
@@ -154,6 +163,13 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
     this.setState((state) => ({
       ...state,
       hourly_rate: hourly_rate,
+    }));
+  }
+
+  setHourlyRateCurrency(hourly_rate_currency: string) {
+    this.setState((state) => ({
+      ...state,
+      hourly_rate_currency: hourly_rate_currency,
     }));
   }
   

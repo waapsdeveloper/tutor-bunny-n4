@@ -39,11 +39,15 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
     const user = this.users.getUser();
 
     let obj = {
-      type: "material",
-      keyword_id: this.keyword ? this.keyword.id : null,
-      filters: this.filters,
+      type: "material",      
       page: page,
       user_id: user.id,
+      keyword_id: this.keyword ? this.keyword.id : null,
+      keywords: this.filters?.keywords || [],
+      language_id: this.filters?.language?.id || null,
+      price: this.filters?.price || null,
+      teacher_name: this.filters?.name || null,
+      country_id: this.filters?.country?.id || null,
     };
 
     let res = await this.network.getGlobalSearch(obj);

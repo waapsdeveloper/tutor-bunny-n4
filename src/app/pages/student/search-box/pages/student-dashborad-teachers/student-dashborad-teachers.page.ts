@@ -40,10 +40,12 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
 
     let obj = {
       type: "teacher",
-      keyword_id: this.keyword ? this.keyword.id : null,
-      filters: this.filters,
       page: page,
-      user_id: user.id,
+      user_id: user.id,      
+      keyword_id: this.keyword ? this.keyword.id : null,
+      country_id: this.filters?.country?.id || null,      
+      travel_policy_id: this.filters?.travel_policy?.id || null,
+      hourly_rate: this.filters?.hourly_rate || null,
     };
 
     let res = await this.network.getGlobalSearch(obj);

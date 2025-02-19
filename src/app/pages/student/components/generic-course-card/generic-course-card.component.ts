@@ -58,6 +58,17 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
     super(injector);
     this.user = this.users.getUser();
   }
+  
+  hostScreensize = -1;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
+  }
+
+  updateColumnClass(width: number) {
+    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
+  }
 
   ngOnInit(): void {
     this.updateColumnClass(window.innerWidth);   
@@ -91,16 +102,6 @@ export class GenericCourseCardComponent extends BasePage implements OnInit {
   }
 
 
-  hostScreensize = -1;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.updateColumnClass(event.target.innerWidth);
-  }
-
-  updateColumnClass(width: number) {
-    this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
-  }
   
 
  
