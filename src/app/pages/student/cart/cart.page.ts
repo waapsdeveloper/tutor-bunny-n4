@@ -218,6 +218,7 @@ async  removeCartitem(item) {
     console.log(res);
 
     this.order = res;
+    console.log(this.order , "order");
     this.events.publish("event-order-number", res);
 
     for (let i = 0; i < items.length; i++) {

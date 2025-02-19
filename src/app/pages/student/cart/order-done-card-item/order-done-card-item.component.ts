@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 
 @Component({
@@ -12,29 +12,32 @@ export class OrderDoneCardItemComponent  implements OnInit {
   order_number = '';
 
   private _data: any;
-
+  @Input()
   get data(): any {
-    return this._data;
+   return this._data;
+
   }
 
   set data(value: any) {
     this._data = value;
-    this.updateData(value);
+    console.log(value , "value") ;
+       this.updateData(value);
   }
 
-  constructor(private events: EventsService) { 
+  constructor(private events: EventsService) {
 
     this.events.subscribe("event-order-number", (res) => {
       this.updateData.bind(res);
     });
   }
 
+
   ngOnInit() {}
 
 
 
   async updateData(value: any){
-    console.log(value)
+    console.log(value,"value")
     this.order_number = value.order_number;
   }
 
