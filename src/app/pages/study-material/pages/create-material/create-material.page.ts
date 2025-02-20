@@ -340,7 +340,7 @@ export class CreateMaterialPage extends BasePage implements OnInit, ViewWillEnte
 
     this.globalStudyMaterialService.getMyStudyMaterialFromApi(1, '');
 
-    this.nav.push('/tabs/course-material/notes');
+    this.nav.push('/tabs/course-material', {view:'notes'});
 
 
 

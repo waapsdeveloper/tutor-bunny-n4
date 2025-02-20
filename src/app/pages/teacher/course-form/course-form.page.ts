@@ -208,17 +208,21 @@ export class CourseFormPage
   }
 
   async submit() {
+    console.log("fff")
     this.events.publish(
       'teacher-course-second-screen-submit-call',
       this.createCourseService.formData
     );
     let f = this.createCourseService.formData;
+    console.log(f , "f")
     if (!f.category || !f.price || !f.duration || !f.lesson || !f.keyword) {
       return;
     }
+    console.log("fff1")
     if (f.keyword.length == 0) {
       return;
     }
+    console.log("fff2")
     const course_id = this.createCourseService.courseId;
     if (f.category && f.category.id) {
       f.category_id = f.category.id;
@@ -233,6 +237,7 @@ export class CourseFormPage
         this.utility.presentSuccessToast('Course Saved Successfully');
       }
     }
+    console.log("last ");
 
     // if (res && res.message) {
     //   this.loading = false;
@@ -243,7 +248,7 @@ export class CourseFormPage
     //   this.utility.presentSuccessToast(message);
     // }
     this.createCourseService.resetFormData();
-    this.nav.push('/tabs/course-material/courses');
+    this.nav.push('/tabs/course-material' , {view:'courses'});
     this.events.publish('initilize-the-list', res);
     this.globalCourseService.getMyCoursesFromApi(1, '')
     this.loading = false;
