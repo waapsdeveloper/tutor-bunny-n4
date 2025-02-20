@@ -66,6 +66,14 @@ export class SearchFilterService extends NgSimpleStateBaseRxjsStore<GlobalSearch
     return this.selectState((state) => state );
   }
 
+  getFormDataPromise(){
+    return new Promise((resolve) => {
+      this.selectState((state) => state).subscribe((data) => {
+        resolve(data);
+      });
+    });
+  }
+
   updateFormData(value: any, key: string): void {
     this.setState((state) => ({
      ...state,

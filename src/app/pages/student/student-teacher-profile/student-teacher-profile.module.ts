@@ -17,6 +17,7 @@ import { StpPageHeaderModule } from 'src/app/components/shared/teacher-profile-p
 import { StpPageVideoBoxModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-video-box/stp-page-video-box.module';
 import { StpPageInfoModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-header/stp-page-info/stp-page-info.module';
 import { StpPageProfileStatisticsModule } from 'src/app/components/shared/teacher-profile-pages-components/stp-page-profile-statistics/stp-page-profile-statistics.module';
+import { ExpQulRetroModule } from 'src/app/components/exp-qul-retro/exp-qul-retro.module';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { StpPageProfileStatisticsModule } from 'src/app/components/shared/teache
     StpPageHeaderModule,
     StpPageVideoBoxModule,
     StpPageInfoModule,
-    StpPageProfileStatisticsModule
+    StpPageProfileStatisticsModule,
+    ExpQulRetroModule
   ],
   declarations: [StudentTeacherProfilePage]
 })

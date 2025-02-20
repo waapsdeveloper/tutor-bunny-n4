@@ -21,6 +21,7 @@ import { StpPageProfileStatisticsModule } from 'src/app/components/shared/teache
 import { GlobalTextReadModule } from 'src/app/components/global-text-read/global-text-read.module';
 import { MyRatingsModule } from 'src/app/components/my-ratings/my-ratings.module';
 import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-button-clear.module';
+import { ExpQulRetroModule } from 'src/app/components/exp-qul-retro/exp-qul-retro.module';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { SdButtonClearModule } from 'src/app/components/sd-button-clear/sd-butto
     StpPageInfoModule,
     StpPageProfileStatisticsModule,
     SdButtonClearModule,
+    ExpQulRetroModule
   ],
   declarations: [TeacherProfilePage],
 })

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="modals.dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+
+  <app-global-text-read [heading]="'Qualifications'" [text]="data.qualification"></app-global-text-read>
+  <app-global-text-read [heading]="'Experiences'" [text]="data.experience"></app-global-text-read>
+
+
+</ion-content>
