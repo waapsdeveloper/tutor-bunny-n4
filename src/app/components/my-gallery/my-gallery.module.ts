@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyGalleryComponent } from './my-gallery.component';
 import { GalleryListModule } from './gallery-list/gallery-list.module';
+import { GalleryViewerModule } from './gallery-viewer/gallery-viewer.module';
 
 
 
@@ -9,7 +10,8 @@ import { GalleryListModule } from './gallery-list/gallery-list.module';
   declarations: [MyGalleryComponent],
   imports: [
     CommonModule,
-    GalleryListModule
+    GalleryListModule,
+    GalleryViewerModule
   ],
   exports:[MyGalleryComponent]
 })

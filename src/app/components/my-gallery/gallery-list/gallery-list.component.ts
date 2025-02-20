@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { ModalService } from 'src/app/services/basic/modal.service';
 @Component({
   selector: 'app-gallery-list',
   templateUrl: './gallery-list.component.html',
@@ -10,7 +11,7 @@ export class GalleryListComponent {
   @Input() list: any[] = [];  
   @Output() clickOpen = new EventEmitter<any>()
   
-  constructor() {
+  constructor(public modals: ModalService) {
 
   }  
 

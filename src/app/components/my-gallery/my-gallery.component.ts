@@ -1,4 +1,7 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { ModalService } from 'src/app/services/basic/modal.service';
+import { GalleryListComponent } from './gallery-list/gallery-list.component';
+import { GalleryViewerComponent } from './gallery-viewer/gallery-viewer.component';
 
 @Component({
   selector: 'app-my-gallery',
@@ -26,7 +29,7 @@ export class MyGalleryComponent {
 
   @Output() seeallEmit = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private modals: ModalService) {
     
   }
 
@@ -37,6 +40,15 @@ export class MyGalleryComponent {
       this.heading = value.heading || '';
       this.list = value.list || [];
     }
+
+  }
+
+  openGalleryList(){
+  
+    // GalleryListComponent
+    this.modals.present(GalleryViewerComponent, {
+      list: this.list
+    }, '', 1, [0,1], true)
 
   }
 
