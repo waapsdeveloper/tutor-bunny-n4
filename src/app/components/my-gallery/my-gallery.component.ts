@@ -2,6 +2,7 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { GalleryListComponent } from './gallery-list/gallery-list.component';
 import { GalleryViewerComponent } from './gallery-viewer/gallery-viewer.component';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-my-gallery',
@@ -10,9 +11,9 @@ import { GalleryViewerComponent } from './gallery-viewer/gallery-viewer.componen
 })
 export class MyGalleryComponent {
 
- 
-  
-  private _data: any; 
+
+
+  private _data: any;
   @Input()
   set data(value: any) {
     this._data = value;
@@ -29,11 +30,11 @@ export class MyGalleryComponent {
 
   @Output() seeallEmit = new EventEmitter<any>();
 
-  constructor(private modals: ModalService) {
-    
+  constructor(private modals: ModalService, private nav:NavService) {
+
   }
 
-  
+
   updateUserDetails(value: any){
 
     if (value) {
@@ -44,13 +45,15 @@ export class MyGalleryComponent {
   }
 
   openGalleryList(){
-  
+
     // GalleryListComponent
     this.modals.present(GalleryViewerComponent, {
       list: this.list
     }, '', 1, [0,1], true)
 
   }
+ 
+
 
   // goToGallery() {
 
