@@ -1,21 +1,29 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NavService } from 'src/app/services/nav.service';
 import { SwiperComponent } from 'swiper/angular';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-course-material',
   templateUrl: './course-material.page.html',
   styleUrls: ['./course-material.page.scss'],
 })
-export class CourseMaterialPage {
+export class CourseMaterialPage implements AfterViewInit{
 
   @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
   view = 'course';
   activeIndex = 0;
-  
-  constructor(private nav: NavService, private cdr: ChangeDetectorRef) { }
+  params;
 
-  
+  constructor(private nav: NavService, private cdr: ChangeDetectorRef , private activatedRoute:ActivatedRoute) {
+
+  }
+
+  ngAfterViewInit(): void {
+    this.params = this.activatedRoute.snapshot.paramMap.get('view');
+
+  console.log(this.params , "params")
+    this.toogleView('course');
+  }
 
   toogleView(view) {
     this.view = view;

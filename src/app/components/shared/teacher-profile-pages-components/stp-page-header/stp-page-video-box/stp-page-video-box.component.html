@@ -1,11 +1,4 @@
-<div class="video-box-98563 background-image-with-button"  *ngIf="!doPlay">
-  <!-- Show Image if No Video URL -->
-  <img src="assets/svg/vedio.svg" alt="video placeholder" class="youtube" *ngIf="videoUrl" (click)="playVIdeo()">
-</div>
-
-
-
-<div class="video-box-98563" *ngIf="videoUrl && doPlay">
-  <video  [attr.src]="videoUrl" controls autoplay (error)="onVideoError($event)" style="width: 100%;">
+<div class="video-box-98563" *ngIf="videoUrl">
+  <video  [attr.src]="videoUrl" controls  (error)="onVideoError($event)" style="width: 100%;">
   </video>
 </div>

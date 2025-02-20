@@ -119,6 +119,7 @@ export class CreateCourseService extends NgSimpleStateBaseRxjsStore<CourseModel>
     this.formData['category'] = data['category'];
     this.formData['mode_type'] = data['mode_type'];
     this.formData['language'] = data['language'];
+    console.log(data['keywords'],"jjjj")
     this.formData['keyword'] = data['keywords'];
     this.formData['lesson'] = data['lesson'];
     this.formData['category'] = data['category'][0];

@@ -7,21 +7,21 @@ const routes: Routes = [
   {
     path: '',
     component: CourseMaterialPage,
-    children: [
-      {
-        path: '',
-        redirectTo: 'courses',
-        pathMatch: 'full'
-      }, 
-      {
-        path:'courses',
-        loadChildren:() => import('./courses/courses.module').then( m => m.CoursesPageModule)
-      },
-      {
-        path:'notes',
-        loadChildren:() => import('./notes/notes.module').then( m => m.NotesPageModule)
-      },
-    ]
+    // children: [
+    //   {
+    //     path: '',
+    //     redirectTo: 'courses',
+    //     pathMatch: 'full'
+    //   },
+    //   {
+    //     path:'courses',
+    //     loadChildren:() => import('./courses/courses.module').then( m => m.CoursesPageModule)
+    //   },
+    //   {
+    //     path:'notes',
+    //     loadChildren:() => import('./notes/notes.module').then( m => m.NotesPageModule)
+    //   },
+    // ]
   }
 ];
 
