@@ -9,7 +9,6 @@ import { log } from 'node:console';
   providedIn: 'root',
 })
 export class NetworkService {
-
   constructor(
     public api: ApiService,
     public router: Router,
@@ -30,7 +29,7 @@ export class NetworkService {
   }
 
   postImages(data) {
-    return this.httpPostResponse('gallery/add', data, null, false,false);
+    return this.httpPostResponse('gallery/add', data, null, false, false);
   }
 
   sendMessage(data) {
@@ -45,7 +44,13 @@ export class NetworkService {
     return this.httpPostResponse('user/update-profile-image', data);
   }
   postCoursePhoto(data) {
-    return this.httpPostResponse('courses/update-course-image', data, false, false, false);
+    return this.httpPostResponse(
+      'courses/update-course-image',
+      data,
+      false,
+      false,
+      false
+    );
   }
 
   updateMessageReaquest(data, id) {
@@ -75,7 +80,13 @@ export class NetworkService {
   }
 
   saveFcmToken(data) {
-    return this.httpPostResponse('update-firebase-token', data,null,false,false);
+    return this.httpPostResponse(
+      'update-firebase-token',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   postPhotoIdImage(data) {
@@ -109,11 +120,23 @@ export class NetworkService {
   }
 
   favCourseByIds(data) {
-    return this.httpPostResponse('courses/list-By-ids', data, null, false, false);
+    return this.httpPostResponse(
+      'courses/list-By-ids',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   favMaterialByIds(data) {
-    return this.httpPostResponse('material/list-By-ids', data, null, false, false);
+    return this.httpPostResponse(
+      'material/list-By-ids',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getStates(data) {
@@ -174,7 +197,13 @@ export class NetworkService {
   }
 
   getUnreadChat(data: any) {
-    return this.httpPostResponse('get-unread-chats/count', data, null, false, false);
+    return this.httpPostResponse(
+      'get-unread-chats/count',
+      data,
+      null,
+      false,
+      false
+    );
   }
 
   getChatRoomById(id: any, params: any) {
@@ -320,7 +349,7 @@ export class NetworkService {
     );
   }
 
-  geTrailsByIds(data) {    
+  geTrailsByIds(data) {
     return this.httpPostResponse(
       'courses/trials/by/ids',
       data,
@@ -359,11 +388,6 @@ export class NetworkService {
       false
     );
   }
-
-  
-
-
-
 
   geTrailRequestsByPusher(id) {
     return this.httpGetResponse(
@@ -574,11 +598,23 @@ export class NetworkService {
     return this.httpPostResponse('subjects/add-teacher-subject', data);
   }
   addKeyword(data) {
-    return this.httpPostResponse('keywords/add-keyword', data, false, false, false);
+    return this.httpPostResponse(
+      'keywords/add-keyword',
+      data,
+      false,
+      false,
+      false
+    );
   }
 
   addMaterialKeyword(data) {
-    return this.httpPostResponse('keywords/add-material-keyword', data, false, false, false);
+    return this.httpPostResponse(
+      'keywords/add-material-keyword',
+      data,
+      false,
+      false,
+      false
+    );
   }
 
   addInputKeyword(data) {
@@ -770,9 +806,8 @@ export class NetworkService {
   }
 
   deleteMaterial(data) {
-    return this.httpPostResponse('material/delete',data, null, false, false);
+    return this.httpPostResponse('material/delete', data, null, false, false);
   }
-
 
   deleteShedule(id) {
     return this.httpDeleteResponse('schedule/delete/' + id, null);
@@ -894,8 +929,6 @@ export class NetworkService {
     );
   }
 
-
-
   postMaterialImage(data) {
     return this.httpPostResponse(
       'material/image/add',
@@ -950,14 +983,14 @@ export class NetworkService {
       'profile/video',
       data,
       null,
-      false,
+      true,
       true,
       'multipart/form-data'
     );
   }
 
   getIntoVideoFile(data) {
-    let str = this.serialize(data)
+    let str = this.serialize(data);
     return this.httpGetResponse(
       'profile/video' + '?' + str,
       null,
@@ -1074,7 +1107,7 @@ export class NetworkService {
       false
     );
   }
-  teacherById(id){
+  teacherById(id) {
     return this.httpGetResponse('teachers/by-id', id, false, false);
   }
 
@@ -1141,22 +1174,21 @@ export class NetworkService {
   creditHistory(data: any) {
     const str = this.serialize(data);
     return this.httpGetResponse(
-      'teacher/credit-history' + '/'+ data,
+      'teacher/credit-history' + '/' + data,
       null,
       false,
       false
     );
   }
-  earningHistory(data:any){
+  earningHistory(data: any) {
     const str = this.serialize(data);
     return this.httpGetResponse(
-      'teacher/earning-history' + '/'+ data,
+      'teacher/earning-history' + '/' + data,
       null,
       false,
       false
     );
   }
-
 
   getTeacherWallet() {
     return this.httpGetResponse('teacher/wallet', null, false, false);
@@ -1168,7 +1200,12 @@ export class NetworkService {
 
   getGlobalSearch(params: any) {
     const str = this.serialize(params);
-    return this.httpGetResponse('global-search' + '?' + str, null, false, false);
+    return this.httpGetResponse(
+      'global-search' + '?' + str,
+      null,
+      false,
+      false
+    );
   }
 
   serialize = (obj: any) => {

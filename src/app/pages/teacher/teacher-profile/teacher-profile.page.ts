@@ -250,6 +250,8 @@ export class TeacherProfilePage
     years_of_experience: 0,
     course_count: 0,
     notes_count: 0,
+    currency_symbol: '',
+    hourly_rate: 0,
   };
 
   aboutData = {
@@ -281,7 +283,7 @@ export class TeacherProfilePage
   constructor(
     injector: Injector,
     public globalTeacherService: GlobalTeacherService,
-    private userService : UsersService
+    private userService: UsersService
   ) {
     super(injector);
   }
@@ -297,16 +299,16 @@ export class TeacherProfilePage
 
   async ionViewWillEnter() {
     let user = this.userService.getUser();
-    console.log(user, "i am a user");
-    this.teacherId =  user.id;
+    console.log(user, 'i am a user');
+    this.teacherId = user.id;
     this.params = this.nav.getQueryParams();
     if (this.params.backUrl) {
       this.backUrl = this.params.backUrl;
     }
-       let res = await this.network.teacherById(this.teacherId);
-      console.log('hello', res.result);
-      this.teacher$ = res.result;
-      this.callApi(this.teacher$);
+    let res = await this.network.teacherById(this.teacherId);
+    console.log('hello', res.result);
+    this.teacher$ = res.result;
+    this.callApi(this.teacher$);
   }
 
   async callApi(data): Promise<boolean> {
@@ -363,6 +365,8 @@ export class TeacherProfilePage
       years_of_experience: user.teacher.started_teaching,
       course_count: res.course_material.total_courses,
       notes_count: res.course_material.total_material,
+      currency_symbol: user.teacher.auth_user_currency_symbol,
+      hourly_rate: user.teacher.converted_hourly_rate,
     };
 
     this.courseData = {
@@ -425,6 +429,8 @@ export class TeacherProfilePage
       years_of_experience: this.user.teacher.started_teaching,
       course_count: res.course_material.total_courses,
       notes_count: res.course_material.total_material,
+      currency_symbol: this.user.teacher.auth_user_currency_symbol,
+      hourly_rate: this.user.teacher.converted_hourly_rate,
     };
 
     this.aboutData = {
