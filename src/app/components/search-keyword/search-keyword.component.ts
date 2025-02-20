@@ -197,4 +197,8 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
     return false;
   }
+
+  onChangeSubs($event){
+    this.onChange.emit($event.subs);
+  }
 }
