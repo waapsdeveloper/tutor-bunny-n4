@@ -2,6 +2,7 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
+import { SearchFilterService } from '../../search-filter.service';
 
 @Component({
   selector: 'app-student-dashborad-courses',
@@ -14,14 +15,15 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   constructor(
     injector: Injector,
-    public globalCoursesService: GlobalCoursesService
+    public globalCoursesService: GlobalCoursesService,
+    public searchFilterService: SearchFilterService
   ) {
     super(injector);
-    this.events.subscribe(
-      'tag-input-search-triggered',
-      this.triggerSearchWithParams.bind(this),
-      false
-    );
+    // this.events.subscribe(
+    //   'tag-input-search-triggered',
+    //   this.triggerSearchWithParams.bind(this),
+    //   false
+    // );
     this.events.subscribe(
       'tag-filter-result-triggered',
       this.getResultsByFilter.bind(this),
@@ -30,27 +32,30 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit called');
-  }
-
-  triggerSearchWithParams(params) {
-    console.log('triggerSearch', params);
-    this.keyword = params;
-
     this.resetAndFetch();
-    // this.updateViewDetails({
-    //   search: params.text,
-    // });
-    // this.cdr.detectChanges();
   }
+
+  // triggerSearchWithParams(params) {
+  //   console.log('triggerSearch', params);
+  //   this.keyword = params;
+
+    
+  //   // this.updateViewDetails({
+  //   //   search: params.text,
+  //   // });
+  //   // this.cdr.detectChanges();
+  // }
 
   getResultsByFilter(data) {
-    console.log('getResultsByFilter', data);
+    console.log('getResultsByFilter', data);                           
     this.filters = data;
     this.resetAndFetch();
   }
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
+
+    this.filters = await this.searchFilterService.getFormDataPromise();
+
     let obj = {
       type: 'course',
       page: page,

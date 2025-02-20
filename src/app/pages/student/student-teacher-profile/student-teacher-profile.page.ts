@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 import { StudentWelcomeComponent } from '../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { ExpQulRetroComponent } from 'src/app/components/exp-qul-retro/exp-qul-retro.component';
 
 @Component({
   selector: 'app-student-teacher-profile',
@@ -62,6 +63,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     heading: 'Reviews',
     list: [],
   };
+
+  expQulData = {
+    heading: 'Experience',
+    experience: '',
+    qualification: ''
+  }
 
   constructor(
     injector: Injector,
@@ -164,6 +171,12 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
       heading: 'Gallery',
       list: res.gallery,
     };
+
+    this.expQulData = {
+      heading: 'Experience',
+      experience: this.teacher$.teacher.experience_description,
+      qualification: this.teacher$.teacher.qualification_description,
+    }
 
     return true;
   }
@@ -308,5 +321,13 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
         showBack: true,
       });
     }
+  }
+
+  goToQualifications() {
+    
+    const modal = this.modals.present(ExpQulRetroComponent, {
+      data: this.expQulData
+    }, '', 0.7, [0, 1]);
+
   }
 }

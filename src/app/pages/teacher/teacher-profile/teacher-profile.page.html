@@ -41,7 +41,7 @@
     <app-stp-page-profile-statistics [data]="countData"></app-stp-page-profile-statistics>
     <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text"></app-global-text-read>
 
-
+    <app-sd-button-clear [image]="'assets/svg/tag-file-icon.svg'" [text]="'View qualifications and experiences'" (click)="goToQualifications()"></app-sd-button-clear>
     <!-- courses section -->
     <app-my-courses [data]="courseData" *ngIf="courseData.list.length !== 0" (clickOpen)="clickOpenCourse($event)"></app-my-courses>
     <app-my-gallery [data]="galleryData" *ngIf="galleryData.list.length !== 0"></app-my-gallery>

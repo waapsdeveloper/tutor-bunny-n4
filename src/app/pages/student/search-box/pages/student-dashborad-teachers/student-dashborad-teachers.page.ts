@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ListPage } from 'src/app/base-page/list-page';
+import { SearchFilterService } from '../../search-filter.service';
 
 @Component({
   selector: 'app-student-dashborad-teachers',
@@ -12,21 +13,22 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
   filters: any = null;
   constructor(
     injector: Injector,
+    public searchFilterService: SearchFilterService
   ) {
     super(injector);
-    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+    // this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
     this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
   }
 
-  triggerSearchWithParams(params) {
-    console.log('triggerSearch', params);
-    this.keyword = params;
-    this.resetAndFetch();
-    // this.updateViewDetails({
-    //   search: params.text,
-    // });
-    // this.cdr.detectChanges();
-  }
+  // triggerSearchWithParams(params) {
+  //   console.log('triggerSearch', params);
+  //   this.keyword = params;
+  //   this.resetAndFetch();
+  //   // this.updateViewDetails({
+  //   //   search: params.text,
+  //   // });
+  //   // this.cdr.detectChanges();
+  // }
 
   getResultsByFilter(data){
     console.log('getResultsByFilter', data);
@@ -38,11 +40,14 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
     
     const user = this.users.getUser();
 
+    this.filters = await this.searchFilterService.getFormDataPromise();
+
     let obj = {
       type: "teacher",
       page: page,
-      user_id: user.id,      
+      user_id: user.id,
       keyword_id: this.keyword ? this.keyword.id : null,
+      language_id: this.filters?.language?.id || null,
       country_id: this.filters?.country?.id || null,      
       travel_policy_id: this.filters?.travel_policy?.id || null,
       hourly_rate: this.filters?.hourly_rate || null,

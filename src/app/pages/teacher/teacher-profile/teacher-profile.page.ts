@@ -4,6 +4,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import { GlobalTeacherService } from 'src/app/services/global-teacher.service';
 import * as moment from 'moment';
 import { UsersService } from 'src/app/services/users.service';
+import { ExpQulRetroComponent } from 'src/app/components/exp-qul-retro/exp-qul-retro.component';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -14,6 +15,7 @@ export class TeacherProfilePage
   extends BasePage
   implements OnInit, ViewWillEnter
 {
+
   // user;
   // displayName;
   // flag;
@@ -270,6 +272,12 @@ export class TeacherProfilePage
     list: [],
   };
 
+  expQulData = {
+    heading: 'Experience',
+    experience: '',
+    qualification: ''
+  }
+
   constructor(
     injector: Injector,
     public globalTeacherService: GlobalTeacherService,
@@ -369,7 +377,13 @@ export class TeacherProfilePage
     this.videoBox = {
       user_id: user.id,
     };
-    console.log(this.videoBox , "video box id" )
+    
+
+    this.expQulData = {
+      heading: 'Experience',
+      experience: this.teacher$.teacher.experience_description,
+      qualification: this.teacher$.teacher.qualification_description,
+    }
 
     return true;
   }
@@ -526,5 +540,13 @@ export class TeacherProfilePage
   back() {
     localStorage.removeItem('teacher');
     this.nav.pop();
+  }
+
+  goToQualifications() {
+    
+    const modal = this.modals.present(ExpQulRetroComponent, {
+      data: this.expQulData
+    }, '', 0.7, [0, 1]);
+
   }
 }

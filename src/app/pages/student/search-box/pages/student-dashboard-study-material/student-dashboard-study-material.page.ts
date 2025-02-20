@@ -1,42 +1,46 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ViewWillEnter } from '@ionic/angular';
 import { ListPage } from 'src/app/base-page/list-page';
 import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
+import { SearchFilterService } from '../../search-filter.service';
 
 @Component({
   selector: 'app-student-dashboard-study-material',
   templateUrl: './student-dashboard-study-material.page.html',
   styleUrls: ['./student-dashboard-study-material.page.scss'],
 })
-export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit {  
+export class StudentDashboardStudyMaterialPage extends ListPage implements OnInit, ViewWillEnter {  
 
   keyword: any;
   filters: any = null;
 
-  constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
+  constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService, public searchFilterService: SearchFilterService,) {
     super(injector);
-    this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
+    // this.events.subscribe('tag-input-search-triggered',this.triggerSearchWithParams.bind(this), false);
     this.events.subscribe('tag-filter-result-triggered', this.getResultsByFilter.bind(this), false);
   }
+  
 
-  triggerSearchWithParams(params) {
-    console.log('triggerSearch', params);
-    this.keyword = params;
-    this.resetAndFetch();
-    // this.updateViewDetails({
-    //   search: params.text,
-    // });
-    // this.cdr.detectChanges();
-  }
+  // triggerSearchWithParams(params) {
+  //   console.log('triggerSearch', params);
+  //   this.keyword = params;
+  //   this.resetAndFetch();
+  //   // this.updateViewDetails({
+  //   //   search: params.text,
+  //   // });
+  //   // this.cdr.detectChanges();
+  // }
 
   getResultsByFilter(data){
     console.log('getResultsByFilter', data);
     this.filters = data;
-    this.resetAndFetch();
+    this.resetAndFetch(); 
   }
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const user = this.users.getUser();
+
+    this.filters = await this.searchFilterService.getFormDataPromise();
 
     let obj = {
       type: "material",      
@@ -68,6 +72,10 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
     // this.globalStudyMaterialService.getList().subscribe(data => {      
     //   this.list = data;
     // });
+    this.resetAndFetch();
+  }
+
+  ionViewWillEnter(): void {
     this.resetAndFetch();
   }
 

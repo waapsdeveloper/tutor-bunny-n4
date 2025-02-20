@@ -16,6 +16,7 @@
       [text]="aboutData.text"
     ></app-global-text-read>
 
+    <app-sd-button-clear [image]="'assets/svg/tag-file-icon.svg'" [text]="'View qualifications and experiences'" (click)="goToQualifications()"></app-sd-button-clear>
     <!-- courses section -->
     <app-my-courses *ngIf="courseData.list.length !== 0"
       [data]="courseData"
