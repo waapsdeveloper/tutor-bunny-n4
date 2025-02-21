@@ -27,6 +27,8 @@ export class SearchBoxPage extends BasePage implements OnInit{
     this.filter.reset();
 
     this.events.subscribe('filter-result', this.getResultsByFilter.bind(this));
+    this.events.subscribe('restart-search-with-text', this.restartSearchWithText.bind(this));
+    
 
   }
   // click on recent search
@@ -67,6 +69,14 @@ export class SearchBoxPage extends BasePage implements OnInit{
 
   getResultsByFilter(formData){
     console.log(formData)
+    this.step = 3;
+
+    setTimeout( () => {
+      this.events.publish('tag-filter-result-triggered', formData);
+    }, 500)
+  }
+
+  restartSearchWithText(formData){
     this.step = 3;
 
     setTimeout( () => {

@@ -45,6 +45,17 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
     let res = await this.network.getDatafromText(obj);
     console.log(res)
+
+
+    // if we reach end of result and data is empty
+    if (res.data.length == 0) {
+      this.events.publish("restart-search-with-text", obj);      
+    }
+
+
+
+
+
     return {
       list: res.data,
       page: res.current_page,
