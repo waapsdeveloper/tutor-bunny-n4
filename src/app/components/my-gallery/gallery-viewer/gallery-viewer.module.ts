@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SdButtonGrayModule } from "../../sd-button-gray/sd-button-gray.module";
 import { SdHeaderTopModule } from "../../sd-header-top/sd-header-top.module";
 
+import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SdHeaderTopModule } from "../../sd-header-top/sd-header-top.module";
     SdButtonGrayModule,
     SdHeaderTopModule
 ],
+
   exports: [
     GalleryViewerComponent
   ]

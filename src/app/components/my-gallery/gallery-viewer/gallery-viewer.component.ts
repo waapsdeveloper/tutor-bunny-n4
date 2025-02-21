@@ -2,7 +2,8 @@ import { Component, OnInit, Input ,Injector} from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { BasePage } from 'src/app/base-page/base-page';
 import { GalleryImagePage } from 'src/app/pages/teacher/teacher-profile/teacher-gallery/gallery-image/gallery-image.page';
-
+import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-gallery-viewer',
   templateUrl: './gallery-viewer.component.html',
@@ -22,7 +23,7 @@ export class GalleryViewerComponent extends BasePage  {
    title;
    gallery = 'false';
 
-   constructor(injector: Injector) {
+   constructor(injector: Injector,private photoViewer: PhotoViewer,private platform: Platform) {
      super(injector);
      this.initialize();
    }
@@ -43,6 +44,15 @@ export class GalleryViewerComponent extends BasePage  {
        this.backBtn = this.params.backUrl;
      }
    }
+   openPhoto(imageUrl: string) {
+    if (this.platform.is('cordova') || this.platform.is('capacitor')) {
+      // ✅ Run the native PhotoViewer only on real devices
+      this.photoViewer.show(imageUrl, 'Photo Viewer', { share: true });
+    } else {
+      // ✅ Fallback: Open in a new browser tab
+      window.open(imageUrl, '_blank');
+    }
+  }
 
    async initialize() {
      const user = this.users.getUser();
@@ -55,10 +65,12 @@ export class GalleryViewerComponent extends BasePage  {
    }
 
    async addImageInArray(string) {
+
      let firstIndex = this.images.findIndex((x) => x.image == null);
      if (firstIndex != -1) {
        this.images[firstIndex]['id'] = firstIndex;
        this.images[firstIndex]['image'] = string;
+       console.log(this.images);
      }
      const user = this.users.getUser();
      let obj = {
@@ -73,6 +85,7 @@ export class GalleryViewerComponent extends BasePage  {
    }
 
    async onFileSelected(event: any) {
+
      const files: File[] = Array.from(event.target.files);
 
      // Check if the total images (existing + new) exceed 8

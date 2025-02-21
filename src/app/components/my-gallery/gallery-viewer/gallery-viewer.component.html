@@ -25,7 +25,7 @@
       <ion-row>
         <ion-col *ngFor="let image of images" size-xs="4" size-sm="4" size-md="4" size-lg="4">
           <div class="image-card-78975" [style.backgroundImage]="setBackgroundImage(image)"
-            (click)="openImage(image.image)">
+            (click)="openPhoto(image.image)">
             <img src="assets/svg/delete.svg" *ngIf="gallery === 'true'" class="clear-input-678956744"
               (click)="clearImage(image.id, $event, image)">
           </div>
