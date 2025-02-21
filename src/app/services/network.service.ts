@@ -691,6 +691,15 @@ export class NetworkService {
       false
     );
   }
+  getDatafromText(data:any){
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'global-search-by-text' + '?' + str,
+      null,
+      false,
+      false
+    );
+  }
 
   getUserByEmail(data) {
     const str = this.serialize(data);

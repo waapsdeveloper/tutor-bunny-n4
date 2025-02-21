@@ -10,7 +10,7 @@ import { SearchFilterService } from '../../search-filter.service';
   styleUrls: ['./tag-search-view.component.scss'],
 })
 export class TagSearchViewComponent extends ListPage implements OnInit {
-  
+
 
   @Output() selectKeyword: EventEmitter<any> = new EventEmitter<any>();
 
@@ -36,14 +36,14 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
-   
+
     let obj = {
       search: search,
       page: page,
       perpage: 20
     };
 
-    let res = await this.network.getKeywords(obj);
+    let res = await this.network.getDatafromText(obj);
     console.log(res)
     return {
       list: res.data,
@@ -111,7 +111,7 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
   // }
 
-  
+
   // callAPiOnSerch(search) {
   //   return new Promise(async (resolve) => {
   //     let obj = {
@@ -130,7 +130,7 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
 
 
-      
+
   //     // this.searchList = res.keywords;
   //     // this.searchCourses = res.result.data;
 
@@ -139,7 +139,7 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
   // }
 
   // async setRecentSeach(item, type) {
-    
+
   //   const params = {
   //     search: item.name // type == 'keyword' ? (item.keyword_name ?? '') : (item.title ?? ''),
   //   };
