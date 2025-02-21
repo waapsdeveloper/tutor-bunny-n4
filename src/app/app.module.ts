@@ -15,6 +15,7 @@ import { NgxPubSubModule } from '@pscoped/ngx-pub-sub';
 import { SharedSqliteModule } from './services/sqlite/shared-sqlite/shared-sqlite.module';
 import { SwiperModule } from 'swiper/angular';
 import { provideNgSimpleState } from 'ng-simple-state';
+import { PhotoViewer } from '@awesome-cordova-plugins/photo-viewer/ngx';
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
@@ -33,13 +34,15 @@ firebase.initializeApp(environment.firebaseConfig);
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
-    provideNgSimpleState({
-      enableDevTool: isDevMode(),
-      enableLocalStorage: true,
-      persistentStorage: 'local'
-    })
-
-  ],
+    provideNgSimpleState(
+      {
+        enableDevTool: isDevMode(),
+        enableLocalStorage: true,
+        persistentStorage: 'local'
+      }
+    ),
+    PhotoViewer  ]
+,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
