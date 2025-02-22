@@ -41,7 +41,13 @@ export class NetworkService {
   }
 
   postProfileImage(data) {
-    return this.httpPostResponse('user/update-profile-image', data);
+    return this.httpPostResponse(
+      'user/update-profile-image',
+      data,
+      null,
+      true,
+      false
+    );
   }
   postCoursePhoto(data) {
     return this.httpPostResponse(
@@ -90,11 +96,19 @@ export class NetworkService {
   }
 
   postPhotoIdImage(data) {
-    return this.httpPostResponse('user/update-photoid-image', data);
+    return this.httpPostResponse(
+      'user/update-photoid-image',
+      data,
+      null,
+      true,
+      false
+    );
   }
 
   postStudentPhotoIdImage(data) {
-    return this.httpPostResponse('students/update-profile', data);
+    return this.httpPostResponse('students/update-profile', data ,null,
+      true,
+      false);
   }
 
   getImage(data) {
@@ -691,7 +705,7 @@ export class NetworkService {
       false
     );
   }
-  getDatafromText(data:any){
+  getDatafromText(data: any) {
     const str = this.serialize(data);
     return this.httpGetResponse(
       'global-search-by-text' + '?' + str,
