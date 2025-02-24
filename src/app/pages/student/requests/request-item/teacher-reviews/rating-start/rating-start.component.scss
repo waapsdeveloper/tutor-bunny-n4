@@ -2,16 +2,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px; /* Move gap here */
 
   svg {
     cursor: pointer;
     transition: fill 0.2s;
+    height: 50px;
+    width: 55px;
+
+    &.filled {
+      fill: red;
+      border: none;
+    }
+  }
+}
+
+.small-screen-9098 { /* Fixed class name */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px; /* Move gap here */
+
+  svg {
+    cursor: pointer;
+    transition: fill 0.2s;
+    height: 43px;
+    width: 43px;
 
     &.filled {
       fill: gold;
       border: none;
     }
-
-
   }
 }

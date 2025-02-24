@@ -3,8 +3,8 @@
     <div class="teacher-review-image-78523"
       [style.background-image]="item?.image ? 'url(' + item?.image + ')' : 'assets/learn-piano.jpeg'"></div>
     <div class="teacher-review-name-box-78524">
-      <div class="teacher-review-course-name-78525">{{item?.title}}</div>
-      <div class="teacher-review-teacher-name-box-78526">
+      <div class="teacher-review-course-name-78525 roboto-medium fs-16">{{item?.title}}</div>
+      <div class="teacher-review-teacher-name-box-78526 roboto-regular fs-14">
         <div class="teacher-review-teacher-image-78528"
           [style.background-image]="item?.image ? 'url(' + item?.user.image + ')' : 'assets/learn-piano.jpeg'"></div>
         <div class="teacher-review-teacher-name-78529">{{displayName}}</div>
@@ -16,7 +16,7 @@
     <div class="teacher-review-teacher-review-stars-78532">
       <app-rating-start [currentRating]="userRating" (ratingChange)="onRatingChange($event)"></app-rating-start>
     </div>
-    <div class="teacher-review-teacher-review-number-78533">{{userRating}} out of 5</div>
+    <div class="teacher-review-teacher-review-number-78533 roboto-medium fs-20">{{userRating}} out of 5</div>
   </div>
   <div style="color: red;" *ngIf="showError">Please select the rating</div>
   <div class="teacher-review-teacher-review-textarea-78530">

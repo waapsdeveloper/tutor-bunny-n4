@@ -127,7 +127,7 @@ export class TrialReqButtonComponent implements OnInit {
     }
 
     if (this.trial && this.status === 'Complete') {
-      return { label: 'Write a Review', icon: 'assets/svg/complete.svg', action: 'studentReviewByTeacher' };
+      return { label: 'Review', icon: 'assets/svg/complete.svg', action: 'studentReviewByTeacher' };
     }
 
     if (!this.trial) {

@@ -15,7 +15,7 @@
 
       height: 100px;
       width: 100px;
-      border-radius: 8px;
+      border-radius: 9px;
       background-color: aliceblue;
       background-size: cover;
       background-position: center center;
@@ -31,10 +31,14 @@
 
       .teacher-review-course-name-78525 {
 
-        font-size: 16px;
-        font-weight: 500;
-        color: black;
-
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: normal;
+        
       }
       .teacher-review-teacher-name-box-78526 {
 

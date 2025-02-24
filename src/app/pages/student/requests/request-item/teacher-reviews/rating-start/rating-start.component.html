@@ -1,8 +1,8 @@
-  <div class="rating-stars">
+<div [class.rating-stars]="hostScreensize > 400" [class.small-screen-9098]="hostScreensize < 400">
   <svg
     *ngFor="let star of stars; let i = index"
     (click)="rate(i + 1)"
-    [ngClass]="{ 'filled': i < currentRating }"
+    [ngClass]="{ filled: i < currentRating }"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -15,4 +15,3 @@
     ></polygon>
   </svg>
 </div>
-

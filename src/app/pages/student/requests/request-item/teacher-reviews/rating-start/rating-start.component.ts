@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output , HostListener,} from '@angular/core';
 
 @Component({
   selector: 'app-rating-start',
@@ -14,7 +14,22 @@ export class RatingStartComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  hostScreensize = -1;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateColumnClass(event.target.innerWidth);
+  }
+
+  updateColumnClass(width: number) {
+    this.hostScreensize = width;
+  }
+
+
+  ngOnInit()
+  {
+    console.log();
+  }
 
   get stars(): number[] {
     return Array(this.maxRating).fill(0).map((_, i) => i + 1);
