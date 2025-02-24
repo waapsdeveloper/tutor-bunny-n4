@@ -609,7 +609,7 @@ export class NetworkService {
   }
 
   addSubject(data) {
-    return this.httpPostResponse('subjects/add-teacher-subject', data);
+    return this.httpPostResponse('subjects/add-teacher-subject', data,null,false,false);
   }
   addKeyword(data) {
     return this.httpPostResponse(
