@@ -104,7 +104,7 @@ export class TabsPage extends BasePage implements OnInit {
 
   async createCourse() {
     let res = await this.modals.present(CreateCoursePage, {},
-      'auto-height-modal', 1, [0, 1],
+      'full-height-modal', 1, [0, 1],
       true);
 
     if (res.data.title) {
@@ -118,7 +118,7 @@ export class TabsPage extends BasePage implements OnInit {
 
         this.nav.push('/create-material', params);
       } else {
-        
+
         const params = {
           backUrl: '/tabs/teacher-dashboard',
           title: 'Create',
