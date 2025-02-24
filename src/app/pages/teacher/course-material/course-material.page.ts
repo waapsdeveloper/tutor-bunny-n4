@@ -14,26 +14,30 @@ export class CourseMaterialPage implements AfterViewInit{
   activeIndex = 0;
   params;
 
-  constructor(private nav: NavService, private cdr: ChangeDetectorRef , private activatedRoute:ActivatedRoute) {
+  constructor(private nav: NavService, private cdr: ChangeDetectorRef , private activatedRoute:ActivatedRoute,) {
 
   }
 
   ngAfterViewInit(): void {
-    this.params = this.activatedRoute.snapshot.paramMap.get('view');
-
-  console.log(this.params , "params")
-    this.toogleView('course');
+    this.activatedRoute.queryParams.subscribe(params => {
+      const param = params['view'];
+      console.log(param, "params");
+      this.toogleView(param);
+    });
   }
 
   toogleView(view) {
-    this.view = view;
+
+      this.view = view;
     if (view == 'course') {
       this.changeToActiveIndex(0);
     }
     if (view == 'notes'){
       this.changeToActiveIndex(1);
-    }
+
+
   }
+}
   // end
 
   goback(){
