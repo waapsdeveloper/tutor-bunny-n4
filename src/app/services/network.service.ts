@@ -984,7 +984,7 @@ export class NetworkService {
       'material/upload/docs',
       data,
       null,
-      false,
+      true,
       false,
       'multipart/form-data'
     );
