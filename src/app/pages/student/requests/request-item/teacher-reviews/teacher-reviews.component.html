@@ -1,12 +1,12 @@
 <div class="teacher-review-outer-78521">
   <div class="teacher-review-header-78522">
     <div class="teacher-review-image-78523"
-      [style.background-image]="item.image ? 'url(' + item.image + ')' : 'assets/learn-piano.jpeg'"></div>
+      [style.background-image]="item?.image ? 'url(' + item?.image + ')' : 'assets/learn-piano.jpeg'"></div>
     <div class="teacher-review-name-box-78524">
-      <div class="teacher-review-course-name-78525">{{item.title}}</div>
+      <div class="teacher-review-course-name-78525">{{item?.title}}</div>
       <div class="teacher-review-teacher-name-box-78526">
         <div class="teacher-review-teacher-image-78528"
-          [style.background-image]="item.image ? 'url(' + item.user.image + ')' : 'assets/learn-piano.jpeg'"></div>
+          [style.background-image]="item?.image ? 'url(' + item?.user.image + ')' : 'assets/learn-piano.jpeg'"></div>
         <div class="teacher-review-teacher-name-78529">{{displayName}}</div>
       </div>
     </div>

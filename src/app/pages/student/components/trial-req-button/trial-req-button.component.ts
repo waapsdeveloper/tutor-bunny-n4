@@ -1,3 +1,4 @@
+import { courseListResolver } from './../../../../resolvers/student/courseList.resolver';
 import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
@@ -9,6 +10,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 import { StudentWelcomeComponent } from '../../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { TeacherReviewsComponent } from '../../requests/request-item/teacher-reviews/teacher-reviews.component';
+import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
   selector: 'app-trial-req-button',
@@ -54,7 +56,8 @@ export class TrialReqButtonComponent implements OnInit {
     private globalTrialCoursesService: GlobalTrialCoursesService,
     private modals: ModalService,
     private nav: NavService,
-    private chats: ChatService
+    private chats: ChatService,
+    private network: NetworkService
   ) {}
 
   ngOnInit(): void {
@@ -153,7 +156,7 @@ export class TrialReqButtonComponent implements OnInit {
       return;
     }
     if(this.status == 'Complete') {
-      this.studentReviewByTeacher(this.course)
+      this.studentReviewByTeacher(this.courseId)
       return;
     }
 
@@ -312,11 +315,12 @@ export class TrialReqButtonComponent implements OnInit {
     }
   }
  async studentReviewByTeacher(item) {
-
-  console.log(item , "studnet review ");
+  let data = await this.network.getcourseById(item);
+  console.log(data.course, "data");
+  let items = data.course; 
     let res = (await this.modals.present(
       TeacherReviewsComponent,
-      { item },
+      { items },
       '',
       0.7
     )) as any;

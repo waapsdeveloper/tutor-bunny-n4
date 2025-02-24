@@ -16,7 +16,6 @@ export class TeacherReviewsComponent extends BasePage {
 
   public set item(value: any) {
     this._item = value;
-
     this.displayName = this.utility.getAmericanName(value.user.name);
   }
 
@@ -29,11 +28,14 @@ export class TeacherReviewsComponent extends BasePage {
   constructor(injector: Injector) {
     super(injector);
     this.user = this.users.getUser();
+    this.init();
+   
+  }
+  init(){
+  
   }
 
   onRatingChange(newRating: any) {
-
-
     this.userRating = newRating;
   }
 
@@ -42,6 +44,7 @@ export class TeacherReviewsComponent extends BasePage {
   }
 
   async addReview() {
+    console.log('item inside ', this.item);
     if (this.userRating < 1) {
       this.showError = true;
       setTimeout(() => {
