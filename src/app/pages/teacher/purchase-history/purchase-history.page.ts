@@ -9,7 +9,7 @@ import { NetworkService } from 'src/app/services/network.service';
 })
 export class PurchaseHistoryPage implements OnInit {
 
-  chips = ['Pending', '2024', '2023', '2022'];
+  chips = [ '2024', '2023', '2022'];
   
   selectedChip = 0; // Default selected chip (e.g., 'Pending')
 

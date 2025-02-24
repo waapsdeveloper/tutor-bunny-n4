@@ -26,7 +26,7 @@
     <ion-list class="checkout-history-list" inset="true">
       <ion-item *ngFor="let record of item?.transaction_history" detail="true">
         <ion-label>
-          <h2>Coin: {{record?.coins}}</h2>
+          <h2>{{ record?.updated_at | date:'dd-MM-yyyy' }}</h2>
         </ion-label>
         <span slot="end" class="price">{{item?.currency_symbol}} {{record?.total}}</span>
       </ion-item>

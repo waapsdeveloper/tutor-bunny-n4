@@ -27,7 +27,7 @@ export class TeacherCreditsPage implements OnInit, ViewWillEnter {
     'November',
     'December',
   ];
-  chips = ['Pending', '2024', '2023', '2022'];
+  chips = ['2024', '2023', '2022'];
 
   selectedChip = 0; // Default selected chip (e.g., 'Pending')
 
