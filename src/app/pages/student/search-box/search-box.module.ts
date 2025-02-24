@@ -23,7 +23,8 @@ import { FilterSearchViewModule } from './views/filter-search-view/filter-search
     EmptySearchViewModule,
     FilterSearchViewModule,
     ListSearchViewModule,
-    TagSearchViewModule
+    TagSearchViewModule,
+    
 
   ],
   declarations: [SearchBoxPage]

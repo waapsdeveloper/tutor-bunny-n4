@@ -42,11 +42,17 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
 
     this.filters = await this.searchFilterService.getFormDataPromise();
 
+    let kws = null;
+    if (this.filters?.keywords && this.filters?.keywords.length > 0) {
+      kws = JSON.stringify(this.filters.keywords);
+    }
+
     let obj = {
       type: "teacher",
       page: page,
       user_id: user.id,
-      keyword_id: this.keyword ? this.keyword.id : null,
+      search: this.filters?.search || null,
+      keywords: kws || null,
       language_id: this.filters?.language?.id || null,
       country_id: this.filters?.country?.id || null,      
       travel_policy_id: this.filters?.travel_policy?.id || null,

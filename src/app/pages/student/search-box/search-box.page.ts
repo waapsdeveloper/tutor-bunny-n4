@@ -1,7 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
 import { SearchFilterService } from 'src/app/pages/student/search-box/search-filter.service';
-
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.page.html',
@@ -14,15 +15,21 @@ export class SearchBoxPage extends BasePage implements OnInit{
   search = '';
   user;
 
+  loading = false;
+  searchSubject = new Subject<string>();
   
 
   constructor(injector: Injector, public filter: SearchFilterService) {
     super(injector);
 
+    this.searchSubject.pipe(debounceTime(1500)).subscribe(value => {
+      this.executeSearch(value);
+    });
+
   }
   async ngOnInit(){
     this.step = 1;    
-    this.search = '';
+    // this.search = '';
     this.user = await this.users.getUser();
     this.filter.reset();
 
@@ -31,34 +38,21 @@ export class SearchBoxPage extends BasePage implements OnInit{
     
 
   }
-  // click on recent search
-  // async openFromRecentSearch(item) {
-
-  //   if (!item.course_id) {
-
-  //   } else {
-  //     const params = {
-  //       id: item.id,
-  //       backUrl: '/tabs/student-dashboard',
-  //     };
-  //     this.nav.push('student-course-detail', params);
-  //   }
-  // }
 
   searchKeyword($event){
     console.log($event);
+    let keyword = Object.assign({}, $event);
 
-    let id = $event.id;
     let v = $event.name;
+    this.filter.setKeywords([keyword])
+    this.filter.setSearch('');
+
     if(v){
       this.search = v;
       this.step = 3;
 
       setTimeout( () => {
-        this.events.publish('tag-input-search-triggered', {
-          id: id,
-          name: v,
-        });
+        this.events.publish('tag-input-search-triggered', keyword);
       }, 500)
       
 
@@ -93,22 +87,31 @@ export class SearchBoxPage extends BasePage implements OnInit{
   // Debounced onKeyUp method
   async onKeyUp(event: any) {
 
+    this.loading = true;
+
     let v = event.target.value;
     console.log(v);
     if(!v || !v.length || v == ''){
+      
       this.step = 1;      
     } else {
       this.step = 2;
     }
 
     this.filter.setSearch(event.target.value);
+    this.filter.setKeywords([]);
 
-    setTimeout( () => {
-      this.events.publish('text-input-search-triggered', {
-        text: event.target.value,
-      });
-    }, 500)
+    // Emit search event with debounce
+    this.searchSubject.next(v);
    
+  }
+
+  private executeSearch(value: string) {
+
+    this.loading = false;
+    this.events.publish('text-input-search-triggered', {
+      text: value,
+    });
   }
 
 
