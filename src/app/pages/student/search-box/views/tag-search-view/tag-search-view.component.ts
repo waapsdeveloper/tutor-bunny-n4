@@ -29,7 +29,7 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
   triggerSearchWithParams(data: any) {
     console.log('triggerSearch', data);
-    this.search = data.text;
+    // this.search = data.text;
     this.resetAndFetch();
     // this.fetchList(1, data.text, '');
   }
@@ -37,8 +37,10 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
 
+    let searchPromise = await this.filter.getSearchPromise();
+
     let obj = {
-      search: search,
+      search: searchPromise,
       page: page,
       perpage: 20
     };
@@ -51,10 +53,6 @@ export class TagSearchViewComponent extends ListPage implements OnInit {
     if (res.data.length == 0) {
       this.events.publish("restart-search-with-text", obj);      
     }
-
-
-
-
 
     return {
       list: res.data,

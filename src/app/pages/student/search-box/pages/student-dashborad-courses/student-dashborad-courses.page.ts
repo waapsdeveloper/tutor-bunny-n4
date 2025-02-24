@@ -56,11 +56,16 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
     this.filters = await this.searchFilterService.getFormDataPromise();
 
+    let kws = null;
+    if (this.filters?.keywords && this.filters?.keywords.length > 0) {
+      kws = JSON.stringify(this.filters.keywords);
+    }
+
     let obj = {
       type: 'course',
       page: page,
-      keyword_id: this.keyword ? this.keyword.id : null,
-      keywords: this.filters?.keywords || [],
+      search: this.filters?.search || null,
+      keywords: kws || null,
       language_id: this.filters?.language?.id || null,
       travel_policy_id: this.filters?.travel_policy?.id || null,      
       price: this.filters?.price || null,

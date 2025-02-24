@@ -8,8 +8,8 @@
       <div class="search-box-outer-89655">
         <div class="search-box-input-outer">
           <input type="text" placeholder="Search" type="search" style="background: white;" [(ngModel)]="search"
-            (keyup)="onKeyUp($event)"  />
-            <!-- (search)="onSearch($event)" -->
+            (keyup)="onKeyUp($event)" />
+          <!-- (search)="onSearch($event)" -->
           <img src="assets/icon/input-search-gray.svg" />
         </div>
         <div class="search-box-filter-outer" style="width: 24px;" (click)="gotoFilter()">
@@ -22,9 +22,17 @@
 
 <ion-content class="">
 
-  <app-empty-search-view *ngIf="step === 1" (searchKeyword)="searchKeyword($event)"></app-empty-search-view>
-  <app-tag-search-view *ngIf="step === 2" (selectKeyword)="searchKeyword($event)" ></app-tag-search-view>
-  <app-list-search-view *ngIf="step === 3"></app-list-search-view>
+  <div class="d-flex flex-row justify-content-center align-items-center ion-padding" style="height: 100vh;" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading" style="height: 100vh; width: 100%;">
+
+    <app-empty-search-view *ngIf="step === 1" (searchKeyword)="searchKeyword($event)"></app-empty-search-view>
+    <app-tag-search-view *ngIf="step === 2" (selectKeyword)="searchKeyword($event)"></app-tag-search-view>
+    <app-list-search-view *ngIf="step === 3"></app-list-search-view>
+
+  </div>
 
 
 
@@ -36,5 +44,5 @@
 
 
 
-  
+
 </ion-content>

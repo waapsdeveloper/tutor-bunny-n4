@@ -203,6 +203,7 @@ export class SearchKeywordComponent extends BasePage implements OnInit {
 
   removeKeyword($event){
     console.log("removeKeyword", $event);
-    this.searchFilterService.removeKeyword($event)
+    this.searchFilterService.removeKeyword($event);
+    
   }
 }
