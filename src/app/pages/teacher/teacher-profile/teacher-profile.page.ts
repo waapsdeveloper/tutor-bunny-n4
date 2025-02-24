@@ -381,7 +381,7 @@ export class TeacherProfilePage
     this.videoBox = {
       user_id: user.id,
     };
-    
+
 
     this.expQulData = {
       heading: 'Experience',
@@ -549,10 +549,10 @@ export class TeacherProfilePage
   }
 
   goToQualifications() {
-    
+
     const modal = this.modals.present(ExpQulRetroComponent, {
       data: this.expQulData
-    }, '', 0.7, [0, 1]);
+    }, 'full-height-modal', 0.7, [0, 1]);
 
   }
 }
