@@ -93,9 +93,10 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
     if (this.params.teacher_id) {
       this.teacherId = this.params.teacher_id;
       let res = await this.network.teacherById(this.teacherId);
-      console.log('hello', res.result);
+
       this.teacher$ = res.result;
       this.callApi(this.teacher$);
+      console.log(this.teacher$.id , "kkk")
     }
     // } else {
     //   this.nav.pop();
@@ -324,7 +325,7 @@ export class StudentTeacherProfilePage extends BasePage implements OnInit {
   }
 
   goToQualifications() {
-    
+
     const modal = this.modals.present(ExpQulRetroComponent, {
       data: this.expQulData
     }, '', 0.7, [0, 1]);
