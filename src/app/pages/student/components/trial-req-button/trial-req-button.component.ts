@@ -155,6 +155,7 @@ export class TrialReqButtonComponent implements OnInit {
       this.requestTrail();
       return;
     }
+
     if(this.status == 'Complete') {
       this.studentReviewByTeacher(this.courseId)
       return;
@@ -315,18 +316,19 @@ export class TrialReqButtonComponent implements OnInit {
     }
   }
  async studentReviewByTeacher(item) {
+  
   let data = await this.network.getcourseById(item);
   console.log(data.course, "data");
-  let items = data.course; 
+  let course = data.course; 
     let res = (await this.modals.present(
       TeacherReviewsComponent,
-      { items },
+      { item: course },
       '',
       0.7
     )) as any;
     if (res.data) {
-      this.showReviewBtn = true;
-    this.trialStatusChange.emit();
+    //   this.showReviewBtn = true;
+    // this.trialStatusChange.emit();
 
     }
   }
