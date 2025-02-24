@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border ion-no-shadow">
+<!-- <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [title]="'Credit Balance'" [showBack]="true" [parentHandleBack]="true" (parentBack)="goback()"
     [backUrl]=""></app-sd-header-top>
 </ion-header>
@@ -26,9 +26,48 @@
     <ion-list class="checkout-history-list" inset="true">
       <ion-item *ngFor="let record of item?.transaction_history" detail="true">
         <ion-label>
-          <h2>{{ record?.updated_at | date:'dd-MM-yyyy' }}</h2>
+          <h2 class="roboto-regular fs-14">{{ record?.updated_at | date:'dd-MM-yyyy' }} &#x28;{{record?.coin}} credits | {{item?.currency_symbol}}{{calculatePerCreditAmount(record)}} &#x29;</h2>
         </ion-label>
         <span slot="end" class="price">{{item?.currency_symbol}} {{record?.total}}</span>
+      </ion-item>
+     
+    </ion-list>
+
+  </div>
+
+  <div *ngIf="!item?.transaction_history?.length" class="centered-message">
+    <p>You haven't purchased any credit yet</p>
+  </div>
+</ion-content> -->
+<ion-header class="ion-no-border ion-no-shadow">
+  <app-sd-header-top [title]="'Credit Purchase history'" [showBack]="true" [parentHandleBack]="true" (parentBack)="goback()"
+    [backUrl]=""></app-sd-header-top>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="container" *ngIf="item?.transaction_history?.length">
+
+    <!-- Total Credits Purchased Section -->
+    <div class="total-credits-container">
+      <p class="total-credits-label roboto-regular fs-16">Total Credits Purchased</p>
+      <span class="total-credits-value roboto-bold fs-18">
+        
+        {{ item?.currency_symbol }}{{ item?.wallet?.order_amount || '0.00' }}
+      </span>
+    </div>
+
+    <!-- Credit Purchase History List -->
+    <ion-list class="checkout-history-list" inset="true">
+      <ion-item *ngFor="let record of item?.transaction_history" detail="false">
+        <ion-label>
+          <h2 class="history-date roboto-regular fs-14">
+            {{ record?.updated_at | date:'dd-MMM-yyyy' }} 
+            ({{ record?.coins }} Credits | {{ item?.currency_symbol }}{{ calculatePerCreditAmount(record) }})
+          </h2>
+          <p class="order-number roboto-regular fs-12 ">Order # {{ record?.order_number }}</p>
+        </ion-label>
+        <span slot="end" class="price fs-14 roboto-medium">{{ item?.currency_symbol }} {{ record?.total }}</span>
       </ion-item>
     </ion-list>
 
@@ -37,19 +76,5 @@
   <div *ngIf="!item?.transaction_history?.length" class="centered-message">
     <p>You haven't purchased any credit yet</p>
   </div>
+
 </ion-content>
-<ion-footer>
-  <div class="d-flex flex-column gap-16 ion-padding">
-    <app-sd-button-golden [text]="'Buy Credit'" (click)="buyCredits()"></app-sd-button-golden>
-  </div>
-</ion-footer>
-
-
-<!-- <ion-footer>
-    <div class="d-flex flex-column gap-16">
-      <app-sd-button-golden
-        [text]="'Continue to the home page'"
-      ></app-sd-button-golden>
-      <app-sd-button-clear [text]="'Order Details'"></app-sd-button-clear>
-    </div>
-  </ion-footer> -->

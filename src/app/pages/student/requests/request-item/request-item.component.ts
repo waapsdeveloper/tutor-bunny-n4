@@ -64,6 +64,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
+    console.log(this.item, "I am item")
   }
 
   async ngOnInit() {
@@ -129,7 +130,7 @@ export class RequestItemComponent extends BasePage  implements OnInit {
   }
 
   async addReview(item) {
-
+    console.log("items " , item);
 
     let res = (await this.modals.present(
       TeacherReviewsComponent,

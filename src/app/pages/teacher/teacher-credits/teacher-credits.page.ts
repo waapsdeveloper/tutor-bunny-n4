@@ -10,7 +10,7 @@ import { NetworkService } from 'src/app/services/network.service';
   styleUrls: ['./teacher-credits.page.scss'],
 })
 export class TeacherCreditsPage implements OnInit, ViewWillEnter {
-
+  perCreditAmount = 0;
   user;
   item;
   months: any[] = [
@@ -30,7 +30,7 @@ export class TeacherCreditsPage implements OnInit, ViewWillEnter {
   chips = ['2024', '2023', '2022'];
 
   selectedChip = 0; // Default selected chip (e.g., 'Pending')
-
+ 
   selectChip(index: number) {
     this.selectedChip = index; // Update the selected chip index
   }
@@ -49,6 +49,15 @@ export class TeacherCreditsPage implements OnInit, ViewWillEnter {
     console.log("err")
   }
 
+
+  calculatePerCreditAmount(record: any): number {
+    if (record?.coins && record?.total) {
+      return parseFloat(record.total) / record.coins;
+    }
+    return 0; // Return 0 if data is missing
+  }
+  
+
   async ionViewWillEnter() {
     let user = localStorage.getItem('user');
     this.user = JSON.parse(user);
@@ -56,5 +65,6 @@ export class TeacherCreditsPage implements OnInit, ViewWillEnter {
     let res = await this.network.creditHistory(this.user?.id);
     console.log(res);
     this.item = res;
+  
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { ModalService } from 'src/app/services/basic/modal.service';
 import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { NavService } from 'src/app/services/nav.service';
@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { StudentWelcomeComponent } from '../../student-dashboard/student-welcome/student-welcome.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { TeacherReviewsComponent } from '../../requests/request-item/teacher-reviews/teacher-reviews.component';
 
 @Component({
   selector: 'app-trial-req-button',
@@ -20,8 +21,9 @@ export class TrialReqButtonComponent implements OnInit {
   trial: any;
   loading: boolean = false;
   course: any;
+  showReviewBtn = false;
   teacher;
-
+ @Output() trialStatusChange: EventEmitter<any> = new EventEmitter<any>();
   @Input() buttonType: 'small' | 'large' = 'small';
 
   private _courseId;
@@ -60,7 +62,7 @@ export class TrialReqButtonComponent implements OnInit {
   }
 
   initiateTrialStatus(value: any) {
-    console.log(value);
+    console.log(value, "value");
 
     this.globalTrialCoursesService.getItemByKey('course_id', value).subscribe( (data) => {
       console.log('rety', data)
@@ -121,9 +123,9 @@ export class TrialReqButtonComponent implements OnInit {
       // return { label: 'Trial Accepted', icon: '', action: '' };
     }
 
-    // if (trail && status === 'Complete') {
-    //   return { label: 'Trial Completed', icon: 'assets/svg/complete.svg', action: '' };
-    // }
+    if (this.trial && this.status === 'Complete') {
+      return { label: 'Write a Review', icon: 'assets/svg/complete.svg', action: 'studentReviewByTeacher' };
+    }
 
     if (!this.trial) {
       label = 'Free trial';
@@ -148,6 +150,10 @@ export class TrialReqButtonComponent implements OnInit {
 
     if(!this.trial){
       this.requestTrail();
+      return;
+    }
+    if(this.status == 'Complete') {
+      this.studentReviewByTeacher(this.course)
       return;
     }
 
@@ -305,5 +311,20 @@ export class TrialReqButtonComponent implements OnInit {
       });
     }
   }
+ async studentReviewByTeacher(item) {
 
+  console.log(item , "studnet review ");
+    let res = (await this.modals.present(
+      TeacherReviewsComponent,
+      { item },
+      '',
+      0.7
+    )) as any;
+    if (res.data) {
+      this.showReviewBtn = true;
+    this.trialStatusChange.emit();
+
+    }
+  }
+ 
 }

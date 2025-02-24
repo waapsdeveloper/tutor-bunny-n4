@@ -1,54 +1,92 @@
-.earnings-container {
+// .earnings-container {
 
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    justify-content: center;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 16px;
+//     align-items: center;
+//     justify-content: center;
     
-  }
+//   }
   
-  .tabs-46843543 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
+//   .tabs-46843543 {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     gap: 12px;
+//     width: 100%;
   
-    .chips {
-      cursor: pointer;    
-      padding: 5px 10px;
-      border-radius: 16px;
-      color: rgba(2, 2, 2, 1);
-      border: 0.5px solid #000000;
-      height: 30px;
-      width: calc(25% - 8px);
-      text-align: center;
-    }
-    .chips.active {
-      background-color: #cccccc;
-      color: #020202;
-      font-weight: bold;
-    }
+//     .chips {
+//       cursor: pointer;    
+//       padding: 5px 10px;
+//       border-radius: 16px;
+//       color: rgba(2, 2, 2, 1);
+//       border: 0.5px solid #000000;
+//       height: 30px;
+//       width: calc(25% - 8px);
+//       text-align: center;
+//     }
+//     .chips.active {
+//       background-color: #cccccc;
+//       color: #020202;
+//       font-weight: bold;
+//     }
   
-  }
+//   }
   
-  .total-payment {
-    display: flex;
-    flex-direction: column;  
-    justify-content: center;
-    align-items: center;
-  }
+//   .total-payment {
+//     display: flex;
+//     flex-direction: column;  
+//     justify-content: center;
+//     align-items: center;
+//   }
   
   
   
-  .pay {
-    color: rgba(0, 0, 0, 0.5);
-  }
+//   .pay {
+//     color: rgba(0, 0, 0, 0.5);
+//   }
   
-  .checkout-history-list{
-    border-radius: 20px;
-    border: 0.5px solid #454545;
-    box-shadow: 1px 4px 4px 0px #00000026;
-  }
+//   .checkout-history-list{
+//     border-radius: 20px;
+//     border: 0.5px solid #454545;
+//     box-shadow: 1px 4px 4px 0px #00000026;
+//   }
   
+.total-credits-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.total-credits-label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.total-credits-value {
+  color: rgba(24, 28, 50, 1);
+}
+
+.checkout-history-list {
+  border-radius: 12px;
+  border: 0.5px solid #454545;
+  box-shadow: 1px 4px 4px 0px #00000026;
+}
+
+ion-item {
+  --inner-padding-end: 10px;
+}
+
+
+
+.order-number {
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 2px;
+}
+
+.price {
+}
+
+.centered-message {
+  text-align: center;
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
