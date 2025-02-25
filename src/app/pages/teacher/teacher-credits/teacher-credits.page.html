@@ -30,7 +30,7 @@
         </ion-label>
         <span slot="end" class="price">{{item?.currency_symbol}} {{record?.total}}</span>
       </ion-item>
-     
+
     </ion-list>
 
   </div>
@@ -52,7 +52,7 @@
     <div class="total-credits-container">
       <p class="total-credits-label roboto-regular fs-16">Total Credits Purchased</p>
       <span class="total-credits-value roboto-bold fs-18">
-        
+
         {{ item?.currency_symbol }}{{ item?.wallet?.order_amount || '0.00' }}
       </span>
     </div>
@@ -60,14 +60,18 @@
     <!-- Credit Purchase History List -->
     <ion-list class="checkout-history-list" inset="true">
       <ion-item *ngFor="let record of item?.transaction_history" detail="false">
-        <ion-label>
-          <h2 class="history-date roboto-regular fs-14">
-            {{ record?.updated_at | date:'dd-MMM-yyyy' }} 
-            ({{ record?.coins }} Credits | {{ item?.currency_symbol }}{{ calculatePerCreditAmount(record) }})
+        <label>
+          <h2 class="history-date roboto-regular fs-14 d-flex justify-content-between align-items-center gap-20">
+            <span>
+              {{ record?.updated_at | date:'dd-MMM-yyyy' }}
+              ({{ record?.coins }} Credits | {{ item?.currency_symbol }}{{ calculatePerCreditAmount(record) }})
+            </span>
+            <span class="price fs-14 roboto-medium">
+              {{ item?.currency_symbol }} {{ record?.total }}
+            </span>
           </h2>
-          <p class="order-number roboto-regular fs-12 ">Order # {{ record?.order_number }}</p>
-        </ion-label>
-        <span slot="end" class="price fs-14 roboto-medium">{{ item?.currency_symbol }} {{ record?.total }}</span>
+          <p class="order-number roboto-regular fs-12">Order # {{ record?.order_number }}</p>
+        </label>
       </ion-item>
     </ion-list>
 
