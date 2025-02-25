@@ -7,15 +7,15 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './teacher-my-earning.page.html',
   styleUrls: ['./teacher-my-earning.page.scss'],
 })
-export class TeacherMyEarningPage { 
-  wallet; 
+export class TeacherMyEarningPage {
+  wallet;
   currency;
   history;
   id;
  constructor(private network : NetworkService){
   this.initialize();
  }
- 
+
   async initialize(){
     let res = await this.network.getTeacherWallet();
     this.id = res?.result.user?.id;
@@ -26,7 +26,7 @@ export class TeacherMyEarningPage {
     console.log(hist)
     this.currency = res.result.currency_symbol;
   }
- 
+
   months: any[] = [
     'January',
     'Febuary',
@@ -41,12 +41,12 @@ export class TeacherMyEarningPage {
     'November',
     'December',
   ];
-  chips = ['Pending', '2024', '2023', '2022'];
-  
+  chips = [ '2024', '2023', '2022'];
+
   selectedChip = 0; // Default selected chip (e.g., 'Pending')
 
   selectChip(index: number) {
     this.selectedChip = index; // Update the selected chip index
   }
-  
+
 }
