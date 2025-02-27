@@ -426,3 +426,11 @@
   align-items: center;
   gap: 8px;
 }
+.full-height-modal {
+  height: 100vh !important;  /* Full viewport height */
+  max-height: 100vh !important;
+  width: 100%;  /* Ensure it covers the full width if needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
