@@ -549,10 +549,9 @@ export class TeacherProfilePage
   }
 
   goToQualifications() {
-
     const modal = this.modals.present(ExpQulRetroComponent, {
       data: this.expQulData
-    }, 'full-height-modal', 0.7, [0, 1]);
-
+    }, 'full-height-modal', 1, [0, 1]); // Change 0.7 to 1 for full height
   }
+
 }
