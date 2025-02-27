@@ -24,7 +24,13 @@ export class CourseLanguageComponent extends BasePage implements OnInit {
     this._language = value;
     if (value && value.name) {
       this.selectedLanguage = value;
-
+    } else {
+      this.selectedLanguage = {
+        "created_at": null,
+        "id": -1,
+        "name": "",
+        "updated_at": null
+      }
     }
 
   }

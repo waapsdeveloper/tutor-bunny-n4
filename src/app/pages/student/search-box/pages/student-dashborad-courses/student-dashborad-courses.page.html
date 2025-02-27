@@ -19,6 +19,7 @@
 
 <!-- <ion-content> -->
   <app-global-list-view
+    [loading]="loading"
     [list]="list"
     [itemTemplate]="itemTemplate"
     (refresh)="handleRefresh($event)"

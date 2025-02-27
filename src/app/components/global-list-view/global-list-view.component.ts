@@ -22,6 +22,7 @@ export class GlobalListViewComponent implements OnInit {
 
 
   @Input() itemTemplate!: TemplateRef<any>;
+  @Input() loading: boolean = false;
 
   @Output() refresh = new EventEmitter<any>();
   @Output() loadMore = new EventEmitter<any>();

@@ -14,7 +14,7 @@
      [class.pending-colors-btn]="status === 'Pending'"     
      
      [class.less-screen-width-style]="hostScreensize <= 400 && buttonType !== 'large'"
-     (click)="handleButtonClick()">
+     (click)="handleButtonClick()">   
 
   <img *ngIf="!loading" [src]="getButtonConfig()?.icon" alt="" />
   <ion-spinner *ngIf="loading"></ion-spinner>

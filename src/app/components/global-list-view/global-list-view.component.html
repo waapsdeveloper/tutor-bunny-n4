@@ -43,7 +43,10 @@
     </ng-container>
 
     <ng-template #noData>
-      <!-- <div class="centered-message"><ion-spinner></ion-spinner></div> -->
+      <div class="centered-message">
+        <ion-spinner *ngIf="loading"></ion-spinner>
+        <div *ngIf="!loading && list.length === 0">No Data Found</div>
+      </div>
     </ng-template>
 
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

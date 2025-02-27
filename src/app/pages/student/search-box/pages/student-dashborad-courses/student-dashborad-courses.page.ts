@@ -54,6 +54,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
 
+    this.loading = true;
     this.filters = await this.searchFilterService.getFormDataPromise();
 
     let kws = null;
@@ -85,7 +86,7 @@ export class StudentDashboradCoursesPage extends ListPage implements OnInit {
 
     let res = await this.network.getGlobalSearch(filteredObj);
     console.log('fetchList', res);
-
+    this.loading = false;
     return {
       list: res.result.data,
       page: res.result.current_page,

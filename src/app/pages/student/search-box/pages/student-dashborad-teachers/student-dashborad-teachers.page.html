@@ -20,8 +20,7 @@
 
 
  -->
-<ion-content
-  ><app-global-list-view
+<app-global-list-view
     [list]="list"
     [itemTemplate]="itemTemplate"
     (refresh)="handleRefresh($event)"
@@ -32,5 +31,4 @@
         [item]="item"
         (openDetails)="openDetails(item)"
       ></app-generic-teacher-card>
-    </ng-template> </app-global-list-view
-></ion-content>
+    </ng-template> </app-global-list-view>
