@@ -75,8 +75,8 @@ export class MaterialCardComponent extends BasePage implements OnInit {
   }
 
   async initialize(data) {
-    this.rating = data.user.teacher.avg_rating;
-    this.total_rating = data.user.teacher.total_rating;
+    this.rating = data.avg_rating;
+    this.total_rating = data.total_rating;
     this.displayName = this.utility.getAmericanName(this.item.user.name);
   }
 
