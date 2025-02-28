@@ -90,8 +90,8 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
 
 
 
-    this.rating = data.user.teacher.avg_rating;
-    this.total_rating = data.user.teacher.total_rating;
+    this.rating = data.avg_rating || 0;
+    this.total_rating = data.total_rating || 0;
     this.displayName = this.utility.getAmericanName(data.user.name);
     this.flag = this.utility.getFlag(data.user);
     this.status = data.trial ? data.trial.status : null;
