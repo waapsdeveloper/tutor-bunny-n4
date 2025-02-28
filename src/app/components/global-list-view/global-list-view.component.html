@@ -45,7 +45,7 @@
     <ng-template #noData>
       <div class="centered-message">
         <ion-spinner *ngIf="loading"></ion-spinner>
-        <div *ngIf="!loading && list.length === 0">No Data Found</div>
+        <div *ngIf="!loading && list?.length === 0">No Data Found</div>
       </div>
     </ng-template>
 
