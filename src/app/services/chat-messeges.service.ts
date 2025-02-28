@@ -3,22 +3,20 @@ import { NgrxCrudService } from './abstract/ngrx-crud.service';
 import Pusher from 'pusher-js';
 import { NetworkService } from './network.service';
 import { ListRequestsService } from './teacher/list-requests.service';
+import { EventsService } from './events.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatMessegesService extends NgrxCrudService<any> {
   ngrxModelName: string = 'ChatMessagesModel';
-
-  messages: any[] = [];
   chatChannel: any;
-  chats;
-  unreadCount = 0;
-
-  constructor(private network: NetworkService,private listRequestsService: ListRequestsService) {
+  constructor(
+    private network: NetworkService,
+    private events: EventsService
+  ) {
     super();
   }
-
 
   unRegisterPusherEvent(pusher: Pusher, user_id: number) {
     if (pusher) {
@@ -37,13 +35,25 @@ export class ChatMessegesService extends NgrxCrudService<any> {
     );
   }
 
-
   chatChannelReceived($event: any) {
     let data = $event;
     console.log('data-chat', data);
     if (data.chat_room_id) {
-
     }
+  }
+  getChatMessages(id) {
+    return new Promise(async (resolve) => {
+      let res = (await this.network.getMessages(id)) as any;
+      const days = res.data;
+      this.setState((state) => ({
+        ...state,
+        list: days,
+      }));
 
+      //
+      this.events.publish('scroll-to-bottom');
+
+      resolve(true);
+    });
   }
 }
