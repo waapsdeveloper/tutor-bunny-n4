@@ -10,6 +10,7 @@ import { IonContent, ViewWillEnter } from '@ionic/angular';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
+import { ChatMessegesService } from 'src/app/services/chat-messeges.service';
 
 @Component({
   selector: 'app-messages',
@@ -40,7 +41,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
   combineMessages = [];
 
-  constructor(injector: Injector, public chats: ChatService, private listChatsService: ListChatsService) {
+  constructor(injector: Injector, public chats: ChatService, private listChatsService: ListChatsService, private chatMessegesService: ChatMessegesService) {
     super(injector);
   }
 
@@ -61,7 +62,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     const roomId = this.params.chat_room_id;
     this.initialize(roomId);
-    this.messageReceivedViaPusher();
+    // this.messageReceivedViaPusher();
   }
 
   async initialize(roomId) {
@@ -95,12 +96,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     }, 500);
   }
 
-  messageReceivedViaPusher() {
-    this.events.subscribe(
-      'message-received-via-pusher',
-      this.updateChatsByMessageReceived.bind(this)
-    );
-  }
+  // messageReceivedViaPusher() {
+  //   this.events.subscribe(
+  //     'message-received-via-pusher',
+  //     this.updateChatsByMessageReceived.bind(this)
+  //   );
+  // }
 
   updateChatsByMessageReceived(data: any) {
     const dm = data;
