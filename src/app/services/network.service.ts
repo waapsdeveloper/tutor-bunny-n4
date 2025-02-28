@@ -39,6 +39,16 @@ export class NetworkService {
   deleteImage(id) {
     return this.httpDeleteResponse('gallery/delete/ ' + id, true);
   }
+  downloadAttachment(data){
+    const str = this.serialize(data);
+    return this.httpGetResponse(
+      'download/attachments' + '?' + str,
+      null,
+      false,
+      false
+    );
+
+  }
 
   postProfileImage(data) {
     return this.httpPostResponse(

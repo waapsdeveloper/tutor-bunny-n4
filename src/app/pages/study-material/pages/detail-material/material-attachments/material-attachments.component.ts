@@ -71,8 +71,13 @@ export class MaterialAttachmentsComponent{
     console.log('Add to cart clicked');
 
   }
-  downloadAll() {
-    console.log('Download all clicked');
+  async downloadAll() {
+    console.log('D all clicked', this._materialId);
+    let obj = {
+      study_material_id : this._materialId
+    }
+    const res  =await this.network.downloadAttachment(obj);
+    console.log('Download all clicked',res);
   }
 
 }
