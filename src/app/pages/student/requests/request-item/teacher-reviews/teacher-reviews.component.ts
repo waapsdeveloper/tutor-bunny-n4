@@ -29,10 +29,10 @@ export class TeacherReviewsComponent extends BasePage {
     super(injector);
     this.user = this.users.getUser();
     this.init();
-   
+
   }
   init(){
-  
+
   }
 
   onRatingChange(newRating: any) {
@@ -56,7 +56,7 @@ export class TeacherReviewsComponent extends BasePage {
       rating: this.userRating,
       message: this.review,
       user_id: this.user.id,
-      course_id: this.item.id,
+      study_material_id: this.item.id,
       teacher_id: this.item.user.id,
     };
     // return
