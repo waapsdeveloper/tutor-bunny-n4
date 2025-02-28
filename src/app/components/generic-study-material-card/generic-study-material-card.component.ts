@@ -39,6 +39,7 @@ export class GenericStudyMaterialCardComponent
   trail = false;
   languageName: any;
   isPurchased: number;
+  isreviewed:number;
 
   favLoading = false;
 
@@ -91,7 +92,7 @@ export class GenericStudyMaterialCardComponent
       .subscribe((count) => {
         this.itemExistInFav$ = count > 0;
       });
-
+    this.isreviewed = data.is_reviewed;
     this.isPurchased = data.is_purchased;
     this.rating = data.avg_rating || 0;
     this.total_rating = data.total_rating || 0;

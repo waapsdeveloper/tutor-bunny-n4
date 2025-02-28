@@ -48,7 +48,8 @@
           <div
             class="big-action-button-8574"
             (click)="gotoReview()"
-            *ngIf="isPurchased > 0"
+            *ngIf="isPurchased > 0 && !isreviewed"
+
           >
             <ion-icon name="checkbox-outline"></ion-icon>
           </div>
