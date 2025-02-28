@@ -8,6 +8,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { BasePage } from 'src/app/base-page/base-page';
+import { TeacherReviewsComponent } from 'src/app/pages/student/requests/request-item/teacher-reviews/teacher-reviews.component';
 import { CartService } from 'src/app/services/cart.service';
 import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-material.service';
 @Component({
@@ -15,13 +16,16 @@ import { GlobalFavMaterialService } from 'src/app/services/student/global-fav-ma
   templateUrl: './generic-study-material-card.component.html',
   styleUrls: ['./generic-study-material-card.component.scss'],
 })
-export class GenericStudyMaterialCardComponent extends BasePage implements OnInit {
+export class GenericStudyMaterialCardComponent
+  extends BasePage
+  implements OnInit
+{
   private _item: any;
 
   itemExistInCart$;
   itemExistInFav$;
 
-  teacherImage
+  teacherImage;
   displayName;
   flag;
   user;
@@ -34,12 +38,12 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
   loading = false;
   trail = false;
   languageName: any;
+  isPurchased: number;
 
   favLoading = false;
 
   @Output() openDetails = new EventEmitter<any>();
 
-  
   hostScreensize = -1;
 
   @HostListener('window:resize', ['$event'])
@@ -50,7 +54,6 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
   updateColumnClass(width: number) {
     this.hostScreensize = width; //<= 1300 ? 'col-md-12' : 'col-md-9';
   }
-
 
   @Input('item')
   public get item() {
@@ -67,35 +70,35 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
     private cartService: CartService,
 
     private materialFavoriteService: GlobalFavMaterialService,
-    public globalMaterial: GlobalFavMaterialService,
+    public globalMaterial: GlobalFavMaterialService
   ) {
     super(injector);
     this.user = this.users.getUser();
-
   }
 
   ngOnInit(): void {
     this.updateColumnClass(window.innerWidth);
   }
 
-  async initialize(data) { 
-    console.log(data)
-    this.cartService.isItemExist(data.id).subscribe( data => {
+  async initialize(data) {
+    console.log(data);
+    this.cartService.isItemExist(data.id).subscribe((data) => {
       this.itemExistInCart$ = data;
-    })
+    });
 
-    this.materialFavoriteService.isItemExist('study_material_id', data.id).subscribe( count => {
-      this.itemExistInFav$ = count > 0;
-    })
+    this.materialFavoriteService
+      .isItemExist('study_material_id', data.id)
+      .subscribe((count) => {
+        this.itemExistInFav$ = count > 0;
+      });
 
-
-
+    this.isPurchased = data.is_purchased;
     this.rating = data.avg_rating || 0;
     this.total_rating = data.total_rating || 0;
     this.displayName = this.utility.getAmericanName(data.user.name);
     this.flag = this.utility.getFlag(data.user);
     this.status = data.trial ? data.trial.status : null;
-    this.teacherImage = data.user.image
+    this.teacherImage = data.user.image;
     if (data && data.trial) {
       this.blocked = data.trial.status;
     }
@@ -185,8 +188,8 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
   async addToFav() {
     // let showFav = true;
     // this.events.publish('show-fav-dot', showFav);
-    if(this.favLoading == true){
-      return
+    if (this.favLoading == true) {
+      return;
     }
     this.favLoading = true;
     this.itemExistInFav$ = true;
@@ -198,8 +201,8 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
   async removeToFav() {
     // let showFav = false;
     // this.events.publish('show-fav-dot', showFav);
-    if(this.favLoading == true){
-      return
+    if (this.favLoading == true) {
+      return;
     }
     this.favLoading = true;
     this.itemExistInFav$ = false;
@@ -208,29 +211,42 @@ export class GenericStudyMaterialCardComponent extends BasePage implements OnIni
     this.favLoading = false;
   }
 
-  async toggleCartItem(){
-
-
-    if(this.itemExistInCart$ == 0) {
-
-      const flag = await this.utility.presentConfirm('Yes', 'No', 'Add Item to Cart', 'Are you sure you want to add this item to cart?');
-      if(!flag) {
+  async toggleCartItem() {
+    if (this.itemExistInCart$ == 0) {
+      const flag = await this.utility.presentConfirm(
+        'Yes',
+        'No',
+        'Add Item to Cart',
+        'Are you sure you want to add this item to cart?'
+      );
+      if (!flag) {
         return;
       }
 
       this.cartService.setItem(this.item);
     }
-
   }
 
-  getButtonText(){
-
-
-    if(this.hostScreensize <= 400 ){
+  getButtonText() {
+    if (this.hostScreensize <= 400) {
       return '';
     }
 
-     return this.itemExistInCart$ > 0 ? 'In Cart' : 'Add to Cart'
+    return this.itemExistInCart$ > 0 ? 'In Cart' : 'Add to Cart';
+  }
+  async gotoReview() {
+    let data = await this.network.getMaterialById(this.item.id);
+    console.log(data.material, 'data');
+    let material = data.material;
+    let res = (await this.modals.present(
+      TeacherReviewsComponent,
+      { item: material },
+      '',
+      0.7
+    )) as any;
+    if (res.data) {
+      //   this.showReviewBtn = true;
+      // this.trialStatusChange.emit();
+    }
   }
 }
-
