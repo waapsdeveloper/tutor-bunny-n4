@@ -106,7 +106,7 @@ export class ListChatsService extends NgrxCrudService<any> {
 
     this.getUnreadMsgCount();
 
-    // when chat received, update message request 
+    // when chat received, update message request
     this.listRequestsService.getRequests(1, '')
 
     // this.getchatList();

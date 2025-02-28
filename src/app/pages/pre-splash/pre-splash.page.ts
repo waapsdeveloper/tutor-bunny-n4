@@ -15,7 +15,6 @@ import { PusherSingleService } from 'src/app/services/pusher-single.service';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
 // import { GlobalFavMaterialService } from 'src/app/services/global-fav-material.service';
 
-
 @Component({
   selector: 'app-pre-splash',
   templateUrl: './pre-splash.page.html',
@@ -32,68 +31,34 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
     private pusherService: PusherSingleService,
 
-
     private profilesService: ProfileService,
     private router: Router,
     // private iap: InitializeAppService,
-    
-    public globalCourses: GlobalCoursesService,
-    // public globalTrials: GlobalTrialsService,
-    
+
     public notificationService: NotificationsService,
-    private fcm: FirebaseService,
+    private fcm: FirebaseService
+  ) // subscription APIs
+  // private listTrialsService: listTrialsService,
+  // private globalStudyMaterialService: GlobalStudyMaterialService,
+  // private globalFavCoursesService: GlobalFavCoursesService,
+  // private globalFavMaterialService: GlobalFavMaterialService,
 
+  // new services
 
-
-    // subscription APIs
-    // private listTrialsService: listTrialsService,
-    // private globalStudyMaterialService: GlobalStudyMaterialService,
-    // private globalFavCoursesService: GlobalFavCoursesService,
-    // private globalFavMaterialService: GlobalFavMaterialService,
-
-
-    // new services
-    
-
-
-
-  ) {
+  {
     super(injector);
   }
 
   ionViewWillEnter() {
     this.initialize();
-
   }
 
   async initialize() {
-
-
     this.pusherService.initialize();
     this.loading = true;
 
     this.loadResolvers();
     this.user = this.dataR.user;
-
-
-    
-    
-    // this.globalTrials.registerPusherEvent();
-    this.globalCourses.registerPusherEvent();
-
-
-    this.notificationService.registerPusherEvent();
-
-    // new services
-    // this.listChatsService.registerPusherEvent(this.user.id);
-
-
-
-
-
-    // this.chatService.getchatList();
-    // this.notificationService.getNotificationsFromApi();
-
     this.fcm.setTokenToServer();
 
     const utcTime = moment().utcOffset();
@@ -103,14 +68,12 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
     this.network.getTimeZone(time, this.user.id);
 
-
     // subscription APIs
     // this.listTrialsService.getPendingTrialsFromApi('', 1);
     // this.globalStudyMaterialService.getGlobalStudyMaterialFromApi('', 1);
     // // this.globalCourses.getGlobalCoursesFromApi('', 1);
     // this.globalFavCoursesService.getGlobalFavCoursesFromApi();
     // this.globalFavMaterialService.getGlobalFavMaterialFromApi();
-
 
     // this.iap.initializeUserTables(this.user);
 
@@ -130,8 +93,6 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
       // Handle Teacher (roleId = 3)
       if (roleId === 3) {
         if (!isProfileCompleted) {
-
-
           this.nav.push('/teacher-welcome');
           // let res = await this.modals.present(
           //   TeacherWelcomePage,

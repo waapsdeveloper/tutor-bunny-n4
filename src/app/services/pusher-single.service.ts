@@ -5,18 +5,22 @@ import { ListTrialsService } from './teacher/list-trials.service';
 
 import Pusher from 'pusher-js';
 import { TeacherService } from './teacher/teacher.service';
+import { ChatMessegesService } from './chat-messeges.service';
+import { NotificationsService } from './notifications.service';
+import { GlobalCoursesService } from './global-courses.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PusherSingleService {
-  
   private pusher: Pusher;
 
   constructor(
     // common services
     private listChatsService: ListChatsService,
-
+    private chatMessageService: ChatMessegesService,
+    public globalCourses: GlobalCoursesService,
+    public notificationService: NotificationsService,
     // teacher service
     public listTrialsService: ListTrialsService,
     public teacher: TeacherService,
@@ -45,19 +49,21 @@ export class PusherSingleService {
   async initialize() {
     let user = await this.getUser();
 
-    
-
     if (!user) {
       return;
     }
-    
+
     if (!this.pusher) {
       return;
     }
-    console.log("W8965468465", this.pusher)
+    console.log('W8965468465', this.pusher);
 
     // common pusher registers
     this.listChatsService.registerPusherEvent(this.pusher, user.id);
+    this.chatMessageService.registerPusherEvent(this.pusher, user.id);
+    this.globalCourses.registerPusherEvent();
+
+    this.notificationService.registerPusherEvent();
 
     if (user.role_id == 3) {
       this.teacher.registerPusherEvent(this.pusher, user.id);
