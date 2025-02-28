@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AttachmentListModule } from "./attachment-list/attachment-list.module";
 import { NetworkService } from 'src/app/services/network.service';
+import { CartService } from 'src/app/services/cart.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-material-attachments',
@@ -11,6 +13,8 @@ import { NetworkService } from 'src/app/services/network.service';
 export class MaterialAttachmentsComponent {
 
 
+  itemExistInCart$: number;
+  material$;
 
   @Input() count = 0;
   list: any[] = [];
@@ -33,7 +37,7 @@ export class MaterialAttachmentsComponent {
 
   }
 
-  constructor(private network: NetworkService) {
+  constructor(private network: NetworkService, private cartService: CartService, public utility: UtilityService,) {
   }
 
   async getMaterialDocs(id) {
@@ -89,7 +93,20 @@ export class MaterialAttachmentsComponent {
     });
   }
 
-
+  async toggleCartItem() {
+    if (this.itemExistInCart$ == 0) {
+      const flag = await this.utility.presentConfirm(
+        'Yes',
+        'No',
+        'Add Item to Cart',
+        'Are you sure you want to add this item to cart?'
+      );
+      if (!flag) {
+        return;
+      }
+      this.cartService.setItem(this.material$);
+    }
+  }
   getOtherCourse(events) {
 
     // this.onChange.emit(events);

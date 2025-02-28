@@ -3,7 +3,7 @@
     <div class="sb-heading-title-7895 outfit-semibold">
       Attachments ({{list.length}})
     </div>
-    <div class="download-all-container" *ngIf="isPurchased > 0; else addToCartTemplate">
+    <div class="download-all-container" *ngIf="isPurchased > 0;">
       <img src="assets/svg/download-all.svg" />
       <div
         class="sb-heading-sl-7895 outfit download-all-btn"
@@ -11,16 +11,7 @@
         Download All
       </div>
     </div>
-    <ng-template #addToCartTemplate>
-      <div class="download-all-container">
-        <img src="assets/svg/cart.svg" />
-        <div
-          class="sb-heading-sl-7895 outfit add-to-cart-btn"
-          (click)="addToCart()">
-          Add to Cart
-        </div>
-      </div>
-    </ng-template>
+
 
   </div>
   <div class="sb-content-7895"></div>
