@@ -56,7 +56,7 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
       language_id: this.filters?.language?.id || null,
       price: this.filters?.price || null,
       teacher_name: this.filters?.name || null,
-      country_id: this.filters?.country?.id || null,
+      country_id: this.filters?.country?.id || null,      
     };
 
     let filteredObj = Object.fromEntries(

@@ -57,6 +57,7 @@ export class StudentDashboradTeachersPage extends ListPage implements OnInit {
       country_id: this.filters?.country?.id || null,      
       travel_policy_id: this.filters?.travel_policy?.id || null,
       hourly_rate: this.filters?.hourly_rate || null,
+      teacher_name: this.filters?.name || null,
     };
 
     let filteredObj = Object.fromEntries(

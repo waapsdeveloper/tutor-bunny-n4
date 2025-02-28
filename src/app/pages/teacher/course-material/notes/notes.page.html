@@ -27,7 +27,7 @@
   </div>
 </ion-content> -->
 
-<app-global-list-view [list]="list$" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+<app-global-list-view [list]="list$ || []" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
   <ng-template #itemTemplate let-item>
     <app-material-card [item]="item" (openDeatils)="openDetails(item)" (materialDeleted)="onMaterialDeleted(item)"></app-material-card>
   </ng-template>
