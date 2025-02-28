@@ -9,7 +9,7 @@
   <div class="body-content ion-padding">
 
 
-    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text">      
+    <app-global-text-read [heading]="aboutData.heading" [text]="aboutData.text">
 
       <div class="d-flex flex-row align-center gap-16">
         <img src="assets/svg/speaks.svg" alt="" style="height: 16px" />
@@ -17,7 +17,7 @@
       </div>
     </app-global-text-read>
 
-    <app-material-attachments [materialId]="materialId"></app-material-attachments>
+    <app-material-attachments [materialId]="materialId" [isPurchased]="isPurchased"></app-material-attachments>
 
     <app-teacher-info-card [data]="teacherData"></app-teacher-info-card>
 
@@ -32,7 +32,7 @@
 
     <app-my-ratings [data]="ratingData"></app-my-ratings>
 
-    
+
 
   </div>
 
@@ -41,5 +41,5 @@
     <app-sd-button-golden class="footer-button-2" [image]="'assets/svg/send-message.svg'" [text]="'Message'"
       (click)="goToChat()"></app-sd-button-golden>
   </div>
-  
+
 </ion-content>

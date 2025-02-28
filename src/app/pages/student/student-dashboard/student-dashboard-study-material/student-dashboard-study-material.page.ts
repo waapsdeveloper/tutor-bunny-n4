@@ -12,7 +12,11 @@ export class StudentDashboardStudyMaterialPage extends ListPage implements OnIni
 
   constructor(injector: Injector, public globalStudyMaterialService: GlobalStudyMaterialService) {
     super(injector);
+    this.events.subscribe("refresh-study-materials", ()  => {
+      this.resetAndFetch();
+    },false);
   }
+
 
   async fetchList(page: number, search: string, status: string): Promise<any> {
     const res = await this.globalStudyMaterialService.getGlobalStudyMaterialFromApi(page, search);

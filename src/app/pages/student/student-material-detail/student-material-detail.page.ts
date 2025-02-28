@@ -97,6 +97,7 @@ export class StudentMaterialDetailPage extends BasePage {
   startDate;
   endDate;
   categoryId;
+  isPurchased:number
   otherMaterialList: any[] = [];
   otherMaterialListTotalCount: number = 0;
   user;
@@ -256,6 +257,9 @@ export class StudentMaterialDetailPage extends BasePage {
     }
 
     this.title = this.data.title;
+    this.isPurchased = this.data.is_purchased;
+    console.log(this.isPurchased , "hhhh");
+    console.log(this.data.is_purchased , "2hhhdaf");
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
     this.mode_type = this.data.mode_type;

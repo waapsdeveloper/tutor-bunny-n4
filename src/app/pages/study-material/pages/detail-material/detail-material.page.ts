@@ -20,6 +20,7 @@ export class DetailMaterialPage extends BasePage {
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
   material$;
+  isPurchased :number;
   materialId;
 
   bannerData: bannerData = {
@@ -191,6 +192,9 @@ export class DetailMaterialPage extends BasePage {
     this.user = this.users.getUser();
 
     this.data = data;
+    this.isPurchased = this.data.is_purchased;
+    console.log(this.isPurchased , "hhhh");
+    console.log(this.data.is_purchased , "2hhhdaf");
     this.title = this.data.title;
     this.language = this.data.language.name;
     this.capacity = this.data.capacity;
@@ -215,14 +219,13 @@ export class DetailMaterialPage extends BasePage {
     this.created_at = this.data.created_at;
     this.updated_at = this.data.updated_at;
     this.loading = false;
-
     const startDate = this.data.start_date;
     this.startDate = startDate ? moment(startDate).format('DD-MM-Y') : '';
 
     const endDate = this.data.end_date;
     this.endDate = endDate ? moment(endDate).format('DD-MM-Y') : '';
 
-    
+
 
     const uid = this.user.id;
     const cuid = this.data.user_id;
@@ -248,7 +251,7 @@ export class DetailMaterialPage extends BasePage {
     return description.replace(/\n/g, '<br>');
   }
 
-  async getotherMaterialList(id): Promise<any[]> {    
+  async getotherMaterialList(id): Promise<any[]> {
       let user = this.users.getUser();
       const obj = {
         user_id: user['id'],

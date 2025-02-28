@@ -14,13 +14,12 @@ import { NetworkService } from 'src/app/services/network.service';
   templateUrl: './material-attachments.component.html',
   styleUrls: ['./material-attachments.component.scss'],
 })
-
-export class MaterialAttachmentsComponent {
-
+export class MaterialAttachmentsComponent{
   @Input() count = 0;
+  @Input() isPurchased:number;
   list: any[] = [];
   // @Output() openOtherCourses = new EventEmitter<any>();
-  // @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
+  // @Output('onChange') onChange: EventEmitter<any> = new EvesntEmitter<any>();
 
   private _materialId;
   @Input()
@@ -34,24 +33,20 @@ export class MaterialAttachmentsComponent {
     if (value) {
       this.getMaterialDocs(value);
     }
-
-
   }
 
-  constructor(private network: NetworkService) {
-  }
+
+  constructor(private network: NetworkService) {}
 
   async getMaterialDocs(id) {
     let obj = {
       study_material_id: id,
     };
     let res = (await this.network.getMaterialDocs(obj)) as any;
-    if(res && res.result && res.result.data){
-      this.list = res.result.data
-      console.log("List" , this.list);
-
+    if (res && res.result && res.result.data) {
+      this.list = res.result.data;
+      console.log('List', this.list);
     }
-
   }
 
   gotoCourseList() {
@@ -59,7 +54,13 @@ export class MaterialAttachmentsComponent {
   }
 
   getOtherCourse(events) {
-
     // this.onChange.emit(events);
+  }
+  addToCart() {
+    console.log('Add to cart clicked');
+
+  }
+  downloadAll() {
+    console.log('Download all clicked');
   }
 }

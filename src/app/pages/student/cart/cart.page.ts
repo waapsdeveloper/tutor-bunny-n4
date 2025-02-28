@@ -9,6 +9,7 @@ import { ViewWillEnter } from '@ionic/angular';
 import { log } from 'node:console';
 import { BasePage } from 'src/app/base-page/base-page';
 import { CartService } from 'src/app/services/cart.service';
+import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 // import { StripePayComponent } from 'src/app/stripe-pay/stripe-pay.component';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -32,7 +33,7 @@ export class CartPage extends BasePage implements OnInit, ViewWillEnter {
   activeIndex = 0;
   @ViewChild('slides', { static: false }) slides: SwiperComponent;
 
-  constructor(injector: Injector, private cartService: CartService) {
+  constructor(injector: Injector, private cartService: CartService , private studyMaterialService:GlobalStudyMaterialService) {
     super(injector);
   }
 
@@ -215,6 +216,7 @@ async  removeCartitem(item) {
     };
 
     const res = await this.network.postStudentOrder(d);
+
     console.log(res);
 
     this.order = res;
@@ -228,7 +230,7 @@ async  removeCartitem(item) {
     this.slides?.swiperRef.slideNext(500);
 
     this.cdr.detectChanges();
-
+   this.events.publish("refresh-study-materials");
   }
 
   parentBack($event: any){
