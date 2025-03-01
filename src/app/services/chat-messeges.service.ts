@@ -72,10 +72,43 @@ export class ChatMessegesService extends NgrxCrudService<any> {
   }
 
   addMessageInState(messageObject: any) {
-    this.setState((state) => ({
-      ...state,
-      list: [...state.list, messageObject],
-    }));
+    this.setState( (state) => {
+      // ...state,
+      // list: [...state.list, messageObject],
+
+      let messageFound = false;
+
+      const updatedList = state.list.map((item) => {
+
+        let lastIndexNow = state.list
+        .find(item => item.date === "now");
+
+        if(lastIndexNow != -1){ 
+          messageFound = true;
+          return {
+            ...item,
+            messages: [...item.messages, messageObject]
+          };
+          
+        }
+        
+        messageFound = false;
+        return item;
+      })
+
+      if(!messageFound){
+        updatedList.push({
+          date: 'now',
+          messages: [messageObject]
+        })
+      }
+
+      return {
+        ...state,
+        list: updatedList
+      }
+
+    });
   }
 
   updateMessageInState(updatedMessage: any) {
@@ -87,8 +120,10 @@ export class ChatMessegesService extends NgrxCrudService<any> {
       const updatedList = state.list.map( (item) => {
 
         let lastIndexNow = state.list
-        .filter(item => item.date === "now")
-        .pop() || -1; // Return -1 if undefined
+        .find(item => item.date === "now");
+        // .pop() || -1; // Return -1 if undefined
+
+        console.log(lastIndexNow)
 
         if(lastIndexNow != -1){
 
