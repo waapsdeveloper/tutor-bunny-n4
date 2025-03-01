@@ -39,6 +39,7 @@ export class ChatMessegesService extends NgrxCrudService<any> {
       const chatRoomId = await this.returnChatroomIdFromListInState();
       if (chatRoomId === data.chat_room_id) {
         this.updateMessageInState(data)
+        this.events.publish("scroll-to-bottom");
       }
     }
   }
@@ -101,13 +102,13 @@ export class ChatMessegesService extends NgrxCrudService<any> {
                ...msg,
                ...updatedMessage
               };
-            } 
-              
+            }
+
             messageFound = false;
             return msg;
           })
-        } 
-          
+        }
+
         messageFound = false;
         return item;
 
