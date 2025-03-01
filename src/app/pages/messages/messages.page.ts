@@ -204,7 +204,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
   async sendMessage() {
     if (!this.message) return;
-    this.newMesg = {
+
+
+
+    const newMsgObj = {
       date: 'now',
       messages: [
         {
@@ -218,21 +221,32 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
         },
       ],
     };
-    this.chats.days.push(this.newMesg);
-    this.scrollToBottomOnInit();
-    let obj = {
-      chat_room_id: this.item.chat_room_id,
-      user_id: this.user.id,
-      message: this.message,
-    };
-    this.message = '';
-    this.messageInput.nativeElement.value = '';
-    this.adjustHeight(this.messageInput.nativeElement);
-    let res = await this.network.sendMessage(obj);
 
-    console.log('send msg ', res);
+    this.chatMessegesService.addMessageInState(newMsgObj);
 
-    this.listChatsService.setLastMessageOfChatList(obj);
+    setTimeout( () => this.scrollToBottomOnInit(), 500);
+
+
+    // this.chats.days.push(this.newMesg);
+    
+    
+    
+    
+    
+    // this.scrollToBottomOnInit();
+    // let obj = {
+    //   chat_room_id: this.item.chat_room_id,
+    //   user_id: this.user.id,
+    //   message: this.message,
+    // };
+    // this.message = '';
+    // this.messageInput.nativeElement.value = '';
+    // this.adjustHeight(this.messageInput.nativeElement);
+    // let res = await this.network.sendMessage(obj);
+
+    // console.log('send msg ', res);
+
+    // this.listChatsService.setLastMessageOfChatList(obj);
 
     // this.chats.getchatList()
   }

@@ -50,10 +50,19 @@ export class ChatMessegesService extends NgrxCrudService<any> {
         list: days,
       }));
 
-      //
-      this.events.publish('scroll-to-bottom');
+      // //
+      // this.events.publish('scroll-to-bottom');
 
       resolve(true);
     });
   }
+
+  addMessageInState(messageObject: any) {
+    this.setState((state) => ({
+      ...state,
+      list: [...state.list, messageObject],
+    }));
+  }
+
+
 }
