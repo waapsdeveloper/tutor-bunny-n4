@@ -32,10 +32,14 @@ export class ChatMessegesService extends NgrxCrudService<any> {
     );
   }
 
-  chatChannelReceived($event: any) {
+  async chatChannelReceived($event: any) {
     let data = $event;
     console.log('data-chat', data);
     if (data.chat_room_id) {
+      const chatRoomId = await this.returnChatroomIdFromListInState();
+      if (chatRoomId === data.chat_room_id) {
+        this.updateMessageInState(data)
+      }
     }
   }
   getChatMessages(id) {
@@ -54,6 +58,18 @@ export class ChatMessegesService extends NgrxCrudService<any> {
     });
   }
 
+  async returnChatroomIdFromListInState(): Promise<number> {
+    const list = await this.getListPromise();
+    if (list && list.length > 0) {
+      let msgs = list[0].messages;
+      if (msgs && msgs.length > 0) {
+        return msgs[0].chat_room_id;
+      }
+    }
+
+    return 0;
+  }
+
   addMessageInState(messageObject: any) {
     this.setState((state) => ({
       ...state,
@@ -62,16 +78,84 @@ export class ChatMessegesService extends NgrxCrudService<any> {
   }
 
   updateMessageInState(updatedMessage: any) {
-    this.setState((state) => ({
-      list: state.list.map((item) => ({
-        ...item,
-        messages: item.messages.map((msg) =>
-          (msg.id === -1 && msg.message === updatedMessage.message) ||
-          msg.id === updatedMessage.id
-            ? { ...msg, ...updatedMessage }
-            : msg
-        ),
-      })),
-    }));
+
+    this.setState( (state) => {
+
+      let messageFound = false;
+
+      const updatedList = state.list.map( (item) => {
+
+        let lastIndexNow = state.list
+        .filter(item => item.date === "now")
+        .pop() || -1; // Return -1 if undefined
+
+        if(lastIndexNow != -1){
+
+          const updatedMessages = item.messages.map((msg) => {
+            if (
+              (msg.id === -1 && msg.message === updatedMessage.message) ||
+              msg.id === updatedMessage.id
+            ) {
+              messageFound = true;
+              return {
+               ...msg,
+               ...updatedMessage
+              };
+            } 
+              
+            messageFound = false;
+            return msg;
+          })
+        } 
+          
+        messageFound = false;
+        return item;
+
+      })
+
+      if(!messageFound){
+        updatedList.push({
+          date: 'now',
+          messages: [updatedMessage]
+        })
+      }
+
+      return {
+        ...state,
+        list: updatedList
+      }
+
+    });
+
+    // this.setState((state) => {
+
+    //   let messageUpdated = false;
+
+    //   const updatedList = state.list.map((item) => {
+    //   //   // if (item.date === 'now') {
+    //       const updatedMessages = item.messages.map((msg) => {
+    //   //       if (
+    //   //         (msg.id === -1 && msg.message === updatedMessage.message) ||
+    //   //         msg.id === updatedMessage.id
+    //   //       ) {
+    //   //         messageUpdated = true;
+    //   //         return { ...msg, ...updatedMessage };
+    //   //       }
+    //   //       return msg;
+    //   //     });
+
+    //   //     return {
+    //   //       ...item,
+    //   //       messages: messageUpdated
+    //   //         ? updatedMessages // If updated, return modified messages
+    //   //         : [...updatedMessages, updatedMessage], // Otherwise, add new message
+    //       // };
+    //     // }
+    //     // return item;
+    //   // });
+
+    //   // return { list: updatedList };
+
+    // });
   }
 }
