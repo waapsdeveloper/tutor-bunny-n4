@@ -223,11 +223,13 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
         obj,
         item.chat_room_id
       );
-      if (this.user.role_id == 3) {
+
+      const user = this.users.getUser();
+      if (user.role_id == 3) {
         this.getChatRequsts();
       }
       this.getchatList();
-      resolve;
+      resolve(true);
     });
   }
 
