@@ -11,10 +11,7 @@ import { EventsService } from './events.service';
 export class ChatMessegesService extends NgrxCrudService<any> {
   ngrxModelName: string = 'ChatMessagesModel';
   chatChannel: any;
-  constructor(
-    private network: NetworkService,
-    private events: EventsService
-  ) {
+  constructor(private network: NetworkService, private events: EventsService) {
     super();
   }
 
@@ -64,5 +61,17 @@ export class ChatMessegesService extends NgrxCrudService<any> {
     }));
   }
 
-
+  updateMessageInState(updatedMessage: any) {
+    this.setState((state) => ({
+      list: state.list.map((item) => ({
+        ...item,
+        messages: item.messages.map((msg) =>
+          (msg.id === -1 && msg.message === updatedMessage.message) ||
+          msg.id === updatedMessage.id
+            ? { ...msg, ...updatedMessage }
+            : msg
+        ),
+      })),
+    }));
+  }
 }

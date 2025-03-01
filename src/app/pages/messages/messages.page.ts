@@ -218,11 +218,25 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
           message: this.message,
           updated_at: new Date(),
           user_id: this.user.id,
+          status: -1
         },
       ],
     };
 
     this.chatMessegesService.addMessageInState(newMsgObj);
+
+    let obj = {
+      chat_room_id: this.item.chat_room_id,
+      user_id: this.user.id,
+      message: this.message,
+    };
+    let res = await this.network.sendMessage(obj);
+
+    console.log('send msg ', res);
+
+    if(res && res.message){
+      this.chatMessegesService.updateMessageInState(res.message);
+    }
 
     setTimeout( () => this.scrollToBottomOnInit(), 500);
 
@@ -234,11 +248,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     
     
     // this.scrollToBottomOnInit();
-    // let obj = {
-    //   chat_room_id: this.item.chat_room_id,
-    //   user_id: this.user.id,
-    //   message: this.message,
-    // };
+    
     // this.message = '';
     // this.messageInput.nativeElement.value = '';
     // this.adjustHeight(this.messageInput.nativeElement);
