@@ -23,7 +23,7 @@
   <ion-spinner></ion-spinner>
 </div>
 <ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" (ionScroll)="onScroll($event)" [scrollEvents]="true">
-  <div class="body-content" *ngFor="let item of chats.days">
+  <div class="body-content" *ngFor="let item of allMessages">
     <div class="chat-day-heading-85621" *ngIf="item.date && item.date != 'now'">
       <div *ngIf="item.date && item.date != 'now'" style="
             padding: 8px;
@@ -38,7 +38,7 @@
   <app-typing-box></app-typing-box>
 </ion-content>
 <ion-footer>
-  
+
   <div class="footer-box-78521">
     <div class="input-box-78522">
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"

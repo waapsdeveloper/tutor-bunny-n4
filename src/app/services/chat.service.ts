@@ -45,7 +45,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
   ) {
     super();
 
-    
+
     // this.events.subscribe(
     //   'clear-all-services-data',
     //   () => {
@@ -237,6 +237,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
+
       //
       this.events.publish('scroll-to-bottom');
 
