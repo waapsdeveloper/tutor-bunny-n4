@@ -214,8 +214,6 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async sendMessage() {
     if (!this.message) return;
 
-
-
     const newMsgObj = {
       chat_room_id: this.item.chat_room_id,
       created_at: new Date(),
@@ -238,6 +236,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     };
     let res = await this.network.sendMessage(obj);
 
+    this.message = '';
+    this.emptyValue = ''
+
     console.log('send msg ', res);
 
     if(res && res.message){
@@ -255,7 +256,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     
     // this.scrollToBottomOnInit();
     
-    // this.message = '';
+    // 
     // this.messageInput.nativeElement.value = '';
     // this.adjustHeight(this.messageInput.nativeElement);
     // let res = await this.network.sendMessage(obj);

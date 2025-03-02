@@ -31,7 +31,7 @@ export class ChatMessegesService extends NgrxCrudService<any> {
   
     this.timer = setTimeout(() => {
       this.isTyping = false;
-    }, 3000);
+    }, 1500);
   }
 
   unRegisterPusherEvent(pusher: Pusher, user_id: number) {

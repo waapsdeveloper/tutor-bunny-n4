@@ -23,7 +23,7 @@ export class TypingBoxComponent  implements OnInit {
 
         setTimeout(() => {
           this.isUserTyping = false;
-        }, 2000);
+        }, 3000);
       }
     });
   }

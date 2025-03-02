@@ -35,10 +35,10 @@
     </div>
     <app-message-list *ngFor="let chat of item.messages" [chat]="chat"></app-message-list>
   </div>
-  <app-typing-box class="typing-shown-775" [chatItem]="item"></app-typing-box>
+  
 </ion-content>
 <ion-footer>
-
+  <app-typing-box class="typing-shown-775" [chatItem]="item"></app-typing-box>
   <div class="footer-box-78521">
     <div class="input-box-78522">
       <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
