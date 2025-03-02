@@ -73,4 +73,22 @@ export class MessageListComponent extends BasePage implements OnInit {
 
     this.nav.push('/tabs/requests', data);
   }
+
+  returnIconsBasedOnType() {
+    
+    if(this.chat.id == -1){
+      return 'assets/svg/sentMessage.svg';
+    }
+
+    if(this.chat.is_read == 0){
+      return 'assets/svg/sentMessageDouble.svg';
+    }
+
+    if(this.chat.is_read == 1){
+      return 'assets/svg/sentMessageDoubleBlue.svg';
+    }
+    
+    
+    return 'assets/svg/sentMessage.svg'
+  }
 }

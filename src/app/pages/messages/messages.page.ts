@@ -220,6 +220,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
     this.chatMessegesService.addMessageInState(newMsgObj);
 
+    setTimeout( () => this.scrollToBottomOnInit(), 500);
+
     let obj = {
       chat_room_id: this.item.chat_room_id,
       user_id: this.user.id,
@@ -233,7 +235,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.chatMessegesService.updateMessageInState(res.message);
     }
 
-    setTimeout( () => this.scrollToBottomOnInit(), 500);
+    
 
 
     // this.chats.days.push(this.newMesg);

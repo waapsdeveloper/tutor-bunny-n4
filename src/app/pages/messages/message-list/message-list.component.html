@@ -3,7 +3,7 @@
     <div [class.chat-recive-text-85623]="user_id != chat.user_id"
       [class.chat-send-text-85626]="user_id == chat.user_id">
       <div [innerHTML]="message"></div>
-      <div class="chat-recive-time-85624">{{getTime(chat.created_at)}} <img src="assets/svg/sentMessage.svg" alt=""> </div>
+      <div class="chat-recive-time-85624">{{getTime(chat.created_at)}} <img *ngIf="user_id == chat.user_id" [src]="returnIconsBasedOnType()" alt=""> </div>
     </div>
   </div>
 </div>
