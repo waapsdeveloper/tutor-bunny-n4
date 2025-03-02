@@ -11,8 +11,27 @@ import { EventsService } from './events.service';
 export class ChatMessegesService extends NgrxCrudService<any> {
   ngrxModelName: string = 'ChatMessagesModel';
   chatChannel: any;
+
+
+  isTyping: boolean = false;
+
+  timer: any;
+
   constructor(private network: NetworkService, private events: EventsService) {
     super();
+  }
+
+  isStartTyping(obj: any) {
+    if (!this.isTyping) {
+      this.isTyping = true;
+      this.network.sendMessageTyping(obj); // Send only when first typing starts
+    }
+  
+    clearTimeout(this.timer);
+  
+    this.timer = setTimeout(() => {
+      this.isTyping = false;
+    }, 3000);
   }
 
   unRegisterPusherEvent(pusher: Pusher, user_id: number) {
@@ -30,6 +49,26 @@ export class ChatMessegesService extends NgrxCrudService<any> {
       'message-rec-' + user_id,
       this.chatChannelReceived.bind(this)
     );
+
+    this.chatChannel.bind(
+      'message-typing-' + user_id,
+      this.chatChannelTypingReceived.bind(this)
+    );
+
+    
+  }
+
+  async chatChannelTypingReceived($event: any) {
+    let data = $event;
+    console.log('data-chat', data);
+    if (data.chat_room_id) {
+      const chatRoomId = await this.returnChatroomIdFromListInState();
+      if (chatRoomId === data.chat_room_id) {
+
+        // this.updateMessageInState(data);
+        this.events.publish('np-starts-typing', data);
+      }
+    }
   }
 
   async chatChannelReceived($event: any) {

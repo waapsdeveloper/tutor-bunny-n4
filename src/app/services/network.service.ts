@@ -36,6 +36,10 @@ export class NetworkService {
     return this.httpPostResponse('add-chat-message', data, null, false, false);
   }
 
+  sendMessageTyping(data) {
+    return this.httpPostResponse('send-chat-message-typing', data, null, false, false);
+  }
+
   deleteImage(id) {
     return this.httpDeleteResponse('gallery/delete/ ' + id, true);
   }

@@ -201,6 +201,15 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
   onKeyUp(event: any) {
     this.message = event.target.value;
+
+    let obj = {
+      chat_room_id: this.item.chat_room_id,
+      user_id: this.item.other_user_id,
+      message: this.message,
+    }
+
+    this.chatMessegesService.isStartTyping(obj)
+
   }
   async sendMessage() {
     if (!this.message) return;
