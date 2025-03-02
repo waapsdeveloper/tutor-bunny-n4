@@ -38,8 +38,8 @@ export class ChatMessegesService extends NgrxCrudService<any> {
     if (data.chat_room_id) {
       const chatRoomId = await this.returnChatroomIdFromListInState();
       if (chatRoomId === data.chat_room_id) {
-        this.updateMessageInState(data)
-        this.events.publish("scroll-to-bottom");
+        this.updateMessageInState(data);
+        this.events.publish('scroll-to-bottom');
       }
     }
   }
@@ -72,126 +72,105 @@ export class ChatMessegesService extends NgrxCrudService<any> {
   }
 
   addMessageInState(messageObject: any) {
-    this.setState( (state) => {
-      // ...state,
-      // list: [...state.list, messageObject],
+    this.setState((state) => {
+      // Find index of the entry with date "now"
+      let nowIndex = state.list.findIndex((item) => item.date === 'now');
 
-      let messageFound = false;
+      let updatedList = [...state.list];
 
-      const updatedList = state.list.map((item) => {
-
-        let lastIndexNow = state.list
-        .find(item => item.date === "now");
-
-        if(lastIndexNow != -1){ 
-          messageFound = true;
-          return {
-            ...item,
-            messages: [...item.messages, messageObject]
-          };
-          
-        }
-        
-        messageFound = false;
-        return item;
-      })
-
-      if(!messageFound){
+      if (nowIndex !== -1) {
+        // If "now" exists, update its messages array
+        updatedList[nowIndex] = {
+          ...updatedList[nowIndex],
+          messages: [...updatedList[nowIndex].messages, messageObject],
+        };
+      } else {
+        // If "now" does not exist, add a new entry
         updatedList.push({
           date: 'now',
-          messages: [messageObject]
-        })
+          messages: [messageObject],
+        });
       }
 
       return {
         ...state,
-        list: updatedList
-      }
-
+        list: updatedList,
+      };
     });
   }
 
   updateMessageInState(updatedMessage: any) {
+    this.setState((state) => {
+      // Find index of the entry with date "now"
+      let nowIndex = state.list.findIndex((item) => item.date === 'now');
+      let messageUpdated = false;
+      let updatedList = [...state.list];
 
-    this.setState( (state) => {
-
-      let messageFound = false;
-
-      const updatedList = state.list.map( (item) => {
-
-        let lastIndexNow = state.list
-        .find(item => item.date === "now");
-        // .pop() || -1; // Return -1 if undefined
-
-        console.log(lastIndexNow)
-
-        if(lastIndexNow != -1){
-
-          const updatedMessages = item.messages.map((msg) => {
+      if (nowIndex !== -1) {
+        // Update message if found
+        updatedList[nowIndex] = {
+          ...updatedList[nowIndex],
+          messages: updatedList[nowIndex].messages.map((msg) => {
             if (
               (msg.id === -1 && msg.message === updatedMessage.message) ||
               msg.id === updatedMessage.id
             ) {
-              messageFound = true;
-              return {
-               ...msg,
-               ...updatedMessage
-              };
+              messageUpdated = true;
+              return { ...msg, ...updatedMessage };
             }
-
-            messageFound = false;
             return msg;
-          })
+          }),
+        };
+      }
+
+      // If no message was updated, add it as a new message
+      if (!messageUpdated) {
+        if (nowIndex !== -1) {
+          updatedList[nowIndex].messages.push(updatedMessage);
+        } else {
+          updatedList.push({
+            date: 'now',
+            messages: [updatedMessage],
+          });
         }
-
-        messageFound = false;
-        return item;
-
-      })
-
-      if(!messageFound){
-        updatedList.push({
-          date: 'now',
-          messages: [updatedMessage]
-        })
       }
 
       return {
         ...state,
-        list: updatedList
-      }
-
+        list: updatedList,
+      };
     });
-
-    // this.setState((state) => {
-
-    //   let messageUpdated = false;
-
-    //   const updatedList = state.list.map((item) => {
-    //   //   // if (item.date === 'now') {
-    //       const updatedMessages = item.messages.map((msg) => {
-    //   //       if (
-    //   //         (msg.id === -1 && msg.message === updatedMessage.message) ||
-    //   //         msg.id === updatedMessage.id
-    //   //       ) {
-    //   //         messageUpdated = true;
-    //   //         return { ...msg, ...updatedMessage };
-    //   //       }
-    //   //       return msg;
-    //   //     });
-
-    //   //     return {
-    //   //       ...item,
-    //   //       messages: messageUpdated
-    //   //         ? updatedMessages // If updated, return modified messages
-    //   //         : [...updatedMessages, updatedMessage], // Otherwise, add new message
-    //       // };
-    //     // }
-    //     // return item;
-    //   // });
-
-    //   // return { list: updatedList };
-
-    // });
   }
+
+  // this.setState((state) => {
+
+  //   let messageUpdated = false;
+
+  //   const updatedList = state.list.map((item) => {
+  //   //   // if (item.date === 'now') {
+  //       const updatedMessages = item.messages.map((msg) => {
+  //   //       if (
+  //   //         (msg.id === -1 && msg.message === updatedMessage.message) ||
+  //   //         msg.id === updatedMessage.id
+  //   //       ) {
+  //   //         messageUpdated = true;
+  //   //         return { ...msg, ...updatedMessage };
+  //   //       }
+  //   //       return msg;
+  //   //     });
+
+  //   //     return {
+  //   //       ...item,
+  //   //       messages: messageUpdated
+  //   //         ? updatedMessages // If updated, return modified messages
+  //   //         : [...updatedMessages, updatedMessage], // Otherwise, add new message
+  //       // };
+  //     // }
+  //     // return item;
+  //   // });
+
+  //   // return { list: updatedList };
+
+  // });
+  // }
 }

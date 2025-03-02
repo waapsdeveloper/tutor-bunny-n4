@@ -208,19 +208,14 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
 
 
     const newMsgObj = {
-      date: 'now',
-      messages: [
-        {
-          chat_room_id: this.item.chat_room_id,
-          created_at: new Date(),
-          id: -1,
-          is_read: 0,
-          message: this.message,
-          updated_at: new Date(),
-          user_id: this.user.id,
-          status: -1
-        },
-      ],
+      chat_room_id: this.item.chat_room_id,
+      created_at: new Date(),
+      id: -1,
+      is_read: 0,
+      message: this.message,
+      updated_at: new Date(),
+      user_id: this.user.id,
+      status: -1
     };
 
     this.chatMessegesService.addMessageInState(newMsgObj);
