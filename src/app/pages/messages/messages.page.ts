@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   Injector,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -17,7 +18,8 @@ import { ChatMessegesService } from 'src/app/services/chat-messeges.service';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.scss'],
 })
-export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
+export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnDestroy {
+
   @ViewChild('scroll', { read: ElementRef })
   public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
@@ -180,12 +182,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   back() {
-    this.events.publish('clear-chat-data');
     this.nav.pop();
   }
 
   ngOnDestroy() {
-    this.events.publish('clear-params-chat');
+    this.listChatsService.getUnreadMsgCount();
   }
 
   openImage(image) {}
@@ -245,18 +246,18 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.chatMessegesService.updateMessageInState(res.message);
     }
 
-    
+
 
 
     // this.chats.days.push(this.newMesg);
-    
-    
-    
-    
-    
+
+
+
+
+
     // this.scrollToBottomOnInit();
-    
-    // 
+
+    //
     // this.messageInput.nativeElement.value = '';
     // this.adjustHeight(this.messageInput.nativeElement);
     // let res = await this.network.sendMessage(obj);
@@ -287,4 +288,5 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.loadingMore = false;
     }
   }
+
 }

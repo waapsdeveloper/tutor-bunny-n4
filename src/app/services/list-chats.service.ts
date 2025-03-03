@@ -34,6 +34,7 @@ export class ListChatsService extends NgrxCrudService<any> {
 
       let res = await this.network.getMessagesRoom(user.id, obj);
       const data = res.result;
+      console.log("chat-data", data)
       this.setList(data.data, data.page, data.last_page, data.total);
 
       this.unreadCount = (await this.getUnreadMsgCount()) as number;
@@ -50,6 +51,31 @@ export class ListChatsService extends NgrxCrudService<any> {
       ...state,
       unread_count: res.unread_count,
     }));
+
+
+    let list = res.list as any[];
+    for(var i = 0; i < list.length; i++){
+
+      let anItem = list[i];
+
+      this.setState((state) => ({
+        ...state,
+        list: state.list.map( item => {
+          if(item.chat_room_id == anItem.chat_room_id ){
+            return { ...item, unread_count: anItem.unread_count }
+          }
+          return item;
+        }),
+      }));
+    }
+
+
+
+
+
+
+
+
 
     return this.unreadCount;
   }
@@ -68,10 +94,14 @@ export class ListChatsService extends NgrxCrudService<any> {
       return {
         ...state,
         list: state.list.map(
-          (item: any) =>
-            item.chat_room_id === obj.chat_room_id
-              ? { ...item, last_message: obj.message } // Update last_message for the matching chat
-              : item // Return unchanged for others
+          (item: any) => {
+            if(item.chat_room_id === obj.chat_room_id) {
+
+              // count unread meessage via
+              return { ...item, last_message: obj.message } // Update last_message for the matching chat
+            }
+            return item;
+          }
         ),
       };
     });
@@ -98,10 +128,12 @@ export class ListChatsService extends NgrxCrudService<any> {
     let data = $event;
     console.log('data-chat', data);
     if (data.chat_room_id) {
+
       this.setLastMessageOfChatList({
         chat_room_id: data.chat_room_id,
-        message: data.message,
+        message: data.message
       });
+
     }
 
     this.getUnreadMsgCount();

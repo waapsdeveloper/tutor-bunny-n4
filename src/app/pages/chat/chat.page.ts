@@ -1,7 +1,8 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { BasePage } from 'src/app/base-page/base-page';
-import * as moment from 'moment';
-import { ChatService } from 'src/app/services/chat.service';
+import { ListPage } from 'src/app/base-page/list-page';
+// import { BasePage } from 'src/app/base-page/base-page';
+// import * as moment from 'moment';
+// import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
 
 
@@ -10,12 +11,13 @@ import { ListChatsService } from 'src/app/services/list-chats.service';
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage extends BasePage implements OnInit {
+export class ChatPage extends ListPage implements OnInit {
+
 
   list$;
 
   isSearchBarShow = false;
-  search;
+  // search;
   showChat = 'inbox';
   activeUser;
 
@@ -33,23 +35,45 @@ export class ChatPage extends BasePage implements OnInit {
   // other_user_id;
 
   // public chats: ChatService
-  constructor(injector: Injector, private listChatService: ListChatsService ) {
-    super(injector); 
+  constructor(injector: Injector, private listChatService: ListChatsService) {
+    super(injector);
 
     // this.initialize();
     // this.activeUser = this.users.getUser();
 
-    this.listChatService.getList().subscribe( (data) => {
+    this.listChatService.getList().subscribe((data) => {
       this.list$ = data;
     });
 
   }
 
+  override async fetchList(page: number, search: string, status: string): Promise<any> {
+    this.loading = true;
+
+    const user = this.users.getUser();
+    let obj = {
+      search: search,
+      page: page,
+    };
+
+    let res = await this.network.getMessagesRoom(user.id, obj);
+    this.loading = false;
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total,
+    };
+
+  }
+
   ngOnInit(): void {
     //
-    this.activeUser = this.users.getUser();
+    // this.activeUser = this.users.getUser();
+    this.resetAndFetch();
+
   }
-  
+
 
   // ngOnDestroy() {
   //   this.user = null;
