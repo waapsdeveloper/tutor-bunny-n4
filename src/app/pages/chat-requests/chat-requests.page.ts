@@ -15,7 +15,6 @@ export class ChatRequestsPage extends ListPage {
   user
   count;
 
-  // public chats: ChatService
 
   constructor(injector:Injector, private listRequestsService: ListRequestsService  ){
     super(injector);

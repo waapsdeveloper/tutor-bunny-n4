@@ -1,11 +1,17 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Injector,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ListPage } from 'src/app/base-page/list-page';
 // import { BasePage } from 'src/app/base-page/base-page';
 // import * as moment from 'moment';
 // import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
 import { ListRequestsService } from 'src/app/services/teacher/list-requests.service';
-
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-chat',
@@ -13,7 +19,7 @@ import { ListRequestsService } from 'src/app/services/teacher/list-requests.serv
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage extends ListPage implements OnInit {
-
+  @ViewChild('swiper') swiper: Swiper;
 
   list$;
   requestList$;
@@ -22,6 +28,8 @@ export class ChatPage extends ListPage implements OnInit {
   // search;
   showChat = 'inbox';
   activeUser;
+  activeTab: string = 'inbox';
+
 
   // request;
   // time;
@@ -37,8 +45,12 @@ export class ChatPage extends ListPage implements OnInit {
   // other_user_id;
 
   // public chats: ChatService
-  constructor(injector: Injector, private listChatService: ListChatsService, private listRequestsService: ListRequestsService  ) {
-    super(injector); 
+  constructor(
+    injector: Injector,
+    private listChatService: ListChatsService,
+    private listRequestsService: ListRequestsService
+  ) {
+    super(injector);
 
     // this.initialize();
     // this.activeUser = this.users.getUser();
@@ -46,25 +58,45 @@ export class ChatPage extends ListPage implements OnInit {
     this.listChatService.getList().subscribe((data) => {
       this.list$ = data;
     });
-    
-    this.listRequestsService.getList().subscribe( (data) => {
+
+    this.listRequestsService.getList().subscribe((data) => {
       this.requestList$ = data;
-    })
+    });
+  }
 
-   }
+  onSwiper(swiperInstance: Swiper) {
+    this.swiper = swiperInstance;
+  }
 
-   async fetchReqList(page: number, search: string, status: string): Promise<{ list: any[]; page: number; last_page: number; total: number }> {
-    const res = await this.listRequestsService.getRequests(page, search, status);
+  goToSlide(index: number) {
+    if (this.swiper) {
+      this.swiper.slideTo(index);
+    }
+  }
+
+  async fetchReqList(
+    page: number,
+    search: string,
+    status: string
+  ): Promise<{ list: any[]; page: number; last_page: number; total: number }> {
+    const res = await this.listRequestsService.getRequests(
+      page,
+      search,
+      status
+    );
     return {
       list: res.result.data,
       page: res.result.current_page,
       last_page: res.result.last_page,
-      total: res.result.total
+      total: res.result.total,
     };
-
   }
 
-  override async fetchList(page: number, search: string, status: string): Promise<any> {
+  override async fetchList(
+    page: number,
+    search: string,
+    status: string
+  ): Promise<any> {
     this.loading = true;
 
     const user = this.users.getUser();
@@ -81,22 +113,18 @@ export class ChatPage extends ListPage implements OnInit {
       last_page: res.result.last_page,
       total: res.result.total,
     };
-
   }
 
   ngOnInit(): void {
     //
     // this.activeUser = this.users.getUser();
     this.resetAndFetch();
-
   }
-
 
   // ngOnDestroy() {
   //   this.user = null;
   //   this.other_user_id = null;
   // }
-
 
   // ionViewDidLeave() {
   //   this.user = null;
@@ -106,8 +134,6 @@ export class ChatPage extends ListPage implements OnInit {
   // doSearch(event) {
   //   this.chats.getchatList(this.search, 1)
   // }
-
-
 
   // async initialize() {
   //   await this.chats.getchatList(this.search, 1);
@@ -151,10 +177,7 @@ export class ChatPage extends ListPage implements OnInit {
   // //   this.request = res.data;
   // // }
 
-
   // ShowSearchBar(event) {
   //   this.isSearchBarShow = !this.isSearchBarShow;
   // }
-
-
 }

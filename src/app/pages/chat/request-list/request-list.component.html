@@ -1,4 +1,4 @@
-<div class="trial-box-outer-689567">
+<!-- <div class="trial-box-outer-689567">
   <div class="trial-box-inner-689567">
     <div class="trial-box-heading-outer">
       <div class="trial-box-heading-outer-title">
@@ -32,9 +32,6 @@
         "
       ></div>
       <div class="content-container-23432">
-        <!-- <div class="profile-name-outer-8973 roboto-medium fs-16">
-          {{item.last_message}}
-        </div> -->
         <div class="profile-line-content">
           <div
             class="profile-name-outer-8973 roboto-medium fs-16 d-flex justify-content-between"
@@ -49,7 +46,55 @@
         </div>
         <div class="flag-box-98875">
           <span slot="start" class="fi fi-{{ getFlag() }}"></span>
-          <div class="fs-16 outfit">{{ item.user.student.country.name }}</div>
+          <div class="fs-16 outfit">
+            {{ item?.user?.student?.country?.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="chat-list-98521">
+  <div class="chat-box-98522">
+    <div class="chat-image-box-98523">
+      <div
+        class="chat-image-98523"
+        [style.background-image]="
+          item.user.image
+            ? 'url(' + item.user.image + ')'
+            : 'assets/profileimg.png'
+        "
+      ></div>
+    </div>
+    <div class="chat-deatil-98524">
+      <div class="chat-name-time-98525">
+        <div class="chat-name-98526">
+          <span>{{ item.user.name | names }}</span>
+        </div>
+        <div class="chat-time-98527">{{ date }}</div>
+      </div>
+      <div class="chat-satus-98528">
+        <div class="chat-online-98529">
+          <img src="assets/svg/cake.svg" alt="Age Icon" class="icon" />
+          <span class="roboto-regular fs-14">Age {{ age }}</span>
+          <span slot="start" class="fi fi-{{ getFlag() }}"></span>
+          <div class="fs-16 outfit">
+            {{ item?.user?.student?.country?.name }}
+          </div>
+        </div>
+        <div class="chat-message-98530">
+          <!-- {{ this.item.unread_count }} -->
+          <img src="../../../../assets/menu.svg" alt="" id="open-popover"/>
+          <ion-popover trigger="open-popover" triggerAction="click">
+            <ng-template style="width: 100%">
+             <ion-list>
+              <ion-item>Accept</ion-item>
+              <ion-item>Reject</ion-item>
+              <ion-item>Block</ion-item>
+             </ion-list>
+            </ng-template>
+          </ion-popover>
         </div>
       </div>
     </div>

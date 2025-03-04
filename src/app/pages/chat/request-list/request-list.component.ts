@@ -43,10 +43,10 @@ export class RequestListComponent extends BasePage {
       return flag ? flag.toLowerCase() : '';
     } else if (
       this.item &&
-      this.item.user.teacher &&
-      this.item.user.teacher.country
+      this.item?.user?.teacher &&
+      this.item?.user?.teacher?.country
     ) {
-      const flag = this.item.user.teacher.country.iso2;
+      const flag = this.item?.user?.teacher?.country?.iso2;
       return flag ? flag.toLowerCase() : '';
     } else {
       return '';

@@ -3,6 +3,7 @@
   align-items: stretch;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
 
   .chat-room-swiper {
@@ -11,19 +12,28 @@
     justify-content: center;
     gap: 12px;
     border-bottom: 0.5px solid black;
-    padding: 8px;
-
+    padding: 8px 12px 0 8px;
+  
     .chat-swiper-boxes {
       display: flex;
       align-items: center;
       font-size: 16px;
       gap: 8px;
       justify-content: center;
-      // width: 50%;
+      color: #888888;
       text-wrap: nowrap;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &.active {
+        // background-color: gray; // Active tab background
+        border-bottom: 2px solid black; // Bottom border
+        font-weight: bold;
+      }
     }
   }
-
+  
   .chat-top-header-78521 {
     width: 100%;
     padding: 8px 0;

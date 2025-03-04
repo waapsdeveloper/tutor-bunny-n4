@@ -8,57 +8,68 @@
     [showSearch]="true"
   ></app-sd-header-top>
 </ion-header>
-<ion-content class="ion-padding" [fullscreen]="true">
+<ion-content [fullscreen]="true">
   <div class="body-content">
-    <!-- <div class="search-box-outer-89655" *ngIf="showChat === 'inbox' && isSearchBarShow">
-      <div class="search-box-input-outer">
-        <img src="assets/icon/input-search-gray.svg" />
-        <input type="text" placeholder="Search by name?" [(ngModel)]="search" (keyup.enter)="doSearch($event)" />
+    <div style="width: 100%">
+      <div style="padding: 0 16px 0 16px">
+        <swiper
+          [slidesPerView]="2"
+          [spaceBetween]="12"
+          class="chat-room-swiper"
+        >
+          <ng-template swiperSlide>
+            <div
+              class="chat-swiper-boxes"
+              [class.active]="activeTab === 'inbox'"
+              (click)="activeTab = 'inbox'"
+            >
+              <img src="../../../assets/inbox.svg" alt="" />Inbox
+            </div>
+          </ng-template>
+          <ng-template swiperSlide>
+            <div
+              class="chat-swiper-boxes"
+              [class.active]="activeTab === 'requests'"
+              (click)="activeTab = 'requests'"
+            >
+              <img src="../../../assets/request.svg" alt="" />Message Requests
+              (0)
+            </div>
+          </ng-template>
+        </swiper>
       </div>
-    </div> -->
-    <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher> -->
-    <!-- <div class="chat-top-header-78521">
-      <div class="chat-inbox-78522">
-        <img src="assets/svg/inbox.svg" alt="" />Inbox
+
+      <div
+        *ngIf="activeTab === 'inbox'"
+        style="height: 80vh; position: relative"
+      >
+        <app-global-list-view
+          [list]="list$"
+          [itemTemplate]="itemTemplate"
+          (refresh)="handleRefresh($event)"
+          (loadMore)="onIonInfinite($event)"
+        >
+          <ng-template #itemTemplate let-item>
+            <app-chat-list [item]="item"></app-chat-list>
+          </ng-template>
+        </app-global-list-view>
       </div>
-      <app-chat-page-requests-button
-        *ngIf="activeUser.role_id === 3"
-      ></app-chat-page-requests-button>
-    </div> -->
-    <div>
-      <div class="chat-room-swiper">
-        <div class="chat-swiper-boxes" style="width: 40%">
-          <img src="../../../assets/inbox.svg" alt="" />Inbox
-        </div>
-        <div class="chat-swiper-boxes" style="width: 60%">
-          <img src="../../../assets/request.svg" alt="" />Message Requests (0)
-        </div>
-      </div>
-      <div style="height: 100%; position: relative">
-        <app-chat-list *ngFor="let item of list$" [item]="item"></app-chat-list>
-        <div class="centered-message" *ngIf="list$?.length === 0">
-          No chat to display
-        </div>
-      </div>
-      <div style="height: 100%; position: relative">
-        <app-request-list
-          *ngFor="let item of list$"
-          [item]="item"
-        ></app-request-list>
-        <div class="centered-message" *ngIf="list$?.length === 0">
-          No chat to display
-        </div>
+
+      <div
+        *ngIf="activeTab === 'requests'"
+        style="height: 80vh; position: relative"
+      >
+        <app-global-list-view
+          [list]="list$"
+          [itemTemplate]="itemTemplate"
+          (refresh)="handleRefresh($event)"
+          (loadMore)="onIonInfinite($event)"
+        >
+          <ng-template #itemTemplate let-item>
+            <app-request-list [item]="item"></app-request-list>
+          </ng-template>
+        </app-global-list-view>
       </div>
     </div>
-  </div> -->
-
-
-  <app-global-list-view [list]="list$" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
-    <ng-template #itemTemplate let-item >
-      <app-chat-list [item]="item" ></app-chat-list>
-    </ng-template>
-  </app-global-list-view>
-
+  </div>
 </ion-content>

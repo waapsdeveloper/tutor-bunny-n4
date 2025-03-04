@@ -3,6 +3,7 @@ import { NgrxCrudService } from './abstract/ngrx-crud.service';
 import Pusher from 'pusher-js';
 import { NetworkService } from './network.service';
 import { ListRequestsService } from './teacher/list-requests.service';
+import { EventsService } from './events.service';
 
 @Injectable({
   providedIn: 'root',

@@ -13,6 +13,7 @@ import { NamesPipeModule } from 'src/app/pipes/name.pipe.module';
 import { ChatPageRequestsButtonModule } from './chat-page-requests-button/chat-page-requests-button.module';
 import { RequestListModule } from './request-list/request-list.module';
 import { GlobalListViewModule } from "../../components/global-list-view/global-list-view.module";
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { GlobalListViewModule } from "../../components/global-list-view/global-l
     RequestListModule,
     // additional modules
     ChatPageRequestsButtonModule,
-    GlobalListViewModule
+    GlobalListViewModule,
+    SwiperModule
 ],
   declarations: [ChatPage]
 })
