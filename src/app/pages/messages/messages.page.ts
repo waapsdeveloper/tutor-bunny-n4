@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
 import { ChatMessegesService } from 'src/app/services/chat-messeges.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 
 @Component({
   selector: 'app-messages',
@@ -40,10 +41,17 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
   role_id;
   params;
   emptyValue;
-
+  status;
   combineMessages = [];
 
-  constructor(injector: Injector, public chats: ChatService, private listChatsService: ListChatsService, private chatMessegesService: ChatMessegesService) {
+  constructor(
+    injector: Injector,
+    public chats: ChatService,
+    private listChatsService: ListChatsService,
+    private chatMessegesService: ChatMessegesService,
+    private userStatus: UserStatusService
+
+  ) {
     super(injector);
   }
 
@@ -87,15 +95,13 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
     this.image = ch.user.image;
     this.loading = false;
 
-    setTimeout( async () => {
+    setTimeout(async () => {
       this.myContent.scrollToBottom(100);
-
-
-
       this.chats.unreadCount = (await this.chats.getUnreadMsgCount()) as number;
-
-
     }, 500);
+
+    this.status = await this.userStatus.getUserStatus(ch.user.id);
+
   }
 
   // messageReceivedViaPusher() {
@@ -109,7 +115,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
     const dm = data;
 
 
-    if(!this.item){
+    if (!this.item) {
       return;
     }
 
@@ -170,6 +176,13 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
     } else {
       return '';
     }
+  }
+
+  getOnlineTime(last_seen: string){
+    if(!last_seen){
+      return ''
+    }
+    return moment(last_seen).format('hh:mm a')
   }
 
   getTime(time) {

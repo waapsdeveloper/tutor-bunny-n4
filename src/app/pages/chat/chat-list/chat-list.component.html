@@ -4,7 +4,7 @@
       <div class="chat-image-98523"
         [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'">
       </div>
-      <div class="online-dot-23" *ngIf="status.is_online"></div>
+      <div class="online-dot-23" *ngIf="status?.is_online"></div>
 
     </div>
     <div class="chat-deatil-98524">

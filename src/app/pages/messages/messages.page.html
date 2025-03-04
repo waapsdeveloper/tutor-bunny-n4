@@ -8,18 +8,21 @@
       <div class="header-image-78415" (click)="openImage(image)"
         [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'">
       </div>
-      <div style="display: flex; align-items: flex-start; flex-direction: column;
-      gap: 8px;">
+      <div class="d-flex flex-column">
         <div class="header-title ">
           <div>{{displayName}}</div> <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
-        <div class="chat-online-98529"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
+        <div class="">
+          <div class="chat-online-98529" *ngIf="status?.is_online"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
+          <div class="chat-online-98529ww" *ngIf="!status?.is_online && status?.last_seen"> Last seen {{ getOnlineTime(status?.last_seen) }} </div>
+        </div>
+
       </div>
     </div>
   </div>
 </ion-header>
 
-<div *ngIf="loading" class="loading-syn "  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
+<div *ngIf="loading" class="loading-syn"  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
   <ion-spinner></ion-spinner>
 </div>
 <ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" (ionScroll)="onScroll($event)" [scrollEvents]="true">
@@ -35,7 +38,7 @@
     </div>
     <app-message-list *ngFor="let chat of item.messages" [chat]="chat"></app-message-list>
   </div>
-  
+
 </ion-content>
 <ion-footer>
   <app-typing-box class="typing-shown-775" [chatItem]="item"></app-typing-box>
