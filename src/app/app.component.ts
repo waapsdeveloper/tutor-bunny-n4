@@ -11,6 +11,7 @@ import { InitializeAppService } from './services/sqlite/initialize.app.service';
 // import { environment } from 'src/environments/environment';
 import { Keyboard } from '@capacitor/keyboard';
 import { PusherSingleService } from './services/pusher-single.service';
+import { UserStatusService } from './services/user-status.service';
 
 
 @Component({
@@ -31,11 +32,20 @@ export class AppComponent {
     private modalController: ModalController,
     private zone: NgZone,
     private iap: InitializeAppService,
+    private userStatusService: UserStatusService
 
   ) {
 
     platform.ready().then(async () => {
       this.Initialize();
+
+      App.addListener('appStateChange', (state) => {
+        if (!state.isActive) {
+          // App is going to the background or closing
+          this.sendExitApi();
+        }
+      });
+
     });
   }
 
@@ -49,6 +59,7 @@ export class AppComponent {
 
     await this.iap.initializeApp();
     this.pusherService.initialize();
+    this.userStatusService.initialize();
 
     if (Capacitor.getPlatform() != 'web') {
       this.fcm.setupFMC();
@@ -116,7 +127,12 @@ export class AppComponent {
     }
   }
 
+  sendExitApi(){
+    this.userStatusService.userLeftApp()
+  }
+
   exitApp() {
+    this.userStatusService.userLeftApp();
     navigator['app'].exitApp();
   }
 

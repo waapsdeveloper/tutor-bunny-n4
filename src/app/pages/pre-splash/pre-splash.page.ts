@@ -10,6 +10,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 // import { InitializeAppService } from 'src/app/services/sqlite/initialize.app.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { PusherSingleService } from 'src/app/services/pusher-single.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 // import { listTrialsService } from 'src/app/services/teacher/pending-trials.service';
 // import { GlobalStudyMaterialService } from 'src/app/services/global-study-material.service';
 // import { GlobalFavCoursesService } from 'src/app/services/student/global-fav-courses.service';
@@ -36,7 +37,8 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
     // private iap: InitializeAppService,
 
     public notificationService: NotificationsService,
-    private fcm: FirebaseService
+    private fcm: FirebaseService,
+    private userStatusService: UserStatusService
   ) // subscription APIs
   // private listTrialsService: listTrialsService,
   // private globalStudyMaterialService: GlobalStudyMaterialService,
@@ -55,6 +57,7 @@ export class PreSplashPage extends BasePage implements ViewWillEnter {
 
   async initialize() {
     this.pusherService.initialize();
+    this.userStatusService.initialize();
     this.loading = true;
 
     this.loadResolvers();

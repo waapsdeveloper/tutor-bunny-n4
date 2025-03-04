@@ -6,12 +6,13 @@ import { GlobalCoursesService } from 'src/app/services/global-courses.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { UsersService } from 'src/app/services/users.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 @Component({
   selector: 'app-menu-list-box',
   templateUrl: './menu-list-box.component.html',
   styleUrls: ['./menu-list-box.component.scss'],
 })
-export class MenuListBoxComponent extends BasePage implements OnInit {
+export class MenuListBoxComponent extends BasePage {
   role;
   user;
   constructor(injector: Injector,
@@ -19,7 +20,8 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     private courses: GlobalCoursesService,
     private chats: ChatService,
     @Inject(NotificationsService) private notification: NotificationsService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private userStatusService: UserStatusService
 
   ) {
     super(injector);
@@ -29,9 +31,6 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
     this.role = localStorage.getItem('role');
     this.user = this.users.getUser();
     console.log(this.user)
-  }
-  ngOnInit() {
-
   }
 
   gotoProfile() {
@@ -62,6 +61,7 @@ export class MenuListBoxComponent extends BasePage implements OnInit {
   async logout() {
 
     this.events.publish('clear-all-services-data');
+    this.userStatusService.userLeftApp();
     // this.chats.unRegisterPusherEvent();
     this.trails.unRegisterPusherEvent();
     this.courses.unRegisterPusherEvent();

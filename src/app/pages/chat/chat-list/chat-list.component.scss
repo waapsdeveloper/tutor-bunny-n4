@@ -14,6 +14,7 @@
 
     .chat-image-box-98523 {
       // width: 20%;
+      position: relative;
 
       .chat-image-98523 {
         height: 62px;
@@ -23,6 +24,9 @@
         background-color: #677169;
         background-size: cover;
         background-position: center center;
+
+
+
       }
     }
 
@@ -93,4 +97,16 @@
       }
     }
   }
+}
+
+.online-dot-23 {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  color: #138808;
+  background-color: #138808; /* Add this */
+  width: 10px;
+  height: 10px;
+  z-index: 25;
+  border-radius: 50%;
 }

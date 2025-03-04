@@ -1235,6 +1235,14 @@ export class NetworkService {
     return this.httpGetResponse('student/wallet', null, false, false);
   }
 
+  updateUserStatus(data: any) {
+    return this.httpPostResponse('user/update-status', data, null, false, false);
+  }
+
+  getUserStatus(userId) {
+    return this.httpGetResponse('user/get-status/' + userId, null, false, false);
+  }
+
   getGlobalSearch(params: any) {
     const str = this.serialize(params);
     return this.httpGetResponse(

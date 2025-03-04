@@ -9,6 +9,7 @@ import {
 import * as moment from 'moment';
 import { BasePage } from 'src/app/base-page/base-page';
 import { ChatService } from 'src/app/services/chat.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -19,6 +20,10 @@ export class ChatListComponent extends BasePage implements OnInit {
   private _item: any;
   last_message;
   unread_count;
+
+  status: any = null;
+
+
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Input('item')
@@ -28,10 +33,7 @@ export class ChatListComponent extends BasePage implements OnInit {
 
   public set item(value: any) {
     this._item = value;
-    const time = this.item.updated_at;
-    this.unread_count = this.item.unread_count;
-    this.last_message = this.item.last_message;
-    this.time = moment(time).format('hh:mm a');
+    this.initialize(value)
   }
 
   time;
@@ -39,9 +41,26 @@ export class ChatListComponent extends BasePage implements OnInit {
   user;
 
   constructor(injector: Injector,
-     private chats: ChatService
+     private chats: ChatService,
+     private userStatus: UserStatusService
   ) {
     super(injector);
+  }
+
+  async initialize(value){
+
+    const time = value.updated_at;
+    this.unread_count = value.unread_count;
+    this.last_message = value.last_message;
+    this.time = moment(time).format('hh:mm a');
+
+    let userId = value.user.id;
+    if(userId){
+      const res = await this.userStatus.getUserStatus(userId);
+      console.log(res);
+      this.status = res;
+    }
+
   }
 
   ngOnInit() {
