@@ -1,0 +1,57 @@
+<div class="trial-box-outer-689567">
+  <div class="trial-box-inner-689567">
+    <div class="trial-box-heading-outer">
+      <div class="trial-box-heading-outer-title">
+        <img src="assets/svg/mail.svg" style="height: 16px" />
+        <div class="trial-box-heading-7895 roboto-medium fs-16">
+          Message Request
+        </div>
+      </div>
+      <div class="trial-box-heading-outer-sl-7895">
+        <div
+          class="trial-box-heading-accept-2156 roboto-medium fs-12"
+          (click)="updaeStatus('accept', item)"
+        >
+          <span>Accept</span>
+        </div>
+        <div
+          class="trial-box-heading-reject-2156 roboto-medium fs-12"
+          (click)="updaeStatus('reject', item)"
+        >
+          <span>Reject</span>
+        </div>
+      </div>
+    </div>
+    <div class="trial-box-content-outer">
+      <div
+        class="image-container-23432"
+        [style.background-image]="
+          item.user.image
+            ? 'url(' + item.user.image + ')'
+            : 'assets/profileimg.png'
+        "
+      ></div>
+      <div class="content-container-23432">
+        <!-- <div class="profile-name-outer-8973 roboto-medium fs-16">
+          {{item.last_message}}
+        </div> -->
+        <div class="profile-line-content">
+          <div
+            class="profile-name-outer-8973 roboto-medium fs-16 d-flex justify-content-between"
+          >
+            <span>{{ item.user.name | names }}</span> <span>{{ date }}</span>
+          </div>
+        </div>
+
+        <div class="profile-age-2154">
+          <img src="assets/svg/cake.svg" alt="Age Icon" class="icon" />
+          <span class="roboto-regular fs-14">Age {{ age }}</span>
+        </div>
+        <div class="flag-box-98875">
+          <span slot="start" class="fi fi-{{ getFlag() }}"></span>
+          <div class="fs-16 outfit">{{ item.user.student.country.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

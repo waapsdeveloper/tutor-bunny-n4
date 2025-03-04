@@ -5,6 +5,25 @@
   flex-direction: column;
   gap: 16px;
 
+  .chat-room-swiper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-bottom: 0.5px solid black;
+    padding: 8px;
+
+    .chat-swiper-boxes {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      gap: 8px;
+      justify-content: center;
+      // width: 50%;
+      text-wrap: nowrap;
+    }
+  }
+
   .chat-top-header-78521 {
     width: 100%;
     padding: 8px 0;
@@ -25,7 +44,7 @@
     .chat-inbox-78523 {
       display: flex;
       align-items: center;
-      color: #0B5DD8;
+      color: #0b5dd8;
       gap: 8px;
       font-weight: 600;
       justify-content: center;
@@ -48,12 +67,12 @@
 
       .label-986675555 {
         font-size: 10px;
-        color: #677169
+        color: #677169;
       }
     }
 
     .search-box-input-outer {
-      background: #FFFFFF;
+      background: #ffffff;
       height: 40px;
       width: 100%;
       border: 0.5px solid rgb(103 113 105 / 50%);
@@ -135,7 +154,7 @@
           .chat-time-98527 {
             font-size: 16px;
             font-weight: 400;
-            color: #ADAFBB;
+            color: #adafbb;
           }
         }
 
@@ -157,7 +176,7 @@
           .chat-message-98530 {
             font-size: 12px;
             font-weight: 700;
-            background-color: #E94057;
+            background-color: #e94057;
             border-radius: 50%;
             color: white;
             height: 20px;
@@ -178,5 +197,3 @@
     }
   }
 }
-
-

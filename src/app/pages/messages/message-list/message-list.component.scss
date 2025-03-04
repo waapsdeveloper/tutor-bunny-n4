@@ -82,12 +82,11 @@
 
 .chat-send-text-85626 {
   width: 100%;
-  background-color: #B1D2A780;
+  background-color: #60AD394D;
   text-wrap: wrap;
-  padding: 16px;
+  padding: 8px;
   box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
   border-radius: 16px 16px 0 16px ;
-  border: 0.25px solid #00000080;
   font-size: 16px;
   color: #0f0500;
   font-weight: 400;
@@ -112,9 +111,10 @@
 
 .chat-recive-text-85623 {
   width: 100%;
-  background-color: #F4F4F4;
+  background-color: #ffffff;
   text-wrap: wrap;
-  padding: 24px;
+  padding: 8px;
+  box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
   border-radius: 16px 16px 16px 0;
   font-size: 16px;
   color: #0f0500;
@@ -144,9 +144,11 @@
     background: white;
     display: flex;
     align-items: center;
+    border: 0.5px solid rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     justify-content: space-between;
     padding: 0 16px 0 0;
+    box-shadow: 1px 4px 4px 0 rgba(0, 0, 0, 0.15);
 
     input {
       width: 88%;
@@ -211,6 +213,7 @@ ion-footer {
   font-weight: 400;
   gap: 8px;
   height: 38px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
   justify-content: center;
   border-radius: 8px;
 }

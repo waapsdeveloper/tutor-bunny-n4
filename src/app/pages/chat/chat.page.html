@@ -1,8 +1,14 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <!-- (toggleSearchBar)="ShowSearchBar($event)" -->
-  <app-sd-header-top [showBack]="true" [title]="'Chat'" [backUrl]="" [showNotification]="false" [showSearch]="false"></app-sd-header-top>
+  <app-sd-header-top
+    [showBack]="true"
+    [title]="'Chat'"
+    [backUrl]=""
+    [showNotification]="true"
+    [showSearch]="true"
+  ></app-sd-header-top>
 </ion-header>
-<ion-content class=" ion-padding" [fullscreen]="true">
+<ion-content class="ion-padding" [fullscreen]="true">
   <div class="body-content">
     <!-- <div class="search-box-outer-89655" *ngIf="showChat === 'inbox' && isSearchBarShow">
       <div class="search-box-input-outer">
@@ -13,14 +19,38 @@
     <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher> -->
-    <div class="chat-top-header-78521">
-      <div class="chat-inbox-78522"><img src="assets/svg/inbox.svg" alt="">Inbox</div>
-      <app-chat-page-requests-button *ngIf="activeUser.role_id === 3"></app-chat-page-requests-button>      
-    </div>
-    <div style="height: 100%; position: relative;">
-      <!-- (onChange)="gotoMessage($event)" -->
-      <app-chat-list *ngFor="let item of list$" [item]="item" ></app-chat-list>
-      <div class="centered-message" *ngIf="list$?.length === 0">No chat to display</div>
+    <!-- <div class="chat-top-header-78521">
+      <div class="chat-inbox-78522">
+        <img src="assets/svg/inbox.svg" alt="" />Inbox
+      </div>
+      <app-chat-page-requests-button
+        *ngIf="activeUser.role_id === 3"
+      ></app-chat-page-requests-button>
+    </div> -->
+    <div>
+      <div class="chat-room-swiper">
+        <div class="chat-swiper-boxes" style="width: 40%">
+          <img src="../../../assets/inbox.svg" alt="" />Inbox
+        </div>
+        <div class="chat-swiper-boxes" style="width: 60%">
+          <img src="../../../assets/request.svg" alt="" />Message Requests (0)
+        </div>
+      </div>
+      <div style="height: 100%; position: relative">
+        <app-chat-list *ngFor="let item of list$" [item]="item"></app-chat-list>
+        <div class="centered-message" *ngIf="list$?.length === 0">
+          No chat to display
+        </div>
+      </div>
+      <div style="height: 100%; position: relative">
+        <app-request-list
+          *ngFor="let item of list$"
+          [item]="item"
+        ></app-request-list>
+        <div class="centered-message" *ngIf="list$?.length === 0">
+          No chat to display
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

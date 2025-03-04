@@ -38,26 +38,16 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   role_id;
   params;
   emptyValue;
-  allMessages: any[] = [];
 
   combineMessages = [];
 
-  constructor(
-    injector: Injector,
-    public chats: ChatService,
-    private listChatsService: ListChatsService,
-    private chatMessegesService: ChatMessegesService
-  ) {
+  constructor(injector: Injector, public chats: ChatService, private listChatsService: ListChatsService, private chatMessegesService: ChatMessegesService) {
     super(injector);
   }
 
   ngOnInit() {
     this.events.subscribe('scroll-to-bottom', () => {
       this.scrollToBottomOnInit();
-    });
-    this.chatMessegesService.getList().subscribe((data) => {
-      console.log(data, "data")
-      this.allMessages = data;
     });
   }
 
@@ -87,19 +77,22 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.nav.pop();
       return;
     }
-    this.image = ch.user.image;
-
-    await this.chatMessegesService.getChatMessages(roomId);
-
-    // this.chats.updateChatCount(roomId, 0);
+    await this.chats.getChatMessages(roomId);
+    this.chats.updateChatCount(roomId, 0);
 
     this.item = ch;
     this.displayName = this.utility.getAmericanName(ch.user.name);
+    this.image = ch.user.image;
     this.loading = false;
-    setTimeout(async () => {
+
+    setTimeout( async () => {
       this.myContent.scrollToBottom(100);
 
-      // this.chats.unreadCount = (await this.chats.getUnreadMsgCount()) as number;
+
+
+      this.chats.unreadCount = (await this.chats.getUnreadMsgCount()) as number;
+
+
     }, 500);
   }
 
@@ -113,7 +106,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   updateChatsByMessageReceived(data: any) {
     const dm = data;
 
-    if (!this.item) {
+
+    if(!this.item){
       return;
     }
 
@@ -121,6 +115,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       if (!this.chats || !this.chats.days) {
         return;
       }
+
 
       let newMessage = {
         chat_room_id: dm.chat_room_id,
@@ -188,11 +183,12 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.events.publish('clear-params-chat');
   }
 
-  openImage(image) {}
+  openImage(image) { }
 
   scrollToBottomOnInit() {
     setTimeout(() => {
       this.myContent.scrollToBottom(100);
+
     }, 500);
   }
   adjustHeight(textArea: HTMLTextAreaElement): void {
@@ -204,56 +200,36 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
   async sendMessage() {
     if (!this.message) return;
-
-
-
-    const newMsgObj = {
-      chat_room_id: this.item.chat_room_id,
-      created_at: new Date(),
-      id: -1,
-      is_read: 0,
-      message: this.message,
-      updated_at: new Date(),
-      user_id: this.user.id,
-      status: -1
+    this.newMesg = {
+      date: 'now',
+      messages: [
+        {
+          chat_room_id: this.item.chat_room_id,
+          created_at: new Date(),
+          id: -1,
+          is_read: 0,
+          message: this.message,
+          updated_at: new Date(),
+          user_id: this.user.id,
+        },
+      ],
     };
-
-    this.chatMessegesService.addMessageInState(newMsgObj);
-
-    setTimeout( () => this.scrollToBottomOnInit(), 500);
-
+    this.chats.days.push(this.newMesg);
+    this.scrollToBottomOnInit();
     let obj = {
       chat_room_id: this.item.chat_room_id,
       user_id: this.user.id,
       message: this.message,
     };
+    this.message = '';
+    this.messageInput.nativeElement.value = '';
+    this.adjustHeight(this.messageInput.nativeElement);
     let res = await this.network.sendMessage(obj);
 
-    console.log('send msg ', res);
+    console.log("send msg ", res)
 
-    if(res && res.message){
-      this.chatMessegesService.updateMessageInState(res.message);
-    }
+    this.listChatsService.setLastMessageOfChatList(obj)
 
-    
-
-
-    // this.chats.days.push(this.newMesg);
-    
-    
-    
-    
-    
-    // this.scrollToBottomOnInit();
-    
-    // this.message = '';
-    // this.messageInput.nativeElement.value = '';
-    // this.adjustHeight(this.messageInput.nativeElement);
-    // let res = await this.network.sendMessage(obj);
-
-    // console.log('send msg ', res);
-
-    // this.listChatsService.setLastMessageOfChatList(obj);
 
     // this.chats.getchatList()
   }
@@ -266,9 +242,10 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   async onScroll(event: any) {
     const scrollTop = event.detail.scrollTop;
 
-    if (scrollTop < 50 && !this.loadingMore) {
-      // Trigger when near the top
+    if (scrollTop < 50 && !this.loadingMore) { // Trigger when near the top
       this.loadingMore = true;
+
+
 
       // const newMessages = await this.chatService.getMessages(this.offset, this.limit);
       // this.chats.days = this.groupMessagesByDate([...newMessages, ...this.chats.days]);

@@ -35,6 +35,7 @@
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@hreimer/angular-image-viewer": "^0.14.1",
     "@ionic/angular": "^7.0.0",
+    "@ng-state/store": "^9.5.2",
     "@pscoped/ngx-pub-sub": "^6.0.1",
     "capacitor-resources": "^2.0.5",
     "crypto": "^1.0.1",

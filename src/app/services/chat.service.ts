@@ -45,7 +45,7 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
   ) {
     super();
 
-
+    
     // this.events.subscribe(
     //   'clear-all-services-data',
     //   () => {
@@ -223,13 +223,11 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
         obj,
         item.chat_room_id
       );
-
-      const user = this.users.getUser();
-      if (user.role_id == 3) {
+      if (this.user.role_id == 3) {
         this.getChatRequsts();
       }
       this.getchatList();
-      resolve(true);
+      resolve;
     });
   }
 
@@ -237,7 +235,6 @@ export class ChatService extends NgSimpleStateBaseRxjsStore<GlobalChatsModel> {
     return new Promise(async (resolve) => {
       let res = (await this.network.getMessages(id)) as any;
       this.days = res.data;
-
       //
       this.events.publish('scroll-to-bottom');
 

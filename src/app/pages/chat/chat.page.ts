@@ -3,6 +3,7 @@ import { BasePage } from 'src/app/base-page/base-page';
 import * as moment from 'moment';
 import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
+import { ListRequestsService } from 'src/app/services/teacher/list-requests.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { ListChatsService } from 'src/app/services/list-chats.service';
 export class ChatPage extends BasePage implements OnInit {
 
   list$;
+  requestList$;
 
   isSearchBarShow = false;
   search;
@@ -33,7 +35,7 @@ export class ChatPage extends BasePage implements OnInit {
   // other_user_id;
 
   // public chats: ChatService
-  constructor(injector: Injector, private listChatService: ListChatsService ) {
+  constructor(injector: Injector, private listChatService: ListChatsService, private listRequestsService: ListRequestsService  ) {
     super(injector); 
 
     // this.initialize();
@@ -42,6 +44,21 @@ export class ChatPage extends BasePage implements OnInit {
     this.listChatService.getList().subscribe( (data) => {
       this.list$ = data;
     });
+    
+    this.listRequestsService.getList().subscribe( (data) => {
+      this.requestList$ = data;
+    })
+
+   }
+
+   async fetchList(page: number, search: string, status: string): Promise<{ list: any[]; page: number; last_page: number; total: number }> {
+    const res = await this.listRequestsService.getRequests(page, search, status);
+    return {
+      list: res.result.data,
+      page: res.result.current_page,
+      last_page: res.result.last_page,
+      total: res.result.total
+    };
 
   }
 
