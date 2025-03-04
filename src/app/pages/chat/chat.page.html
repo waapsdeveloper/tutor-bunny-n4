@@ -52,5 +52,13 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
+  <app-global-list-view [list]="list$" [itemTemplate]="itemTemplate" (refresh)="handleRefresh($event)" (loadMore)="onIonInfinite($event)">
+    <ng-template #itemTemplate let-item >
+      <app-chat-list [item]="item" ></app-chat-list>
+    </ng-template>
+  </app-global-list-view>
+
 </ion-content>

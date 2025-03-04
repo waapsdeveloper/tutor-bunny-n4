@@ -1,0 +1,10 @@
+.typing-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    img {
+        width: 20px;
+    }
+}

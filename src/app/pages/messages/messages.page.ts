@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   Injector,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -17,7 +18,8 @@ import { ChatMessegesService } from 'src/app/services/chat-messeges.service';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.scss'],
 })
-export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
+export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnDestroy {
+
   @ViewChild('scroll', { read: ElementRef })
   public scrollableDiv!: ElementRef<any>;
   @ViewChild('messageInput') messageInput!: ElementRef;
@@ -175,12 +177,11 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
 
   back() {
-    this.events.publish('clear-chat-data');
     this.nav.pop();
   }
 
   ngOnDestroy() {
-    this.events.publish('clear-params-chat');
+    this.listChatsService.getUnreadMsgCount();
   }
 
   openImage(image) { }
@@ -197,22 +198,28 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
   }
   onKeyUp(event: any) {
     this.message = event.target.value;
+
+    let obj = {
+      chat_room_id: this.item.chat_room_id,
+      user_id: this.item.other_user_id,
+      message: this.message,
+    }
+
+    this.chatMessegesService.isStartTyping(obj)
+
   }
   async sendMessage() {
     if (!this.message) return;
-    this.newMesg = {
-      date: 'now',
-      messages: [
-        {
-          chat_room_id: this.item.chat_room_id,
-          created_at: new Date(),
-          id: -1,
-          is_read: 0,
-          message: this.message,
-          updated_at: new Date(),
-          user_id: this.user.id,
-        },
-      ],
+
+    const newMsgObj = {
+      chat_room_id: this.item.chat_room_id,
+      created_at: new Date(),
+      id: -1,
+      is_read: 0,
+      message: this.message,
+      updated_at: new Date(),
+      user_id: this.user.id,
+      status: -1
     };
     this.chats.days.push(this.newMesg);
     this.scrollToBottomOnInit();
@@ -225,6 +232,9 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
     this.messageInput.nativeElement.value = '';
     this.adjustHeight(this.messageInput.nativeElement);
     let res = await this.network.sendMessage(obj);
+
+    this.message = '';
+    this.emptyValue = ''
 
     console.log("send msg ", res)
 
@@ -254,4 +264,5 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter {
       this.loadingMore = false;
     }
   }
+
 }
