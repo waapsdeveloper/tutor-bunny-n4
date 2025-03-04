@@ -11,7 +11,7 @@ import { ListPage } from 'src/app/base-page/list-page';
 // import { ChatService } from 'src/app/services/chat.service';
 import { ListChatsService } from 'src/app/services/list-chats.service';
 import { ListRequestsService } from 'src/app/services/teacher/list-requests.service';
-import Swiper from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-chat',
@@ -19,17 +19,15 @@ import Swiper from 'swiper';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage extends ListPage implements OnInit {
-  @ViewChild('swiper') swiper: Swiper;
 
   list$;
   requestList$;
 
-  isSearchBarShow = false;
+  // isSearchBarShow = false;
   // search;
-  showChat = 'inbox';
-  activeUser;
-  activeTab: string = 'inbox';
-
+  activeIndex = 0;
+  @ViewChild('slides', { static: false }) slides: SwiperComponent | null = null;
+  view = 'inbox';
 
   // request;
   // time;
@@ -64,15 +62,38 @@ export class ChatPage extends ListPage implements OnInit {
     });
   }
 
-  onSwiper(swiperInstance: Swiper) {
-    this.swiper = swiperInstance;
+  toogleView(view) {
+    this.view = view;
+    if (view == 'inbox') {
+      this.changeToActiveIndex(0)
+      // this.nav.pop('/tabs/student-dashboard/student-dashborad-courses');
+    }
+    if (view == 'requests') {
+      this.changeToActiveIndex(1)
+      // this.nav.push('/tabs/student-dashboard/student-dashborad-teachers');
+    }
+
   }
 
-  goToSlide(index: number) {
-    if (this.swiper) {
-      this.swiper.slideTo(index);
-    }
+  changeToActiveIndex(index) {
+    this.slides?.swiperRef?.slideTo(index);
   }
+
+  onSlideChanged() {
+    this.activeIndex = this.slides?.swiperRef?.activeIndex ?? 0;
+
+    if(this.activeIndex == 0){
+      this.toogleView('inbox');
+    }
+
+    if(this.activeIndex == 1){
+      this.toogleView('requests');
+    }
+
+
+    this.cdr.detectChanges();
+  }
+
 
   async fetchReqList(
     page: number,

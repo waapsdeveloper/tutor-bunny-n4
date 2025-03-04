@@ -1,49 +1,29 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <!-- (toggleSearchBar)="ShowSearchBar($event)" -->
   <app-sd-header-top
-    [showBack]="true"
+    [showBack]="false"
     [title]="'Chat'"
     [backUrl]=""
-    [showNotification]="true"
-    [showSearch]="true"
+    [showNotification]="false"
+    [showSearch]="false"
   ></app-sd-header-top>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <div class="body-content">
-    <div style="width: 100%">
-      <div style="padding: 0 16px 0 16px">
-        <swiper
-          [slidesPerView]="2"
-          [spaceBetween]="12"
-          class="chat-room-swiper"
-        >
-          <ng-template swiperSlide>
-            <div
-              class="chat-swiper-boxes"
-              [class.active]="activeTab === 'inbox'"
-              (click)="activeTab = 'inbox'"
-            >
-              <img src="../../../assets/inbox.svg" alt="" />Inbox
-            </div>
-          </ng-template>
-          <ng-template swiperSlide>
-            <div
-              class="chat-swiper-boxes"
-              [class.active]="activeTab === 'requests'"
-              (click)="activeTab = 'requests'"
-            >
-              <img src="../../../assets/request.svg" alt="" />Message Requests
-              (0)
-            </div>
-          </ng-template>
-        </swiper>
-      </div>
+<div class="dashboard-top-fixed-98563 ">
+  <div class="header-chips">
+    <div class="header-chip">
+      <div class="ion-chip" [class.active-class]="view === 'inbox'" [class.inactive-class]="view !== 'inbox'"
+        (click)="toogleView('inbox')"><img src="assets/inbox.svg" alt="">Inbox</div>
+      <div class="ion-chip" [class.active-class]="view === 'requests'" [class.inactive-class]="view !== 'requests'"
+        (click)="toogleView('requests')"><img src="assets/request.svg" alt="">Message Requests</div>
+    </div>
+  </div>
+</div>
 
-      <div
-        *ngIf="activeTab === 'inbox'"
-        style="height: 80vh; position: relative"
-      >
-        <app-global-list-view
+<ion-content [scrollY]="false">
+
+  <swiper [slidesPerView]="1" [spaceBetween]="10" [pagination]="{ clickable: true }" class="swiper-container-inner-78967852" #slides (transitionEnd)="onSlideChanged()">
+    <ng-template swiperSlide>
+      <app-global-list-view
           [list]="list$"
           [itemTemplate]="itemTemplate"
           (refresh)="handleRefresh($event)"
@@ -53,14 +33,10 @@
             <app-chat-list [item]="item"></app-chat-list>
           </ng-template>
         </app-global-list-view>
-      </div>
-
-      <div
-        *ngIf="activeTab === 'requests'"
-        style="height: 80vh; position: relative"
-      >
-        <app-global-list-view
-          [list]="list$"
+    </ng-template>
+    <ng-template swiperSlide>
+      <app-global-list-view
+          [list]="requestList$"
           [itemTemplate]="itemTemplate"
           (refresh)="handleRefresh($event)"
           (loadMore)="onIonInfinite($event)"
@@ -69,7 +45,9 @@
             <app-request-list [item]="item"></app-request-list>
           </ng-template>
         </app-global-list-view>
-      </div>
-    </div>
-  </div>
+    </ng-template>
+
+  </swiper>
+
+
 </ion-content>
