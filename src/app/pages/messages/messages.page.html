@@ -1,54 +1,100 @@
-<div *ngIf="loading" class="loading-syn ">
+<div *ngIf="loading" class="loading-syn">
   <ion-spinner></ion-spinner>
 </div>
-<ion-header  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" class="ion-no-border ion-no-shadow">
+<ion-header
+  [class.tabs-opacity-0]="loading"
+  [class.tabs-opacity-1]="!loading"
+  class="ion-no-border ion-no-shadow"
+>
   <div class="top-header-78956">
     <div class="header-left-items-78956">
-      <app-sd-bback-btn style="margin-left: -12px;" (click)="back()"></app-sd-bback-btn>
-      <div class="header-image-78415" (click)="openImage(image)"
-        [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'">
-      </div>
+      <app-sd-bback-btn
+        style="margin-left: -12px"
+        (click)="back()"
+      ></app-sd-bback-btn>
+      <div
+        class="header-image-78415"
+        (click)="openImage(image)"
+        [style.background-image]="image ? 'url(' + image + ')' : 'assets/profileimg.png'"
+      ></div>
       <div class="d-flex flex-column">
-        <div class="header-title ">
-          <div>{{displayName}}</div> <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
+        <div class="header-title">
+          <div>{{displayName}}</div>
+          <span *ngIf="flag" slot="start" class="fi fi-{{flag}}"></span>
         </div>
         <div class="">
-          <div class="chat-online-98529" *ngIf="status?.is_online"><img src="../../assets/svg/active-staties.svg" alt="">Online</div>
-          <div class="chat-online-98529ww" *ngIf="!status?.is_online && status?.last_seen"> Last seen {{ getOnlineTime(status?.last_seen) }} </div>
+          <div class="chat-online-98529" *ngIf="status?.is_online">
+            <img src="../../assets/svg/active-staties.svg" alt="" />Online
+          </div>
+          <div class="chat-online-98529ww" *ngIf="status?.last_seen">
+            Last seen {{ getOnlineTime(status?.last_seen) }}
+          </div>
         </div>
-
       </div>
     </div>
   </div>
 </ion-header>
 
-<div *ngIf="loading" class="loading-syn"  [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading">
+<div
+  *ngIf="loading"
+  class="loading-syn"
+  [class.tabs-opacity-0]="loading"
+  [class.tabs-opacity-1]="!loading"
+>
   <ion-spinner></ion-spinner>
 </div>
-<ion-content #content class="ion-content-bg ion-padding" [class.tabs-opacity-0]="loading" [class.tabs-opacity-1]="!loading" (ionScroll)="onScroll($event)" [scrollEvents]="true">
+<ion-content
+  #content
+  class="ion-content-bg ion-padding"
+  [class.tabs-opacity-0]="loading"
+  [class.tabs-opacity-1]="!loading"
+  (ionScroll)="onScroll($event)"
+  [scrollEvents]="true"
+>
   <div class="body-content" *ngFor="let item of chats.days">
     <div class="chat-day-heading-85621" *ngIf="item.date && item.date != 'now'">
-      <div *ngIf="item.date && item.date != 'now'" style="
-            padding: 8px;
-            background: antiquewhite;
-            border-radius: 8px;
-           ">
+      <div
+        *ngIf="item.date && item.date != 'now'"
+        style="padding: 8px; background: antiquewhite; border-radius: 8px"
+      >
         {{item.date}}
       </div>
     </div>
-    <app-message-list *ngFor="let chat of item.messages" [chat]="chat"></app-message-list>
+    <app-message-list
+      *ngFor="let chat of item.messages"
+      [chat]="chat"
+    ></app-message-list>
   </div>
-
 </ion-content>
 <ion-footer>
   <app-typing-box class="typing-shown-775" [chatItem]="item"></app-typing-box>
   <div class="footer-box-78521">
     <div class="input-box-78522">
-      <textarea id="chat-input" rows="1" class="chat-input" #messageInput placeholder="Write your text here"
-        (input)="adjustHeight(messageInput)" (keyup)="onKeyUp($event)" [ngModel]="emptyValue">
+      <textarea
+        id="chat-input"
+        rows="1"
+        class="chat-input"
+        #messageInput
+        placeholder="Write your text here"
+        (input)="adjustHeight(messageInput)"
+        (keyup)="onKeyUp($event)"
+        [ngModel]="emptyValue"
+      >
       </textarea>
-      <img src="../../assets/svg/sent.svg" class="send-btn" *ngIf="message" alt="" (click)="sendMessage()" >
-      <img src="../../assets/svg/sent-2.svg" *ngIf="!message" alt="" class="send-btn" style="opacity: 50%;">
+      <img
+        src="../../assets/svg/sent.svg"
+        class="send-btn"
+        *ngIf="message"
+        alt=""
+        (click)="sendMessage()"
+      />
+      <img
+        src="../../assets/svg/sent-2.svg"
+        *ngIf="!message"
+        alt=""
+        class="send-btn"
+        style="opacity: 50%"
+      />
     </div>
   </div>
 </ion-footer>

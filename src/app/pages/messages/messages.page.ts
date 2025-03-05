@@ -82,6 +82,7 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
     this.loadResolvers();
     this.user = this.dataR.user;
     const ch = await this.chats.getChatRoomInfo(roomId);
+    
 
     if (!ch) {
       this.nav.pop();
@@ -101,6 +102,8 @@ export class MessagesPage extends BasePage implements OnInit, ViewWillEnter, OnD
     }, 500);
 
     this.status = await this.userStatus.getUserStatus(ch.user.id);
+    console.log(this.status, "hiiiii");
+
 
   }
 

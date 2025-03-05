@@ -1,20 +1,32 @@
 <div class="chat-list-98521" *ngIf="last_message">
   <div class="chat-box-98522" (click)="gotoMessage(item)">
     <div class="chat-image-box-98523">
-      <div class="chat-image-98523"
-        [style.background-image]="item.user.image ? 'url(' + item.user.image + ')' : 'assets/profileimg.png'">
-      </div>
+      <div
+        class="chat-image-98523"
+        [style.background-image]="
+          item.user.image
+            ? 'url(' + item.user.image + ')'
+            : 'assets/profileimg.png'
+        "
+      ></div>
       <div class="online-dot-23" *ngIf="status?.is_online"></div>
-
     </div>
     <div class="chat-deatil-98524">
       <div class="chat-name-time-98525">
-        <div class="chat-name-98526">{{item.user.name}}</div>
-        <div class="chat-time-98527">{{time}}</div>
+        <div class="chat-name-98526">
+          {{ item.user.name }}
+        </div>
+        <div class="chat-time-98527">{{ time }}</div>
       </div>
       <div class="chat-satus-98528">
-        <div class="chat-online-98529">{{last_message}}</div>
-        <div class="chat-message-98530" *ngIf="this.item.unread_count !== 0">{{this.item.unread_count}}</div>
+        <div class="chat-online-98529">
+          <img  src="../../../../assets/seen.svg" alt="" />
+          <!-- <img src="../../../../assets/deliverd.svg" alt="" /> -->
+          {{ last_message }}
+        </div>
+        <div class="chat-message-98530" *ngIf="this.item.unread_count !== 0">
+          {{ this.item.unread_count }}
+        </div>
       </div>
     </div>
   </div>
