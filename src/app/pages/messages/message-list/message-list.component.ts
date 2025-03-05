@@ -35,7 +35,6 @@ export class MessageListComponent extends BasePage implements OnInit {
   }
 
   async initialize(value) {
-
     // this.chats.getUnreadMsgCount()
 
     this.slug = value.slug;
@@ -72,5 +71,21 @@ export class MessageListComponent extends BasePage implements OnInit {
     // return;
 
     this.nav.push('/tabs/requests', data);
+  }
+
+  returnIconsBasedOnType() {
+    if (this.chat.id == -1) {
+      return 'assets/svg/sentMessage.svg';
+    }
+
+    if (this.chat.is_read == 0) {
+      return 'assets/svg/sentMessageDouble.svg';
+    }
+
+    if (this.chat.is_read == 1) {
+      return 'assets/svg/sentMessageDoubleBlue.svg';
+    }
+
+    return 'assets/svg/sentMessage.svg';
   }
 }
