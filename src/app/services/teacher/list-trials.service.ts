@@ -13,13 +13,13 @@ export class ListTrialsService extends NgrxCrudService<any> {
 
   trialChannel: any;
 
-  constructor(private network: NetworkService, private users: UsersService) { 
+  constructor(private network: NetworkService, private users: UsersService) {
     super();
-    
+
 
   }
 
-  unRegisterPusherEvent(pusher: Pusher, user_id: number){  
+  unRegisterPusherEvent(pusher: Pusher, user_id: number){
     if (pusher) {
       pusher.unsubscribe('trials-channel');
       pusher.disconnect();
@@ -56,8 +56,8 @@ export class ListTrialsService extends NgrxCrudService<any> {
     // const user = this.users.getUser();
     // if(user.role_id == 2){
 
-    //   // check if user is student 
-    //   // check if the student has a course of that trial 
+    //   // check if user is student
+    //   // check if the student has a course of that trial
     //   // update course key trial to the receievd object
     //   let obj = Object.assign({}, $event);
     //   console.log(obj);
@@ -77,8 +77,8 @@ export class ListTrialsService extends NgrxCrudService<any> {
     //     let res = await this.network.geTrailRequestsByPusher(id);
     //     this.updateTrailsList(res.trial);
     //     this.events.publish('update-notifications');
-        
-        
+
+
     //     if (user.role_id == 3) {
     //       let shownoti = true;
     //       this.user = this.users.getUser();
@@ -132,12 +132,12 @@ export class ListTrialsService extends NgrxCrudService<any> {
   }
 
   async changeStatus(obj, trialId) {
-    
+
     let res = await this.network.changeTrailStuts(obj, trialId);
     if(res){
       this.setItem(res.trial);
     }
-    
+
     // if (res.status === 200) {
     //   let findIndex = this.list.findIndex((x) => x.id == trialId);
 
@@ -148,8 +148,8 @@ export class ListTrialsService extends NgrxCrudService<any> {
     // }
   }
 
-  
-  
+
+
   getPendingTrialsFromApi(search = '', page = 1) {
     return new Promise(async (resolve) => {
       const user = this.users.getUser();
@@ -161,7 +161,7 @@ export class ListTrialsService extends NgrxCrudService<any> {
       let res = await this.network.getPendingTrial(user.id, obj);
       const data = res.result;
       this.setList(data.data, data.page, data.last_page, data.total);
-      
+
       resolve(true);
     });
   }
@@ -173,11 +173,11 @@ export class ListTrialsService extends NgrxCrudService<any> {
         user_id: userId,
       };
       let res = await this.network.changeTrailStuts(obj, trailId);
-      
+
       if (res) {
         if(key == 'Accepted' || key == 'Rejected'){
           this.removeItem(trailId);
-        }  
+        }
       }
 
       resolve(res);

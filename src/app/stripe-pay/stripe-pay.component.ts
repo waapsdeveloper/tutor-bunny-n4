@@ -21,7 +21,7 @@ export class StripePayComponent extends BasePage implements OnInit {
 
   total = 0;
 
-  constructor(injector: Injector, private cartService: CartService) { 
+  constructor(injector: Injector, private cartService: CartService) {
     super(injector);
   }
 
@@ -37,8 +37,8 @@ export class StripePayComponent extends BasePage implements OnInit {
         return prev + parseFloat(next.price)
       }, 0);
     });
-  } 
-  
+  }
+
 
   async initialize (){
     this.stripe = await loadStripe('YOUR_PUBLISHABLE_KEY'); // Replace with your Stripe publishable key
@@ -58,7 +58,7 @@ export class StripePayComponent extends BasePage implements OnInit {
     }, 0);
 
     let obj = {
-      cart_ids: items.map( x => x.id),  
+      cart_ids: items.map( x => x.id),
       item_total: item_total,
       tax: 10,
       total: item_total + 10
