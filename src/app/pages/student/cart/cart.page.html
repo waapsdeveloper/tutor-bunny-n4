@@ -1,12 +1,12 @@
 <ion-header class="ion-no-border ion-no-shadow">
   <app-sd-header-top [showBack]="true" [title]="title" [backUrl]="" [showNotification]="false" [showSearch]="false" [parentHandleBack]="true" (parentBack)="parentBack($event)"></app-sd-header-top>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="false">
 
   <swiper [slidesPerView]="1" [spaceBetween]="0" [pagination]="{ clickable: true }" class="swiper-container-inner-7892" #slides (transitionEnd)="onSlideChanged()" >
     <ng-template swiperSlide>
 
-      <app-global-list-view style="width: 100%; height: auto;"
+      <app-global-list-view style="width: 100%; height: 500px;"
         [list]="list$"
         [itemTemplate]="itemTemplate">
         <ng-template #itemTemplate let-item>
@@ -14,21 +14,12 @@
         </ng-template>
       </app-global-list-view>
 
+      
+      
+
     </ng-template>
     <ng-template swiperSlide>
       <app-payment-card-item></app-payment-card-item>
-    </ng-template>
-    <ng-template swiperSlide>
-      <app-order-done-card-item [data]="order" ></app-order-done-card-item>
-    </ng-template>
-  </swiper>
-
-  
-</ion-content>
-<ion-footer class="checkout-footer checkout-border-top">
-  <div class="ion-padding d-flex flex-column">
-    <div class="d-flex flex-column gap-8 ion-padding" >
-
       <div class="d-flex flex-row justify-content-between">
         <div>Order</div>
         <div>{{currency_symbol}} {{ subtotal }}</div>
@@ -41,6 +32,30 @@
         <div>Total</div>
         <div class="roboto-bold fs-24">{{currency_symbol}} {{ total }}</div> 
       </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <app-order-done-card-item [data]="order" ></app-order-done-card-item>
+    </ng-template>
+  </swiper>
+
+  
+</ion-content>
+<ion-footer class="checkout-footer checkout-border-top">
+  <div class="ion-padding d-flex flex-column">
+    <div class="d-flex flex-column gap-8 ion-padding" >
+
+      <!-- <div class="d-flex flex-row justify-content-between">
+        <div>Order</div>
+        <div>{{currency_symbol}} {{ subtotal }}</div>
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <div>Tax</div>
+        <div>{{currency_symbol}} {{tax}}</div>        
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <div>Total</div>
+        <div class="roboto-bold fs-24">{{currency_symbol}} {{ total }}</div> 
+      </div> -->
 
 
       <app-sd-button-golden *ngIf="activeIndex === 0" [text]="getSelectedItems()" (click)="confirmAndMoveToPaySlide()"></app-sd-button-golden>
@@ -53,7 +68,7 @@
 
     </div>
 
-    <div class="Privacy-policy outfit" *ngIf="activeIndex !== 2" >By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
+    <div class="privacy-policy outfit" *ngIf="activeIndex !== 2" >By checking out, you agree to Tutor Bunny’s <br> <a>Terms of Service </a></div>
     
   </div>
 </ion-footer>
